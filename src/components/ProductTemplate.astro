@@ -19,9 +19,6 @@ const labels =
         support: 'Support',
         download: '다운로드',
         stores: '스토어',
-        androidNote: 'Android 설명',
-        iosNote: 'iOS 설명',
-        platformCopy: '플랫폼별 설명',
         status: '상태'
       }
     : {
@@ -33,17 +30,13 @@ const labels =
         support: 'Support',
         download: 'Download',
         stores: 'Stores',
-        androidNote: 'Android copy',
-        iosNote: 'iOS copy',
-        platformCopy: 'Platform copy',
         status: 'Status'
       };
 
 const bodyBlocks = renderBlocks(pageBodyDescription(copy));
 const heroIntro = landingSubtitle(copy);
-const hasAndroidCopy = Boolean(copy.android.name || copy.android.shortDescription || copy.android.description);
-const hasIosCopy = Boolean(copy.ios.name || copy.ios.subtitle || copy.ios.promo || copy.ios.description);
-const showPlatformCopy = data.locale === 'en' && (hasAndroidCopy || hasIosCopy);
+const heroSignals =
+  (bodyBlocks.find((block) => block.type === 'ul')?.value as string[] | undefined)?.slice(0, 3) ?? [];
 const homePath = data.locale === 'ko' ? '/ko/' : '/';
 const pageStyle = `--accent-border: ${data.accent.border}; --accent-bg: ${data.accent.background}; --accent-text: ${data.accent.text};`;
 const iconUrl = new URL(data.iconPath, Astro.site);
@@ -85,6 +78,11 @@ const jsonLd = {
           <p class="eyebrow">{labels.status}: {meta.status}</p>
           <h1 id="product-title">{meta.title}</h1>
           {heroIntro && <p class="intro">{heroIntro}</p>}
+          {heroSignals.length > 0 && (
+            <p class="signal-list" aria-label={heroIntro}>
+              {heroSignals.map((signal) => <span>{signal}</span>)}
+            </p>
+          )}
         </div>
       </div>
 
@@ -132,29 +130,6 @@ const jsonLd = {
         <a class="button" href={meta.privacy}>{labels.privacy}</a>
       </div>
     </section>
-
-    {showPlatformCopy && (
-      <section class="platforms subtle" aria-labelledby="platform-copy">
-        <h2 id="platform-copy">{labels.platformCopy}</h2>
-        <div class="platform-grid">
-          {hasAndroidCopy && (
-            <article>
-              <p class="eyebrow">{labels.androidNote}</p>
-              {copy.android.name && <h3>{copy.android.name}</h3>}
-              {copy.android.shortDescription && <p>{copy.android.shortDescription}</p>}
-            </article>
-          )}
-          {hasIosCopy && (
-            <article>
-              <p class="eyebrow">{labels.iosNote}</p>
-              {copy.ios.name && <h3>{copy.ios.name}</h3>}
-              {copy.ios.subtitle && <p>{copy.ios.subtitle}</p>}
-              {copy.ios.promo && <p>{copy.ios.promo}</p>}
-            </article>
-          )}
-        </div>
-      </section>
-    )}
 
     <footer>
       <span>{meta.title}</span>
@@ -241,6 +216,21 @@ const jsonLd = {
     line-height: 1.55;
   }
 
+  .signal-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0 0;
+  }
+
+  .signal-list span {
+    border-bottom: 1px solid var(--accent-border);
+    padding-bottom: 3px;
+    color: var(--accent-text);
+    font-size: 14px;
+    font-weight: 650;
+  }
+
   .actions {
     display: flex;
     flex-wrap: wrap;
@@ -309,8 +299,7 @@ const jsonLd = {
   }
 
   .content-band,
-  .download-band,
-  .platforms {
+  .download-band {
     border-top: 1px solid #e0d8cb;
     padding: 44px 0;
   }
@@ -360,38 +349,6 @@ const jsonLd = {
     padding-left: 20px;
   }
 
-  .platform-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-  }
-
-  .platforms.subtle {
-    padding-top: 34px;
-  }
-
-  .platforms.subtle h2 {
-    color: #737067;
-    font-size: 18px;
-  }
-
-  article {
-    border: 1px solid #e6ded2;
-    border-radius: 8px;
-    padding: 16px;
-    background: rgba(255, 253, 248, 0.62);
-  }
-
-  article h3 {
-    color: #4f4b43;
-    font-size: 17px;
-  }
-
-  article p {
-    color: #625d54;
-    font-size: 15px;
-  }
-
   footer {
     border-top: 1px solid #e0d8cb;
     padding-top: 20px;
@@ -409,8 +366,7 @@ const jsonLd = {
     }
 
     .identity,
-    .actions,
-    .platform-grid {
+    .actions {
       display: grid;
       grid-template-columns: 1fr;
     }
