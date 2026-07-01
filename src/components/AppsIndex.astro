@@ -60,11 +60,15 @@ const text =
 
     {featuredApp && (
       <section class="featured-app" aria-label={text.featured} style={appCardStyle(featuredApp)}>
-        <div>
+        <div class="featured-copy">
           <span>{text.featured}</span>
-          <img src={featuredApp.iconPath} alt={`${featuredApp.title} icon`} width="64" height="64" />
-          <h2>{featuredApp.title}</h2>
-          <p>{featuredApp.description}</p>
+          <div class="featured-title">
+            <img src={featuredApp.iconPath} alt={`${featuredApp.title} icon`} width="64" height="64" />
+            <div>
+              <h2>{featuredApp.title}</h2>
+              <p>{featuredApp.description}</p>
+            </div>
+          </div>
           <div class="meta-row">
             <span>{featuredApp.status}</span>
             <div class="platform-badges" aria-label="Platforms">
@@ -170,7 +174,7 @@ const text =
 
   .featured-app {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 154px;
+    grid-template-columns: minmax(0, 1fr) 190px;
     gap: 28px;
     align-items: center;
     border: 1px solid var(--accent-border);
@@ -180,13 +184,17 @@ const text =
     background: linear-gradient(90deg, var(--accent-bg), #fffdf8 74%);
   }
 
-  .featured-app > div > span {
+  .featured-copy > span {
     color: var(--accent-text);
     font-size: 13px;
     font-weight: 650;
   }
 
-  .featured-app img {
+  .featured-title {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
     margin-top: 12px;
   }
 
@@ -196,7 +204,7 @@ const text =
     border-radius: 8px;
     padding: 6px;
     background: #fffdf8;
-    max-height: 230px;
+    max-height: 290px;
     overflow: hidden;
   }
 
@@ -295,8 +303,8 @@ const text =
     }
 
     .featured-app figure {
-      width: min(180px, 52vw);
-      max-height: 220px;
+      width: min(210px, 58vw);
+      max-height: 260px;
     }
 
     article {
