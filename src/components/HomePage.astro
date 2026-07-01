@@ -11,6 +11,7 @@ const contentApps = getProductIndexItems(locale);
 const privacyApps = contentApps.filter((app) => app.privacy);
 const contentAppTitles = new Set(contentApps.map((app) => app.title));
 const appHref = new Map(contentApps.map((app) => [app.title, app.href]));
+const releasedApps = ['Quivra', 'TagWeaver', 'VaultXT', 'Segra', 'ClipNest', 'Aligna'];
 const staticPrivacyApps = [
   ['Quivra', 'https://onnelakin.github.io/quivra-privacy-policy/'],
   ['TagWeaver', 'https://onnelakin.github.io/tagweaver-privacy-policy/'],
@@ -86,12 +87,9 @@ const text =
     <h2>{text.released}</h2>
 
     <ul>
-      <li><a href={appHref.get('Aligna') ?? '/apps/aligna/'}>Aligna</a></li>
-      <li>Quivra</li>
-      <li>TagWeaver</li>
-      <li>{appHref.has('VaultXT') ? <a href={appHref.get('VaultXT')}>VaultXT</a> : 'VaultXT'}</li>
-      <li>Segra</li>
-      <li>ClipNest</li>
+      {releasedApps.map((name) => (
+        <li>{appHref.has(name) ? <a href={appHref.get(name)}>{name}</a> : name}</li>
+      ))}
       <li>Melivra <small>({text.soon})</small></li>
     </ul>
 
@@ -117,6 +115,7 @@ const text =
 
     <p>
       {text.inquiry}
+      {' '}
       <a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a>
     </p>
   </main>

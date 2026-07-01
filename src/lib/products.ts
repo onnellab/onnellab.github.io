@@ -10,7 +10,7 @@ export type ProductMeta = {
   status: string;
   platforms: string[];
   appstore: string;
-  googleplay: string;
+  googleplay?: string;
   privacy: string;
   supportEmail: string;
   icon: string;
@@ -89,8 +89,7 @@ export function getProductSources(): ProductSource[] {
 export function getProductPageData(slug: string, locale: Locale): ProductPageData {
   const source = getProductSource(slug);
   const copy = readProductCopy(source.contentDir, locale);
-  const seoDescription =
-    copy.android.shortDescription ?? firstParagraph(copy.android.description);
+  const seoDescription = pageDescription(copy);
   const canonicalPath = locale === 'en' ? `/apps/${source.slug}/` : `/apps/${source.slug}/ko/`;
   return {
     locale,
@@ -113,12 +112,16 @@ export function getProductIndexItems(locale: Locale): ProductIndexItem[] {
       title: source.meta.title,
       status: source.meta.status,
       platforms: source.meta.platforms,
-      description: copy.android.shortDescription ?? firstParagraph(copy.android.description),
+      description: pageDescription(copy),
       iconPath: getIconRoutePath(source),
-      href: `/apps/${source.slug}/`,
+      href: locale === 'en' ? `/apps/${source.slug}/` : `/apps/${source.slug}/ko/`,
       privacy: source.meta.privacy
     };
   });
+}
+
+export function pageBodyDescription(copy: ProductCopy): string {
+  return copy.android.description || copy.ios.description;
 }
 
 export function getProductSource(slug: string): ProductSource {
@@ -216,7 +219,7 @@ function readProductMeta(contentDir: string): ProductMeta {
     status: required(values, 'status'),
     platforms,
     appstore: required(values, 'appstore'),
-    googleplay: required(values, 'googleplay'),
+    googleplay: values.get('googleplay'),
     privacy: required(values, 'privacy'),
     supportEmail: required(values, 'supportEmail'),
     icon: required(values, 'icon')
@@ -243,6 +246,15 @@ function parsePlatformCopy(text: string): PlatformCopy {
       field(text, fieldLabels.detailedDescription) ?? field(text, fieldLabels.description) ?? '',
     keywords: field(text, fieldLabels.keywords)
   };
+}
+
+function pageDescription(copy: ProductCopy): string {
+  return (
+    copy.android.shortDescription ??
+    copy.ios.subtitle ??
+    copy.ios.promo ??
+    firstParagraph(pageBodyDescription(copy))
+  );
 }
 
 function section(raw: string, marker: string): string {

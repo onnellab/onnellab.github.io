@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { renderBlocks, type ProductPageData } from '../lib/products';
+import { pageBodyDescription, renderBlocks, type ProductPageData } from '../lib/products';
 
 type Props = {
   data: ProductPageData;
@@ -37,7 +37,10 @@ const labels =
         status: 'Status'
       };
 
-const bodyBlocks = renderBlocks(copy.android.description);
+const bodyBlocks = renderBlocks(pageBodyDescription(copy));
+const heroIntro = copy.android.shortDescription || copy.ios.subtitle || copy.ios.promo;
+const hasAndroidCopy = Boolean(copy.android.name || copy.android.shortDescription || copy.android.description);
+const hasIosCopy = Boolean(copy.ios.name || copy.ios.subtitle || copy.ios.promo || copy.ios.description);
 const iconUrl = new URL(data.iconPath, Astro.site);
 const canonicalUrl = new URL(data.canonicalPath, Astro.site);
 const alternateUrl = new URL(data.alternatePath, Astro.site);
@@ -46,10 +49,10 @@ const jsonLd = {
   '@type': 'SoftwareApplication',
   name: meta.title,
   operatingSystem: meta.platforms.join(', '),
-  applicationSubCategory: copy.android.name,
+  applicationSubCategory: copy.android.name || copy.ios.name,
   description: data.seoDescription,
   image: iconUrl.toString(),
-  downloadUrl: [meta.appstore, meta.googleplay],
+  downloadUrl: [meta.appstore, meta.googleplay].filter(Boolean),
   url: canonicalUrl.toString()
 };
 ---
@@ -76,13 +79,13 @@ const jsonLd = {
         <div>
           <p class="eyebrow">{labels.status}: {meta.status}</p>
           <h1 id="product-title">{meta.title}</h1>
-          {copy.android.shortDescription && <p class="intro">{copy.android.shortDescription}</p>}
+          {heroIntro && <p class="intro">{heroIntro}</p>}
         </div>
       </div>
 
       <div class="actions" aria-label={labels.stores}>
         <a class="button primary" href={meta.appstore}>{labels.appStore}</a>
-        <a class="button primary" href={meta.googleplay}>{labels.googlePlay}</a>
+        {meta.googleplay && <a class="button primary" href={meta.googleplay}>{labels.googlePlay}</a>}
         <a class="button" href={meta.privacy}>{labels.privacy}</a>
         <a class="button" href={`mailto:${meta.supportEmail}`}>{labels.support}</a>
       </div>
@@ -95,7 +98,7 @@ const jsonLd = {
       </dl>
     </section>
 
-    <section class="content-band" aria-label={copy.android.name ?? meta.title}>
+    <section class="content-band" aria-label={copy.android.name ?? copy.ios.name ?? meta.title}>
       <div class="copy-column">
         {bodyBlocks.map((block) => (
           block.type === 'h' ? (
@@ -114,17 +117,21 @@ const jsonLd = {
     <section class="platforms" aria-labelledby="platform-copy">
       <h2 id="platform-copy">{labels.platformCopy}</h2>
       <div class="platform-grid">
-        <article>
-          <p class="eyebrow">{labels.androidNote}</p>
-          {copy.android.name && <h3>{copy.android.name}</h3>}
-          {copy.android.shortDescription && <p>{copy.android.shortDescription}</p>}
-        </article>
-        <article>
-          <p class="eyebrow">{labels.iosNote}</p>
-          {copy.ios.name && <h3>{copy.ios.name}</h3>}
-          {copy.ios.subtitle && <p>{copy.ios.subtitle}</p>}
-          {copy.ios.promo && <p>{copy.ios.promo}</p>}
-        </article>
+        {hasAndroidCopy && (
+          <article>
+            <p class="eyebrow">{labels.androidNote}</p>
+            {copy.android.name && <h3>{copy.android.name}</h3>}
+            {copy.android.shortDescription && <p>{copy.android.shortDescription}</p>}
+          </article>
+        )}
+        {hasIosCopy && (
+          <article>
+            <p class="eyebrow">{labels.iosNote}</p>
+            {copy.ios.name && <h3>{copy.ios.name}</h3>}
+            {copy.ios.subtitle && <p>{copy.ios.subtitle}</p>}
+            {copy.ios.promo && <p>{copy.ios.promo}</p>}
+          </article>
+        )}
       </div>
     </section>
 
