@@ -8,20 +8,8 @@ type Props = {
 
 const { locale } = Astro.props;
 const contentApps = getProductIndexItems(locale);
-const privacyUpdatedAtByTitle: Record<string, string> = {
-  Quivra: '2026-02-10',
-  TagWeaver: '2026-02-14',
-  VaultXT: '2026-03-11',
-  Segra: '2026-06-12',
-  ClipNest: '2026-06-13',
-  Aligna: '2026-06-24',
-  Melivra: '2026-06-24'
-};
-const privacyDate = (title: string) => privacyUpdatedAtByTitle[title] ?? '9999-12-31';
-const comparePrivacyDate = (a: string, b: string) =>
-  privacyDate(a).localeCompare(privacyDate(b)) || a.localeCompare(b);
 const releasedApps = ['Quivra', 'TagWeaver', 'VaultXT', 'Segra', 'ClipNest', 'Aligna'].sort(
-  comparePrivacyDate
+  (a, b) => a.localeCompare(b)
 );
 const releasedAppCards = releasedApps
   .map((name) => contentApps.find((app) => app.title === name))
