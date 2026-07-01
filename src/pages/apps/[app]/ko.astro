@@ -1,0 +1,15 @@
+---
+import ProductTemplate from '../../../components/ProductTemplate.astro';
+import { getProductPageData, getProductSources } from '../../../lib/products';
+
+export function getStaticPaths() {
+  return getProductSources().map((source) => ({
+    params: { app: source.slug }
+  }));
+}
+
+const app = Astro.params.app as string;
+const data = getProductPageData(app, 'ko');
+---
+
+<ProductTemplate data={data} />

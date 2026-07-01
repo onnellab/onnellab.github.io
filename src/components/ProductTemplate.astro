@@ -1,0 +1,335 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { renderBlocks, type ProductPageData } from '../lib/products';
+
+type Props = {
+  data: ProductPageData;
+};
+
+const { data } = Astro.props;
+const { meta, copy } = data;
+const labels =
+  data.locale === 'ko'
+    ? {
+        switchLabel: 'English',
+        platforms: '지원 플랫폼',
+        appStore: 'App Store',
+        googlePlay: 'Google Play',
+        privacy: 'Privacy Policy',
+        support: 'Support',
+        stores: '스토어',
+        androidNote: 'Android 설명',
+        iosNote: 'iOS 설명',
+        platformCopy: '플랫폼별 설명',
+        status: '상태'
+      }
+    : {
+        switchLabel: '한국어',
+        platforms: 'Platforms',
+        appStore: 'App Store',
+        googlePlay: 'Google Play',
+        privacy: 'Privacy Policy',
+        support: 'Support',
+        stores: 'Stores',
+        androidNote: 'Android copy',
+        iosNote: 'iOS copy',
+        platformCopy: 'Platform copy',
+        status: 'Status'
+      };
+
+const bodyBlocks = renderBlocks(copy.android.description);
+const iconUrl = new URL(data.iconPath, Astro.site);
+const canonicalUrl = new URL(data.canonicalPath, Astro.site);
+const alternateUrl = new URL(data.alternatePath, Astro.site);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: meta.title,
+  operatingSystem: meta.platforms.join(', '),
+  applicationSubCategory: copy.android.name,
+  description: data.seoDescription,
+  image: iconUrl.toString(),
+  downloadUrl: [meta.appstore, meta.googleplay],
+  url: canonicalUrl.toString()
+};
+---
+
+<BaseLayout
+  title={data.seoTitle}
+  description={data.seoDescription}
+  canonicalPath={data.canonicalPath}
+  lang={data.locale}
+  image={data.iconPath}
+  jsonLd={jsonLd}
+>
+  <link slot="head" rel="alternate" hreflang={data.locale === 'en' ? 'ko' : 'en'} href={alternateUrl} />
+
+  <main class="page-shell">
+    <header class="topbar" aria-label="OnnelLab">
+      <a class="brand" href="/">OnnelLab</a>
+      <a class="language" href={data.alternatePath}>{labels.switchLabel}</a>
+    </header>
+
+    <section class="hero" aria-labelledby="product-title">
+      <div class="identity">
+        <img src={data.iconPath} alt={`${meta.title} icon`} width="88" height="88" />
+        <div>
+          <p class="eyebrow">{labels.status}: {meta.status}</p>
+          <h1 id="product-title">{meta.title}</h1>
+          {copy.android.shortDescription && <p class="intro">{copy.android.shortDescription}</p>}
+        </div>
+      </div>
+
+      <div class="actions" aria-label={labels.stores}>
+        <a class="button primary" href={meta.appstore}>{labels.appStore}</a>
+        <a class="button primary" href={meta.googleplay}>{labels.googlePlay}</a>
+        <a class="button" href={meta.privacy}>{labels.privacy}</a>
+        <a class="button" href={`mailto:${meta.supportEmail}`}>{labels.support}</a>
+      </div>
+
+      <dl class="meta-list">
+        <div>
+          <dt>{labels.platforms}</dt>
+          <dd>{meta.platforms.join(' · ')}</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="content-band" aria-label={copy.android.name ?? meta.title}>
+      <div class="copy-column">
+        {bodyBlocks.map((block) => (
+          block.type === 'h' ? (
+            <h2>{block.value}</h2>
+          ) : block.type === 'ul' ? (
+            <ul>
+              {(block.value as string[]).map((item) => <li>{item}</li>)}
+            </ul>
+          ) : (
+            <p>{block.value}</p>
+          )
+        ))}
+      </div>
+    </section>
+
+    <section class="platforms" aria-labelledby="platform-copy">
+      <h2 id="platform-copy">{labels.platformCopy}</h2>
+      <div class="platform-grid">
+        <article>
+          <p class="eyebrow">{labels.androidNote}</p>
+          {copy.android.name && <h3>{copy.android.name}</h3>}
+          {copy.android.shortDescription && <p>{copy.android.shortDescription}</p>}
+        </article>
+        <article>
+          <p class="eyebrow">{labels.iosNote}</p>
+          {copy.ios.name && <h3>{copy.ios.name}</h3>}
+          {copy.ios.subtitle && <p>{copy.ios.subtitle}</p>}
+          {copy.ios.promo && <p>{copy.ios.promo}</p>}
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <span>{meta.title}</span>
+      <a href={meta.privacy}>{labels.privacy}</a>
+      <a href={`mailto:${meta.supportEmail}`}>{meta.supportEmail}</a>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    width: min(980px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 22px 0 28px;
+  }
+
+  .topbar,
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: #737067;
+    font-size: 14px;
+  }
+
+  .brand,
+  .language,
+  footer a {
+    text-decoration: none;
+  }
+
+  .brand {
+    font-weight: 650;
+    color: #37342f;
+  }
+
+  .language {
+    border: 1px solid #ddd5c8;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #fffdf8;
+  }
+
+  .hero {
+    min-height: 70vh;
+    display: grid;
+    align-content: center;
+    gap: 28px;
+    padding: 72px 0 52px;
+  }
+
+  .identity {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  img {
+    border-radius: 22px;
+    background: #eee8dd;
+  }
+
+  .eyebrow {
+    margin: 0 0 8px;
+    color: #827d72;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(44px, 8vw, 84px);
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+
+  .intro {
+    max-width: 560px;
+    margin: 18px 0 0;
+    color: #5b574f;
+    font-size: 19px;
+    line-height: 1.55;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d6cec0;
+    border-radius: 8px;
+    padding: 10px 15px;
+    background: #fffdf8;
+    color: #37342f;
+    text-decoration: none;
+    font-weight: 620;
+  }
+
+  .button.primary {
+    background: #3a3630;
+    border-color: #3a3630;
+    color: #fffaf0;
+  }
+
+  .meta-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 4px 0 0;
+  }
+
+  dt {
+    color: #827d72;
+    font-size: 13px;
+  }
+
+  dd {
+    margin: 4px 0 0;
+    color: #464139;
+    font-weight: 600;
+  }
+
+  .content-band,
+  .platforms {
+    border-top: 1px solid #e0d8cb;
+    padding: 44px 0;
+  }
+
+  .copy-column {
+    max-width: 720px;
+  }
+
+  h2 {
+    margin: 28px 0 12px;
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    margin: 0 0 12px;
+    font-size: 20px;
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+
+  p,
+  li {
+    color: #4f4b43;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  ul {
+    margin: 14px 0 0;
+    padding-left: 20px;
+  }
+
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  article {
+    border: 1px solid #e0d8cb;
+    border-radius: 8px;
+    padding: 20px;
+    background: #fffdf8;
+  }
+
+  footer {
+    border-top: 1px solid #e0d8cb;
+    padding-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 680px) {
+    .page-shell {
+      width: min(100% - 24px, 980px);
+    }
+
+    .hero {
+      min-height: auto;
+      padding: 52px 0 36px;
+    }
+
+    .identity,
+    .actions,
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+</style>
