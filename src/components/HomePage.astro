@@ -117,7 +117,11 @@ const text =
     </section>
 
     {featuredApp && (
-      <section class="featured" aria-label={text.featured} style={appCardStyle(featuredApp)}>
+      <section
+        class="featured"
+        aria-label={text.featured}
+        style="--accent-border: #d9cfc7; --accent-bg: #f7f1ec; --accent-text: #6a5548;"
+      >
         <div class="featured-icon">
           <img src={featuredApp.iconPath} alt={`${featuredApp.title} icon`} width="72" height="72" />
         </div>
