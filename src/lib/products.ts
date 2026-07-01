@@ -22,6 +22,7 @@ export type PlatformCopy = {
   shortDescription?: string;
   subtitle?: string;
   promo?: string;
+  landingDescription?: string;
   description: string;
   keywords?: string;
 };
@@ -84,6 +85,7 @@ const fieldLabels = {
   name: '앱 이름:',
   shortDescription: '간단한 설명:',
   detailedDescription: '자세한 설명:',
+  landingDescription: '랜딩 페이지:',
   subtitle: '부제:',
   promo: '프로모션 텍스트:',
   description: '설명:',
@@ -147,7 +149,12 @@ export function productAccent(source: ProductSource): ProductAccent {
 }
 
 export function pageBodyDescription(copy: ProductCopy): string {
-  return copy.android.description || copy.ios.description;
+  return (
+    copy.android.landingDescription ||
+    copy.ios.landingDescription ||
+    copy.android.description ||
+    copy.ios.description
+  );
 }
 
 export function getProductSource(slug: string): ProductSource {
@@ -281,6 +288,7 @@ function parsePlatformCopy(text: string): PlatformCopy {
     shortDescription: field(text, fieldLabels.shortDescription),
     subtitle: field(text, fieldLabels.subtitle),
     promo: field(text, fieldLabels.promo),
+    landingDescription: field(text, fieldLabels.landingDescription),
     description:
       field(text, fieldLabels.detailedDescription) ?? field(text, fieldLabels.description) ?? '',
     keywords: field(text, fieldLabels.keywords)

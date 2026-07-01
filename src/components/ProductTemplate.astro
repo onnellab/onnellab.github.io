@@ -43,6 +43,7 @@ const bodyBlocks = renderBlocks(pageBodyDescription(copy));
 const heroIntro = copy.android.shortDescription || copy.ios.subtitle || copy.ios.promo;
 const hasAndroidCopy = Boolean(copy.android.name || copy.android.shortDescription || copy.android.description);
 const hasIosCopy = Boolean(copy.ios.name || copy.ios.subtitle || copy.ios.promo || copy.ios.description);
+const showPlatformCopy = data.locale === 'en' && (hasAndroidCopy || hasIosCopy);
 const homePath = data.locale === 'ko' ? '/ko/' : '/';
 const pageStyle = `--accent-border: ${data.accent.border}; --accent-bg: ${data.accent.background}; --accent-text: ${data.accent.text};`;
 const iconUrl = new URL(data.iconPath, Astro.site);
@@ -132,26 +133,28 @@ const jsonLd = {
       </div>
     </section>
 
-    <section class="platforms subtle" aria-labelledby="platform-copy">
-      <h2 id="platform-copy">{labels.platformCopy}</h2>
-      <div class="platform-grid">
-        {hasAndroidCopy && (
-          <article>
-            <p class="eyebrow">{labels.androidNote}</p>
-            {copy.android.name && <h3>{copy.android.name}</h3>}
-            {copy.android.shortDescription && <p>{copy.android.shortDescription}</p>}
-          </article>
-        )}
-        {hasIosCopy && (
-          <article>
-            <p class="eyebrow">{labels.iosNote}</p>
-            {copy.ios.name && <h3>{copy.ios.name}</h3>}
-            {copy.ios.subtitle && <p>{copy.ios.subtitle}</p>}
-            {copy.ios.promo && <p>{copy.ios.promo}</p>}
-          </article>
-        )}
-      </div>
-    </section>
+    {showPlatformCopy && (
+      <section class="platforms subtle" aria-labelledby="platform-copy">
+        <h2 id="platform-copy">{labels.platformCopy}</h2>
+        <div class="platform-grid">
+          {hasAndroidCopy && (
+            <article>
+              <p class="eyebrow">{labels.androidNote}</p>
+              {copy.android.name && <h3>{copy.android.name}</h3>}
+              {copy.android.shortDescription && <p>{copy.android.shortDescription}</p>}
+            </article>
+          )}
+          {hasIosCopy && (
+            <article>
+              <p class="eyebrow">{labels.iosNote}</p>
+              {copy.ios.name && <h3>{copy.ios.name}</h3>}
+              {copy.ios.subtitle && <p>{copy.ios.subtitle}</p>}
+              {copy.ios.promo && <p>{copy.ios.promo}</p>}
+            </article>
+          )}
+        </div>
+      </section>
+    )}
 
     <footer>
       <span>{meta.title}</span>
