@@ -158,14 +158,22 @@ const jsonLd = {
         <div class="screenshot-row">
           {data.screenshotPaths.slice(0, 3).map((screenshotPath, index) => (
             <figure>
-              <img
-                src={screenshotPath}
-                alt={`${meta.title} ${labels.screens} ${index + 1}`}
-                width="1242"
-                height="2688"
-                loading="lazy"
-                decoding="async"
-              />
+              <a
+                class="screenshot-link"
+                href={screenshotPath}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${meta.title} ${labels.screens} ${index + 1}`}
+              >
+                <img
+                  src={screenshotPath}
+                  alt={`${meta.title} ${labels.screens} ${index + 1}`}
+                  width="1242"
+                  height="2688"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
             </figure>
           ))}
         </div>
@@ -412,6 +420,16 @@ const jsonLd = {
     width: 100%;
     height: auto;
     border-radius: 6px;
+  }
+
+  .screenshot-link {
+    display: block;
+    border-radius: 6px;
+  }
+
+  .screenshot-link:focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 3px;
   }
 
   .download-band {
