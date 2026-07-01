@@ -18,7 +18,7 @@ const labels =
         privacy: 'Privacy Policy',
         support: 'Support',
         download: '다운로드',
-        preview: '미리보기',
+        preview: '화면',
         stores: '스토어',
         status: '상태'
       }
@@ -30,7 +30,7 @@ const labels =
         privacy: 'Privacy Policy',
         support: 'Support',
         download: 'Download',
-        preview: 'Preview',
+        preview: 'Screens',
         stores: 'Stores',
         status: 'Status'
       };
@@ -91,7 +91,7 @@ const jsonLd = {
     { lang: 'x-default', path: enPath }
   ]}
 >
-  <main class="page-shell" style={pageStyle}>
+  <main class="page-shell" data-product={data.source.slug} style={pageStyle}>
     <header class="topbar" aria-label="ONNELLAB">
       <a class="brand" href={homePath}>ONNELLAB</a>
       <a class="language" href={data.alternatePath}>{labels.switchLabel}</a>
@@ -326,6 +326,37 @@ const jsonLd = {
     font-size: 15px;
     font-weight: 650;
     line-height: 1.45;
+  }
+
+  .page-shell[data-product='tagweaver'] .task-preview {
+    border-left-style: dashed;
+  }
+
+  .page-shell[data-product='tagweaver'] .task-row span {
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+    background: #fffdf8;
+    text-align: center;
+  }
+
+  .page-shell[data-product='vaultxt'] .task-preview {
+    border-left: 0;
+    padding-left: 24px;
+    box-shadow: inset 2px 0 0 var(--accent-border), inset 6px 0 0 #fffdf8;
+  }
+
+  .page-shell[data-product='vaultxt'] .task-row {
+    border-bottom-style: dashed;
+  }
+
+  .page-shell[data-product='aligna'] .task-preview,
+  .page-shell[data-product='segra'] .task-preview {
+    border-left-width: 2px;
+  }
+
+  .page-shell[data-product='clipnest'] .task-row:first-child,
+  .page-shell[data-product='quivra'] .task-row:first-child {
+    border-top-color: var(--accent-text);
   }
 
   .actions {

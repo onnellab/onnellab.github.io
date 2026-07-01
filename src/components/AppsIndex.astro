@@ -77,18 +77,6 @@ const text =
           </div>
           <a href={featuredApp.href}>{text.open}</a>
         </div>
-        {featuredApp.screenshotPath && (
-          <figure>
-            <img
-              src={featuredApp.screenshotPath}
-              alt={`${featuredApp.title} preview`}
-              width="1242"
-              height="2688"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-        )}
       </section>
     )}
 
@@ -173,10 +161,6 @@ const text =
   }
 
   .featured-app {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 190px;
-    gap: 28px;
-    align-items: center;
     border: 1px solid var(--accent-border);
     border-radius: 8px;
     margin-top: 34px;
@@ -196,24 +180,6 @@ const text =
     align-items: center;
     gap: 16px;
     margin-top: 12px;
-  }
-
-  .featured-app figure {
-    margin: 0;
-    border: 1px solid var(--accent-border);
-    border-radius: 8px;
-    padding: 6px;
-    background: #fffdf8;
-    max-height: 290px;
-    overflow: hidden;
-  }
-
-  .featured-app figure img {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0;
-    border-radius: 5px;
   }
 
   article {
@@ -296,15 +262,6 @@ const text =
 
     .grid {
       grid-template-columns: 1fr;
-    }
-
-    .featured-app {
-      grid-template-columns: 1fr;
-    }
-
-    .featured-app figure {
-      width: min(210px, 58vw);
-      max-height: 260px;
     }
 
     article {

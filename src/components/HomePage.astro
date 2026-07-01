@@ -152,28 +152,29 @@ const text =
           <a href={app.href}>{text.openApp}</a>
         </article>
       ))}
-      <article class="tool-row upcoming-card">
-        <img src="/app-assets/melivra/assets/icon/melivra.png" alt="" width="38" height="38" />
-        <div>
-          <h3>Melivra</h3>
-          <p>{text.soon}</p>
-          <span>{text.upcoming}</span>
-        </div>
-      </article>
     </section>
 
     <p><a href={text.allAppsHref}>{text.allApps}</a></p>
 
     <h2>{text.upcoming}</h2>
 
-    <p class="inline-list">
-      {text.upcomingItems.map((item, index) => (
-        <>
-          <span>{item}</span>
-          {index < text.upcomingItems.length - 1 && <span aria-hidden="true">/</span>}
-        </>
-      ))}
-    </p>
+    <section class="upcoming-list" aria-label={text.upcoming}>
+      <article class="tool-row upcoming-card">
+        <img src="/app-assets/melivra/assets/icon/melivra.png" alt="" width="38" height="38" />
+        <div>
+          <h3>Melivra</h3>
+          <p>{text.soon}</p>
+        </div>
+      </article>
+      <p class="inline-list">
+        {text.upcomingItems.map((item, index) => (
+          <>
+            <span>{item}</span>
+            {index < text.upcomingItems.length - 1 && <span aria-hidden="true">/</span>}
+          </>
+        ))}
+      </p>
+    </section>
 
     <h2>{text.privacy}</h2>
 
@@ -374,17 +375,24 @@ const text =
     line-height: 1.2;
   }
 
-  .upcoming-card {
-    grid-template-columns: 38px 1fr;
-    color: #5b574f;
-    border-bottom: 0;
-  }
-
   .inline-list {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     color: #737067;
+  }
+
+  .upcoming-list {
+    border-top: 1px solid #e0d8cb;
+    border-bottom: 1px solid #e0d8cb;
+    padding: 12px 0 14px;
+  }
+
+  .upcoming-card {
+    grid-template-columns: 38px 1fr;
+    color: #5b574f;
+    border-bottom: 1px solid #e9e1d5;
+    padding-top: 0;
   }
 
   small {
