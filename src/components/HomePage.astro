@@ -125,11 +125,11 @@ const text =
           <span>{text.featured}</span>
           <h2>{featuredApp.title}</h2>
           <p>{featuredApp.description}</p>
-          <div class="platform-badges" aria-label="Platforms">
-            {featuredApp.platforms.map((platform) => <span>{platform}</span>)}
-          </div>
         </div>
         <a class="featured-link" href={featuredApp.href}>{text.openApp}</a>
+        <div class="featured-meta platform-badges" aria-label="Platforms">
+          {featuredApp.platforms.map((platform) => <span>{platform}</span>)}
+        </div>
       </section>
     )}
 
@@ -241,6 +241,7 @@ const text =
     grid-template-columns: 84px minmax(0, 1fr) auto;
     align-items: center;
     column-gap: 22px;
+    row-gap: 14px;
     border: 1px solid var(--accent-border);
     border-radius: 8px;
     margin: 38px 0 14px;
@@ -255,7 +256,7 @@ const text =
   }
 
   .featured h2 {
-    margin: 3px 0 5px;
+    margin: 3px 0 8px;
     font-size: 28px;
     line-height: 1.12;
   }
@@ -289,6 +290,12 @@ const text =
     text-decoration: none;
     font-weight: 620;
     line-height: 1.2;
+  }
+
+  .featured-meta {
+    grid-column: 2 / -1;
+    padding-top: 12px;
+    border-top: 1px solid var(--accent-border);
   }
 
   .tool-list {
@@ -411,6 +418,10 @@ const text =
     .featured-link {
       grid-column: 1 / -1;
       text-align: center;
+    }
+
+    .featured-meta {
+      grid-column: 1 / -1;
     }
   }
 </style>
