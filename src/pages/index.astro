@@ -4,6 +4,16 @@ import { getProductIndexItems } from '../lib/products';
 
 const contentApps = getProductIndexItems('en');
 const privacyApps = contentApps.filter((app) => app.privacy);
+const contentAppTitles = new Set(contentApps.map((app) => app.title));
+const appHref = new Map(contentApps.map((app) => [app.title, app.href]));
+const staticPrivacyApps = [
+  ['Quivra', 'https://onnelakin.github.io/quivra-privacy-policy/'],
+  ['TagWeaver', 'https://onnelakin.github.io/tagweaver-privacy-policy/'],
+  ['VaultXT', 'https://onnelakin.github.io/vaultxt-privacy-policy/'],
+  ['Segra', 'https://onnelakin.github.io/segra-privacy-policy/'],
+  ['ClipNest', 'https://onnelakin.github.io/clipnest-privacy-policy/'],
+  ['Melivra', 'https://onnelakin.github.io/melivra-privacy-policy/']
+].filter(([title]) => !contentAppTitles.has(title));
 const title = 'ONNELLAB - Calm, Structured Digital Tools';
 const description =
   'ONNELLAB is an independent software studio creating calm, structured apps for music, text, audio, files, and productivity.';
@@ -24,10 +34,10 @@ const description =
     <h2>Released Apps</h2>
 
     <ul>
-      <li><a href="/apps/aligna/">Aligna</a></li>
+      <li><a href={appHref.get('Aligna') ?? '/apps/aligna/'}>Aligna</a></li>
       <li>Quivra</li>
       <li>TagWeaver</li>
-      <li>VaultXT</li>
+      <li>{appHref.has('VaultXT') ? <a href={appHref.get('VaultXT')}>VaultXT</a> : 'VaultXT'}</li>
       <li>Segra</li>
       <li>ClipNest</li>
       <li>Melivra <small>(Coming Soon)</small></li>
@@ -48,12 +58,7 @@ const description =
 
     <ul>
       {privacyApps.map((app) => <li><a href={app.privacy}>{app.title}</a></li>)}
-      <li><a href="https://onnelakin.github.io/quivra-privacy-policy/">Quivra</a></li>
-      <li><a href="https://onnelakin.github.io/tagweaver-privacy-policy/">TagWeaver</a></li>
-      <li><a href="https://onnelakin.github.io/vaultxt-privacy-policy/">VaultXT</a></li>
-      <li><a href="https://onnelakin.github.io/segra-privacy-policy/">Segra</a></li>
-      <li><a href="https://onnelakin.github.io/clipnest-privacy-policy/">ClipNest</a></li>
-      <li><a href="https://onnelakin.github.io/melivra-privacy-policy/">Melivra</a></li>
+      {staticPrivacyApps.map(([name, href]) => <li><a href={href}>{name}</a></li>)}
     </ul>
 
     <h2>Contact</h2>
