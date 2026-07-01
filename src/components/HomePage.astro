@@ -8,9 +8,25 @@ type Props = {
 
 const { locale } = Astro.props;
 const contentApps = getProductIndexItems(locale);
-const privacyApps = contentApps.filter((app) => app.privacy);
 const contentAppTitles = new Set(contentApps.map((app) => app.title));
-const releasedApps = ['Quivra', 'TagWeaver', 'VaultXT', 'Segra', 'ClipNest', 'Aligna'];
+const privacyUpdatedAtByTitle: Record<string, string> = {
+  Quivra: '2026-02-10',
+  TagWeaver: '2026-02-14',
+  VaultXT: '2026-03-11',
+  Segra: '2026-06-12',
+  ClipNest: '2026-06-13',
+  Aligna: '2026-06-24',
+  Melivra: '2026-06-24'
+};
+const privacyDate = (title: string) => privacyUpdatedAtByTitle[title] ?? '9999-12-31';
+const comparePrivacyDate = (a: string, b: string) =>
+  privacyDate(a).localeCompare(privacyDate(b)) || a.localeCompare(b);
+const compareAppPrivacyDate = (a: ProductIndexItem, b: ProductIndexItem) =>
+  comparePrivacyDate(a.title, b.title);
+const privacyApps = contentApps.filter((app) => app.privacy).sort(compareAppPrivacyDate);
+const releasedApps = ['Quivra', 'TagWeaver', 'VaultXT', 'Segra', 'ClipNest', 'Aligna'].sort(
+  comparePrivacyDate
+);
 const releasedAppCards = releasedApps
   .map((name) => contentApps.find((app) => app.title === name))
   .filter((app): app is ProductIndexItem => app !== undefined);
@@ -19,13 +35,15 @@ const listedAppCards = releasedAppCards.filter((app) => app.title !== featuredAp
 const appCardStyle = (app: ProductIndexItem) =>
   `--accent-border: ${app.accent.border}; --accent-bg: ${app.accent.background}; --accent-text: ${app.accent.text};`;
 const staticPrivacyApps = [
-  ['Quivra', 'https://onnelakin.github.io/quivra-privacy-policy/'],
-  ['TagWeaver', 'https://onnelakin.github.io/tagweaver-privacy-policy/'],
-  ['VaultXT', 'https://onnelakin.github.io/vaultxt-privacy-policy/'],
-  ['Segra', 'https://onnelakin.github.io/segra-privacy-policy/'],
-  ['ClipNest', 'https://onnelakin.github.io/clipnest-privacy-policy/'],
-  ['Melivra', 'https://onnelakin.github.io/melivra-privacy-policy/']
-].filter(([title]) => !contentAppTitles.has(title));
+  { title: 'Quivra', href: 'https://onnelakin.github.io/quivra-privacy-policy/' },
+  { title: 'TagWeaver', href: 'https://onnelakin.github.io/tagweaver-privacy-policy/' },
+  { title: 'VaultXT', href: 'https://onnelakin.github.io/vaultxt-privacy-policy/' },
+  { title: 'Segra', href: 'https://onnelakin.github.io/segra-privacy-policy/' },
+  { title: 'ClipNest', href: 'https://onnelakin.github.io/clipnest-privacy-policy/' },
+  { title: 'Melivra', href: 'https://onnelakin.github.io/melivra-privacy-policy/' }
+]
+  .filter((app) => !contentAppTitles.has(app.title))
+  .sort((a, b) => comparePrivacyDate(a.title, b.title));
 
 const text =
   locale === 'ko'
@@ -160,7 +178,7 @@ const text =
 
     <ul>
       {privacyApps.map((app) => <li><a href={app.privacy}>{app.title}</a></li>)}
-      {staticPrivacyApps.map(([name, href]) => <li><a href={href}>{name}</a></li>)}
+      {staticPrivacyApps.map((app) => <li><a href={app.href}>{app.title}</a></li>)}
     </ul>
 
     <h2>{text.contact}</h2>
