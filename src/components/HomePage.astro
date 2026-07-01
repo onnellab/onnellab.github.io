@@ -217,13 +217,23 @@ const text =
   }
 
   .home-showcase {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1.22fr) minmax(320px, 0.78fr);
     align-items: center;
     gap: 48px;
     min-height: 374px;
-    padding: 48px 0 36px;
+    padding: 46px 0 38px;
     border-bottom: 1px solid #e0d8cb;
+  }
+
+  .home-showcase::before {
+    content: "";
+    position: absolute;
+    inset: 30px auto auto 0;
+    width: 112px;
+    height: 1px;
+    background: #d7cdbc;
   }
 
   .brand-block {
@@ -231,7 +241,7 @@ const text =
   }
 
   .studio-label {
-    margin: 0 0 14px;
+    margin: 0 0 16px;
     color: #827d72;
     font-size: 12px;
     font-weight: 680;
@@ -248,10 +258,10 @@ const text =
   }
 
   .brand-rule {
-    width: 72px;
+    width: 92px;
     height: 2px;
     margin-top: 18px;
-    background: #cfc5b7;
+    background: linear-gradient(90deg, #b9ad9d, rgba(207, 197, 183, 0));
   }
 
   h2 {
@@ -274,7 +284,7 @@ const text =
   .intro-block p {
     max-width: 520px;
     color: #4f4b43;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.64;
   }
 
@@ -299,6 +309,14 @@ const text =
     overflow: hidden;
     text-decoration: none;
     transition: border-color 140ms ease, background 140ms ease;
+  }
+
+  .featured::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-top: 1px solid rgba(255, 253, 248, 0.86);
+    pointer-events: none;
   }
 
   .featured:hover,
@@ -507,6 +525,11 @@ const text =
       gap: 30px;
       min-height: 0;
       padding: 38px 0 28px;
+    }
+
+    .home-showcase::before {
+      width: 76px;
+      inset: 28px auto auto 0;
     }
 
     h1 {
