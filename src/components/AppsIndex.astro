@@ -186,6 +186,7 @@ const text =
   }
 
   .app-card {
+    position: relative;
     display: grid;
     grid-template-columns: 64px 1fr;
     align-items: start;
@@ -193,10 +194,22 @@ const text =
     border: 1px solid var(--accent-border, #e0d8cb);
     border-radius: 8px;
     padding: 16px;
-    background: #fffdf8;
+    background:
+      linear-gradient(135deg, rgba(255, 253, 248, 0.96), var(--accent-bg, #fffdf8)),
+      #fffdf8;
     color: inherit;
+    overflow: hidden;
     text-decoration: none;
     transition: border-color 140ms ease, background 140ms ease;
+  }
+
+  .app-card::after {
+    content: "";
+    position: absolute;
+    inset: 16px 0 16px auto;
+    width: 2px;
+    background: var(--accent-border, #e0d8cb);
+    opacity: 0.58;
   }
 
   .app-card:hover,
@@ -212,7 +225,10 @@ const text =
 
   img {
     border-radius: 16px;
-    background: #eee8dd;
+    background: #fffdf8;
+    box-shadow:
+      0 0 0 1px var(--accent-border, #ddd5c8),
+      0 10px 24px rgba(73, 63, 50, 0.06);
   }
 
   h2 {
@@ -305,6 +321,10 @@ const text =
       grid-template-columns: 56px 1fr;
       gap: 14px;
       padding: 15px;
+    }
+
+    .app-card::after {
+      inset: 14px 0 14px auto;
     }
 
     img {

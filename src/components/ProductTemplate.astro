@@ -648,6 +648,14 @@ const jsonLd = {
     cursor: grab;
   }
 
+  .viewer-image-stage:has(img[data-zoomed="true"]) {
+    cursor: grab;
+  }
+
+  .viewer-image-stage:has(img[data-dragging="true"]) {
+    cursor: grabbing;
+  }
+
   .viewer-image-stage img[data-dragging="true"] {
     cursor: grabbing;
   }
@@ -680,6 +688,7 @@ const jsonLd = {
     padding: 3px;
     background: rgba(255, 253, 248, 0.62);
     cursor: pointer;
+    transition: border-color 140ms ease, background 140ms ease, box-shadow 140ms ease;
   }
 
   .viewer-thumb[aria-current="true"] {
