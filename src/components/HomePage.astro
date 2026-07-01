@@ -34,9 +34,9 @@ const text =
         description:
           'ONNELLAB은 음악, 텍스트, 오디오, 파일, 생산성을 위한 조용하고 구조적인 앱을 만드는 독립 소프트웨어 스튜디오입니다.',
         intro:
-          '일상적인 디지털 작업을 위한 조용하고 구조적인 도구를 만드는 독립 소프트웨어 스튜디오입니다.',
+          '음악, 텍스트, 오디오, 파일 작업을 위한 조용한 도구를 만듭니다.',
         focus:
-          'ONNELLAB은 하나의 일을 잘 해내는 가볍고 개인정보를 존중하는 앱에 집중합니다.',
+          '가볍게 열리고, 한 가지 일을 정확히 끝내는 앱에 집중합니다.',
         released: '출시된 앱',
         featured: '대표 앱',
         allApps: '전체 앱 페이지',
@@ -56,9 +56,9 @@ const text =
         description:
           'ONNELLAB is an independent software studio creating calm, structured apps for music, text, audio, files, and productivity.',
         intro:
-          'Independent software studio creating calm, structured tools for everyday digital work.',
+          'Calm tools for music, text, audio, and file work.',
         focus:
-          'ONNELLAB focuses on lightweight, privacy-conscious applications designed to do one job well.',
+          'Lightweight, privacy-conscious apps designed to do one job well.',
         released: 'Released Apps',
         featured: 'Featured App',
         allApps: 'All app pages',
@@ -207,13 +207,16 @@ const text =
   }
 
   .intro-block {
+    max-width: 610px;
     border-left: 2px solid #d8d0c5;
     margin: 22px 0 0;
     padding-left: 18px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .intro-block p {
-    max-width: 680px;
+    max-width: 560px;
   }
 
   ul {
