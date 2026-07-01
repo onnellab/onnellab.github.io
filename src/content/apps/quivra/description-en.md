@@ -60,9 +60,9 @@ Audio files can be converted to MP3. MP4 videos can be saved as MP3 audio. MOV v
 
 Supported conversions
 
-• WAV to MP3
-• M4A to MP3
-• MP4 to MP3 audio extraction
+• Convert WAV to MP3
+• Convert M4A to MP3
+• Extract audio from MP4
 • MOV to MP4 video conversion
 
 Quivra is a paid converter with no ads and no subscriptions. It remembers the save location you choose and handles duplicate file names automatically.

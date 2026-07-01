@@ -42,13 +42,12 @@ Every change can be previewed before it is applied, so file names stay predictab
 
 Core tasks
 
-• Add dates before or after file names
-• Add sequential numbers
-• Replace spaces with underscores
-• Remove invalid characters
+• Add dates
+• Add sequence numbers
+• Preview renamed files
+• Clean spaces and invalid characters
 • Organize photos by capture date
 • Rename music files from artist, track, or title fields
-• Preview changes before applying
 • Rename multiple files in one batch
 
 Aligna is not a file explorer or cloud manager. It focuses on one task: making file names clean and consistent.

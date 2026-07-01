@@ -60,10 +60,9 @@ You can cut a long recording down to the part you need, join voice files in orde
 
 Core tasks
 
-• Trim audio sections
-• Work with MP3 and WAV files
-• Merge multiple audio files
-• Create MP4 videos from audio and images
+• Trim the needed section
+• Merge audio files
+• Create MP4 from audio
 • Preserve original files
 • Process everything offline
 

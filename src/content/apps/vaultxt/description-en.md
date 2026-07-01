@@ -47,9 +47,8 @@ Files are opened directly from your device. You can review the content, make cha
 Core tasks
 
 • Open large TXT files
-• Review long documents and logs
-• Edit plain text
-• Work with autosave
+• Review long documents
+• Edit with autosave
 • Recover with undo and snapshots
 • Keep working offline
 

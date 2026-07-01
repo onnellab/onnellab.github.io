@@ -45,9 +45,9 @@ Pinned items stay easy to reach. Recent copied text can be searched and reused i
 
 Core features
 
-• Clipboard history
-• Keyboard paste access
-• Pinned text items
+• Save copied text
+• Paste from the keyboard
+• Pin frequent text
 • Recent clip search
 • Duplicate handling
 • Local storage on your device

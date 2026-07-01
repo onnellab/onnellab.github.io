@@ -51,12 +51,12 @@ TagWeaver does not try to reorganize your library automatically. It saves only t
 
 Supported editing
 
-• MP3 metadata editing
-• ID3 v2.3 and v2.4 tags
-• Title, artist, album, and track fields
-• Album artwork
-• Lyrics
-• Multiple-file selection and batch editing
+• Edit tag fields
+• Manage album artwork
+• Add or edit lyrics
+• ID3 v2.3 and v2.4 support
+• Multiple-file selection
+• Batch editing
 
 Use it to align tracks from the same album, clean up scattered MP3 files, or correct metadata before moving files into another music app. Batch saving for multiple files is available with Pro.
 
