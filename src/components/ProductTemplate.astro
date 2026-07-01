@@ -375,27 +375,41 @@ const jsonLd = {
   }
 
   .task-preview {
+    display: grid;
+    gap: 0;
     border-left: 1px solid var(--accent-border);
-    background: linear-gradient(90deg, rgba(255, 253, 248, 0.68), rgba(255, 253, 248, 0));
-    padding-left: 24px;
+    background:
+      linear-gradient(90deg, rgba(255, 253, 248, 0.82), rgba(255, 253, 248, 0)),
+      linear-gradient(180deg, transparent, var(--accent-bg), transparent);
+    padding: 8px 0 8px 24px;
   }
 
   .task-row {
+    position: relative;
     display: grid;
-    grid-template-columns: 34px minmax(0, 1fr);
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid #e7dfd3;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(231, 223, 211, 0.92);
   }
 
   .task-row:first-child {
-    border-top: 1px solid #e7dfd3;
+    border-top: 1px solid rgba(231, 223, 211, 0.92);
   }
 
   .task-row span {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+    background: rgba(255, 253, 248, 0.72);
     color: var(--accent-text);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
+    line-height: 1;
   }
 
   .task-row strong {
@@ -535,10 +549,10 @@ const jsonLd = {
     width: min(1120px, calc(100vw - 32px));
     max-height: calc(100vh - 32px);
     border: 1px solid rgba(210, 201, 188, 0.48);
-    border-radius: 18px;
+    border-radius: 22px;
     padding: 0;
     background:
-      linear-gradient(180deg, rgba(248, 246, 242, 0.98), rgba(238, 234, 227, 0.98)),
+      linear-gradient(180deg, rgba(250, 249, 246, 0.98), rgba(238, 234, 227, 0.98)),
       #f2eee7;
     color: #37342f;
     box-shadow:
@@ -555,8 +569,8 @@ const jsonLd = {
 
   .viewer-panel {
     display: grid;
-    gap: 12px;
-    padding: 12px;
+    gap: 14px;
+    padding: 14px;
   }
 
   .viewer-bar {
@@ -567,9 +581,9 @@ const jsonLd = {
 
   .viewer-close,
   .viewer-nav {
-    border: 1px solid rgba(196, 185, 169, 0.58);
-    border-radius: 10px;
-    background: rgba(255, 253, 248, 0.46);
+    border: 1px solid rgba(196, 185, 169, 0.5);
+    border-radius: 999px;
+    background: rgba(255, 253, 248, 0.64);
     color: #37342f;
     font: inherit;
     font-weight: 560;
@@ -584,18 +598,18 @@ const jsonLd = {
   }
 
   .viewer-close {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     padding: 0;
-    font-size: 19px;
+    font-size: 18px;
     line-height: 1;
   }
 
   .viewer-frame {
     display: grid;
-    grid-template-columns: 48px minmax(0, 1fr) 48px;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   .viewer-image-stage {
@@ -638,29 +652,29 @@ const jsonLd = {
   .viewer-nav {
     position: relative;
     z-index: 2;
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     justify-self: center;
     padding: 0;
-    font-size: 24px;
+    font-size: 23px;
     line-height: 1;
   }
 
   .viewer-thumbs {
     display: flex;
     justify-content: center;
-    gap: 8px;
+    gap: 9px;
     overflow-x: auto;
-    padding: 2px 2px 4px;
+    padding: 3px 2px 5px;
   }
 
   .viewer-thumb {
-    width: 42px;
-    height: 56px;
+    width: 48px;
+    height: 64px;
     flex: 0 0 auto;
     border: 1px solid rgba(196, 185, 169, 0.72);
-    border-radius: 10px;
-    padding: 2px;
+    border-radius: 12px;
+    padding: 3px;
     background: rgba(255, 253, 248, 0.62);
     cursor: pointer;
   }
@@ -692,6 +706,8 @@ const jsonLd = {
     display: grid;
     justify-items: center;
     gap: 16px;
+    background:
+      linear-gradient(180deg, rgba(255, 253, 248, 0), rgba(255, 253, 248, 0.52), rgba(255, 253, 248, 0));
     text-align: center;
   }
 
@@ -750,9 +766,9 @@ const jsonLd = {
     grid-template-columns: minmax(0, 1fr);
     justify-items: center;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
     border-top: 1px solid #e0d8cb;
-    padding-top: 18px;
+    padding-top: 20px;
     text-align: center;
   }
 
@@ -769,10 +785,14 @@ const jsonLd = {
 
   footer a:first-of-type {
     order: 1;
+    color: #4f4b43;
+    font-weight: 650;
   }
 
   footer a:last-child {
     order: 3;
+    color: #827d72;
+    font-size: 13px;
   }
 
   @media (max-width: 680px) {
@@ -841,13 +861,15 @@ const jsonLd = {
 
     .task-preview {
       border-left: 0;
-      padding-left: 0;
+      border-top: 1px solid var(--accent-border);
+      background: linear-gradient(180deg, rgba(255, 253, 248, 0.52), rgba(255, 253, 248, 0));
+      padding: 8px 0 0;
     }
 
     .task-row {
-      grid-template-columns: 30px minmax(0, 1fr);
-      gap: 10px;
-      padding: 10px 0;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 9px;
+      padding: 11px 0;
     }
 
     .actions.compact {
@@ -889,10 +911,12 @@ const jsonLd = {
 
     .viewer-panel {
       padding: 10px;
+      gap: 11px;
     }
 
     .viewer-frame {
       grid-template-columns: 1fr 1fr;
+      gap: 9px;
     }
 
     .viewer-image-stage {
@@ -908,6 +932,12 @@ const jsonLd = {
     .viewer-prev,
     .viewer-next {
       grid-row: 2;
+    }
+
+    .viewer-nav {
+      width: 100%;
+      height: 38px;
+      border-radius: 12px;
     }
 
     .viewer-thumbs {
