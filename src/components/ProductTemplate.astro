@@ -500,20 +500,27 @@ const jsonLd = {
 
   .viewer-close,
   .viewer-nav {
-    border: 1px solid var(--accent-border);
+    border: 1px solid rgba(214, 206, 192, 0.58);
     border-radius: 8px;
-    background: rgba(255, 253, 248, 0.88);
+    background: rgba(255, 253, 248, 0.72);
     color: #37342f;
     font: inherit;
     font-weight: 620;
     cursor: pointer;
   }
 
+  .viewer-close:hover,
+  .viewer-nav:hover {
+    border-color: var(--accent-border);
+    background: rgba(255, 253, 248, 0.92);
+    color: var(--accent-text);
+  }
+
   .viewer-close {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     padding: 0;
-    font-size: 22px;
+    font-size: 21px;
     line-height: 1;
   }
 
@@ -536,11 +543,11 @@ const jsonLd = {
   }
 
   .viewer-nav {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     justify-self: center;
     padding: 0;
-    font-size: 30px;
+    font-size: 28px;
     line-height: 1;
   }
 
@@ -566,6 +573,9 @@ const jsonLd = {
   .viewer-thumb[aria-current="true"] {
     border-color: var(--accent-text);
     background: #fffdf8;
+    box-shadow:
+      0 0 0 1px rgba(255, 253, 248, 0.9),
+      inset 0 0 0 1px var(--accent-text);
   }
 
   .viewer-thumb img {
