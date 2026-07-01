@@ -1,6 +1,15 @@
 import { expect, test } from '@playwright/test';
 
-const pages = ['/', '/ko/', '/apps/', '/apps/ko/', '/apps/tagweaver/', '/apps/tagweaver/ko/'];
+const pages = [
+  '/',
+  '/ko/',
+  '/apps/',
+  '/apps/ko/',
+  '/apps/tagweaver/',
+  '/apps/tagweaver/ko/',
+  '/privacy/',
+  '/privacy/ko/'
+];
 
 test.describe('site layout', () => {
   for (const path of pages) {
@@ -40,6 +49,17 @@ test.describe('site layout', () => {
       titleBox.y < summaryBox.y + summaryBox.height &&
       titleBox.y + titleBox.height > summaryBox.y;
     expect(overlaps).toBe(false);
+  });
+
+  test('korean privacy heading keeps a readable mobile block', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 900 });
+    await page.goto('/privacy/ko/');
+    const headingBox = await page.locator('h1').boundingBox();
+
+    expect(headingBox).not.toBeNull();
+    if (!headingBox) return;
+    expect(headingBox.width).toBeLessThanOrEqual(362);
+    expect(headingBox.height).toBeLessThan(112);
   });
 
   test('product store links match page locale', async ({ page }) => {
