@@ -79,7 +79,12 @@ const accentPalette: ProductAccent[] = [
   { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' },
   { border: '#cdd3dc', background: '#f0f3f7', text: '#4b5b70' },
   { border: '#d8d0c5', background: '#f7f2eb', text: '#665846' },
-  { border: '#d2d6c7', background: '#f4f6ed', text: '#5a6246' }
+  { border: '#d2d6c7', background: '#f4f6ed', text: '#5a6246' },
+  { border: '#d6c9c9', background: '#f7efef', text: '#6b4f4f' },
+  { border: '#c8d6cf', background: '#eef6f2', text: '#4a6357' },
+  { border: '#d8d4c9', background: '#f7f4ec', text: '#655f4d' },
+  { border: '#cfd2dc', background: '#f1f3f8', text: '#505b73' },
+  { border: '#d6cdd2', background: '#f7f0f3', text: '#674f5b' }
 ];
 
 const fieldLabels = {

@@ -72,18 +72,26 @@ const jsonLd = {
     </header>
 
     <section class="hero" aria-labelledby="product-title">
-      <div class="identity">
-        <img src={data.iconPath} alt={`${meta.title} icon`} width="88" height="88" />
-        <div>
-          <p class="eyebrow">{labels.status}: {meta.status}</p>
-          <h1 id="product-title">{meta.title}</h1>
-          {heroIntro && <p class="intro">{heroIntro}</p>}
-          {heroSignals.length > 0 && (
-            <p class="signal-list" aria-label={heroIntro}>
-              {heroSignals.map((signal) => <span>{signal}</span>)}
-            </p>
-          )}
+      <div class="hero-grid">
+        <div class="identity">
+          <img src={data.iconPath} alt={`${meta.title} icon`} width="88" height="88" />
+          <div>
+            <p class="eyebrow">{labels.status}: {meta.status}</p>
+            <h1 id="product-title">{meta.title}</h1>
+            {heroIntro && <p class="intro">{heroIntro}</p>}
+          </div>
         </div>
+
+        {heroSignals.length > 0 && (
+          <div class="task-preview" aria-hidden="true">
+            {heroSignals.map((signal, index) => (
+              <div class="task-row">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{signal}</strong>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div class="actions" aria-label={labels.stores}>
@@ -182,6 +190,13 @@ const jsonLd = {
     padding: 76px 0 58px;
   }
 
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+    align-items: center;
+    gap: 28px;
+  }
+
   .identity {
     display: grid;
     grid-template-columns: 112px minmax(0, 1fr);
@@ -219,19 +234,34 @@ const jsonLd = {
     line-height: 1.55;
   }
 
-  .signal-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 18px 0 0;
+  .task-preview {
+    border-left: 1px solid var(--accent-border);
+    padding-left: 22px;
   }
 
-  .signal-list span {
-    border-bottom: 1px solid var(--accent-border);
-    padding-bottom: 3px;
+  .task-row {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid #e7dfd3;
+  }
+
+  .task-row:first-child {
+    border-top: 1px solid #e7dfd3;
+  }
+
+  .task-row span {
     color: var(--accent-text);
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .task-row strong {
+    color: #464139;
+    font-size: 15px;
     font-weight: 650;
+    line-height: 1.45;
   }
 
   .actions {
@@ -371,7 +401,8 @@ const jsonLd = {
     }
 
     .identity,
-    .actions {
+    .actions,
+    .hero-grid {
       display: grid;
       grid-template-columns: 1fr;
     }
@@ -388,6 +419,11 @@ const jsonLd = {
     .actions,
     .meta-list {
       margin-left: 0;
+    }
+
+    .task-preview {
+      border-left: 0;
+      padding-left: 0;
     }
 
     .actions.compact {

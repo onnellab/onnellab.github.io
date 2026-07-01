@@ -139,6 +139,7 @@ const text =
     <section class="tool-list" aria-label={text.released}>
       {listedAppCards.map((app) => (
         <article class="tool-row" style={appCardStyle(app)}>
+          <img src={app.iconPath} alt="" width="38" height="38" />
           <div>
             <h3>{app.title}</h3>
             <p>{app.description}</p>
@@ -297,11 +298,18 @@ const text =
 
   .tool-row {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 38px 1fr auto;
     align-items: center;
     gap: 18px;
     border-bottom: 1px solid #e9e1d5;
     padding: 15px 0;
+  }
+
+  .tool-row > img {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px var(--accent-border, #ddd5c8);
   }
 
   h3 {
@@ -359,6 +367,7 @@ const text =
   }
 
   .upcoming-card {
+    grid-template-columns: 1fr;
     color: #5b574f;
     border-bottom: 0;
   }
@@ -391,7 +400,7 @@ const text =
     }
 
     .tool-row {
-      grid-template-columns: 1fr;
+      grid-template-columns: 38px 1fr;
       gap: 10px;
     }
 
