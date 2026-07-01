@@ -1,8 +1,8 @@
 import fs from 'node:fs';
-import { getIconAssets } from '../../lib/products';
+import { getAppAssets } from '../../lib/products';
 
 export function getStaticPaths() {
-  return getIconAssets().map((asset) => ({
+  return getAppAssets().map((asset) => ({
     params: { asset: asset.routePath.replace(/^app-assets\//, '') },
     props: { filePath: asset.filePath }
   }));

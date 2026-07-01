@@ -130,6 +130,18 @@ const text =
           </div>
         </div>
         <a href={featuredApp.href}>{text.openApp}</a>
+        {featuredApp.screenshotPath && (
+          <div class="featured-preview">
+            <img
+              src={featuredApp.screenshotPath}
+              alt={`${featuredApp.title} preview`}
+              width="1242"
+              height="2688"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        )}
       </section>
     )}
 
@@ -243,7 +255,7 @@ const text =
 
   .featured {
     display: grid;
-    grid-template-columns: 84px 1fr auto;
+    grid-template-columns: 84px 1fr auto 136px;
     align-items: center;
     gap: 22px;
     border: 1px solid var(--accent-border);
@@ -285,6 +297,24 @@ const text =
     color: #37342f;
     text-decoration: none;
     font-weight: 620;
+  }
+
+  .featured-preview {
+    justify-self: end;
+    width: 116px;
+    max-height: 180px;
+    border: 1px solid var(--accent-border);
+    border-radius: 8px;
+    padding: 5px;
+    background: #fffdf8;
+    overflow: hidden;
+  }
+
+  .featured-preview img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
   }
 
   .tool-list {
@@ -407,6 +437,13 @@ const text =
     .featured > a {
       grid-column: 1 / -1;
       text-align: center;
+    }
+
+    .featured-preview {
+      grid-column: 1 / -1;
+      justify-self: start;
+      width: min(180px, 52vw);
+      max-height: 220px;
     }
   }
 </style>

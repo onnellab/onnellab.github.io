@@ -18,6 +18,7 @@ const labels =
         privacy: 'Privacy Policy',
         support: 'Support',
         download: '다운로드',
+        preview: '미리보기',
         stores: '스토어',
         status: '상태'
       }
@@ -29,6 +30,7 @@ const labels =
         privacy: 'Privacy Policy',
         support: 'Support',
         download: 'Download',
+        preview: 'Preview',
         stores: 'Stores',
         status: 'Status'
       };
@@ -41,6 +43,7 @@ const homePath = data.locale === 'ko' ? '/ko/' : '/';
 const pageStyle = `--accent-border: ${data.accent.border}; --accent-bg: ${data.accent.background}; --accent-text: ${data.accent.text};`;
 const iconUrl = new URL(data.iconPath, Astro.site);
 const canonicalUrl = new URL(data.canonicalPath, Astro.site);
+const screenshotUrls = data.screenshotPaths.map((screenshotPath) => new URL(screenshotPath, Astro.site));
 const enPath = `/apps/${data.source.slug}/`;
 const koPath = `/apps/${data.source.slug}/ko/`;
 const offerPriceCurrency = meta.priceCurrency ?? (meta.price === 0 ? 'USD' : undefined);
@@ -53,7 +56,7 @@ const jsonLd = {
   applicationSubCategory: copy.android.name || copy.ios.name,
   description: data.seoDescription,
   inLanguage: data.locale,
-  image: iconUrl.toString(),
+  image: [iconUrl.toString(), ...screenshotUrls.map((url) => url.toString())],
   downloadUrl: [meta.appstore, meta.googleplay].filter(Boolean),
   sameAs: [meta.appstore, meta.googleplay].filter(Boolean),
   publisher: {
@@ -134,6 +137,29 @@ const jsonLd = {
       </dl>
     </section>
 
+    {data.screenshotPaths.length > 0 && (
+      <section class="preview-band" aria-label={labels.preview}>
+        <div class="preview-heading">
+          <p class="eyebrow">{labels.preview}</p>
+          <h2>{meta.title}</h2>
+        </div>
+        <div class="screenshot-row">
+          {data.screenshotPaths.slice(0, 3).map((screenshotPath, index) => (
+            <figure>
+              <img
+                src={screenshotPath}
+                alt={`${meta.title} ${labels.preview} ${index + 1}`}
+                width="1242"
+                height="2688"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
+
     <section class="content-band" aria-label={copy.android.name ?? copy.ios.name ?? meta.title}>
       <div class="copy-column">
         {bodyBlocks.map((block) => (
@@ -151,6 +177,7 @@ const jsonLd = {
     </section>
 
     <section class="download-band" aria-label={labels.download}>
+      <img src={data.iconPath} alt="" width="64" height="64" loading="lazy" />
       <div>
         <p class="eyebrow">{labels.download}</p>
         <h2>{meta.title}</h2>
@@ -356,9 +383,48 @@ const jsonLd = {
   }
 
   .content-band,
+  .preview-band,
   .download-band {
     border-top: 1px solid #e0d8cb;
     padding: 44px 0;
+  }
+
+  .preview-band {
+    display: grid;
+    gap: 24px;
+  }
+
+  .preview-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .preview-heading h2 {
+    margin: 0;
+  }
+
+  .screenshot-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    align-items: start;
+  }
+
+  figure {
+    margin: 0;
+    border: 1px solid var(--accent-border);
+    border-radius: 8px;
+    padding: 8px;
+    background: #fffdf8;
+  }
+
+  figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
   }
 
   .download-band {
@@ -366,6 +432,18 @@ const jsonLd = {
     justify-items: center;
     gap: 18px;
     text-align: center;
+    border: 1px solid var(--accent-border);
+    border-radius: 8px;
+    margin: 10px 0 34px;
+    padding: 34px 20px;
+    background: linear-gradient(180deg, var(--accent-bg), #fffdf8 78%);
+  }
+
+  .download-band img {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px var(--accent-border);
   }
 
   .download-band h2 {
@@ -451,6 +529,22 @@ const jsonLd = {
 
     .actions.compact {
       justify-content: stretch;
+    }
+
+    .preview-heading {
+      display: block;
+    }
+
+    .screenshot-row {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 4px;
+    }
+
+    figure {
+      flex: 0 0 min(74vw, 320px);
+      scroll-snap-align: start;
     }
 
     .button {

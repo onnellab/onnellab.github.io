@@ -53,6 +53,7 @@ export type ProductPageData = {
   seoTitle: string;
   seoDescription: string;
   iconPath: string;
+  screenshotPaths: string[];
   accent: ProductAccent;
 };
 
@@ -63,6 +64,7 @@ export type ProductIndexItem = {
   platforms: string[];
   description: string;
   iconPath: string;
+  screenshotPath?: string;
   href: string;
   privacy: string;
   accent: ProductAccent;
@@ -135,6 +137,7 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     seoTitle: source.meta.title,
     seoDescription,
     iconPath: getIconRoutePath(source),
+    screenshotPaths: getScreenshotRoutePaths(source, locale),
     accent: productAccent(source)
   };
 }
@@ -149,6 +152,7 @@ export function getProductIndexItems(locale: Locale): ProductIndexItem[] {
       platforms: source.meta.platforms,
       description: landingSubtitle(copy),
       iconPath: getIconRoutePath(source),
+      screenshotPath: getScreenshotRoutePaths(source, locale)[0],
       href: locale === 'en' ? `/apps/${source.slug}/` : `/apps/${source.slug}/ko/`,
       privacy: source.meta.privacy,
       accent: productAccent(source)
@@ -194,6 +198,35 @@ export function getIconAssets(): Array<{ routePath: string; filePath: string }> 
     routePath: getIconRoutePath(source).replace(/^\/+/, ''),
     filePath: getIconFilePath(source)
   }));
+}
+
+export function getAppAssets(): Array<{ routePath: string; filePath: string }> {
+  return [
+    ...getIconAssets(),
+    ...getScreenshotAssets()
+  ];
+}
+
+function getScreenshotRoutePaths(source: ProductSource, locale: Locale): string[] {
+  const screenshotDir = path.resolve(source.contentDir, 'assets/screenshots', locale);
+  if (!fs.existsSync(screenshotDir)) return [];
+  return fs
+    .readdirSync(screenshotDir, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && /\.(?:png|jpg|jpeg|webp)$/i.test(entry.name))
+    .map((entry) => entry.name)
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+    .map((fileName) => `/app-assets/${source.slug}/assets/screenshots/${locale}/${fileName}`);
+}
+
+function getScreenshotAssets(): Array<{ routePath: string; filePath: string }> {
+  return getProductSources().flatMap((source) =>
+    (['en', 'ko'] as const).flatMap((locale) =>
+      getScreenshotRoutePaths(source, locale).map((routePath) => ({
+        routePath: routePath.replace(/^\/+/, ''),
+        filePath: path.resolve(source.contentDir, routePath.replace(`/app-assets/${source.slug}/`, ''))
+      }))
+    )
+  );
 }
 
 export function renderBlocks(text: string): Array<{ type: 'p' | 'h' | 'ul'; value: string | string[] }> {
