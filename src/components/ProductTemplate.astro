@@ -313,14 +313,10 @@ const jsonLd = {
   }
 
   .download-band {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 22px;
-  }
-
-  .download-band {
-    background: linear-gradient(90deg, var(--accent-bg), transparent 72%);
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+    text-align: center;
   }
 
   .download-band h2 {
@@ -328,7 +324,7 @@ const jsonLd = {
   }
 
   .actions.compact {
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   .copy-column {
@@ -411,7 +407,6 @@ const jsonLd = {
 
     .identity,
     .actions,
-    .download-band,
     .platform-grid {
       display: grid;
       grid-template-columns: 1fr;
