@@ -78,6 +78,23 @@ test.describe('site layout', () => {
     const wheelZoomTransform = await viewerImage.evaluate((image) => getComputedStyle(image).transform);
     expect(wheelZoomTransform).not.toBe(zoomedTransform);
 
+    for (let index = 0; index < 8; index += 1) {
+      await page.locator('[data-viewer-stage]').dispatchEvent('wheel', {
+        deltaY: 120,
+        clientX: stageBox.x + stageBox.width / 2,
+        clientY: stageBox.y + stageBox.height / 2,
+        bubbles: true,
+        cancelable: true
+      });
+    }
+    const reducedWheelScale = await viewerImage.evaluate((image) => {
+      const transform = getComputedStyle(image).transform;
+      return transform === 'none' ? 1 : new DOMMatrixReadOnly(transform).a;
+    });
+    expect(reducedWheelScale).toBeGreaterThan(1);
+    expect(reducedWheelScale).toBeLessThan(1.2);
+    const reducedWheelTransform = await viewerImage.evaluate((image) => getComputedStyle(image).transform);
+
     await viewerImage.dispatchEvent('mousedown', {
       clientX: stageBox.x + stageBox.width / 2,
       clientY: stageBox.y + stageBox.height / 2,
@@ -96,7 +113,7 @@ test.describe('site layout', () => {
         y: stageBox.y + stageBox.height / 2 + 48
       }
     );
-    expect(await viewerImage.evaluate((image) => getComputedStyle(image).transform)).not.toBe(wheelZoomTransform);
+    expect(await viewerImage.evaluate((image) => getComputedStyle(image).transform)).not.toBe(reducedWheelTransform);
 
     await page.locator('[data-viewer-next]').click();
     await expect(page.locator('[data-viewer-image]')).toHaveAttribute('src', /tagweaver\/assets\/screenshots\/en\/2\.png/);

@@ -116,7 +116,6 @@ const text =
           aria-label={text.featured}
           style={appCardStyle(featuredApp)}
         >
-          <div class="featured-accent" aria-hidden="true"></div>
           <div class="featured-topline">
             <span class="featured-label">{text.featured}</span>
             <div class="platform-badges" aria-label="Platforms">
@@ -220,9 +219,9 @@ const text =
   .home-showcase {
     display: grid;
     grid-template-columns: minmax(0, 1.22fr) minmax(320px, 0.78fr);
-    align-items: end;
+    align-items: center;
     gap: 48px;
-    min-height: 404px;
+    min-height: 390px;
     padding: 52px 0 38px;
     border-bottom: 1px solid #e0d8cb;
   }
@@ -304,27 +303,15 @@ const text =
 
   .featured:hover,
   .featured:focus-visible {
-    border-color: var(--accent-text);
+    border-color: var(--accent-border);
     background:
       linear-gradient(135deg, var(--accent-bg), #fffdf8 58%),
       #fffdf8;
   }
 
   .featured:focus-visible {
-    outline: 2px solid var(--accent-text);
+    outline: 2px solid #b8ad9f;
     outline-offset: 3px;
-  }
-
-  .featured-accent {
-    position: absolute;
-    inset: auto 18px 17px auto;
-    width: 118px;
-    height: 58px;
-    background:
-      linear-gradient(var(--accent-border), var(--accent-border)) 0 12px / 100% 1px no-repeat,
-      linear-gradient(var(--accent-border), var(--accent-border)) 18px 29px / 74% 1px no-repeat,
-      linear-gradient(var(--accent-border), var(--accent-border)) 8px 46px / 88% 1px no-repeat;
-    opacity: 0.75;
   }
 
   .featured-topline {
@@ -417,13 +404,17 @@ const text =
 
   .product-card:hover,
   .product-card:focus-visible {
-    border-color: var(--accent-text, #827d72);
+    border-color: var(--accent-border, #d8cec0);
     background: var(--accent-bg, #fffdf8);
   }
 
   .product-card:focus-visible {
-    outline: 2px solid var(--accent-text, #827d72);
+    outline: 2px solid #b8ad9f;
     outline-offset: 3px;
+  }
+
+  .product-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 
   .product-card > img {
@@ -523,7 +514,7 @@ const text =
     }
 
     h1 {
-      font-size: clamp(45px, 15vw, 62px);
+      font-size: clamp(42px, 14vw, 58px);
     }
 
     .brand-rule {
@@ -564,6 +555,10 @@ const text =
 
     .product-grid {
       grid-template-columns: 1fr;
+    }
+
+    .product-card:last-child:nth-child(odd) {
+      grid-column: auto;
     }
 
     .product-card {

@@ -95,8 +95,10 @@ const text =
             <h2>{app.title}</h2>
             <p>{app.description}</p>
             <div class="meta-row">
-              <span>{categoryLabels[appCategory(app.title)]}</span>
-              <span>{app.status}</span>
+              <div class="meta-text">
+                <span>{categoryLabels[appCategory(app.title)]}</span>
+                <span>{app.status}</span>
+              </div>
               <div class="platform-badges" aria-label="Platforms">
                 {app.platforms.map((platform) => <span>{platform}</span>)}
               </div>
@@ -199,12 +201,12 @@ const text =
 
   .app-card:hover,
   .app-card:focus-visible {
-    border-color: var(--accent-text);
+    border-color: var(--accent-border);
     background: var(--accent-bg, #fffdf8);
   }
 
   .app-card:focus-visible {
-    outline: 2px solid var(--accent-text, #827d72);
+    outline: 2px solid #b8ad9f;
     outline-offset: 3px;
   }
 
@@ -230,13 +232,32 @@ const text =
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 8px;
+    justify-content: space-between;
+    gap: 8px 12px;
+    margin-top: 11px;
   }
 
-  .meta-row > span {
+  .meta-text {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .meta-text span {
     color: #827d72;
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .meta-text span + span::before {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin: 0 7px 2px 0;
+    border-radius: 50%;
+    background: #c7beb1;
   }
 
   .platform-badges {

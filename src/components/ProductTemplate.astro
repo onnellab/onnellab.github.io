@@ -298,20 +298,6 @@ const jsonLd = {
     overflow: hidden;
   }
 
-  .hero::after {
-    content: "";
-    position: absolute;
-    inset: auto 0 42px auto;
-    width: min(260px, 32vw);
-    height: 88px;
-    background:
-      linear-gradient(var(--accent-border), var(--accent-border)) 0 18px / 100% 1px no-repeat,
-      linear-gradient(var(--accent-border), var(--accent-border)) 34px 44px / 72% 1px no-repeat,
-      linear-gradient(var(--accent-border), var(--accent-border)) 14px 70px / 86% 1px no-repeat;
-    opacity: 0.42;
-    pointer-events: none;
-  }
-
   .hero-grid {
     position: relative;
     display: grid;
@@ -723,10 +709,6 @@ const jsonLd = {
       padding: 42px 0 32px;
     }
 
-    .hero::after {
-      display: none;
-    }
-
     .identity,
     .actions,
     .hero-grid {
@@ -861,7 +843,8 @@ const jsonLd = {
   let suppressNextViewerClick = false;
   const dragThreshold = 4;
   const minViewerZoom = 1;
-  const clickViewerZoom = 1.55;
+  const minWheelViewerZoom = 1.08;
+  const clickViewerZoom = 1.35;
   const maxViewerZoom = 1.9;
   const wheelZoomStep = 0.16;
 
@@ -997,7 +980,12 @@ const jsonLd = {
     if (!viewer?.open) return;
     event.preventDefault();
     const direction = event.deltaY < 0 ? 1 : -1;
-    setViewerZoomAtPoint(viewerZoom + direction * wheelZoomStep, event.clientX, event.clientY);
+    if (direction < 0 && viewerZoom <= minViewerZoom) return;
+    const targetZoom =
+      direction > 0
+        ? viewerZoom + wheelZoomStep
+        : Math.max(minWheelViewerZoom, viewerZoom - wheelZoomStep);
+    setViewerZoomAtPoint(targetZoom, event.clientX, event.clientY);
   }, { passive: false });
   thumbnailButtons.forEach((button, index) => {
     button.addEventListener('click', () => setViewerImage(index));
