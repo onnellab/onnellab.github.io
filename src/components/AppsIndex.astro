@@ -51,7 +51,6 @@ const text =
         title: 'ONNELLAB 앱',
         description: 'ONNELLAB이 만든 조용하고 가벼운 앱을 한곳에서 살펴보세요.',
         heading: '앱',
-        open: '열기',
         switchLabel: 'English',
         switchHref: '/apps/',
         homeHref: '/ko/'
@@ -60,7 +59,6 @@ const text =
         title: 'ONNELLAB Apps',
         description: 'Calm, lightweight apps by ONNELLAB.',
         heading: 'Apps',
-        open: 'Open',
         switchLabel: '한국어',
         switchHref: '/apps/ko/',
         homeHref: '/'
@@ -91,7 +89,7 @@ const text =
 
     <section class="grid" aria-label={text.heading}>
       {apps.map((app) => (
-        <article style={appCardStyle(app)}>
+        <a class="app-card" href={app.href} style={appCardStyle(app)}>
           <img src={app.iconPath} alt={`${app.title} icon`} width="64" height="64" />
           <div>
             <h2>{app.title}</h2>
@@ -104,8 +102,7 @@ const text =
               </div>
             </div>
           </div>
-          <a href={app.href}>{text.open}</a>
-        </article>
+        </a>
       ))}
     </section>
   </main>
@@ -169,7 +166,7 @@ const text =
     margin-top: 36px;
   }
 
-  article {
+  .app-card {
     display: grid;
     grid-template-columns: 64px 1fr;
     align-items: start;
@@ -178,11 +175,20 @@ const text =
     border-radius: 8px;
     padding: 16px;
     background: #fffdf8;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 140ms ease, background 140ms ease;
   }
 
-  article a {
-    grid-column: 1 / -1;
-    justify-self: start;
+  .app-card:hover,
+  .app-card:focus-visible {
+    border-color: var(--accent-text);
+    background: var(--accent-bg, #fffdf8);
+  }
+
+  .app-card:focus-visible {
+    outline: 2px solid var(--accent-text, #827d72);
+    outline-offset: 3px;
   }
 
   img {
@@ -232,15 +238,6 @@ const text =
     line-height: 1.4;
   }
 
-  article a {
-    border: 1px solid var(--accent-border, #d6cec0);
-    border-radius: 8px;
-    padding: 9px 12px;
-    background: #faf8f5;
-    text-decoration: none;
-    font-weight: 620;
-  }
-
   @media (max-width: 680px) {
     .page-shell {
       width: min(100% - 24px, 980px);
@@ -250,7 +247,7 @@ const text =
       grid-template-columns: 1fr;
     }
 
-    article {
+    .app-card {
       grid-template-columns: 56px 1fr;
     }
 
@@ -260,10 +257,5 @@ const text =
       border-radius: 14px;
     }
 
-    article a {
-      grid-column: 1 / -1;
-      text-align: center;
-      justify-self: stretch;
-    }
   }
 </style>

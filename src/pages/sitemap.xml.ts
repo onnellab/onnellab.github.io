@@ -64,6 +64,24 @@ export function GET() {
         { lang: 'x-default', path: '/apps/' }
       ]
     },
+    {
+      path: '/privacy/',
+      lastmod: sourceLastmod('src/components/PrivacyIndex.astro'),
+      alternates: [
+        { lang: 'en', path: '/privacy/' },
+        { lang: 'ko', path: '/privacy/ko/' },
+        { lang: 'x-default', path: '/privacy/' }
+      ]
+    },
+    {
+      path: '/privacy/ko/',
+      lastmod: sourceLastmod('src/components/PrivacyIndex.astro'),
+      alternates: [
+        { lang: 'en', path: '/privacy/' },
+        { lang: 'ko', path: '/privacy/ko/' },
+        { lang: 'x-default', path: '/privacy/' }
+      ]
+    },
     ...productEntries
   ];
   const uniqueEntries = entries.filter(

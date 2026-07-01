@@ -20,6 +20,8 @@ export function GET() {
     `- Home: ${siteUrl}/`,
     `- Korean home: ${siteUrl}/ko/`,
     `- Apps: ${siteUrl}/apps/`,
+    `- Privacy policies: ${siteUrl}/privacy/`,
+    `- Korean privacy policies: ${siteUrl}/privacy/ko/`,
     `- RSS: ${siteUrl}/rss.xml`,
     `- Sitemap: ${siteUrl}/sitemap.xml`,
     '',

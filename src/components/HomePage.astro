@@ -8,7 +8,6 @@ type Props = {
 
 const { locale } = Astro.props;
 const contentApps = getProductIndexItems(locale);
-const contentAppTitles = new Set(contentApps.map((app) => app.title));
 const privacyUpdatedAtByTitle: Record<string, string> = {
   Quivra: '2026-02-10',
   TagWeaver: '2026-02-14',
@@ -21,9 +20,6 @@ const privacyUpdatedAtByTitle: Record<string, string> = {
 const privacyDate = (title: string) => privacyUpdatedAtByTitle[title] ?? '9999-12-31';
 const comparePrivacyDate = (a: string, b: string) =>
   privacyDate(a).localeCompare(privacyDate(b)) || a.localeCompare(b);
-const compareAppPrivacyDate = (a: ProductIndexItem, b: ProductIndexItem) =>
-  comparePrivacyDate(a.title, b.title);
-const privacyApps = contentApps.filter((app) => app.privacy).sort(compareAppPrivacyDate);
 const releasedApps = ['Quivra', 'TagWeaver', 'VaultXT', 'Segra', 'ClipNest', 'Aligna'].sort(
   comparePrivacyDate
 );
@@ -34,16 +30,6 @@ const featuredApp = releasedAppCards.find((app) => app.title === 'TagWeaver') ??
 const listedAppCards = releasedAppCards.filter((app) => app.title !== featuredApp?.title);
 const appCardStyle = (app: ProductIndexItem) =>
   `--accent-border: ${app.accent.border}; --accent-bg: ${app.accent.background}; --accent-text: ${app.accent.text};`;
-const staticPrivacyApps = [
-  { title: 'Quivra', href: 'https://onnelakin.github.io/quivra-privacy-policy/' },
-  { title: 'TagWeaver', href: 'https://onnelakin.github.io/tagweaver-privacy-policy/' },
-  { title: 'VaultXT', href: 'https://onnelakin.github.io/vaultxt-privacy-policy/' },
-  { title: 'Segra', href: 'https://onnelakin.github.io/segra-privacy-policy/' },
-  { title: 'ClipNest', href: 'https://onnelakin.github.io/clipnest-privacy-policy/' },
-  { title: 'Melivra', href: 'https://onnelakin.github.io/melivra-privacy-policy/' }
-]
-  .filter((app) => !contentAppTitles.has(app.title))
-  .sort((a, b) => comparePrivacyDate(a.title, b.title));
 
 const text =
   locale === 'ko'
@@ -61,10 +47,11 @@ const text =
         featured: '대표 앱',
         allApps: '전체 앱 페이지',
         allAppsHref: '/apps/ko/',
-        openApp: '열기',
         upcoming: '예정 프로젝트',
         upcomingItems: ['Papira', 'FloMo', 'Nunote', 'Textoria', 'Heara'],
         privacy: '개인정보처리방침',
+        privacyLink: '앱별 개인정보처리방침 보기',
+        privacyHref: '/privacy/ko/',
         contact: '문의',
         inquiry: '문의:',
         soon: '출시 예정',
@@ -85,10 +72,11 @@ const text =
         featured: 'Featured App',
         allApps: 'All app pages',
         allAppsHref: '/apps/',
-        openApp: 'Open',
         upcoming: 'Upcoming Projects',
         upcomingItems: ['Papira', 'FloMo', 'Nunote', 'Textoria', 'Heara'],
         privacy: 'Privacy Policy',
+        privacyLink: 'View app privacy policies',
+        privacyHref: '/privacy/',
         contact: 'Contact',
         inquiry: 'For inquiries:',
         soon: 'Coming Soon',
@@ -126,8 +114,9 @@ const text =
     </section>
 
     {featuredApp && (
-      <section
+      <a
         class="featured"
+        href={featuredApp.href}
         aria-label={text.featured}
         style={appCardStyle(featuredApp)}
       >
@@ -145,15 +134,14 @@ const text =
             </div>
           </div>
         </div>
-        <a class="featured-link" href={featuredApp.href}>{text.openApp}</a>
-      </section>
+      </a>
     )}
 
     <h2>{text.released}</h2>
 
     <section class="tool-list" aria-label={text.released}>
       {listedAppCards.map((app) => (
-        <article class="tool-row" style={appCardStyle(app)}>
+        <a class="tool-row" href={app.href} style={appCardStyle(app)}>
           <img src={app.iconPath} alt="" width="38" height="38" />
           <div>
             <h3>{app.title}</h3>
@@ -165,8 +153,7 @@ const text =
               </div>
             </div>
           </div>
-          <a href={app.href}>{text.openApp}</a>
-        </article>
+        </a>
       ))}
     </section>
 
@@ -187,10 +174,7 @@ const text =
 
     <h2>{text.privacy}</h2>
 
-    <ul>
-      {privacyApps.map((app) => <li><a href={app.privacy}>{app.title}</a></li>)}
-      {staticPrivacyApps.map((app) => <li><a href={app.href}>{app.title}</a></li>)}
-    </ul>
+    <p><a href={text.privacyHref}>{text.privacyLink}</a></p>
 
     <h2>{text.contact}</h2>
 
@@ -289,7 +273,7 @@ const text =
 
   .featured {
     display: grid;
-    grid-template-columns: 84px minmax(0, 1fr) auto;
+    grid-template-columns: 84px minmax(0, 1fr);
     align-items: center;
     column-gap: 22px;
     row-gap: 14px;
@@ -298,6 +282,20 @@ const text =
     margin: 38px 0 14px;
     padding: 20px 22px;
     background: linear-gradient(90deg, var(--accent-bg), #fffdf8 76%);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 140ms ease, background 140ms ease;
+  }
+
+  .featured:hover,
+  .featured:focus-visible {
+    border-color: var(--accent-text);
+    background: linear-gradient(90deg, var(--accent-bg), #fffdf8 70%);
+  }
+
+  .featured:focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 3px;
   }
 
   .featured-icon img {
@@ -306,8 +304,7 @@ const text =
     border-radius: 20px;
   }
 
-  .featured-icon,
-  .featured-link {
+  .featured-icon {
     align-self: center;
   }
 
@@ -334,20 +331,6 @@ const text =
     line-height: 1.55;
   }
 
-  .featured-link {
-    display: inline-flex;
-    align-items: center;
-    justify-self: end;
-    border: 1px solid var(--accent-border);
-    border-radius: 8px;
-    padding: 8px 11px;
-    background: #fffdf8;
-    color: #37342f;
-    text-decoration: none;
-    font-weight: 620;
-    line-height: 1.2;
-  }
-
   .tool-list {
     display: grid;
     gap: 0;
@@ -358,11 +341,25 @@ const text =
 
   .tool-row {
     display: grid;
-    grid-template-columns: 38px 1fr auto;
+    grid-template-columns: 38px 1fr;
     align-items: center;
     gap: 18px;
     border-bottom: 1px solid #e9e1d5;
     padding: 15px 0;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 140ms ease, background 140ms ease;
+  }
+
+  .tool-row:hover,
+  .tool-row:focus-visible {
+    background: #fffdf8;
+    border-bottom-color: var(--accent-border, #d6cec0);
+  }
+
+  .tool-row:focus-visible {
+    outline: 2px solid var(--accent-text, #827d72);
+    outline-offset: 3px;
   }
 
   .tool-row > img {
@@ -420,16 +417,6 @@ const text =
     line-height: 1.4;
   }
 
-  .tool-row a {
-    border: 1px solid var(--accent-border, #d6cec0);
-    border-radius: 8px;
-    padding: 8px 11px;
-    background: #faf8f5;
-    text-decoration: none;
-    font-weight: 620;
-    line-height: 1.2;
-  }
-
   .inline-list {
     display: flex;
     flex-wrap: wrap;
@@ -479,12 +466,6 @@ const text =
     .tool-row {
       grid-template-columns: 38px 1fr;
       gap: 10px;
-    }
-
-    .tool-row a,
-    .featured-link {
-      grid-column: 1 / -1;
-      text-align: center;
     }
   }
 </style>

@@ -1,0 +1,249 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getProductIndexItems, type Locale } from '../lib/products';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const privacyUpdatedAtByTitle: Record<string, string> = {
+  Quivra: '2026-02-10',
+  TagWeaver: '2026-02-14',
+  VaultXT: '2026-03-11',
+  Segra: '2026-06-12',
+  ClipNest: '2026-06-13',
+  Aligna: '2026-06-24',
+  Melivra: '2026-06-24'
+};
+const contentApps = getProductIndexItems(locale);
+const contentAppTitles = new Set(contentApps.map((app) => app.title));
+const staticPrivacyApps = [
+  { title: 'Quivra', href: 'https://onnelakin.github.io/quivra-privacy-policy/' },
+  { title: 'TagWeaver', href: 'https://onnelakin.github.io/tagweaver-privacy-policy/' },
+  { title: 'VaultXT', href: 'https://onnelakin.github.io/vaultxt-privacy-policy/' },
+  { title: 'Segra', href: 'https://onnelakin.github.io/segra-privacy-policy/' },
+  { title: 'ClipNest', href: 'https://onnelakin.github.io/clipnest-privacy-policy/' },
+  { title: 'Melivra', href: 'https://onnelakin.github.io/melivra-privacy-policy/' }
+].filter((app) => !contentAppTitles.has(app.title));
+const privacyDate = (title: string) => privacyUpdatedAtByTitle[title] ?? '9999-12-31';
+const policies = [
+  ...contentApps
+    .filter((app) => app.privacy)
+    .map((app) => ({
+      title: app.title,
+      href: app.privacy,
+      date: privacyDate(app.title),
+      platforms: app.platforms
+    })),
+  ...staticPrivacyApps.map((app) => ({
+    title: app.title,
+    href: app.href,
+    date: privacyDate(app.title),
+    platforms: [] as string[]
+  }))
+].sort((a, b) => a.date.localeCompare(b.date) || a.title.localeCompare(b.title));
+
+const text =
+  locale === 'ko'
+    ? {
+        title: 'ONNELLAB 개인정보처리방침',
+        description: 'ONNELLAB 앱별 개인정보처리방침 링크를 정리한 페이지입니다.',
+        heading: '개인정보처리방침',
+        intro: '앱별 개인정보처리방침을 작성 날짜 기준 오름차순으로 정리했습니다.',
+        updated: '작성 날짜',
+        home: 'ONNELLAB',
+        switchLabel: 'English',
+        switchHref: '/privacy/',
+        homeHref: '/ko/'
+      }
+    : {
+        title: 'ONNELLAB Privacy Policies',
+        description: 'Privacy policy links for ONNELLAB apps.',
+        heading: 'Privacy Policies',
+        intro: 'App privacy policies are listed by policy date in ascending order.',
+        updated: 'Policy date',
+        home: 'ONNELLAB',
+        switchLabel: '한국어',
+        switchHref: '/privacy/ko/',
+        homeHref: '/'
+      };
+---
+
+<BaseLayout
+  title={text.title}
+  description={text.description}
+  canonicalPath={locale === 'ko' ? '/privacy/ko/' : '/privacy/'}
+  lang={locale}
+  alternates={[
+    { lang: 'en', path: '/privacy/' },
+    { lang: 'ko', path: '/privacy/ko/' },
+    { lang: 'x-default', path: '/privacy/' }
+  ]}
+>
+  <main class="page-shell">
+    <nav aria-label="Navigation">
+      <a class="brand" href={text.homeHref}>{text.home}</a>
+      <a class="language" href={text.switchHref}>{text.switchLabel}</a>
+    </nav>
+
+    <header>
+      <h1>{text.heading}</h1>
+      <p>{text.intro}</p>
+    </header>
+
+    <section class="policy-list" aria-label={text.heading}>
+      {policies.map((policy) => (
+        <a class="policy-row" href={policy.href}>
+          <div>
+            <h2>{policy.title}</h2>
+            <p>
+              <span>{text.updated}</span>
+              {' '}
+              <time datetime={policy.date}>{policy.date}</time>
+            </p>
+          </div>
+          {policy.platforms.length > 0 && (
+            <div class="platform-badges" aria-label="Platforms">
+              {policy.platforms.map((platform) => <span>{platform}</span>)}
+            </div>
+          )}
+        </a>
+      ))}
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    width: min(860px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 42px;
+    line-height: 1.7;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand,
+  .language,
+  .policy-row {
+    text-decoration: none;
+  }
+
+  .brand {
+    color: #737067;
+    font-size: 14px;
+    font-weight: 650;
+  }
+
+  .language {
+    border: 1px solid #ddd5c8;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #fffdf8;
+    font-size: 14px;
+  }
+
+  header {
+    padding-top: 42px;
+  }
+
+  h1 {
+    margin: 12px 0 10px;
+    font-size: clamp(42px, 7vw, 72px);
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  header p {
+    max-width: 560px;
+    margin: 0;
+    color: #5b574f;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .policy-list {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid #e0d8cb;
+    border-bottom: 1px solid #e0d8cb;
+    margin-top: 36px;
+  }
+
+  .policy-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid #e9e1d5;
+    padding: 16px 0;
+    color: inherit;
+  }
+
+  .policy-row:last-child {
+    border-bottom: 0;
+  }
+
+  .policy-row:hover,
+  .policy-row:focus-visible {
+    background: #fffdf8;
+  }
+
+  .policy-row:focus-visible {
+    outline: 2px solid #827d72;
+    outline-offset: 3px;
+  }
+
+  h2 {
+    margin: 0 0 4px;
+    font-size: 19px;
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+
+  .policy-row p {
+    margin: 0;
+    color: #827d72;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .platform-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 5px;
+  }
+
+  .platform-badges span {
+    border: 1px solid #ddd5c8;
+    border-radius: 999px;
+    padding: 2px 7px;
+    background: #fffdf8;
+    color: #737067;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 680px) {
+    .page-shell {
+      width: min(100% - 24px, 860px);
+    }
+
+    .policy-row {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 8px;
+    }
+
+    .platform-badges {
+      justify-content: flex-start;
+    }
+  }
+</style>
