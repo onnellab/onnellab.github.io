@@ -79,7 +79,7 @@ const text =
   <main class="page-shell">
     <nav aria-label="Navigation">
       <a class="brand" href={text.homeHref}>ONNELLAB</a>
-      <a class="language" href={text.switchHref}>{text.switchLabel}</a>
+      <a class="language" href={text.switchHref} data-locale-choice={locale === 'ko' ? 'en' : 'ko'}>{text.switchLabel}</a>
     </nav>
 
     <header>

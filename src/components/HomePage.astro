@@ -41,7 +41,7 @@ const text =
         focus: '빠르게 열리고, 조용히 머물며, 한 가지 일을 정확히 끝내는 앱을 만듭니다.',
         studioLabel: 'Independent App Studio',
         metaLine: 'iOS / Android · 개인정보를 존중하는 유틸리티 앱',
-        released: '출시된 앱',
+        released: '전체 출시 앱',
         featured: '대표 앱',
         allApps: '전체 앱 페이지',
         allAppsHref: '/apps/ko/',
@@ -64,7 +64,7 @@ const text =
         focus: 'Small tools for files, text, audio, and music.',
         studioLabel: 'Independent App Studio',
         metaLine: 'iOS / Android · Privacy-conscious utility apps',
-        released: 'Released Apps',
+        released: 'All Released Apps',
         featured: 'Featured App',
         allApps: 'All app pages',
         allAppsHref: '/apps/',
@@ -94,7 +94,7 @@ const text =
 >
   <main class="page-shell">
     <nav class="top-nav" aria-label="Language">
-      <a class="language" href={text.switchHref}>{text.switchLabel}</a>
+      <a class="language" href={text.switchHref} data-locale-choice={locale === 'ko' ? 'en' : 'ko'}>{text.switchLabel}</a>
     </nav>
 
     <section class="home-showcase" aria-label="ONNELLAB">

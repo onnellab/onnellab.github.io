@@ -51,6 +51,48 @@ const imageUrl = image ? new URL(image, Astro.site) : undefined;
   </head>
   <body>
     <slot />
+    <script is:inline>
+      (() => {
+        const preferenceKey = 'onnellab.locale';
+        document.addEventListener('click', (event) => {
+          const target = event.target;
+          if (!(target instanceof Element)) return;
+          const link = target.closest('a[data-locale-choice]');
+          const locale = link?.getAttribute('data-locale-choice');
+          if (!locale) return;
+          try {
+            window.localStorage.setItem(preferenceKey, locale);
+          } catch {
+          }
+        });
+
+        let savedLocale = null;
+        try {
+          savedLocale = window.localStorage.getItem(preferenceKey);
+        } catch {
+        }
+        if (savedLocale) return;
+
+        const languages = navigator.languages?.length ? navigator.languages : [navigator.language];
+        const prefersKorean = languages.some((language) => language?.toLowerCase().startsWith('ko'));
+        if (!prefersKorean) return;
+
+        const { pathname, search, hash } = window.location;
+        let targetPath = '';
+        if (pathname === '/') {
+          targetPath = '/ko/';
+        } else if (pathname === '/apps/') {
+          targetPath = '/apps/ko/';
+        } else if (pathname === '/privacy/') {
+          targetPath = '/privacy/ko/';
+        } else {
+          const appMatch = pathname.match(/^\/apps\/([^/]+)\/$/);
+          if (appMatch) targetPath = `/apps/${appMatch[1]}/ko/`;
+        }
+
+        if (targetPath) window.location.replace(`${targetPath}${search}${hash}`);
+      })();
+    </script>
   </body>
 </html>
 

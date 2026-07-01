@@ -50,6 +50,8 @@ const text =
         title: 'ONNELLAB 개인정보처리방침',
         description: 'ONNELLAB 앱별 개인정보처리방침 링크를 정리한 페이지입니다.',
         heading: '개인정보 처리방침',
+        searchLabel: '앱 찾기',
+        searchPlaceholder: '앱 이름 검색',
         updated: '작성 날짜',
         home: 'ONNELLAB',
         switchLabel: 'English',
@@ -60,6 +62,8 @@ const text =
         title: 'ONNELLAB Privacy Policies',
         description: 'Privacy policy links for ONNELLAB apps.',
         heading: 'Privacy Policies',
+        searchLabel: 'Find app',
+        searchPlaceholder: 'Search app name',
         updated: 'Policy date',
         home: 'ONNELLAB',
         switchLabel: '한국어',
@@ -82,7 +86,7 @@ const text =
   <main class="page-shell">
     <nav aria-label="Navigation">
       <a class="brand" href={text.homeHref}>{text.home}</a>
-      <a class="language" href={text.switchHref}>{text.switchLabel}</a>
+      <a class="language" href={text.switchHref} data-locale-choice={locale === 'ko' ? 'en' : 'ko'}>{text.switchLabel}</a>
     </nav>
 
     <header>
@@ -90,9 +94,14 @@ const text =
       <div class="header-rule" aria-hidden="true"></div>
     </header>
 
+    <label class="policy-search">
+      <span>{text.searchLabel}</span>
+      <input type="search" placeholder={text.searchPlaceholder} data-policy-search />
+    </label>
+
     <section class="policy-list" aria-label={text.heading}>
       {policies.map((policy) => (
-        <a class="policy-row" href={policy.href}>
+        <a class="policy-row" href={policy.href} data-policy-row data-policy-title={policy.title.toLowerCase()}>
           <div>
             <h2>{policy.title}</h2>
             <p>
@@ -109,6 +118,21 @@ const text =
         </a>
       ))}
     </section>
+    <script is:inline>
+      (() => {
+        const policySearch = document.querySelector('[data-policy-search]');
+        const policyRows = Array.from(document.querySelectorAll('[data-policy-row]'));
+        if (!(policySearch instanceof HTMLInputElement)) return;
+
+        policySearch.addEventListener('input', () => {
+          const query = policySearch.value.trim().toLowerCase();
+          policyRows.forEach((row) => {
+            const title = row.getAttribute('data-policy-title') ?? '';
+            row.hidden = query.length > 0 && !title.includes(query);
+          });
+        });
+      })();
+    </script>
   </main>
 </BaseLayout>
 
@@ -189,10 +213,37 @@ const text =
     gap: 0;
     border-top: 1px solid #e0d8cb;
     border-bottom: 1px solid #e0d8cb;
-    margin-top: 42px;
+    margin-top: 18px;
     background:
       linear-gradient(180deg, rgba(255, 253, 248, 0.7), rgba(255, 253, 248, 0)),
       transparent;
+  }
+
+  .policy-search {
+    display: grid;
+    gap: 8px;
+    max-width: 320px;
+    margin-top: 36px;
+    color: #6f695f;
+    font-size: 13px;
+    font-weight: 620;
+  }
+
+  .policy-search input {
+    min-height: 40px;
+    border: 1px solid #ded6ca;
+    border-radius: 8px;
+    padding: 8px 11px;
+    background: rgba(255, 253, 248, 0.74);
+    color: #3f3b35;
+    font: inherit;
+    font-weight: 500;
+  }
+
+  .policy-search input:focus {
+    border-color: #cfc5b7;
+    outline: 2px solid #827d72;
+    outline-offset: 3px;
   }
 
   .policy-row {
@@ -205,6 +256,10 @@ const text =
     padding: 19px 16px;
     color: inherit;
     transition: background 140ms ease, border-color 140ms ease;
+  }
+
+  .policy-row[hidden] {
+    display: none;
   }
 
   .policy-row:last-child {
@@ -302,7 +357,12 @@ const text =
     }
 
     .policy-list {
-      margin-top: 34px;
+      margin-top: 16px;
+    }
+
+    .policy-search {
+      max-width: none;
+      margin-top: 30px;
     }
 
     .policy-row {

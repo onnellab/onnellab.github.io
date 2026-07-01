@@ -62,6 +62,37 @@ test.describe('site layout', () => {
     expect(headingBox.height).toBeLessThan(112);
   });
 
+  test('privacy app search filters policy rows', async ({ page }) => {
+    await page.goto('/privacy/ko/');
+    await page.locator('[data-policy-search]').fill('tag');
+    await expect(page.locator('[data-policy-row]:visible')).toHaveCount(1);
+    await expect(page.locator('[data-policy-row]:visible h2')).toHaveText('TagWeaver');
+  });
+
+  test('korean browser language redirects default pages to korean pages', async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, 'languages', { get: () => ['ko-KR', 'ko'] });
+      Object.defineProperty(navigator, 'language', { get: () => 'ko-KR' });
+    });
+
+    await page.goto('/');
+    await expect(page).toHaveURL(/\/ko\/$/);
+
+    await page.goto('/apps/tagweaver/');
+    await expect(page).toHaveURL(/\/apps\/tagweaver\/ko\/$/);
+  });
+
+  test('manual language choice prevents automatic korean redirect', async ({ page }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem('onnellab.locale', 'en');
+      Object.defineProperty(navigator, 'languages', { get: () => ['ko-KR', 'ko'] });
+      Object.defineProperty(navigator, 'language', { get: () => 'ko-KR' });
+    });
+
+    await page.goto('/');
+    await expect.poll(() => new URL(page.url()).pathname).toBe('/');
+  });
+
   test('product store links match page locale', async ({ page }) => {
     await page.goto('/apps/tagweaver/');
     await expect(page.locator('.hero .button.primary').first()).toHaveAttribute(

@@ -110,7 +110,7 @@ const jsonLd = {
   <main class="page-shell" style={pageStyle}>
     <header class="topbar" aria-label="ONNELLAB">
       <a class="brand" href={homePath}>ONNELLAB</a>
-      <a class="language" href={data.alternatePath}>{labels.switchLabel}</a>
+      <a class="language" href={data.alternatePath} data-locale-choice={data.locale === 'ko' ? 'en' : 'ko'}>{labels.switchLabel}</a>
     </header>
 
     <section class="hero" aria-labelledby="product-title">
@@ -136,11 +136,15 @@ const jsonLd = {
         )}
       </div>
 
-      <div class="actions" aria-label={labels.stores}>
-        <a class="button primary" href={appStoreUrl}>{labels.appStore}</a>
-        {googlePlayUrl && <a class="button primary" href={googlePlayUrl}>{labels.googlePlay}</a>}
-        <a class="button" href={meta.privacy}>{labels.privacy}</a>
-        <a class="button" href={`mailto:${meta.supportEmail}`}>{labels.support}</a>
+      <div class="hero-actions">
+        <div class="actions store-actions" aria-label={labels.stores}>
+          <a class="button primary" href={appStoreUrl}>{labels.appStore}</a>
+          {googlePlayUrl && <a class="button primary" href={googlePlayUrl}>{labels.googlePlay}</a>}
+        </div>
+        <div class="support-links" aria-label="Support links">
+          <a href={meta.privacy}>{labels.privacy}</a>
+          <a href={`mailto:${meta.supportEmail}`}>{labels.support}</a>
+        </div>
       </div>
 
       <dl class="meta-list">
@@ -419,13 +423,38 @@ const jsonLd = {
     line-height: 1.45;
   }
 
+  .hero-actions {
+    position: relative;
+    display: grid;
+    gap: 8px;
+    margin-left: 152px;
+    z-index: 1;
+  }
+
   .actions {
     position: relative;
     display: flex;
     flex-wrap: wrap;
     gap: 9px;
-    margin-left: 152px;
     z-index: 1;
+  }
+
+  .support-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    color: #827d72;
+    font-size: 13px;
+  }
+
+  .support-links a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .support-links a:hover,
+  .support-links a:focus-visible {
+    color: #4f4b43;
   }
 
   .button {
@@ -841,6 +870,7 @@ const jsonLd = {
     }
 
     .identity,
+    .hero-actions,
     .actions,
     .hero-grid {
       display: grid;
@@ -867,6 +897,7 @@ const jsonLd = {
       line-height: 1.55;
     }
 
+    .hero-actions,
     .actions,
     .meta-list {
       margin-left: 0;
@@ -877,14 +908,8 @@ const jsonLd = {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .hero .actions .button:not(.primary) {
-      min-height: 38px;
-      background: rgba(255, 253, 248, 0.54);
-      color: #5f5a50;
-    }
-
-    .hero .actions .button.primary:first-child:nth-last-child(3) {
-      grid-column: 1 / -1;
+    .store-actions:has(.button:only-child) {
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .task-preview {
