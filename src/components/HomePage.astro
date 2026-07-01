@@ -153,6 +153,7 @@ const text =
         </article>
       ))}
       <article class="tool-row upcoming-card">
+        <img src="/app-assets/melivra/assets/icon/melivra.png" alt="" width="38" height="38" />
         <div>
           <h3>Melivra</h3>
           <p>{text.soon}</p>
@@ -243,7 +244,7 @@ const text =
 
   .featured {
     display: grid;
-    grid-template-columns: 84px minmax(0, 1fr) 150px auto;
+    grid-template-columns: 84px minmax(0, 1fr) auto;
     align-items: center;
     gap: 22px;
     border: 1px solid var(--accent-border);
@@ -278,14 +279,16 @@ const text =
   }
 
   .featured > a {
-    justify-self: start;
+    justify-self: end;
     border: 1px solid var(--accent-border);
     border-radius: 8px;
-    padding: 10px 14px;
+    min-width: 84px;
+    padding: 10px 16px;
     background: #fffdf8;
     color: #37342f;
     text-decoration: none;
     font-weight: 620;
+    text-align: center;
   }
 
   .tool-list {
@@ -367,7 +370,7 @@ const text =
   }
 
   .upcoming-card {
-    grid-template-columns: 1fr;
+    grid-template-columns: 38px 1fr;
     color: #5b574f;
     border-bottom: 0;
   }

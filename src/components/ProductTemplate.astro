@@ -244,9 +244,9 @@ const jsonLd = {
 
   .hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(240px, 340px);
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
     align-items: center;
-    gap: 28px;
+    gap: clamp(48px, 8vw, 96px);
   }
 
   .identity {
@@ -290,11 +290,12 @@ const jsonLd = {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     align-items: center;
+    padding-top: 12px;
   }
 
   .task-preview {
     border-left: 1px solid var(--accent-border);
-    padding-left: 22px;
+    padding-left: 28px;
   }
 
   .task-row {
@@ -534,6 +535,10 @@ const jsonLd = {
     .task-preview {
       border-left: 0;
       padding-left: 0;
+    }
+
+    .hero-side {
+      padding-top: 0;
     }
 
     .actions.compact {
