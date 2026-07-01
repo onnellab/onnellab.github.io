@@ -5,6 +5,9 @@ TagWeaver – MP3 Tag Editor
 간단한 설명:
 MP3 tag editor & ID3 tag editor with batch edit, album art & lyrics
 
+Landing subtitle:
+MP3 Tag Editor
+
 자세한 설명:
 MP3 Tag Editor & ID3 Tag Editor
 

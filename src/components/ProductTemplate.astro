@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { pageBodyDescription, renderBlocks, type ProductPageData } from '../lib/products';
+import { landingSubtitle, pageBodyDescription, renderBlocks, type ProductPageData } from '../lib/products';
 
 type Props = {
   data: ProductPageData;
@@ -40,7 +40,7 @@ const labels =
       };
 
 const bodyBlocks = renderBlocks(pageBodyDescription(copy));
-const heroIntro = copy.android.shortDescription || copy.ios.subtitle || copy.ios.promo;
+const heroIntro = landingSubtitle(copy);
 const hasAndroidCopy = Boolean(copy.android.name || copy.android.shortDescription || copy.android.description);
 const hasIosCopy = Boolean(copy.ios.name || copy.ios.subtitle || copy.ios.promo || copy.ios.description);
 const showPlatformCopy = data.locale === 'en' && (hasAndroidCopy || hasIosCopy);

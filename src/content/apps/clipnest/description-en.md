@@ -5,6 +5,9 @@ ClipNest - Clipboard History
 부제:
 Clipboard History & Paste
 
+Landing subtitle:
+Clipboard History
+
 프로모션 텍스트:
 Clipboard manager with automatic clipboard history, keyboard access, quick paste, and pinned text snippets. Keep copied text organized and ready anytime.
 

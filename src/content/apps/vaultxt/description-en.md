@@ -5,6 +5,9 @@ VaultXT - Large Text Editor
 간단한 설명:
 Fast text editor for large files. Open, edit, and save TXT locally.
 
+Landing subtitle:
+Large TXT Editor
+
 자세한 설명:
 VaultXT is a fast and lightweight text editor designed for large files.
 

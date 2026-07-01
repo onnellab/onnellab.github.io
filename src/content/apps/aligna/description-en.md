@@ -5,6 +5,9 @@ Aligna - File Renamer
 간단한 설명:
 Rename and organize files in one batch.
 
+Landing subtitle:
+Batch File Renamer
+
 자세한 설명:
 Aligna is a simple batch file renamer that helps you organize file names with clear, predictable rules.
 

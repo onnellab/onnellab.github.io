@@ -22,6 +22,7 @@ export type PlatformCopy = {
   shortDescription?: string;
   subtitle?: string;
   promo?: string;
+  landingSubtitle?: string;
   landingDescription?: string;
   description: string;
   keywords?: string;
@@ -83,6 +84,8 @@ const accentPalette: ProductAccent[] = [
 
 const fieldLabels = {
   name: '앱 이름:',
+  landingSubtitle: '랜딩 부제:',
+  landingSubtitleEn: 'Landing subtitle:',
   shortDescription: '간단한 설명:',
   detailedDescription: '자세한 설명:',
   landingDescription: '랜딩 페이지:',
@@ -136,7 +139,7 @@ export function getProductIndexItems(locale: Locale): ProductIndexItem[] {
       title: source.meta.title,
       status: source.meta.status,
       platforms: source.meta.platforms,
-      description: pageDescription(copy),
+      description: landingSubtitle(copy),
       iconPath: getIconRoutePath(source),
       href: locale === 'en' ? `/apps/${source.slug}/` : `/apps/${source.slug}/ko/`,
       privacy: source.meta.privacy,
@@ -286,6 +289,8 @@ function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
 function parsePlatformCopy(text: string): PlatformCopy {
   return {
     name: field(text, fieldLabels.name),
+    landingSubtitle:
+      field(text, fieldLabels.landingSubtitle) ?? field(text, fieldLabels.landingSubtitleEn),
     shortDescription: field(text, fieldLabels.shortDescription),
     subtitle: field(text, fieldLabels.subtitle),
     promo: field(text, fieldLabels.promo),
@@ -303,6 +308,14 @@ function pageDescription(copy: ProductCopy): string {
     copy.ios.subtitle ??
     copy.ios.promo ??
     firstParagraph(pageBodyDescription(copy))
+  );
+}
+
+export function landingSubtitle(copy: ProductCopy): string {
+  return (
+    copy.android.landingSubtitle ??
+    copy.ios.landingSubtitle ??
+    pageDescription(copy)
   );
 }
 

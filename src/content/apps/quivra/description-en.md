@@ -5,6 +5,9 @@ Quivra – WAV to MP3 Converter
 간단한 설명:
 High-quality media converter
 
+Landing subtitle:
+Media Converter
+
 자세한 설명:
 Quivra is a paid media converter
 designed for simple WAV to MP3 conversion

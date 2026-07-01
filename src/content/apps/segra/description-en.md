@@ -5,6 +5,9 @@ Segra - Audio Cutter & Merger
 간단한 설명:
 Trim, merge, and turn audio into video in seconds.
 
+Landing subtitle:
+Audio Cutter and Merger
+
 자세한 설명:
 A simple tool for trimming and combining audio
 
