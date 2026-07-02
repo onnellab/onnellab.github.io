@@ -227,17 +227,17 @@ const collectionJsonLd = {
   }
 
   header p {
-    max-width: 560px;
+    max-width: 600px;
     color: #5b574f;
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.62;
   }
 
   .app-search {
     display: grid;
     gap: 8px;
-    max-width: 320px;
-    margin-top: 28px;
+    max-width: 340px;
+    margin-top: 30px;
     color: #6f695f;
     font-size: 13px;
     font-weight: 620;
@@ -273,8 +273,8 @@ const collectionJsonLd = {
   .grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-    margin-top: 18px;
+    gap: 15px;
+    margin-top: 22px;
   }
 
   .app-card {
@@ -292,7 +292,7 @@ const collectionJsonLd = {
       #fffdf8;
     color: inherit;
     text-decoration: none;
-    transition: border-color 140ms ease, background 140ms ease, color 140ms ease;
+    transition: border-color 140ms ease, background 140ms ease, color 140ms ease, box-shadow 140ms ease;
   }
 
   .app-card::before {
@@ -316,8 +316,11 @@ const collectionJsonLd = {
   .app-card:focus-visible {
     border-color: var(--accent-border, #d8cec0);
     background:
-      linear-gradient(135deg, #fffdf8, var(--accent-bg, #fffdf8)),
+      linear-gradient(135deg, #fffdf8 16%, var(--accent-bg, #fffdf8)),
       #fffdf8;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 253, 248, 0.54),
+      0 8px 18px rgba(58, 49, 38, 0.035);
   }
 
   .app-card:focus-visible {
@@ -419,7 +422,7 @@ const collectionJsonLd = {
     .grid {
       grid-template-columns: 1fr;
       gap: 10px;
-      margin-top: 18px;
+      margin-top: 20px;
     }
 
     .app-card {

@@ -247,12 +247,16 @@ test.describe('site layout', () => {
 
   test('product screenshots open in an in-page viewer', async ({ page }) => {
     await page.goto('/apps/tagweaver/');
+    await expect(page.locator('.identity img')).toHaveAttribute('data-no-visual-search', 'true');
     await page.locator('.screens-band summary').click();
+    await expect(page.locator('[data-screenshot-link] img').first()).toHaveAttribute('data-no-visual-search', 'true');
     await page.locator('[data-screenshot-link]').first().click();
 
     const viewer = page.locator('.screenshot-viewer');
     await expect(viewer).toBeVisible();
     await expect(page.locator('[data-viewer-image]')).toHaveAttribute('src', /tagweaver\/assets\/screenshots\/en\/1\.png/);
+    await expect(page.locator('[data-viewer-image]')).toHaveAttribute('data-no-visual-search', 'true');
+    await expect(page.locator('[data-viewer-thumb] img').first()).toHaveAttribute('data-no-visual-search', 'true');
     await expect(page.locator('[data-viewer-thumb]').first()).toHaveAttribute('aria-current', 'true');
 
     const viewerImage = page.locator('[data-viewer-image]');

@@ -125,7 +125,7 @@ const jsonLd = {
     <section class="hero" aria-labelledby="product-title" data-app={data.source.slug}>
       <div class="hero-grid">
         <div class="identity">
-          <img src={data.iconPath} alt={`${meta.title} icon`} width="88" height="88" />
+          <img src={data.iconPath} alt={`${meta.title} icon`} width="88" height="88" data-no-visual-search="true" />
           <div>
             <h1 id="product-title">{meta.title}</h1>
             {heroIntro && <p class="intro">{heroIntro}</p>}
@@ -201,6 +201,7 @@ const jsonLd = {
                   height="2688"
                   loading="lazy"
                   decoding="async"
+                  data-no-visual-search="true"
                 />
               </a>
             </figure>
@@ -234,6 +235,7 @@ const jsonLd = {
                     height="2688"
                     loading="lazy"
                     decoding="async"
+                    data-no-visual-search="true"
                   />
                 </button>
               ))}
@@ -661,10 +663,10 @@ const jsonLd = {
     font-size: 17px;
     font-weight: 620;
     list-style: none;
-    border: 1px solid rgba(224, 216, 203, 0.78);
+    border: 1px solid rgba(211, 200, 185, 0.88);
     border-radius: 999px;
-    padding: 7px 12px;
-    background: linear-gradient(180deg, rgba(255, 253, 248, 0.82), rgba(250, 248, 245, 0.5));
+    padding: 8px 13px;
+    background: linear-gradient(180deg, rgba(255, 253, 248, 0.92), rgba(250, 248, 245, 0.64));
     transition: border-color 140ms ease, background 140ms ease, color 140ms ease;
   }
 
@@ -1277,17 +1279,17 @@ const jsonLd = {
     }
 
     .screenshot-viewer {
-      width: min(100vw - 12px, 512px);
-      max-height: calc(100dvh - 12px);
-      border-radius: 22px;
+      width: min(100vw - 8px, 512px);
+      max-height: calc(100dvh - 8px);
+      border-radius: 21px;
     }
 
     .viewer-panel {
       position: relative;
       grid-template-rows: auto minmax(0, 1fr) auto;
-      max-height: calc(100dvh - 14px);
+      max-height: calc(100dvh - 10px);
       padding: 4px;
-      gap: 4px;
+      gap: 3px;
     }
 
     .viewer-bar {
@@ -1311,50 +1313,72 @@ const jsonLd = {
     }
 
     .viewer-frame {
-      grid-template-columns: 1fr 1fr;
-      gap: 5px;
+      position: relative;
+      grid-template-columns: 1fr;
+      gap: 0;
       min-height: 0;
     }
 
     .viewer-image-stage {
-      grid-column: 1 / -1;
+      grid-column: 1;
       grid-row: 1;
-      max-height: calc(100dvh - 118px);
+      max-height: calc(100dvh - 96px);
     }
 
     .viewer-image-stage img {
-      max-height: calc(100dvh - 118px);
+      max-height: calc(100dvh - 96px);
     }
 
     .viewer-prev,
     .viewer-next {
-      grid-row: 2;
+      position: absolute;
+      top: 50%;
+      grid-row: 1;
+      width: 30px;
+      height: 54px;
+      transform: translateY(-50%);
     }
 
     .viewer-nav {
-      width: 100%;
-      height: 24px;
+      width: 30px;
+      height: 54px;
       border-radius: 999px;
-      background: rgba(255, 253, 248, 0.18);
-      border-color: rgba(196, 185, 169, 0.14);
-      color: rgba(55, 52, 47, 0.42);
-      box-shadow: none;
+      background: rgba(255, 253, 248, 0.38);
+      border-color: rgba(196, 185, 169, 0.18);
+      color: rgba(55, 52, 47, 0.46);
+      box-shadow: 0 8px 22px rgba(39, 34, 29, 0.08);
       font-size: 18px;
+    }
+
+    .viewer-prev {
+      left: 6px;
+    }
+
+    .viewer-next {
+      right: 6px;
     }
 
     .viewer-thumbs {
       justify-content: center;
-      gap: 3px;
-      padding: 0 2px;
-      opacity: 0.48;
+      gap: 5px;
+      padding: 1px 2px 2px;
+      opacity: 0.42;
     }
 
     .viewer-thumb {
-      width: 23px;
-      height: 32px;
-      border-radius: 7px;
-      padding: 1px;
+      width: 32px;
+      height: 10px;
+      border-radius: 999px;
+      padding: 0;
       box-shadow: none;
+    }
+
+    .viewer-thumb[aria-current="true"] {
+      transform: none;
+    }
+
+    .viewer-thumb img {
+      display: none;
     }
 
     .button {
