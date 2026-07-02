@@ -647,6 +647,11 @@ const jsonLd = {
     font-size: 17px;
     font-weight: 620;
     list-style: none;
+    border: 1px solid rgba(224, 216, 203, 0.78);
+    border-radius: 999px;
+    padding: 7px 12px;
+    background: linear-gradient(180deg, rgba(255, 253, 248, 0.82), rgba(250, 248, 245, 0.5));
+    transition: border-color 140ms ease, background 140ms ease, color 140ms ease;
   }
 
   .screens-band summary::-webkit-details-marker {
@@ -670,6 +675,8 @@ const jsonLd = {
 
   .screens-band summary:hover,
   .screens-band summary:focus-visible {
+    border-color: var(--accent-border);
+    background: #fffdf8;
     color: var(--accent-text);
   }
 
@@ -1109,7 +1116,7 @@ const jsonLd = {
 
     .hero-actions {
       width: 100%;
-      gap: 7px;
+      gap: 6px;
     }
 
     .actions {
@@ -1124,7 +1131,7 @@ const jsonLd = {
     .support-links {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       padding-top: 1px;
     }
 
@@ -1150,13 +1157,14 @@ const jsonLd = {
 
     .meta-list {
       justify-content: center;
+      margin-top: 1px;
       opacity: 0.82;
     }
 
     .meta-pill {
       border-color: rgba(210, 199, 184, 0.72);
       background: rgba(255, 253, 248, 0.48);
-      padding: 6px 9px;
+      padding: 5px 8px;
     }
 
     dt {
