@@ -1151,7 +1151,9 @@ const jsonLd = {
     }
 
     .identity {
-      gap: 12px;
+      grid-template-columns: 82px minmax(0, 1fr);
+      align-items: center;
+      gap: 14px;
     }
 
     .identity::after {
@@ -1165,13 +1167,14 @@ const jsonLd = {
     }
 
     h1 {
-      font-size: clamp(40px, 14vw, 58px);
+      font-size: clamp(34px, 11vw, 54px);
+      line-height: 1.02;
     }
 
     .intro {
-      margin-top: 10px;
-      font-size: 16px;
-      line-height: 1.5;
+      margin-top: 8px;
+      font-size: 15.5px;
+      line-height: 1.48;
     }
 
     .hero-actions,
@@ -1245,6 +1248,7 @@ const jsonLd = {
       border-left: 0;
       border-top: 1px solid rgba(210, 199, 184, 0.24);
       background: linear-gradient(180deg, rgba(255, 253, 248, 0.34), rgba(255, 253, 248, 0));
+      margin-top: 3px;
       padding: 7px 0 0;
     }
 
@@ -1335,6 +1339,10 @@ const jsonLd = {
     }
 
     .viewer-close {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      z-index: 6;
       width: 31px;
       height: 31px;
       background:
@@ -1350,6 +1358,7 @@ const jsonLd = {
       grid-template-columns: 1fr;
       gap: 0;
       min-height: 0;
+      padding-top: 3px;
     }
 
     .viewer-image-stage {
@@ -1460,6 +1469,7 @@ const jsonLd = {
   const dragThreshold = 4;
   const swipeThreshold = 44;
   const minViewerZoom = 1;
+  const touchPanZoomThreshold = 1.03;
   const clickViewerZoom = 1.08;
   const maxViewerZoom = 1.35;
   const wheelZoomStep = 0.1;
@@ -1655,7 +1665,7 @@ const jsonLd = {
     touchPanStartX = viewerPanX;
     touchPanStartY = viewerPanY;
     didTouchPanImage = false;
-    isTouchPanningImage = viewerZoom > minViewerZoom;
+    isTouchPanningImage = viewerZoom > touchPanZoomThreshold;
     if (isTouchPanningImage) {
       event.preventDefault();
       if (viewerImage) viewerImage.dataset.dragging = 'true';
@@ -1714,7 +1724,7 @@ const jsonLd = {
       didTouchPanImage = false;
       return;
     }
-    if (event.touches.length > 0 || viewerZoom > minViewerZoom) return;
+    if (event.touches.length > 0 || viewerZoom > touchPanZoomThreshold) return;
     const changedTouch = event.changedTouches[0];
     const endX = changedTouch?.clientX ?? touchLastX;
     const endY = changedTouch?.clientY ?? touchLastY;
