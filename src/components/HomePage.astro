@@ -311,12 +311,12 @@ const websiteJsonLd = {
   .featured {
     position: relative;
     display: grid;
-    gap: 18px;
+    gap: 19px;
     border: 1px solid var(--accent-border);
     border-radius: 8px;
-    padding: 20px 21px 22px;
+    padding: 21px 22px 23px;
     background:
-      linear-gradient(135deg, var(--accent-bg), rgba(255, 253, 248, 0.96) 58%, #fffdf8 86%),
+      linear-gradient(135deg, var(--accent-bg), rgba(255, 253, 248, 0.95) 54%, #fffdf8 88%),
       #fffdf8;
     color: inherit;
     overflow: hidden;
@@ -357,14 +357,14 @@ const websiteJsonLd = {
   .featured-body {
     position: relative;
     display: grid;
-    grid-template-columns: 82px minmax(0, 1fr);
+    grid-template-columns: 84px minmax(0, 1fr);
     align-items: center;
-    gap: 23px;
+    gap: 24px;
   }
 
   .featured-body img {
-    width: 82px;
-    height: 82px;
+    width: 84px;
+    height: 84px;
     border-radius: 19px;
     box-shadow:
       0 0 0 1px var(--accent-border),
@@ -372,9 +372,17 @@ const websiteJsonLd = {
   }
 
   .featured-label {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+    padding: 2px 9px;
+    background: rgba(255, 253, 248, 0.58);
     color: var(--accent-text);
     font-size: 13px;
     font-weight: 650;
+    line-height: 1.35;
   }
 
   .featured h2 {

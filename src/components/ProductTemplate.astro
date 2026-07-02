@@ -244,10 +244,7 @@ const jsonLd = {
     )}
 
     <section class="download-band" aria-label={labels.download}>
-      <div>
-        <p class="eyebrow">{labels.download}</p>
-        <h2>{meta.title}</h2>
-      </div>
+      <p class="eyebrow">{labels.download}</p>
       <div class="actions compact" aria-label={labels.stores}>
         <a class="button primary" href={appStoreUrl}>{labels.appStore}</a>
         {googlePlayUrl && <a class="button primary" href={googlePlayUrl}>{labels.googlePlay}</a>}
@@ -470,10 +467,10 @@ const jsonLd = {
 
   .task-preview {
     display: grid;
-    gap: 0;
-    border-left: 1px solid rgba(210, 199, 184, 0.24);
-    padding: 5px 0 5px 16px;
-    background: linear-gradient(90deg, rgba(255, 253, 248, 0.22), rgba(255, 253, 248, 0));
+    gap: 6px;
+    border-left: 1px solid rgba(210, 199, 184, 0.18);
+    padding: 3px 0 3px 17px;
+    background: linear-gradient(90deg, rgba(255, 253, 248, 0.18), rgba(255, 253, 248, 0));
   }
 
   .task-row {
@@ -481,11 +478,11 @@ const jsonLd = {
     display: grid;
     grid-template-columns: 24px minmax(0, 1fr);
     gap: 10px;
-    padding: 8px 0;
+    padding: 5px 0;
   }
 
   .task-row + .task-row {
-    border-top: 1px solid rgba(210, 199, 184, 0.22);
+    border-top: 1px solid rgba(210, 199, 184, 0.14);
   }
 
   .task-row span {
@@ -634,13 +631,13 @@ const jsonLd = {
   }
 
   .content-band {
-    padding-top: 48px;
+    padding-top: 50px;
   }
 
   .copy-column {
     position: relative;
-    padding-left: 20px;
-    border-left: 1px solid rgba(224, 216, 203, 0.54);
+    padding-left: 18px;
+    border-left: 1px solid rgba(224, 216, 203, 0.42);
   }
 
   .copy-column::before {
@@ -974,21 +971,15 @@ const jsonLd = {
   .download-band {
     display: grid;
     justify-items: center;
-    gap: 9px;
+    gap: 12px;
     background:
       linear-gradient(180deg, rgba(255, 253, 248, 0), rgba(255, 253, 248, 0.36), rgba(255, 253, 248, 0));
     text-align: center;
   }
 
   .download-band .eyebrow {
-    margin-bottom: 5px;
-  }
-
-  .download-band h2 {
     margin: 0;
-    color: #5b574f;
-    font-size: 18px;
-    font-weight: 600;
+    color: #746d62;
   }
 
   .actions.compact {
@@ -1217,15 +1208,15 @@ const jsonLd = {
 
     .task-preview {
       border-left: 0;
-      border-top: 1px solid rgba(210, 199, 184, 0.34);
+      border-top: 1px solid rgba(210, 199, 184, 0.24);
       background: linear-gradient(180deg, rgba(255, 253, 248, 0.34), rgba(255, 253, 248, 0));
-      padding: 5px 0 0;
+      padding: 7px 0 0;
     }
 
     .task-row {
       grid-template-columns: 25px minmax(0, 1fr);
       gap: 8px;
-      padding: 7px 0;
+      padding: 6px 0;
     }
 
     .task-row strong {
@@ -1295,8 +1286,8 @@ const jsonLd = {
       position: relative;
       grid-template-rows: auto minmax(0, 1fr) auto;
       max-height: calc(100dvh - 14px);
-      padding: 5px;
-      gap: 5px;
+      padding: 4px;
+      gap: 4px;
     }
 
     .viewer-bar {
@@ -1321,18 +1312,18 @@ const jsonLd = {
 
     .viewer-frame {
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 5px;
       min-height: 0;
     }
 
     .viewer-image-stage {
       grid-column: 1 / -1;
       grid-row: 1;
-      max-height: calc(100dvh - 142px);
+      max-height: calc(100dvh - 118px);
     }
 
     .viewer-image-stage img {
-      max-height: calc(100dvh - 142px);
+      max-height: calc(100dvh - 118px);
     }
 
     .viewer-prev,
@@ -1342,25 +1333,26 @@ const jsonLd = {
 
     .viewer-nav {
       width: 100%;
-      height: 28px;
-      border-radius: 10px;
-      background: rgba(255, 253, 248, 0.25);
-      border-color: rgba(196, 185, 169, 0.18);
-      color: rgba(55, 52, 47, 0.52);
+      height: 24px;
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.18);
+      border-color: rgba(196, 185, 169, 0.14);
+      color: rgba(55, 52, 47, 0.42);
       box-shadow: none;
+      font-size: 18px;
     }
 
     .viewer-thumbs {
       justify-content: center;
-      gap: 4px;
-      padding: 0 2px 1px;
-      opacity: 0.62;
+      gap: 3px;
+      padding: 0 2px;
+      opacity: 0.48;
     }
 
     .viewer-thumb {
-      width: 28px;
-      height: 38px;
-      border-radius: 8px;
+      width: 23px;
+      height: 32px;
+      border-radius: 7px;
       padding: 1px;
       box-shadow: none;
     }

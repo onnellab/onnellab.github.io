@@ -207,6 +207,16 @@ const collectionJsonLd = {
 
   header {
     padding-top: 28px;
+    position: relative;
+  }
+
+  header::after {
+    content: "";
+    display: block;
+    width: 68px;
+    height: 2px;
+    margin-top: 18px;
+    background: linear-gradient(90deg, #b9ad9d, rgba(207, 197, 183, 0));
   }
 
   h1 {
@@ -227,7 +237,7 @@ const collectionJsonLd = {
     display: grid;
     gap: 8px;
     max-width: 320px;
-    margin-top: 26px;
+    margin-top: 28px;
     color: #6f695f;
     font-size: 13px;
     font-weight: 620;
@@ -389,6 +399,11 @@ const collectionJsonLd = {
 
     header {
       padding-top: 30px;
+    }
+
+    header::after {
+      width: 56px;
+      margin-top: 16px;
     }
 
     h1 {
