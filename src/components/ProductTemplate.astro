@@ -444,6 +444,33 @@ const jsonLd = {
       #fffdf8;
   }
 
+  .hero[data-app="tagweaver"] .identity img,
+  .hero[data-app="melivra"] .identity img {
+    background:
+      linear-gradient(135deg, rgba(255, 253, 248, 0.98), var(--accent-bg)),
+      #fffdf8;
+  }
+
+  .hero[data-app="vaultxt"] .identity img {
+    background:
+      linear-gradient(180deg, rgba(255, 253, 248, 0.98), var(--accent-bg)),
+      #fffdf8;
+  }
+
+  .hero[data-app="aligna"] .identity img,
+  .hero[data-app="segra"] .identity img {
+    background:
+      linear-gradient(90deg, rgba(255, 253, 248, 0.98), var(--accent-bg)),
+      #fffdf8;
+  }
+
+  .hero[data-app="clipnest"] .identity img,
+  .hero[data-app="quivra"] .identity img {
+    background:
+      linear-gradient(160deg, rgba(255, 253, 248, 0.98), var(--accent-bg)),
+      #fffdf8;
+  }
+
   .identity img:hover {
     border-color: var(--accent-border);
   }
@@ -1340,18 +1367,18 @@ const jsonLd = {
       position: absolute;
       top: 50%;
       grid-row: 1;
-      width: 30px;
-      height: 54px;
+      width: 34px;
+      height: 56px;
       transform: translateY(-50%);
     }
 
     .viewer-nav {
-      width: 30px;
-      height: 54px;
+      width: 34px;
+      height: 56px;
       border-radius: 999px;
-      background: rgba(255, 253, 248, 0.3);
-      border-color: rgba(196, 185, 169, 0.14);
-      color: rgba(55, 52, 47, 0.38);
+      background: rgba(255, 253, 248, 0.34);
+      border-color: rgba(196, 185, 169, 0.18);
+      color: rgba(55, 52, 47, 0.42);
       box-shadow: 0 6px 18px rgba(39, 34, 29, 0.06);
       font-size: 18px;
     }
@@ -1431,7 +1458,7 @@ const jsonLd = {
   let isTouchPanningImage = false;
   let didTouchPanImage = false;
   const dragThreshold = 4;
-  const swipeThreshold = 52;
+  const swipeThreshold = 44;
   const minViewerZoom = 1;
   const clickViewerZoom = 1.08;
   const maxViewerZoom = 1.35;
@@ -1693,7 +1720,7 @@ const jsonLd = {
     const endY = changedTouch?.clientY ?? touchLastY;
     const deltaX = endX - touchStartX;
     const deltaY = endY - touchStartY;
-    if (Math.abs(deltaX) >= swipeThreshold && Math.abs(deltaX) > Math.abs(deltaY) * 1.35) {
+    if (Math.abs(deltaX) >= swipeThreshold && Math.abs(deltaX) > Math.abs(deltaY) * 1.25) {
       event.preventDefault();
       setViewerImage(currentScreenshotIndex + (deltaX < 0 ? 1 : -1));
       suppressNextViewerClick = true;
