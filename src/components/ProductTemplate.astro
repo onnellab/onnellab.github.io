@@ -343,8 +343,8 @@ const jsonLd = {
   .hero::after {
     content: "";
     position: absolute;
-    inset: 188px 0 116px auto;
-    width: 142px;
+    inset: 198px 0 132px auto;
+    width: 118px;
     background: repeating-linear-gradient(
       0deg,
       rgba(255, 253, 248, 0),
@@ -352,57 +352,57 @@ const jsonLd = {
       var(--accent-border) 12px,
       var(--accent-border) 13px
     );
-    opacity: 0.1;
+    opacity: 0.075;
     pointer-events: none;
   }
 
   .hero[data-app="tagweaver"]::after {
-    width: 148px;
+    width: 126px;
     background:
       linear-gradient(90deg, var(--accent-border) 0 1px, transparent 1px),
       linear-gradient(0deg, var(--accent-border) 0 1px, transparent 1px);
     background-size: 24px 24px;
-    opacity: 0.12;
+    opacity: 0.09;
   }
 
   .hero[data-app="aligna"]::after {
-    width: 152px;
+    width: 128px;
     background: var(--accent-border);
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='132' height='48' viewBox='0 0 132 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 8H72M24 22H116M12 36H88' stroke='white' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml,%3Csvg width='132' height='48' viewBox='0 0 132 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 8H72M24 22H116M12 36H88' stroke='white' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
     -webkit-mask-repeat: repeat-y;
     mask-repeat: repeat-y;
-    opacity: 0.12;
+    opacity: 0.09;
   }
 
   .hero[data-app="vaultxt"]::after {
-    width: 156px;
+    width: 132px;
     background: repeating-linear-gradient(
       0deg,
       var(--accent-border) 0 1px,
       transparent 1px 13px
     );
-    opacity: 0.12;
+    opacity: 0.09;
   }
 
   .hero[data-app="clipnest"]::after {
-    width: 148px;
+    width: 124px;
     background: var(--accent-border);
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='116' height='58' viewBox='0 0 116 58' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 18h42v22H18zM38 12h42v28H38zM58 20h42v20H58z' fill='none' stroke='white' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml,%3Csvg width='116' height='58' viewBox='0 0 116 58' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 18h42v22H18zM38 12h42v28H38zM58 20h42v20H58z' fill='none' stroke='white' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E");
     -webkit-mask-repeat: repeat-y;
     mask-repeat: repeat-y;
-    opacity: 0.12;
+    opacity: 0.09;
   }
 
   .hero[data-app="segra"]::after {
-    width: 154px;
+    width: 130px;
     background: var(--accent-border);
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='132' height='56' viewBox='0 0 132 56' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 28C12 12 24 12 36 28S60 44 72 28s24-16 36 0 24 16 36 0' fill='none' stroke='white' stroke-width='1' stroke-linecap='round'/%3E%3Cpath d='M8 40h116M8 16h116' fill='none' stroke='white' stroke-width='1' stroke-linecap='round' opacity='.42'/%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml,%3Csvg width='132' height='56' viewBox='0 0 132 56' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 28C12 12 24 12 36 28S60 44 72 28s24-16 36 0 24 16 36 0' fill='none' stroke='white' stroke-width='1' stroke-linecap='round'/%3E%3Cpath d='M8 40h116M8 16h116' fill='none' stroke='white' stroke-width='1' stroke-linecap='round' opacity='.42'/%3E%3C/svg%3E");
     -webkit-mask-repeat: repeat-y;
     mask-repeat: repeat-y;
-    opacity: 0.12;
+    opacity: 0.09;
   }
 
   .hero-grid {
@@ -471,8 +471,9 @@ const jsonLd = {
   .task-preview {
     display: grid;
     gap: 0;
-    border-left: 1px solid rgba(210, 199, 184, 0.32);
-    padding: 6px 0 6px 18px;
+    border-left: 1px solid rgba(210, 199, 184, 0.42);
+    padding: 7px 0 7px 18px;
+    background: linear-gradient(90deg, rgba(255, 253, 248, 0.36), rgba(255, 253, 248, 0));
   }
 
   .task-row {
@@ -1077,7 +1078,7 @@ const jsonLd = {
     }
 
     .identity {
-      gap: 16px;
+      gap: 12px;
     }
 
     .identity::after {
@@ -1085,9 +1086,9 @@ const jsonLd = {
     }
 
     .identity img {
-      width: 86px;
-      height: 86px;
-      border-radius: 19px;
+      width: 82px;
+      height: 82px;
+      border-radius: 18px;
     }
 
     h1 {
@@ -1243,7 +1244,7 @@ const jsonLd = {
       z-index: 5;
       min-height: 36px;
       padding-bottom: 2px;
-      background: linear-gradient(180deg, rgba(242, 238, 231, 0.96), rgba(242, 238, 231, 0.72));
+      background: transparent;
     }
 
     .viewer-close {
@@ -1344,9 +1345,10 @@ const jsonLd = {
   const dragThreshold = 4;
   const swipeThreshold = 52;
   const minViewerZoom = 1;
-  const clickViewerZoom = 1.15;
-  const maxViewerZoom = 2;
+  const clickViewerZoom = 1.1;
+  const maxViewerZoom = 1.6;
   const wheelZoomStep = 0.1;
+  const pinchZoomDamping = 0.42;
 
   const applyViewerZoom = () => {
     if (!viewerImage) return;
@@ -1532,7 +1534,8 @@ const jsonLd = {
     if (isPinchingViewer && event.touches.length === 2 && pinchStartDistance > 0) {
       event.preventDefault();
       const center = getTouchCenter(event.touches);
-      const targetZoom = pinchStartZoom * (getTouchDistance(event.touches) / pinchStartDistance);
+      const distanceRatio = getTouchDistance(event.touches) / pinchStartDistance;
+      const targetZoom = pinchStartZoom + (distanceRatio - 1) * pinchZoomDamping;
       setViewerZoomAtPoint(targetZoom, center.x, center.y);
       return;
     }

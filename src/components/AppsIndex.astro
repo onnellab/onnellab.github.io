@@ -286,6 +286,18 @@ const collectionJsonLd = {
     transition: border-color 140ms ease, background 140ms ease, color 140ms ease;
   }
 
+  .app-card::after {
+    content: "";
+    width: 18px;
+    height: 1px;
+    position: absolute;
+    right: 14px;
+    top: 18px;
+    background: linear-gradient(90deg, rgba(207, 197, 183, 0), var(--accent-border, #ddd5c8));
+    opacity: 0;
+    transition: opacity 140ms ease;
+  }
+
   .app-card[hidden] {
     display: none;
   }
@@ -296,6 +308,11 @@ const collectionJsonLd = {
     background:
       linear-gradient(135deg, rgba(255, 253, 248, 0.98), var(--accent-bg, #fffdf8)),
       #fffdf8;
+  }
+
+  .app-card:hover::after,
+  .app-card:focus-visible::after {
+    opacity: 0.78;
   }
 
   .app-card:focus-visible {
@@ -341,15 +358,16 @@ const collectionJsonLd = {
   }
 
   .meta-text span {
-    color: #706a60;
+    color: #5f5a50;
     font-size: 12px;
+    font-weight: 560;
     line-height: 1.4;
   }
 
   .meta-text span + span {
-    color: #9a9388;
+    color: #827d72;
     font-size: 11px;
-    font-weight: 520;
+    font-weight: 560;
   }
 
   .meta-text span + span::before {
