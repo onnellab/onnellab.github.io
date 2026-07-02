@@ -104,6 +104,14 @@ test.describe('site layout', () => {
     await expect(page.locator('.product-card')).toHaveCount(4);
   });
 
+  test('mobile all apps link remains discoverable', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 900 });
+    await page.goto('/ko/');
+    const allAppsLink = page.locator('.section-head a');
+    await expect(allAppsLink).toBeVisible();
+    await expect(allAppsLink).toHaveCSS('text-decoration-line', /underline/);
+  });
+
   test('korean browser language redirects default pages to korean pages', async ({ page }) => {
     await page.addInitScript(() => {
       Object.defineProperty(navigator, 'languages', { get: () => ['ko-KR', 'ko'] });
