@@ -89,7 +89,7 @@ const jsonLdItems = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
           targetPath = '/privacy/ko/';
         } else {
           const appMatch = pathname.match(/^\/apps\/([^/]+)\/$/);
-          if (appMatch) targetPath = `/apps/${appMatch[1]}/ko/`;
+          if (appMatch && appMatch[1] !== 'ko') targetPath = `/apps/${appMatch[1]}/ko/`;
         }
 
         if (targetPath) window.location.replace(`${targetPath}${search}${hash}`);

@@ -125,6 +125,16 @@ test.describe('site layout', () => {
     await expect(page).toHaveURL(/\/apps\/tagweaver\/ko\/$/);
   });
 
+  test('korean apps collection does not redirect as an app detail page', async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, 'languages', { get: () => ['ko-KR', 'ko'] });
+      Object.defineProperty(navigator, 'language', { get: () => 'ko-KR' });
+    });
+
+    await page.goto('/apps/ko/');
+    await expect(page).toHaveURL(/\/apps\/ko\/$/);
+  });
+
   test('legacy korean-prefixed collection paths redirect to canonical pages', async ({ page }) => {
     await page.goto('/ko/apps/');
     await expect(page).toHaveURL(/\/apps\/ko\/$/);
