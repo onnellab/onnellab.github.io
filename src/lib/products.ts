@@ -140,7 +140,7 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     copy,
     canonicalPath,
     alternatePath: locale === 'en' ? `/apps/${source.slug}/ko/` : `/apps/${source.slug}/`,
-    seoTitle: source.meta.title,
+    seoTitle: productSeoTitle(source, copy),
     seoDescription,
     iconPath: getIconRoutePath(source),
     screenshotPaths: getScreenshotRoutePaths(source, locale),
@@ -375,6 +375,14 @@ function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
     return `${source.meta.title}는 ${platforms}용 ${category}입니다. ${summary}`;
   }
   return `${source.meta.title} is ${indefiniteArticle(category)} ${category} for ${platforms}. ${summary}`;
+}
+
+function productSeoTitle(source: ProductSource, copy: ProductCopy): string {
+  const subtitle = landingSubtitle(copy).replace(/\s+/g, ' ').trim();
+  if (!subtitle || subtitle.toLowerCase() === source.meta.title.toLowerCase()) {
+    return source.meta.title;
+  }
+  return `${source.meta.title} - ${subtitle}`;
 }
 
 function indefiniteArticle(value: string): 'a' | 'an' {

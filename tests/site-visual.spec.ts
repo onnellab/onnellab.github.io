@@ -167,7 +167,11 @@ test.describe('site layout', () => {
       'href',
       'https://onnelakin.github.io/apps/tagweaver/'
     );
-    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', 'TagWeaver');
+    await expect(page).toHaveTitle('TagWeaver - MP3 Tag Editor');
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+      'content',
+      'TagWeaver - MP3 Tag Editor'
+    );
     await expect(page.locator('link[rel="icon"]')).toHaveAttribute(
       'href',
       'https://onnelakin.github.io/app-assets/tagweaver/assets/icon/tagweaver.png'
