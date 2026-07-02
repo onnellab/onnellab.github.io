@@ -546,14 +546,14 @@ const websiteJsonLd = {
   @media (max-width: 680px) {
     .page-shell {
       width: min(100% - 28px, 1040px);
-      padding: 20px 0 30px;
+      padding: 18px 0 26px;
     }
 
     .home-showcase {
       grid-template-columns: 1fr;
-      gap: 24px;
+      gap: 20px;
       min-height: 0;
-      padding: 32px 0 24px;
+      padding: 28px 0 22px;
     }
 
     h1 {
@@ -575,8 +575,8 @@ const websiteJsonLd = {
 
     .featured {
       width: 100%;
-      gap: 16px;
-      padding: 17px;
+      gap: 14px;
+      padding: 15px;
     }
 
     .featured-topline {
@@ -586,38 +586,52 @@ const websiteJsonLd = {
     }
 
     .featured-body {
-      grid-template-columns: 72px minmax(0, 1fr);
-      gap: 16px;
+      grid-template-columns: 66px minmax(0, 1fr);
+      gap: 15px;
     }
 
     .featured-body img {
-      width: 72px;
-      height: 72px;
-      border-radius: 18px;
+      width: 66px;
+      height: 66px;
+      border-radius: 17px;
     }
 
     .product-grid {
       grid-template-columns: 1fr;
+      gap: 8px;
     }
 
     .product-card {
       min-height: auto;
-      grid-template-columns: 48px minmax(0, 1fr);
-      gap: 14px;
-      padding: 16px;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 12px;
+      padding: 13px;
       background:
         linear-gradient(135deg, #fffdf8 24%, var(--accent-bg, #fffdf8)),
         #fffdf8;
     }
 
     .product-card.is-featured-list::after {
-      inset: auto 16px 12px 78px;
+      inset: auto 14px 11px 67px;
     }
 
     .product-card > img {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+    }
+
+    h3 {
+      font-size: 17px;
+    }
+
+    .product-card p {
+      font-size: 14px;
+      line-height: 1.42;
+    }
+
+    .product-card .platform-badges {
+      margin-top: 6px;
     }
 
     .home-footer {
