@@ -190,24 +190,9 @@ const collectionJsonLd = {
   }
 
   .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
     color: #737067;
     font-size: 14px;
     font-weight: 560;
-  }
-
-  .brand::before {
-    content: "";
-    width: 16px;
-    height: 16px;
-    border: 1px solid #cfc5b7;
-    border-radius: 5px;
-    background:
-      linear-gradient(90deg, transparent 6px, #b9ad9d 6px 7px, transparent 7px),
-      linear-gradient(0deg, transparent 6px, #b9ad9d 6px 7px, transparent 7px),
-      linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(239, 234, 226, 0.76));
   }
 
   .language {
@@ -312,7 +297,7 @@ const collectionJsonLd = {
     border-bottom: 1px solid #e9e1d5;
     padding: 19px 16px;
     color: inherit;
-    transition: background 140ms ease, border-color 140ms ease;
+    transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
   }
 
   .policy-row[hidden] {
@@ -326,7 +311,12 @@ const collectionJsonLd = {
   .policy-row:hover,
   .policy-row:focus-visible {
     border-bottom-color: #ddd2c3;
-    background: linear-gradient(90deg, rgba(255, 253, 248, 0.94), rgba(255, 253, 248, 0.36));
+    background: linear-gradient(90deg, rgba(255, 253, 248, 0.98), rgba(250, 248, 245, 0.56));
+  }
+
+  .policy-row:hover h2,
+  .policy-row:focus-visible h2 {
+    color: #2f2d29;
   }
 
   .policy-row:focus-visible {
@@ -389,7 +379,7 @@ const collectionJsonLd = {
 
     h1 {
       max-width: 7.5em;
-      font-size: clamp(38px, 11vw, 44px);
+      font-size: clamp(36px, 10.5vw, 42px);
       line-height: 1.08;
     }
 

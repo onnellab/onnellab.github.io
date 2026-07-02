@@ -176,24 +176,9 @@ const collectionJsonLd = {
   }
 
   .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
     color: #737067;
     font-size: 14px;
     font-weight: 560;
-  }
-
-  .brand::before {
-    content: "";
-    width: 16px;
-    height: 16px;
-    border: 1px solid #cfc5b7;
-    border-radius: 5px;
-    background:
-      linear-gradient(90deg, transparent 6px, #b9ad9d 6px 7px, transparent 7px),
-      linear-gradient(0deg, transparent 6px, #b9ad9d 6px 7px, transparent 7px),
-      linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(239, 234, 226, 0.76));
   }
 
   .language {
@@ -298,7 +283,7 @@ const collectionJsonLd = {
       #fffdf8;
     color: inherit;
     text-decoration: none;
-    transition: border-color 140ms ease, background 140ms ease;
+    transition: border-color 140ms ease, background 140ms ease, color 140ms ease;
   }
 
   .app-card[hidden] {
@@ -308,7 +293,9 @@ const collectionJsonLd = {
   .app-card:hover,
   .app-card:focus-visible {
     border-color: var(--accent-border, #d8cec0);
-    background: var(--accent-bg, #fffdf8);
+    background:
+      linear-gradient(135deg, rgba(255, 253, 248, 0.98), var(--accent-bg, #fffdf8)),
+      #fffdf8;
   }
 
   .app-card:focus-visible {
@@ -354,7 +341,7 @@ const collectionJsonLd = {
   }
 
   .meta-text span {
-    color: #827d72;
+    color: #706a60;
     font-size: 12px;
     line-height: 1.4;
   }
@@ -402,7 +389,8 @@ const collectionJsonLd = {
     }
 
     h1 {
-      font-size: clamp(38px, 13vw, 54px);
+      font-size: clamp(36px, 12vw, 50px);
+      line-height: 1.04;
     }
 
     header p {
