@@ -135,6 +135,11 @@ test.describe('site layout', () => {
     await expect(page).toHaveURL(/\/apps\/ko\/$/);
   });
 
+  test('legacy duplicated korean apps path redirects to the apps collection', async ({ page }) => {
+    await page.goto('/apps/ko/ko/');
+    await expect(page).toHaveURL(/\/apps\/ko\/$/);
+  });
+
   test('legacy korean-prefixed collection paths redirect to canonical pages', async ({ page }) => {
     await page.goto('/ko/apps/');
     await expect(page).toHaveURL(/\/apps\/ko\/$/);
