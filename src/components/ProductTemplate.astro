@@ -374,24 +374,24 @@ const jsonLd = {
   .task-preview {
     display: grid;
     gap: 0;
-    padding: 8px 0 8px 18px;
+    padding: 6px 0 6px 14px;
   }
 
   .task-row {
     position: relative;
     display: grid;
-    grid-template-columns: 38px minmax(0, 1fr);
-    gap: 14px;
-    padding: 13px 0;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 12px;
+    padding: 11px 0;
   }
 
   .task-row + .task-row {
-    border-top: 1px solid rgba(210, 199, 184, 0.48);
+    border-top: 1px solid rgba(210, 199, 184, 0.34);
   }
 
   .task-row span {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -399,15 +399,15 @@ const jsonLd = {
     border-radius: 999px;
     background: rgba(255, 253, 248, 0.72);
     color: var(--accent-text);
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 10px;
+    font-weight: 650;
     line-height: 1;
   }
 
   .task-row strong {
     color: #464139;
-    font-size: 15px;
-    font-weight: 650;
+    font-size: 14px;
+    font-weight: 620;
     line-height: 1.45;
   }
 
@@ -416,6 +416,7 @@ const jsonLd = {
     display: grid;
     gap: 8px;
     margin-left: 152px;
+    width: min(100%, 286px);
     z-index: 1;
   }
 
@@ -529,18 +530,18 @@ const jsonLd = {
   .screens-band,
   .download-band {
     border-top: 1px solid #e3dbcf;
-    padding: 46px 0;
+    padding: 42px 0;
   }
 
   .content-band {
-    padding-top: 50px;
+    padding-top: 48px;
   }
 
   .screens-band summary {
     cursor: pointer;
     color: #37342f;
-    font-size: 18px;
-    font-weight: 650;
+    font-size: 17px;
+    font-weight: 620;
     list-style-position: outside;
   }
 
@@ -548,7 +549,7 @@ const jsonLd = {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
-    margin-top: 22px;
+    margin-top: 18px;
   }
 
   figure {
@@ -813,7 +814,7 @@ const jsonLd = {
   .download-band {
     display: grid;
     justify-items: center;
-    gap: 16px;
+    gap: 12px;
     background:
       linear-gradient(180deg, rgba(255, 253, 248, 0), rgba(255, 253, 248, 0.52), rgba(255, 253, 248, 0));
     text-align: center;
@@ -821,12 +822,15 @@ const jsonLd = {
 
   .download-band h2 {
     margin: 0;
+    color: #4a453d;
+    font-size: 19px;
+    font-weight: 600;
   }
 
   .actions.compact {
     justify-content: center;
     margin-left: 0;
-    width: 100%;
+    width: min(100%, 286px);
   }
 
   .copy-column {
