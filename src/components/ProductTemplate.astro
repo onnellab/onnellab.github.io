@@ -327,7 +327,7 @@ const jsonLd = {
 
   .hero[data-app] {
     background:
-      linear-gradient(180deg, rgba(255, 253, 248, 0), rgba(255, 253, 248, 0.3) 42%, rgba(255, 253, 248, 0));
+      linear-gradient(180deg, rgba(255, 253, 248, 0), rgba(255, 253, 248, 0.34) 48%, rgba(255, 253, 248, 0));
   }
 
   .hero::before {
@@ -335,8 +335,8 @@ const jsonLd = {
     position: absolute;
     inset: 78px 0;
     background:
-      linear-gradient(90deg, rgba(255, 253, 248, 0), var(--accent-bg), rgba(255, 253, 248, 0));
-    opacity: 0.34;
+      linear-gradient(90deg, rgba(255, 253, 248, 0), rgba(255, 253, 248, 0.72), rgba(255, 253, 248, 0));
+    opacity: 0.58;
     pointer-events: none;
   }
 
@@ -471,9 +471,9 @@ const jsonLd = {
   .task-preview {
     display: grid;
     gap: 0;
-    border-left: 1px solid rgba(210, 199, 184, 0.3);
-    padding: 6px 0 6px 17px;
-    background: linear-gradient(90deg, rgba(255, 253, 248, 0.28), rgba(255, 253, 248, 0));
+    border-left: 1px solid rgba(210, 199, 184, 0.24);
+    padding: 5px 0 5px 16px;
+    background: linear-gradient(90deg, rgba(255, 253, 248, 0.22), rgba(255, 253, 248, 0));
   }
 
   .task-row {
@@ -481,11 +481,11 @@ const jsonLd = {
     display: grid;
     grid-template-columns: 24px minmax(0, 1fr);
     gap: 10px;
-    padding: 9px 0;
+    padding: 8px 0;
   }
 
   .task-row + .task-row {
-    border-top: 1px solid rgba(210, 199, 184, 0.26);
+    border-top: 1px solid rgba(210, 199, 184, 0.22);
   }
 
   .task-row span {
@@ -496,7 +496,7 @@ const jsonLd = {
     justify-content: center;
     border: 1px solid var(--accent-border);
     border-radius: 999px;
-    background: rgba(255, 253, 248, 0.72);
+    background: rgba(255, 253, 248, 0.58);
     color: var(--accent-text);
     font-size: 9px;
     font-weight: 650;
@@ -504,9 +504,9 @@ const jsonLd = {
   }
 
   .task-row strong {
-    color: #464139;
+    color: #504a41;
     font-size: 12.5px;
-    font-weight: 620;
+    font-weight: 580;
     line-height: 1.42;
   }
 
@@ -811,8 +811,8 @@ const jsonLd = {
 
   .viewer-panel {
     display: grid;
-    gap: 12px;
-    padding: 12px;
+    gap: 11px;
+    padding: 11px;
   }
 
   .viewer-bar {
@@ -925,14 +925,14 @@ const jsonLd = {
   .viewer-thumbs {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 9px;
     overflow-x: auto;
-    padding: 4px 2px 6px;
+    padding: 3px 2px 5px;
   }
 
   .viewer-thumb {
-    width: 50px;
-    height: 66px;
+    width: 48px;
+    height: 64px;
     flex: 0 0 auto;
     border: 1px solid rgba(196, 185, 169, 0.58);
     border-radius: 13px;
@@ -1033,33 +1033,33 @@ const jsonLd = {
   .copy-column > p:first-child {
     color: #3f3b35;
     font-size: 18px;
-    line-height: 1.66;
+    line-height: 1.7;
     max-width: none;
   }
 
   .copy-column p + p {
-    margin-top: 15px;
+    margin-top: 16px;
   }
 
   ul {
     display: grid;
-    gap: 8px;
-    margin: 17px 0 0;
+    gap: 7px;
+    margin: 20px 0 0;
     padding: 0;
     list-style: none;
   }
 
   li {
     position: relative;
-    padding: 8px 0 8px 18px;
-    border-top: 1px solid rgba(224, 216, 203, 0.62);
+    padding: 7px 0 7px 18px;
+    border-top: 1px solid rgba(224, 216, 203, 0.5);
   }
 
   li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 19px;
+    top: 18px;
     width: 5px;
     height: 5px;
     border-radius: 999px;
@@ -1109,7 +1109,7 @@ const jsonLd = {
     .hero::before {
       inset: 86px 0 auto 0;
       height: 188px;
-      opacity: 0.22;
+      opacity: 0.36;
     }
 
     .hero::after {
@@ -1217,20 +1217,20 @@ const jsonLd = {
 
     .task-preview {
       border-left: 0;
-      border-top: 1px solid rgba(210, 199, 184, 0.42);
-      background: linear-gradient(180deg, rgba(255, 253, 248, 0.42), rgba(255, 253, 248, 0));
-      padding: 6px 0 0;
+      border-top: 1px solid rgba(210, 199, 184, 0.34);
+      background: linear-gradient(180deg, rgba(255, 253, 248, 0.34), rgba(255, 253, 248, 0));
+      padding: 5px 0 0;
     }
 
     .task-row {
       grid-template-columns: 25px minmax(0, 1fr);
       gap: 8px;
-      padding: 8px 0;
+      padding: 7px 0;
     }
 
     .task-row strong {
       font-size: 12.5px;
-      line-height: 1.38;
+      line-height: 1.36;
     }
 
     .task-row span {
@@ -1295,22 +1295,22 @@ const jsonLd = {
       position: relative;
       grid-template-rows: auto minmax(0, 1fr) auto;
       max-height: calc(100dvh - 14px);
-      padding: 7px;
-      gap: 7px;
+      padding: 6px;
+      gap: 6px;
     }
 
     .viewer-bar {
       position: sticky;
       top: 0;
       z-index: 5;
-      min-height: 34px;
+      min-height: 32px;
       padding-bottom: 0;
       background: transparent;
     }
 
     .viewer-close {
-      width: 32px;
-      height: 32px;
+      width: 31px;
+      height: 31px;
       background:
         linear-gradient(180deg, rgba(255, 253, 248, 0.94), rgba(244, 240, 233, 0.84)),
         #fffdf8;
@@ -1328,11 +1328,11 @@ const jsonLd = {
     .viewer-image-stage {
       grid-column: 1 / -1;
       grid-row: 1;
-      max-height: calc(100dvh - 164px);
+      max-height: calc(100dvh - 152px);
     }
 
     .viewer-image-stage img {
-      max-height: calc(100dvh - 164px);
+      max-height: calc(100dvh - 152px);
     }
 
     .viewer-prev,
@@ -1342,25 +1342,25 @@ const jsonLd = {
 
     .viewer-nav {
       width: 100%;
-      height: 32px;
-      border-radius: 11px;
-      background: rgba(255, 253, 248, 0.44);
-      border-color: rgba(196, 185, 169, 0.28);
-      color: rgba(55, 52, 47, 0.72);
+      height: 30px;
+      border-radius: 10px;
+      background: rgba(255, 253, 248, 0.34);
+      border-color: rgba(196, 185, 169, 0.22);
+      color: rgba(55, 52, 47, 0.62);
       box-shadow: none;
     }
 
     .viewer-thumbs {
       justify-content: center;
-      gap: 6px;
-      padding: 1px 2px 3px;
-      opacity: 0.84;
+      gap: 5px;
+      padding: 0 2px 2px;
+      opacity: 0.72;
     }
 
     .viewer-thumb {
-      width: 36px;
-      height: 48px;
-      border-radius: 10px;
+      width: 32px;
+      height: 42px;
+      border-radius: 9px;
       padding: 2px;
       box-shadow: none;
     }

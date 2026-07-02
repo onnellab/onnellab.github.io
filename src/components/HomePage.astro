@@ -316,7 +316,7 @@ const websiteJsonLd = {
     border-radius: 8px;
     padding: 19px 20px 21px;
     background:
-      linear-gradient(135deg, var(--accent-bg), #fffdf8 68%),
+      linear-gradient(135deg, var(--accent-bg), rgba(255, 253, 248, 0.96) 58%, #fffdf8 86%),
       #fffdf8;
     color: inherit;
     overflow: hidden;
@@ -328,14 +328,17 @@ const websiteJsonLd = {
     content: "";
     position: absolute;
     inset: 0;
-    border-top: 1px solid rgba(255, 253, 248, 0.86);
+    border-top: 1px solid rgba(255, 253, 248, 0.9);
+    box-shadow: inset 0 0 0 1px rgba(255, 253, 248, 0.34);
     pointer-events: none;
   }
 
   .featured:hover,
   .featured:focus-visible {
     border-color: var(--accent-border);
-    background: var(--accent-bg);
+    background:
+      linear-gradient(135deg, var(--accent-bg), rgba(255, 253, 248, 0.92) 68%),
+      #fffdf8;
   }
 
   .featured:focus-visible {
@@ -363,7 +366,9 @@ const websiteJsonLd = {
     width: 82px;
     height: 82px;
     border-radius: 19px;
-    box-shadow: 0 0 0 1px var(--accent-border);
+    box-shadow:
+      0 0 0 1px var(--accent-border),
+      0 10px 24px rgba(58, 49, 38, 0.06);
   }
 
   .featured-label {
@@ -594,6 +599,7 @@ const websiteJsonLd = {
       width: 66px;
       height: 66px;
       border-radius: 17px;
+      box-shadow: 0 0 0 1px var(--accent-border);
     }
 
     .product-grid {
