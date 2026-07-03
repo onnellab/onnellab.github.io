@@ -16,7 +16,7 @@ const text = isKo
       studioLabel: 'Independent App Studio',
       intro: [
         '한국에서 시작한 독립 앱 스튜디오입니다.',
-        '신중하게 설계한 유틸리티와 오프라인 중심 앱에 집중합니다.',
+        '신중하게 만든 유틸리티와 오프라인에서도 바로 쓸 수 있는 앱에 집중합니다.',
         'Flutter • iOS • Android'
       ],
       timeline: '타임라인',
@@ -24,7 +24,8 @@ const text = isKo
       contact: '문의하기',
       homeHref: '/ko/',
       switchHref: '/about/',
-      switchLabel: 'English'
+      switchLabel: 'English',
+      email: 'onnellab.app@gmail.com'
     }
   : {
       title: 'About ONNELLAB',
@@ -41,16 +42,17 @@ const text = isKo
       contact: 'Contact',
       homeHref: '/',
       switchHref: '/about/ko/',
-      switchLabel: '한국어'
+      switchLabel: '한국어',
+      email: 'onnellab.app@gmail.com'
     };
 const canonicalPath = isKo ? '/about/ko/' : '/about/';
 const timelineItems = [
-  { date: '2026.03.30', app: 'TagWeaver' },
-  { date: '2026.04.02', app: 'Quivra' },
-  { date: '2026.04.24', app: 'VaultXT' },
-  { date: '2026.06.25', app: 'ClipNest' },
-  { date: '2026.06.30', app: 'Aligna' },
-  { date: '2026.07.01', app: 'Segra' }
+  { date: '2026.03.30', displayDate: '2026.03', app: 'TagWeaver', summary: isKo ? 'MP3 태그 편집기' : 'MP3 tag editor' },
+  { date: '2026.04.02', displayDate: '2026.04', app: 'Quivra', summary: isKo ? '미디어 변환기' : 'media converter' },
+  { date: '2026.04.24', displayDate: '2026.04', app: 'VaultXT', summary: isKo ? '대용량 TXT 편집기' : 'large TXT editor' },
+  { date: '2026.06.25', displayDate: '2026.06', app: 'ClipNest', summary: isKo ? '클립보드 기록' : 'clipboard history' },
+  { date: '2026.06.30', displayDate: '2026.06', app: 'Aligna', summary: isKo ? '일괄 파일명 정리' : 'batch file renamer' },
+  { date: '2026.07.01', displayDate: '2026.07', app: 'Segra', summary: isKo ? '오디오 자르기와 병합' : 'audio cutter and merger' }
 ];
 const organizationJsonLd = {
   '@context': 'https://schema.org',
@@ -94,7 +96,10 @@ const organizationJsonLd = {
       <div class="intro-lines">
         {text.intro.map((line) => <p>{line}</p>)}
       </div>
-      <a class="contact-link" href="mailto:onnellab.app@gmail.com">{text.contact}</a>
+      <div class="contact-block">
+        <a class="contact-link" href={`mailto:${text.email}`}>{text.contact}</a>
+        <p>{text.email}</p>
+      </div>
     </section>
 
     <section class="timeline-section" aria-labelledby="timeline-title">
@@ -102,8 +107,11 @@ const organizationJsonLd = {
       <ol class="timeline">
         {timelineItems.map((item) => (
           <li>
-            <time datetime={item.date.replace(/\./g, '-')}>{item.date}</time>
-            <span>{item.app} {text.eventLabel}</span>
+            <time datetime={item.date.replace(/\./g, '-')}>{item.displayDate}</time>
+            <div>
+              <span>{item.app} {text.eventLabel}</span>
+              <p>{item.summary}</p>
+            </div>
           </li>
         ))}
       </ol>
@@ -206,15 +214,37 @@ const organizationJsonLd = {
     margin-top: 6px;
   }
 
-  .contact-link {
+  .contact-block {
     margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .contact-block p {
+    margin: 0;
+    color: #81786b;
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   .timeline-section {
+    position: relative;
     display: grid;
     grid-template-columns: 180px minmax(0, 1fr);
     gap: 48px;
     padding-top: 42px;
+  }
+
+  .timeline-section::before {
+    content: "";
+    position: absolute;
+    top: 42px;
+    left: 180px;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(185, 173, 157, 0.44), rgba(250, 248, 245, 0));
   }
 
   h2 {
@@ -255,6 +285,13 @@ const organizationJsonLd = {
     font-weight: 650;
   }
 
+  .timeline p {
+    margin: 2px 0 0;
+    color: #81786b;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
   @media (max-width: 680px) {
     .page-shell {
       width: min(100% - 28px, 900px);
@@ -269,6 +306,10 @@ const organizationJsonLd = {
       grid-template-columns: 1fr;
       gap: 18px;
       padding-top: 32px;
+    }
+
+    .timeline-section::before {
+      display: none;
     }
 
     .timeline li {
