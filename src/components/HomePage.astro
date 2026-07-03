@@ -39,6 +39,8 @@ const text =
         upcoming: '예정 프로젝트',
         upcomingItems: ['Papira', 'FloMo', 'Nunote', 'Textoria', 'Heara'],
         privacy: '개인정보 처리방침',
+        aboutLink: 'About',
+        aboutHref: '/about/ko/',
         privacyLink: '앱별 개인정보 처리방침',
         privacyHref: '/privacy/ko/',
         contact: '문의',
@@ -62,6 +64,8 @@ const text =
         upcoming: 'Upcoming Projects',
         upcomingItems: ['Papira', 'FloMo', 'Nunote', 'Textoria', 'Heara'],
         privacy: 'Privacy Policy',
+        aboutLink: 'About',
+        aboutHref: '/about/',
         privacyLink: 'View app privacy policies',
         privacyHref: '/privacy/',
         contact: 'Contact',
@@ -192,6 +196,7 @@ const websiteJsonLd = {
         </p>
       </div>
       <div class="footer-links">
+        <a href={text.aboutHref}>{text.aboutLink}</a>
         <a href={text.privacyHref}>{text.privacyLink}</a>
         <a href="mailto:onnellab.app@gmail.com">{text.contactLink}</a>
       </div>

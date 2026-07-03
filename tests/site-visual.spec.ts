@@ -7,6 +7,8 @@ const pages = [
   '/apps/ko/',
   '/apps/tagweaver/',
   '/apps/tagweaver/ko/',
+  '/about/',
+  '/about/ko/',
   '/privacy/',
   '/privacy/ko/'
 ];
@@ -123,6 +125,9 @@ test.describe('site layout', () => {
 
     await page.goto('/apps/tagweaver/');
     await expect(page).toHaveURL(/\/apps\/tagweaver\/ko\/$/);
+
+    await page.goto('/about/');
+    await expect(page).toHaveURL(/\/about\/ko\/$/);
   });
 
   test('korean apps collection does not redirect as an app detail page', async ({ page }) => {
@@ -179,7 +184,7 @@ test.describe('site layout', () => {
       'href',
       /https:\/\/play\.google\.com\/store\/apps\/details\?id=com\.onnellab\.tagweaver2&hl=ko&gl=KR/
     );
-    await expect(page.locator('.support-links a').first()).toHaveText('Privacy Policy');
+    await expect(page.locator('.support-links a').first()).toHaveText('개인정보 처리방침');
     await expect(page.locator('.support-links a').first()).toHaveAttribute(
       'href',
       'https://onnelakin.github.io/tagweaver-privacy-policy/ko/'
@@ -304,7 +309,6 @@ test.describe('site layout', () => {
   test('product screenshots open in an in-page viewer', async ({ page }) => {
     await page.goto('/apps/tagweaver/');
     await expect(page.locator('.identity img')).toHaveAttribute('data-no-visual-search', 'true');
-    await page.locator('.screens-band summary').click();
     await expect(page.locator('[data-screenshot-link] img').first()).toHaveAttribute('data-no-visual-search', 'true');
     await page.locator('[data-screenshot-link]').first().click();
 

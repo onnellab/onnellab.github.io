@@ -82,6 +82,24 @@ export function GET() {
         { lang: 'x-default', path: '/privacy/' }
       ]
     },
+    {
+      path: '/about/',
+      lastmod: sourceLastmod('src/components/AboutPage.astro'),
+      alternates: [
+        { lang: 'en', path: '/about/' },
+        { lang: 'ko', path: '/about/ko/' },
+        { lang: 'x-default', path: '/about/' }
+      ]
+    },
+    {
+      path: '/about/ko/',
+      lastmod: sourceLastmod('src/components/AboutPage.astro'),
+      alternates: [
+        { lang: 'en', path: '/about/' },
+        { lang: 'ko', path: '/about/ko/' },
+        { lang: 'x-default', path: '/about/' }
+      ]
+    },
     ...productEntries
   ];
   const uniqueEntries = entries.filter(

@@ -224,7 +224,13 @@ const jsonLd = {
             <div class="viewer-frame">
               <button class="viewer-nav viewer-prev" type="button" data-viewer-prev aria-label="Previous">‹</button>
               <div class="viewer-image-stage" data-viewer-stage>
-                <img data-viewer-image data-no-visual-search="true" alt="" />
+                <img
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                  data-viewer-image
+                  data-no-visual-search="true"
+                  alt=""
+                  hidden
+                />
               </div>
               <button class="viewer-nav viewer-next" type="button" data-viewer-next aria-label="Next">›</button>
             </div>
@@ -857,6 +863,10 @@ const jsonLd = {
       0 0 0 1px rgba(255, 253, 248, 0.42),
       inset 0 1px 0 rgba(255, 255, 255, 0.78);
     overscroll-behavior: contain;
+  }
+
+  .screenshot-viewer[open] {
+    display: block;
   }
 
   .screenshot-viewer::backdrop {
@@ -1608,6 +1618,7 @@ const jsonLd = {
     const image = link.querySelector('img');
     viewerImage.src = link.getAttribute('href');
     viewerImage.alt = image?.getAttribute('alt') || '';
+    viewerImage.hidden = false;
     resetViewerZoom();
     thumbnailButtons.forEach((button, thumbnailIndex) => {
       if (thumbnailIndex === currentScreenshotIndex) {

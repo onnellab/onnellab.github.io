@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Locale } from '../lib/products';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const isKo = locale === 'ko';
+const text = isKo
+  ? {
+      title: 'About ONNELLAB',
+      description: 'ONNELLAB은 한국에서 조용하고 신중한 유틸리티 앱을 만드는 독립 앱 스튜디오입니다.',
+      heading: 'About ONNELLAB',
+      intro: [
+        'Independent app studio from Korea.',
+        'Focused on thoughtful utilities and offline-first apps.',
+        'Flutter • iOS • Android'
+      ],
+      timeline: 'Timeline',
+      contact: 'Contact',
+      homeHref: '/ko/',
+      switchHref: '/about/',
+      switchLabel: 'English'
+    }
+  : {
+      title: 'About ONNELLAB',
+      description: 'ONNELLAB is an independent app studio from Korea focused on thoughtful utilities and offline-first apps.',
+      heading: 'About ONNELLAB',
+      intro: [
+        'Independent app studio from Korea.',
+        'Focused on thoughtful utilities and offline-first apps.',
+        'Flutter • iOS • Android'
+      ],
+      timeline: 'Timeline',
+      contact: 'Contact',
+      homeHref: '/',
+      switchHref: '/about/ko/',
+      switchLabel: '한국어'
+    };
+const canonicalPath = isKo ? '/about/ko/' : '/about/';
+const timelineItems = [
+  { date: '2026.03.30', app: 'TagWeaver' },
+  { date: '2026.04.02', app: 'Quivra' },
+  { date: '2026.04.24', app: 'VaultXT' },
+  { date: '2026.06.25', app: 'ClipNest' },
+  { date: '2026.06.30', app: 'Aligna' },
+  { date: '2026.07.01', app: 'Segra' }
+];
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  '@id': new URL(`${canonicalPath}#about`, Astro.site).toString(),
+  name: text.title,
+  description: text.description,
+  url: new URL(canonicalPath, Astro.site).toString(),
+  inLanguage: locale,
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': new URL('/#organization', Astro.site).toString(),
+    name: 'ONNELLAB',
+    url: new URL('/', Astro.site).toString(),
+    email: 'onnellab.app@gmail.com'
+  }
+};
+---
+
+<BaseLayout
+  title={text.title}
+  description={text.description}
+  canonicalPath={canonicalPath}
+  lang={locale}
+  jsonLd={organizationJsonLd}
+  alternates={[
+    { lang: 'en', path: '/about/' },
+    { lang: 'ko', path: '/about/ko/' },
+    { lang: 'x-default', path: '/about/' }
+  ]}
+>
+  <main class="page-shell">
+    <nav aria-label="Navigation">
+      <a class="brand" href={text.homeHref}>ONNELLAB</a>
+      <a class="language" href={text.switchHref} data-locale-choice={isKo ? 'en' : 'ko'}>{text.switchLabel}</a>
+    </nav>
+
+    <section class="about-hero" aria-labelledby="about-title">
+      <p class="studio-label">Independent App Studio</p>
+      <h1 id="about-title">{text.heading}</h1>
+      <div class="intro-lines">
+        {text.intro.map((line) => <p>{line}</p>)}
+      </div>
+      <a class="contact-link" href="mailto:onnellab.app@gmail.com">{text.contact}</a>
+    </section>
+
+    <section class="timeline-section" aria-labelledby="timeline-title">
+      <h2 id="timeline-title">{text.timeline}</h2>
+      <ol class="timeline">
+        {timelineItems.map((item) => (
+          <li>
+            <time datetime={item.date.replace(/\./g, '-')}>{item.date}</time>
+            <span>{item.app}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    width: min(900px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 44px;
+    line-height: 1.65;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand,
+  .language,
+  .contact-link {
+    text-decoration: none;
+  }
+
+  .brand {
+    color: #737067;
+    font-size: 14px;
+    font-weight: 560;
+  }
+
+  .language,
+  .contact-link {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ded6ca;
+    border-radius: 999px;
+    padding: 6px 12px;
+    background: rgba(255, 253, 248, 0.72);
+    color: #5f5a50;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  .language:hover,
+  .language:focus-visible,
+  .contact-link:hover,
+  .contact-link:focus-visible {
+    border-color: #cfc5b7;
+    background: #fffdf8;
+  }
+
+  .language:focus-visible,
+  .contact-link:focus-visible,
+  .brand:focus-visible {
+    outline: 2px solid #827d72;
+    outline-offset: 3px;
+  }
+
+  .about-hero {
+    padding: 56px 0 42px;
+    border-bottom: 1px solid #e0d8cb;
+  }
+
+  .studio-label {
+    margin: 0 0 12px;
+    color: #827d72;
+    font-size: 12px;
+    font-weight: 720;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    color: #36332f;
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+
+  .intro-lines {
+    max-width: 620px;
+    margin-top: 24px;
+    color: #514d46;
+    font-size: clamp(18px, 2.5vw, 22px);
+    line-height: 1.56;
+  }
+
+  .intro-lines p {
+    margin: 0;
+  }
+
+  .intro-lines p + p {
+    margin-top: 6px;
+  }
+
+  .contact-link {
+    margin-top: 28px;
+  }
+
+  .timeline-section {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 48px;
+    padding-top: 42px;
+  }
+
+  h2 {
+    margin: 0;
+    color: #6b655b;
+    font-size: 14px;
+    font-weight: 720;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .timeline {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .timeline li {
+    display: grid;
+    grid-template-columns: 116px minmax(0, 1fr);
+    gap: 20px;
+    align-items: baseline;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e8e0d4;
+  }
+
+  .timeline time {
+    color: #81786b;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .timeline span {
+    color: #37332f;
+    font-size: 20px;
+    font-weight: 650;
+  }
+
+  @media (max-width: 680px) {
+    .page-shell {
+      width: min(100% - 28px, 900px);
+      padding-top: 18px;
+    }
+
+    .about-hero {
+      padding: 42px 0 34px;
+    }
+
+    .timeline-section {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      padding-top: 32px;
+    }
+
+    .timeline li {
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .timeline span {
+      font-size: 18px;
+    }
+  }
+</style>
