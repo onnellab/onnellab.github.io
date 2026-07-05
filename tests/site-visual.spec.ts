@@ -220,8 +220,10 @@ test.describe('site layout', () => {
     const structuredDataItems = jsonLdItems.map((jsonLd) => JSON.parse(jsonLd));
     const structuredData = structuredDataItems.find((item) => item['@type'] === 'SoftwareApplication');
     const breadcrumbData = structuredDataItems.find((item) => item['@type'] === 'BreadcrumbList');
+    const faqData = structuredDataItems.find((item) => item['@type'] === 'FAQPage');
     expect(structuredData).toBeDefined();
     expect(breadcrumbData).toBeDefined();
+    expect(faqData).toBeDefined();
     expect(structuredData['@type']).toBe('SoftwareApplication');
     expect(structuredData.name).toBe('TagWeaver');
     expect(structuredData.mainEntityOfPage).toBe('https://onnelakin.github.io/apps/tagweaver/');
@@ -238,6 +240,9 @@ test.describe('site layout', () => {
       'TagWeaver'
     ]);
     expect(breadcrumbData.itemListElement.at(-1).item).toBe('https://onnelakin.github.io/apps/tagweaver/');
+    expect(faqData.mainEntity.map((item) => item.name)).toContain('Are files uploaded to a server?');
+    await expect(page.locator('#use-cases-title')).toHaveText('Use cases');
+    await expect(page.locator('#faq-title')).toHaveText('FAQ');
     await expect(page.locator('[data-store-link][data-store-position="hero"]')).toHaveCount(2);
     await expect(page.locator('[data-store-link][data-store-position="download"]')).toHaveCount(2);
 
@@ -255,6 +260,36 @@ test.describe('site layout', () => {
     const llmsText = await llmsResponse.text();
     expect(llmsText).toContain('## Korean App Summaries');
     expect(llmsText).toContain('주요 작업:');
+  });
+
+  test('product store click analytics include app locale store and position', async ({ page }) => {
+    await page.goto('/apps/tagweaver/');
+    await page.evaluate(() => {
+      window.__onnellEvents = [];
+      window.onnelTrack = (eventName, params = {}) => {
+        window.__onnellEvents.push({ eventName, params });
+      };
+      document.addEventListener(
+        'click',
+        (event) => {
+          if (event.target instanceof Element && event.target.closest('[data-store-link]')) {
+            event.preventDefault();
+          }
+        },
+        true
+      );
+    });
+
+    await page.locator('[data-store-link][data-store-position="hero"][data-store="app_store"]').click();
+    const event = await page.evaluate(() => window.__onnellEvents.at(-1));
+    expect(event.eventName).toBe('store_click');
+    expect(event.params).toMatchObject({
+      app: 'tagweaver',
+      locale: 'en',
+      store: 'app_store',
+      position: 'hero',
+      page_path: '/apps/tagweaver/'
+    });
   });
 
   test('site and collection schema remain crawlable', async ({ page }) => {

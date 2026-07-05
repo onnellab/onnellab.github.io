@@ -19,6 +19,12 @@ const text = isKo
         '신중하게 설계하고, 오프라인에서도 바로 쓸 수 있게 만듭니다.',
         'Flutter • iOS • Android'
       ],
+      principlesTitle: '제품 원칙',
+      principles: [
+        '계정 없이 바로 사용할 수 있는 도구를 우선합니다.',
+        '가능한 작업은 기기 안에서 처리하고, 불필요한 업로드를 만들지 않습니다.',
+        '한 앱은 한 가지 일을 조용하고 예측 가능하게 끝내도록 설계합니다.'
+      ],
       timeline: '타임라인',
       eventLabel: '출시',
       closing: 'ONNELLAB은 작고 오래 쓰는 도구를 계속 만듭니다.',
@@ -37,6 +43,12 @@ const text = isKo
         'Quiet utility apps from Korea.',
         'Built thoughtfully to work offline, simply and reliably.',
         'Flutter • iOS • Android'
+      ],
+      principlesTitle: 'Product principles',
+      principles: [
+        'Tools should be usable without creating an account first.',
+        'Whenever possible, work should happen on device without unnecessary uploads.',
+        'Each app should finish one job quietly and predictably.'
       ],
       timeline: 'Timeline',
       eventLabel: 'launch',
@@ -102,6 +114,13 @@ const organizationJsonLd = {
         <a class="contact-link" href={`mailto:${text.email}`}>{text.contact}</a>
         <p>{text.email}</p>
       </div>
+    </section>
+
+    <section class="principles-section" aria-labelledby="principles-title">
+      <h2 id="principles-title">{text.principlesTitle}</h2>
+      <ul class="principles-list">
+        {text.principles.map((principle) => <li>{principle}</li>)}
+      </ul>
     </section>
 
     <section class="timeline-section" aria-labelledby="timeline-title">
@@ -241,6 +260,41 @@ const organizationJsonLd = {
     padding-top: 42px;
   }
 
+  .principles-section {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 48px;
+    padding: 38px 0;
+    border-bottom: 1px solid #e0d8cb;
+  }
+
+  .principles-list {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .principles-list li {
+    position: relative;
+    padding-left: 18px;
+    color: #514d46;
+    font-size: 16px;
+    line-height: 1.62;
+  }
+
+  .principles-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: #c8b99e;
+  }
+
   .timeline-section::before {
     content: "";
     position: absolute;
@@ -328,6 +382,12 @@ const organizationJsonLd = {
       grid-template-columns: 1fr;
       gap: 18px;
       padding-top: 32px;
+    }
+
+    .principles-section {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 30px 0;
     }
 
     .timeline-section::before {

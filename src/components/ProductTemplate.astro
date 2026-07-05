@@ -75,6 +75,60 @@ const storeUrls = [appStoreUrl, googlePlayUrl].filter(Boolean);
 const screenshotUrls = data.screenshotPaths.map((screenshotPath) =>
   new URL(screenshotPath, Astro.site).toString()
 );
+const tagweaverUseCaseContent = data.locale === 'ko'
+  ? {
+      title: '이럴 때 사용해요',
+      items: [
+        '가지고 있는 파일의 제목, 아티스트, 앨범 정보를 직접 정리하고 싶을 때',
+        '앨범 아트, 가사, 평점처럼 파일 안에 저장된 정보를 확인하고 수정하고 싶을 때',
+        '자동 정리 없이 사용자가 확인한 변경사항만 저장하고 싶을 때'
+      ]
+    }
+  : {
+      title: 'Use cases',
+      items: [
+        'Clean up title, artist, and album metadata in files you already own',
+        'Review and edit artwork, lyrics, and rating stored inside audio files',
+        'Save only the fields you checked and changed, without automatic library changes'
+      ]
+    };
+const tagweaverFaqContent = data.locale === 'ko'
+  ? {
+      title: '자주 묻는 질문',
+      items: [
+        {
+          question: '파일이 서버로 업로드되나요?',
+          answer: '아니요. TagWeaver는 로그인, 계정 생성, 파일 업로드 없이 기기 안에서 편집합니다.'
+        },
+        {
+          question: 'MP3와 FLAC를 모두 편집할 수 있나요?',
+          answer: '네. MP3 ID3 태그와 FLAC Vorbis Comment 태그를 지원합니다.'
+        },
+        {
+          question: '여러 파일을 한 번에 저장할 수 있나요?',
+          answer: '여러 파일 선택과 일괄 편집을 지원하며, 여러 파일 일괄 저장은 Pro에서 사용할 수 있습니다.'
+        }
+      ]
+    }
+  : {
+      title: 'FAQ',
+      items: [
+        {
+          question: 'Are files uploaded to a server?',
+          answer: 'No. TagWeaver edits on your device without login, account creation, or file uploads.'
+        },
+        {
+          question: 'Can it edit both MP3 and FLAC files?',
+          answer: 'Yes. TagWeaver supports MP3 ID3 tags and FLAC Vorbis Comment tags.'
+        },
+        {
+          question: 'Can I save edits across multiple files?',
+          answer: 'Multiple-file selection and batch editing are supported. Batch saving for multiple files is available with Pro.'
+        }
+      ]
+    };
+const useCaseContent = data.source.slug === 'tagweaver' ? tagweaverUseCaseContent : undefined;
+const faqContent = data.source.slug === 'tagweaver' ? tagweaverFaqContent : undefined;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -139,6 +193,19 @@ const breadcrumbJsonLd = {
     }
   ]
 };
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${canonicalUrl.toString()}#faq`,
+  mainEntity: (faqContent?.items ?? []).map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer
+    }
+  }))
+};
 ---
 
 <BaseLayout
@@ -147,7 +214,7 @@ const breadcrumbJsonLd = {
   canonicalPath={data.canonicalPath}
   lang={data.locale}
   image={data.iconPath}
-  jsonLd={[jsonLd, breadcrumbJsonLd]}
+  jsonLd={faqContent ? [jsonLd, breadcrumbJsonLd, faqJsonLd] : [jsonLd, breadcrumbJsonLd]}
   alternates={[
     { lang: 'en', path: enPath },
     { lang: 'ko', path: koPath },
@@ -218,6 +285,29 @@ const breadcrumbJsonLd = {
         ))}
       </div>
     </section>
+
+    {useCaseContent && (
+      <section class="use-cases-band" aria-labelledby="use-cases-title">
+        <h2 id="use-cases-title">{useCaseContent.title}</h2>
+        <ul class="use-case-list">
+          {useCaseContent.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+    )}
+
+    {faqContent && (
+      <section class="faq-band" aria-labelledby="faq-title">
+        <h2 id="faq-title">{faqContent.title}</h2>
+        <div class="faq-list">
+          {faqContent.items.map((item) => (
+            <details>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
 
     {data.screenshotPaths.length > 0 && (
       <details class="screens-band" open>
@@ -718,6 +808,8 @@ const breadcrumbJsonLd = {
   }
 
   .content-band,
+  .use-cases-band,
+  .faq-band,
   .screens-band,
   .download-band {
     border-top: 1px solid #e3dbcf;
@@ -743,6 +835,43 @@ const breadcrumbJsonLd = {
     width: 1px;
     height: 58px;
     background: linear-gradient(180deg, rgba(185, 173, 157, 0.54), rgba(255, 253, 248, 0));
+  }
+
+  .use-cases-band h2,
+  .faq-band h2 {
+    margin-top: 0;
+  }
+
+  .use-case-list {
+    margin-top: 12px;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .faq-list details {
+    border-top: 1px solid rgba(224, 216, 203, 0.68);
+    padding: 12px 0 10px;
+  }
+
+  .faq-list summary {
+    cursor: pointer;
+    color: #37342f;
+    font-size: 16px;
+    font-weight: 650;
+    line-height: 1.55;
+  }
+
+  .faq-list summary::marker {
+    color: var(--accent-text);
+  }
+
+  .faq-list p {
+    margin: 8px 0 0;
+    color: #5f5a50;
   }
 
   .screens-band summary {
