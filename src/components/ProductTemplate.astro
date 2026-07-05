@@ -40,6 +40,7 @@ const heroIntro = landingSubtitle(copy);
 const heroSignals =
   (bodyBlocks.find((block) => block.type === 'ul')?.value as string[] | undefined)?.slice(0, 3) ?? [];
 const homePath = data.locale === 'ko' ? '/ko/' : '/';
+const appsPath = data.locale === 'ko' ? '/apps/ko/' : '/apps/';
 const pageStyle = `--accent-border: ${data.accent.border}; --accent-bg: ${data.accent.background}; --accent-text: ${data.accent.text};`;
 const iconUrl = new URL(data.iconPath, Astro.site);
 const canonicalUrl = new URL(data.canonicalPath, Astro.site);
@@ -113,6 +114,31 @@ const jsonLd = {
     : {}),
   privacyPolicy: privacyUrl
 };
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${canonicalUrl.toString()}#breadcrumb`,
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'ONNELLAB',
+      item: new URL(homePath, Astro.site).toString()
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: labels.download,
+      item: new URL(appsPath, Astro.site).toString()
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: meta.title,
+      item: canonicalUrl.toString()
+    }
+  ]
+};
 ---
 
 <BaseLayout
@@ -121,7 +147,7 @@ const jsonLd = {
   canonicalPath={data.canonicalPath}
   lang={data.locale}
   image={data.iconPath}
-  jsonLd={jsonLd}
+  jsonLd={[jsonLd, breadcrumbJsonLd]}
   alternates={[
     { lang: 'en', path: enPath },
     { lang: 'ko', path: koPath },
@@ -158,8 +184,8 @@ const jsonLd = {
 
       <div class="hero-actions">
         <div class="actions store-actions" aria-label={labels.stores}>
-          <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store">{labels.appStore}</a>
-          {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play">{labels.googlePlay}</a>}
+          <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store" data-store-position="hero">{labels.appStore}</a>
+          {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play" data-store-position="hero">{labels.googlePlay}</a>}
         </div>
         <div class="support-links" aria-label="Contact links">
           <a href={privacyUrl}>{labels.privacy}</a>
@@ -266,8 +292,8 @@ const jsonLd = {
     <section class="download-band" aria-label={labels.download}>
       <p class="eyebrow">{labels.download}</p>
       <div class="actions compact" aria-label={labels.stores}>
-        <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store">{labels.appStore}</a>
-        {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play">{labels.googlePlay}</a>}
+        <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store" data-store-position="download">{labels.appStore}</a>
+        {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play" data-store-position="download">{labels.googlePlay}</a>}
       </div>
     </section>
 
@@ -1483,7 +1509,10 @@ const jsonLd = {
   };
   document.querySelectorAll('[data-store-link]').forEach((link) => {
     link.addEventListener('click', () => {
-      trackProductEvent('store_click', { store: link.getAttribute('data-store') || '' });
+      trackProductEvent('store_click', {
+        store: link.getAttribute('data-store') || '',
+        position: link.getAttribute('data-store-position') || ''
+      });
     });
   });
 

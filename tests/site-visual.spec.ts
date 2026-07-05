@@ -216,11 +216,12 @@ test.describe('site layout', () => {
       'href',
       'https://onnelakin.github.io/app-assets/tagweaver/assets/icon/tagweaver.png'
     );
-    await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1);
-
-    const jsonLd = await page.locator('script[type="application/ld+json"]').textContent();
-    expect(jsonLd).not.toBeNull();
-    const structuredData = JSON.parse(jsonLd ?? '{}');
+    const jsonLdItems = await page.locator('script[type="application/ld+json"]').allTextContents();
+    const structuredDataItems = jsonLdItems.map((jsonLd) => JSON.parse(jsonLd));
+    const structuredData = structuredDataItems.find((item) => item['@type'] === 'SoftwareApplication');
+    const breadcrumbData = structuredDataItems.find((item) => item['@type'] === 'BreadcrumbList');
+    expect(structuredData).toBeDefined();
+    expect(breadcrumbData).toBeDefined();
     expect(structuredData['@type']).toBe('SoftwareApplication');
     expect(structuredData.name).toBe('TagWeaver');
     expect(structuredData.mainEntityOfPage).toBe('https://onnelakin.github.io/apps/tagweaver/');
@@ -231,6 +232,14 @@ test.describe('site layout', () => {
     expect(structuredData.installUrl).toContain('https://apps.apple.com/us/app/id6759609875?l=en-US');
     expect(structuredData.privacyPolicy).toBe('https://onnelakin.github.io/tagweaver-privacy-policy/');
     expect(structuredData.publisher.name).toBe('ONNELLAB');
+    expect(breadcrumbData.itemListElement.map((item) => item.name)).toEqual([
+      'ONNELLAB',
+      'Download',
+      'TagWeaver'
+    ]);
+    expect(breadcrumbData.itemListElement.at(-1).item).toBe('https://onnelakin.github.io/apps/tagweaver/');
+    await expect(page.locator('[data-store-link][data-store-position="hero"]')).toHaveCount(2);
+    await expect(page.locator('[data-store-link][data-store-position="download"]')).toHaveCount(2);
 
     const sitemapResponse = await page.request.get('/sitemap.xml');
     expect(sitemapResponse.ok()).toBe(true);
