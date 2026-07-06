@@ -142,7 +142,7 @@ const jsonLd = {
   description: data.seoDescription,
   inLanguage: data.locale,
   image: iconUrl.toString(),
-  isAccessibleForFree: true,
+  isAccessibleForFree: meta.price === 0,
   ...(heroSignals.length > 0 ? { featureList: heroSignals } : {}),
   ...(screenshotUrls.length > 0 ? { screenshot: screenshotUrls } : {}),
   downloadUrl: storeUrls,
@@ -313,7 +313,7 @@ const faqJsonLd = {
       <details class="screens-band" open>
         <summary>{labels.screens}</summary>
         <div class="screenshot-row">
-          {data.screenshotPaths.slice(0, 3).map((screenshotPath, index) => (
+          {data.screenshotPaths.map((screenshotPath, index) => (
             <figure>
               <a
                 class="screenshot-link"
@@ -354,7 +354,7 @@ const faqJsonLd = {
               <button class="viewer-nav viewer-next" type="button" data-viewer-next aria-label="Next">›</button>
             </div>
             <div class="viewer-thumbs" aria-label={labels.screens}>
-              {data.screenshotPaths.slice(0, 3).map((screenshotPath, index) => (
+              {data.screenshotPaths.map((screenshotPath, index) => (
                 <button
                   class="viewer-thumb"
                   type="button"
@@ -919,7 +919,7 @@ const faqJsonLd = {
 
   .screenshot-row {
     display: grid;
-    grid-template-columns: minmax(0, 1.08fr) repeat(2, minmax(0, 0.96fr));
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     align-items: start;
     gap: 18px;
     margin-top: 22px;

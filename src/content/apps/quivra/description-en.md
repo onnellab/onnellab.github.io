@@ -3,7 +3,7 @@ Android
 Quivra – WAV to MP3 Converter
 
 간단한 설명:
-High-quality media converter
+Convert WAV, M4A, MP4, and MOV with no ads or subscriptions
 
 Landing subtitle:
 Media Converter
@@ -52,11 +52,17 @@ Only the essentials.
 Nothing unnecessary.
 
 Landing page:
-Quivra converts everyday media files without extra setup.
+Quivra converts WAV, M4A, MP4, and MOV files with fixed rules, no ads, and no subscriptions.
 
 Choose a WAV, M4A, MP4, or MOV file and Quivra picks the right conversion path automatically. You do not need to choose an output format before starting.
 
 Audio files can be converted to MP3. MP4 videos can be saved as MP3 audio. MOV videos can be converted to MP4.
+
+Core tasks
+
+• Choose a media file
+• Convert automatically
+• Save without extra steps
 
 Supported conversions
 
