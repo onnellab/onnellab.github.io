@@ -72,7 +72,8 @@ const appStoreUrl = localizedAppStoreUrl(meta.appstore, data.locale);
 const googlePlayUrl = localizedGooglePlayUrl(meta.googleplay, data.locale);
 const privacyUrl = localizedPrivacyUrl(meta.privacy, data.locale);
 const storeUrls = [appStoreUrl, googlePlayUrl].filter(Boolean);
-const screenshotUrls = data.screenshotPaths.map((screenshotPath) =>
+const landingScreenshotPaths = data.screenshotPaths.slice(0, 3);
+const screenshotUrls = landingScreenshotPaths.map((screenshotPath) =>
   new URL(screenshotPath, Astro.site).toString()
 );
 const tagweaverUseCaseContent = data.locale === 'ko'
@@ -309,11 +310,11 @@ const faqJsonLd = {
       </section>
     )}
 
-    {data.screenshotPaths.length > 0 && (
+    {landingScreenshotPaths.length > 0 && (
       <details class="screens-band" open>
         <summary>{labels.screens}</summary>
         <div class="screenshot-row">
-          {data.screenshotPaths.map((screenshotPath, index) => (
+          {landingScreenshotPaths.map((screenshotPath, index) => (
             <figure>
               <a
                 class="screenshot-link"
@@ -354,7 +355,7 @@ const faqJsonLd = {
               <button class="viewer-nav viewer-next" type="button" data-viewer-next aria-label="Next">›</button>
             </div>
             <div class="viewer-thumbs" aria-label={labels.screens}>
-              {data.screenshotPaths.map((screenshotPath, index) => (
+              {landingScreenshotPaths.map((screenshotPath, index) => (
                 <button
                   class="viewer-thumb"
                   type="button"
