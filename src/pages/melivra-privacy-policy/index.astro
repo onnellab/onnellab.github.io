@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const updatedAt = '2026-07-09';
+const canonicalPath = '/melivra-privacy-policy/';
+---
+
+<BaseLayout
+  title="Melivra Privacy Policy"
+  description="Privacy policy for Melivra, including AI script and translation processing."
+  canonicalPath={canonicalPath}
+  lang="en"
+  alternates={[
+    { lang: 'en', path: canonicalPath },
+    { lang: 'ko', path: '/melivra-privacy-policy/ko/' },
+    { lang: 'x-default', path: canonicalPath }
+  ]}
+>
+  <main class="policy-page">
+    <nav aria-label="Navigation">
+      <a class="brand" href="/">ONNELLAB</a>
+      <a class="language" href="/melivra-privacy-policy/ko/" data-locale-choice="ko">한국어</a>
+    </nav>
+
+    <header>
+      <p>Melivra</p>
+      <h1>Privacy Policy</h1>
+      <time datetime={updatedAt}>Updated {updatedAt}</time>
+    </header>
+
+    <section aria-labelledby="overview">
+      <h2 id="overview">Overview</h2>
+      <p>
+        Melivra is a local music library and playback app. It is designed for audio files that you own or have permission to use. Most library and playback features work on your device without an ONNELLAB account.
+      </p>
+    </section>
+
+    <section aria-labelledby="local-data">
+      <h2 id="local-data">Local Data</h2>
+      <p>
+        Melivra stores library metadata, playback history, bookmarks, ratings, playlists, app settings, AI Token status, AI job status, and saved AI results on your device. Melivra does not use a cloud music library or account sync.
+      </p>
+      <p>
+        Melivra does not modify your original audio files except for explicitly supported rating metadata writes. AI script and translation results are stored inside Melivra app data, not written into audio file tags.
+      </p>
+    </section>
+
+    <section aria-labelledby="ai-processing">
+      <h2 id="ai-processing">AI Script and Translation</h2>
+      <p>
+        When you choose AI script or translation, Melivra estimates AI Token use and asks for your approval before reserving tokens or uploading the original audio. Original audio is uploaded only for the requested AI processing.
+      </p>
+      <p>
+        The AI server processes the uploaded audio to generate transcripts, translations, timestamps, and job status. Original audio is not kept long term after result generation. Server logs must not store full transcript text, full translation text, or original audio content.
+      </p>
+    </section>
+
+    <section aria-labelledby="rights">
+      <h2 id="rights">Copyright and User Rights</h2>
+      <p>
+        Use AI script and translation only with audio you own or have permission to process. Transcripts and translations may include protected content. Melivra does not grant rights to source audio, lyrics, transcripts, or translations.
+      </p>
+      <p>
+        Sharing, distributing, selling, publishing, or otherwise using exported AI results may require permission from the rights holder. Exported TXT and JSON results may include Melivra provenance. Rights remain with their respective owners.
+      </p>
+    </section>
+
+    <section aria-labelledby="exports">
+      <h2 id="exports">Exports</h2>
+      <p>
+        Saved AI results can be exported as TXT, SRT, LRC, or JSON without another AI Token charge. Exporting creates a user-controlled file outside Melivra app storage.
+      </p>
+      <p>
+        TXT exports can include a Melivra provenance note. JSON exports include metadata identifying Melivra and user-provided audio as the source context. SRT and LRC exports are kept in subtitle or lyric format and do not add footer text to the body.
+      </p>
+    </section>
+
+    <section aria-labelledby="purchases">
+      <h2 id="purchases">Purchases</h2>
+      <p>
+        AI Tokens are separate from Melivra Pro. Purchase verification is handled through platform store receipts or purchase tokens and the Melivra AI Token server ledger. Melivra does not create an email or social login account for AI Tokens.
+      </p>
+    </section>
+
+    <section aria-labelledby="contact">
+      <h2 id="contact">Contact</h2>
+      <p>
+        For privacy questions, contact <a href="mailto:onnelakin@gmail.com">onnelakin@gmail.com</a>.
+      </p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .policy-page {
+    width: min(860px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 28px 0 56px;
+    line-height: 1.72;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .brand,
+  .language {
+    text-decoration: none;
+  }
+
+  .brand {
+    color: #737067;
+    font-size: 14px;
+    font-weight: 560;
+  }
+
+  .language {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ded6ca;
+    border-radius: 999px;
+    padding: 6px 12px;
+    background: rgba(255, 253, 248, 0.72);
+    color: #5f5a50;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  header {
+    border-bottom: 1px solid rgba(115, 112, 103, 0.22);
+    padding-bottom: 22px;
+    margin-bottom: 28px;
+  }
+
+  header p,
+  time {
+    color: #737067;
+    font-size: 14px;
+  }
+
+  h1 {
+    margin: 6px 0 8px;
+    color: #232323;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.05;
+  }
+
+  section {
+    padding: 18px 0;
+  }
+
+  h2 {
+    margin: 0 0 10px;
+    color: #2f2f2f;
+    font-size: 21px;
+  }
+
+  p {
+    margin: 0 0 12px;
+    color: #4b4944;
+    font-size: 16px;
+  }
+
+  a {
+    color: #3f625a;
+    font-weight: 650;
+  }
+</style>

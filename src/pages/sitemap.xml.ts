@@ -83,6 +83,24 @@ export function GET() {
       ]
     },
     {
+      path: '/melivra-privacy-policy/',
+      lastmod: sourceLastmod('src/pages/melivra-privacy-policy/index.astro'),
+      alternates: [
+        { lang: 'en', path: '/melivra-privacy-policy/' },
+        { lang: 'ko', path: '/melivra-privacy-policy/ko/' },
+        { lang: 'x-default', path: '/melivra-privacy-policy/' }
+      ]
+    },
+    {
+      path: '/melivra-privacy-policy/ko/',
+      lastmod: sourceLastmod('src/pages/melivra-privacy-policy/ko.astro'),
+      alternates: [
+        { lang: 'en', path: '/melivra-privacy-policy/' },
+        { lang: 'ko', path: '/melivra-privacy-policy/ko/' },
+        { lang: 'x-default', path: '/melivra-privacy-policy/' }
+      ]
+    },
+    {
       path: '/about/',
       lastmod: sourceLastmod('src/components/AboutPage.astro'),
       alternates: [

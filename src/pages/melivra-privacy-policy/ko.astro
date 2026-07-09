@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const updatedAt = '2026-07-09';
+const canonicalPath = '/melivra-privacy-policy/ko/';
+---
+
+<BaseLayout
+  title="Melivra 개인정보 처리방침"
+  description="AI 대본·번역 처리를 포함한 Melivra 개인정보 처리방침입니다."
+  canonicalPath={canonicalPath}
+  lang="ko"
+  alternates={[
+    { lang: 'en', path: '/melivra-privacy-policy/' },
+    { lang: 'ko', path: canonicalPath },
+    { lang: 'x-default', path: '/melivra-privacy-policy/' }
+  ]}
+>
+  <main class="policy-page">
+    <nav aria-label="Navigation">
+      <a class="brand" href="/ko/">ONNELLAB</a>
+      <a class="language" href="/melivra-privacy-policy/" data-locale-choice="en">English</a>
+    </nav>
+
+    <header>
+      <p>Melivra</p>
+      <h1>개인정보 처리방침</h1>
+      <time datetime={updatedAt}>작성 날짜 {updatedAt}</time>
+    </header>
+
+    <section aria-labelledby="overview">
+      <h2 id="overview">개요</h2>
+      <p>
+        Melivra는 로컬 음악 라이브러리와 재생을 위한 앱입니다. 본인이 소유했거나 사용할 권한이 있는 오디오 파일을 다루도록 설계되어 있습니다. 대부분의 라이브러리와 재생 기능은 ONNELLAB 계정 없이 기기 안에서 동작합니다.
+      </p>
+    </section>
+
+    <section aria-labelledby="local-data">
+      <h2 id="local-data">로컬 데이터</h2>
+      <p>
+        Melivra는 라이브러리 메타데이터, 재생 기록, 북마크, 평점, 플레이리스트, 앱 설정, AI Token 상태, AI 작업 상태, 저장된 AI 결과를 기기에 저장합니다. Melivra는 클라우드 음악 라이브러리나 계정 동기화를 사용하지 않습니다.
+      </p>
+      <p>
+        Melivra는 명시적으로 지원되는 평점 메타데이터 기록을 제외하고 원본 오디오 파일을 수정하지 않습니다. AI 대본·번역 결과는 오디오 파일 태그가 아니라 Melivra 앱 데이터 안에 저장됩니다.
+      </p>
+    </section>
+
+    <section aria-labelledby="ai-processing">
+      <h2 id="ai-processing">AI 대본·번역</h2>
+      <p>
+        사용자가 AI 대본 또는 번역을 선택하면 Melivra는 예상 AI Token 사용량을 계산하고, 사용자 승인 후에만 토큰을 예약하고 원본 오디오를 업로드합니다. 원본 오디오는 요청한 AI 처리를 위해서만 업로드됩니다.
+      </p>
+      <p>
+        AI 서버는 업로드된 오디오를 처리해 대본, 번역, 타임스탬프, 작업 상태를 생성합니다. 결과 생성 후 원본 오디오는 서버에 장기 보관하지 않습니다. 서버 로그에는 대본 전문, 번역문 전문, 원본 오디오 내용을 저장하지 않아야 합니다.
+      </p>
+    </section>
+
+    <section aria-labelledby="rights">
+      <h2 id="rights">저작권과 사용자 권리</h2>
+      <p>
+        AI 대본·번역은 본인이 소유했거나 처리 권한이 있는 오디오에만 사용하세요. 생성된 대본과 번역에는 보호되는 내용이 포함될 수 있습니다. Melivra는 원본 오디오, 가사, 대본, 번역에 대한 권리를 부여하지 않습니다.
+      </p>
+      <p>
+        내보낸 AI 결과를 공유, 배포, 판매, 공개하거나 그 밖의 방식으로 사용하는 경우 권리자의 허락이 필요할 수 있습니다. TXT와 JSON 내보내기에는 Melivra 생성 출처가 포함될 수 있습니다. 권리는 각 권리자에게 남아 있습니다.
+      </p>
+    </section>
+
+    <section aria-labelledby="exports">
+      <h2 id="exports">내보내기</h2>
+      <p>
+        저장된 AI 결과는 AI Token을 다시 차감하지 않고 TXT, SRT, LRC, JSON 형식으로 내보낼 수 있습니다. 내보내기는 Melivra 앱 저장소 밖에 사용자가 관리하는 파일을 만듭니다.
+      </p>
+      <p>
+        TXT 내보내기에는 Melivra 생성 출처 문구를 포함할 수 있습니다. JSON 내보내기에는 Melivra와 사용자 제공 오디오를 출처 맥락으로 식별하는 metadata가 포함됩니다. SRT와 LRC 내보내기는 자막 또는 가사 형식을 유지하며 본문 footer 문구를 추가하지 않습니다.
+      </p>
+    </section>
+
+    <section aria-labelledby="purchases">
+      <h2 id="purchases">구매</h2>
+      <p>
+        AI Token은 Melivra Pro와 분리되어 있습니다. 구매 확인은 플랫폼 스토어 영수증 또는 구매 토큰과 Melivra AI Token 서버 원장을 통해 처리됩니다. Melivra는 AI Token을 위해 이메일 또는 소셜 로그인 계정을 만들지 않습니다.
+      </p>
+    </section>
+
+    <section aria-labelledby="contact">
+      <h2 id="contact">문의</h2>
+      <p>
+        개인정보 관련 문의는 <a href="mailto:onnelakin@gmail.com">onnelakin@gmail.com</a>으로 연락하세요.
+      </p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .policy-page {
+    width: min(860px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 28px 0 56px;
+    line-height: 1.72;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .brand,
+  .language {
+    text-decoration: none;
+  }
+
+  .brand {
+    color: #737067;
+    font-size: 14px;
+    font-weight: 560;
+  }
+
+  .language {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ded6ca;
+    border-radius: 999px;
+    padding: 6px 12px;
+    background: rgba(255, 253, 248, 0.72);
+    color: #5f5a50;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  header {
+    border-bottom: 1px solid rgba(115, 112, 103, 0.22);
+    padding-bottom: 22px;
+    margin-bottom: 28px;
+  }
+
+  header p,
+  time {
+    color: #737067;
+    font-size: 14px;
+  }
+
+  h1 {
+    margin: 6px 0 8px;
+    color: #232323;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.05;
+  }
+
+  section {
+    padding: 18px 0;
+  }
+
+  h2 {
+    margin: 0 0 10px;
+    color: #2f2f2f;
+    font-size: 21px;
+  }
+
+  p {
+    margin: 0 0 12px;
+    color: #4b4944;
+    font-size: 16px;
+  }
+
+  a {
+    color: #3f625a;
+    font-weight: 650;
+  }
+</style>
