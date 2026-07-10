@@ -105,11 +105,13 @@ const categories = isKo
     {posts.length > 0 && (
       <section class="post-list" aria-label={copy.postsLabel}>
         {posts.map((post) => (
-          <article class="post-card">
-            <p>{post.meta.category}</p>
-            <h2><a href={post.href}>{post.meta.cardTitle}</a></h2>
-            <span>{post.meta.description}</span>
-          </article>
+          <a class="post-card" href={post.href} aria-label={post.meta.title}>
+            <article>
+              <p>{post.meta.category}</p>
+              <h2>{post.meta.cardTitle}</h2>
+              <span>{post.meta.description}</span>
+            </article>
+          </a>
         ))}
       </section>
     )}
@@ -235,10 +237,49 @@ const categories = isKo
     padding-top: 26px;
   }
   .post-card {
+    position: relative;
+    display: block;
     border: 1px solid #ded6ca;
     border-radius: 8px;
     padding: 22px;
     background: #fffdf8;
+    color: inherit;
+    text-decoration: none;
+    transition: background 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+  }
+  .post-card::after {
+    content: "";
+    width: 18px;
+    height: 1px;
+    position: absolute;
+    right: 18px;
+    bottom: 16px;
+    background: linear-gradient(90deg, rgba(207, 197, 183, 0), rgba(185, 173, 157, 0.58));
+    opacity: 0;
+    transition: opacity 140ms ease;
+  }
+  .post-card:hover,
+  .post-card:focus-visible {
+    border-color: #d4c7b6;
+    background:
+      linear-gradient(90deg, #fffdf8, rgba(250, 248, 245, 0.74)),
+      #fffdf8;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 253, 248, 0.78),
+      inset 0 -1px 0 rgba(210, 199, 184, 0.62),
+      0 8px 18px rgba(58, 49, 38, 0.04);
+  }
+  .post-card:hover h2,
+  .post-card:focus-visible h2 {
+    color: #2f2d29;
+  }
+  .post-card:hover::after,
+  .post-card:focus-visible::after {
+    opacity: 0.9;
+  }
+  .post-card:focus-visible {
+    outline: 2px solid #827d72;
+    outline-offset: 3px;
   }
   .post-card h2,
   .empty-state h2 {
@@ -246,9 +287,6 @@ const categories = isKo
     color: #343331;
     font-size: 22px;
     line-height: 1.25;
-  }
-  .post-card h2 a {
-    text-decoration: none;
   }
   .post-card span,
   .empty-state p {
