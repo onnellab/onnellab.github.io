@@ -16,13 +16,16 @@ const copy = isKo
       description: '읽기, 음악, 생산성, 미디어, 창작, 게임, 리서치 워크플로를 다루는 ONNELLAB 교육형 글입니다.',
       canonicalPath: '/blog/ko/',
       switchHref: '/blog/',
-      switchLabel: 'EN',
+      switchLabel: 'English',
+      appsHref: '/apps/ko/',
+      appsLabel: 'Apps',
       eyebrow: 'ONNELLAB Blog',
       heading: '워크플로 가이드',
       intro: '읽기, 음악, 생산성, 미디어 작업을 차분하게 정리하는 실전 글입니다.',
       emptyTitle: '첫 글을 준비하고 있습니다',
       emptyText: '읽기, 음악, 생산성, 미디어 작업을 더 차분하게 정리하는 실전 가이드를 곧 게시합니다.',
       categoriesLabel: '다룰 주제',
+      emptyLabel: '상태',
       postsLabel: '게시된 글'
     }
   : {
@@ -30,13 +33,16 @@ const copy = isKo
       description: 'Educational ONNELLAB articles about reading, music, productivity, media, craft, games, and research workflows.',
       canonicalPath: '/blog/',
       switchHref: '/blog/ko/',
-      switchLabel: 'KO',
+      switchLabel: '한국어',
+      appsHref: '/apps/',
+      appsLabel: 'Apps',
       eyebrow: 'ONNELLAB Blog',
       heading: 'Practical Workflow Guides',
       intro: 'Focused articles for calmer reading, music, productivity, and media workflows.',
       emptyTitle: 'Articles are being prepared',
       emptyText: 'Practical guides for reading, music, productivity, and media workflows will appear here as they are published.',
       categoriesLabel: 'Planned topics',
+      emptyLabel: 'Status',
       postsLabel: 'Published articles'
     };
 const categories = isKo
@@ -66,9 +72,12 @@ const categories = isKo
   ]}
 >
   <main class="blog-shell">
-    <nav class="top-nav" aria-label="Blog language">
+    <nav class="top-nav" aria-label="Blog navigation">
       <a href={isKo ? '/ko/' : '/'}>ONNELLAB</a>
-      <a class="language" href={copy.switchHref} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={isKo ? 'English' : '한국어'}>{copy.switchLabel}</a>
+      <div class="nav-actions">
+        <a href={copy.appsHref}>{copy.appsLabel}</a>
+        <a class="language" href={copy.switchHref} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={isKo ? 'English' : '한국어'}>{copy.switchLabel}</a>
+      </div>
     </nav>
 
     <header class="blog-header">
@@ -76,6 +85,13 @@ const categories = isKo
       <h1>{copy.heading}</h1>
       <p>{copy.intro}</p>
     </header>
+
+    {posts.length === 0 && (
+      <section class="empty-state" aria-label={copy.emptyLabel}>
+        <h2>{copy.emptyTitle}</h2>
+        <p>{copy.emptyText}</p>
+      </section>
+    )}
 
     <section class="category-preview" aria-label={copy.categoriesLabel}>
       {categories.map(([name, description]) => (
@@ -86,22 +102,17 @@ const categories = isKo
       ))}
     </section>
 
-    <section class="post-list" aria-label={copy.postsLabel}>
-      {posts.length === 0 ? (
-        <div class="empty-state">
-          <h2>{copy.emptyTitle}</h2>
-          <p>{copy.emptyText}</p>
-        </div>
-      ) : (
-        posts.map((post) => (
+    {posts.length > 0 && (
+      <section class="post-list" aria-label={copy.postsLabel}>
+        {posts.map((post) => (
           <article class="post-card">
             <p>{post.meta.category}</p>
             <h2><a href={post.href}>{post.meta.title}</a></h2>
             <span>{post.meta.description}</span>
           </article>
-        ))
-      )}
-    </section>
+        ))}
+      </section>
+    )}
   </main>
 </BaseLayout>
 
@@ -114,6 +125,7 @@ const categories = isKo
   }
   .top-nav {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 16px;
     font-size: 14px;
@@ -122,6 +134,16 @@ const categories = isKo
     color: #5f5a50;
     text-decoration: none;
     font-weight: 650;
+  }
+  .nav-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav-actions > a:not(.language):hover,
+  .nav-actions > a:not(.language):focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
   .language {
     min-width: 38px;
@@ -173,35 +195,44 @@ const categories = isKo
     color: #5b574f;
     font-size: 18px;
   }
+  .empty-state {
+    margin-top: 24px;
+    border: 1px solid #ded6ca;
+    border-radius: 8px;
+    padding: 22px;
+    background: #fffdf8;
+  }
   .category-preview {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    padding: 24px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 22px 0 0;
   }
   .category-preview article {
-    border-top: 1px solid #ded6ca;
-    padding: 16px 0 2px;
+    max-width: 210px;
+    border: 1px solid #ded6ca;
+    border-radius: 999px;
+    padding: 8px 13px;
+    background: rgba(255, 253, 248, 0.74);
   }
   .category-preview h2 {
-    margin: 0 0 6px;
+    margin: 0;
     color: #343331;
-    font-size: 18px;
-    line-height: 1.25;
+    font-size: 14px;
+    line-height: 1.2;
   }
   .category-preview p {
-    margin: 0;
-    color: #5d5850;
-    font-size: 14px;
-    line-height: 1.55;
+    margin: 3px 0 0;
+    color: #6c675f;
+    font-size: 12px;
+    line-height: 1.35;
   }
   .post-list {
     display: grid;
     gap: 14px;
     padding-top: 26px;
   }
-  .post-card,
-  .empty-state {
+  .post-card {
     border: 1px solid #ded6ca;
     border-radius: 8px;
     padding: 22px;
@@ -229,8 +260,10 @@ const categories = isKo
     .blog-header {
       padding: 46px 0 30px;
     }
-    .category-preview {
-      grid-template-columns: 1fr;
+    .category-preview article {
+      max-width: none;
+      width: 100%;
+      border-radius: 8px;
     }
   }
 </style>

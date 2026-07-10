@@ -113,13 +113,13 @@ test.describe('site layout', () => {
     await expect(page.locator('.product-card')).toHaveCount(4);
   });
 
-  test('language switch uses compact badge labels', async ({ page }) => {
+  test('language switch uses full language labels', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('main > .top-nav .language')).toHaveText('KO');
+    await expect(page.locator('main > .top-nav .language')).toHaveText('한국어');
     await expect(page.locator('main > .top-nav .language')).toHaveAttribute('aria-label', '한국어로 보기');
 
     await page.goto('/ko/');
-    await expect(page.locator('main > .top-nav .language')).toHaveText('EN');
+    await expect(page.locator('main > .top-nav .language')).toHaveText('English');
     await expect(page.locator('main > .top-nav .language')).toHaveAttribute('aria-label', 'Switch to English');
   });
 
@@ -137,6 +137,14 @@ test.describe('site layout', () => {
     const allAppsLink = page.locator('.section-head a');
     await expect(allAppsLink).toBeVisible();
     await expect(allAppsLink).toHaveCSS('text-decoration-line', /underline/);
+  });
+
+  test('blog exposes apps navigation', async ({ page }) => {
+    await page.goto('/blog/');
+    await expect(page.locator('.top-nav a[href="/apps/"]')).toBeVisible();
+
+    await page.goto('/blog/ko/');
+    await expect(page.locator('.top-nav a[href="/apps/ko/"]')).toBeVisible();
   });
 
   test('empty blog pages present visitor-facing planned topics', async ({ page }) => {
