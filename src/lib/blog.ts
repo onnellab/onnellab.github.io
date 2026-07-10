@@ -48,6 +48,11 @@ export function getBlogPost(slug: string, locale: Locale): BlogPost {
   return post;
 }
 
+export function getBlogAlternatePost(post: BlogPost): BlogPost | undefined {
+  const alternateLocale = post.meta.language === 'ko' ? 'en' : 'ko';
+  return getBlogPosts(alternateLocale).find((item) => item.meta.slug === post.meta.slug);
+}
+
 export function getAllBlogPages(): BlogPost[] {
   return getBlogPosts();
 }
