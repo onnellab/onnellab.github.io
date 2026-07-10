@@ -1,0 +1,285 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { renderMarkdownBlocks, type BlogPost } from '../lib/blog';
+import type { Locale } from '../lib/products';
+
+type Props = {
+  locale: Locale;
+  post: BlogPost;
+};
+
+const { locale, post } = Astro.props;
+const isKo = locale === 'ko';
+const blocks = renderMarkdownBlocks(post.body);
+const homeHref = isKo ? '/ko/' : '/';
+const blogHref = isKo ? '/blog/ko/' : '/blog/';
+const appsHref = isKo ? '/apps/ko/' : '/apps/';
+const copy = isKo
+  ? {
+      blog: 'Blog',
+      apps: 'Apps',
+      summary: '요약',
+      relatedApps: '관련 앱',
+      tags: '태그',
+      published: '게시',
+      updated: '수정'
+    }
+  : {
+      blog: 'Blog',
+      apps: 'Apps',
+      summary: 'Summary',
+      relatedApps: 'Related apps',
+      tags: 'Tags',
+      published: 'Published',
+      updated: 'Updated'
+    };
+const dateLabel = (value?: string) => {
+  if (!value) return '';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return date.toISOString().slice(0, 10);
+};
+const appHref = (appName: string) => {
+  const slug = appName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return isKo ? `/apps/${slug}/ko/` : `/apps/${slug}/`;
+};
+const hasMeta = post.meta.publishedAt || post.meta.updatedAt || post.meta.relatedApps.length || post.meta.tags.length;
+---
+
+<BaseLayout
+  title={`${post.meta.title} - ONNELLAB Blog`}
+  description={post.meta.description}
+  canonicalPath={post.href}
+  lang={locale}
+  alternates={isKo ? [{ lang: 'ko', path: post.href }] : [{ lang: 'en', path: post.href }, { lang: 'x-default', path: post.href }]}
+>
+  <main class="article-shell">
+    <nav class="top-nav" aria-label="Article navigation">
+      <a href={homeHref}>ONNELLAB</a>
+      <div class="nav-actions">
+        <a href={appsHref}>{copy.apps}</a>
+        <a href={blogHref}>{copy.blog}</a>
+      </div>
+    </nav>
+
+    <article>
+      <header class="article-header">
+        <p class="category">{post.meta.category}</p>
+        <h1>{post.meta.title}</h1>
+        <p class="description">{post.meta.description}</p>
+        {hasMeta && (
+          <div class="meta-grid" aria-label="Article metadata">
+            {post.meta.publishedAt && <span>{copy.published} {dateLabel(post.meta.publishedAt)}</span>}
+            {post.meta.updatedAt && <span>{copy.updated} {dateLabel(post.meta.updatedAt)}</span>}
+            {post.meta.relatedApps.map((app) => <a href={appHref(app)}>{app}</a>)}
+            {post.meta.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+        )}
+      </header>
+
+      <aside class="summary-box" aria-label={copy.summary}>
+        <p>{copy.summary}</p>
+        <span>{post.meta.description}</span>
+      </aside>
+
+      <div class="article-body">
+        {blocks.map((block) => {
+          if (block.type === 'h2') return <h2>{block.value}</h2>;
+          if (block.type === 'h3') return <h3>{block.value}</h3>;
+          if (block.type === 'ul') return <ul>{(block.value as string[]).map((item) => <li>{item}</li>)}</ul>;
+          if (block.type === 'ol') return <ol>{(block.value as string[]).map((item) => <li>{item}</li>)}</ol>;
+          return <p>{block.value}</p>;
+        })}
+      </div>
+
+      {(post.meta.relatedApps.length > 0 || post.meta.tags.length > 0) && (
+        <footer class="article-footer">
+          {post.meta.relatedApps.length > 0 && (
+            <section aria-label={copy.relatedApps}>
+              <h2>{copy.relatedApps}</h2>
+              <div class="chip-row">
+                {post.meta.relatedApps.map((app) => <a href={appHref(app)}>{app}</a>)}
+              </div>
+            </section>
+          )}
+          {post.meta.tags.length > 0 && (
+            <section aria-label={copy.tags}>
+              <h2>{copy.tags}</h2>
+              <div class="chip-row">
+                {post.meta.tags.map((tag) => <span>{tag}</span>)}
+              </div>
+            </section>
+          )}
+        </footer>
+      )}
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .article-shell {
+    width: min(840px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 22px 0 64px;
+    line-height: 1.75;
+  }
+  .top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 48px;
+    font-size: 14px;
+  }
+  .top-nav a {
+    color: #5f5a50;
+    text-decoration: none;
+    font-weight: 650;
+  }
+  .nav-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .nav-actions a:hover,
+  .nav-actions a:focus-visible,
+  .article-body a:hover,
+  .article-body a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .article-header {
+    padding-bottom: 28px;
+    border-bottom: 1px solid #e0d8cb;
+  }
+  .category {
+    margin: 0 0 12px;
+    color: #716a5f;
+    font-size: 13px;
+    font-weight: 720;
+    text-transform: uppercase;
+  }
+  h1 {
+    max-width: 780px;
+    margin: 0;
+    color: #2f2f2f;
+    font-size: clamp(34px, 6vw, 60px);
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+  .description {
+    max-width: 700px;
+    margin: 18px 0 0;
+    color: #5d5850;
+    font-size: 18px;
+    line-height: 1.62;
+  }
+  .meta-grid,
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .meta-grid {
+    margin-top: 20px;
+  }
+  .meta-grid span,
+  .meta-grid a,
+  .chip-row span,
+  .chip-row a {
+    border: 1px solid #ded6ca;
+    border-radius: 999px;
+    padding: 5px 10px;
+    background: rgba(255, 253, 248, 0.78);
+    color: #5d5850;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.25;
+    text-decoration: none;
+  }
+  .summary-box {
+    margin-top: 24px;
+    border: 1px solid #ded6ca;
+    border-radius: 8px;
+    padding: 18px 20px;
+    background: #fffdf8;
+  }
+  .summary-box p {
+    margin: 0 0 6px;
+    color: #716a5f;
+    font-size: 13px;
+    font-weight: 720;
+    text-transform: uppercase;
+  }
+  .summary-box span {
+    color: #4f4b45;
+    font-size: 16px;
+    line-height: 1.62;
+  }
+  .article-body {
+    padding-top: 18px;
+  }
+  .article-body h2 {
+    margin: 38px 0 12px;
+    color: #343331;
+    font-size: 27px;
+    line-height: 1.22;
+    letter-spacing: 0;
+  }
+  .article-body h3 {
+    margin: 28px 0 8px;
+    color: #343331;
+    font-size: 20px;
+    line-height: 1.28;
+  }
+  .article-body p,
+  .article-body li {
+    color: #4f4b45;
+    font-size: 17px;
+  }
+  .article-body p {
+    margin: 0 0 18px;
+  }
+  .article-body ul,
+  .article-body ol {
+    margin: 0 0 22px;
+    padding-left: 24px;
+  }
+  .article-body li + li {
+    margin-top: 7px;
+  }
+  .article-body a {
+    color: #3f625a;
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-color: #c4b9aa;
+    text-underline-offset: 3px;
+  }
+  .article-footer {
+    display: grid;
+    gap: 18px;
+    margin-top: 42px;
+    padding-top: 24px;
+    border-top: 1px solid #e0d8cb;
+  }
+  .article-footer h2 {
+    margin: 0 0 10px;
+    color: #343331;
+    font-size: 18px;
+    line-height: 1.25;
+  }
+  @media (max-width: 640px) {
+    .article-shell {
+      width: min(100% - 32px, 840px);
+      padding-top: 18px;
+    }
+    .top-nav {
+      margin-bottom: 38px;
+    }
+    .description,
+    .article-body p,
+    .article-body li {
+      font-size: 16px;
+    }
+  }
+</style>
