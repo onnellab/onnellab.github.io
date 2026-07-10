@@ -20,8 +20,10 @@ const copy = isKo
       eyebrow: 'ONNELLAB Blog',
       heading: '차분한 디지털 워크플로를 위한 실전 가이드',
       intro: '문제를 먼저 설명하고, 실제로 도움이 될 때만 앱을 소개하는 교육형 글을 게시합니다.',
-      emptyTitle: '아직 게시된 글이 없습니다',
-      emptyText: 'ONNELLAB Content Engine에서 생성한 정식 글을 받을 준비가 끝났습니다.'
+      emptyTitle: '첫 글을 준비하고 있습니다',
+      emptyText: '읽기, 음악, 생산성, 미디어 작업을 더 차분하게 정리하는 실전 가이드를 곧 게시합니다.',
+      categoriesLabel: '다룰 주제',
+      postsLabel: '게시된 글'
     }
   : {
       title: 'ONNELLAB Blog - Practical guides for calm digital workflows',
@@ -32,9 +34,24 @@ const copy = isKo
       eyebrow: 'ONNELLAB Blog',
       heading: 'Practical guides for calm digital workflows',
       intro: 'Educational articles that explain problems first and introduce applications only when they are genuinely useful.',
-      emptyTitle: 'No articles published yet',
-      emptyText: 'The blog is ready to receive canonical articles from the ONNELLAB Content Engine.'
+      emptyTitle: 'Articles are being prepared',
+      emptyText: 'Practical guides for reading, music, productivity, and media workflows will appear here as they are published.',
+      categoriesLabel: 'Planned topics',
+      postsLabel: 'Published articles'
     };
+const categories = isKo
+  ? [
+      ['Reading', '큰 텍스트와 긴 문서를 읽기 쉽게 다루는 방법'],
+      ['Music', '오디오 파일과 음악 메타데이터를 정리하는 방법'],
+      ['Productivity', '반복 작업을 줄이고 파일 흐름을 정돈하는 방법'],
+      ['Media', '스크린샷, 클립, 자료를 잃어버리지 않게 관리하는 방법']
+    ]
+  : [
+      ['Reading', 'Ways to handle large text and long-form documents calmly'],
+      ['Music', 'Workflows for audio files and music metadata'],
+      ['Productivity', 'Methods for reducing repeated file and text work'],
+      ['Media', 'Practical organization for screenshots, clips, and references']
+    ];
 ---
 
 <BaseLayout
@@ -60,7 +77,16 @@ const copy = isKo
       <p>{copy.intro}</p>
     </header>
 
-    <section class="post-list" aria-label="Blog posts">
+    <section class="category-preview" aria-label={copy.categoriesLabel}>
+      {categories.map(([name, description]) => (
+        <article>
+          <h2>{name}</h2>
+          <p>{description}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="post-list" aria-label={copy.postsLabel}>
       {posts.length === 0 ? (
         <div class="empty-state">
           <h2>{copy.emptyTitle}</h2>
@@ -123,10 +149,32 @@ const copy = isKo
     color: #5b574f;
     font-size: 18px;
   }
+  .category-preview {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 24px 0 0;
+  }
+  .category-preview article {
+    border-top: 1px solid #ded6ca;
+    padding: 16px 0 2px;
+  }
+  .category-preview h2 {
+    margin: 0 0 6px;
+    color: #343331;
+    font-size: 18px;
+    line-height: 1.25;
+  }
+  .category-preview p {
+    margin: 0;
+    color: #5d5850;
+    font-size: 14px;
+    line-height: 1.55;
+  }
   .post-list {
     display: grid;
     gap: 14px;
-    padding-top: 28px;
+    padding-top: 26px;
   }
   .post-card,
   .empty-state {
@@ -148,5 +196,17 @@ const copy = isKo
   .post-card span,
   .empty-state p {
     color: #5d5850;
+  }
+  @media (max-width: 640px) {
+    .blog-shell {
+      width: min(100% - 32px, 920px);
+      padding-top: 18px;
+    }
+    .blog-header {
+      padding: 46px 0 30px;
+    }
+    .category-preview {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

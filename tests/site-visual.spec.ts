@@ -7,6 +7,9 @@ const pages = [
   '/apps/ko/',
   '/apps/tagweaver/',
   '/apps/tagweaver/ko/',
+  '/blog/',
+  '/blog/en/',
+  '/blog/ko/',
   '/about/',
   '/about/ko/',
   '/privacy/',
@@ -110,12 +113,44 @@ test.describe('site layout', () => {
     await expect(page.locator('.product-card')).toHaveCount(4);
   });
 
+  test('home exposes blog navigation outside the footer', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('main > .top-nav a[href="/blog/"]')).toBeVisible();
+
+    await page.goto('/ko/');
+    await expect(page.locator('main > .top-nav a[href="/blog/ko/"]')).toBeVisible();
+  });
+
   test('mobile all apps link remains discoverable', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 900 });
     await page.goto('/ko/');
     const allAppsLink = page.locator('.section-head a');
     await expect(allAppsLink).toBeVisible();
     await expect(allAppsLink).toHaveCSS('text-decoration-line', /underline/);
+  });
+
+  test('empty blog pages present visitor-facing planned topics', async ({ page }) => {
+    await page.goto('/blog/');
+    await expect(page.locator('.empty-state')).toContainText('Articles are being prepared');
+    await expect(page.locator('.empty-state')).not.toContainText('Content Engine');
+    await expect(page.locator('.category-preview article')).toHaveCount(4);
+
+    await page.goto('/blog/ko/');
+    await expect(page.locator('.empty-state')).toContainText('첫 글을 준비하고 있습니다');
+    await expect(page.locator('.empty-state')).not.toContainText('Content Engine');
+    await expect(page.locator('.category-preview article')).toHaveCount(4);
+  });
+
+  test('blog seo endpoints include blog routes', async ({ page }) => {
+    const sitemapResponse = await page.request.get('/sitemap.xml');
+    expect(sitemapResponse.ok()).toBe(true);
+    const sitemap = await sitemapResponse.text();
+    expect(sitemap).toContain('https://onnelakin.github.io/blog/');
+    expect(sitemap).toContain('https://onnelakin.github.io/blog/ko/');
+
+    const rssResponse = await page.request.get('/rss.xml');
+    expect(rssResponse.ok()).toBe(true);
+    expect(rssResponse.headers()['content-type']).toMatch(/(?:application|text)\/xml|rss\+xml/);
   });
 
   test('korean browser language redirects default pages to korean pages', async ({ page }) => {
@@ -132,6 +167,9 @@ test.describe('site layout', () => {
 
     await page.goto('/about/');
     await expect(page).toHaveURL(/\/about\/ko\/$/);
+
+    await page.goto('/blog/');
+    await expect(page).toHaveURL(/\/blog\/ko\/$/);
   });
 
   test('korean apps collection does not redirect as an app detail page', async ({ page }) => {
