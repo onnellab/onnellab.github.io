@@ -84,6 +84,8 @@ const copy = isKo
 const summaryText = post.meta.shortAnswer || post.meta.description;
 const dateLabel = (value?: string) => {
   if (!value) return '';
+  const localDate = value.match(/^\d{4}-\d{2}-\d{2}/);
+  if (localDate) return localDate[0];
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
   return date.toISOString().slice(0, 10);
@@ -154,18 +156,6 @@ const hasRecommendations =
         <p>{copy.summary}</p>
         <span>{summaryText}</span>
       </aside>
-
-      {post.meta.imageSpecs.length > 0 && (
-        <section class="visual-plan" aria-label={copy.visualPlan}>
-          <div>
-            <p>{copy.visualPlan}</p>
-            <span>{post.meta.imageSpecs.length}</span>
-          </div>
-          <ul>
-            {post.meta.imageSpecs.map((item) => <li>{item}</li>)}
-          </ul>
-        </section>
-      )}
 
       <div class="article-body">
         {articleBlocks.map((block, index) => {

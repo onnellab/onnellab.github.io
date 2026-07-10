@@ -86,10 +86,12 @@ Yes. The template should render recommendation metadata as links when a URL is p
   assert.match(indexHtml, /Readable Workflow Article Title/);
   assert.doesNotMatch(indexHtml, /How to Keep a Very Long ONNELLAB Workflow Article Title Readable on Mobile and Desktop/);
   assert.match(html, /Use a concise answer block/);
+  assert.match(html, /Published 2026-07-11/);
+  assert.match(html, /Updated 2026-07-12/);
   assert.match(html, /Related articles/);
   assert.match(html, /Related guides/);
-  assert.match(html, /Image plan/);
-  assert.match(html, /Workflow diagram for the full process/);
+  assert.doesNotMatch(html, /Image plan/);
+  assert.doesNotMatch(html, /Workflow diagram for the full process/);
   assert.match(html, /<blockquote\b/);
   assert.match(html, /<table\b/);
   assert.match(html, /<details/);
