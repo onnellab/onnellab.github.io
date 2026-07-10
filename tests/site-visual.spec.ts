@@ -147,10 +147,10 @@ test.describe('site layout', () => {
     await expect(page.locator('.top-nav a[href="/apps/ko/"]')).toBeVisible();
   });
 
-  test('empty blog pages present visitor-facing planned topics', async ({ page }) => {
+  test('blog pages present published posts or visitor-facing planned topics', async ({ page }) => {
     await page.goto('/blog/');
-    await expect(page.locator('.empty-state')).toContainText('Articles are being prepared');
-    await expect(page.locator('.empty-state')).not.toContainText('Content Engine');
+    await expect(page.locator('.post-card')).toContainText('Read Large TXT Files Without Lag');
+    await expect(page.locator('.empty-state')).toHaveCount(0);
     await expect(page.locator('.category-preview article')).toHaveCount(4);
 
     await page.goto('/blog/ko/');
@@ -165,10 +165,12 @@ test.describe('site layout', () => {
     const sitemap = await sitemapResponse.text();
     expect(sitemap).toContain('https://onnelakin.github.io/blog/');
     expect(sitemap).toContain('https://onnelakin.github.io/blog/ko/');
+    expect(sitemap).toContain('https://onnelakin.github.io/blog/en/read-large-txt-files-without-lag/');
 
     const rssResponse = await page.request.get('/rss.xml');
     expect(rssResponse.ok()).toBe(true);
     expect(rssResponse.headers()['content-type']).toMatch(/(?:application|text)\/xml|rss\+xml/);
+    expect(await rssResponse.text()).toContain('How to Read Large TXT Files Without Lag');
   });
 
   test('korean browser language redirects default pages to korean pages', async ({ page }) => {
