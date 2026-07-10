@@ -7,6 +7,7 @@
     "build": "astro build",
     "dev": "astro dev",
     "preview": "astro preview",
+    "test:blog-template": "node --test scripts/blog-template-contract.mjs",
     "test:visual": "playwright test"
   },
   "dependencies": {

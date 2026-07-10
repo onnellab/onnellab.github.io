@@ -73,7 +73,7 @@ const categories = isKo
 >
   <main class="blog-shell">
     <nav class="top-nav" aria-label="Blog navigation">
-      <a href={isKo ? '/ko/' : '/'}>ONNELLAB</a>
+      <a class="brand" href={isKo ? '/ko/' : '/'}>ONNELLAB</a>
       <div class="nav-actions">
         <a href={copy.appsHref}>{copy.appsLabel}</a>
         <a class="language" href={copy.switchHref} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={isKo ? 'English' : '한국어'}>{copy.switchLabel}</a>
@@ -134,6 +134,11 @@ const categories = isKo
     color: #5f5a50;
     text-decoration: none;
     font-weight: 650;
+  }
+  .top-nav .brand {
+    color: #737067;
+    font-size: 14px;
+    font-weight: 560;
   }
   .nav-actions {
     display: inline-flex;

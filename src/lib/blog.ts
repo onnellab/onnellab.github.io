@@ -11,10 +11,14 @@ export type BlogPostMeta = {
   category: string;
   language: Locale;
   description: string;
+  shortAnswer?: string;
   publishedAt?: string;
   updatedAt?: string;
   tags: string[];
   relatedApps: string[];
+  relatedArticles: string[];
+  relatedGuides: string[];
+  imageSpecs: string[];
 };
 
 export type BlogPost = {
@@ -119,10 +123,14 @@ function readPost(filePath: string, fallbackLanguage: Locale): BlogPost {
     category: frontmatter.category || 'general',
     language,
     description: frontmatter.description || firstParagraph(body) || frontmatter.title || slug,
+    shortAnswer: frontmatter.short_answer || frontmatter.shortAnswer || extractSection(body, 'Short Answer') || undefined,
     publishedAt: frontmatter.published_at || frontmatter.publishedAt || undefined,
     updatedAt: frontmatter.updated_at || frontmatter.updatedAt || undefined,
     tags: splitList(frontmatter.tags),
-    relatedApps: splitList(frontmatter.related_apps || frontmatter.relatedApps)
+    relatedApps: splitList(frontmatter.related_apps || frontmatter.relatedApps),
+    relatedArticles: splitList(frontmatter.related_articles || frontmatter.relatedArticles),
+    relatedGuides: splitList(frontmatter.related_guides || frontmatter.relatedGuides),
+    imageSpecs: splitList(frontmatter.image_specs || frontmatter.imageSpecs)
   };
   return {
     meta,
@@ -161,6 +169,19 @@ function firstParagraph(markdown: string): string {
     if (trimmed && !trimmed.startsWith('#') && !trimmed.startsWith('-')) return trimmed.replace(/\s+/g, ' ');
   }
   return '';
+}
+
+function extractSection(markdown: string, heading: string): string {
+  const lines = markdown.split(/\r?\n/);
+  const start = lines.findIndex((line) => line.trim().toLowerCase() === `## ${heading}`.toLowerCase());
+  if (start === -1) return '';
+  const section: string[] = [];
+  for (const line of lines.slice(start + 1)) {
+    if (/^##\s+/.test(line.trim())) break;
+    const trimmed = line.trim();
+    if (trimmed) section.push(trimmed);
+  }
+  return section.join(' ').replace(/\s+/g, ' ').trim();
 }
 
 function postDateValue(post: BlogPost): string {
