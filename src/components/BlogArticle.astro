@@ -1,4 +1,7 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getBlogAlternatePost, renderMarkdownBlocks, type BlogPost } from '../lib/blog';
 import type { Locale } from '../lib/products';
@@ -11,7 +14,7 @@ type Props = {
 const { locale, post } = Astro.props;
 const isKo = locale === 'ko';
 const blocks = renderMarkdownBlocks(post.body);
-const shortAnswerHeadings = new Set(['short answer', '짧은 답변', '요약']);
+const shortAnswerHeadings = new Set(['short answer', '짧은 답변', '요약 답변', '핵심 답변', '요약']);
 const faqHeadings = new Set(['faq', '자주 묻는 질문']);
 const articleBlocks: typeof blocks = [];
 let skippingShortAnswer = false;
@@ -200,6 +203,13 @@ const hasRecommendations =
   post.meta.relatedGuides.length > 0 ||
   post.meta.tags.length > 0;
 const articleImage = articleImages[0]?.src;
+const publicAssetExists = (assetPath: string) => fs.existsSync(path.join(process.cwd(), 'public', assetPath.replace(/^\//, '')));
+const socialImageCandidate = articleImage?.endsWith('.svg')
+  ? articleImage.replace(/\/[^/]+\.svg$/, '/social-card.png')
+  : articleImage;
+const articleSocialImage = socialImageCandidate && publicAssetExists(socialImageCandidate)
+  ? socialImageCandidate
+  : articleImage;
 const articleTitle = `${post.meta.title} - ONNELLAB Blog`;
 const absoluteUrl = (path: string) => new URL(path, Astro.site).toString();
 const allFaqItems = Array.from(faqBlocks.values()).flat();
@@ -215,7 +225,7 @@ const blogPostingJsonLd = {
   dateModified: post.meta.updatedAt || post.meta.publishedAt,
   articleSection: post.meta.category,
   keywords: post.meta.tags,
-  image: articleImage ? [absoluteUrl(articleImage)] : undefined,
+  image: articleSocialImage ? [absoluteUrl(articleSocialImage)] : undefined,
   author: {
     '@type': 'Organization',
     name: 'ONNELLAB',
@@ -274,7 +284,7 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
   description={post.meta.description}
   canonicalPath={post.href}
   lang={locale}
-  socialImage={articleImage}
+  socialImage={articleSocialImage}
   ogType="article"
   articleMeta={{
     publishedTime: post.meta.publishedAt,

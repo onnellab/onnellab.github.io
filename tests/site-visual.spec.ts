@@ -32,6 +32,12 @@ test.describe('site layout', () => {
       const brokenImages = await page.evaluate(() =>
         Array.from(document.images)
           .filter((image) => !image.closest('details:not([open])'))
+          .filter((image) => !image.closest('dialog:not([open])'))
+          .filter((image) => {
+            if (image.loading !== 'lazy') return true;
+            const rect = image.getBoundingClientRect();
+            return rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+          })
           .filter((image) => image.naturalWidth === 0 || image.naturalHeight === 0)
           .map((image) => image.getAttribute('src') ?? '')
       );
@@ -218,15 +224,47 @@ test.describe('site layout', () => {
     );
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
       'content',
-      'https://onnelakin.github.io/blog-assets/en/read-large-txt-files-without-lag/workflow-diagram.svg'
+      'https://onnelakin.github.io/blog-assets/en/read-large-txt-files-without-lag/social-card.png'
     );
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+    await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+      'content',
+      'https://onnelakin.github.io/blog-assets/en/read-large-txt-files-without-lag/social-card.png'
+    );
     const jsonLd = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
       scripts.map((script) => script.textContent || '').join('\n')
     );
     expect(jsonLd).toContain('BlogPosting');
     expect(jsonLd).toContain('BreadcrumbList');
     expect(jsonLd).toContain('FAQPage');
+    expect(jsonLd).toContain('social-card.png');
+  });
+
+  test('blog uses the shared ONNELLAB favicon', async ({ page }) => {
+    await page.goto('/blog/');
+    await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', 'https://onnelakin.github.io/favicon.svg');
+
+    await page.goto('/blog/ko/read-large-txt-files-without-lag/');
+    await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', 'https://onnelakin.github.io/favicon.svg');
+  });
+
+  test('korean article does not repeat the summary answer in the body', async ({ page }) => {
+    await page.goto('/blog/ko/read-large-txt-files-without-lag/');
+    await expect(page.locator('.summary-box')).toContainText('대용량 TXT 파일은 형식이 단순해 보여도');
+    await expect(page.locator('.article-body h2').filter({ hasText: '요약 답변' })).toHaveCount(0);
+    await expect(page.locator('.toc-box a[href="#요약-답변"]')).toHaveCount(0);
+  });
+
+  test('mobile blog lists published posts before planned topic cards', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 900 });
+    await page.goto('/blog/ko/');
+
+    const postListBox = await page.locator('.post-list').boundingBox();
+    const categoryBox = await page.locator('.category-preview').boundingBox();
+    expect(postListBox).not.toBeNull();
+    expect(categoryBox).not.toBeNull();
+    if (!postListBox || !categoryBox) return;
+    expect(postListBox.y).toBeLessThan(categoryBox.y);
   });
 
   test('blog article table of contents links to article sections', async ({ page }) => {
@@ -474,7 +512,7 @@ test.describe('site layout', () => {
     await page.goto('/');
     await expect(page.locator('link[rel="icon"]')).toHaveAttribute(
       'href',
-      'https://onnelakin.github.io/app-assets/quivra/assets/icon/quivra.png'
+      'https://onnelakin.github.io/favicon.svg'
     );
     const homeSchemas = await page.locator('script[type="application/ld+json"]').allTextContents();
     const homeTypes = homeSchemas.map((schema) => JSON.parse(schema)['@type']);

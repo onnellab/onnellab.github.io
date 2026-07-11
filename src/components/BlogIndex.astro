@@ -221,6 +221,8 @@ const blogJsonLd = [
 <style>
   .blog-shell {
     width: min(920px, calc(100% - 40px));
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
     padding: 22px 0 56px;
     line-height: 1.65;
@@ -432,6 +434,14 @@ const blogJsonLd = [
     }
     .category-preview {
       grid-template-columns: 1fr;
+      order: 4;
+      padding-top: 26px;
+    }
+    .filter-row {
+      order: 2;
+    }
+    .post-list {
+      order: 3;
     }
   }
 </style>
