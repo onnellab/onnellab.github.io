@@ -159,6 +159,19 @@ test.describe('site layout', () => {
     await expect(page.locator('.category-preview article')).toHaveCount(4);
   });
 
+  test('blog category filters prepare the post list for growth', async ({ page }) => {
+    await page.goto('/blog/');
+    await expect(page.locator('[data-blog-filter="all"]')).toHaveText('All');
+    await expect(page.locator('[data-blog-filter="reading"]')).toBeVisible();
+    await page.locator('[data-blog-filter="reading"]').click();
+    await expect(page.locator('[data-post-category="reading"]')).toBeVisible();
+    await expect(page.locator('[data-blog-filter="reading"]')).toHaveAttribute('aria-pressed', 'true');
+
+    await page.goto('/blog/ko/');
+    await expect(page.locator('[data-blog-filter="all"]')).toHaveText('전체');
+    await expect(page.locator('[data-blog-filter="reading"]')).toBeVisible();
+  });
+
   test('blog seo endpoints include blog routes', async ({ page }) => {
     const sitemapResponse = await page.request.get('/sitemap.xml');
     expect(sitemapResponse.ok()).toBe(true);
@@ -216,6 +229,26 @@ test.describe('site layout', () => {
     await expect(page.locator('.toc-box')).toBeVisible();
     await expect(page.locator('.toc-box a[href="#권장-워크플로"]')).toContainText('권장 워크플로');
     await expect(page.locator('#권장-워크플로')).toBeVisible();
+  });
+
+  test('blog article related topics link to internal sections', async ({ page }) => {
+    await page.goto('/blog/en/read-large-txt-files-without-lag/');
+    await expect(page.locator('.topic-link-list a[href="#what-makes-a-txt-file-feel-slow"]')).toContainText(
+      'Large text file performance'
+    );
+    await expect(page.locator('.topic-link-list a[href="#what-to-check-first"]')).toContainText(
+      'TXT encoding and unreadable characters'
+    );
+
+    await page.goto('/blog/ko/read-large-txt-files-without-lag/');
+    await expect(page.getByRole('link', { name: 'TXT 인코딩과 글자 깨짐' })).toHaveAttribute(
+      'href',
+      '#먼저-확인할-항목'
+    );
+    await expect(page.getByRole('link', { name: '일반 텍스트 읽기 워크플로' })).toHaveAttribute(
+      'href',
+      '#권장-워크플로'
+    );
   });
 
   test('korean browser language redirects default pages to korean pages', async ({ page }) => {

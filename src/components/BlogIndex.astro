@@ -26,7 +26,8 @@ const copy = isKo
       emptyText: '읽기, 음악, 생산성, 미디어 작업을 더 차분하게 정리하는 실전 가이드를 곧 게시합니다.',
       categoriesLabel: '다룰 주제',
       emptyLabel: '상태',
-      postsLabel: '게시된 글'
+      postsLabel: '게시된 글',
+      allCategories: '전체'
     }
   : {
       title: 'ONNELLAB Blog - Practical guides for calm digital workflows',
@@ -43,7 +44,8 @@ const copy = isKo
       emptyText: 'Practical guides for reading, music, productivity, and media workflows will appear here as they are published.',
       categoriesLabel: 'Planned topics',
       emptyLabel: 'Status',
-      postsLabel: 'Published articles'
+      postsLabel: 'Published articles',
+      allCategories: 'All'
     };
 const categories = isKo
   ? [
@@ -58,6 +60,7 @@ const categories = isKo
       ['Productivity', 'Methods for reducing repeated file and text work'],
       ['Media', 'Practical organization for screenshots, clips, and references']
     ];
+const postCategories = Array.from(new Set(posts.map((post) => post.meta.category))).sort((a, b) => a.localeCompare(b));
 const absoluteUrl = (path: string) => new URL(path, Astro.site).toString();
 const blogJsonLd = [
   {
@@ -147,19 +150,52 @@ const blogJsonLd = [
     </section>
 
     {posts.length > 0 && (
-      <section class="post-list" aria-label={copy.postsLabel}>
-        {posts.map((post) => (
-          <a class="post-card" href={post.href} aria-label={post.meta.cardTitle}>
-            <article>
-              <p>{post.meta.category}</p>
-              <h2>{post.meta.cardTitle}</h2>
-              <span>{post.meta.description}</span>
-            </article>
-          </a>
-        ))}
-      </section>
+      <>
+        <div class="filter-row" role="group" aria-label={copy.categoriesLabel}>
+          <button type="button" class="filter-chip is-active" data-blog-filter="all">{copy.allCategories}</button>
+          {postCategories.map((category) => (
+            <button type="button" class="filter-chip" data-blog-filter={category}>{category}</button>
+          ))}
+        </div>
+
+        <section class="post-list" aria-label={copy.postsLabel}>
+          {posts.map((post) => (
+            <a class="post-card" href={post.href} aria-label={post.meta.cardTitle} data-post-category={post.meta.category}>
+              <article>
+                <p>{post.meta.category}</p>
+                <h2>{post.meta.cardTitle}</h2>
+                <span>{post.meta.description}</span>
+              </article>
+            </a>
+          ))}
+        </section>
+      </>
     )}
   </main>
+  <script is:inline>
+    (() => {
+      const filters = Array.from(document.querySelectorAll('[data-blog-filter]'));
+      const cards = Array.from(document.querySelectorAll('[data-post-category]'));
+      if (!filters.length || !cards.length) return;
+
+      const selectFilter = (value) => {
+        filters.forEach((filter) => {
+          const selected = filter.getAttribute('data-blog-filter') === value;
+          filter.classList.toggle('is-active', selected);
+          filter.setAttribute('aria-pressed', String(selected));
+        });
+        cards.forEach((card) => {
+          const category = card.getAttribute('data-post-category');
+          card.hidden = value !== 'all' && category !== value;
+        });
+      };
+
+      filters.forEach((filter) => {
+        filter.setAttribute('aria-pressed', String(filter.classList.contains('is-active')));
+        filter.addEventListener('click', () => selectFilter(filter.getAttribute('data-blog-filter') || 'all'));
+      });
+    })();
+  </script>
 </BaseLayout>
 
 <style>
@@ -279,6 +315,36 @@ const blogJsonLd = [
     display: grid;
     gap: 14px;
     padding-top: 26px;
+  }
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 24px;
+  }
+  .filter-chip {
+    min-height: 34px;
+    border: 1px solid #ded6ca;
+    border-radius: 999px;
+    padding: 6px 12px;
+    background: rgba(255, 253, 248, 0.72);
+    color: #5f5a50;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.35;
+    cursor: pointer;
+  }
+  .filter-chip:hover,
+  .filter-chip:focus-visible,
+  .filter-chip.is-active {
+    border-color: #c9d7d2;
+    background: #f6fbf9;
+    color: #3f625a;
+  }
+  .filter-chip:focus-visible {
+    outline: 2px solid #827d72;
+    outline-offset: 3px;
   }
   .post-card {
     position: relative;
