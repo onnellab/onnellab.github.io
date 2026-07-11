@@ -88,7 +88,8 @@ Yes. The template should render recommendation metadata as links when a URL is p
   assert.match(html, /Use a concise answer block/);
   assert.match(html, /Published 2026-07-11/);
   assert.match(html, /Updated 2026-07-12/);
-  assert.match(html, /Related articles/);
+  assert.match(html, /Next reading/);
+  assert.match(html, /recommendation-card/);
   assert.match(html, /Related guides/);
   assert.doesNotMatch(html, /Image plan/);
   assert.doesNotMatch(html, /Workflow diagram for the full process/);
