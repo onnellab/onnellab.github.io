@@ -7,11 +7,14 @@ import { after, test } from 'node:test';
 const root = path.resolve(import.meta.dirname, '..');
 const fixtureDir = path.join(root, 'src/content/blog/en');
 const fixturePath = path.join(fixtureDir, 'template-contract.md');
+const relatedFixturePath = path.join(fixtureDir, 'template-contract-related.md');
 const outputPath = path.join(root, 'dist/blog/en/template-contract/index.html');
+const relatedOutputPath = path.join(root, 'dist/blog/en/template-contract-related/index.html');
 const indexPath = path.join(root, 'dist/blog/en/index.html');
 
 after(() => {
   fs.rmSync(fixturePath, { force: true });
+  fs.rmSync(relatedFixturePath, { force: true });
   execFileSync('npm', ['run', 'build'], { cwd: root, stdio: 'pipe' });
 });
 
@@ -104,4 +107,73 @@ Yes. The template should render recommendation metadata as links when a URL is p
   assert.match(html, /topics.csv -&gt; markdown draft/);
   assert.match(html, /Caption text for a future generated workflow image/);
   assert.doesNotMatch(html, />Short Answer</);
+});
+
+test('blog article template renders next-reading cards when a public related post exists', () => {
+  fs.mkdirSync(fixtureDir, { recursive: true });
+  fs.writeFileSync(
+    relatedFixturePath,
+    `---
+title: "Offline Text Workflow Guide"
+card_title: "Offline Text Workflow Guide"
+slug: "template-contract-related"
+category: "reading"
+language: "en"
+description: "A related fixture that behaves like a second public article."
+short_answer: "Keep the article available as a public related destination."
+published_at: "2026-07-10"
+updated_at: "2026-07-10"
+tags: "reading|workflow"
+---
+
+# Offline Text Workflow Guide
+
+## Question
+
+How should a second public article behave?
+
+## Short Answer
+
+It should be available as a link target for the next-reading card test.
+`,
+    'utf-8'
+  );
+  fs.writeFileSync(
+    fixturePath,
+    `---
+title: "Readable Public Article"
+card_title: "Readable Public Article"
+slug: "template-contract"
+category: "reading"
+language: "en"
+description: "A fixture that verifies actual public related article cards."
+short_answer: "Show a concrete next-reading card when related article metadata points at a public article."
+published_at: "2026-07-11"
+updated_at: "2026-07-11"
+tags: "reading|workflow"
+related_articles: "Offline Text Workflow Guide => /blog/en/template-contract-related/"
+---
+
+# Readable Public Article
+
+## Question
+
+How should related articles appear?
+
+## Short Answer
+
+They should appear as linked cards after the article body.
+`,
+    'utf-8'
+  );
+
+  execFileSync('npm', ['run', 'build'], { cwd: root, stdio: 'pipe' });
+
+  const html = fs.readFileSync(outputPath, 'utf-8');
+  const relatedHtml = fs.readFileSync(relatedOutputPath, 'utf-8');
+  assert.match(relatedHtml, /Offline Text Workflow Guide/);
+  assert.match(html, /Next reading/);
+  assert.match(html, /recommendation-card/);
+  assert.match(html, /href="\/blog\/en\/template-contract-related\/"/);
+  assert.match(html, /Offline Text Workflow Guide/);
 });
