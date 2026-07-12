@@ -3,13 +3,13 @@ Android
 Melivra - Offline Music Player
 
 간단한 설명:
-Offline MP3, FLAC, WAV music player for local audio libraries.
+Offline music player for local audio files and libraries.
 
 Landing subtitle:
 Local Audio Library Player
 
 자세한 설명:
-Melivra is an offline MP3 and FLAC music player for local music collections.
+Melivra is an offline music player for local audio collections across multiple formats.
 
 Play MP3, FLAC, WAV, ALAC, AIFF, M4A, and OGG files, and organize your music by album, artist, composer, genre, or folder.
 
@@ -39,7 +39,7 @@ Melivra Pro
 Melivra is made for your own music collection — not endless recommendations.
 
 Landing page:
-Melivra is an offline music player for MP3, FLAC, WAV, ALAC, AIFF, M4A, OGG, and other local audio collections. It works as an MP3 player, FLAC player, and local music library in one focused app.
+Melivra is an offline music player for MP3, FLAC, WAV, ALAC, AIFF, M4A, OGG, and other local audio collections. It keeps multiple audio formats organized in one focused local music library.
 
 Browse your local music library by album, artist, composer, genre, or folder, and use integrated music search to find tracks quickly.
 
@@ -67,8 +67,8 @@ FAQ:
 Q: Are music files uploaded to a server?
 A: No. Melivra is a local music player without streaming or cloud library sync.
 
-Q: Can it play both MP3 and FLAC files?
-A: Yes. Melivra supports MP3, FLAC, WAV, ALAC, AIFF, M4A, and OGG playback.
+Q: Which audio files can it play?
+A: Melivra supports MP3, FLAC, WAV, ALAC, AIFF, M4A, and OGG playback.
 
 Q: Is it useful for audiobooks or long tracks?
 A: Yes. Resume playback, bookmarks, A-B repeat, and playback speed control help with long-form listening.
