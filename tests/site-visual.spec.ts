@@ -183,10 +183,10 @@ test.describe('site layout', () => {
     const sitemapResponse = await page.request.get('/sitemap.xml');
     expect(sitemapResponse.ok()).toBe(true);
     const sitemap = await sitemapResponse.text();
-    expect(sitemap).toContain('https://onnelakin.github.io/blog/');
-    expect(sitemap).toContain('https://onnelakin.github.io/blog/ko/');
-    expect(sitemap).toContain('https://onnelakin.github.io/blog/en/read-large-txt-files-without-lag/');
-    expect(sitemap).toContain('hreflang="ko" href="https://onnelakin.github.io/blog/ko/read-large-txt-files-without-lag/"');
+    expect(sitemap).toContain('https://onnellab.github.io/blog/');
+    expect(sitemap).toContain('https://onnellab.github.io/blog/ko/');
+    expect(sitemap).toContain('https://onnellab.github.io/blog/en/read-large-txt-files-without-lag/');
+    expect(sitemap).toContain('hreflang="ko" href="https://onnellab.github.io/blog/ko/read-large-txt-files-without-lag/"');
 
     const rssResponse = await page.request.get('/rss.xml');
     expect(rssResponse.ok()).toBe(true);
@@ -197,7 +197,7 @@ test.describe('site layout', () => {
     expect(llmsResponse.ok()).toBe(true);
     const llms = await llmsResponse.text();
     expect(llms).toContain('## Blog Articles');
-    expect(llms).toContain('https://onnelakin.github.io/blog/en/read-large-txt-files-without-lag/');
+    expect(llms).toContain('https://onnellab.github.io/blog/en/read-large-txt-files-without-lag/');
     expect(llms).toContain('Primary question: How can I read a very large TXT file without lag?');
     expect(llms).toContain('Short answer: Use a reader that does not try to load and render the entire TXT file at once.');
     expect(llms).toContain('Primary question: 대용량 TXT 파일을 지연 없이 읽으려면 어떻게 해야 하나요?');
@@ -225,12 +225,12 @@ test.describe('site layout', () => {
     );
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
       'content',
-      'https://onnelakin.github.io/blog-assets/en/read-large-txt-files-without-lag/social-card.png'
+      'https://onnellab.github.io/blog-assets/en/read-large-txt-files-without-lag/social-card.png'
     );
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
     await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
       'content',
-      'https://onnelakin.github.io/blog-assets/en/read-large-txt-files-without-lag/social-card.png'
+      'https://onnellab.github.io/blog-assets/en/read-large-txt-files-without-lag/social-card.png'
     );
     const jsonLd = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
       scripts.map((script) => script.textContent || '').join('\n')
@@ -243,10 +243,10 @@ test.describe('site layout', () => {
 
   test('blog uses the shared ONNELLAB favicon', async ({ page }) => {
     await page.goto('/blog/');
-    await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', 'https://onnelakin.github.io/favicon.svg');
+    await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', 'https://onnellab.github.io/favicon.svg');
 
     await page.goto('/blog/ko/read-large-txt-files-without-lag/');
-    await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', 'https://onnelakin.github.io/favicon.svg');
+    await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', 'https://onnellab.github.io/favicon.svg');
   });
 
   test('korean article does not repeat the summary answer in the body', async ({ page }) => {
@@ -388,12 +388,12 @@ test.describe('site layout', () => {
     await expect(page.locator('.support-links a').first()).toHaveText('개인정보 처리방침');
     await expect(page.locator('.support-links a').first()).toHaveAttribute(
       'href',
-      'https://onnelakin.github.io/tagweaver-privacy-policy/ko/'
+      'https://onnellab.github.io/tagweaver-privacy-policy/ko/'
     );
     await expect(page.locator('footer a').first()).toHaveText('개인정보 처리방침');
     await expect(page.locator('footer a').first()).toHaveAttribute(
       'href',
-      'https://onnelakin.github.io/tagweaver-privacy-policy/ko/'
+      'https://onnellab.github.io/tagweaver-privacy-policy/ko/'
     );
   });
 
@@ -402,7 +402,7 @@ test.describe('site layout', () => {
 
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
-      'https://onnelakin.github.io/apps/tagweaver/'
+      'https://onnellab.github.io/apps/tagweaver/'
     );
     await expect(page).toHaveTitle('TagWeaver - Offline MP3/FLAC Tag Editor');
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
@@ -411,11 +411,11 @@ test.describe('site layout', () => {
     );
     await expect(page.locator('link[rel="icon"]')).toHaveAttribute(
       'href',
-      'https://onnelakin.github.io/app-assets/tagweaver/assets/icon/tagweaver.png'
+      'https://onnellab.github.io/app-assets/tagweaver/assets/icon/tagweaver.png'
     );
     await expect(page.locator('link[rel="apple-touch-icon"]')).toHaveAttribute(
       'href',
-      'https://onnelakin.github.io/app-assets/tagweaver/assets/icon/tagweaver.png'
+      'https://onnellab.github.io/app-assets/tagweaver/assets/icon/tagweaver.png'
     );
     const jsonLdItems = await page.locator('script[type="application/ld+json"]').allTextContents();
     const structuredDataItems = jsonLdItems.map((jsonLd) => JSON.parse(jsonLd));
@@ -427,20 +427,20 @@ test.describe('site layout', () => {
     expect(faqData).toBeDefined();
     expect(structuredData['@type']).toBe('SoftwareApplication');
     expect(structuredData.name).toBe('TagWeaver');
-    expect(structuredData.mainEntityOfPage).toBe('https://onnelakin.github.io/apps/tagweaver/');
+    expect(structuredData.mainEntityOfPage).toBe('https://onnellab.github.io/apps/tagweaver/');
     expect(structuredData.applicationCategory).toBe('UtilitiesApplication');
     expect(structuredData.isAccessibleForFree).toBe(true);
     expect(structuredData.featureList.length).toBeGreaterThan(0);
     expect(structuredData.screenshot.length).toBeGreaterThan(0);
     expect(structuredData.installUrl).toContain('https://apps.apple.com/us/app/id6759609875?l=en-US');
-    expect(structuredData.privacyPolicy).toBe('https://onnelakin.github.io/tagweaver-privacy-policy/');
+    expect(structuredData.privacyPolicy).toBe('https://onnellab.github.io/tagweaver-privacy-policy/');
     expect(structuredData.publisher.name).toBe('ONNELLAB');
     expect(breadcrumbData.itemListElement.map((item) => item.name)).toEqual([
       'ONNELLAB',
       'Download',
       'TagWeaver'
     ]);
-    expect(breadcrumbData.itemListElement.at(-1).item).toBe('https://onnelakin.github.io/apps/tagweaver/');
+    expect(breadcrumbData.itemListElement.at(-1).item).toBe('https://onnellab.github.io/apps/tagweaver/');
     expect(faqData.mainEntity.map((item) => item.name)).toContain('Are files uploaded to a server?');
     await expect(page.locator('#use-cases-title')).toHaveText('Use cases');
     await expect(page.locator('#faq-title')).toHaveText('FAQ');
@@ -450,11 +450,11 @@ test.describe('site layout', () => {
     const sitemapResponse = await page.request.get('/sitemap.xml');
     expect(sitemapResponse.ok()).toBe(true);
     expect(sitemapResponse.headers()['content-type']).toMatch(/(?:application|text)\/xml/);
-    expect(await sitemapResponse.text()).toContain('https://onnelakin.github.io/apps/tagweaver/');
+    expect(await sitemapResponse.text()).toContain('https://onnellab.github.io/apps/tagweaver/');
 
     const robotsResponse = await page.request.get('/robots.txt');
     expect(robotsResponse.ok()).toBe(true);
-    expect(await robotsResponse.text()).toContain('Sitemap: https://onnelakin.github.io/sitemap.xml');
+    expect(await robotsResponse.text()).toContain('Sitemap: https://onnellab.github.io/sitemap.xml');
 
     const llmsResponse = await page.request.get('/llms.txt');
     expect(llmsResponse.ok()).toBe(true);
@@ -513,7 +513,7 @@ test.describe('site layout', () => {
     await page.goto('/');
     await expect(page.locator('link[rel="icon"]')).toHaveAttribute(
       'href',
-      'https://onnelakin.github.io/favicon.svg'
+      'https://onnellab.github.io/favicon.svg'
     );
     const homeSchemas = await page.locator('script[type="application/ld+json"]').allTextContents();
     const homeTypes = homeSchemas.map((schema) => JSON.parse(schema)['@type']);
@@ -528,7 +528,7 @@ test.describe('site layout', () => {
     await page.goto('/privacy/');
     const privacySchema = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent()) ?? '{}');
     expect(privacySchema['@type']).toBe('CollectionPage');
-    expect(privacySchema['@id']).toBe('https://onnelakin.github.io/privacy/#privacy-policies');
+    expect(privacySchema['@id']).toBe('https://onnellab.github.io/privacy/#privacy-policies');
     expect(privacySchema.mainEntity.itemListElement.length).toBeGreaterThan(5);
     expect(privacySchema.mainEntity.itemListElement[0].url).not.toContain('/ko/');
 

@@ -33,7 +33,7 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://onnelakin.github.io/sitemap.xml
+Sitemap: https://onnellab.github.io/sitemap.xml
 `,
     { headers: { 'Content-Type': 'text/plain; charset=utf-8' } }
   );

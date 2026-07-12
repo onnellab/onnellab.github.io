@@ -1,7 +1,7 @@
 import { getBlogPosts } from '../lib/blog';
 import { getProductIndexItems } from '../lib/products';
 
-const siteUrl = 'https://onnelakin.github.io';
+const siteUrl = 'https://onnellab.github.io';
 
 type FeedItem = {
   title: string;

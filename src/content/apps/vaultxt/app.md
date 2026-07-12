@@ -8,7 +8,7 @@ platforms:
 appstore: https://apps.apple.com/app/id6760122045
 googleplay: https://play.google.com/store/apps/details?id=com.onnellab.vaultxt
 
-privacy: https://onnelakin.github.io/vaultxt-privacy-policy/
+privacy: https://onnellab.github.io/vaultxt-privacy-policy/
 supportEmail: onnellab.app@gmail.com
 
 pricing: Free download with optional Pro purchase

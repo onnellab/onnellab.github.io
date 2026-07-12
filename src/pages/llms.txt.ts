@@ -7,7 +7,7 @@ import {
 } from '../lib/products';
 import { getBlogPosts, renderMarkdownBlocks, type BlogPost } from '../lib/blog';
 
-const siteUrl = 'https://onnelakin.github.io';
+const siteUrl = 'https://onnellab.github.io';
 
 function articleQuestion(post: BlogPost): string {
   const blocks = renderMarkdownBlocks(post.body);

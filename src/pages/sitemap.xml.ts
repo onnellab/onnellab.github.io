@@ -10,7 +10,7 @@ type SitemapEntry = {
   alternates?: Array<{ lang: string; path: string }>;
 };
 
-const siteUrl = 'https://onnelakin.github.io';
+const siteUrl = 'https://onnellab.github.io';
 
 export function GET() {
   const sourceLastmod = sourceFileLastmod();
