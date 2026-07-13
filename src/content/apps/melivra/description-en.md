@@ -70,9 +70,6 @@ A: No. Melivra is a local music player without streaming or cloud library sync. 
 Q: Which audio files can it play?
 A: Melivra supports MP3, FLAC, WAV, ALAC, AIFF, M4A, and OGG playback.
 
-Q: Is it useful for audiobooks or long tracks?
-A: Yes. Resume playback, bookmarks, A-B repeat, and playback speed control help with long-form listening.
-
 Q: Can Melivra create transcripts or translations?
 A: Yes. With your approval, Melivra can use AI Tokens to create AI transcripts and AI translations, then export saved results as TXT, SRT, LRC, or JSON.
 
