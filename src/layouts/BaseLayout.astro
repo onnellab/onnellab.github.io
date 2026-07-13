@@ -175,10 +175,26 @@ const gaScript = gaMeasurementId
     font-family:
       "SUIT Variable", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
       "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    line-break: strict;
   }
 
   a {
     color: inherit;
+  }
+
+  code,
+  pre,
+  kbd,
+  samp,
+  input,
+  textarea,
+  table,
+  .word-break-anywhere {
+    word-break: normal;
+    overflow-wrap: anywhere;
+    line-break: auto;
   }
 
   .wordmark,
