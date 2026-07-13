@@ -1,0 +1,344 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getProductPageData } from '../lib/products';
+import { releaseNoteKoPath, releaseNotePath, type ReleaseNote } from '../lib/releaseNotes';
+
+type Props = {
+  note: ReleaseNote;
+  locale: 'en' | 'ko';
+};
+
+const { note, locale } = Astro.props;
+const isKo = locale === 'ko';
+const product = getProductPageData(note.appSlug, locale);
+const canonicalPath = isKo ? releaseNoteKoPath(note) : releaseNotePath(note);
+const alternatePath = isKo ? releaseNotePath(note) : releaseNoteKoPath(note);
+const appPath = isKo ? `/apps/${note.appSlug}/ko/` : `/apps/${note.appSlug}/`;
+const summary = isKo ? note.summaryKo : note.summary;
+const changes = isKo ? note.changesKo : note.changes;
+const labels = isKo
+  ? {
+      titleSuffix: '릴리즈 노트',
+      switchLabel: 'English',
+      eyebrow: '릴리즈 노트',
+      released: '출시일',
+      platform: '플랫폼',
+      previous: '이전 공개 버전',
+      changed: '변경 사항',
+      compatibility: '호환성',
+      compatibilityText: `이 업데이트는 ${note.appName}의 공개 앱 스토어 목록을 통해 배포됩니다.`,
+      upgrade: '업데이트 안내',
+      upgradeText: '별도의 업데이트 절차는 필요하지 않습니다.',
+      appPage: '앱 페이지'
+    }
+  : {
+      titleSuffix: 'Release Notes',
+      switchLabel: '한국어',
+      eyebrow: 'Release Notes',
+      released: 'Released',
+      platform: 'Platform',
+      previous: 'Previous public version',
+      changed: 'What Changed',
+      compatibility: 'Compatibility',
+      compatibilityText: `This update is distributed through the public app store listing for ${note.appName}.`,
+      upgrade: 'Upgrade Notes',
+      upgradeText: 'No special upgrade steps are required.',
+      appPage: 'App page'
+    };
+const canonicalUrl = new URL(canonicalPath, Astro.site);
+const description = `${note.title} ${labels.titleSuffix}. ${summary}`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  '@id': `${canonicalUrl.toString()}#release-notes`,
+  headline: note.title,
+  description,
+  datePublished: note.releasedDate,
+  dateModified: note.releasedDate,
+  inLanguage: locale,
+  mainEntityOfPage: canonicalUrl.toString(),
+  about: {
+    '@type': 'SoftwareApplication',
+    name: note.appName,
+    softwareVersion: note.version,
+    url: new URL(appPath, Astro.site).toString()
+  },
+  publisher: {
+    '@type': 'Organization',
+    '@id': new URL('/#organization', Astro.site).toString(),
+    name: 'ONNELLAB',
+    url: new URL('/', Astro.site).toString()
+  }
+};
+---
+
+<BaseLayout
+  title={`${note.title} ${labels.titleSuffix} | ONNELLAB`}
+  description={description}
+  canonicalPath={canonicalPath}
+  lang={locale}
+  image={product.iconPath}
+  ogType="article"
+  articleMeta={{
+    publishedTime: note.releasedDate,
+    modifiedTime: note.releasedDate,
+    section: labels.titleSuffix,
+    tags: [note.appName, note.platform, note.version]
+  }}
+  jsonLd={jsonLd}
+  alternates={[
+    { lang: 'en', path: releaseNotePath(note) },
+    { lang: 'ko', path: releaseNoteKoPath(note) },
+    { lang: 'x-default', path: releaseNotePath(note) }
+  ]}
+>
+  <main class="release-shell">
+    <nav class="topbar" aria-label="ONNELLAB">
+      <a class="brand" href={isKo ? '/ko/' : '/'}>ONNELLAB</a>
+      <a class="language" href={alternatePath} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={labels.switchLabel}>{labels.switchLabel}</a>
+    </nav>
+
+    <article class="release-note">
+      <header>
+        <p class="eyebrow">{labels.eyebrow}</p>
+        <h1>{note.title}</h1>
+        <p class="summary">{summary}</p>
+        <a class="app-link" href={appPath}>{note.appName} {labels.appPage}</a>
+        <dl class="facts">
+          <div>
+            <dt>{labels.released}</dt>
+            <dd>{note.releasedDate}</dd>
+          </div>
+          <div>
+            <dt>{labels.platform}</dt>
+            <dd>{note.platform}</dd>
+          </div>
+          <div>
+            <dt>{labels.previous}</dt>
+            <dd>{note.previousVersion}</dd>
+          </div>
+        </dl>
+      </header>
+
+      <section aria-labelledby="changed-heading">
+        <h2 id="changed-heading">{labels.changed}</h2>
+        <ul>
+          {changes.map((change) => <li>{change}</li>)}
+        </ul>
+      </section>
+
+      <section aria-labelledby="compat-heading">
+        <h2 id="compat-heading">{labels.compatibility}</h2>
+        <p>{labels.compatibilityText}</p>
+      </section>
+
+      <section aria-labelledby="upgrade-heading">
+        <h2 id="upgrade-heading">{labels.upgrade}</h2>
+        <p>{labels.upgradeText}</p>
+      </section>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .release-shell {
+    min-height: 100vh;
+    padding: 24px 20px 56px;
+    background: #faf8f5;
+  }
+
+  .topbar,
+  .release-note {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 46px;
+  }
+
+  .brand {
+    color: #737067;
+    font-size: 14px;
+    font-weight: 560;
+    text-decoration: none;
+  }
+
+  .language {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ded6ca;
+    border-radius: 999px;
+    padding: 6px 12px;
+    background: rgba(255, 253, 248, 0.72);
+    color: #5f5a50;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .language:hover,
+  .language:focus-visible {
+    border-color: #cfc5b7;
+    background: #fffdf8;
+  }
+
+  .language:focus-visible,
+  .brand:focus-visible,
+  .app-link:focus-visible {
+    outline: 2px solid #827d72;
+    outline-offset: 3px;
+  }
+
+  .release-note {
+    color: #343230;
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    color: #6e675e;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    color: #252321;
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 1.04;
+    letter-spacing: 0;
+  }
+
+  .summary {
+    max-width: 680px;
+    margin: 18px 0 0;
+    color: #4f4a44;
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .app-link {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ded6ca;
+    border-radius: 999px;
+    margin-top: 16px;
+    padding: 6px 12px;
+    background: rgba(255, 253, 248, 0.72);
+    color: #5f5a50;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 28px 0 42px;
+  }
+
+  .facts div {
+    border: 1px solid #ddd6cc;
+    border-radius: 8px;
+    background: #fffdf9;
+    padding: 14px;
+  }
+
+  dt {
+    color: #6e675e;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 6px 0 0;
+    color: #2f2c29;
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  section {
+    border-top: 1px solid #ded8cf;
+    padding: 28px 0;
+  }
+
+  h2 {
+    margin: 0 0 14px;
+    color: #282522;
+    font-size: 24px;
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+
+  ul {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    padding: 6px 0 6px 18px;
+    border-top: 1px solid rgba(224, 216, 203, 0.5);
+  }
+
+  li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: #c7b8a0;
+  }
+
+  li,
+  p {
+    color: #48433d;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 640px) {
+    .release-shell {
+      padding: 20px 14px 44px;
+    }
+
+    .topbar {
+      margin-bottom: 36px;
+    }
+
+    .brand,
+    .language {
+      min-height: 40px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 10vw, 46px);
+    }
+
+    .summary {
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .facts {
+      grid-template-columns: 1fr;
+      margin-bottom: 32px;
+    }
+  }
+</style>

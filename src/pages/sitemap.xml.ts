@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { getBlogPosts } from '../lib/blog';
 import { getProductSources } from '../lib/products';
-import { releaseNotePath, releaseNotes } from '../lib/releaseNotes';
+import { releaseNoteKoPath, releaseNotePath, releaseNotes } from '../lib/releaseNotes';
 
 type SitemapEntry = {
   path: string;
@@ -34,10 +34,20 @@ export function GET() {
     lastmod: sourceLastmod(post.sourcePath),
     alternates: blogAlternates(post)
   }));
-  const releaseNoteEntries = releaseNotes.map((note) => ({
-    path: releaseNotePath(note),
-    lastmod: sourceLastmod('src/lib/releaseNotes.ts')
-  }));
+  const releaseNoteEntries = releaseNotes.flatMap((note) => {
+    const enPath = releaseNotePath(note);
+    const koPath = releaseNoteKoPath(note);
+    const lastmod = sourceLastmod('src/lib/releaseNotes.ts');
+    const alternates = [
+      { lang: 'en', path: enPath },
+      { lang: 'ko', path: koPath },
+      { lang: 'x-default', path: enPath }
+    ];
+    return [
+      { path: enPath, lastmod, alternates },
+      { path: koPath, lastmod, alternates }
+    ];
+  });
   const entries: SitemapEntry[] = [
     {
       path: '/',

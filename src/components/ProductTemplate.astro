@@ -19,6 +19,7 @@ const labels =
         privacy: '개인정보 처리방침',
         footerPrivacy: '개인정보 처리방침',
         releaseNotes: '릴리즈 노트',
+        latestRelease: '최신 릴리즈',
         support: '문의하기',
         download: '다운로드',
         screens: '스크린샷',
@@ -32,6 +33,7 @@ const labels =
         privacy: 'Privacy Policy',
         footerPrivacy: 'Privacy Policy',
         releaseNotes: 'Release Notes',
+        latestRelease: 'Latest release',
         support: 'Contact',
         download: 'Download',
         screens: 'Screenshots',
@@ -225,7 +227,6 @@ const faqJsonLd = {
         <div class="actions store-actions" aria-label={labels.stores}>
           <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store" data-store-position="hero">{labels.appStore}</a>
           {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play" data-store-position="hero">{labels.googlePlay}</a>}
-          {releaseNotesUrl && <a class="button secondary" href={releaseNotesUrl}>{labels.releaseNotes}</a>}
         </div>
         <div class="support-links" aria-label="Contact links">
           <a href={privacyUrl}>{labels.privacy}</a>
@@ -370,8 +371,12 @@ const faqJsonLd = {
       <div class="actions compact" aria-label={labels.stores}>
         <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store" data-store-position="download">{labels.appStore}</a>
         {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play" data-store-position="download">{labels.googlePlay}</a>}
-        {releaseNotesUrl && <a class="button secondary" href={releaseNotesUrl}>{labels.releaseNotes}</a>}
       </div>
+      {releaseNotesUrl && latestReleaseNote && (
+        <a class="release-note-inline" href={releaseNotesUrl}>
+          {labels.latestRelease}: {latestReleaseNote.title}
+        </a>
+      )}
     </section>
 
     <footer>
@@ -1308,6 +1313,29 @@ const faqJsonLd = {
     min-height: 38px;
     padding: 8px 12px;
     font-size: 14px;
+  }
+
+  .release-note-inline {
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(222, 214, 202, 0.72);
+    border-radius: 999px;
+    padding: 6px 11px;
+    background: rgba(255, 253, 248, 0.56);
+    color: #746d62;
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .release-note-inline:hover,
+  .release-note-inline:focus-visible {
+    border-color: var(--accent-border);
+    color: var(--accent-text);
+    background: #fffdf8;
   }
 
   .copy-column {
