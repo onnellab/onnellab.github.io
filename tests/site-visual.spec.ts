@@ -19,6 +19,9 @@ const productPages = ['aligna', 'clipnest', 'quivra', 'segra', 'tagweaver', 'vau
   `/apps/${slug}/`,
   `/apps/${slug}/ko/`
 ]);
+const privacySlugs = ['aligna', 'clipnest', 'melivra', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+const privacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/`);
+const koreanPrivacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/ko/`);
 
 test.describe('site layout', () => {
   for (const path of pages) {
@@ -388,13 +391,31 @@ test.describe('site layout', () => {
     await expect(page.locator('.support-links a').first()).toHaveText('개인정보 처리방침');
     await expect(page.locator('.support-links a').first()).toHaveAttribute(
       'href',
-      'https://onnellab.github.io/tagweaver-privacy-policy/ko/'
+      'https://onnellab.github.io/privacy/tagweaver/ko/'
     );
     await expect(page.locator('footer a').first()).toHaveText('개인정보 처리방침');
     await expect(page.locator('footer a').first()).toHaveAttribute(
       'href',
-      'https://onnellab.github.io/tagweaver-privacy-policy/ko/'
+      'https://onnellab.github.io/privacy/tagweaver/ko/'
     );
+  });
+
+  test('all product privacy links and schema use canonical policy URLs', async ({ page }) => {
+    for (const slug of privacySlugs) {
+      for (const locale of ['en', 'ko'] as const) {
+        const suffix = locale === 'ko' ? 'ko/' : '';
+        const expectedUrl = `https://onnellab.github.io/privacy/${slug}/${suffix}`;
+        await page.goto(`/apps/${slug}/${suffix}`);
+        await expect(page.locator('.support-links a').first()).toHaveAttribute('href', expectedUrl);
+        await expect(page.locator('footer a').first()).toHaveAttribute('href', expectedUrl);
+
+        const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
+        const softwareApplication = schemas
+          .map((schema) => JSON.parse(schema))
+          .find((schema) => schema['@type'] === 'SoftwareApplication');
+        expect(softwareApplication?.privacyPolicy).toBe(expectedUrl);
+      }
+    }
   });
 
   test('product seo metadata remains crawlable', async ({ page }) => {
@@ -433,7 +454,7 @@ test.describe('site layout', () => {
     expect(structuredData.featureList.length).toBeGreaterThan(0);
     expect(structuredData.screenshot.length).toBeGreaterThan(0);
     expect(structuredData.installUrl).toContain('https://apps.apple.com/us/app/id6759609875?l=en-US');
-    expect(structuredData.privacyPolicy).toBe('https://onnellab.github.io/tagweaver-privacy-policy/');
+    expect(structuredData.privacyPolicy).toBe('https://onnellab.github.io/privacy/tagweaver/');
     expect(structuredData.publisher.name).toBe('ONNELLAB');
     expect(breadcrumbData.itemListElement.map((item) => item.name)).toEqual([
       'ONNELLAB',
@@ -524,19 +545,50 @@ test.describe('site layout', () => {
     expect(appsSchema['@type']).toBe('CollectionPage');
     expect(appsSchema.mainEntity['@type']).toBe('ItemList');
     expect(appsSchema.mainEntity.itemListElement.length).toBeGreaterThan(5);
+  });
 
+  test('privacy hub schema links and sitemap use canonical policy URLs', async ({ page }) => {
     await page.goto('/privacy/');
     const privacySchema = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent()) ?? '{}');
     expect(privacySchema['@type']).toBe('CollectionPage');
     expect(privacySchema['@id']).toBe('https://onnellab.github.io/privacy/#privacy-policies');
-    expect(privacySchema.mainEntity.itemListElement.length).toBeGreaterThan(5);
-    expect(privacySchema.mainEntity.itemListElement[0].url).not.toContain('/ko/');
+    expect(privacySchema.mainEntity.itemListElement.map((item) => item.url)).toEqual(privacyUrls);
+    expect(await page.locator('[data-policy-row]').evaluateAll((rows) => rows.map((row) => row.getAttribute('href')))).toEqual(
+      privacyUrls
+    );
 
     await page.goto('/privacy/ko/');
     const koreanPrivacySchema = JSON.parse(
       (await page.locator('script[type="application/ld+json"]').textContent()) ?? '{}'
     );
-    expect(koreanPrivacySchema.mainEntity.itemListElement[0].url).toContain('/ko/');
+    expect(koreanPrivacySchema.mainEntity.itemListElement.map((item) => item.url)).toEqual(koreanPrivacyUrls);
+    expect(await page.locator('[data-policy-row]').evaluateAll((rows) => rows.map((row) => row.getAttribute('href')))).toEqual(
+      koreanPrivacyUrls
+    );
+
+    const sitemapResponse = await page.request.get('/sitemap.xml');
+    expect(sitemapResponse.ok()).toBe(true);
+    const sitemap = await sitemapResponse.text();
+    const sitemapEntries = [...sitemap.matchAll(/<url>\s*([\s\S]*?)\s*<\/url>/g)].map((match) => match[1]);
+    const expectedPrivacyUrls = [...privacyUrls, ...koreanPrivacyUrls];
+    const privacySitemapEntries = sitemapEntries.filter((entry) =>
+      expectedPrivacyUrls.some((url) => entry.includes(`<loc>${url}</loc>`))
+    );
+    expect(privacySitemapEntries).toHaveLength(14);
+    for (const slug of privacySlugs) {
+      const enUrl = `https://onnellab.github.io/privacy/${slug}/`;
+      const koUrl = `https://onnellab.github.io/privacy/${slug}/ko/`;
+      for (const url of [enUrl, koUrl]) {
+        const matchingEntries = sitemapEntries.filter((entry) => entry.includes(`<loc>${url}</loc>`));
+        expect(matchingEntries).toHaveLength(1);
+        const entry = matchingEntries[0];
+        expect(entry.split(`hreflang="en" href="${enUrl}"`).length - 1).toBe(1);
+        expect(entry.split(`hreflang="ko" href="${koUrl}"`).length - 1).toBe(1);
+        expect(entry.split(`hreflang="x-default" href="${enUrl}"`).length - 1).toBe(1);
+      }
+    }
+    expect(sitemap).not.toContain('<loc>https://onnellab.github.io/melivra-privacy-policy/</loc>');
+    expect(sitemap).not.toContain('<loc>https://onnellab.github.io/melivra-privacy-policy/ko/</loc>');
   });
 
   test('single store download action is centered', async ({ page }) => {

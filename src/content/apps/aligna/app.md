@@ -8,7 +8,7 @@ platforms:
 appstore: https://apps.apple.com/app/id6783642658
 googleplay: https://play.google.com/store/apps/details?id=com.onnellab.aligna
 
-privacy: https://onnellab.github.io/aligna-privacy-policy/
+privacy: https://onnellab.github.io/privacy/aligna/
 supportEmail: onnellab.app@gmail.com
 
 pricing: Free download with optional Pro purchase

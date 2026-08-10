@@ -29,6 +29,31 @@ export function GET() {
       { path: koPath, lastmod, alternates }
     ];
   });
+  const privacyEntries = getProductSources().flatMap((source) => {
+    const enPath = `/privacy/${source.slug}/`;
+    const koPath = `/privacy/${source.slug}/ko/`;
+    const expectedPrivacyUrl = new URL(enPath, siteUrl).toString();
+    if (source.meta.privacy !== expectedPrivacyUrl) {
+      throw new Error(`Privacy URL mismatch for ${source.slug}: expected ${expectedPrivacyUrl}`);
+    }
+    const enSourcePath = `public/privacy/${source.slug}/index.html`;
+    const koSourcePath = `public/privacy/${source.slug}/ko/index.html`;
+    for (const sourcePath of [enSourcePath, koSourcePath]) {
+      if (!fs.existsSync(path.resolve(process.cwd(), sourcePath))) {
+        throw new Error(`Missing privacy policy source: ${sourcePath}`);
+      }
+    }
+    const lastmod = [sourceLastmod(enSourcePath), sourceLastmod(koSourcePath)].sort().at(-1) as string;
+    const alternates = [
+      { lang: 'en', path: enPath },
+      { lang: 'ko', path: koPath },
+      { lang: 'x-default', path: enPath }
+    ];
+    return [
+      { path: enPath, lastmod, alternates },
+      { path: koPath, lastmod, alternates }
+    ];
+  });
   const blogEntries = getBlogPosts().map((post) => ({
     path: post.href,
     lastmod: sourceLastmod(post.sourcePath),
@@ -122,6 +147,7 @@ export function GET() {
         { lang: 'x-default', path: '/privacy/' }
       ]
     },
+    ...privacyEntries,
     {
       path: '/terms/',
       lastmod: sourceLastmod('src/pages/terms/index.astro'),
@@ -156,24 +182,6 @@ export function GET() {
         { lang: 'en', path: '/oauth/x/callback/' },
         { lang: 'ko', path: '/oauth/x/callback/ko/' },
         { lang: 'x-default', path: '/oauth/x/callback/' }
-      ]
-    },
-    {
-      path: '/melivra-privacy-policy/',
-      lastmod: sourceLastmod('src/pages/melivra-privacy-policy/index.astro'),
-      alternates: [
-        { lang: 'en', path: '/melivra-privacy-policy/' },
-        { lang: 'ko', path: '/melivra-privacy-policy/ko/' },
-        { lang: 'x-default', path: '/melivra-privacy-policy/' }
-      ]
-    },
-    {
-      path: '/melivra-privacy-policy/ko/',
-      lastmod: sourceLastmod('src/pages/melivra-privacy-policy/ko.astro'),
-      alternates: [
-        { lang: 'en', path: '/melivra-privacy-policy/' },
-        { lang: 'ko', path: '/melivra-privacy-policy/ko/' },
-        { lang: 'x-default', path: '/melivra-privacy-policy/' }
       ]
     },
     {

@@ -8,7 +8,7 @@ platforms:
 appstore: https://apps.apple.com/app/id6783644955
 googleplay: https://play.google.com/store/apps/details?id=com.onnellab.melivra
 
-privacy: https://onnellab.github.io/melivra-privacy-policy/
+privacy: https://onnellab.github.io/privacy/melivra/
 supportEmail: onnellab.app@gmail.com
 
 pricing: Free download with optional Pro purchase

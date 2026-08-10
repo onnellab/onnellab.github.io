@@ -19,12 +19,12 @@ const privacyUpdatedAtByTitle: Record<string, string> = {
 const contentApps = getProductIndexItems(locale);
 const contentAppTitles = new Set(contentApps.map((app) => app.title));
 const staticPrivacyApps = [
-  { title: 'Quivra', href: 'https://onnellab.github.io/quivra-privacy-policy/' },
-  { title: 'TagWeaver', href: 'https://onnellab.github.io/tagweaver-privacy-policy/' },
-  { title: 'VaultXT', href: 'https://onnellab.github.io/vaultxt-privacy-policy/' },
-  { title: 'Segra', href: 'https://onnellab.github.io/segra-privacy-policy/' },
-  { title: 'ClipNest', href: 'https://onnellab.github.io/clipnest-privacy-policy/' },
-  { title: 'Melivra', href: 'https://onnellab.github.io/melivra-privacy-policy/' }
+  { title: 'Quivra', href: 'https://onnellab.github.io/privacy/quivra/' },
+  { title: 'TagWeaver', href: 'https://onnellab.github.io/privacy/tagweaver/' },
+  { title: 'VaultXT', href: 'https://onnellab.github.io/privacy/vaultxt/' },
+  { title: 'Segra', href: 'https://onnellab.github.io/privacy/segra/' },
+  { title: 'ClipNest', href: 'https://onnellab.github.io/privacy/clipnest/' },
+  { title: 'Melivra', href: 'https://onnellab.github.io/privacy/melivra/' }
 ].filter((app) => !contentAppTitles.has(app.title));
 const privacyDate = (title: string) => privacyUpdatedAtByTitle[title] ?? '9999-12-31';
 const localizedPolicyHref = (href: string) => {
