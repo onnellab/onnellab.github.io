@@ -12,6 +12,7 @@ type SitemapEntry = {
 };
 
 const siteUrl = 'https://onnellab.github.io';
+const standalonePrivacySlugs = ['papira'] as const;
 
 export function GET() {
   const sourceLastmod = sourceFileLastmod();
@@ -29,7 +30,7 @@ export function GET() {
       { path: koPath, lastmod, alternates }
     ];
   });
-  const privacyEntries = getProductSources().flatMap((source) => {
+  const productPrivacyEntries = getProductSources().flatMap((source) => {
     const enPath = `/privacy/${source.slug}/`;
     const koPath = `/privacy/${source.slug}/ko/`;
     const expectedPrivacyUrl = new URL(enPath, siteUrl).toString();
@@ -54,6 +55,28 @@ export function GET() {
       { path: koPath, lastmod, alternates }
     ];
   });
+  const standalonePrivacyEntries = standalonePrivacySlugs.flatMap((slug) => {
+    const enPath = `/privacy/${slug}/`;
+    const koPath = `/privacy/${slug}/ko/`;
+    const enSourcePath = `public/privacy/${slug}/index.html`;
+    const koSourcePath = `public/privacy/${slug}/ko/index.html`;
+    for (const sourcePath of [enSourcePath, koSourcePath]) {
+      if (!fs.existsSync(path.resolve(process.cwd(), sourcePath))) {
+        throw new Error(`Missing standalone privacy policy source: ${sourcePath}`);
+      }
+    }
+    const lastmod = [sourceLastmod(enSourcePath), sourceLastmod(koSourcePath)].sort().at(-1) as string;
+    const alternates = [
+      { lang: 'en', path: enPath },
+      { lang: 'ko', path: koPath },
+      { lang: 'x-default', path: enPath }
+    ];
+    return [
+      { path: enPath, lastmod, alternates },
+      { path: koPath, lastmod, alternates }
+    ];
+  });
+  const privacyEntries = [...productPrivacyEntries, ...standalonePrivacyEntries];
   const blogEntries = getBlogPosts().map((post) => ({
     path: post.href,
     lastmod: sourceLastmod(post.sourcePath),
