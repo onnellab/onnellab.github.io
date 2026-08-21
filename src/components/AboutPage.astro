@@ -1,81 +1,170 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import type { Locale } from '../lib/products';
+import LocaleMenu from './LocaleMenu.astro';
+import {
+  localeAlternates,
+  localeDefinitions,
+  routeFor,
+  type SiteLocale
+} from '../lib/site-i18n';
 
-type Props = {
-  locale: Locale;
+type Props = { locale: SiteLocale };
+type AboutCopy = {
+  nav: { apps: string; blog: string };
+  seoTitle: string;
+  description: string;
+  eyebrow: string;
+  title: string;
+  introTitle: string;
+  intro: string[];
+  principlesTitle: string;
+  principles: Array<{ title: string; body: string }>;
+  timelineTitle: string;
+  launchLabel: string;
+  closing: string;
+};
+
+const copies: Record<SiteLocale, AboutCopy> = {
+  en: {
+    nav: { apps: 'Apps', blog: 'Blog' },
+    seoTitle: 'About ONNELLAB',
+    description: 'ONNELLAB is an independent software studio from Korea building calm, focused utilities.',
+    eyebrow: 'Independent software studio',
+    title: 'About ONNELLAB',
+    introTitle: 'Studio',
+    intro: [
+      'ONNELLAB builds calm, focused tools for files, media, creative work, and everyday tasks.',
+      'Each product begins with one clear job. We avoid feature bloat, unnecessary accounts, and interfaces that demand more attention than the work itself.',
+      'Whenever the product allows it, files stay on the device and access is limited to what the user explicitly chooses.'
+    ],
+    principlesTitle: 'Principles',
+    principles: [
+      { title: 'Focused', body: 'A tool should explain its purpose in one sentence and stop before it becomes a platform.' },
+      { title: 'Quiet', body: 'Design should support the task instead of competing for attention.' },
+      { title: 'Respectful', body: 'Users should keep control of their files, choices, and attention.' }
+    ],
+    timelineTitle: 'Timeline',
+    launchLabel: 'launch',
+    closing: 'ONNELLAB continues to build small tools made to last.'
+  },
+  ko: {
+    nav: { apps: '앱', blog: '블로그' },
+    seoTitle: 'ONNELLAB 소개',
+    description: 'ONNELLAB은 한국에서 차분하고 목적이 분명한 도구를 만드는 독립 소프트웨어 스튜디오예요.',
+    eyebrow: '독립 소프트웨어 스튜디오',
+    title: 'ONNELLAB 소개',
+    introTitle: '스튜디오',
+    intro: [
+      'ONNELLAB은 파일, 미디어, 창작 작업과 일상을 위한 차분하고 목적이 분명한 도구를 만들어요.',
+      '각 앱은 한 가지 분명한 일에서 시작해요. 기능 과잉, 필요 없는 계정과 작업보다 더 많은 주의를 요구하는 화면을 피하려고 해요.',
+      '제품의 성격이 허용한다면 파일은 기기 안에 남기고, 사용자가 직접 선택한 항목에만 접근해요.'
+    ],
+    principlesTitle: '원칙',
+    principles: [
+      { title: '분명하게', body: '도구의 목적은 한 문장으로 설명할 수 있어야 하고, 플랫폼이 되기 전에 멈춰요.' },
+      { title: '조용하게', body: '디자인은 주의를 빼앗지 않고 작업을 도와야 해요.' },
+      { title: '존중하며', body: '파일과 선택, 주의력을 사용자가 직접 통제해요.' }
+    ],
+    timelineTitle: '연표',
+    launchLabel: '출시',
+    closing: 'ONNELLAB은 작고 오래 쓰는 도구를 계속 만들어요.'
+  },
+  ja: {
+    nav: { apps: 'アプリ', blog: 'ブログ' },
+    seoTitle: 'ONNELLABについて',
+    description: 'ONNELLABは韓国で、静かで目的の明確なツールをつくるインディーソフトウェアスタジオです。',
+    eyebrow: 'インディーソフトウェアスタジオ',
+    title: 'ONNELLABについて',
+    introTitle: 'スタジオ',
+    intro: [
+      'ONNELLABは、ファイル、メディア、創作、日々の作業のための静かで目的の明確なツールをつくります。',
+      '各アプリはひとつの明確な役割から始まります。機能の詰め込み、不要なアカウント、作業以上に注意を奪う画面を避けます。',
+      '製品の性質が許す限り、ファイルは端末内に残し、利用者が明示的に選んだ項目だけへアクセスします。'
+    ],
+    principlesTitle: '原則',
+    principles: [
+      { title: '明確に', body: '道具の目的は一文で説明でき、プラットフォームになる前に止まるべきです。' },
+      { title: '静かに', body: 'デザインは注意を奪わず、作業を支えるべきです。' },
+      { title: '尊重して', body: 'ファイル、選択、注意力は利用者が管理します。' }
+    ],
+    timelineTitle: '沿革',
+    launchLabel: '公開',
+    closing: 'ONNELLABは、長く使える小さな道具をつくり続けます。'
+  },
+  'zh-Hans': {
+    nav: { apps: '应用', blog: '博客' },
+    seoTitle: '关于 ONNELLAB',
+    description: 'ONNELLAB 是一家来自韩国、打造安静而专注工具的独立软件工作室。',
+    eyebrow: '独立软件工作室',
+    title: '关于 ONNELLAB',
+    introTitle: '工作室',
+    intro: [
+      'ONNELLAB 为文件、媒体、创作与日常任务打造安静而用途明确的工具。',
+      '每款应用都从一项清晰的工作开始。我们避免功能堆叠、不必要的账号，以及比任务本身更抢注意力的界面。',
+      '在产品条件允许时，文件保留在设备内，并且只访问用户明确选择的内容。'
+    ],
+    principlesTitle: '原则',
+    principles: [
+      { title: '明确', body: '工具的用途应能用一句话说明，并在变成平台之前停下。' },
+      { title: '安静', body: '设计应支持任务，而不是争夺注意力。' },
+      { title: '尊重', body: '文件、选择与注意力始终由用户掌控。' }
+    ],
+    timelineTitle: '历程',
+    launchLabel: '发布',
+    closing: 'ONNELLAB 会继续制作小而耐用的工具。'
+  },
+  'zh-Hant': {
+    nav: { apps: '應用程式', blog: '部落格' },
+    seoTitle: '關於 ONNELLAB',
+    description: 'ONNELLAB 是一家來自韓國、打造安靜而專注工具的獨立軟體工作室。',
+    eyebrow: '獨立軟體工作室',
+    title: '關於 ONNELLAB',
+    introTitle: '工作室',
+    intro: [
+      'ONNELLAB 為檔案、媒體、創作與日常工作打造安靜而用途明確的工具。',
+      '每款應用程式都從一項清楚的工作開始。我們避免功能堆疊、不必要的帳號，以及比工作本身更搶注意力的介面。',
+      '在產品條件允許時，檔案保留在裝置內，並且只存取使用者明確選擇的內容。'
+    ],
+    principlesTitle: '原則',
+    principles: [
+      { title: '明確', body: '工具的用途應能用一句話說明，並在變成平台之前停下。' },
+      { title: '安靜', body: '設計應支援工作，而不是爭奪注意力。' },
+      { title: '尊重', body: '檔案、選擇與注意力始終由使用者掌控。' }
+    ],
+    timelineTitle: '歷程',
+    launchLabel: '發布',
+    closing: 'ONNELLAB 會繼續製作小而耐用的工具。'
+  }
 };
 
 const { locale } = Astro.props;
-const isKo = locale === 'ko';
-const text = isKo
-  ? {
-      title: 'ONNELLAB 소개',
-      description: 'ONNELLAB은 한국에서 조용하고 신중한 유틸리티 앱을 만드는 독립 앱 스튜디오입니다.',
-      heading: 'ONNELLAB 소개',
-      studioLabel: 'Independent App Studio',
-      intro: [
-        '한국에서 조용한 유틸리티 앱을 만듭니다.',
-        '신중하게 설계하고, 오프라인에서도 바로 쓸 수 있게 만듭니다.',
-        'Flutter • iOS • Android'
-      ],
-      principlesTitle: '제품 원칙',
-      principles: [
-        '계정 없이 바로 사용할 수 있는 도구를 우선합니다.',
-        '가능한 작업은 기기 안에서 처리하고, 불필요한 업로드를 만들지 않습니다.',
-        '한 앱은 한 가지 일을 조용하고 예측 가능하게 끝내도록 설계합니다.'
-      ],
-      timeline: '타임라인',
-      eventLabel: '출시',
-      closing: 'ONNELLAB은 작고 오래 쓰는 도구를 계속 만듭니다.',
-      contact: '문의하기',
-      homeHref: '/ko/',
-      switchHref: '/about/',
-      switchLabel: 'English',
-      email: 'onnellab.app@gmail.com'
-    }
-  : {
-      title: 'About ONNELLAB',
-      description: 'ONNELLAB is an independent app studio from Korea focused on thoughtful utilities and offline-first apps.',
-      heading: 'About ONNELLAB',
-      studioLabel: 'Independent App Studio',
-      intro: [
-        'Quiet utility apps from Korea.',
-        'Built thoughtfully to work offline, simply and reliably.',
-        'Flutter • iOS • Android'
-      ],
-      principlesTitle: 'Product principles',
-      principles: [
-        'Tools should be usable without creating an account first.',
-        'Whenever possible, work should happen on device without unnecessary uploads.',
-        'Each app should finish one job quietly and predictably.'
-      ],
-      timeline: 'Timeline',
-      eventLabel: 'launch',
-      closing: 'ONNELLAB continues to build small tools made to last.',
-      contact: 'Contact',
-      homeHref: '/',
-      switchHref: '/about/ko/',
-      switchLabel: '한국어',
-      email: 'onnellab.app@gmail.com'
-    };
-const canonicalPath = isKo ? '/about/ko/' : '/about/';
+const copy = copies[locale];
+const definition = localeDefinitions[locale];
+const canonicalPath = routeFor('about', locale);
+const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
 const timelineItems = [
-  { date: '2026.03.30', displayDate: '2026.03', app: 'TagWeaver', summary: isKo ? 'MP3/FLAC 태그 편집기' : 'MP3/FLAC tag editor' },
-  { date: '2026.04.02', displayDate: '2026.04', app: 'Quivra', summary: isKo ? '미디어 변환기' : 'media converter' },
-  { date: '2026.04.24', displayDate: '2026.04', repeatedMonth: true, app: 'VaultXT', summary: isKo ? '대용량 TXT 편집기' : 'large TXT editor' },
-  { date: '2026.06.25', displayDate: '2026.06', app: 'ClipNest', summary: isKo ? '클립보드 도구' : 'clipboard tool' },
-  { date: '2026.06.30', displayDate: '2026.06', repeatedMonth: true, app: 'Aligna', summary: isKo ? '일괄 파일명 정리' : 'batch file renamer' },
-  { date: '2026.07.01', displayDate: '2026.07', app: 'Segra', summary: isKo ? '오디오 자르기와 병합' : 'audio cutter and merger' }
+  { date: '2026-03-30', month: '2026.03', app: 'TagWeaver', en: 'MP3/FLAC tag editor', ko: 'MP3·FLAC 태그 편집기', ja: 'MP3・FLACタグ編集', hans: 'MP3/FLAC 标签编辑器', hant: 'MP3/FLAC 標籤編輯器' },
+  { date: '2026-04-02', month: '2026.04', app: 'Quivra', en: 'media converter', ko: '미디어 변환기', ja: 'メディア変換ツール', hans: '媒体转换工具', hant: '媒體轉換工具' },
+  { date: '2026-04-24', month: '2026.04', app: 'VaultXT', en: 'large TXT editor', ko: '대용량 TXT 편집기', ja: '大容量TXTエディター', hans: '大文件 TXT 编辑器', hant: '大型 TXT 編輯器' },
+  { date: '2026-06-25', month: '2026.06', app: 'ClipNest', en: 'clipboard tool', ko: '클립보드 도구', ja: 'クリップボードツール', hans: '剪贴板工具', hant: '剪貼簿工具' },
+  { date: '2026-06-30', month: '2026.06', app: 'Aligna', en: 'batch file renamer', ko: '일괄 파일명 정리', ja: '一括ファイル名整理', hans: '批量文件重命名', hant: '批次檔名整理' },
+  { date: '2026-07-01', month: '2026.07', app: 'Segra', en: 'audio cutter', ko: '오디오 구간 추출', ja: 'オーディオ区間抽出', hans: '音频片段提取', hant: '音訊片段擷取' }
 ];
-const organizationJsonLd = {
+const timelineSummary = (item: (typeof timelineItems)[number]) => {
+  if (locale === 'ko') return item.ko;
+  if (locale === 'ja') return item.ja;
+  if (locale === 'zh-Hans') return item.hans;
+  if (locale === 'zh-Hant') return item.hant;
+  return item.en;
+};
+const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
   '@id': new URL(`${canonicalPath}#about`, Astro.site).toString(),
-  name: text.title,
-  description: text.description,
+  name: copy.seoTitle,
+  description: copy.description,
   url: new URL(canonicalPath, Astro.site).toString(),
-  inLanguage: locale,
+  inLanguage: definition.htmlLang,
   mainEntity: {
     '@type': 'Organization',
     '@id': new URL('/#organization', Astro.site).toString(),
@@ -87,236 +176,195 @@ const organizationJsonLd = {
 ---
 
 <BaseLayout
-  title={text.title}
-  description={text.description}
+  title={copy.seoTitle}
+  description={copy.description}
   canonicalPath={canonicalPath}
-  lang={locale}
-  jsonLd={organizationJsonLd}
-  alternates={[
-    { lang: 'en', path: '/about/' },
-    { lang: 'ko', path: '/about/ko/' },
-    { lang: 'x-default', path: '/about/' }
-  ]}
+  lang={definition.htmlLang}
+  jsonLd={jsonLd}
+  alternates={localeAlternates('about')}
 >
-  <main class="page-shell">
-    <nav aria-label="Navigation">
-      <a class="brand" href={text.homeHref}>ONNELLAB</a>
-      <a class="language" href={text.switchHref} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={isKo ? 'English' : '한국어'}>{text.switchLabel}</a>
+  <main class="page-shell" data-core-page="about">
+    <nav class="top-nav" aria-label="Navigation">
+      <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
+      <div class="nav-actions">
+        <a href={routeFor('apps', locale)}>{copy.nav.apps}</a>
+        <a href={blogHref}>{copy.nav.blog}</a>
+        <LocaleMenu locale={locale} page="about" />
+      </div>
     </nav>
 
-    <section class="about-hero" aria-labelledby="about-title">
-      <p class="studio-label">{text.studioLabel}</p>
-      <h1 id="about-title" data-locale={locale}>{text.heading}</h1>
-      <div class="intro-lines">
-        {text.intro.map((line) => <p>{line}</p>)}
-      </div>
-      <div class="contact-block">
-        <a class="contact-link" href={`mailto:${text.email}`}>{text.contact}</a>
-        <p>{text.email}</p>
+    <header class="page-hero">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1>{copy.title}</h1>
+    </header>
+
+    <section class="aligned-section intro-section" aria-labelledby="intro-title">
+      <h2 id="intro-title">{copy.introTitle}</h2>
+      <div class="intro-copy">
+        {copy.intro.map((paragraph) => <p>{paragraph}</p>)}
       </div>
     </section>
 
-    <section class="principles-section" aria-labelledby="principles-title">
-      <h2 id="principles-title">{text.principlesTitle}</h2>
-      <ul class="principles-list">
-        {text.principles.map((principle) => <li>{principle}</li>)}
-      </ul>
-    </section>
-
-    <section class="timeline-section" aria-labelledby="timeline-title">
-      <h2 id="timeline-title">{text.timeline}</h2>
-      <ol class="timeline">
-        {timelineItems.map((item) => (
-          <li>
-            <time class:list={[item.repeatedMonth && 'is-repeated']} datetime={item.date.replace(/\./g, '-')}>
-              {item.displayDate}
-            </time>
-            <div>
-              <span>{item.app} {text.eventLabel}</span>
-              <p>{item.summary}</p>
-            </div>
-          </li>
+    <section class="aligned-section principles-section" aria-labelledby="principles-title">
+      <h2 id="principles-title">{copy.principlesTitle}</h2>
+      <div class="principles-grid">
+        {copy.principles.map((principle) => (
+          <article>
+            <h3>{principle.title}</h3>
+            <p>{principle.body}</p>
+          </article>
         ))}
-      </ol>
-      <p class="closing-line">{text.closing}</p>
+      </div>
     </section>
+
+    <section class="aligned-section timeline-section" aria-labelledby="timeline-title">
+      <h2 id="timeline-title">{copy.timelineTitle}</h2>
+      <div>
+        <ol class="timeline">
+          {timelineItems.map((item, index) => (
+            <li>
+              <time class:list={[index > 0 && item.month === timelineItems[index - 1].month && 'is-repeated']} datetime={item.date}>{item.month}</time>
+              <div>
+                <span>{item.app} {copy.launchLabel}</span>
+                <p>{timelineSummary(item)}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p class="closing-line">{copy.closing}</p>
+      </div>
+    </section>
+
+    <footer>
+      <a href={routeFor('privacy', locale)}>{definition.label}</a>
+      <a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a>
+      <span>© ONNELLAB</span>
+    </footer>
   </main>
 </BaseLayout>
 
 <style>
   .page-shell {
-    width: min(900px, calc(100% - 32px));
+    width: min(1040px, calc(100% - 40px));
     margin: 0 auto;
-    padding: 28px 0 44px;
-    line-height: 1.65;
+    padding: 26px 0 54px;
+    color: #3f3b35;
   }
 
-  nav {
+  .top-nav,
+  .nav-actions,
+  footer {
     display: flex;
     align-items: center;
+  }
+
+  .top-nav {
     justify-content: space-between;
+    gap: 20px;
+  }
+
+  .nav-actions {
     gap: 16px;
   }
 
-  .brand,
-  .language,
-  .contact-link {
+  .nav-actions > a,
+  footer a {
+    color: #686259;
+    font-size: 13px;
+    font-weight: 620;
     text-decoration: none;
   }
 
-  .brand {
-    color: #737067;
-    font-size: 14px;
-    font-weight: 560;
+  .top-nav a:hover,
+  footer a:hover {
+    color: #2f2d29;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
-  .language,
-  .contact-link {
-    min-height: 34px;
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid #ded6ca;
-    border-radius: 999px;
-    padding: 6px 12px;
-    background: rgba(255, 253, 248, 0.72);
-    color: #5f5a50;
-    font-size: 13px;
-    font-weight: 650;
-    line-height: 1.35;
+  .page-hero {
+    padding: clamp(76px, 11vw, 126px) 0 58px;
   }
 
-  .language:hover,
-  .language:focus-visible,
-  .contact-link:hover,
-  .contact-link:focus-visible {
-    border-color: #cfc5b7;
-    background: #fffdf8;
-  }
-
-  .language:focus-visible,
-  .contact-link:focus-visible,
-  .brand:focus-visible {
-    outline: 2px solid #827d72;
-    outline-offset: 3px;
-  }
-
-  .about-hero {
-    padding: 56px 0 42px;
-    border-bottom: 1px solid #e0d8cb;
-  }
-
-  .studio-label {
-    margin: 0 0 12px;
-    color: #827d72;
+  .eyebrow {
+    margin: 0 0 16px;
+    color: #8b8175;
     font-size: 12px;
-    font-weight: 680;
-    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
   }
 
   h1 {
+    max-width: 900px;
     margin: 0;
-    color: #36332f;
-    font-size: clamp(40px, 7vw, 72px);
-    line-height: 0.98;
-    letter-spacing: 0;
+    color: #37332e;
+    font-size: clamp(46px, 7.5vw, 78px);
+    font-weight: 650;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
   }
 
-  .intro-lines {
-    max-width: 620px;
-    margin-top: 24px;
-    color: #514d46;
-    font-size: clamp(18px, 2.5vw, 22px);
-    line-height: 1.56;
-  }
-
-  .intro-lines p {
-    margin: 0;
-  }
-
-  .intro-lines p + p {
-    margin-top: 6px;
-  }
-
-  .contact-block {
-    margin-top: 28px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .contact-block p {
-    margin: 0;
-    color: #81786b;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  .timeline-section {
-    position: relative;
+  .aligned-section {
     display: grid;
-    grid-template-columns: 180px minmax(0, 1fr);
+    grid-template-columns: 160px minmax(0, 1fr);
     gap: 48px;
-    padding-top: 42px;
+    border-top: 1px solid #ded6ca;
+    padding: 44px 0 50px;
   }
 
-  .principles-section {
-    display: grid;
-    grid-template-columns: 180px minmax(0, 1fr);
-    gap: 48px;
-    padding: 38px 0;
-    border-bottom: 1px solid #e0d8cb;
-  }
-
-  .principles-list {
-    display: grid;
-    gap: 12px;
+  .aligned-section > h2 {
     margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .principles-list li {
-    position: relative;
-    padding-left: 18px;
-    color: #514d46;
-    font-size: 16px;
-    line-height: 1.62;
-  }
-
-  .principles-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 11px;
-    width: 5px;
-    height: 5px;
-    border-radius: 999px;
-    background: #c8b99e;
-  }
-
-  .timeline-section::before {
-    content: "";
-    position: absolute;
-    top: 42px;
-    left: 180px;
-    bottom: 0;
-    width: 1px;
-    background: linear-gradient(180deg, rgba(185, 173, 157, 0.28), rgba(250, 248, 245, 0));
-  }
-
-  h2 {
-    margin: 0;
-    color: #6b655b;
-    font-size: 14px;
+    color: #746c62;
+    font-size: 13px;
     font-weight: 720;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
+  .intro-copy {
+    max-width: 790px;
+  }
+
+  .intro-copy p {
+    margin: 0;
+    color: #5f584f;
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.78;
+  }
+
+  .intro-copy p + p {
+    margin-top: 16px;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .principles-grid article {
+    border-top: 2px solid #c7bad3;
+    padding: 20px 6px 0 0;
+  }
+
+  .principles-grid h3 {
+    margin: 0;
+    color: #403b35;
+    font-size: 18px;
+    font-weight: 650;
+  }
+
+  .principles-grid p {
+    margin: 10px 0 0;
+    color: #71695f;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
   .timeline {
     display: grid;
-    gap: 17px;
+    gap: 0;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -325,10 +373,11 @@ const organizationJsonLd = {
   .timeline li {
     display: grid;
     grid-template-columns: 116px minmax(0, 1fr);
-    gap: 20px;
+    gap: 24px;
     align-items: baseline;
-    padding-bottom: 17px;
-    border-bottom: 1px solid rgba(232, 224, 212, 0.58);
+    border-bottom: 1px solid #e8e0d4;
+    padding: 0 0 18px;
+    margin-bottom: 18px;
   }
 
   .timeline time {
@@ -344,82 +393,79 @@ const organizationJsonLd = {
   .timeline span {
     color: #37332f;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 620;
   }
 
   .timeline p {
-    margin: 2px 0 0;
+    margin: 3px 0 0;
     color: #81786b;
     font-size: 14px;
-    line-height: 1.45;
+    line-height: 1.5;
   }
 
   .closing-line {
-    grid-column: 2;
-    margin: 14px 0 0;
+    margin: 22px 0 0;
     color: #5f5a50;
     font-size: 16px;
     line-height: 1.65;
   }
 
-  @media (max-width: 680px) {
+  footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 9px 20px;
+    margin-top: 12px;
+    border-top: 1px solid #ded6ca;
+    padding-top: 28px;
+    color: #857d72;
+    font-size: 12px;
+  }
+
+  @media (max-width: 760px) {
     .page-shell {
-      width: min(100% - 28px, 900px);
-      padding-top: 18px;
+      width: min(100% - 30px, 1040px);
+      padding-top: 20px;
     }
 
-    .about-hero {
-      padding: 42px 0 34px;
+    .nav-actions > a:nth-of-type(2) {
+      display: none;
     }
 
-    h1[data-locale='ko'] {
-      font-size: clamp(30px, 9vw, 40px);
-      line-height: 1.06;
-      white-space: nowrap;
+    .page-hero {
+      padding: 62px 0 46px;
     }
 
-    .timeline-section {
+    .aligned-section {
       grid-template-columns: 1fr;
       gap: 18px;
-      padding-top: 32px;
+      padding: 36px 0 42px;
     }
 
-    .principles-section {
+    .intro-copy {
+      max-width: none;
+    }
+
+    .principles-grid {
       grid-template-columns: 1fr;
-      gap: 14px;
-      padding: 30px 0;
+      gap: 18px;
     }
+  }
 
-    .timeline-section::before {
-      display: none;
+  @media (max-width: 520px) {
+    h1 {
+      font-size: clamp(38px, 11vw, 50px);
+      line-height: 1.12;
     }
 
     .timeline li {
       grid-template-columns: 1fr;
-      gap: 3px;
+      gap: 4px;
       padding-bottom: 16px;
+      margin-bottom: 16px;
     }
 
     .timeline span {
       font-size: 18px;
-      line-height: 1.32;
-    }
-
-    .timeline time {
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
-    .closing-line {
-      grid-column: 1;
-      margin-top: 10px;
-      font-size: 15px;
-    }
-
-    .contact-block {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 8px;
     }
   }
 </style>
