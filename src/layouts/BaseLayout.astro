@@ -114,6 +114,7 @@ const gaScript = gaMeasurementId
     <script is:inline>
       (() => {
         const preferenceKey = 'onnellab.locale';
+
         document.addEventListener('click', (event) => {
           const target = event.target;
           if (!(target instanceof Element)) return;
@@ -129,6 +130,16 @@ const gaScript = gaMeasurementId
             window.localStorage.setItem(preferenceKey, locale);
           } catch {
           }
+        });
+
+        document.addEventListener('click', (event) => {
+          const target = event.target;
+          if (!(target instanceof Element) || event.defaultPrevented) return;
+          const card = target.closest('main[data-core-page="home"] .featured');
+          if (!(card instanceof HTMLElement) || target.closest('a')) return;
+          const link = card.querySelector('a[href]');
+          if (!(link instanceof HTMLAnchorElement)) return;
+          link.click();
         });
       })();
     </script>
@@ -167,6 +178,10 @@ const gaScript = gaMeasurementId
 
   a {
     color: inherit;
+  }
+
+  main[data-core-page='home'] .featured {
+    cursor: pointer;
   }
 
   code,
