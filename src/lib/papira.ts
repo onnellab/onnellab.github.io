@@ -129,7 +129,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       '기존 파일을 덮어쓰지 않고 이름이 겹치면 번호를 자동으로 붙여요',
       'EPUB 제작과 책 작업 저장이 모두 기기 안에서 이루어져요'
     ],
-    privacyTitle: '원고는 누나의 기기 안에 남아요',
+    privacyTitle: '원고는 기기 안에 남아요',
     privacyItems: [
       '계정과 로그인 없이 사용해요',
       '광고·행동 분석·추적 SDK를 사용하지 않아요',
