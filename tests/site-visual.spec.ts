@@ -13,13 +13,16 @@ const pages = [
   '/about/',
   '/about/ko/',
   '/privacy/',
-  '/privacy/ko/'
+  '/privacy/ko/',
+  '/privacy/papira/',
+  '/privacy/papira/ko/'
 ];
 const productPages = ['aligna', 'clipnest', 'quivra', 'segra', 'tagweaver', 'vaultxt'].flatMap((slug) => [
   `/apps/${slug}/`,
   `/apps/${slug}/ko/`
 ]);
-const privacySlugs = ['aligna', 'clipnest', 'melivra', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+const productPrivacySlugs = ['aligna', 'clipnest', 'melivra', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+const privacySlugs = ['aligna', 'clipnest', 'melivra', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const privacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/`);
 const koreanPrivacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/ko/`);
 
@@ -104,6 +107,24 @@ test.describe('site layout', () => {
     await page.locator('[data-policy-search]').fill('missing-app');
     await expect(page.locator('[data-policy-row]:visible')).toHaveCount(0);
     await expect(page.locator('[data-policy-empty]')).toBeVisible();
+  });
+
+  test('Papira privacy policy exposes localized canonical pages', async ({ page }) => {
+    await page.goto('/privacy/papira/');
+    await expect(page).toHaveTitle('Papira Privacy Policy');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://onnellab.github.io/privacy/papira/'
+    );
+    await expect(page.locator('main')).toContainText('TXT manuscripts and cover images');
+
+    await page.goto('/privacy/papira/ko/');
+    await expect(page).toHaveTitle('Papira 개인정보 처리방침');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://onnellab.github.io/privacy/papira/ko/'
+    );
+    await expect(page.locator('main')).toContainText('TXT 원고와 표지 이미지');
   });
 
   test('apps search filters app cards', async ({ page }) => {
@@ -401,7 +422,7 @@ test.describe('site layout', () => {
   });
 
   test('all product privacy links and schema use canonical policy URLs', async ({ page }) => {
-    for (const slug of privacySlugs) {
+    for (const slug of productPrivacySlugs) {
       for (const locale of ['en', 'ko'] as const) {
         const suffix = locale === 'ko' ? 'ko/' : '';
         const expectedUrl = `https://onnellab.github.io/privacy/${slug}/${suffix}`;
@@ -574,7 +595,7 @@ test.describe('site layout', () => {
     const privacySitemapEntries = sitemapEntries.filter((entry) =>
       expectedPrivacyUrls.some((url) => entry.includes(`<loc>${url}</loc>`))
     );
-    expect(privacySitemapEntries).toHaveLength(14);
+    expect(privacySitemapEntries).toHaveLength(privacySlugs.length * 2);
     for (const slug of privacySlugs) {
       const enUrl = `https://onnellab.github.io/privacy/${slug}/`;
       const koUrl = `https://onnellab.github.io/privacy/${slug}/ko/`;
