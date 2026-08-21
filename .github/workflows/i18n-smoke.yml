@@ -1,0 +1,88 @@
+name: Verify five-language site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/i18n-smoke.yml'
+      - 'src/components/CorePage.astro'
+      - 'src/components/LocaleMenu.astro'
+      - 'src/components/PapiraPage.astro'
+      - 'src/components/PapiraPrivacyPage.astro'
+      - 'src/layouts/BaseLayout.astro'
+      - 'src/lib/papira.ts'
+      - 'src/lib/site-i18n.ts'
+      - 'src/pages/apps/**'
+      - 'src/pages/about/**'
+      - 'src/pages/privacy/**'
+      - 'src/pages/terms/**'
+      - 'src/pages/ja/**'
+      - 'src/pages/zh-hans/**'
+      - 'src/pages/zh-hant/**'
+      - 'src/pages/index.astro'
+      - 'src/pages/sitemap.xml.ts'
+      - 'tests/papira-i18n.spec.ts'
+      - 'tests/site-i18n.spec.ts'
+      - 'tests/site-visual.spec.ts'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+concurrency:
+  group: i18n-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run five-language smoke tests
+        run: >-
+          npx playwright test
+          tests/site-i18n.spec.ts
+          tests/papira-i18n.spec.ts
+          --project=desktop
+
+      - name: Publish commit status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_RESULT: ${{ job.status }}
+          TARGET_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ "$JOB_RESULT" = "success" ]; then
+            state=success
+            description="Five-language browser smoke tests passed"
+          else
+            state=failure
+            description="Five-language browser smoke tests failed"
+          fi
+
+          gh api \
+            --method POST \
+            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -f state="$state" \
+            -f context="onnellab/i18n-smoke" \
+            -f description="$description" \
+            -f target_url="$TARGET_URL"
