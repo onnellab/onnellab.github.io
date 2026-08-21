@@ -1,0 +1,549 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LocaleMenu from './LocaleMenu.astro';
+import {
+  localeAlternates,
+  localeDefinitions,
+  routeFor,
+  type SiteLocale
+} from '../lib/site-i18n';
+
+type Props = {
+  locale: SiteLocale;
+};
+
+type PolicySection = {
+  title: string;
+  paragraphs?: string[];
+  items?: string[];
+};
+
+type PolicyCopy = {
+  title: string;
+  description: string;
+  intro: string;
+  updatedLabel: string;
+  updatedValue: string;
+  heading: string;
+  opening: string;
+  sections: PolicySection[];
+  homeLabel: string;
+  privacyHubLabel: string;
+};
+
+const policies: Record<SiteLocale, PolicyCopy> = {
+  en: {
+    title: 'Papira Privacy Policy',
+    description: 'Privacy Policy for the Papira app.',
+    intro: 'This Privacy Policy applies to the Papira app provided by ONNELLAB.',
+    updatedLabel: 'Last updated',
+    updatedValue: '2026-08-21',
+    heading: 'Privacy Policy',
+    opening: 'Papira values your privacy. This app operates as described below.',
+    homeLabel: 'ONNELLAB',
+    privacyHubLabel: 'All privacy policies',
+    sections: [
+      {
+        title: '1. Accounts and direct identifiers',
+        paragraphs: [
+          'Papira does not require registration or sign-in with a name, email address, or phone number. App content and usage history are not transmitted to ONNELLAB.'
+        ]
+      },
+      {
+        title: '2. Data accessed or stored on the device',
+        items: [
+          'TXT manuscripts and cover images that the user explicitly selects',
+          'Book projects, publishing metadata and defaults, app preferences, recent output history, previews and caches, and generated EPUB files stored on the device',
+          'TXT and cover processing, preview generation, project saving, and EPUB creation occur on the device',
+          'Papira requests access to a file or photo only when the user chooses it through the operating-system picker',
+          'Selected manuscripts, cover images, projects, and generated EPUB files are not uploaded to an ONNELLAB server'
+        ]
+      },
+      {
+        title: '3. Server transmission',
+        paragraphs: [
+          'Papira does not transmit manuscript contents, cover images, project data, generated EPUB files, or usage history to an ONNELLAB server.'
+        ]
+      },
+      {
+        title: '4. App store services and payment information',
+        paragraphs: [
+          'Papira may be downloaded or purchased through Apple App Store or Google Play. The applicable store processes downloads, purchases, refunds, and related account information under its own policy. Papira and ONNELLAB do not access or store card or bank-account details.'
+        ]
+      },
+      {
+        title: '5. Advertising, analytics, and sharing',
+        paragraphs: [
+          "Papira does not use advertising SDKs, behavioral analytics SDKs, or third-party tracking tools. Data is not sold or shared outside the purposes described above. When the user deliberately exports or shares an EPUB to another app, storage provider, or service through operating-system features, that destination's privacy policy applies."
+        ]
+      },
+      {
+        title: '6. Retention and deletion',
+        paragraphs: [
+          "App-managed projects, preferences, recent records, previews, and caches can be removed through the applicable delete controls or by uninstalling the app. Source files and exported EPUB files controlled by the user remain until the user deletes them. Copies sent to another app, storage provider, or service remain subject to that destination's retention rules. ONNELLAB retains no Papira app content on its servers."
+        ]
+      },
+      {
+        title: "7. Security and children's privacy",
+        paragraphs: [
+          "ONNELLAB applies reasonable technical and organizational safeguards to data that must be handled. Users should also protect access to their devices and exported files. Papira is not directed to children under 13 and does not knowingly collect personal information from children."
+        ]
+      },
+      {
+        title: '8. Changes and contact',
+        paragraphs: [
+          'If Papira functionality or legal or store requirements change, this document will be updated and its last-updated date will change.',
+          'Privacy questions or deletion requests: onnellab.app@gmail.com'
+        ]
+      }
+    ]
+  },
+  ko: {
+    title: 'Papira 개인정보 처리방침',
+    description: 'Papira 앱의 개인정보 처리방침이에요.',
+    intro: '이 개인정보 처리방침은 ONNELLAB이 제공하는 Papira 앱에 적용돼요.',
+    updatedLabel: '최종 업데이트',
+    updatedValue: '2026-08-21',
+    heading: '개인정보 처리방침',
+    opening: 'Papira는 사용자의 개인정보를 중요하게 생각하며 아래와 같은 방식으로 운영돼요.',
+    homeLabel: 'ONNELLAB',
+    privacyHubLabel: '모든 개인정보 처리방침',
+    sections: [
+      {
+        title: '1. 계정 및 개인 식별 정보',
+        paragraphs: [
+          'Papira는 이름, 이메일 주소 또는 전화번호로 가입하거나 로그인하도록 요구하지 않아요. 앱 콘텐츠와 사용 기록은 ONNELLAB로 전송되지 않아요.'
+        ]
+      },
+      {
+        title: '2. 앱이 접근하거나 기기에 저장하는 데이터',
+        items: [
+          '사용자가 직접 선택한 TXT 원고와 표지 이미지',
+          '기기에 저장되는 책 작업, 출판 정보와 기본값, 앱 설정, 최근 생성 기록, 미리보기와 캐시, 생성된 EPUB 파일',
+          'TXT와 표지 처리, 미리보기 생성, 책 작업 저장 및 EPUB 생성은 기기 안에서 이루어져요',
+          'Papira는 사용자가 운영체제의 파일 또는 사진 선택 화면에서 항목을 직접 고른 경우에만 해당 파일이나 사진에 접근해요',
+          '선택한 원고, 표지 이미지, 책 작업 및 생성된 EPUB 파일은 ONNELLAB 서버로 업로드되지 않아요'
+        ]
+      },
+      {
+        title: '3. 서버 전송',
+        paragraphs: [
+          'Papira는 원고 내용, 표지 이미지, 책 작업 데이터, 생성된 EPUB 파일 또는 사용 기록을 ONNELLAB 서버로 전송하지 않아요.'
+        ]
+      },
+      {
+        title: '4. 앱 스토어 서비스 및 결제 정보',
+        paragraphs: [
+          'Papira는 Apple App Store 또는 Google Play를 통해 다운로드하거나 구매할 수 있어요. 다운로드, 구매, 환불 및 관련 계정 정보는 해당 스토어가 자체 처리방침에 따라 처리해요. Papira와 ONNELLAB은 카드번호나 은행계좌 정보에 접근하거나 저장하지 않아요.'
+        ]
+      },
+      {
+        title: '5. 광고, 분석 및 제3자 제공',
+        paragraphs: [
+          'Papira는 광고 SDK, 사용자 행동 분석 SDK 또는 제3자 추적 도구를 사용하지 않아요. 데이터는 위에 설명한 기능 제공 목적 외에는 판매하거나 제공하지 않아요. 사용자가 운영체제 기능을 통해 EPUB을 다른 앱, 저장소 제공자 또는 서비스로 직접 내보내거나 공유한 경우에는 해당 대상 서비스의 개인정보 처리방침이 적용돼요.'
+        ]
+      },
+      {
+        title: '6. 보관 및 삭제',
+        paragraphs: [
+          '앱이 관리하는 책 작업, 설정, 최근 기록, 미리보기 및 캐시는 해당 기능의 삭제 동작 또는 앱 삭제를 통해 기기에서 제거할 수 있어요. 사용자가 관리하는 원본 파일과 내보낸 EPUB 파일은 사용자가 삭제할 때까지 남을 수 있어요. 다른 앱, 저장소 제공자 또는 서비스로 전달된 사본은 해당 대상의 보관 정책이 적용돼요. ONNELLAB 서버에는 Papira 앱 콘텐츠가 보관되지 않아요.'
+        ]
+      },
+      {
+        title: '7. 보안 및 아동의 개인정보',
+        paragraphs: [
+          'ONNELLAB은 처리해야 하는 데이터에 합리적인 기술적·관리적 보호조치를 적용해요. 사용자는 자신의 기기와 내보낸 파일에 대한 접근도 안전하게 관리해야 해요. Papira는 만 13세 미만 아동을 대상으로 설계되지 않았으며 아동의 개인정보를 고의로 수집하지 않아요.'
+        ]
+      },
+      {
+        title: '8. 변경 및 문의',
+        paragraphs: [
+          'Papira의 기능이나 법적·스토어 요구사항이 변경되면 이 문서를 수정하고 최종 업데이트일을 변경해요.',
+          '개인정보 관련 문의 또는 삭제 요청: onnellab.app@gmail.com'
+        ]
+      }
+    ]
+  },
+  ja: {
+    title: 'Papira プライバシーポリシー',
+    description: 'Papiraアプリのプライバシーポリシーです。',
+    intro: '本プライバシーポリシーは、ONNELLABが提供するPapiraアプリに適用されます。',
+    updatedLabel: '最終更新日',
+    updatedValue: '2026-08-21',
+    heading: 'プライバシーポリシー',
+    opening: 'Papiraは利用者のプライバシーを尊重し、以下の方針で運営されます。',
+    homeLabel: 'ONNELLAB',
+    privacyHubLabel: 'すべてのプライバシーポリシー',
+    sections: [
+      {
+        title: '1. アカウントと個人を直接識別する情報',
+        paragraphs: [
+          'Papiraは、氏名、メールアドレス、電話番号による登録やログインを求めません。アプリ内の内容や利用履歴はONNELLABへ送信されません。'
+        ]
+      },
+      {
+        title: '2. 端末上でアクセスまたは保存するデータ',
+        items: [
+          '利用者が明示的に選択したTXT原稿と表紙画像',
+          '端末に保存される作品プロジェクト、書誌情報と初期値、アプリ設定、最近の出力履歴、プレビュー、キャッシュ、生成したEPUBファイル',
+          'TXTと表紙の処理、プレビュー生成、プロジェクト保存、EPUB作成は端末内で行われます',
+          'Papiraは、利用者がOSのファイルまたは写真選択画面で項目を選んだ場合にのみ、そのファイルや写真へアクセスします',
+          '選択した原稿、表紙画像、プロジェクト、生成したEPUBはONNELLABのサーバーへアップロードされません'
+        ]
+      },
+      {
+        title: '3. サーバーへの送信',
+        paragraphs: [
+          'Papiraは、原稿本文、表紙画像、プロジェクトデータ、生成したEPUB、利用履歴をONNELLABのサーバーへ送信しません。'
+        ]
+      },
+      {
+        title: '4. アプリストアのサービスと決済情報',
+        paragraphs: [
+          'PapiraはApple App StoreまたはGoogle Playからダウンロードまたは購入できます。ダウンロード、購入、返金、関連するアカウント情報は各ストアがそれぞれのポリシーに従って処理します。PapiraおよびONNELLABはカード番号や銀行口座情報へアクセスせず、保存もしません。'
+        ]
+      },
+      {
+        title: '5. 広告、分析、第三者への提供',
+        paragraphs: [
+          'Papiraは広告SDK、行動分析SDK、第三者の追跡ツールを使用しません。上記の目的を超えてデータを販売または提供しません。利用者がOSの機能を使ってEPUBを別のアプリ、ストレージ事業者、サービスへ書き出した場合は、送信先のプライバシーポリシーが適用されます。'
+        ]
+      },
+      {
+        title: '6. 保存期間と削除',
+        paragraphs: [
+          'アプリが管理するプロジェクト、設定、最近の履歴、プレビュー、キャッシュは、該当する削除操作またはアプリのアンインストールで端末から削除できます。利用者が管理する元ファイルと書き出したEPUBは、利用者が削除するまで残る場合があります。別のアプリやサービスへ送ったコピーには送信先の保存方針が適用されます。ONNELLABのサーバーにPapiraの内容は保存されません。'
+        ]
+      },
+      {
+        title: '7. セキュリティと子どものプライバシー',
+        paragraphs: [
+          'ONNELLABは、取り扱う必要のあるデータに合理的な技術上・組織上の保護措置を適用します。利用者自身も端末と書き出したファイルへのアクセスを安全に管理してください。Papiraは13歳未満の子どもを対象としておらず、子どもの個人情報を意図的に収集しません。'
+        ]
+      },
+      {
+        title: '8. 変更とお問い合わせ',
+        paragraphs: [
+          'Papiraの機能、法令、ストア要件が変わった場合、本ポリシーと最終更新日を更新します。',
+          'プライバシーに関するお問い合わせまたは削除依頼: onnellab.app@gmail.com'
+        ]
+      }
+    ]
+  },
+  'zh-Hans': {
+    title: 'Papira 隐私政策',
+    description: 'Papira 应用的隐私政策。',
+    intro: '本隐私政策适用于 ONNELLAB 提供的 Papira 应用。',
+    updatedLabel: '最后更新',
+    updatedValue: '2026-08-21',
+    heading: '隐私政策',
+    opening: 'Papira 重视用户隐私，并按照以下方式运行。',
+    homeLabel: 'ONNELLAB',
+    privacyHubLabel: '全部隐私政策',
+    sections: [
+      {
+        title: '1. 账号与直接身份信息',
+        paragraphs: [
+          'Papira 不要求用户使用姓名、电子邮箱或电话号码注册或登录。应用内容与使用记录不会传输给 ONNELLAB。'
+        ]
+      },
+      {
+        title: '2. 应用访问或存储在设备上的数据',
+        items: [
+          '用户明确选择的 TXT 原稿与封面图片',
+          '保存在设备上的书籍项目、出版信息与默认值、应用设置、最近输出记录、预览、缓存及生成的 EPUB 文件',
+          'TXT 与封面处理、预览生成、项目保存和 EPUB 制作均在设备本地完成',
+          '只有当用户通过操作系统的文件或照片选择器主动选择项目时，Papira 才会访问相应文件或照片',
+          '所选原稿、封面图片、项目及生成的 EPUB 不会上传到 ONNELLAB 服务器'
+        ]
+      },
+      {
+        title: '3. 服务器传输',
+        paragraphs: [
+          'Papira 不会把原稿内容、封面图片、项目数据、生成的 EPUB 或使用记录传输到 ONNELLAB 服务器。'
+        ]
+      },
+      {
+        title: '4. 应用商店服务与支付信息',
+        paragraphs: [
+          'Papira 可通过 Apple App Store 或 Google Play 下载或购买。下载、购买、退款及相关账号信息由相应商店按照其政策处理。Papira 与 ONNELLAB 不会访问或保存银行卡或银行账户信息。'
+        ]
+      },
+      {
+        title: '5. 广告、分析与共享',
+        paragraphs: [
+          'Papira 不使用广告 SDK、行为分析 SDK 或第三方追踪工具。除上述目的外，不会出售或提供数据。用户通过操作系统功能主动把 EPUB 导出或分享至其他应用、存储服务或平台后，将适用相应接收方的隐私政策。'
+        ]
+      },
+      {
+        title: '6. 保留与删除',
+        paragraphs: [
+          '应用管理的项目、设置、最近记录、预览与缓存可通过相应删除功能或卸载应用从设备中移除。由用户管理的源文件与已导出的 EPUB 可能保留至用户自行删除。发送到其他应用或服务的副本适用接收方的保留规则。ONNELLAB 服务器不保留 Papira 应用内容。'
+        ]
+      },
+      {
+        title: '7. 安全与儿童隐私',
+        paragraphs: [
+          'ONNELLAB 会对必须处理的数据采取合理的技术与管理保护措施。用户也应妥善保护设备与导出文件。Papira 并非面向 13 岁以下儿童设计，也不会故意收集儿童个人信息。'
+        ]
+      },
+      {
+        title: '8. 变更与联系',
+        paragraphs: [
+          '如 Papira 功能、法律或应用商店要求发生变化，本政策及最后更新日期也会相应更新。',
+          '隐私问题或删除请求: onnellab.app@gmail.com'
+        ]
+      }
+    ]
+  },
+  'zh-Hant': {
+    title: 'Papira 隱私權政策',
+    description: 'Papira 應用程式的隱私權政策。',
+    intro: '本隱私權政策適用於 ONNELLAB 提供的 Papira 應用程式。',
+    updatedLabel: '最後更新',
+    updatedValue: '2026-08-21',
+    heading: '隱私權政策',
+    opening: 'Papira 重視使用者隱私，並依照以下方式運作。',
+    homeLabel: 'ONNELLAB',
+    privacyHubLabel: '全部隱私權政策',
+    sections: [
+      {
+        title: '1. 帳號與直接識別資訊',
+        paragraphs: [
+          'Papira 不要求使用者以姓名、電子郵件或電話號碼註冊或登入。應用程式內容與使用紀錄不會傳送給 ONNELLAB。'
+        ]
+      },
+      {
+        title: '2. 應用程式存取或儲存在裝置上的資料',
+        items: [
+          '使用者明確選取的 TXT 原稿與封面圖片',
+          '儲存在裝置上的書籍專案、出版資訊與預設值、應用程式設定、最近輸出紀錄、預覽、快取及產生的 EPUB 檔案',
+          'TXT 與封面處理、預覽產生、專案儲存和 EPUB 製作都在裝置本機完成',
+          '只有當使用者透過作業系統的檔案或照片選取器主動選取項目時，Papira 才會存取對應檔案或照片',
+          '選取的原稿、封面圖片、專案及產生的 EPUB 不會上傳到 ONNELLAB 伺服器'
+        ]
+      },
+      {
+        title: '3. 伺服器傳輸',
+        paragraphs: [
+          'Papira 不會將原稿內容、封面圖片、專案資料、產生的 EPUB 或使用紀錄傳送到 ONNELLAB 伺服器。'
+        ]
+      },
+      {
+        title: '4. 應用程式商店服務與付款資訊',
+        paragraphs: [
+          'Papira 可透過 Apple App Store 或 Google Play 下載或購買。下載、購買、退款及相關帳號資訊由對應商店依其政策處理。Papira 與 ONNELLAB 不會存取或儲存信用卡或銀行帳戶資訊。'
+        ]
+      },
+      {
+        title: '5. 廣告、分析與分享',
+        paragraphs: [
+          'Papira 不使用廣告 SDK、行為分析 SDK 或第三方追蹤工具。除上述目的外，不會出售或提供資料。使用者透過作業系統功能主動將 EPUB 匯出或分享至其他應用程式、儲存服務或平台後，將適用接收方的隱私權政策。'
+        ]
+      },
+      {
+        title: '6. 保留與刪除',
+        paragraphs: [
+          '應用程式管理的專案、設定、最近紀錄、預覽與快取可透過對應刪除功能或移除應用程式從裝置中刪除。由使用者管理的來源檔案與已匯出的 EPUB 可能保留至使用者自行刪除。傳送至其他應用程式或服務的副本適用接收方的保留規則。ONNELLAB 伺服器不保留 Papira 應用程式內容。'
+        ]
+      },
+      {
+        title: '7. 安全與兒童隱私',
+        paragraphs: [
+          'ONNELLAB 會對必須處理的資料採取合理的技術與管理保護措施。使用者也應妥善保護裝置與匯出檔案。Papira 並非為 13 歲以下兒童設計，也不會故意蒐集兒童個人資訊。'
+        ]
+      },
+      {
+        title: '8. 變更與聯絡',
+        paragraphs: [
+          '如 Papira 功能、法律或應用程式商店要求變更，本政策及最後更新日期也會同步更新。',
+          '隱私問題或刪除請求: onnellab.app@gmail.com'
+        ]
+      }
+    ]
+  }
+};
+
+const { locale } = Astro.props;
+const text = policies[locale];
+const definition = localeDefinitions[locale];
+const canonicalPath = routeFor('papiraPrivacy', locale);
+---
+
+<BaseLayout
+  title={text.title}
+  description={text.description}
+  canonicalPath={canonicalPath}
+  lang={definition.htmlLang}
+  alternates={localeAlternates('papiraPrivacy')}
+>
+  <main class="legal-shell">
+    <nav class="topbar" aria-label="Navigation">
+      <a class="home-link" href={routeFor('home', locale)}>{text.homeLabel}</a>
+      <div class="topbar-actions">
+        <a class="hub-link" href={routeFor('privacy', locale)}>{text.privacyHubLabel}</a>
+        <LocaleMenu locale={locale} page="papiraPrivacy" />
+      </div>
+    </nav>
+
+    <h1>{text.title}</h1>
+    <p class="intro">{text.intro}</p>
+    <p class="updated"><strong>{text.updatedLabel}:</strong> {text.updatedValue}</p>
+    <hr />
+    <h2>{text.heading}</h2>
+    <p>{text.opening}</p>
+
+    {text.sections.map((section) => (
+      <section>
+        <h3>{section.title}</h3>
+        {section.paragraphs?.map((paragraph) =>
+          paragraph.includes('onnellab.app@gmail.com') ? (
+            <p>
+              {paragraph.replace('onnellab.app@gmail.com', '')}
+              <a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a>
+            </p>
+          ) : (
+            <p>{paragraph}</p>
+          )
+        )}
+        {section.items && (
+          <ul>
+            {section.items.map((item) => <li>{item}</li>)}
+          </ul>
+        )}
+      </section>
+    ))}
+  </main>
+</BaseLayout>
+
+<style>
+  .legal-shell {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 42px 28px 88px;
+    color: #3e3e3e;
+    font-size: 16px;
+    line-height: 1.76;
+  }
+
+  .topbar,
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  .topbar {
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 54px;
+  }
+
+  .topbar-actions {
+    gap: 14px;
+  }
+
+  .home-link,
+  .hub-link {
+    color: #686259;
+    font-size: 13px;
+    font-weight: 620;
+    text-decoration: none;
+  }
+
+  .home-link:hover,
+  .hub-link:hover {
+    color: #32302c;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  h1 {
+    margin: 0 0 14px;
+    color: #36332f;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 720;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+  }
+
+  h2 {
+    margin: 0 0 18px;
+    color: #393631;
+    font-size: 1.5rem;
+    font-weight: 690;
+  }
+
+  h3 {
+    margin: 38px 0 12px;
+    color: #403c37;
+    font-size: 1.08rem;
+    font-weight: 680;
+    line-height: 1.4;
+  }
+
+  p {
+    margin: 0 0 14px;
+  }
+
+  .intro {
+    max-width: 650px;
+    color: #746d64;
+    font-size: 1.04rem;
+  }
+
+  .updated {
+    color: #746d64;
+    font-size: 0.92rem;
+  }
+
+  ul {
+    margin: 0 0 18px;
+    padding-left: 1.28rem;
+  }
+
+  li {
+    margin: 8px 0;
+  }
+
+  hr {
+    margin: 42px 0;
+    border: 0;
+    border-top: 1px solid #ded7cd;
+  }
+
+  a {
+    color: #3d5f82;
+    text-decoration-color: rgba(61, 95, 130, 0.36);
+    text-underline-offset: 0.18em;
+  }
+
+  a:hover {
+    text-decoration-color: currentColor;
+  }
+
+  @media (max-width: 640px) {
+    .legal-shell {
+      padding: 26px 20px 64px;
+      font-size: 15px;
+    }
+
+    .topbar {
+      align-items: flex-start;
+      margin-bottom: 42px;
+    }
+
+    .topbar-actions {
+      align-items: flex-end;
+      flex-direction: column-reverse;
+      gap: 8px;
+    }
+
+    h3 {
+      margin-top: 32px;
+    }
+
+    hr {
+      margin: 34px 0;
+    }
+  }
+</style>

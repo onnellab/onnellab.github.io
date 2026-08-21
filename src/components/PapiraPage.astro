@@ -1,0 +1,492 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LocaleMenu from './LocaleMenu.astro';
+import { papiraCopy } from '../lib/papira';
+import {
+  localeAlternates,
+  localeDefinitions,
+  routeFor,
+  type SiteLocale
+} from '../lib/site-i18n';
+
+type Props = {
+  locale: SiteLocale;
+};
+
+const { locale } = Astro.props;
+const text = papiraCopy[locale];
+const canonicalPath = routeFor('papira', locale);
+const privacyPath = routeFor('papiraPrivacy', locale);
+const localeDefinition = localeDefinitions[locale];
+const appIcon = '/app-assets/papira/icon.png';
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    '@id': new URL(`${canonicalPath}#app`, Astro.site).toString(),
+    name: 'Papira',
+    description: text.seoDescription,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: ['iOS', 'Android'],
+    inLanguage: localeDefinition.htmlLang,
+    url: new URL(canonicalPath, Astro.site).toString(),
+    image: new URL(appIcon, Astro.site).toString(),
+    featureList: text.features,
+    privacyPolicy: new URL(privacyPath, Astro.site).toString(),
+    publisher: {
+      '@type': 'Organization',
+      name: 'ONNELLAB',
+      url: new URL('/', Astro.site).toString()
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': new URL(`${canonicalPath}#faq`, Astro.site).toString(),
+    mainEntity: text.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer
+      }
+    }))
+  }
+];
+---
+
+<BaseLayout
+  title={text.seoTitle}
+  description={text.seoDescription}
+  canonicalPath={canonicalPath}
+  lang={localeDefinition.htmlLang}
+  jsonLd={jsonLd}
+  alternates={localeAlternates('papira')}
+  favicon={appIcon}
+>
+  <main class="product-shell">
+    <nav class="top-nav" aria-label="Navigation">
+      <a class="brand" href={routeFor('home', locale)}>{text.homeLabel}</a>
+      <div class="nav-actions">
+        <a href={routeFor('apps', locale)}>{text.appsLabel}</a>
+        <LocaleMenu locale={locale} page="papira" />
+      </div>
+    </nav>
+
+    <section class="hero" aria-labelledby="papira-title">
+      <div class="identity">
+        <img src={appIcon} alt="Papira app icon" width="120" height="120" data-no-visual-search="true" />
+        <div>
+          <p class="eyebrow">{text.eyebrow}</p>
+          <h1 id="papira-title">Papira</h1>
+        </div>
+      </div>
+      <div class="hero-copy">
+        <h2>{text.tagline}</h2>
+        <p>{text.lead}</p>
+        <dl class="facts">
+          <div>
+            <dt>{text.statusLabel}</dt>
+            <dd>{text.statusValue}</dd>
+          </div>
+          <div>
+            <dt>{text.platformsLabel}</dt>
+            <dd>{text.platformsValue}</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="modes-title">
+      <div class="section-heading">
+        <p>01</p>
+        <h2 id="modes-title">{text.modesTitle}</h2>
+      </div>
+      <div class="mode-grid">
+        {text.modes.map((mode) => (
+          <article>
+            <h3>{mode.title}</h3>
+            <p>{mode.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="features-title">
+      <div class="section-heading">
+        <p>02</p>
+        <h2 id="features-title">{text.featuresTitle}</h2>
+      </div>
+      <ul class="feature-list">
+        {text.features.map((feature) => <li>{feature}</li>)}
+      </ul>
+    </section>
+
+    <section class="split-section">
+      <article aria-labelledby="privacy-title">
+        <p class="section-number">03</p>
+        <h2 id="privacy-title">{text.privacyTitle}</h2>
+        <ul>
+          {text.privacyItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article aria-labelledby="boundaries-title">
+        <p class="section-number">04</p>
+        <h2 id="boundaries-title">{text.boundariesTitle}</h2>
+        <ul>
+          {text.boundaries.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </section>
+
+    <section class="section faq" aria-labelledby="faq-title">
+      <div class="section-heading">
+        <p>05</p>
+        <h2 id="faq-title">{text.faqTitle}</h2>
+      </div>
+      <div class="faq-list">
+        {text.faqs.map((faq) => (
+          <details>
+            <summary>{faq.question}</summary>
+            <p>{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <footer>
+      <a href={privacyPath}>{text.privacyLabel}</a>
+      <a href="mailto:onnellab.app@gmail.com">{text.contactLabel}</a>
+      <span>© ONNELLAB</span>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .product-shell {
+    width: min(1080px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 26px 0 56px;
+    color: #3f3b35;
+  }
+
+  .top-nav,
+  .nav-actions,
+  .identity,
+  .facts,
+  footer {
+    display: flex;
+    align-items: center;
+  }
+
+  .top-nav {
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .brand,
+  .top-nav a,
+  footer a {
+    color: #686259;
+    font-size: 13px;
+    font-weight: 620;
+    text-decoration: none;
+  }
+
+  .brand {
+    letter-spacing: 0.02em;
+  }
+
+  .nav-actions {
+    gap: 14px;
+  }
+
+  .top-nav a:hover,
+  footer a:hover {
+    color: #2f2d29;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(34px, 7vw, 92px);
+    align-items: center;
+    min-height: 560px;
+    padding: 88px 0 76px;
+  }
+
+  .identity {
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  .identity img {
+    width: 112px;
+    height: 112px;
+    border-radius: 25px;
+    box-shadow: 0 14px 36px rgba(69, 57, 45, 0.12);
+  }
+
+  .eyebrow,
+  .section-heading p,
+  .section-number {
+    margin: 0 0 12px;
+    color: #8b8175;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    color: #38332e;
+    font-size: clamp(64px, 10vw, 112px);
+    font-weight: 690;
+    letter-spacing: -0.055em;
+    line-height: 0.86;
+  }
+
+  .hero-copy h2 {
+    max-width: 650px;
+    margin: 0;
+    color: #37332e;
+    font-size: clamp(34px, 5.8vw, 66px);
+    font-weight: 650;
+    letter-spacing: -0.045em;
+    line-height: 1.02;
+  }
+
+  .hero-copy > p {
+    max-width: 650px;
+    margin: 28px 0 0;
+    color: #676056;
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.75;
+  }
+
+  .facts {
+    flex-wrap: wrap;
+    gap: 12px 36px;
+    margin: 34px 0 0;
+  }
+
+  .facts div {
+    min-width: 150px;
+  }
+
+  .facts dt {
+    color: #8b8175;
+    font-size: 12px;
+    font-weight: 650;
+  }
+
+  .facts dd {
+    margin: 5px 0 0;
+    color: #49443e;
+    font-size: 14px;
+    font-weight: 620;
+  }
+
+  .section,
+  .split-section {
+    border-top: 1px solid #dfd7cb;
+    padding: 66px 0 72px;
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 18px;
+    align-items: baseline;
+    margin-bottom: 36px;
+  }
+
+  .section-heading h2,
+  .split-section h2 {
+    margin: 0;
+    color: #39352f;
+    font-size: clamp(27px, 4vw, 43px);
+    font-weight: 640;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
+  }
+
+  .mode-grid,
+  .split-section {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .mode-grid article {
+    min-height: 190px;
+    border: 1px solid #ded6ca;
+    border-radius: 18px;
+    padding: 30px;
+    background: rgba(255, 253, 248, 0.66);
+  }
+
+  .mode-grid h3 {
+    margin: 0;
+    color: #3c3832;
+    font-size: 22px;
+    font-weight: 650;
+  }
+
+  .mode-grid p,
+  .faq-list p {
+    margin: 15px 0 0;
+    color: #6a6359;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .feature-list,
+  .split-section ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 42px;
+  }
+
+  .feature-list li,
+  .split-section li {
+    position: relative;
+    border-bottom: 1px solid #e7dfd3;
+    padding: 18px 0 18px 22px;
+    color: #585149;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .feature-list li::before,
+  .split-section li::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    top: 26px;
+    left: 0;
+    border-radius: 50%;
+    background: #c6b5d5;
+  }
+
+  .split-section article {
+    min-width: 0;
+    padding: 32px;
+    background: linear-gradient(150deg, rgba(235, 241, 249, 0.66), rgba(255, 250, 244, 0.72));
+  }
+
+  .split-section article:last-child {
+    background: linear-gradient(150deg, rgba(247, 232, 226, 0.62), rgba(255, 252, 247, 0.76));
+  }
+
+  .split-section ul {
+    margin-top: 24px;
+  }
+
+  .faq-list {
+    border-top: 1px solid #dfd7cb;
+  }
+
+  .faq-list details {
+    border-bottom: 1px solid #dfd7cb;
+    padding: 0 4px;
+  }
+
+  .faq-list summary {
+    padding: 22px 0;
+    color: #3f3a34;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 640;
+  }
+
+  .faq-list p {
+    max-width: 760px;
+    margin: -4px 0 22px;
+  }
+
+  footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 9px 20px;
+    border-top: 1px solid #dfd7cb;
+    padding-top: 28px;
+    color: #857d72;
+    font-size: 12px;
+  }
+
+  @media (max-width: 780px) {
+    .product-shell {
+      width: min(100% - 30px, 1080px);
+      padding-top: 20px;
+    }
+
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding: 70px 0 62px;
+    }
+
+    .identity {
+      align-items: center;
+    }
+
+    .identity img {
+      width: 82px;
+      height: 82px;
+      border-radius: 20px;
+    }
+
+    h1 {
+      font-size: clamp(55px, 18vw, 82px);
+    }
+
+    .mode-grid,
+    .feature-list,
+    .split-section {
+      grid-template-columns: 1fr;
+    }
+
+    .section,
+    .split-section {
+      padding: 50px 0 54px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .top-nav {
+      align-items: flex-start;
+    }
+
+    .nav-actions {
+      align-items: flex-end;
+      flex-direction: column-reverse;
+      gap: 8px;
+    }
+
+    .identity {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .section-heading {
+      grid-template-columns: 38px minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .mode-grid article,
+    .split-section article {
+      padding: 24px;
+    }
+  }
+</style>

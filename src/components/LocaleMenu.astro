@@ -1,0 +1,126 @@
+---
+import {
+  localeDefinitions,
+  routeFor,
+  siteLocales,
+  type LocalizedPage,
+  type SiteLocale
+} from '../lib/site-i18n';
+
+type Props = {
+  locale: SiteLocale;
+  page: LocalizedPage;
+  supported?: readonly SiteLocale[];
+};
+
+const { locale, page, supported = siteLocales } = Astro.props;
+const current = localeDefinitions[locale];
+---
+
+<details class="locale-menu">
+  <summary aria-label={`Language: ${current.label}`}>{current.label}</summary>
+  <div class="locale-menu-panel" role="list">
+    {supported.map((item) => {
+      const definition = localeDefinitions[item];
+      return (
+        <a
+          href={routeFor(page, item)}
+          lang={definition.htmlLang}
+          hreflang={definition.hreflang}
+          data-locale-choice={item}
+          aria-current={item === locale ? 'page' : undefined}
+          role="listitem"
+        >
+          {definition.label}
+        </a>
+      );
+    })}
+  </div>
+</details>
+
+<style>
+  .locale-menu {
+    position: relative;
+    z-index: 20;
+  }
+
+  .locale-menu summary {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ded6ca;
+    border-radius: 999px;
+    padding: 7px 13px;
+    background: rgba(255, 253, 248, 0.82);
+    color: #5f5a50;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.35;
+    list-style: none;
+    white-space: nowrap;
+  }
+
+  .locale-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .locale-menu summary::after {
+    content: '⌄';
+    margin-left: 7px;
+    color: #90877b;
+    font-size: 12px;
+    transform: translateY(-1px);
+  }
+
+  .locale-menu[open] summary,
+  .locale-menu summary:hover,
+  .locale-menu summary:focus-visible {
+    border-color: #cfc5b7;
+    background: #fffdf8;
+  }
+
+  .locale-menu summary:focus-visible,
+  .locale-menu-panel a:focus-visible {
+    outline: 2px solid #827d72;
+    outline-offset: 3px;
+  }
+
+  .locale-menu-panel {
+    width: max-content;
+    min-width: 156px;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    display: grid;
+    gap: 2px;
+    border: 1px solid #ded6ca;
+    border-radius: 13px;
+    padding: 6px;
+    background: #fffdf8;
+    box-shadow: 0 14px 34px rgba(57, 48, 39, 0.11);
+  }
+
+  .locale-menu-panel a {
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: #5f5a50;
+    font-size: 13px;
+    font-weight: 560;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .locale-menu-panel a:hover,
+  .locale-menu-panel a[aria-current='page'] {
+    background: #f4efe7;
+    color: #383631;
+  }
+
+  @media (max-width: 520px) {
+    .locale-menu-panel {
+      right: 0;
+    }
+  }
+</style>
