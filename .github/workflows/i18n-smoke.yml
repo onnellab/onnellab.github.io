@@ -57,11 +57,12 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Run five-language smoke tests
+      - name: Run desktop route and regression tests
         run: >-
           npx playwright test
           tests/site-i18n.spec.ts
           tests/papira-i18n.spec.ts
+          tests/site-visual.spec.ts
           --project=desktop
 
       - name: Publish commit status
@@ -73,10 +74,10 @@ jobs:
         run: |
           if [ "$JOB_RESULT" = "success" ]; then
             state=success
-            description="Five-language browser smoke tests passed"
+            description="Five-language desktop regression tests passed"
           else
             state=failure
-            description="Five-language browser smoke tests failed"
+            description="Five-language desktop regression tests failed"
           fi
 
           gh api \
