@@ -115,15 +115,37 @@ test.describe('site layout and navigation', () => {
     await expect.poll(() => new URL(page.url()).pathname).toBe('/apps/tagweaver/');
   });
 
-  test('home highlights TagWeaver and keeps Papira on the apps page only', async ({ page }) => {
+  test('home uses the full TagWeaver card as the link and keeps Papira off the homepage', async ({ page }) => {
     await page.goto('/ko/');
-    await expect(page.locator('.featured h2')).toContainText('TagWeaver');
-    await expect(page.locator('.featured a')).toHaveAttribute('href', '/apps/tagweaver/ko/');
+    const featured = page.locator('a.featured');
+    await expect(featured).toHaveAttribute('href', '/apps/tagweaver/ko/');
+    await expect(featured.locator('h2')).toContainText('TagWeaver');
+    await expect(featured.locator('a')).toHaveCount(0);
+    await expect(featured).not.toContainText('TagWeaver 살펴보기');
     await expect(page.locator('main')).not.toContainText('Papira');
     await expect(page.locator('.product-card')).toHaveCount(4);
 
     await page.goto('/apps/ko/');
     await expect(page.locator('[data-app-row]').filter({ hasText: 'Papira' })).toHaveCount(1);
+  });
+
+  test('home introduction uses the card measure and breaks between sentences', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/ko/');
+
+    const lede = page.locator('.home-hero .lede');
+    await expect(lede).toContainText('목적이 분명한 앱을 만들어요.');
+    await expect(lede).toContainText('기능을 쌓아 올리거나');
+
+    const ledeBox = await lede.boundingBox();
+    const featuredBox = await page.locator('a.featured').boundingBox();
+    expect(ledeBox).not.toBeNull();
+    expect(featuredBox).not.toBeNull();
+    if (!ledeBox || !featuredBox) return;
+    expect(Math.abs(ledeBox.width - featuredBox.width)).toBeLessThan(1.5);
+
+    const renderedText = await lede.innerText();
+    expect(renderedText).toContain('만들어요.\n기능을');
   });
 
   test('mobile home reveals the representative app within the first viewport', async ({ page }) => {
@@ -140,11 +162,25 @@ test.describe('site layout and navigation', () => {
     expect(titleMetrics.fontSize).toBeLessThanOrEqual(44.1);
     expect(titleMetrics.lineHeight).toBeGreaterThan(titleMetrics.fontSize);
 
-    const featuredBox = await page.locator('.featured').boundingBox();
+    const featuredBox = await page.locator('a.featured').boundingBox();
     expect(featuredBox).not.toBeNull();
     if (!featuredBox) return;
     expect(featuredBox.y).toBeLessThan(844);
-    await expect(page.locator('.featured')).toContainText('TagWeaver');
+    await expect(page.locator('a.featured')).toContainText('TagWeaver');
+  });
+
+  test('ONNELLAB wordmark uses one font across core, blog, and product pages', async ({ page }) => {
+    const paths = ['/ko/', '/blog/ko/', '/apps/tagweaver/ko/', '/about/ko/', '/privacy/ko/', '/apps/papira/ko/'];
+    const fontFamilies: string[] = [];
+
+    for (const path of paths) {
+      await page.goto(path);
+      const brand = page.locator('.brand').first();
+      await expect(brand).toHaveText('ONNELLAB');
+      fontFamilies.push(await brand.evaluate((node) => getComputedStyle(node).fontFamily));
+    }
+
+    expect(new Set(fontFamilies).size).toBe(1);
   });
 
   test('core navigation follows the active locale', async ({ page }) => {
@@ -170,6 +206,39 @@ test.describe('site layout and navigation', () => {
 });
 
 test.describe('app and privacy collections', () => {
+  test('apps are alphabetically ordered and localized status badges are distinct', async ({ page }) => {
+    await page.goto('/apps/ko/');
+    await expect(page.locator('[data-app-row] h2')).toHaveText([
+      'Aligna',
+      'ClipNest',
+      'Melivra',
+      'Papira',
+      'Quivra',
+      'Segra',
+      'TagWeaver',
+      'VaultXT'
+    ]);
+
+    const melivraBadge = page.locator('[data-app-row]').filter({ hasText: 'Melivra' }).locator('.status-badge');
+    const papiraBadge = page.locator('[data-app-row]').filter({ hasText: 'Papira' }).locator('.status-badge');
+    const releasedBadge = page.locator('[data-app-row]').filter({ hasText: 'TagWeaver' }).locator('.status-badge');
+
+    await expect(melivraBadge).toHaveText('출시 준비 중');
+    await expect(papiraBadge).toHaveText('출시 준비 중');
+    await expect(releasedBadge).toHaveText('출시됨');
+    await expect(page.locator('[data-apps-page]')).not.toContainText('Released');
+
+    const preparingStyle = await papiraBadge.evaluate((node) => {
+      const style = getComputedStyle(node);
+      return `${style.backgroundColor}|${style.borderColor}`;
+    });
+    const releasedStyle = await releasedBadge.evaluate((node) => {
+      const style = getComputedStyle(node);
+      return `${style.backgroundColor}|${style.borderColor}`;
+    });
+    expect(preparingStyle).not.toBe(releasedStyle);
+  });
+
   test('apps search filters localized product rows', async ({ page }) => {
     await page.goto('/apps/ja/');
     await page.locator('[data-app-search]').fill('papira');
@@ -199,6 +268,22 @@ test.describe('app and privacy collections', () => {
     );
   });
 
+  test('About restores its timeline and matches the intro measure to the principles', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/about/ko/');
+    await expect(page.locator('#timeline-title')).toHaveText('연표');
+    await expect(page.locator('.timeline li')).toHaveCount(6);
+    await expect(page.locator('.timeline')).toContainText('TagWeaver 출시');
+    await expect(page.locator('.timeline')).toContainText('Segra 출시');
+
+    const introBox = await page.locator('.intro-copy').boundingBox();
+    const principlesBox = await page.locator('.principles-grid').boundingBox();
+    expect(introBox).not.toBeNull();
+    expect(principlesBox).not.toBeNull();
+    if (!introBox || !principlesBox) return;
+    expect(Math.abs(introBox.width - principlesBox.width)).toBeLessThan(1.5);
+  });
+
   test('privacy search filters policy rows', async ({ page }) => {
     await page.goto('/privacy/ko/');
     await page.locator('[data-policy-search]').fill('papira');
@@ -208,6 +293,13 @@ test.describe('app and privacy collections', () => {
     await page.locator('[data-policy-search]').fill('missing-app');
     await expect(page.locator('[data-policy-row]:visible')).toHaveCount(0);
     await expect(page.locator('[data-policy-empty]')).toBeVisible();
+  });
+
+  test('Korean privacy contact keeps the complete sentence around its mail link', async ({ page }) => {
+    await page.goto('/privacy/ko/');
+    const contact = page.locator('[data-contact-notice] p');
+    await expect(contact).toHaveText('개인정보 관련 문의는 onnellab.app@gmail.com으로 보내요.');
+    await expect(contact.locator('a')).toHaveAttribute('href', 'mailto:onnellab.app@gmail.com');
   });
 
   test('privacy hub structured data and visible rows use canonical policy URLs', async ({ page }) => {
@@ -279,6 +371,22 @@ test.describe('existing product pages', () => {
       expect(faq.mainEntity).toHaveLength(3);
     });
   }
+
+  test('Papira uses the shared product-detail layout and formal Korean privacy style', async ({ page }) => {
+    await page.goto('/apps/papira/ko/');
+    await expect(page.locator('main.page-shell')).toHaveAttribute('data-product-slug', 'papira');
+    await expect(page.locator('.hero-grid')).toBeVisible();
+    await expect(page.locator('.content-band')).toHaveCount(2);
+    await expect(page.locator('.status-pill')).toContainText('출시 준비 중');
+
+    await page.goto('/privacy/papira/ko/');
+    const policyText = await page.locator('main').innerText();
+    expect(policyText).toContain('이 개인정보 처리방침은 ONNELLAB이 제공하는 Papira 앱에 적용됩니다.');
+    expect(policyText).toContain('아래와 같은 방식으로 운영됩니다.');
+    expect(policyText).not.toContain('적용돼요');
+    expect(policyText).not.toContain('운영돼요');
+    expect(policyText).not.toContain('요구하지 않아요');
+  });
 
   test('TagWeaver store links and privacy links match page locale', async ({ page }) => {
     await page.goto('/apps/tagweaver/');
