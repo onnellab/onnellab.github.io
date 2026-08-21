@@ -6,6 +6,8 @@ import {
   renderBlocks
 } from '../lib/products';
 import { getBlogPosts, renderMarkdownBlocks, type BlogPost } from '../lib/blog';
+import { papiraCopy } from '../lib/papira';
+import { localeDefinitions, routeFor, siteLocales } from '../lib/site-i18n';
 
 const siteUrl = 'https://onnellab.github.io';
 
@@ -27,20 +29,44 @@ export function GET() {
   const lines = [
     '# ONNELLAB',
     '',
-    'ONNELLAB is an independent software studio creating calm, structured apps for music, text, audio, files, and productivity.',
+    'ONNELLAB is an independent software studio creating calm, focused apps for files, text, audio, media, and creative work.',
     '',
     '## Website',
     '',
-    `- Home: ${siteUrl}/`,
-    `- Korean home: ${siteUrl}/ko/`,
-    `- Apps: ${siteUrl}/apps/`,
-    `- Privacy policies: ${siteUrl}/privacy/`,
-    `- Korean privacy policies: ${siteUrl}/privacy/ko/`,
+    ...siteLocales.flatMap((locale) => {
+      const label = localeDefinitions[locale].label;
+      return [
+        `- ${label} home: ${new URL(routeFor('home', locale), siteUrl).toString()}`,
+        `- ${label} apps: ${new URL(routeFor('apps', locale), siteUrl).toString()}`,
+        `- ${label} about: ${new URL(routeFor('about', locale), siteUrl).toString()}`,
+        `- ${label} privacy hub: ${new URL(routeFor('privacy', locale), siteUrl).toString()}`,
+        `- ${label} terms: ${new URL(routeFor('terms', locale), siteUrl).toString()}`
+      ];
+    }),
     `- Blog: ${siteUrl}/blog/`,
     `- Korean blog: ${siteUrl}/blog/ko/`,
     `- RSS: ${siteUrl}/rss.xml`,
     `- Sitemap: ${siteUrl}/sitemap.xml`,
     '',
+    '## Papira',
+    '',
+    'Papira is an offline TXT-to-EPUB maker for finished manuscripts. It supports English, Korean, Japanese, Simplified Chinese, and Traditional Chinese.',
+    '',
+    ...siteLocales.flatMap((locale) => {
+      const copy = papiraCopy[locale];
+      return [
+        `### Papira (${localeDefinitions[locale].label})`,
+        '',
+        copy.lead,
+        '',
+        `- Main task: ${copy.tagline}`,
+        `- Product page: ${new URL(routeFor('papira', locale), siteUrl).toString()}`,
+        `- Privacy policy: ${new URL(routeFor('papiraPrivacy', locale), siteUrl).toString()}`,
+        `- Platforms: iOS, Android`,
+        `- Processing: on-device; no account, advertising, behavioral analytics, or file upload`,
+        ''
+      ];
+    }),
     '## Blog Articles',
     '',
     ...blogPosts.flatMap((post) => [
@@ -59,7 +85,7 @@ export function GET() {
       ''
     ]),
     '',
-    '## Apps',
+    '## Apps with English and Korean product pages',
     '',
     ...apps.flatMap((app) => {
       const bodyBlocks = renderBlocks(pageBodyDescription(app.copy));
