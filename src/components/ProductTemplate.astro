@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LocaleMenu from './LocaleMenu.astro';
 import { landingSubtitle, pageBodyDescription, renderBlocks, type ProductPageData } from '../lib/products';
 import { latestReleaseNoteForApp, releaseNotePath } from '../lib/releaseNotes';
+import { localeAlternates } from '../lib/site-i18n';
 
 type Props = {
   data: ProductPageData;
@@ -80,6 +82,13 @@ const privacyUrl = localizedPrivacyUrl(meta.privacy, data.locale);
 const storeUrls = [appStoreUrl, googlePlayUrl].filter(Boolean);
 const latestReleaseNote = latestReleaseNoteForApp(data.source.slug);
 const releaseNotesUrl = latestReleaseNote ? releaseNotePath(latestReleaseNote) : undefined;
+const alternates = data.source.slug === 'papira'
+  ? localeAlternates('papira')
+  : [
+      { lang: 'en', path: enPath },
+      { lang: 'ko', path: koPath },
+      { lang: 'x-default', path: enPath }
+    ];
 const landingScreenshotPaths = data.screenshotPaths;
 const hasScreenshotCarousel = landingScreenshotPaths.length > 3;
 const screenshotUrls = landingScreenshotPaths.map((screenshotPath) =>
@@ -190,16 +199,16 @@ const faqJsonLd = {
   lang={data.locale}
   image={data.iconPath}
   jsonLd={faqContent ? [jsonLd, breadcrumbJsonLd, faqJsonLd] : [jsonLd, breadcrumbJsonLd]}
-  alternates={[
-    { lang: 'en', path: enPath },
-    { lang: 'ko', path: koPath },
-    { lang: 'x-default', path: enPath }
-  ]}
+  alternates={alternates}
 >
   <main class="page-shell" style={pageStyle} data-product-slug={data.source.slug} data-product-locale={data.locale}>
     <header class="topbar" aria-label="ONNELLAB">
       <a class="brand" href={homePath}>ONNELLAB</a>
-      <a class="language" href={data.alternatePath} data-locale-choice={data.locale === 'ko' ? 'en' : 'ko'} aria-label={data.locale === 'ko' ? 'Switch to English' : '한국어로 보기'} title={data.locale === 'ko' ? 'English' : '한국어'}>{labels.switchLabel}</a>
+      {data.source.slug === 'papira' ? (
+        <LocaleMenu locale={data.locale} page="papira" />
+      ) : (
+        <a class="language" href={data.alternatePath} data-locale-choice={data.locale === 'ko' ? 'en' : 'ko'} aria-label={data.locale === 'ko' ? 'Switch to English' : '한국어로 보기'} title={data.locale === 'ko' ? 'English' : '한국어'}>{labels.switchLabel}</a>
+      )}
     </header>
 
     <section class="hero" aria-labelledby="product-title" data-app={data.source.slug}>
