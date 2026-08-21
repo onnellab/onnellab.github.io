@@ -35,7 +35,8 @@ const canonicalUrl = new URL(canonicalPath, Astro.site);
 const imageUrl = socialImage || image ? new URL(socialImage || image || '', Astro.site) : undefined;
 const twitterCard = imageUrl ? 'summary_large_image' : 'summary';
 const faviconVersion = '20260713-ol-classic-v2';
-const customFaviconUrl = favicon ? new URL(favicon, Astro.site) : undefined;
+const customFaviconPath = favicon || image;
+const customFaviconUrl = customFaviconPath ? new URL(customFaviconPath, Astro.site) : undefined;
 const jsonLdItems = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID?.trim();
 const gaScript = gaMeasurementId
@@ -67,7 +68,11 @@ const gaScript = gaMeasurementId
     <meta name="google-site-verification" content="0IUOtlQTLbMO9gWiDi4TqtQpMCKZVsGRLEchK8A6IzE" />
     {customFaviconUrl ? (
       <>
-        <link rel="icon" href={customFaviconUrl} type={favicon?.endsWith('.png') ? 'image/png' : undefined} />
+        <link
+          rel="icon"
+          href={customFaviconUrl}
+          type={customFaviconPath?.endsWith('.png') ? 'image/png' : undefined}
+        />
         <link rel="apple-touch-icon" href={customFaviconUrl} />
       </>
     ) : (
