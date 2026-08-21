@@ -1,179 +1,253 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getProductIndexItems, type Locale } from '../lib/products';
+import LocaleMenu from './LocaleMenu.astro';
+import { getProductIndexItems } from '../lib/products';
+import {
+  contentLocale,
+  localeAlternates,
+  localeDefinitions,
+  routeFor,
+  type SiteLocale
+} from '../lib/site-i18n';
 
 type Props = {
-  locale: Locale;
+  locale: SiteLocale;
+};
+
+type PrivacyCopy = {
+  title: string;
+  description: string;
+  eyebrow: string;
+  heading: string;
+  intro: string;
+  searchLabel: string;
+  searchPlaceholder: string;
+  empty: string;
+  updated: string;
+  analyticsTitle: string;
+  analyticsBody: string;
+  siteTitle: string;
+  siteBody: string;
+  contactTitle: string;
+  contactBody: string;
+  fallbackNotice?: string;
+};
+
+const copies: Record<SiteLocale, PrivacyCopy> = {
+  en: {
+    title: 'ONNELLAB Privacy Policies',
+    description: 'Privacy policy links for ONNELLAB apps.',
+    eyebrow: 'Legal',
+    heading: 'Privacy Policies',
+    intro: 'Choose an app to read the policy that matches its actual data flow and platform features.',
+    searchLabel: 'Find app',
+    searchPlaceholder: 'Search app name',
+    empty: 'No matching apps.',
+    updated: 'Policy date',
+    analyticsTitle: 'Website analytics',
+    analyticsBody:
+      'When Google Analytics is configured, the ONNELLAB website may measure aggregate events such as page visits, language switches, store clicks, and screenshot opens to improve the site. It does not collect app file contents, tag values, or account information.',
+    siteTitle: 'ONNELLAB website privacy',
+    siteBody:
+      'This website provides original ONNELLAB content and product information. External publishing APIs are used only for approved ONNELLAB-owned content and ONNELLAB-controlled accounts. ONNELLAB does not sell or analyze other users’ private social data.',
+    contactTitle: 'Contact',
+    contactBody: 'For privacy questions, contact onnellab.app@gmail.com.'
+  },
+  ko: {
+    title: 'ONNELLAB 개인정보 처리방침',
+    description: 'ONNELLAB 앱별 개인정보 처리방침을 확인해요.',
+    eyebrow: '법적 안내',
+    heading: '개인정보 처리방침',
+    intro: '앱마다 실제 데이터 흐름과 플랫폼 기능에 맞는 개인정보 처리방침을 제공해요.',
+    searchLabel: '앱 찾기',
+    searchPlaceholder: '앱 이름을 검색해요',
+    empty: '일치하는 앱이 없어요.',
+    updated: '작성 날짜',
+    analyticsTitle: '사이트 이용 분석',
+    analyticsBody:
+      'Google Analytics가 설정된 경우에만 사이트 개선을 위해 페이지 방문, 언어 전환, 스토어 이동과 스크린샷 열람 같은 집계 이벤트를 측정할 수 있어요. 앱 안의 파일 내용, 태그 값이나 계정 정보는 수집하지 않아요.',
+    siteTitle: 'ONNELLAB 웹사이트 개인정보',
+    siteBody:
+      '이 웹사이트는 ONNELLAB이 만든 콘텐츠와 제품 정보를 제공해요. 외부 게시 API는 승인된 ONNELLAB 콘텐츠와 ONNELLAB이 관리하는 계정에만 사용해요. 다른 사용자의 비공개 소셜 데이터를 판매하거나 분석하지 않아요.',
+    contactTitle: '문의',
+    contactBody: '개인정보 관련 문의는 onnellab.app@gmail.com으로 보내요.'
+  },
+  ja: {
+    title: 'ONNELLAB プライバシーポリシー',
+    description: 'ONNELLABアプリごとのプライバシーポリシーです。',
+    eyebrow: '法的情報',
+    heading: 'プライバシーポリシー',
+    intro: '各アプリの実際のデータフローとプラットフォーム機能に合わせたポリシーを掲載しています。',
+    searchLabel: 'アプリを探す',
+    searchPlaceholder: 'アプリ名で検索',
+    empty: '該当するアプリはありません。',
+    updated: 'ポリシー日付',
+    analyticsTitle: 'ウェブサイトの利用分析',
+    analyticsBody:
+      'Google Analyticsが設定されている場合に限り、サイト改善のため、ページ閲覧、言語切り替え、ストアへの移動、スクリーンショット表示などの集計イベントを測定することがあります。アプリ内のファイル内容、タグ値、アカウント情報は収集しません。',
+    siteTitle: 'ONNELLABウェブサイトのプライバシー',
+    siteBody:
+      '本サイトはONNELLABのコンテンツと製品情報を提供します。外部投稿APIは承認済みのONNELLABコンテンツとONNELLAB管理アカウントにのみ使用します。他の利用者の非公開ソーシャルデータを販売または分析しません。',
+    contactTitle: 'お問い合わせ',
+    contactBody: 'プライバシーに関するお問い合わせは onnellab.app@gmail.com までお送りください。',
+    fallbackNotice: 'Papiraのポリシーは日本語で読めます。ほかのアプリのポリシーは現在、英語または韓国語で提供しています。'
+  },
+  'zh-Hans': {
+    title: 'ONNELLAB 隐私政策',
+    description: 'ONNELLAB 各应用的隐私政策。',
+    eyebrow: '法律信息',
+    heading: '隐私政策',
+    intro: '每款应用都提供与实际数据流和平台功能相符的隐私政策。',
+    searchLabel: '查找应用',
+    searchPlaceholder: '搜索应用名称',
+    empty: '没有匹配的应用。',
+    updated: '政策日期',
+    analyticsTitle: '网站使用分析',
+    analyticsBody:
+      '仅在配置 Google Analytics 时，本网站可能为改进体验而统计页面访问、语言切换、前往商店和查看截图等汇总事件。不会收集应用内文件内容、标签值或账号信息。',
+    siteTitle: 'ONNELLAB 网站隐私',
+    siteBody:
+      '本网站提供 ONNELLAB 原创内容与产品信息。外部发布 API 仅用于经批准的 ONNELLAB 内容和由 ONNELLAB 管理的账号。我们不会出售或分析其他用户的私密社交数据。',
+    contactTitle: '联系',
+    contactBody: '隐私相关问题请发送至 onnellab.app@gmail.com。',
+    fallbackNotice: 'Papira 隐私政策提供简体中文。其他应用政策目前提供英文或韩文。'
+  },
+  'zh-Hant': {
+    title: 'ONNELLAB 隱私權政策',
+    description: 'ONNELLAB 各應用程式的隱私權政策。',
+    eyebrow: '法律資訊',
+    heading: '隱私權政策',
+    intro: '每款應用程式都提供與實際資料流程和平台功能相符的隱私權政策。',
+    searchLabel: '尋找應用程式',
+    searchPlaceholder: '搜尋應用程式名稱',
+    empty: '沒有符合的應用程式。',
+    updated: '政策日期',
+    analyticsTitle: '網站使用分析',
+    analyticsBody:
+      '僅在設定 Google Analytics 時，本網站可能為改善體驗而統計頁面瀏覽、語言切換、前往商店和查看截圖等彙總事件。不會蒐集應用程式內的檔案內容、標籤值或帳號資訊。',
+    siteTitle: 'ONNELLAB 網站隱私',
+    siteBody:
+      '本網站提供 ONNELLAB 原創內容與產品資訊。外部發布 API 僅用於經核准的 ONNELLAB 內容和由 ONNELLAB 管理的帳號。我們不會出售或分析其他使用者的私人社群資料。',
+    contactTitle: '聯絡',
+    contactBody: '隱私相關問題請寄至 onnellab.app@gmail.com。',
+    fallbackNotice: 'Papira 隱私權政策提供繁體中文。其他應用程式政策目前提供英文或韓文。'
+  }
 };
 
 const { locale } = Astro.props;
+const copy = copies[locale];
+const definition = localeDefinitions[locale];
+const canonicalPath = routeFor('privacy', locale);
 const privacyUpdatedAtByTitle: Record<string, string> = {
-  Quivra: '2026-02-10',
-  TagWeaver: '2026-02-14',
-  VaultXT: '2026-03-11',
-  Segra: '2026-06-12',
-  ClipNest: '2026-06-13',
   Aligna: '2026-06-24',
+  ClipNest: '2026-06-13',
   Melivra: '2026-07-09',
-  Papira: '2026-08-21'
+  Papira: '2026-08-21',
+  Quivra: '2026-02-10',
+  Segra: '2026-06-12',
+  TagWeaver: '2026-02-14',
+  VaultXT: '2026-03-11'
 };
-const contentApps = getProductIndexItems(locale);
-const contentAppTitles = new Set(contentApps.map((app) => app.title));
-const staticPrivacyApps = [
-  { title: 'Quivra', href: 'https://onnellab.github.io/privacy/quivra/' },
-  { title: 'TagWeaver', href: 'https://onnellab.github.io/privacy/tagweaver/' },
-  { title: 'VaultXT', href: 'https://onnellab.github.io/privacy/vaultxt/' },
-  { title: 'Segra', href: 'https://onnellab.github.io/privacy/segra/' },
-  { title: 'ClipNest', href: 'https://onnellab.github.io/privacy/clipnest/' },
-  { title: 'Melivra', href: 'https://onnellab.github.io/privacy/melivra/' },
-  { title: 'Papira', href: 'https://onnellab.github.io/privacy/papira/' }
-].filter((app) => !contentAppTitles.has(app.title));
-const privacyDate = (title: string) => privacyUpdatedAtByTitle[title] ?? '9999-12-31';
-const localizedPolicyHref = (href: string) => {
-  if (locale !== 'ko') return href;
-  return href.replace(/\/?$/, '/ko/');
-};
+const existingApps = getProductIndexItems(contentLocale(locale));
+const existingPolicyHref = (href: string) =>
+  locale === 'ko' ? href.replace(/\/?$/, '/ko/') : href;
 const policies = [
-  ...contentApps
-    .filter((app) => app.privacy)
-    .map((app) => ({
-      title: app.title,
-      href: localizedPolicyHref(app.privacy),
-      date: privacyDate(app.title),
-      platforms: app.platforms
-    })),
-  ...staticPrivacyApps.map((app) => ({
+  ...existingApps.map((app) => ({
     title: app.title,
-    href: localizedPolicyHref(app.href),
-    date: privacyDate(app.title),
-    platforms: [] as string[]
-  }))
-].sort((a, b) => a.title.localeCompare(b.title));
-
-const text =
-  locale === 'ko'
-    ? {
-        title: 'ONNELLAB 개인정보 처리방침',
-        description: 'ONNELLAB 앱별 개인정보 처리방침 링크를 정리한 페이지입니다.',
-        heading: '개인정보 처리방침',
-        searchLabel: '앱 찾기',
-        searchPlaceholder: '앱 이름 검색',
-        empty: '일치하는 앱이 없습니다.',
-        updated: '작성 날짜',
-        home: 'ONNELLAB',
-        noticeTitle: '사이트 이용 분석',
-        noticeBody: 'ONNELLAB 웹사이트는 서비스 개선을 위해 Google Analytics가 설정된 경우에만 페이지 방문, 언어 전환, 스토어 이동, 스크린샷 열람 같은 집계 이벤트를 측정할 수 있습니다. 앱 안의 파일 내용, 태그 값, 계정 정보는 수집하지 않습니다.',
-        sitePrivacyTitle: 'ONNELLAB 웹사이트 개인정보',
-        sitePrivacyBody: 'ONNELLAB 웹사이트는 자체 콘텐츠와 앱 정보를 제공하기 위해 운영됩니다. X, Bluesky, Dev.to 같은 외부 게시 API는 ONNELLAB 계정의 승인된 콘텐츠 게시와 기본 인증 확인에만 사용하며, 타인의 소셜 데이터, 타임라인, 팔로워, 다이렉트 메시지를 수집하거나 판매하지 않습니다.',
-        contactTitle: '문의',
-        contactBody: '개인정보 관련 문의는 onnellab.app@gmail.com 으로 연락할 수 있습니다.',
-        switchLabel: 'English',
-        switchHref: '/privacy/',
-        homeHref: '/ko/'
-      }
-    : {
-        title: 'ONNELLAB Privacy Policies',
-        description: 'Privacy policy links for ONNELLAB apps.',
-        heading: 'Privacy Policies',
-        searchLabel: 'Find app',
-        searchPlaceholder: 'Search app name',
-        empty: 'No matching apps.',
-        updated: 'Policy date',
-        home: 'ONNELLAB',
-        noticeTitle: 'Website analytics',
-        noticeBody: 'When Google Analytics is configured, the ONNELLAB website may measure aggregate events such as page visits, language switches, store clicks, and screenshot opens to improve the site. It does not collect app file contents, tag values, or account information.',
-        sitePrivacyTitle: 'ONNELLAB website privacy',
-        sitePrivacyBody: 'The ONNELLAB website provides original content and product information. External publishing APIs such as X, Bluesky, and Dev.to are used only to publish approved ONNELLAB-owned content and verify credentials for ONNELLAB-controlled accounts. ONNELLAB does not collect, sell, or analyze other users’ social data, timelines, followers, or direct messages.',
-        contactTitle: 'Contact',
-        contactBody: 'For privacy questions, contact onnellab.app@gmail.com.',
-        switchLabel: '한국어',
-        switchHref: '/privacy/ko/',
-        homeHref: '/'
-      };
-const canonicalPath = locale === 'ko' ? '/privacy/ko/' : '/privacy/';
+    href: existingPolicyHref(app.privacy),
+    date: privacyUpdatedAtByTitle[app.title] ?? '2026-01-01',
+    platforms: app.platforms
+  })),
+  {
+    title: 'Papira',
+    href: routeFor('papiraPrivacy', locale),
+    date: privacyUpdatedAtByTitle.Papira,
+    platforms: ['iOS', 'Android']
+  }
+].sort((a, b) => a.title.localeCompare(b.title, 'en', { sensitivity: 'base' }));
+const email = 'onnellab.app@gmail.com';
+const emailIndex = copy.contactBody.indexOf(email);
+const contactBefore = emailIndex >= 0 ? copy.contactBody.slice(0, emailIndex) : copy.contactBody;
+const contactAfter = emailIndex >= 0 ? copy.contactBody.slice(emailIndex + email.length) : '';
 const collectionJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   '@id': new URL(`${canonicalPath}#privacy-policies`, Astro.site).toString(),
-  name: text.title,
-  description: text.description,
+  name: copy.title,
+  description: copy.description,
   url: new URL(canonicalPath, Astro.site).toString(),
-  inLanguage: locale,
-  isPartOf: {
-    '@id': new URL('/#website', Astro.site).toString()
-  },
+  inLanguage: definition.htmlLang,
+  isPartOf: { '@id': new URL('/#website', Astro.site).toString() },
   mainEntity: {
     '@type': 'ItemList',
     itemListElement: policies.map((policy, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: `${policy.title} Privacy Policy`,
-      url: policy.href
+      url: new URL(policy.href, Astro.site).toString()
     }))
   }
 };
 ---
 
 <BaseLayout
-  title={text.title}
-  description={text.description}
+  title={copy.title}
+  description={copy.description}
   canonicalPath={canonicalPath}
-  lang={locale}
+  lang={definition.htmlLang}
   jsonLd={collectionJsonLd}
-  alternates={[
-    { lang: 'en', path: '/privacy/' },
-    { lang: 'ko', path: '/privacy/ko/' },
-    { lang: 'x-default', path: '/privacy/' }
-  ]}
+  alternates={localeAlternates('privacy')}
 >
-  <main class="page-shell">
-    <nav aria-label="Navigation">
-      <a class="brand" href={text.homeHref}>{text.home}</a>
-      <a class="language" href={text.switchHref} data-locale-choice={locale === 'ko' ? 'en' : 'ko'} aria-label={locale === 'ko' ? 'Switch to English' : '한국어로 보기'} title={locale === 'ko' ? 'English' : '한국어'}>{text.switchLabel}</a>
+  <main class="page-shell" data-privacy-page data-locale={locale}>
+    <nav class="top-nav" aria-label="Navigation">
+      <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
+      <LocaleMenu locale={locale} page="privacy" />
     </nav>
 
     <header>
-      <h1>{text.heading}</h1>
-      <div class="header-rule" aria-hidden="true"></div>
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1>{copy.heading}</h1>
+      <p class="intro">{copy.intro}</p>
     </header>
 
+    {copy.fallbackNotice && <p class="language-notice">{copy.fallbackNotice}</p>}
+
     <label class="policy-search">
-      <span>{text.searchLabel}</span>
-      <input type="search" placeholder={text.searchPlaceholder} data-policy-search />
+      <span>{copy.searchLabel}</span>
+      <input type="search" placeholder={copy.searchPlaceholder} data-policy-search />
     </label>
 
-    <p class="empty-state" data-policy-empty hidden>{text.empty}</p>
+    <p class="empty-state" data-policy-empty hidden>{copy.empty}</p>
 
-    <section class="privacy-notice" aria-labelledby="privacy-analytics-title">
-      <h2 id="privacy-analytics-title">{text.noticeTitle}</h2>
-      <p>{text.noticeBody}</p>
-    </section>
+    <div class="notice-grid">
+      <section>
+        <h2>{copy.analyticsTitle}</h2>
+        <p>{copy.analyticsBody}</p>
+      </section>
+      <section>
+        <h2>{copy.siteTitle}</h2>
+        <p>{copy.siteBody}</p>
+      </section>
+      <section data-contact-notice>
+        <h2>{copy.contactTitle}</h2>
+        <p>{contactBefore}<a href={`mailto:${email}`}>{email}</a>{contactAfter}</p>
+      </section>
+    </div>
 
-    <section class="privacy-notice" aria-labelledby="privacy-site-title">
-      <h2 id="privacy-site-title">{text.sitePrivacyTitle}</h2>
-      <p>{text.sitePrivacyBody}</p>
-      <p>{text.contactBody}</p>
-    </section>
-
-    <section class="policy-list" aria-label={text.heading}>
+    <section class="policy-list" aria-label={copy.heading}>
       {policies.map((policy) => (
         <a class="policy-row" href={policy.href} data-policy-row data-policy-title={policy.title.toLowerCase()}>
           <div>
             <h2>{policy.title}</h2>
-            <p>
-              <span>{text.updated}</span>
-              {' '}
-              <time datetime={policy.date}>{policy.date}</time>
-            </p>
+            <p><span>{copy.updated}</span> <time datetime={policy.date}>{policy.date}</time></p>
           </div>
-          {policy.platforms.length > 0 && (
-            <div class="platform-badges" aria-label="Platforms">
-              {policy.platforms.map((platform) => <span>{platform}</span>)}
-            </div>
-          )}
+          <div class="platform-badges" aria-label="Platforms">
+            {policy.platforms.map((platform) => <span>{platform}</span>)}
+          </div>
         </a>
       ))}
     </section>
+
     <script is:inline>
       (() => {
         const policySearch = document.querySelector('[data-policy-search]');
@@ -199,127 +273,77 @@ const collectionJsonLd = {
 
 <style>
   .page-shell {
-    width: min(900px, calc(100% - 36px));
+    width: min(960px, calc(100% - 36px));
     margin: 0 auto;
-    padding: 28px 0 44px;
-    line-height: 1.7;
+    padding: 28px 0 52px;
+    color: #3f3b35;
   }
 
-  nav {
+  .top-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
   }
 
-  .brand,
-  .language,
-  .policy-row {
-    text-decoration: none;
-  }
-
   .brand {
-    color: #737067;
-    font-size: 14px;
-    font-weight: 560;
-  }
-
-  .language {
-    min-height: 34px;
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid #ded6ca;
-    border-radius: 999px;
-    padding: 6px 12px;
-    background: rgba(255, 253, 248, 0.72);
-    color: #5f5a50;
-    font-size: 13px;
-    font-weight: 650;
-    line-height: 1.35;
     text-decoration: none;
-  }
-
-  .language:hover,
-  .language:focus-visible {
-    border-color: #cfc5b7;
-    background: #fffdf8;
-  }
-
-  .language:focus-visible {
-    outline: 2px solid #827d72;
-    outline-offset: 3px;
   }
 
   header {
-    padding-top: 34px;
+    padding: 68px 0 34px;
+  }
+
+  .eyebrow {
+    margin: 0 0 12px;
+    color: #827d72;
+    font-size: 12px;
+    font-weight: 680;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   h1 {
     margin: 0;
-    color: #383631;
-    font-size: clamp(40px, 6.4vw, 66px);
-    line-height: 1;
+    color: #36332f;
+    font-size: clamp(42px, 7vw, 70px);
+    line-height: 1.04;
     letter-spacing: 0;
-    word-break: keep-all;
   }
 
-  .header-rule {
-    width: 62px;
-    height: 2px;
-    margin-top: 18px;
-    background: linear-gradient(90deg, #b9ad9d, rgba(207, 197, 183, 0));
+  .intro {
+    max-width: 840px;
+    margin: 22px 0 0;
+    color: #5b574f;
+    font-size: 18px;
+    line-height: 1.65;
   }
 
-  .policy-list {
-    display: grid;
-    gap: 0;
-    width: min(100%, 820px);
-    border-top: 1px solid #e0d8cb;
-    border-bottom: 1px solid #e0d8cb;
-    margin-top: 18px;
-    background:
-      linear-gradient(180deg, rgba(255, 253, 248, 0.78), rgba(255, 253, 248, 0.2)),
-      transparent;
-  }
-
-  .privacy-notice {
-    width: min(100%, 820px);
-    border-top: 1px solid #e0d8cb;
-    border-bottom: 1px solid #e0d8cb;
-    margin-top: 18px;
-    padding: 18px 0;
-    color: #5f5a50;
-  }
-
-  .privacy-notice h2 {
-    margin: 0 0 8px;
-    color: #383631;
-    font-size: 17px;
-    line-height: 1.35;
-  }
-
-  .privacy-notice p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.7;
+  .language-notice {
+    border-left: 3px solid #c9b9d6;
+    margin: 0 0 26px;
+    padding: 12px 16px;
+    background: rgba(247, 242, 249, 0.66);
+    color: #675f6b;
+    font-size: 13px;
+    line-height: 1.65;
   }
 
   .policy-search {
     display: grid;
     gap: 8px;
-    max-width: 320px;
-    margin-top: 28px;
+    max-width: 340px;
     color: #6f695f;
     font-size: 13px;
     font-weight: 620;
   }
 
   .policy-search input {
-    min-height: 42px;
+    min-height: 44px;
     border: 1px solid #ded6ca;
     border-radius: 8px;
     padding: 9px 12px;
-    background: rgba(255, 253, 248, 0.74);
+    background: rgba(255, 253, 248, 0.78);
     color: #3f3b35;
     font: inherit;
     font-weight: 500;
@@ -338,61 +362,64 @@ const collectionJsonLd = {
     padding: 18px 0;
     color: #827d72;
     font-size: 14px;
-    line-height: 1.5;
+  }
+
+  .notice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 38px 0 42px;
+  }
+
+  .notice-grid section {
+    border-top: 2px solid #c7bad3;
+    padding: 20px 6px 0 0;
+  }
+
+  .notice-grid h2 {
+    margin: 0 0 10px;
+    color: #413c36;
+    font-size: 19px;
+    line-height: 1.35;
+  }
+
+  .notice-grid p {
+    margin: 0;
+    color: #686158;
+    font-size: 14px;
+    line-height: 1.72;
+  }
+
+  .notice-grid a {
+    color: #3d5f82;
+    text-underline-offset: 4px;
+  }
+
+  .policy-list {
+    border-top: 1px solid #ded6ca;
+    border-bottom: 1px solid #ded6ca;
   }
 
   .policy-row {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(120px, auto);
+    display: flex;
     align-items: center;
     gap: 20px;
-    border-bottom: 1px solid #e9e1d5;
-    padding: 19px 18px;
+    border-bottom: 1px solid #e8e0d4;
+    padding: 19px 16px;
     color: inherit;
-    transition: background 140ms ease, border-color 140ms ease, color 140ms ease, box-shadow 140ms ease;
-  }
-
-  .policy-row::after {
-    content: "";
-    width: 14px;
-    height: 1px;
-    position: absolute;
-    right: 16px;
-    bottom: 14px;
-    background: linear-gradient(90deg, rgba(207, 197, 183, 0), rgba(185, 173, 157, 0.58));
-    opacity: 0;
-    transition: opacity 140ms ease;
-  }
-
-  .policy-row[hidden] {
-    display: none;
+    text-decoration: none;
   }
 
   .policy-row:last-child {
     border-bottom: 0;
   }
 
-  .policy-row:hover,
-  .policy-row:focus-visible {
-    border-bottom-color: #d4c7b6;
-    background:
-      linear-gradient(90deg, #fffdf8, rgba(250, 248, 245, 0.74)),
-      #fffdf8;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 253, 248, 0.78),
-      inset 0 -1px 0 rgba(210, 199, 184, 0.62),
-      0 8px 18px rgba(58, 49, 38, 0.04);
+  .policy-row[hidden] {
+    display: none;
   }
 
-  .policy-row:hover h2,
-  .policy-row:focus-visible h2 {
-    color: #2f2d29;
-  }
-
-  .policy-row:hover::after,
-  .policy-row:focus-visible::after {
-    opacity: 0.9;
+  .policy-row:hover {
+    background: rgba(255, 253, 248, 0.7);
   }
 
   .policy-row:focus-visible {
@@ -400,30 +427,26 @@ const collectionJsonLd = {
     outline-offset: 3px;
   }
 
-  h2 {
-    margin: 0 0 6px;
-    color: #3f3b35;
+  .policy-row > div:first-child {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .policy-row h2 {
+    margin: 0;
+    color: #3e3933;
     font-size: 21px;
-    font-weight: 650;
-    line-height: 1.25;
-    letter-spacing: 0;
+    line-height: 1.3;
   }
 
   .policy-row p {
-    margin: 0;
-    color: #746d62;
+    margin: 7px 0 0;
+    color: #746c62;
     font-size: 13px;
-    line-height: 1.45;
   }
 
   .policy-row p span {
-    color: #6f695f;
-    font-weight: 620;
-  }
-
-  .policy-row time {
-    color: #746d62;
-    font-variant-numeric: tabular-nums;
+    font-weight: 630;
   }
 
   .platform-badges {
@@ -431,60 +454,41 @@ const collectionJsonLd = {
     flex-wrap: wrap;
     justify-content: flex-end;
     gap: 5px;
-    min-width: 0;
   }
 
   .platform-badges span {
     border: 1px solid #ddd5c8;
     border-radius: 999px;
-    padding: 2px 7px;
-    background: #fffdf8;
+    padding: 3px 7px;
     color: #737067;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.4;
+    white-space: nowrap;
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 700px) {
     .page-shell {
-      width: min(100% - 28px, 900px);
-      padding-top: 24px;
+      width: min(100% - 28px, 960px);
+      padding-top: 20px;
     }
 
     header {
-      padding-top: 34px;
+      padding: 48px 0 30px;
     }
 
-    h1 {
-      max-width: 7.5em;
-      font-size: clamp(36px, 10.5vw, 42px);
-      line-height: 1.08;
+    .intro {
+      font-size: 16px;
+      line-height: 1.62;
     }
 
-    .header-rule {
-      width: 54px;
-      margin-top: 18px;
-    }
-
-    .policy-list {
-      width: 100%;
-      margin-top: 15px;
-    }
-
-    .policy-search {
-      max-width: none;
-      margin-top: 28px;
+    .notice-grid {
+      grid-template-columns: 1fr;
+      gap: 22px;
     }
 
     .policy-row {
-      grid-template-columns: 1fr;
-      align-items: start;
-      gap: 9px;
-      padding: 16px 14px;
-    }
-
-    .policy-row::after {
-      right: 12px;
-      bottom: 12px;
+      align-items: flex-start;
+      padding: 17px 10px;
     }
 
     .platform-badges {
