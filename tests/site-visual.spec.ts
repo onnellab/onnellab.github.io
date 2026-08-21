@@ -194,7 +194,7 @@ test.describe('app and privacy collections', () => {
     expect(schema.mainEntity.itemListElement.map((item) => item.url)).toEqual(privacyUrls);
     expect(
       await page.locator('[data-policy-row]').evaluateAll((rows) =>
-        rows.map((row) => row.getAttribute('href'))
+        rows.map((row) => new URL(row.getAttribute('href') ?? '', document.baseURI).toString())
       )
     ).toEqual(privacyUrls);
 
@@ -207,7 +207,7 @@ test.describe('app and privacy collections', () => {
     );
     expect(
       await page.locator('[data-policy-row]').evaluateAll((rows) =>
-        rows.map((row) => row.getAttribute('href'))
+        rows.map((row) => new URL(row.getAttribute('href') ?? '', document.baseURI).toString())
       )
     ).toEqual(koreanPrivacyUrls);
   });
