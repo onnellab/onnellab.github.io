@@ -115,11 +115,36 @@ test.describe('site layout and navigation', () => {
     await expect.poll(() => new URL(page.url()).pathname).toBe('/apps/tagweaver/');
   });
 
-  test('home highlights Papira and keeps four existing product cards', async ({ page }) => {
+  test('home highlights TagWeaver and keeps Papira on the apps page only', async ({ page }) => {
     await page.goto('/ko/');
-    await expect(page.locator('.featured h2')).toContainText('EPUB');
-    await expect(page.locator('.featured a')).toHaveAttribute('href', '/apps/papira/ko/');
+    await expect(page.locator('.featured h2')).toContainText('TagWeaver');
+    await expect(page.locator('.featured a')).toHaveAttribute('href', '/apps/tagweaver/ko/');
+    await expect(page.locator('main')).not.toContainText('Papira');
     await expect(page.locator('.product-card')).toHaveCount(4);
+
+    await page.goto('/apps/ko/');
+    await expect(page.locator('[data-app-row]').filter({ hasText: 'Papira' })).toHaveCount(1);
+  });
+
+  test('mobile home reveals the representative app within the first viewport', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/ko/');
+
+    const titleMetrics = await page.locator('.home-hero h1').evaluate((heading) => {
+      const style = getComputedStyle(heading);
+      return {
+        fontSize: Number.parseFloat(style.fontSize),
+        lineHeight: Number.parseFloat(style.lineHeight)
+      };
+    });
+    expect(titleMetrics.fontSize).toBeLessThanOrEqual(44.1);
+    expect(titleMetrics.lineHeight).toBeGreaterThan(titleMetrics.fontSize);
+
+    const featuredBox = await page.locator('.featured').boundingBox();
+    expect(featuredBox).not.toBeNull();
+    if (!featuredBox) return;
+    expect(featuredBox.y).toBeLessThan(844);
+    await expect(page.locator('.featured')).toContainText('TagWeaver');
   });
 
   test('core navigation follows the active locale', async ({ page }) => {

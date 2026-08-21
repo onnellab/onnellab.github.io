@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/i18n-smoke.yml'
       - 'src/components/CorePage.astro'
+      - 'src/components/HomePage.astro'
       - 'src/components/LocaleMenu.astro'
       - 'src/components/PapiraPage.astro'
       - 'src/components/PapiraPrivacyPage.astro'
