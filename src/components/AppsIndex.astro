@@ -1,76 +1,149 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getProductIndexItems, type Locale } from '../lib/products';
+import LocaleMenu from './LocaleMenu.astro';
+import { getProductIndexItems, type ProductIndexItem } from '../lib/products';
+import {
+  contentLocale,
+  localeAlternates,
+  localeDefinitions,
+  routeFor,
+  type SiteLocale
+} from '../lib/site-i18n';
 
 type Props = {
-  locale: Locale;
+  locale: SiteLocale;
+};
+
+type StatusKind = 'released' | 'preparing';
+
+type AppCard = ProductIndexItem & {
+  statusKind: StatusKind;
+};
+
+type AppsCopy = {
+  title: string;
+  description: string;
+  eyebrow: string;
+  heading: string;
+  intro: string;
+  searchLabel: string;
+  searchPlaceholder: string;
+  empty: string;
+  languageNotice?: string;
+  status: Record<StatusKind, string>;
+};
+
+const copies: Record<SiteLocale, AppsCopy> = {
+  en: {
+    title: 'ONNELLAB Apps',
+    description: 'Browse focused ONNELLAB apps for files, media, and creative work.',
+    eyebrow: 'Products',
+    heading: 'Apps',
+    intro: 'Small tools with clear boundaries. Open a product to see exactly what it does—and what it deliberately leaves out.',
+    searchLabel: 'Find an app',
+    searchPlaceholder: 'Search app name',
+    empty: 'No matching apps.',
+    status: { released: 'Released', preparing: 'Preparing for release' }
+  },
+  ko: {
+    title: 'ONNELLAB 앱',
+    description: '파일, 미디어와 창작 작업을 위한 ONNELLAB 앱을 살펴봐요.',
+    eyebrow: '제품',
+    heading: '앱',
+    intro: '작지만 경계가 분명한 도구들이에요. 각 제품 페이지에서 무엇을 하고, 무엇을 하지 않는지 정확히 확인해요.',
+    searchLabel: '앱 찾기',
+    searchPlaceholder: '앱 이름을 검색해요',
+    empty: '일치하는 앱이 없어요.',
+    status: { released: '출시됨', preparing: '출시 준비 중' }
+  },
+  ja: {
+    title: 'ONNELLAB アプリ',
+    description: 'ファイル、メディア、創作作業のためのONNELLABアプリ一覧です。',
+    eyebrow: 'プロダクト',
+    heading: 'アプリ',
+    intro: '小さく、境界の明確な道具です。各ページで、できることと、あえて行わないことを確認できます。',
+    searchLabel: 'アプリを探す',
+    searchPlaceholder: 'アプリ名で検索',
+    empty: '該当するアプリはありません。',
+    languageNotice: 'Papiraの詳細ページは日本語に対応しています。ほかのアプリの詳細ページは現在、英語と韓国語で提供しています。',
+    status: { released: '公開済み', preparing: '公開準備中' }
+  },
+  'zh-Hans': {
+    title: 'ONNELLAB 应用',
+    description: '浏览用于文件、媒体与创作工作的 ONNELLAB 应用。',
+    eyebrow: '产品',
+    heading: '应用',
+    intro: '小而边界清晰的工具。每个产品页都会说明它能做什么，以及刻意不做什么。',
+    searchLabel: '查找应用',
+    searchPlaceholder: '搜索应用名称',
+    empty: '没有匹配的应用。',
+    languageNotice: 'Papira 详情页提供简体中文。其他应用详情页目前提供英文与韩文。',
+    status: { released: '已发布', preparing: '准备发布' }
+  },
+  'zh-Hant': {
+    title: 'ONNELLAB 應用程式',
+    description: '瀏覽用於檔案、媒體與創作工作的 ONNELLAB 應用程式。',
+    eyebrow: '產品',
+    heading: '應用程式',
+    intro: '小而邊界清楚的工具。每個產品頁都會說明能做什麼，以及刻意不做什麼。',
+    searchLabel: '尋找應用程式',
+    searchPlaceholder: '搜尋應用程式名稱',
+    empty: '沒有符合的應用程式。',
+    languageNotice: 'Papira 詳細頁提供繁體中文。其他應用程式詳細頁目前提供英文與韓文。',
+    status: { released: '已發布', preparing: '準備發布' }
+  }
 };
 
 const { locale } = Astro.props;
-const apps = getProductIndexItems(locale).sort(
-  (a, b) => a.title.localeCompare(b.title)
-);
-const appCardStyle = (app: (typeof apps)[number]) =>
-  `--accent-border: ${app.accent.border}; --accent-bg: ${app.accent.background}; --accent-text: ${app.accent.text};`;
-const appCategory = (title: string) => {
-  if (['TagWeaver', 'Melivra'].includes(title)) return 'Music';
-  if (['VaultXT'].includes(title)) return 'Text';
-  if (['Aligna', 'Segra'].includes(title)) return 'Files';
-  if (['Quivra', 'ClipNest'].includes(title)) return 'Workflow';
-  return 'Utility';
+const copy = copies[locale];
+const definition = localeDefinitions[locale];
+const canonicalPath = routeFor('apps', locale);
+const appHref = (slug: string) => (locale === 'ko' ? `/apps/${slug}/ko/` : `/apps/${slug}/`);
+const statusKind = (value: string): StatusKind =>
+  /prepar|coming|soon/i.test(value) ? 'preparing' : 'released';
+const existingApps: AppCard[] = getProductIndexItems(contentLocale(locale)).map((app) => {
+  const kind = statusKind(app.status);
+  return {
+    ...app,
+    href: appHref(app.slug),
+    status: copy.status[kind],
+    statusKind: kind
+  };
+});
+const papiraSummary: Record<SiteLocale, string> = {
+  en: 'Offline TXT-to-EPUB maker for fanfiction, novels, digital zines, and TRPG scenarios.',
+  ko: '팬픽·소설·전자책 동인지·TRPG 시나리오 TXT 원고를 EPUB으로 만들어요.',
+  ja: '二次創作・小説・電子同人誌・TRPGシナリオのTXT原稿をEPUBにまとめます。',
+  'zh-Hans': '把同人文、小说、电子同人志与 TRPG 剧本的 TXT 原稿制作成 EPUB。',
+  'zh-Hant': '把同人文、小說、電子同人誌與 TRPG 劇本的 TXT 原稿製作成 EPUB。'
 };
-const categoryLabels =
-  locale === 'ko'
-    ? {
-        Music: '음악',
-        Text: '텍스트',
-        Files: '파일',
-        Workflow: '작업 흐름',
-        Utility: '유틸리티'
-      }
-    : {
-        Music: 'Music',
-        Text: 'Text',
-        Files: 'Files',
-        Workflow: 'Workflow',
-        Utility: 'Utility'
-      };
-const text =
-  locale === 'ko'
-    ? {
-        title: 'ONNELLAB 앱',
-        description: 'ONNELLAB이 만든 조용하고 가벼운 앱을 한곳에서 살펴보세요.',
-        heading: '앱',
-        searchLabel: '앱 찾기',
-        searchPlaceholder: '앱 이름 검색',
-        empty: '일치하는 앱이 없습니다.',
-        switchLabel: 'English',
-        switchHref: '/apps/',
-        homeHref: '/ko/'
-      }
-    : {
-        title: 'ONNELLAB Apps',
-        description: 'Calm, lightweight apps by ONNELLAB.',
-        heading: 'Apps',
-        searchLabel: 'Find app',
-        searchPlaceholder: 'Search app name',
-        empty: 'No matching apps.',
-        switchLabel: '한국어',
-        switchHref: '/apps/ko/',
-        homeHref: '/'
-      };
-const canonicalPath = locale === 'ko' ? '/apps/ko/' : '/apps/';
+const papiraCard: AppCard = {
+  slug: 'papira',
+  title: 'Papira',
+  status: copy.status.preparing,
+  statusKind: 'preparing',
+  platforms: ['iOS', 'Android'],
+  description: papiraSummary[locale],
+  iconPath: '/app-assets/papira/icon.png',
+  href: routeFor('papira', locale),
+  privacy: routeFor('papiraPrivacy', locale),
+  hasStoreListing: false,
+  accent: { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' }
+};
+const apps = [papiraCard, ...existingApps].sort((a, b) =>
+  a.title.localeCompare(b.title, 'en', { sensitivity: 'base' })
+);
+const appCardStyle = (app: AppCard) =>
+  `--accent-border: ${app.accent.border}; --accent-bg: ${app.accent.background}; --accent-text: ${app.accent.text};`;
 const collectionJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   '@id': new URL(`${canonicalPath}#collection`, Astro.site).toString(),
-  name: text.title,
-  description: text.description,
+  name: copy.title,
+  description: copy.description,
   url: new URL(canonicalPath, Astro.site).toString(),
-  inLanguage: locale,
-  isPartOf: {
-    '@id': new URL('/#website', Astro.site).toString()
-  },
+  inLanguage: definition.htmlLang,
+  isPartOf: { '@id': new URL('/#website', Astro.site).toString() },
   mainEntity: {
     '@type': 'ItemList',
     itemListElement: apps.map((app, index) => ({
@@ -84,54 +157,59 @@ const collectionJsonLd = {
 ---
 
 <BaseLayout
-  title={text.title}
-  description={text.description}
+  title={copy.title}
+  description={copy.description}
   canonicalPath={canonicalPath}
-  lang={locale}
+  lang={definition.htmlLang}
   jsonLd={collectionJsonLd}
-  alternates={[
-    { lang: 'en', path: '/apps/' },
-    { lang: 'ko', path: '/apps/ko/' },
-    { lang: 'x-default', path: '/apps/' }
-  ]}
+  alternates={localeAlternates('apps')}
 >
-  <main class="page-shell">
-    <nav aria-label="Navigation">
-      <a class="brand" href={text.homeHref}>ONNELLAB</a>
-      <a class="language" href={text.switchHref} data-locale-choice={locale === 'ko' ? 'en' : 'ko'} aria-label={locale === 'ko' ? 'Switch to English' : '한국어로 보기'} title={locale === 'ko' ? 'English' : '한국어'}>{text.switchLabel}</a>
+  <main class="page-shell" data-apps-page data-locale={locale}>
+    <nav class="top-nav" aria-label="Navigation">
+      <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
+      <LocaleMenu locale={locale} page="apps" />
     </nav>
 
     <header>
-      <h1>{text.heading}</h1>
-      <p>{text.description}</p>
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1>{copy.heading}</h1>
+      <p>{copy.intro}</p>
     </header>
 
+    {copy.languageNotice && <p class="language-notice">{copy.languageNotice}</p>}
+
     <label class="app-search">
-      <span>{text.searchLabel}</span>
-      <input type="search" placeholder={text.searchPlaceholder} data-app-search />
+      <span>{copy.searchLabel}</span>
+      <input type="search" placeholder={copy.searchPlaceholder} data-app-search />
     </label>
 
-    <p class="empty-state" data-app-empty hidden>{text.empty}</p>
+    <p class="empty-state" data-app-empty hidden>{copy.empty}</p>
 
-    <section class="grid" aria-label={text.heading}>
+    <section class="grid" aria-label={copy.heading}>
       {apps.map((app) => (
-        <a class="app-card" href={app.href} style={appCardStyle(app)} data-app-row data-app-title={app.title.toLowerCase()}>
-          <img src={app.iconPath} alt={`${app.title} icon`} width="64" height="64" />
-          <div>
-            <h2>{app.title}</h2>
+        <a
+          class="app-card"
+          href={app.href}
+          style={appCardStyle(app)}
+          data-app-row
+          data-app-title={app.title.toLowerCase()}
+          data-status-kind={app.statusKind}
+        >
+          <img src={app.iconPath} alt="" width="64" height="64" loading="lazy" data-no-visual-search="true" />
+          <div class="app-copy">
+            <div class="title-row">
+              <h2>{app.title}</h2>
+              <span class="status-badge" data-status-kind={app.statusKind}>{app.status}</span>
+            </div>
             <p>{app.description}</p>
-            <div class="meta-row">
-              <div class="meta-text">
-                <span>{categoryLabels[appCategory(app.title)]}</span>
-              </div>
-              <div class="platform-badges" aria-label="Platforms">
-                {app.platforms.map((platform) => <span>{platform}</span>)}
-              </div>
+            <div class="platform-badges" aria-label="Platforms">
+              {app.platforms.map((platform) => <span>{platform}</span>)}
             </div>
           </div>
         </a>
       ))}
     </section>
+
     <script is:inline>
       (() => {
         const appSearch = document.querySelector('[data-app-search]');
@@ -159,107 +237,77 @@ const collectionJsonLd = {
   .page-shell {
     width: min(980px, calc(100% - 32px));
     margin: 0 auto;
-    padding: 28px 0 36px;
+    padding: 28px 0 44px;
   }
 
-  nav {
+  .top-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
   }
 
-  .brand,
-  .language {
+  .brand {
     text-decoration: none;
   }
 
-  .brand {
-    color: #737067;
-    font-size: 14px;
-    font-weight: 560;
-  }
-
-  .language {
-    min-height: 34px;
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid #ded6ca;
-    border-radius: 999px;
-    padding: 6px 12px;
-    background: rgba(255, 253, 248, 0.72);
-    color: #5f5a50;
-    font-size: 13px;
-    font-weight: 650;
-    line-height: 1.35;
-  }
-
-  .language:hover,
-  .language:focus-visible {
-    border-color: #cfc5b7;
-    background: #fffdf8;
-  }
-
-  .language:focus-visible {
-    outline: 2px solid #827d72;
-    outline-offset: 3px;
-  }
-
   header {
-    padding-top: 28px;
-    position: relative;
+    padding: 72px 0 36px;
   }
 
-  header::after {
-    content: "";
-    display: block;
-    width: 68px;
-    height: 2px;
-    margin-top: 18px;
-    background: linear-gradient(90deg, #b9ad9d, rgba(207, 197, 183, 0));
+  .eyebrow {
+    margin: 0 0 12px;
+    color: #827d72;
+    font-size: 12px;
+    font-weight: 680;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   h1 {
-    margin: 12px 0 10px;
-    font-size: clamp(38px, 6vw, 62px);
+    margin: 0;
+    color: #36332f;
+    font-size: clamp(42px, 7vw, 72px);
     line-height: 1;
     letter-spacing: 0;
   }
 
-  header p {
-    max-width: 600px;
+  header > p:last-child {
+    max-width: 820px;
+    margin: 22px 0 0;
     color: #5b574f;
     font-size: 18px;
-    line-height: 1.62;
+    line-height: 1.65;
+  }
+
+  .language-notice {
+    border-left: 3px solid #c9b9d6;
+    margin: 0 0 28px;
+    padding: 12px 16px;
+    background: rgba(247, 242, 249, 0.66);
+    color: #675f6b;
+    font-size: 13px;
+    line-height: 1.65;
   }
 
   .app-search {
     display: grid;
     gap: 8px;
     max-width: 360px;
-    margin-top: 34px;
     color: #6f695f;
     font-size: 13px;
     font-weight: 620;
   }
 
   .app-search input {
-    min-height: 42px;
+    min-height: 44px;
     border: 1px solid #ded6ca;
     border-radius: 8px;
     padding: 9px 12px;
-    background:
-      linear-gradient(180deg, rgba(255, 253, 248, 0.86), rgba(250, 248, 245, 0.64)),
-      rgba(255, 253, 248, 0.74);
+    background: rgba(255, 253, 248, 0.78);
     color: #3f3b35;
     font: inherit;
     font-weight: 500;
-    transition: border-color 140ms ease, background 140ms ease;
-  }
-
-  .app-search input:hover {
-    border-color: #d3c8ba;
-    background: #fffdf8;
   }
 
   .app-search input:focus {
@@ -275,45 +323,31 @@ const collectionJsonLd = {
     padding: 18px 0;
     color: #827d72;
     font-size: 14px;
-    line-height: 1.5;
   }
 
   .grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-    margin-top: 26px;
+    gap: 14px;
+    margin-top: 28px;
   }
 
   .app-card {
     position: relative;
     display: grid;
-    grid-template-columns: 44px minmax(0, 1fr);
+    grid-template-columns: 54px minmax(0, 1fr);
     align-items: start;
     gap: 16px;
+    min-height: 128px;
     border: 1px solid var(--accent-border, #e0d8cb);
-    border-radius: 8px;
-    min-height: 100px;
-    padding: 15px;
+    border-radius: 11px;
+    padding: 18px;
     background:
-      linear-gradient(135deg, rgba(255, 253, 248, 0.94), var(--accent-bg, #fffdf8)),
+      linear-gradient(135deg, rgba(255, 253, 248, 0.96) 16%, var(--accent-bg, #fffdf8)),
       #fffdf8;
     color: inherit;
     text-decoration: none;
-    transition: border-color 140ms ease, background 140ms ease, color 140ms ease, box-shadow 140ms ease;
-  }
-
-  .app-card::before {
-    content: "";
-    position: absolute;
-    inset: 1px;
-    border-radius: 7px;
-    border-top: 1px solid rgba(255, 253, 248, 0.86);
-    pointer-events: none;
-  }
-
-  .app-card::after {
-    display: none;
+    transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, box-shadow 140ms ease;
   }
 
   .app-card[hidden] {
@@ -326,141 +360,119 @@ const collectionJsonLd = {
     background:
       linear-gradient(135deg, #fffdf8 10%, var(--accent-bg, #fffdf8) 92%),
       #fffdf8;
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 253, 248, 0.54),
-      0 10px 22px rgba(58, 49, 38, 0.055);
+    box-shadow: 0 10px 22px rgba(58, 49, 38, 0.055);
+    transform: translateY(-2px);
   }
 
   .app-card:focus-visible {
-    outline: 2px solid #b8ad9f;
+    outline: 2px solid #827d72;
     outline-offset: 3px;
   }
 
-  img {
-    width: 42px;
-    height: 42px;
-    border-radius: 11px;
+  .app-card > img {
+    width: 52px;
+    height: 52px;
+    border-radius: 13px;
     box-shadow: 0 0 0 1px var(--accent-border, #ddd5c8);
-    transition: box-shadow 140ms ease;
   }
 
-  h2 {
-    margin: 0 0 5px;
-    font-size: 18px;
-    line-height: 1.25;
-    letter-spacing: 0;
-    transition: color 140ms ease;
+  .app-copy {
+    min-width: 0;
   }
 
-  .app-card:hover h2,
-  .app-card:focus-visible h2 {
-    color: var(--accent-text, #5f5a50);
-  }
-
-  .app-card:hover img,
-  .app-card:focus-visible img {
-    box-shadow:
-      0 0 0 1px var(--accent-border, #ddd5c8),
-      0 8px 18px rgba(58, 49, 38, 0.06);
-  }
-
-  p {
-    margin: 0;
-    color: #4f4b43;
-    font-size: 15px;
-    line-height: 1.5;
-  }
-
-  .meta-row {
+  .title-row {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 8px 12px;
-    margin-top: 11px;
+    gap: 7px 10px;
   }
 
-  .meta-text {
-    display: inline-flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 7px;
+  h2 {
+    margin: 0;
+    color: #3e3933;
+    font-size: 19px;
+    line-height: 1.25;
+    letter-spacing: 0;
   }
 
-  .meta-text span {
+  .status-badge {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 650;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+
+  .status-badge[data-status-kind='released'] {
+    border-color: #c9d8d2;
+    background: #edf5f2;
+    color: #49645a;
+  }
+
+  .status-badge[data-status-kind='preparing'] {
+    border-color: #e1cfc5;
+    background: #f9eee8;
+    color: #765849;
+  }
+
+  .app-copy > p {
+    margin: 8px 0 0;
     color: #5f5a50;
-    font-size: 12px;
-    font-weight: 560;
-    line-height: 1.4;
-    transition: color 140ms ease;
-  }
-
-  .app-card:hover .meta-text span,
-  .app-card:focus-visible .meta-text span {
-    color: var(--accent-text, #5f5a50);
+    font-size: 14px;
+    line-height: 1.55;
   }
 
   .platform-badges {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+    margin-top: 10px;
   }
 
   .platform-badges span {
     border: 1px solid var(--accent-border, #ddd5c8);
     border-radius: 999px;
     padding: 2px 7px;
-    background: var(--accent-bg, #faf8f5);
-    color: var(--accent-text, #827d72);
-    font-size: 12px;
+    background: color-mix(in srgb, var(--accent-bg, #faf8f5) 80%, #fffdf8);
+    color: var(--accent-text, #737067);
+    font-size: 11px;
     line-height: 1.4;
   }
 
   @media (max-width: 680px) {
     .page-shell {
       width: min(100% - 28px, 980px);
-      padding-top: 24px;
+      padding-top: 20px;
     }
 
     header {
-      padding-top: 30px;
+      padding: 48px 0 30px;
     }
 
-    header::after {
-      width: 56px;
-      margin-top: 16px;
-    }
-
-    h1 {
-      font-size: clamp(36px, 12vw, 50px);
-      line-height: 1.04;
-    }
-
-    header p {
+    header > p:last-child {
       font-size: 16px;
-      line-height: 1.58;
+      line-height: 1.62;
     }
 
     .grid {
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 10px;
       margin-top: 24px;
     }
 
     .app-card {
       grid-template-columns: 46px minmax(0, 1fr);
       gap: 13px;
-      min-height: auto;
+      min-height: 0;
       padding: 15px;
-      background:
-        linear-gradient(135deg, #fffdf8 24%, var(--accent-bg, #fffdf8)),
-        #fffdf8;
     }
 
-    img {
+    .app-card > img {
       width: 44px;
       height: 44px;
-      border-radius: 12px;
+      border-radius: 11px;
     }
   }
 </style>
