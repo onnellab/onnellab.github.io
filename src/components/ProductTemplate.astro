@@ -52,7 +52,8 @@ const canonicalUrl = new URL(data.canonicalPath, Astro.site);
 const enPath = `/apps/${data.source.slug}/`;
 const koPath = `/apps/${data.source.slug}/ko/`;
 const offerPriceCurrency = meta.priceCurrency ?? (meta.price === 0 ? 'USD' : undefined);
-const localizedAppStoreUrl = (url: string, locale: ProductPageData['locale']) => {
+const localizedAppStoreUrl = (url: string | undefined, locale: ProductPageData['locale']) => {
+  if (!url) return undefined;
   const storeCountry = locale === 'ko' ? 'kr' : 'us';
   const language = locale === 'ko' ? 'ko' : 'en-US';
   const appStoreUrl = new URL(url);
@@ -68,8 +69,8 @@ const localizedGooglePlayUrl = (url: string | undefined, locale: ProductPageData
   return playStoreUrl.toString();
 };
 const localizedPrivacyUrl = (url: string, locale: ProductPageData['locale']) => {
-  if (locale !== 'ko') return url;
-  const privacyUrl = new URL(url);
+  const privacyUrl = new URL(url, Astro.site);
+  if (locale !== 'ko') return privacyUrl.toString();
   privacyUrl.pathname = privacyUrl.pathname.replace(/\/?$/, '/ko/');
   return privacyUrl.toString();
 };
@@ -225,7 +226,7 @@ const faqJsonLd = {
 
       <div class="hero-actions">
         <div class="actions store-actions" aria-label={labels.stores}>
-          <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store" data-store-position="hero">{labels.appStore}</a>
+          {appStoreUrl && <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store" data-store-position="hero">{labels.appStore}</a>}
           {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play" data-store-position="hero">{labels.googlePlay}</a>}
         </div>
         <div class="support-links" aria-label="Contact links">
@@ -368,10 +369,14 @@ const faqJsonLd = {
 
     <section class="download-band" aria-label={labels.download}>
       <p class="eyebrow">{labels.download}</p>
-      <div class="actions compact" aria-label={labels.stores}>
-        <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store" data-store-position="download">{labels.appStore}</a>
-        {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play" data-store-position="download">{labels.googlePlay}</a>}
-      </div>
+      {storeUrls.length > 0 ? (
+        <div class="actions compact" aria-label={labels.stores}>
+          {appStoreUrl && <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store" data-store-position="download">{labels.appStore}</a>}
+          {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play" data-store-position="download">{labels.googlePlay}</a>}
+        </div>
+      ) : (
+        <p class="release-note-inline">{meta.status}</p>
+      )}
       {releaseNotesUrl && latestReleaseNote && (
         <a class="release-note-inline" href={releaseNotesUrl}>
           {labels.latestRelease}: {latestReleaseNote.title}

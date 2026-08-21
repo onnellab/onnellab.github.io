@@ -9,7 +9,7 @@ export type ProductMeta = {
   title: string;
   status: string;
   platforms: string[];
-  appstore: string;
+  appstore?: string;
   googleplay?: string;
   privacy: string;
   supportEmail: string;
@@ -228,6 +228,10 @@ export function getIconAssets(): Array<{ routePath: string; filePath: string }> 
 export function getAppAssets(): Array<{ routePath: string; filePath: string }> {
   return [
     ...getIconAssets(),
+    {
+      routePath: 'papira/assets/icon/Papira.png',
+      filePath: path.resolve(process.cwd(), '../papira/assets/Papira.png')
+    },
     ...getScreenshotAssets()
   ];
 }

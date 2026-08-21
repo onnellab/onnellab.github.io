@@ -1,4 +1,6 @@
 import type { SiteLocale } from './site-i18n';
+import { routeFor } from './site-i18n';
+import type { ProductCopy, ProductPageData } from './products';
 
 export type PapiraFaq = {
   question: string;
@@ -30,6 +32,57 @@ export type PapiraCopy = {
   homeLabel: string;
   appsLabel: string;
 };
+
+export function getPapiraProductPageData(locale: 'en' | 'ko'): ProductPageData {
+  const text = papiraCopy[locale];
+  const description = [
+    text.lead,
+    '',
+    `## ${text.modesTitle}`,
+    '',
+    ...text.modes.flatMap((mode) => [`### ${mode.title}`, '', mode.body, '']),
+    `## ${text.featuresTitle}`,
+    '',
+    ...text.features.map((feature) => `- ${feature}`),
+    '',
+    `## ${text.privacyTitle}`,
+    '',
+    ...text.privacyItems.map((item) => `- ${item}`),
+    '',
+    `## ${text.boundariesTitle}`,
+    '',
+    ...text.boundaries.map((item) => `- ${item}`)
+  ].join('\n');
+  const platformCopy = {
+    name: text.tagline,
+    landingSubtitle: text.tagline,
+    landingDescription: description,
+    description,
+    faq: { title: text.faqTitle, items: text.faqs }
+  };
+  const copy: ProductCopy = { locale, android: platformCopy, ios: platformCopy };
+  const meta = {
+    title: 'Papira',
+    status: text.statusValue,
+    platforms: ['iOS', 'Android'],
+    privacy: routeFor('papiraPrivacy', locale),
+    supportEmail: 'onnellab.app@gmail.com',
+    icon: 'assets/icon/Papira.png'
+  };
+  return {
+    locale,
+    source: { slug: 'papira', contentDir: '', meta },
+    meta,
+    copy,
+    canonicalPath: routeFor('papira', locale),
+    alternatePath: routeFor('papira', locale === 'ko' ? 'en' : 'ko'),
+    seoTitle: text.seoTitle,
+    seoDescription: text.seoDescription,
+    iconPath: '/app-assets/papira/assets/icon/Papira.png',
+    screenshotPaths: [],
+    accent: { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' }
+  };
+}
 
 export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
   en: {

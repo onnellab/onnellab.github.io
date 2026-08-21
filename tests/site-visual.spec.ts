@@ -372,11 +372,14 @@ test.describe('existing product pages', () => {
     });
   }
 
-  test('Papira uses the shared product-detail layout and formal Korean privacy style', async ({ page }) => {
+  test('Papira uses the shared product-detail layout and its source icon', async ({ page }) => {
     await page.goto('/apps/papira/ko/');
     await expect(page.locator('main.page-shell')).toHaveAttribute('data-product-slug', 'papira');
     await expect(page.locator('.hero-grid')).toBeVisible();
-    await expect(page.locator('.content-band')).toHaveCount(2);
+    await expect(page.locator('.hero-actions')).toBeVisible();
+    await expect(page.locator('.download-band')).toBeVisible();
+    await expect(page.locator('.identity img')).toHaveAttribute('src', '/app-assets/papira/assets/icon/Papira.png');
+    await expect(page.locator('.content-band')).toHaveCount(1);
     await expect(page.locator('.status-pill')).toContainText('출시 준비 중');
 
     await page.goto('/privacy/papira/ko/');
