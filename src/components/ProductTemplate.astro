@@ -73,7 +73,9 @@ const localizedGooglePlayUrl = (url: string | undefined, locale: ProductPageData
 const localizedPrivacyUrl = (url: string, locale: ProductPageData['locale']) => {
   const privacyUrl = new URL(url, Astro.site);
   if (locale !== 'ko') return privacyUrl.toString();
-  privacyUrl.pathname = privacyUrl.pathname.replace(/\/?$/, '/ko/');
+  if (!/\/ko\/?$/.test(privacyUrl.pathname)) {
+    privacyUrl.pathname = privacyUrl.pathname.replace(/\/?$/, '/ko/');
+  }
   return privacyUrl.toString();
 };
 const appStoreUrl = localizedAppStoreUrl(meta.appstore, data.locale);
@@ -126,12 +128,12 @@ const jsonLd = {
   description: data.seoDescription,
   inLanguage: data.locale,
   image: iconUrl.toString(),
-  isAccessibleForFree: meta.price === 0,
+  ...(meta.price !== undefined ? { isAccessibleForFree: meta.price === 0 } : {}),
   ...(heroSignals.length > 0 ? { featureList: heroSignals } : {}),
   ...(screenshotUrls.length > 0 ? { screenshot: screenshotUrls } : {}),
-  downloadUrl: storeUrls,
-  installUrl: storeUrls,
-  sameAs: storeUrls,
+  ...(storeUrls.length > 0
+    ? { downloadUrl: storeUrls, installUrl: storeUrls, sameAs: storeUrls }
+    : {}),
   softwareHelp: `mailto:${meta.supportEmail}`,
   publisher: {
     '@type': 'Organization',
@@ -257,8 +259,10 @@ const faqJsonLd = {
     <section class="content-band" aria-label={copy.android.name ?? copy.ios.name ?? meta.title}>
       <div class="copy-column">
         {bodyBlocks.map((block) => (
-          block.type === 'h' ? (
+          block.type === 'h2' ? (
             <h2>{block.value}</h2>
+          ) : block.type === 'h3' ? (
+            <h3>{block.value}</h3>
           ) : block.type === 'ul' ? (
             <ul>
               {(block.value as string[]).map((item) => <li>{item}</li>)}

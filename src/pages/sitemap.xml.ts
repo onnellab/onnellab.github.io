@@ -24,9 +24,14 @@ const papiraPages: LocalizedPage[] = ['papira', 'papiraPrivacy'];
 export function GET() {
   const sourceLastmod = sourceFileLastmod();
   const commonLastmod = sourceLastmod('src/components/CorePage.astro');
+  const papiraLastmod = latestLastmod(sourceLastmod, [
+    'src/lib/papira.ts',
+    'src/components/ProductTemplate.astro',
+    'src/components/PapiraPage.astro'
+  ]);
   const entries: SitemapEntry[] = [
     ...corePages.flatMap((page) => localizedEntries(page, commonLastmod)),
-    ...localizedEntries('papira', sourceLastmod('src/components/PapiraPage.astro')),
+    ...localizedEntries('papira', papiraLastmod),
     ...localizedEntries('papiraPrivacy', sourceLastmod('src/components/PapiraPrivacyPage.astro')),
     ...productPrivacyEntries(sourceLastmod),
     ...blogEntries(sourceLastmod),
@@ -50,6 +55,10 @@ ${uniqueEntries.map(renderEntry).join('\n')}
   return new Response(body, {
     headers: { 'Content-Type': 'application/xml; charset=utf-8' }
   });
+}
+
+function latestLastmod(sourceLastmod: (sourcePath: string) => string, sourcePaths: string[]): string {
+  return sourcePaths.map(sourceLastmod).sort().at(-1) as string;
 }
 
 function localizedEntries(page: LocalizedPage, lastmod: string): SitemapEntry[] {

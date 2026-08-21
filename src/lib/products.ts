@@ -258,8 +258,8 @@ function getScreenshotAssets(): Array<{ routePath: string; filePath: string }> {
   );
 }
 
-export function renderBlocks(text: string): Array<{ type: 'p' | 'h' | 'ul'; value: string | string[] }> {
-  const blocks: Array<{ type: 'p' | 'h' | 'ul'; value: string | string[] }> = [];
+export function renderBlocks(text: string): Array<{ type: 'p' | 'h2' | 'h3' | 'ul'; value: string | string[] }> {
+  const blocks: Array<{ type: 'p' | 'h2' | 'h3' | 'ul'; value: string | string[] }> = [];
   const lines = text.split(/\r?\n/);
   let paragraph: string[] = [];
   let list: string[] = [];
@@ -281,9 +281,9 @@ export function renderBlocks(text: string): Array<{ type: 'p' | 'h' | 'ul'; valu
       flushList();
       continue;
     }
-    if (trimmed.startsWith('•') || trimmed.startsWith('* ')) {
+    if (trimmed.startsWith('•') || trimmed.startsWith('* ') || trimmed.startsWith('- ')) {
       flushParagraph();
-      list.push(trimmed.replace(/^(?:•|\*)\s*/, '').trim());
+      list.push(trimmed.replace(/^(?:•|\*|-)\s*/, '').trim());
       continue;
     }
     if (trimmed.includes(' * ')) {
@@ -299,9 +299,18 @@ export function renderBlocks(text: string): Array<{ type: 'p' | 'h' | 'ul'; valu
       continue;
     }
     flushList();
+    const markdownHeading = trimmed.match(/^(#{2,3})\s+(.+)$/);
+    if (markdownHeading) {
+      flushParagraph();
+      blocks.push({
+        type: markdownHeading[1] === '###' ? 'h3' : 'h2',
+        value: markdownHeading[2].trim()
+      });
+      continue;
+    }
     if (isSectionHeading(trimmed)) {
       flushParagraph();
-      blocks.push({ type: 'h', value: trimmed.replace(/:$/, '') });
+      blocks.push({ type: 'h2', value: trimmed.replace(/:$/, '') });
       continue;
     }
     paragraph.push(trimmed);

@@ -92,7 +92,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     eyebrow: 'Offline EPUB maker for writers',
     tagline: 'Turn your manuscript into a book.',
     lead:
-      'Papira assembles finished TXT manuscripts into clean EPUB files for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios.',
+      'Papira assembles finished TXT manuscripts into well-structured EPUB files for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios.',
     statusLabel: 'Status',
     statusValue: 'Preparing for release',
     platformsLabel: 'Platforms',
@@ -129,7 +129,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       'Not an EPUB reader',
       'No AI writing or proofreading',
       'No PDF or DOCX conversion',
-      'No ISBN issuance or publishing agency service'
+      'No ISBN issuance or publishing-agency services'
     ],
     faqTitle: 'FAQ',
     faqs: [
@@ -158,7 +158,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     eyebrow: '작가를 위한 오프라인 EPUB 제작 도구',
     tagline: '원고를 한 권의 책으로 만들어요.',
     lead:
-      'Papira는 팬픽·연재소설·개인소설·전자책 동인지·TRPG 시나리오의 완성된 TXT 원고를 정돈된 EPUB 파일로 조립해요.',
+      'Papira는 팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오의 완성된 TXT 원고를 정돈된 EPUB 파일로 조립해요.',
     statusLabel: '상태',
     statusValue: '출시 준비 중',
     platformsLabel: '지원 기기',
@@ -170,24 +170,24 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
         body: 'TXT 파일을 골라 표지와 출판 정보 없이 바로 EPUB 파일로 만들어요.'
       },
       {
-        title: '작품 EPUB 만들기',
+        title: '책 프로젝트',
         body: '표지, 제목, 저자, 발행 정보, 시리즈, 챕터 규칙과 목차를 정리한 뒤 내보내요.'
       }
     ],
     featuresTitle: '완성된 원고에 필요한 것만 담았어요',
     features: [
-      '팬픽·연재소설·개인소설·전자책 동인지·TRPG 시나리오 작품 유형',
-      '자동 챕터 감지, # 제목 표기, 단일 챕터 방식',
+      '팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오 작품 유형',
+      '자동 챕터 감지, # 제목 모드, 단일 챕터 방식',
       '표지 이미지, 책 정보, 시리즈 정보, 목차와 EPUB 패키징',
       '기존 파일을 덮어쓰지 않고 이름이 겹치면 번호를 자동으로 붙여요',
-      'EPUB 제작과 책 작업 저장이 모두 기기 안에서 이루어져요'
+      'EPUB 제작과 책 프로젝트 저장이 모두 기기 안에서 이루어져요'
     ],
     privacyTitle: '원고는 기기 안에 남아요',
     privacyItems: [
       '계정과 로그인 없이 사용해요',
       '광고·행동 분석·추적 SDK를 사용하지 않아요',
       'TXT 원고와 표지 이미지를 기기 안에서 처리해요',
-      '책 작업과 생성한 EPUB을 ONNELLAB 서버에 업로드하지 않아요'
+      '책 프로젝트와 생성한 EPUB을 ONNELLAB 서버에 업로드하지 않아요'
     ],
     boundariesTitle: 'Papira가 하지 않는 일',
     boundaries: [
@@ -201,7 +201,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     faqs: [
       {
         question: '원고가 서버로 올라가나요?',
-        answer: '아니요. TXT, 표지, 책 작업, 미리보기와 생성한 EPUB은 기기 안에서 처리해요.'
+        answer: '아니요. TXT, 표지, 책 프로젝트, 미리보기와 생성한 EPUB은 기기 안에서 처리해요.'
       },
       {
         question: 'Papira에서 원고를 수정할 수 있나요?',
@@ -209,7 +209,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       },
       {
         question: '어떤 작품을 만들 수 있나요?',
-        answer: '팬픽, 연재소설, 개인소설, 전자책 동인지와 TRPG 시나리오 흐름을 제공해요.'
+        answer: '팬픽, 연재소설, 개인 창작 소설, 디지털 소책자와 TRPG 시나리오 흐름을 제공해요.'
       }
     ],
     privacyLabel: '개인정보 처리방침',
@@ -224,7 +224,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     eyebrow: '創作者のためのオフラインEPUB作成ツール',
     tagline: '原稿を、一冊の本へ。',
     lead:
-      'Papiraは、二次創作・連載小説・個人小説・電子同人誌・TRPGシナリオの完成済みTXT原稿を、整ったEPUBにまとめます。',
+      'Papiraは、二次創作・連載小説・オリジナル小説・デジタル小冊子・TRPGシナリオの完成したTXT原稿を、整ったEPUBにまとめます。',
     statusLabel: 'ステータス',
     statusValue: 'リリース準備中',
     platformsLabel: '対応端末',
@@ -233,17 +233,17 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     modes: [
       {
         title: 'すぐにEPUB化',
-        body: 'TXTファイルを選び、表紙や出版情報を付けずに、そのままEPUBを作成します。'
+        body: 'TXTファイルを選び、表紙や書誌情報を付けずに、そのままEPUBを作成します。'
       },
       {
         title: '作品EPUBを作成',
-        body: '表紙、タイトル、著者、発行情報、シリーズ、章のルール、目次を整えてから書き出します。'
+        body: '表紙、タイトル、著者、書誌情報、シリーズ、章のルール、目次を整えてから書き出します。'
       }
     ],
     featuresTitle: '完成原稿に必要なものだけ',
     features: [
-      '二次創作・連載小説・個人小説・電子同人誌・TRPGシナリオ向けの作品タイプ',
-      '章の自動検出、# 見出し、単一章モード',
+      '二次創作・連載小説・オリジナル小説・デジタル小冊子・TRPGシナリオ向けの作品タイプ',
+      '章の自動検出、「#」見出しモード、単一章モード',
       '表紙画像、書誌情報、シリーズ情報、目次、EPUBパッケージ',
       '既存ファイルを上書きせず、同名の場合は番号を自動付与',
       'EPUB作成とプロジェクト保存は端末内で完結'
@@ -275,7 +275,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       },
       {
         question: 'どのような作品に使えますか？',
-        answer: '二次創作、連載小説、個人小説、電子同人誌、TRPGシナリオ向けの作成フローがあります。'
+        answer: '二次創作、連載小説、オリジナル小説、デジタル小冊子、TRPGシナリオ向けの作成フローがあります。'
       }
     ],
     privacyLabel: 'プライバシーポリシー',
@@ -286,16 +286,16 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
   'zh-Hans': {
     seoTitle: 'Papira - 离线 TXT 转 EPUB 制作工具',
     seoDescription:
-      '把完成的 TXT 原稿整理成带封面、书籍信息、章节与目录的 EPUB。所有处理都在设备本地完成。',
-    eyebrow: '为创作者准备的离线 EPUB 制作工具',
-    tagline: '把原稿，做成一本书。',
+      '把完成的 TXT 文稿整理成带封面、书籍信息、章节与目录的 EPUB。所有处理都在设备本地完成。',
+    eyebrow: '面向创作者的离线 EPUB 制作工具',
+    tagline: '把文稿做成一本书。',
     lead:
-      'Papira 可将同人文、连载小说、个人小说、电子同人志与 TRPG 剧本的完成稿整理成结构清晰的 EPUB。',
+      'Papira 可将同人文、连载小说、原创小说、数字小册子与 TRPG 剧本的完成稿件整理成结构清晰的 EPUB。',
     statusLabel: '状态',
     statusValue: '准备发布',
     platformsLabel: '支持平台',
     platformsValue: 'iOS 与 Android',
-    modesTitle: '两种专注的制作方式',
+    modesTitle: '两种简洁的制作方式',
     modes: [
       {
         title: '快速制作',
@@ -308,7 +308,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     ],
     featuresTitle: '只保留完成稿真正需要的功能',
     features: [
-      '同人文、连载小说、个人小说、电子同人志与 TRPG 剧本类型',
+      '同人文、连载小说、原创小说、数字小册子与 TRPG 剧本类型',
       '自动识别章节、# 标题模式或单章节模式',
       '封面、书籍信息、系列信息、目录与 EPUB 打包',
       '不覆盖已有文件；重名时自动添加编号',
@@ -318,12 +318,12 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     privacyItems: [
       '无需账号或登录',
       '不使用广告、行为分析或追踪 SDK',
-      'TXT 原稿与封面图片在设备本地处理',
+      'TXT 文稿与封面图片在设备本地处理',
       '项目与生成的 EPUB 不会上传到 ONNELLAB 服务器'
     ],
     boundariesTitle: 'Papira 不做这些事',
     boundaries: [
-      '不是原稿编辑器',
+      '不是文稿编辑器',
       '不是 EPUB 阅读器',
       '不提供 AI 写作或校对',
       '不转换 PDF 或 DOCX',
@@ -332,36 +332,36 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     faqTitle: '常见问题',
     faqs: [
       {
-        question: '原稿会上传到服务器吗？',
+        question: '稿件会上传到服务器吗？',
         answer: '不会。TXT、封面、项目、预览与生成的 EPUB 都在设备本地处理。'
       },
       {
-        question: '可以在 Papira 里编辑原稿吗？',
+        question: '可以在 Papira 里编辑文稿吗？',
         answer: 'Papira 用于把完成稿整理成 EPUB。请先在常用写作工具中完成正文编辑。'
       },
       {
         question: '适合制作哪些作品？',
-        answer: 'Papira 提供同人文、连载小说、个人小说、电子同人志与 TRPG 剧本的制作流程。'
+        answer: 'Papira 提供同人文、连载小说、原创小说、数字小册子与 TRPG 剧本的制作流程。'
       }
     ],
     privacyLabel: '隐私政策',
-    contactLabel: '联系',
+    contactLabel: '联系我们',
     homeLabel: 'ONNELLAB',
     appsLabel: '全部应用'
   },
   'zh-Hant': {
     seoTitle: 'Papira - 離線 TXT 轉 EPUB 製作工具',
     seoDescription:
-      '把完成的 TXT 原稿整理成含封面、書籍資訊、章節與目錄的 EPUB。所有處理都在裝置本機完成。',
-    eyebrow: '為創作者準備的離線 EPUB 製作工具',
-    tagline: '把原稿，做成一本書。',
+      '把完成的 TXT 文稿整理成含封面、書籍資訊、章節與目錄的 EPUB。所有處理都在裝置本機完成。',
+    eyebrow: '面向創作者的離線 EPUB 製作工具',
+    tagline: '把文稿做成一本書。',
     lead:
-      'Papira 可將同人文、連載小說、個人小說、電子同人誌與 TRPG 劇本的完成稿整理成結構清楚的 EPUB。',
+      'Papira 可將同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本的完成稿件整理成結構清楚的 EPUB。',
     statusLabel: '狀態',
     statusValue: '準備發布',
     platformsLabel: '支援平台',
     platformsValue: 'iOS 與 Android',
-    modesTitle: '兩種專注的製作方式',
+    modesTitle: '兩種簡潔的製作方式',
     modes: [
       {
         title: '快速製作',
@@ -374,7 +374,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     ],
     featuresTitle: '只保留完成稿真正需要的功能',
     features: [
-      '同人文、連載小說、個人小說、電子同人誌與 TRPG 劇本類型',
+      '同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本類型',
       '自動辨識章節、# 標題模式或單章節模式',
       '封面、書籍資訊、系列資訊、目錄與 EPUB 封裝',
       '不覆寫既有檔案；同名時自動加入編號',
@@ -384,12 +384,12 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     privacyItems: [
       '不需要帳號或登入',
       '不使用廣告、行為分析或追蹤 SDK',
-      'TXT 原稿與封面圖片在裝置本機處理',
+      'TXT 文稿與封面圖片在裝置本機處理',
       '專案與產生的 EPUB 不會上傳到 ONNELLAB 伺服器'
     ],
     boundariesTitle: 'Papira 不做這些事',
     boundaries: [
-      '不是原稿編輯器',
+      '不是文稿編輯器',
       '不是 EPUB 閱讀器',
       '不提供 AI 寫作或校對',
       '不轉換 PDF 或 DOCX',
@@ -398,20 +398,20 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     faqTitle: '常見問題',
     faqs: [
       {
-        question: '原稿會上傳到伺服器嗎？',
+        question: '稿件會上傳到伺服器嗎？',
         answer: '不會。TXT、封面、專案、預覽與產生的 EPUB 都在裝置本機處理。'
       },
       {
-        question: '可以在 Papira 裡編輯原稿嗎？',
+        question: '可以在 Papira 裡編輯文稿嗎？',
         answer: 'Papira 用來把完成稿整理成 EPUB。請先在慣用的寫作工具中完成正文編輯。'
       },
       {
         question: '適合製作哪些作品？',
-        answer: 'Papira 提供同人文、連載小說、個人小說、電子同人誌與 TRPG 劇本的製作流程。'
+        answer: 'Papira 提供同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本的製作流程。'
       }
     ],
     privacyLabel: '隱私權政策',
-    contactLabel: '聯絡',
+    contactLabel: '聯絡我們',
     homeLabel: 'ONNELLAB',
     appsLabel: '全部應用程式'
   }
