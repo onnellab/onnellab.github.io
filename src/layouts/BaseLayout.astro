@@ -131,16 +131,6 @@ const gaScript = gaMeasurementId
           } catch {
           }
         });
-
-        document.addEventListener('click', (event) => {
-          const target = event.target;
-          if (!(target instanceof Element) || event.defaultPrevented) return;
-          const card = target.closest('main[data-core-page="home"] .featured');
-          if (!(card instanceof HTMLElement) || target.closest('a')) return;
-          const link = card.querySelector('a[href]');
-          if (!(link instanceof HTMLAnchorElement)) return;
-          link.click();
-        });
       })();
     </script>
   </body>
@@ -180,10 +170,6 @@ const gaScript = gaMeasurementId
     color: inherit;
   }
 
-  main[data-core-page='home'] .featured {
-    cursor: pointer;
-  }
-
   code,
   pre,
   kbd,
@@ -201,5 +187,12 @@ const gaScript = gaMeasurementId
   .brand {
     font-family: var(--onnellab-wordmark-font);
     letter-spacing: 0;
+  }
+
+  .brand {
+    color: #737067;
+    font-size: 14px;
+    font-weight: 560;
+    line-height: 1.2;
   }
 </style>
