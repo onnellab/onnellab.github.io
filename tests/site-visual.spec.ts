@@ -378,7 +378,7 @@ test.describe('existing product pages', () => {
     await expect(page.locator('.hero-grid')).toBeVisible();
     await expect(page.locator('.hero-actions')).toBeVisible();
     await expect(page.locator('.download-band')).toBeVisible();
-    await expect(page.locator('.identity img')).toHaveAttribute('src', '/app-assets/papira/assets/icon/Papira.png');
+    await expect(page.locator('.identity img')).toHaveAttribute('src', '/app-assets/papira/icon.png');
     await expect(page.locator('.content-band')).toHaveCount(1);
     await expect(page.locator('.download-band')).toContainText('출시 준비 중');
 

@@ -135,6 +135,24 @@ test.describe('Papira five-language launch surface', () => {
     }
   });
 
+  test('Papira icon is served from a repository-contained public asset', async ({ page }) => {
+    const iconPath = '/app-assets/papira/icon.png';
+    await page.goto('/apps/papira/');
+    await expect(page.locator('.identity img')).toHaveAttribute('src', iconPath);
+    expect(fs.existsSync(path.resolve(process.cwd(), 'public', iconPath.replace(/^\//, '')))).toBe(true);
+  });
+
+  test('English and Korean breadcrumb schema names the apps collection accurately', async ({ page }) => {
+    for (const locale of locales.slice(0, 2)) {
+      await page.goto(`/apps/papira/${locale.path}`);
+      const schemas = await jsonLd(page);
+      const breadcrumb = schemas.find((item) => item['@type'] === 'BreadcrumbList');
+      expect(breadcrumb).toBeTruthy();
+      const items = breadcrumb?.itemListElement as Array<{ name: string }>;
+      expect(items[1].name).toBe(locale.hreflang === 'ko' ? '앱' : 'Apps');
+    }
+  });
+
   test('Japanese and Chinese pages publish complete product, breadcrumb, and FAQ schema', async ({ page }) => {
     for (const locale of locales.slice(2)) {
       const canonical = `https://onnellab.github.io/apps/papira/${locale.path}`;

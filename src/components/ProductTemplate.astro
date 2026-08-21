@@ -23,6 +23,7 @@ const labels =
         releaseNotes: '릴리즈 노트',
         latestRelease: '최신 릴리즈',
         support: '문의하기',
+        apps: '앱',
         download: '다운로드',
         screens: '스크린샷',
         stores: '스토어'
@@ -37,6 +38,7 @@ const labels =
         releaseNotes: 'Release Notes',
         latestRelease: 'Latest release',
         support: 'Contact',
+        apps: 'Apps',
         download: 'Download',
         screens: 'Screenshots',
         stores: 'Stores'
@@ -168,7 +170,7 @@ const breadcrumbJsonLd = {
     {
       '@type': 'ListItem',
       position: 2,
-      name: labels.download,
+      name: labels.apps,
       item: new URL(appsPath, Astro.site).toString()
     },
     {

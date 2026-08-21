@@ -78,7 +78,7 @@ export function getPapiraProductPageData(locale: 'en' | 'ko'): ProductPageData {
     alternatePath: routeFor('papira', locale === 'ko' ? 'en' : 'ko'),
     seoTitle: text.seoTitle,
     seoDescription: text.seoDescription,
-    iconPath: '/app-assets/papira/assets/icon/Papira.png',
+    iconPath: '/app-assets/papira/icon.png',
     screenshotPaths: [],
     accent: { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' }
   };

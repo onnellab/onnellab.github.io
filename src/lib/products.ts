@@ -226,14 +226,7 @@ export function getIconAssets(): Array<{ routePath: string; filePath: string }> 
 }
 
 export function getAppAssets(): Array<{ routePath: string; filePath: string }> {
-  return [
-    ...getIconAssets(),
-    {
-      routePath: 'papira/assets/icon/Papira.png',
-      filePath: path.resolve(process.cwd(), '../papira/assets/Papira.png')
-    },
-    ...getScreenshotAssets()
-  ];
+  return [...getIconAssets(), ...getScreenshotAssets()];
 }
 
 function getScreenshotRoutePaths(source: ProductSource, locale: Locale): string[] {

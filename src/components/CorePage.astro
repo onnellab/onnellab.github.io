@@ -568,7 +568,7 @@ const papiraCard = {
   status: copy.apps.papiraStatus,
   platforms: ['iOS', 'Android'],
   description: papiraSummary[locale],
-  iconPath: '/app-assets/papira/assets/icon/Papira.png',
+  iconPath: '/app-assets/papira/icon.png',
   href: routeFor('papira', locale),
   privacy: routeFor('papiraPrivacy', locale)
 };
@@ -703,7 +703,7 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
 
         <section class="featured" aria-labelledby="featured-title">
           <div class="featured-icon">
-            <img src="/app-assets/papira/assets/icon/Papira.png" alt="Papira app icon" width="112" height="112" data-no-visual-search="true" />
+            <img src="/app-assets/papira/icon.png" alt="Papira app icon" width="112" height="112" data-no-visual-search="true" />
           </div>
           <div>
             <p class="eyebrow">{copy.home.featuredLabel}</p>
