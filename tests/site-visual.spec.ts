@@ -194,7 +194,12 @@ test.describe('app and privacy collections', () => {
     expect(schema.mainEntity.itemListElement.map((item) => item.url)).toEqual(privacyUrls);
     expect(
       await page.locator('[data-policy-row]').evaluateAll((rows) =>
-        rows.map((row) => new URL(row.getAttribute('href') ?? '', document.baseURI).toString())
+        rows.map((row) => {
+          const href = row.getAttribute('href') ?? '';
+          return href.startsWith('http')
+            ? href
+            : new URL(href, 'https://onnellab.github.io').toString();
+        })
       )
     ).toEqual(privacyUrls);
 
@@ -207,7 +212,12 @@ test.describe('app and privacy collections', () => {
     );
     expect(
       await page.locator('[data-policy-row]').evaluateAll((rows) =>
-        rows.map((row) => new URL(row.getAttribute('href') ?? '', document.baseURI).toString())
+        rows.map((row) => {
+          const href = row.getAttribute('href') ?? '';
+          return href.startsWith('http')
+            ? href
+            : new URL(href, 'https://onnellab.github.io').toString();
+        })
       )
     ).toEqual(koreanPrivacyUrls);
   });
@@ -313,11 +323,15 @@ test.describe('existing product pages', () => {
 test.describe('blog and crawl endpoints', () => {
   test('blog pages remain available in English and Korean', async ({ page }) => {
     await page.goto('/blog/');
-    await expect(page.locator('.post-card')).toContainText('How to Read Large TXT Files Without Lag');
+    await expect(
+      page.locator('.post-card').filter({ hasText: 'How to Read Large TXT Files Without Lag' })
+    ).toHaveCount(1);
     await expect(page.locator('.top-nav a[href="/apps/"]')).toBeVisible();
 
     await page.goto('/blog/ko/');
-    await expect(page.locator('.post-card')).toContainText('대용량 TXT 파일을 지연 없이 읽는 방법');
+    await expect(
+      page.locator('.post-card').filter({ hasText: '대용량 TXT 파일을 지연 없이 읽는 방법' })
+    ).toHaveCount(1);
     await expect(page.locator('.top-nav a[href="/apps/ko/"]')).toBeVisible();
   });
 
