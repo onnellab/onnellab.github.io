@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 const corePages = [
   '/',
@@ -34,7 +34,7 @@ const privacySlugs = ['aligna', 'clipnest', 'melivra', 'papira', 'quivra', 'segr
 const privacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/`);
 const koreanPrivacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/ko/`);
 
-async function assertPageIntegrity(page, path: string) {
+async function assertPageIntegrity(page: Page, path: string) {
   await page.goto(path);
   await expect(page.locator('body')).toBeVisible();
   await expect(page.locator('main')).toBeVisible();
@@ -342,7 +342,10 @@ test.describe('blog and crawl endpoints', () => {
 
     const llms = await page.request.get('/llms.txt');
     expect(llms.ok()).toBe(true);
-    expect(await llms.text()).toContain('## Blog Articles');
+    const llmsText = await llms.text();
+    expect(llmsText).toContain('## Blog Articles');
+    expect(llmsText).toContain('## Papira');
+    expect(llmsText).toContain('https://onnellab.github.io/apps/papira/zh-hant/');
 
     const sitemap = await page.request.get('/sitemap.xml');
     expect(sitemap.ok()).toBe(true);
