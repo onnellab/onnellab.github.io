@@ -2,19 +2,25 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ProductTemplate from '../../../components/ProductTemplate.astro';
 import { getProductPageData, getProductSources } from '../../../lib/products';
+import { localeDefinitions, siteLocales, type SiteLocale } from '../../../lib/site-i18n';
 
 export function getStaticPaths() {
+  const detailLocales = siteLocales.filter((locale) => locale !== 'en');
   return [
-    ...getProductSources().map((source) => ({
-      params: { app: source.slug }
-    })),
-    { params: { app: 'ko' } }
+    ...getProductSources().flatMap((source) =>
+      detailLocales.map((locale) => ({
+        params: { app: source.slug, locale: localeDefinitions[locale].pathSegment },
+        props: { locale }
+      }))
+    ),
+    { params: { app: 'ko', locale: 'ko' }, props: { locale: 'ko' as SiteLocale } }
   ];
 }
 
 const app = Astro.params.app as string;
+const { locale } = Astro.props as { locale: SiteLocale };
 const targetPath = '/apps/ko/';
-const data = app === 'ko' ? undefined : getProductPageData(app, 'ko');
+const data = app === 'ko' ? undefined : getProductPageData(app, locale);
 ---
 
 {

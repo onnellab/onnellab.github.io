@@ -7,7 +7,7 @@ import {
 } from '../lib/products';
 import { getBlogPosts, renderMarkdownBlocks, type BlogPost } from '../lib/blog';
 import { papiraCopy } from '../lib/papira';
-import { localeDefinitions, routeFor, siteLocales } from '../lib/site-i18n';
+import { localeDefinitions, productRouteFor, routeFor, siteLocales } from '../lib/site-i18n';
 
 const siteUrl = 'https://onnellab.github.io';
 
@@ -85,7 +85,7 @@ export function GET() {
       ''
     ]),
     '',
-    '## Apps with English and Korean product pages',
+    '## Apps with five-language product pages',
     '',
     ...apps.flatMap((app) => {
       const bodyBlocks = renderBlocks(pageBodyDescription(app.copy));
@@ -103,7 +103,10 @@ export function GET() {
         ...taskLines,
         '',
         `- Landing page: ${new URL(app.canonicalPath, siteUrl).toString()}`,
-        `- Korean page: ${new URL(app.alternatePath, siteUrl).toString()}`,
+        `- Korean page: ${new URL(productRouteFor(app.source.slug, 'ko'), siteUrl).toString()}`,
+        `- Japanese page: ${new URL(productRouteFor(app.source.slug, 'ja'), siteUrl).toString()}`,
+        `- Simplified Chinese page: ${new URL(productRouteFor(app.source.slug, 'zh-Hans'), siteUrl).toString()}`,
+        `- Traditional Chinese page: ${new URL(productRouteFor(app.source.slug, 'zh-Hant'), siteUrl).toString()}`,
         `- Privacy policy: ${app.meta.privacy}`,
         `- Platforms: ${app.meta.platforms.join(', ')}`,
         ...(app.meta.pricing ? [`- Pricing: ${app.meta.pricing}`] : []),
@@ -128,7 +131,7 @@ export function GET() {
         ...taskLines,
         '',
         `- 한국어 랜딩 페이지: ${new URL(app.canonicalPath, siteUrl).toString()}`,
-        `- 영어 페이지: ${new URL(app.alternatePath, siteUrl).toString()}`,
+        `- 영어 페이지: ${new URL(productRouteFor(app.source.slug, 'en'), siteUrl).toString()}`,
         `- 개인정보 처리방침: ${app.meta.privacy}`,
         `- 지원 플랫폼: ${app.meta.platforms.join(', ')}`,
         ...(app.meta.pricing ? [`- 가격: ${app.meta.pricing}`] : []),

@@ -2,19 +2,27 @@
 import {
   localeDefinitions,
   routeFor,
+  productRouteFor,
   siteLocales,
   type LocalizedPage,
   type SiteLocale
 } from '../lib/site-i18n';
 
-type Props = {
+type BaseProps = {
   locale: SiteLocale;
-  page: LocalizedPage;
   supported?: readonly SiteLocale[];
 };
 
-const { locale, page, supported = siteLocales } = Astro.props;
+type Props = BaseProps & (
+  | { page: LocalizedPage; productSlug?: never }
+  | { page?: never; productSlug: string }
+);
+
+const { locale, page, productSlug, supported = siteLocales } = Astro.props;
 const current = localeDefinitions[locale];
+if (!page && !productSlug) throw new Error('LocaleMenu requires page or productSlug');
+const localeHref = (item: SiteLocale) =>
+  productSlug ? productRouteFor(productSlug, item) : routeFor(page, item);
 ---
 
 <details class="locale-menu">
@@ -24,7 +32,7 @@ const current = localeDefinitions[locale];
       const definition = localeDefinitions[item];
       return (
         <a
-          href={routeFor(page, item)}
+          href={localeHref(item)}
           lang={definition.htmlLang}
           hreflang={definition.hreflang}
           data-locale-choice={item}

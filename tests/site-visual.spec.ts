@@ -125,6 +125,12 @@ test.describe('site layout and navigation', () => {
     await expect(page.locator('main')).not.toContainText('Papira');
     await expect(page.locator('.product-card')).toHaveCount(4);
 
+    await page.goto('/ja/');
+    await expect(page.locator('a.featured')).toHaveAttribute('href', '/apps/tagweaver/ja/');
+
+    await page.goto('/zh-hans/');
+    await expect(page.locator('a.featured')).toHaveAttribute('href', '/apps/tagweaver/zh-hans/');
+
     await page.goto('/apps/ko/');
     await expect(page.locator('[data-app-row]').filter({ hasText: 'Papira' })).toHaveCount(1);
   });
@@ -250,7 +256,7 @@ test.describe('app and privacy collections', () => {
     await expect(page.locator('[data-app-empty]')).toBeVisible();
   });
 
-  test('non-Papira products remain English and Korean only', async ({ page }) => {
+  test('app collection links every product to the selected locale', async ({ page }) => {
     await page.goto('/apps/zh-hant/');
     await expect(page.locator('[data-app-row]').filter({ hasText: 'Papira' })).toHaveAttribute(
       'href',
@@ -258,7 +264,7 @@ test.describe('app and privacy collections', () => {
     );
     await expect(page.locator('[data-app-row]').filter({ hasText: 'TagWeaver' })).toHaveAttribute(
       'href',
-      '/apps/tagweaver/'
+      '/apps/tagweaver/zh-hant/'
     );
 
     await page.goto('/apps/ko/');
@@ -496,6 +502,9 @@ test.describe('blog and crawl endpoints', () => {
     expect(llmsText).toContain('## Blog Articles');
     expect(llmsText).toContain('## Papira');
     expect(llmsText).toContain('https://onnellab.github.io/apps/papira/zh-hant/');
+    expect(llmsText).not.toContain('https://onnellab.github.io/undefined');
+    expect(llmsText).toContain('https://onnellab.github.io/apps/tagweaver/ja/');
+    expect(llmsText).toContain('https://onnellab.github.io/apps/tagweaver/zh-hant/');
 
     const sitemap = await page.request.get('/sitemap.xml');
     expect(sitemap.ok()).toBe(true);
@@ -503,6 +512,7 @@ test.describe('blog and crawl endpoints', () => {
     expect(text).toContain('https://onnellab.github.io/apps/papira/ja/');
     expect(text).toContain('https://onnellab.github.io/privacy/papira/zh-hant/');
     expect(text).toContain('https://onnellab.github.io/apps/tagweaver/');
-    expect(text).not.toContain('<loc>https://onnellab.github.io/apps/tagweaver/ja/</loc>');
+    expect(text).toContain('<loc>https://onnellab.github.io/apps/tagweaver/ja/</loc>');
+    expect(text).toContain('<loc>https://onnellab.github.io/apps/tagweaver/zh-hant/</loc>');
   });
 });

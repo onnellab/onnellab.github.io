@@ -81,8 +81,23 @@ export function localeAlternates(
   return alternates;
 }
 
-export function contentLocale(locale: SiteLocale): 'en' | 'ko' {
-  return locale === 'ko' ? 'ko' : 'en';
+export function productRouteFor(slug: string, locale: SiteLocale): string {
+  const segment = localeDefinitions[locale].pathSegment;
+  return segment ? `/apps/${slug}/${segment}/` : `/apps/${slug}/`;
+}
+
+export function productLocaleAlternates(slug: string) {
+  return [
+    ...siteLocales.map((locale) => ({
+      lang: localeDefinitions[locale].hreflang,
+      path: productRouteFor(slug, locale)
+    })),
+    { lang: 'x-default', path: productRouteFor(slug, 'en') }
+  ];
+}
+
+export function contentLocale(locale: SiteLocale): SiteLocale {
+  return locale;
 }
 
 export function localeFromPathSegment(segment: string | undefined): SiteLocale {

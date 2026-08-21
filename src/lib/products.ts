@@ -1,9 +1,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import {
+  productLocaleAlternates,
+  productRouteFor,
+  siteLocales,
+  type SiteLocale
+} from './site-i18n';
+import { getLocalizedProductContent } from './product-localizations';
+
 const appsContentDir = path.resolve(process.cwd(), 'src/content/apps');
 
-export type Locale = 'en' | 'ko';
+export type Locale = SiteLocale;
 
 export type ProductMeta = {
   title: string;
@@ -60,7 +68,7 @@ export type ProductPageData = {
   meta: ProductMeta;
   copy: ProductCopy;
   canonicalPath: string;
-  alternatePath: string;
+  alternates: Array<{ lang: string; path: string }>;
   seoTitle: string;
   seoDescription: string;
   iconPath: string;
@@ -146,14 +154,14 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
   const source = getProductSource(slug);
   const copy = readProductCopy(source.contentDir, locale);
   const seoDescription = seoPageDescription(source, copy);
-  const canonicalPath = locale === 'en' ? `/apps/${source.slug}/` : `/apps/${source.slug}/ko/`;
+  const canonicalPath = productRouteFor(source.slug, locale);
   return {
     locale,
     source,
     meta: source.meta,
     copy,
     canonicalPath,
-    alternatePath: locale === 'en' ? `/apps/${source.slug}/ko/` : `/apps/${source.slug}/`,
+    alternates: productLocaleAlternates(source.slug),
     seoTitle: productSeoTitle(source, copy),
     seoDescription,
     iconPath: getIconRoutePath(source),
@@ -173,7 +181,7 @@ export function getProductIndexItems(locale: Locale): ProductIndexItem[] {
       description: landingSubtitle(copy),
       iconPath: getIconRoutePath(source),
       screenshotPath: getScreenshotRoutePaths(source, locale)[0],
-      href: locale === 'en' ? `/apps/${source.slug}/` : `/apps/${source.slug}/ko/`,
+      href: productRouteFor(source.slug, locale),
       privacy: source.meta.privacy,
       hasStoreListing: Boolean(source.meta.appstore || source.meta.googleplay),
       accent: productAccent(source)
@@ -206,7 +214,7 @@ export function getProductSource(slug: string): ProductSource {
 
 export function getAllProductPages(): ProductPageData[] {
   return getProductSources().flatMap((source) =>
-    (['en', 'ko'] as const).map((locale) => getProductPageData(source.slug, locale))
+    siteLocales.map((locale) => getProductPageData(source.slug, locale))
   );
 }
 
@@ -230,14 +238,17 @@ export function getAppAssets(): Array<{ routePath: string; filePath: string }> {
 }
 
 function getScreenshotRoutePaths(source: ProductSource, locale: Locale): string[] {
-  const screenshotDir = path.resolve(source.contentDir, 'assets/screenshots', locale);
+  const screenshotLocale = fs.existsSync(path.resolve(source.contentDir, 'assets/screenshots', locale))
+    ? locale
+    : 'en';
+  const screenshotDir = path.resolve(source.contentDir, 'assets/screenshots', screenshotLocale);
   if (!fs.existsSync(screenshotDir)) return [];
   return fs
     .readdirSync(screenshotDir, { withFileTypes: true })
     .filter((entry) => entry.isFile() && /\.(?:png|jpg|jpeg|webp)$/i.test(entry.name))
     .map((entry) => entry.name)
     .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-    .map((fileName) => `/app-assets/${source.slug}/assets/screenshots/${locale}/${fileName}`);
+    .map((fileName) => `/app-assets/${source.slug}/assets/screenshots/${screenshotLocale}/${fileName}`);
 }
 
 function getScreenshotAssets(): Array<{ routePath: string; filePath: string }> {
@@ -352,7 +363,26 @@ function readProductMeta(contentDir: string): ProductMeta {
 }
 
 function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
-  const fileName = locale === 'en' ? 'description-en.md' : 'description-ko.md';
+  if (locale !== 'en' && locale !== 'ko') {
+    const slug = path.basename(contentDir);
+    const localized = getLocalizedProductContent(slug, locale);
+    const platform = {
+      name: localized.subtitle,
+      landingSubtitle: localized.subtitle,
+      landingDescription: localized.body,
+      description: localized.body,
+      faq: {
+        title: {
+          ja: 'よくある質問',
+          'zh-Hans': '常见问题',
+          'zh-Hant': '常見問題'
+        }[locale],
+        items: localized.faq
+      }
+    };
+    return { locale, android: platform, ios: platform };
+  }
+  const fileName = `description-${locale.toLowerCase()}.md`;
   const raw = fs.readFileSync(path.join(contentDir, fileName), 'utf8');
   return {
     locale,
@@ -389,12 +419,21 @@ function pageDescription(copy: ProductCopy): string {
 
 function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
   const summary = pageDescription(copy).replace(/\s+/g, ' ').trim();
-  const platforms = copy.locale === 'ko'
-    ? source.meta.platforms.join('/')
-    : source.meta.platforms.join(' and ');
+  const platforms = copy.locale === 'en'
+    ? source.meta.platforms.join(' and ')
+    : source.meta.platforms.join('/');
   const category = landingSubtitle(copy);
   if (copy.locale === 'ko') {
     return `${source.meta.title}는 ${platforms}용 ${category}입니다. ${summary}`;
+  }
+  if (copy.locale === 'ja') {
+    return `${source.meta.title}は${platforms}向けの${category}です。${summary}`;
+  }
+  if (copy.locale === 'zh-Hans') {
+    return `${source.meta.title} 是适用于 ${platforms} 的${category}。${summary}`;
+  }
+  if (copy.locale === 'zh-Hant') {
+    return `${source.meta.title} 是適用於 ${platforms} 的${category}。${summary}`;
   }
   return `${source.meta.title} is ${indefiniteArticle(category)} ${category} for ${platforms}. ${summary}`;
 }
@@ -484,14 +523,20 @@ function parseFaqField(value: string | undefined, locale: Locale): ProductFaq | 
   flush();
   if (items.length === 0) return undefined;
   return {
-    title: locale === 'ko' ? '자주 묻는 질문' : 'FAQ',
+    title: {
+      en: 'FAQ',
+      ko: '자주 묻는 질문',
+      ja: 'よくある質問',
+      'zh-Hans': '常见问题',
+      'zh-Hant': '常見問題'
+    }[locale],
     items
   };
 }
 
 function isSectionHeading(value: string): boolean {
   if (value.endsWith(':')) return true;
-  if (value.includes('.') || value.includes('!') || value.includes('?')) return false;
+  if (/[.!?。！？]/.test(value)) return false;
   return value.length <= 44;
 }
 

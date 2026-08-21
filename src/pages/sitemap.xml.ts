@@ -5,6 +5,8 @@ import { getBlogPosts } from '../lib/blog';
 import { getProductSources } from '../lib/products';
 import {
   localeDefinitions,
+  productLocaleAlternates,
+  productRouteFor,
   routeFor,
   siteLocales,
   type LocalizedPage
@@ -78,14 +80,13 @@ function localizedEntries(page: LocalizedPage, lastmod: string): SitemapEntry[] 
 
 function productEntries(sourceLastmod: (sourcePath: string) => string): SitemapEntry[] {
   return getProductSources().flatMap((source) => {
-    const enPath = `/apps/${source.slug}/`;
-    const koPath = `/apps/${source.slug}/ko/`;
     const lastmod = sourceLastmod(source.contentDir);
-    const alternates = legacyAlternates(enPath, koPath);
-    return [
-      { path: enPath, lastmod, alternates },
-      { path: koPath, lastmod, alternates }
-    ];
+    const alternates = productLocaleAlternates(source.slug);
+    return siteLocales.map((locale) => ({
+      path: productRouteFor(source.slug, locale),
+      lastmod,
+      alternates
+    }));
   });
 }
 
