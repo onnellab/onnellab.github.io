@@ -65,6 +65,67 @@ const gaScript = gaMeasurementId
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (() => {
+        if (window.location.pathname !== '/') return;
+
+        const localePaths = {
+          en: '/',
+          ko: '/ko/',
+          ja: '/ja/',
+          'zh-Hans': '/zh-hans/',
+          'zh-Hant': '/zh-hant/'
+        };
+        let preferredLocale = null;
+        try {
+          const storedLocale = window.localStorage.getItem('onnellab.locale');
+          if (storedLocale && Object.prototype.hasOwnProperty.call(localePaths, storedLocale)) {
+            preferredLocale = storedLocale;
+          }
+        } catch {
+        }
+
+        if (!preferredLocale) {
+          const browserLocales = [...(navigator.languages || []), navigator.language];
+          for (const browserLocale of browserLocales) {
+            const normalized = String(browserLocale || '').replaceAll('_', '-').toLowerCase();
+            if (normalized === 'ko' || normalized.startsWith('ko-')) preferredLocale = 'ko';
+            else if (normalized === 'ja' || normalized.startsWith('ja-')) preferredLocale = 'ja';
+            else if (
+              normalized === 'zh-cn' ||
+              normalized.startsWith('zh-cn-') ||
+              normalized === 'zh-sg' ||
+              normalized.startsWith('zh-sg-') ||
+              normalized === 'zh-hans' ||
+              normalized.startsWith('zh-hans-') ||
+              normalized === 'zh'
+            ) preferredLocale = 'zh-Hans';
+            else if (
+              normalized === 'zh-tw' ||
+              normalized.startsWith('zh-tw-') ||
+              normalized === 'zh-hk' ||
+              normalized.startsWith('zh-hk-') ||
+              normalized === 'zh-mo' ||
+              normalized.startsWith('zh-mo-') ||
+              normalized === 'zh-hant' ||
+              normalized.startsWith('zh-hant-')
+            ) preferredLocale = 'zh-Hant';
+            else if (normalized === 'en' || normalized.startsWith('en-')) preferredLocale = 'en';
+            if (preferredLocale) break;
+          }
+        }
+
+        const targetPath = preferredLocale ? localePaths[preferredLocale] : '/';
+        if (targetPath === '/') return;
+
+        document.documentElement.style.visibility = 'hidden';
+        try {
+          window.location.replace(targetPath);
+        } catch {
+          document.documentElement.style.removeProperty('visibility');
+        }
+      })();
+    </script>
     <meta name="google-site-verification" content="0IUOtlQTLbMO9gWiDi4TqtQpMCKZVsGRLEchK8A6IzE" />
     {customFaviconUrl ? (
       <>

@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 const locales = [
   { code: 'en', segment: '', hreflang: 'en', homeTitle: 'ONNELLAB - Calm, focused software' },
@@ -9,6 +9,20 @@ const locales = [
 ] as const;
 
 const localizedPath = (base: string, segment: string) => (segment ? `${base}${segment}` : base);
+
+async function setBrowserLocales(
+  page: Page,
+  languages: string[],
+  language = languages[0] ?? ''
+) {
+  await page.addInitScript(
+    ({ languages, language }) => {
+      Object.defineProperty(navigator, 'languages', { get: () => languages });
+      Object.defineProperty(navigator, 'language', { get: () => language });
+    },
+    { languages, language }
+  );
+}
 
 test.describe('five-language core site', () => {
   for (const locale of locales) {
@@ -43,13 +57,101 @@ test.describe('five-language core site', () => {
     }
   }
 
-  test('browser language no longer forces a redirect', async ({ page }) => {
-    await page.addInitScript(() => {
-      Object.defineProperty(navigator, 'languages', { get: () => ['ko-KR', 'ko'] });
-      Object.defineProperty(navigator, 'language', { get: () => 'ko-KR' });
+  for (const { browserLocale, expectedPath } of [
+    { browserLocale: 'ko-KR', expectedPath: '/ko/' },
+    { browserLocale: 'ja-JP', expectedPath: '/ja/' },
+    { browserLocale: 'zh-CN', expectedPath: '/zh-hans/' },
+    { browserLocale: 'zh-Hans', expectedPath: '/zh-hans/' },
+    { browserLocale: 'zh-TW', expectedPath: '/zh-hant/' },
+    { browserLocale: 'zh-Hant', expectedPath: '/zh-hant/' },
+    { browserLocale: 'en-US', expectedPath: '/' },
+    { browserLocale: 'fr-FR', expectedPath: '/' }
+  ]) {
+    test(`root follows system locale ${browserLocale}`, async ({ page }) => {
+      await setBrowserLocales(page, [browserLocale]);
+      await page.goto('/');
+      await expect.poll(() => new URL(page.url()).pathname).toBe(expectedPath);
     });
+  }
+
+  test('checks navigator languages in order and skips unsupported locales', async ({ page }) => {
+    await setBrowserLocales(page, ['fr-FR', 'ja-JP'], 'ko-KR');
     await page.goto('/');
-    await expect.poll(() => new URL(page.url()).pathname).toBe('/');
+    await expect.poll(() => new URL(page.url()).pathname).toBe('/ja/');
+  });
+
+  test('falls back from navigator languages to navigator language', async ({ page }) => {
+    await setBrowserLocales(page, ['fr-FR'], 'ko-KR');
+    await page.goto('/');
+    await expect.poll(() => new URL(page.url()).pathname).toBe('/ko/');
+  });
+
+  test('normalizes browser locale case and underscores', async ({ page }) => {
+    await setBrowserLocales(page, ['ZH_hAnT']);
+    await page.goto('/');
+    await expect.poll(() => new URL(page.url()).pathname).toBe('/zh-hant/');
+  });
+
+  for (const { storedLocale, expectedPath } of [
+    { storedLocale: 'ja', expectedPath: '/ja/' },
+    { storedLocale: 'en', expectedPath: '/' }
+  ]) {
+    test(`valid stored ${storedLocale} overrides Korean system locale`, async ({ page }) => {
+      await setBrowserLocales(page, ['ko-KR']);
+      await page.addInitScript((locale) => localStorage.setItem('onnellab.locale', locale), storedLocale);
+      await page.goto('/');
+      await expect.poll(() => new URL(page.url()).pathname).toBe(expectedPath);
+    });
+  }
+
+  test('invalid stored locale falls back to the system locale', async ({ page }) => {
+    await setBrowserLocales(page, ['ko-KR']);
+    await page.addInitScript(() => localStorage.setItem('onnellab.locale', 'fr'));
+    await page.goto('/');
+    await expect.poll(() => new URL(page.url()).pathname).toBe('/ko/');
+  });
+
+  test('root stays hidden while its localized redirect is loading', async ({ page }) => {
+    await setBrowserLocales(page, ['ko-KR']);
+    let releaseLocalizedResponse = () => {};
+    const localizedResponseReleased = new Promise<void>((resolve) => {
+      releaseLocalizedResponse = resolve;
+    });
+    let signalLocalizedRequest = () => {};
+    const localizedRequestStarted = new Promise<void>((resolve) => {
+      signalLocalizedRequest = resolve;
+    });
+    await page.route('**/ko/', async (route) => {
+      signalLocalizedRequest();
+      await localizedResponseReleased;
+      await route.continue();
+    });
+
+    await page.goto('/about/');
+    await page.evaluate(() => {
+      const frame = document.createElement('iframe');
+      frame.src = '/';
+      document.body.append(frame);
+    });
+    await localizedRequestStarted;
+    const visibility = await page.evaluate(() => {
+      const frame = document.querySelector('iframe');
+      if (!frame?.contentDocument) return null;
+      return getComputedStyle(frame.contentDocument.documentElement).visibility;
+    });
+    releaseLocalizedResponse();
+    expect(visibility).toBe('hidden');
+    await expect.poll(() => page.frames().some((frame) => new URL(frame.url()).pathname === '/ko/')).toBe(true);
+    const localizedFrame = page.frames().find((frame) => new URL(frame.url()).pathname === '/ko/');
+    expect(await localizedFrame?.locator('html').getAttribute('lang')).toBe('ko');
+    expect(await localizedFrame?.locator('html').isVisible()).toBe(true);
+  });
+
+  test('direct non-root routes never redirect for browser or stored locale', async ({ page }) => {
+    await setBrowserLocales(page, ['ko-KR']);
+    await page.addInitScript(() => localStorage.setItem('onnellab.locale', 'ja'));
+    await page.goto('/apps/tagweaver/');
+    await expect.poll(() => new URL(page.url()).pathname).toBe('/apps/tagweaver/');
   });
 
   test('manual language choice is remembered', async ({ page }) => {

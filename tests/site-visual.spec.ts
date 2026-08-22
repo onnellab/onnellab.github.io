@@ -91,14 +91,14 @@ test.describe('site layout and navigation', () => {
     await expect(page.locator('.locale-menu summary')).toHaveText('繁體中文');
   });
 
-  test('browser language never forces a redirect', async ({ page }) => {
+  test('browser language redirects only the root page', async ({ page }) => {
     await page.addInitScript(() => {
       Object.defineProperty(navigator, 'languages', { get: () => ['ko-KR', 'ko'] });
       Object.defineProperty(navigator, 'language', { get: () => 'ko-KR' });
     });
 
     await page.goto('/');
-    await expect.poll(() => new URL(page.url()).pathname).toBe('/');
+    await expect.poll(() => new URL(page.url()).pathname).toBe('/ko/');
 
     await page.goto('/apps/tagweaver/');
     await expect.poll(() => new URL(page.url()).pathname).toBe('/apps/tagweaver/');
