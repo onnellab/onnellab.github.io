@@ -23,63 +23,11 @@
   <meta name="twitter:title" content="TagWeaver 개인정보 처리방침">
   <meta name="twitter:description" content="TagWeaver 앱의 개인정보 처리방침입니다.">
 
-  <style>
-    @font-face {
-      font-family: "SUIT Variable";
-      font-weight: 45 920;
-      font-style: normal;
-      font-display: swap;
-      src: url("https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.woff2") format("woff2-variations");
-    }
-    :root {
-      color-scheme: light;
-      --background: #faf8f5;
-      --surface: #f0ece5;
-      --text: #3e3e3e;
-      --muted: #766f66;
-      --divider: #ded7cd;
-      --accent: #afc8e8;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; background: var(--background); }
-    main {
-      max-width: 840px;
-      margin: 0 auto;
-      padding: 72px 28px 88px;
-      background: var(--background);
-      color: var(--text);
-      font-family: "SUIT Variable", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif;
-      font-size: 16px;
-      line-height: 1.72;
-    }
-    h1 { margin: 0 0 14px; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.08; font-weight: 760; letter-spacing: 0; }
-    h2 { margin: 56px 0 18px; font-size: 1.35rem; line-height: 1.25; font-weight: 720; }
-    h3 { margin: 32px 0 10px; font-size: 1.02rem; line-height: 1.35; font-weight: 680; }
-    p { margin: 0 0 14px; }
-    ul { margin: 0 0 18px; padding-left: 1.25rem; }
-    li { margin: 7px 0; }
-    hr { margin: 44px 0; border: 0; border-top: 1px solid var(--divider); }
-    a { color: #3d5f82; text-decoration-color: rgba(61, 95, 130, 0.36); text-underline-offset: 0.18em; }
-    a:hover { text-decoration-color: currentColor; }
-    main > p:first-of-type { max-width: 620px; margin-bottom: 28px; color: var(--muted); font-size: 1.05rem; }
-    strong { font-weight: 720; }
-    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 34px; }
-    .topbar a { text-decoration: none; }
-    .home-link { color: #737067; font-family: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif; font-size: 14px; font-weight: 560; letter-spacing: 0; }
-    .language-link { min-height: 34px; display: inline-flex; align-items: center; border: 1px solid #ded6ca; border-radius: 999px; padding: 6px 12px; background: rgba(255, 253, 248, 0.72); color: #5f5a50; font-size: 13px; font-weight: 650; line-height: 1.35; }
-    .home-link:hover, .home-link:focus-visible { color: #3e3e3e; }
-    .language-link:hover, .language-link:focus-visible { border-color: #cfc5b7; background: #fffdf8; }
-    .topbar a:focus-visible { outline: 2px solid #827d72; outline-offset: 3px; }
-    @media (max-width: 640px) {
-      main { padding: 48px 20px 64px; font-size: 15px; }
-      h2 { margin-top: 44px; }
-      hr { margin: 34px 0; }
-    }
-  </style>
+  <link rel="stylesheet" href="/legacy-privacy.css">
 
 </head>
 <body>
-  <main>
+  <main class="legacy-privacy-shell">
 <nav class="topbar" aria-label="Navigation">
   <a class="home-link" href="https://onnellab.github.io/ko/">ONNELLAB</a>
   <a class="language-link" href="https://onnellab.github.io/privacy/tagweaver/">English</a>
@@ -108,6 +56,12 @@
 <h3>8. 변경 및 문의</h3>
 <p>앱 기능이나 법적·스토어 요구사항이 변경되면 이 문서를 수정하고 최종 업데이트일을 변경합니다.</p>
 <p>개인정보 관련 문의 또는 삭제 요청: <a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a></p>
+<footer class="site-footer">
+  <a href="/privacy/ko/">개인정보 처리방침</a>
+  <a href="/terms/ko/">이용약관</a>
+  <a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a>
+  <span>© ONNELLAB</span>
+</footer>
   </main>
 </body>
 </html>

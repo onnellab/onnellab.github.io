@@ -46,6 +46,7 @@ const footerLabels = {
 } as const;
 const productPages = productSlugs.flatMap((slug) => [`/apps/${slug}/`, `/apps/${slug}/ko/`]);
 const privacySlugs = ['aligna', 'clipnest', 'melivra', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+const legacyPrivacySlugs = ['aligna', 'clipnest', 'melivra', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const privacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/`);
 const koreanPrivacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/ko/`);
 
@@ -256,6 +257,91 @@ test.describe('site layout and navigation', () => {
     }
 
     expect(failures).toEqual([]);
+  });
+
+  test('all legacy privacy aliases share the current legal-page presentation without changing policy semantics', async ({ page }) => {
+    for (const slug of legacyPrivacySlugs) {
+      for (const locale of ['en', 'ko'] as const) {
+        const suffix = locale === 'ko' ? 'ko/' : '';
+        const canonical = `https://onnellab.github.io/privacy/${slug}/${suffix}`;
+        const routes = [
+          `/${slug}/privacy/${suffix}`,
+          `/apps/${slug}/privacy/${suffix}`,
+          `/privacy/${slug}/${suffix}`
+        ];
+        const snapshots: Array<{ metadata: unknown; policyHtml: string }> = [];
+
+        for (const route of routes) {
+          await page.goto(route);
+          await expect(page.locator('link[rel="stylesheet"][href="/legacy-privacy.css"]')).toHaveCount(1);
+          await expect(page.locator('head style')).toHaveCount(0);
+          const main = page.locator('main.legacy-privacy-shell');
+          await expect(main).toHaveCount(1);
+
+          const brand = main.locator(':scope > .topbar .home-link');
+          const language = main.locator(':scope > .topbar .language-link');
+          const brandStyle = await brand.evaluate((node) => {
+            const style = getComputedStyle(node);
+            return {
+              fontSize: style.fontSize,
+              fontWeight: style.fontWeight,
+              lineHeight: style.lineHeight,
+              textDecorationLine: style.textDecorationLine
+            };
+          });
+          expect(brandStyle).toEqual({
+            fontSize: '14px',
+            fontWeight: '560',
+            lineHeight: '16.8px',
+            textDecorationLine: 'none'
+          });
+          expect((await language.boundingBox())?.height).toBeGreaterThanOrEqual(36);
+
+          const footer = main.locator(':scope > footer.site-footer');
+          await expect(footer).toHaveCount(1);
+          await expect(footer.locator(':scope > *')).toHaveCount(4);
+          await expect(footer.locator(':scope > a')).toHaveText(
+            locale === 'ko'
+              ? ['개인정보 처리방침', '이용약관', 'onnellab.app@gmail.com']
+              : ['Privacy Policy', 'Terms', 'onnellab.app@gmail.com']
+          );
+          expect(await footer.locator(':scope > a').evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual(
+            locale === 'ko'
+              ? ['/privacy/ko/', '/terms/ko/', 'mailto:onnellab.app@gmail.com']
+              : ['/privacy/', '/terms/', 'mailto:onnellab.app@gmail.com']
+          );
+          await expect(footer.locator(':scope > span')).toHaveText('© ONNELLAB');
+          await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
+          expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
+
+          snapshots.push(await page.evaluate(() => {
+            const mainNode = document.querySelector('main');
+            const policyClone = mainNode?.cloneNode(true) as HTMLElement | undefined;
+            policyClone?.querySelector('.topbar')?.remove();
+            policyClone?.querySelector('.site-footer')?.remove();
+            return {
+              metadata: {
+                title: document.title,
+                description: document.querySelector('meta[name="description"]')?.getAttribute('content'),
+                canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href'),
+                alternates: Array.from(document.querySelectorAll('link[rel="alternate"][hreflang]')).map((link) => [
+                  link.getAttribute('hreflang'),
+                  link.getAttribute('href')
+                ]),
+                openGraph: Array.from(document.querySelectorAll('meta[property^="og:"]')).map((meta) => [
+                  meta.getAttribute('property'),
+                  meta.getAttribute('content')
+                ])
+              },
+              policyHtml: policyClone?.innerHTML.trim() ?? ''
+            };
+          }));
+        }
+
+        expect(snapshots[1]).toEqual(snapshots[0]);
+        expect(snapshots[2]).toEqual(snapshots[0]);
+      }
+    }
   });
 
   test('ONNELLAB wordmark uses one font across core, blog, and product pages', async ({ page }) => {
