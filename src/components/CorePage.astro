@@ -2,916 +2,181 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
-import { getProductIndexItems } from '../lib/products';
 import {
-  contentLocale,
   localeAlternates,
   localeDefinitions,
   routeFor,
   type SiteLocale
 } from '../lib/site-i18n';
 
-type CorePageKind = 'home' | 'apps' | 'about' | 'privacy' | 'terms';
-
 type Props = {
   locale: SiteLocale;
-  page: CorePageKind;
+  page: 'terms';
 };
 
-type CoreCopy = {
+type TermsCopy = {
   nav: {
     apps: string;
     about: string;
     blog: string;
-    privacy: string;
-    terms: string;
   };
-  home: {
-    seoTitle: string;
-    description: string;
-    eyebrow: string;
-    title: string;
-    intro: string;
-    featuredLabel: string;
-    featuredTitle: string;
-    featuredBody: string;
-    featuredAction: string;
-    appsTitle: string;
-    allApps: string;
-    valuesTitle: string;
-    values: Array<{ title: string; body: string }>;
-  };
-  apps: {
-    seoTitle: string;
-    description: string;
-    eyebrow: string;
-    title: string;
-    intro: string;
-    searchLabel: string;
-    searchPlaceholder: string;
-    empty: string;
-    papiraStatus: string;
-    languageNotice?: string;
-  };
-  about: {
-    seoTitle: string;
-    description: string;
-    eyebrow: string;
-    title: string;
-    paragraphs: string[];
-    principlesTitle: string;
-    principles: Array<{ title: string; body: string }>;
-  };
-  privacy: {
-    seoTitle: string;
-    description: string;
-    eyebrow: string;
-    title: string;
-    intro: string;
-    searchLabel: string;
-    searchPlaceholder: string;
-    empty: string;
-    updated: string;
-    analyticsTitle: string;
-    analyticsBody: string;
-    siteTitle: string;
-    siteBody: string;
-    contactTitle: string;
-    contactBody: string;
-    fallbackNotice?: string;
-  };
-  terms: {
-    seoTitle: string;
-    description: string;
-    eyebrow: string;
-    title: string;
-    intro: string;
-    updatedLabel: string;
-    updatedValue: string;
-    sections: Array<{ title: string; paragraphs: string[] }>;
-  };
+  seoTitle: string;
+  description: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  updatedLabel: string;
+  updatedValue: string;
+  sections: Array<{ title: string; paragraphs: string[] }>;
 };
 
-const copies: Record<SiteLocale, CoreCopy> = {
+const copies: Record<SiteLocale, TermsCopy> = {
   en: {
-    nav: { apps: 'Apps', about: 'About', blog: 'Blog', privacy: 'Privacy', terms: 'Terms' },
-    home: {
-      seoTitle: 'ONNELLAB - Calm, focused software',
-      description: 'ONNELLAB builds small, focused apps for files, creative work, and everyday tasks.',
-      eyebrow: 'Independent software studio',
-      title: 'Small tools. Calmly made.',
-      intro:
-        'ONNELLAB builds focused apps that keep files, creative work, and everyday tasks under your control. No clutter, and no forced accounts where they are not needed.',
-      featuredLabel: 'Featured in five languages',
-      featuredTitle: 'Turn a finished manuscript into an EPUB book.',
-      featuredBody:
-        'Papira assembles TXT manuscripts into structured EPUB files with a cover, metadata, chapters, and a table of contents—entirely on your device.',
-      featuredAction: 'Explore Papira',
-      appsTitle: 'More ONNELLAB apps',
-      allApps: 'View all apps',
-      valuesTitle: 'How we build',
-      values: [
-        { title: 'One clear job', body: 'Each product starts with a focused task and stops before it becomes a platform.' },
-        { title: 'Calm by default', body: 'Soft visuals, readable copy, and fewer interruptions keep the work in front.' },
-        { title: 'User-controlled', body: 'Local-first processing and minimal permissions are preferred whenever the product allows it.' }
-      ]
-    },
-    apps: {
-      seoTitle: 'ONNELLAB Apps',
-      description: 'Browse focused ONNELLAB apps for files, media, and creative work.',
-      eyebrow: 'Products',
-      title: 'Apps',
-      intro: 'Small tools with clear boundaries. Open a product to see exactly what it does—and what it deliberately leaves out.',
-      searchLabel: 'Find an app',
-      searchPlaceholder: 'Search app name',
-      empty: 'No matching apps.',
-      papiraStatus: 'Preparing for release'
-    },
-    about: {
-      seoTitle: 'About ONNELLAB',
-      description: 'ONNELLAB is an independent software studio creating calm, practical digital tools.',
-      eyebrow: 'Studio',
-      title: 'About ONNELLAB',
-      paragraphs: [
-        'ONNELLAB is an independent software studio creating calm, practical tools for files, media, creative work, and everyday tasks.',
-        'Each app begins with one clear job. We avoid feature bloat, unnecessary accounts, and interfaces that demand more attention than the work itself.',
-        'When the product allows it, files and creative work stay on the device. Access is limited to what the user explicitly chooses, and server dependence is kept small.',
-        'ONNELLAB is a small studio. Products are released carefully, maintained over time, and allowed to remain focused.'
-      ],
-      principlesTitle: 'Principles',
-      principles: [
-        { title: 'Focused', body: 'A tool should explain its purpose in one sentence.' },
-        { title: 'Quiet', body: 'Design supports the task instead of competing for attention.' },
-        { title: 'Respectful', body: 'The user keeps control of files, choices, and attention.' }
-      ]
-    },
-    privacy: {
-      seoTitle: 'ONNELLAB Privacy Policies',
-      description: 'Privacy policy links for ONNELLAB apps.',
-      eyebrow: 'Legal',
-      title: 'Privacy Policies',
-      intro: 'Choose an app to read the policy that matches its actual data flow and platform features.',
-      searchLabel: 'Find app',
-      searchPlaceholder: 'Search app name',
-      empty: 'No matching apps.',
-      updated: 'Policy date',
-      analyticsTitle: 'Website analytics',
-      analyticsBody:
-        'When Google Analytics is configured, the ONNELLAB website may measure aggregate events such as page visits, language switches, store clicks, and screenshot opens to improve the site. It does not collect app file contents, tag values, or account information.',
-      siteTitle: 'ONNELLAB website privacy',
-      siteBody:
-        'This website provides original content and product information. External publishing APIs are used only for approved ONNELLAB-owned content and ONNELLAB-controlled accounts. ONNELLAB does not sell or analyze other users’ private social data.',
-      contactTitle: 'Contact',
-      contactBody: 'For privacy questions, contact onnellab.app@gmail.com.'
-    },
-    terms: {
-      seoTitle: 'ONNELLAB Terms of Use',
-      description: 'General terms for ONNELLAB apps and websites.',
-      eyebrow: 'Legal',
-      title: 'Terms of Use',
-      intro: 'These general terms apply to ONNELLAB apps and websites unless a product page or store listing states a more specific rule.',
-      updatedLabel: 'Last updated',
-      updatedValue: '2026-08-21',
-      sections: [
-        { title: '1. Using ONNELLAB products', paragraphs: ['Use each product lawfully and in accordance with its store listing, in-app notices, and platform rules. Do not attempt to disrupt, reverse-engineer for abuse, or misuse a service or another person’s data.'] },
-        { title: '2. Your files and content', paragraphs: ['You remain responsible for files, manuscripts, media, and other content you choose to process. ONNELLAB does not claim ownership of user content. Make sure you have the rights needed to use and export the material.'] },
-        { title: '3. Purchases and refunds', paragraphs: ['App downloads, purchases, subscriptions, refunds, and purchase restoration are processed by the applicable app store under its own terms. Product-specific pricing and entitlements are shown in the store or app.'] },
-        { title: '4. External services', paragraphs: ['When a product opens or shares data with another app, website, storage provider, or platform, that destination’s terms and privacy policy apply. ONNELLAB is not responsible for third-party services outside its control.'] },
-        { title: '5. Availability and changes', paragraphs: ['We may update products to fix defects, maintain compatibility, meet legal or store requirements, or improve the experience. Features may differ by platform where operating-system rules require it.'] },
-        { title: '6. Contact', paragraphs: ['Questions about these terms can be sent to onnellab.app@gmail.com.'] }
-      ]
-    }
+    nav: { apps: 'Apps', about: 'About', blog: 'Blog' },
+    seoTitle: 'ONNELLAB Terms of Use',
+    description: 'General terms for ONNELLAB apps and websites.',
+    eyebrow: 'Legal',
+    title: 'Terms of Use',
+    intro: 'These general terms apply to ONNELLAB apps and websites unless a product page or store listing states a more specific rule.',
+    updatedLabel: 'Last updated',
+    updatedValue: '2026-08-21',
+    sections: [
+      { title: '1. Using ONNELLAB products', paragraphs: ['Use each product lawfully and in accordance with its store listing, in-app notices, and platform rules. Do not attempt to disrupt, reverse-engineer for abuse, or misuse a service or another person’s data.'] },
+      { title: '2. Your files and content', paragraphs: ['You remain responsible for files, manuscripts, media, and other content you choose to process. ONNELLAB does not claim ownership of user content. Make sure you have the rights needed to use and export the material.'] },
+      { title: '3. Purchases and refunds', paragraphs: ['App downloads, purchases, subscriptions, refunds, and purchase restoration are processed by the applicable app store under its own terms. Product-specific pricing and entitlements are shown in the store or app.'] },
+      { title: '4. External services', paragraphs: ['When a product opens or shares data with another app, website, storage provider, or platform, that destination’s terms and privacy policy apply. ONNELLAB is not responsible for third-party services outside its control.'] },
+      { title: '5. Availability and changes', paragraphs: ['We may update products to fix defects, maintain compatibility, meet legal or store requirements, or improve the experience. Features may differ by platform where operating-system rules require it.'] },
+      { title: '6. Contact', paragraphs: ['Questions about these terms can be sent to onnellab.app@gmail.com.'] }
+    ]
   },
   ko: {
-    nav: { apps: '앱', about: '소개', blog: '블로그', privacy: '개인정보', terms: '이용약관' },
-    home: {
-      seoTitle: 'ONNELLAB - 차분하고 목적이 분명한 소프트웨어',
-      description: 'ONNELLAB은 파일, 창작 작업과 일상을 위한 작고 목적이 분명한 앱을 만들어요.',
-      eyebrow: '독립 소프트웨어 스튜디오',
-      title: '작은 도구를, 차분하게 만들어요.',
-      intro:
-        'ONNELLAB은 파일과 창작물, 일상의 작업을 사용자가 직접 관리할 수 있는 목적이 분명한 앱을 만들어요. 기능을 쌓아 올리거나 필요 없는 계정을 강요하지 않아요.',
-      featuredLabel: '다섯 언어로 준비한 앱',
-      featuredTitle: '완성된 원고를 한 권의 EPUB으로 만들어요.',
-      featuredBody:
-        'Papira는 TXT 원고를 표지, 책 정보, 챕터와 목차가 있는 EPUB으로 조립해요. 모든 작업은 기기 안에서 이루어져요.',
-      featuredAction: 'Papira 살펴보기',
-      appsTitle: '다른 ONNELLAB 앱',
-      allApps: '모든 앱 보기',
-      valuesTitle: '만드는 원칙',
-      values: [
-        { title: '한 가지 분명한 일', body: '각 앱은 하나의 작업에서 시작하고 플랫폼이 되기 전에 멈춰요.' },
-        { title: '기본값부터 차분하게', body: '부드러운 화면과 읽기 쉬운 문구, 적은 방해로 작업을 앞에 둬요.' },
-        { title: '사용자가 통제해요', body: '가능한 제품은 로컬 우선으로 처리하고 꼭 필요한 권한만 사용해요.' }
-      ]
-    },
-    apps: {
-      seoTitle: 'ONNELLAB 앱',
-      description: '파일, 미디어와 창작 작업을 위한 ONNELLAB 앱을 살펴봐요.',
-      eyebrow: '제품',
-      title: '앱',
-      intro: '작지만 경계가 분명한 도구들이에요. 각 제품 페이지에서 무엇을 하고, 무엇을 하지 않는지 정확히 확인해요.',
-      searchLabel: '앱 찾기',
-      searchPlaceholder: '앱 이름을 검색해요',
-      empty: '일치하는 앱이 없어요.',
-      papiraStatus: '출시 준비 중'
-    },
-    about: {
-      seoTitle: 'ONNELLAB 소개',
-      description: 'ONNELLAB은 차분하고 실용적인 디지털 도구를 만드는 독립 소프트웨어 스튜디오예요.',
-      eyebrow: '스튜디오',
-      title: 'ONNELLAB 소개',
-      paragraphs: [
-        'ONNELLAB은 파일, 미디어, 창작 작업과 일상을 위한 차분하고 실용적인 도구를 만드는 독립 소프트웨어 스튜디오예요.',
-        '각 앱은 한 가지 분명한 일에서 시작해요. 기능 과잉, 필요 없는 계정과 작업보다 더 많은 주의를 요구하는 화면을 피하려고 해요.',
-        '제품의 성격이 허용한다면 파일과 창작물은 기기 안에 남겨요. 사용자가 직접 선택한 항목에만 접근하고 서버 의존을 작게 유지해요.',
-        'ONNELLAB은 작은 스튜디오예요. 제품을 신중하게 출시하고 오래 관리하며, 목적이 흐려지지 않도록 지켜요.'
-      ],
-      principlesTitle: '원칙',
-      principles: [
-        { title: '분명하게', body: '도구의 목적은 한 문장으로 설명할 수 있어야 해요.' },
-        { title: '조용하게', body: '디자인은 주의를 빼앗지 않고 작업을 도와야 해요.' },
-        { title: '존중하며', body: '파일과 선택, 주의력을 사용자가 직접 통제해요.' }
-      ]
-    },
-    privacy: {
-      seoTitle: 'ONNELLAB 개인정보 처리방침',
-      description: 'ONNELLAB 앱별 개인정보 처리방침을 확인해요.',
-      eyebrow: '법적 안내',
-      title: '개인정보 처리방침',
-      intro: '앱마다 실제 데이터 흐름과 플랫폼 기능에 맞는 개인정보 처리방침을 제공해요.',
-      searchLabel: '앱 찾기',
-      searchPlaceholder: '앱 이름을 검색해요',
-      empty: '일치하는 앱이 없어요.',
-      updated: '작성 날짜',
-      analyticsTitle: '사이트 이용 분석',
-      analyticsBody:
-        'Google Analytics가 설정된 경우에만 사이트 개선을 위해 페이지 방문, 언어 전환, 스토어 이동과 스크린샷 열람 같은 집계 이벤트를 측정할 수 있어요. 앱 안의 파일 내용, 태그 값이나 계정 정보는 수집하지 않아요.',
-      siteTitle: 'ONNELLAB 웹사이트 개인정보',
-      siteBody:
-        '이 웹사이트는 ONNELLAB이 만든 콘텐츠와 제품 정보를 제공해요. 외부 게시 API는 승인된 ONNELLAB 콘텐츠와 ONNELLAB이 관리하는 계정에만 사용해요. 다른 사용자의 비공개 소셜 데이터를 판매하거나 분석하지 않아요.',
-      contactTitle: '문의',
-      contactBody: '개인정보 관련 문의는 onnellab.app@gmail.com으로 보내요.'
-    },
-    terms: {
-      seoTitle: 'ONNELLAB 이용약관',
-      description: 'ONNELLAB 앱과 웹사이트의 일반 이용약관이에요.',
-      eyebrow: '법적 안내',
-      title: '이용약관',
-      intro: '제품 페이지나 스토어 안내에 더 구체적인 규칙이 없는 경우 ONNELLAB 앱과 웹사이트에 이 일반 약관이 적용돼요.',
-      updatedLabel: '최종 업데이트',
-      updatedValue: '2026-08-21',
-      sections: [
-        { title: '1. ONNELLAB 제품 이용', paragraphs: ['각 제품은 법률, 스토어 안내, 앱 안의 고지와 플랫폼 규칙을 지켜 사용해요. 서비스를 방해하거나 다른 사람의 데이터를 침해하는 방식으로 악용하면 안 돼요.'] },
-        { title: '2. 사용자의 파일과 콘텐츠', paragraphs: ['사용자가 선택한 파일, 원고, 미디어와 콘텐츠에 대한 책임은 사용자에게 있어요. ONNELLAB은 사용자 콘텐츠의 소유권을 주장하지 않아요. 처리하고 내보낼 권리가 있는 자료인지 확인해요.'] },
-        { title: '3. 구매와 환불', paragraphs: ['앱 다운로드, 구매, 구독, 환불과 구매 복원은 해당 앱 스토어가 자체 약관에 따라 처리해요. 제품별 가격과 이용 권한은 스토어나 앱에서 안내해요.'] },
-        { title: '4. 외부 서비스', paragraphs: ['제품에서 다른 앱, 웹사이트, 저장소 또는 플랫폼으로 데이터를 열거나 공유하면 해당 대상의 약관과 개인정보 처리방침이 적용돼요. ONNELLAB이 통제하지 않는 외부 서비스에 대해서는 책임지지 않아요.'] },
-        { title: '5. 제공 및 변경', paragraphs: ['오류 수정, 호환성 유지, 법률·스토어 요구 대응과 사용 경험 개선을 위해 제품을 업데이트할 수 있어요. 운영체제 규칙에 따라 플랫폼별 기능이 다를 수 있어요.'] },
-        { title: '6. 문의', paragraphs: ['이 약관에 관한 문의는 onnellab.app@gmail.com으로 보내요.'] }
-      ]
-    }
+    nav: { apps: '앱', about: '소개', blog: '블로그' },
+    seoTitle: 'ONNELLAB 이용약관',
+    description: 'ONNELLAB 앱과 웹사이트의 일반 이용약관이에요.',
+    eyebrow: '법적 안내',
+    title: '이용약관',
+    intro: '제품 페이지나 스토어 안내에 더 구체적인 규칙이 없는 경우 ONNELLAB 앱과 웹사이트에 이 일반 약관이 적용돼요.',
+    updatedLabel: '최종 업데이트',
+    updatedValue: '2026-08-21',
+    sections: [
+      { title: '1. ONNELLAB 제품 이용', paragraphs: ['각 제품은 법률, 스토어 안내, 앱 안의 고지와 플랫폼 규칙을 지켜 사용해요. 서비스를 방해하거나 다른 사람의 데이터를 침해하는 방식으로 악용하면 안 돼요.'] },
+      { title: '2. 사용자의 파일과 콘텐츠', paragraphs: ['사용자가 선택한 파일, 원고, 미디어와 콘텐츠에 대한 책임은 사용자에게 있어요. ONNELLAB은 사용자 콘텐츠의 소유권을 주장하지 않아요. 처리하고 내보낼 권리가 있는 자료인지 확인해요.'] },
+      { title: '3. 구매와 환불', paragraphs: ['앱 다운로드, 구매, 구독, 환불과 구매 복원은 해당 앱 스토어가 자체 약관에 따라 처리해요. 제품별 가격과 이용 권한은 스토어나 앱에서 안내해요.'] },
+      { title: '4. 외부 서비스', paragraphs: ['제품에서 다른 앱, 웹사이트, 저장소 또는 플랫폼으로 데이터를 열거나 공유하면 해당 대상의 약관과 개인정보 처리방침이 적용돼요. ONNELLAB이 통제하지 않는 외부 서비스에 대해서는 책임지지 않아요.'] },
+      { title: '5. 제공 및 변경', paragraphs: ['오류 수정, 호환성 유지, 법률·스토어 요구 대응과 사용 경험 개선을 위해 제품을 업데이트할 수 있어요. 운영체제 규칙에 따라 플랫폼별 기능이 다를 수 있어요.'] },
+      { title: '6. 문의', paragraphs: ['이 약관에 관한 문의는 onnellab.app@gmail.com으로 보내요.'] }
+    ]
   },
   ja: {
-    nav: { apps: 'アプリ', about: 'ONNELLABについて', blog: 'ブログ', privacy: 'プライバシー', terms: '利用規約' },
-    home: {
-      seoTitle: 'ONNELLAB - 静かで目的の明確なソフトウェア',
-      description: 'ONNELLABは、ファイル、創作、日々の作業のための小さく目的の明確なアプリをつくります。',
-      eyebrow: 'インディーソフトウェアスタジオ',
-      title: '小さな道具を、静かに。',
-      intro:
-        'ONNELLABは、ファイルや創作、日々の作業を自分の手元で扱える、目的のはっきりしたアプリをつくります。不要な機能や、必要のないアカウントを増やしません。',
-      featuredLabel: '5言語対応の新しいアプリ',
-      featuredTitle: '完成原稿を、一冊のEPUBへ。',
-      featuredBody:
-        'PapiraはTXT原稿を、表紙・書誌情報・章・目次を備えたEPUBにまとめます。すべての処理は端末内で完結します。',
-      featuredAction: 'Papiraを見る',
-      appsTitle: 'ほかのONNELLABアプリ',
-      allApps: 'すべてのアプリ',
-      valuesTitle: 'ものづくりの原則',
-      values: [
-        { title: 'ひとつの明確な役割', body: '一つの仕事から始め、プラットフォームになる前に止めます。' },
-        { title: '最初から静かに', body: '柔らかな画面、読みやすい文章、少ない中断で作業を前に置きます。' },
-        { title: '利用者の手元に', body: '可能な製品はローカル優先で処理し、必要最小限のアクセスだけを求めます。' }
-      ]
-    },
-    apps: {
-      seoTitle: 'ONNELLAB アプリ',
-      description: 'ファイル、メディア、創作作業のためのONNELLABアプリ一覧です。',
-      eyebrow: 'プロダクト',
-      title: 'アプリ',
-      intro: '小さく、境界の明確な道具です。各ページで、できることと、あえて行わないことを確認できます。',
-      searchLabel: 'アプリを探す',
-      searchPlaceholder: 'アプリ名で検索',
-      empty: '該当するアプリはありません。',
-      papiraStatus: 'リリース準備中',
-      languageNotice: 'Papiraの詳細ページは日本語に対応しています。ほかのアプリの詳細ページは現在、英語と韓国語で提供しています。'
-    },
-    about: {
-      seoTitle: 'ONNELLABについて',
-      description: 'ONNELLABは、静かで実用的なデジタルツールをつくるインディーソフトウェアスタジオです。',
-      eyebrow: 'スタジオ',
-      title: 'ONNELLABについて',
-      paragraphs: [
-        'ONNELLABは、ファイル、メディア、創作、日々の作業のための静かで実用的なツールをつくるインディーソフトウェアスタジオです。',
-        '各アプリは、ひとつの明確な役割から始まります。機能の詰め込み、不要なアカウント、作業以上に注意を奪う画面を避けます。',
-        '製品の性質が許す限り、ファイルと創作物は端末内に残します。利用者が明示的に選んだ項目だけへアクセスし、サーバー依存を小さく保ちます。',
-        'ONNELLABは小さなスタジオです。製品を慎重に公開し、長く手入れしながら、目的がぼやけないよう守ります。'
-      ],
-      principlesTitle: '原則',
-      principles: [
-        { title: 'Focused', body: '道具の目的は一文で説明できるべきです。' },
-        { title: 'Quiet', body: 'デザインは注意を奪わず、作業を支えます。' },
-        { title: 'Respectful', body: 'ファイル、選択、注意の主導権は利用者にあります。' }
-      ]
-    },
-    privacy: {
-      seoTitle: 'ONNELLAB プライバシーポリシー',
-      description: 'ONNELLABアプリごとのプライバシーポリシーです。',
-      eyebrow: '法的情報',
-      title: 'プライバシーポリシー',
-      intro: '各アプリの実際のデータフローとプラットフォーム機能に合わせたポリシーを掲載しています。',
-      searchLabel: 'アプリを探す',
-      searchPlaceholder: 'アプリ名で検索',
-      empty: '該当するアプリはありません。',
-      updated: 'ポリシー日付',
-      analyticsTitle: 'ウェブサイトの利用分析',
-      analyticsBody:
-        'Google Analyticsが設定されている場合に限り、サイト改善のため、ページ閲覧、言語切り替え、ストアへの移動、スクリーンショット表示などの集計イベントを測定することがあります。アプリ内のファイル内容、タグ値、アカウント情報は収集しません。',
-      siteTitle: 'ONNELLABウェブサイトのプライバシー',
-      siteBody:
-        '本サイトはONNELLABのコンテンツと製品情報を提供します。外部投稿APIは承認済みのONNELLABコンテンツとONNELLAB管理アカウントにのみ使用します。他の利用者の非公開ソーシャルデータを販売または分析しません。',
-      contactTitle: 'お問い合わせ',
-      contactBody: 'プライバシーに関するお問い合わせは onnellab.app@gmail.com までお送りください。',
-      fallbackNotice: 'Papiraのポリシーは日本語で読めます。ほかのアプリのポリシーは現在、英語または韓国語で提供しています。'
-    },
-    terms: {
-      seoTitle: 'ONNELLAB 利用規約',
-      description: 'ONNELLABアプリとウェブサイトの一般利用規約です。',
-      eyebrow: '法的情報',
-      title: '利用規約',
-      intro: '製品ページやストア表示により具体的な規則がない場合、ONNELLABのアプリとウェブサイトには本一般規約が適用されます。',
-      updatedLabel: '最終更新日',
-      updatedValue: '2026-08-21',
-      sections: [
-        { title: '1. ONNELLAB製品の利用', paragraphs: ['各製品は、法令、ストア表示、アプリ内の案内、プラットフォーム規則に従って使用してください。サービスの妨害や他者のデータを侵害する目的で利用してはいけません。'] },
-        { title: '2. 利用者のファイルとコンテンツ', paragraphs: ['利用者が選択したファイル、原稿、メディア、その他のコンテンツについては利用者が責任を負います。ONNELLABは利用者コンテンツの所有権を主張しません。処理や書き出しに必要な権利があることを確認してください。'] },
-        { title: '3. 購入と返金', paragraphs: ['ダウンロード、購入、サブスクリプション、返金、購入の復元は、各アプリストアがその規約に従って処理します。製品ごとの価格と利用権はストアまたはアプリに表示されます。'] },
-        { title: '4. 外部サービス', paragraphs: ['別のアプリ、ウェブサイト、ストレージ、プラットフォームへデータを開いたり共有したりした場合、送信先の規約とプライバシーポリシーが適用されます。ONNELLABは管理外の第三者サービスについて責任を負いません。'] },
-        { title: '5. 提供と変更', paragraphs: ['不具合修正、互換性維持、法令・ストア要件への対応、体験改善のため製品を更新することがあります。OSの規則により、機能がプラットフォームごとに異なる場合があります。'] },
-        { title: '6. お問い合わせ', paragraphs: ['本規約に関するお問い合わせは onnellab.app@gmail.com までお送りください。'] }
-      ]
-    }
+    nav: { apps: 'アプリ', about: 'ONNELLABについて', blog: 'ブログ' },
+    seoTitle: 'ONNELLAB 利用規約',
+    description: 'ONNELLABアプリとウェブサイトの一般利用規約です。',
+    eyebrow: '法的情報',
+    title: '利用規約',
+    intro: '製品ページやストア表示により具体的な規則がない場合、ONNELLABのアプリとウェブサイトには本一般規約が適用されます。',
+    updatedLabel: '最終更新日',
+    updatedValue: '2026-08-21',
+    sections: [
+      { title: '1. ONNELLAB製品の利用', paragraphs: ['各製品は、法令、ストア表示、アプリ内の案内、プラットフォーム規則に従って使用してください。サービスの妨害や他者のデータを侵害する目的で利用してはいけません。'] },
+      { title: '2. 利用者のファイルとコンテンツ', paragraphs: ['利用者が選択したファイル、原稿、メディア、その他のコンテンツについては利用者が責任を負います。ONNELLABは利用者コンテンツの所有権を主張しません。処理や書き出しに必要な権利があることを確認してください。'] },
+      { title: '3. 購入と返金', paragraphs: ['ダウンロード、購入、サブスクリプション、返金、購入の復元は、各アプリストアがその規約に従って処理します。製品ごとの価格と利用権はストアまたはアプリに表示されます。'] },
+      { title: '4. 外部サービス', paragraphs: ['別のアプリ、ウェブサイト、ストレージ、プラットフォームへデータを開いたり共有したりした場合、送信先の規約とプライバシーポリシーが適用されます。ONNELLABは管理外の第三者サービスについて責任を負いません。'] },
+      { title: '5. 提供と変更', paragraphs: ['不具合修正、互換性維持、法令・ストア要件への対応、体験改善のため製品を更新することがあります。OSの規則により、機能がプラットフォームごとに異なる場合があります。'] },
+      { title: '6. お問い合わせ', paragraphs: ['本規約に関するお問い合わせは onnellab.app@gmail.com までお送りください。'] }
+    ]
   },
   'zh-Hans': {
-    nav: { apps: '应用', about: '关于', blog: '博客', privacy: '隐私', terms: '条款' },
-    home: {
-      seoTitle: 'ONNELLAB - 安静而专注的软件',
-      description: 'ONNELLAB 制作为文件、创作与日常任务服务的小型专注应用。',
-      eyebrow: '独立软件工作室',
-      title: '小工具，安静地做好。',
-      intro:
-        'ONNELLAB 制作目标明确的应用，让文件、创作与日常任务始终由你掌控。不堆叠功能，也不强迫不必要的账号。',
-      featuredLabel: '支持五种语言的新应用',
-      featuredTitle: '把完成稿，做成一本 EPUB。',
-      featuredBody:
-        'Papira 可将 TXT 原稿整理成带封面、书籍信息、章节和目录的 EPUB。所有处理都在设备本地完成。',
-      featuredAction: '了解 Papira',
-      appsTitle: '更多 ONNELLAB 应用',
-      allApps: '查看全部应用',
-      valuesTitle: '我们的制作原则',
-      values: [
-        { title: '只做好一件事', body: '每个产品从一项明确任务出发，在变成平台之前停下来。' },
-        { title: '默认保持安静', body: '柔和的视觉、易读的文字与更少打扰，让任务始终在前。' },
-        { title: '由用户掌控', body: '只要产品允许，就优先本地处理，并尽量减少访问权限。' }
-      ]
-    },
-    apps: {
-      seoTitle: 'ONNELLAB 应用',
-      description: '浏览用于文件、媒体与创作工作的 ONNELLAB 应用。',
-      eyebrow: '产品',
-      title: '应用',
-      intro: '小而边界清晰的工具。每个产品页都会说明它能做什么，以及刻意不做什么。',
-      searchLabel: '查找应用',
-      searchPlaceholder: '搜索应用名称',
-      empty: '没有匹配的应用。',
-      papiraStatus: '准备发布',
-      languageNotice: 'Papira 详情页提供简体中文。其他应用详情页目前提供英文与韩文。'
-    },
-    about: {
-      seoTitle: '关于 ONNELLAB',
-      description: 'ONNELLAB 是一家制作安静、实用数字工具的独立软件工作室。',
-      eyebrow: '工作室',
-      title: '关于 ONNELLAB',
-      paragraphs: [
-        'ONNELLAB 是一家为文件、媒体、创作与日常任务制作安静、实用工具的独立软件工作室。',
-        '每个应用都从一项明确任务出发。我们避免功能膨胀、不必要的账号，以及比任务本身更抢注意力的界面。',
-        '只要产品性质允许，文件和创作内容就留在设备本地。我们只访问用户明确选择的项目，并尽量减少服务器依赖。',
-        'ONNELLAB 是一个小型工作室。我们谨慎发布、长期维护，并让产品始终保持专注。'
-      ],
-      principlesTitle: '原则',
-      principles: [
-        { title: '专注', body: '一个工具的目的应该能用一句话说明。' },
-        { title: '安静', body: '设计应支持任务，而不是争夺注意力。' },
-        { title: '尊重', body: '文件、选择与注意力始终由用户掌控。' }
-      ]
-    },
-    privacy: {
-      seoTitle: 'ONNELLAB 隐私政策',
-      description: 'ONNELLAB 各应用的隐私政策。',
-      eyebrow: '法律信息',
-      title: '隐私政策',
-      intro: '每款应用都提供与实际数据流和平台功能相符的隐私政策。',
-      searchLabel: '查找应用',
-      searchPlaceholder: '搜索应用名称',
-      empty: '没有匹配的应用。',
-      updated: '政策日期',
-      analyticsTitle: '网站使用分析',
-      analyticsBody:
-        '仅在配置 Google Analytics 时，本网站可能为改进体验而统计页面访问、语言切换、前往商店和查看截图等汇总事件。不会收集应用内文件内容、标签值或账号信息。',
-      siteTitle: 'ONNELLAB 网站隐私',
-      siteBody:
-        '本网站提供 ONNELLAB 原创内容与产品信息。外部发布 API 仅用于经批准的 ONNELLAB 内容和由 ONNELLAB 管理的账号。我们不会出售或分析其他用户的私密社交数据。',
-      contactTitle: '联系',
-      contactBody: '隐私相关问题请发送至 onnellab.app@gmail.com。',
-      fallbackNotice: 'Papira 隐私政策提供简体中文。其他应用政策目前提供英文或韩文。'
-    },
-    terms: {
-      seoTitle: 'ONNELLAB 使用条款',
-      description: '适用于 ONNELLAB 应用与网站的一般使用条款。',
-      eyebrow: '法律信息',
-      title: '使用条款',
-      intro: '如产品页面或应用商店说明没有更具体的规则，本一般条款适用于 ONNELLAB 应用与网站。',
-      updatedLabel: '最后更新',
-      updatedValue: '2026-08-21',
-      sections: [
-        { title: '1. 使用 ONNELLAB 产品', paragraphs: ['请依法并按照应用商店说明、应用内提示和平台规则使用产品。不得以破坏服务或侵害他人数据的方式滥用产品。'] },
-        { title: '2. 用户文件与内容', paragraphs: ['用户对自己选择处理的文件、原稿、媒体及其他内容负责。ONNELLAB 不主张用户内容的所有权。请确认你拥有处理与导出相应材料所需的权利。'] },
-        { title: '3. 购买与退款', paragraphs: ['下载、购买、订阅、退款与恢复购买由相应应用商店按照其条款处理。具体价格与权益会在商店或应用中说明。'] },
-        { title: '4. 外部服务', paragraphs: ['当产品把数据打开或分享到其他应用、网站、存储服务或平台时，将适用接收方的条款与隐私政策。ONNELLAB 不对其无法控制的第三方服务负责。'] },
-        { title: '5. 提供与变更', paragraphs: ['我们可能为修复问题、保持兼容、满足法律或商店要求及改进体验而更新产品。受操作系统规则影响，不同平台的功能可能不同。'] },
-        { title: '6. 联系', paragraphs: ['有关本条款的问题可发送至 onnellab.app@gmail.com。'] }
-      ]
-    }
+    nav: { apps: '应用', about: '关于', blog: '博客' },
+    seoTitle: 'ONNELLAB 使用条款',
+    description: '适用于 ONNELLAB 应用与网站的一般使用条款。',
+    eyebrow: '法律信息',
+    title: '使用条款',
+    intro: '如产品页面或应用商店说明没有更具体的规则，本一般条款适用于 ONNELLAB 应用与网站。',
+    updatedLabel: '最后更新',
+    updatedValue: '2026-08-21',
+    sections: [
+      { title: '1. 使用 ONNELLAB 产品', paragraphs: ['请依法并按照应用商店说明、应用内提示和平台规则使用产品。不得以破坏服务或侵害他人数据的方式滥用产品。'] },
+      { title: '2. 用户文件与内容', paragraphs: ['用户对自己选择处理的文件、原稿、媒体及其他内容负责。ONNELLAB 不主张用户内容的所有权。请确认你拥有处理与导出相应材料所需的权利。'] },
+      { title: '3. 购买与退款', paragraphs: ['下载、购买、订阅、退款与恢复购买由相应应用商店按照其条款处理。具体价格与权益会在商店或应用中说明。'] },
+      { title: '4. 外部服务', paragraphs: ['当产品把数据打开或分享到其他应用、网站、存储服务或平台时，将适用接收方的条款与隐私政策。ONNELLAB 不对其无法控制的第三方服务负责。'] },
+      { title: '5. 提供与变更', paragraphs: ['我们可能为修复问题、保持兼容、满足法律或商店要求及改进体验而更新产品。受操作系统规则影响，不同平台的功能可能不同。'] },
+      { title: '6. 联系', paragraphs: ['有关本条款的问题可发送至 onnellab.app@gmail.com。'] }
+    ]
   },
   'zh-Hant': {
-    nav: { apps: '應用程式', about: '關於', blog: '部落格', privacy: '隱私', terms: '條款' },
-    home: {
-      seoTitle: 'ONNELLAB - 安靜而專注的軟體',
-      description: 'ONNELLAB 製作為檔案、創作與日常工作服務的小型專注應用程式。',
-      eyebrow: '獨立軟體工作室',
-      title: '小工具，安靜地做好。',
-      intro:
-        'ONNELLAB 製作目標明確的應用程式，讓檔案、創作與日常工作始終由你掌控。不堆疊功能，也不強迫不必要的帳號。',
-      featuredLabel: '支援五種語言的新應用程式',
-      featuredTitle: '把完成稿，做成一本 EPUB。',
-      featuredBody:
-        'Papira 可將 TXT 原稿整理成含封面、書籍資訊、章節和目錄的 EPUB。所有處理都在裝置本機完成。',
-      featuredAction: '了解 Papira',
-      appsTitle: '更多 ONNELLAB 應用程式',
-      allApps: '查看全部應用程式',
-      valuesTitle: '我們的製作原則',
-      values: [
-        { title: '只做好一件事', body: '每個產品從一項明確工作出發，在變成平台之前停下來。' },
-        { title: '預設保持安靜', body: '柔和的視覺、易讀的文字與更少打擾，讓工作始終在前。' },
-        { title: '由使用者掌控', body: '只要產品允許，就優先本機處理，並儘量減少存取權限。' }
-      ]
-    },
-    apps: {
-      seoTitle: 'ONNELLAB 應用程式',
-      description: '瀏覽用於檔案、媒體與創作工作的 ONNELLAB 應用程式。',
-      eyebrow: '產品',
-      title: '應用程式',
-      intro: '小而邊界清楚的工具。每個產品頁都會說明能做什麼，以及刻意不做什麼。',
-      searchLabel: '尋找應用程式',
-      searchPlaceholder: '搜尋應用程式名稱',
-      empty: '沒有符合的應用程式。',
-      papiraStatus: '準備發布',
-      languageNotice: 'Papira 詳細頁提供繁體中文。其他應用程式詳細頁目前提供英文與韓文。'
-    },
-    about: {
-      seoTitle: '關於 ONNELLAB',
-      description: 'ONNELLAB 是一家製作安靜、實用數位工具的獨立軟體工作室。',
-      eyebrow: '工作室',
-      title: '關於 ONNELLAB',
-      paragraphs: [
-        'ONNELLAB 是一家為檔案、媒體、創作與日常工作製作安靜、實用工具的獨立軟體工作室。',
-        '每個應用程式都從一項明確工作出發。我們避免功能膨脹、不必要的帳號，以及比工作本身更搶注意力的介面。',
-        '只要產品性質允許，檔案與創作內容就留在裝置本機。我們只存取使用者明確選取的項目，並儘量減少伺服器依賴。',
-        'ONNELLAB 是一個小型工作室。我們謹慎發布、長期維護，並讓產品始終保持專注。'
-      ],
-      principlesTitle: '原則',
-      principles: [
-        { title: '專注', body: '一個工具的目的應該能用一句話說明。' },
-        { title: '安靜', body: '設計應支援工作，而不是爭奪注意力。' },
-        { title: '尊重', body: '檔案、選擇與注意力始終由使用者掌控。' }
-      ]
-    },
-    privacy: {
-      seoTitle: 'ONNELLAB 隱私權政策',
-      description: 'ONNELLAB 各應用程式的隱私權政策。',
-      eyebrow: '法律資訊',
-      title: '隱私權政策',
-      intro: '每款應用程式都提供與實際資料流程和平台功能相符的隱私權政策。',
-      searchLabel: '尋找應用程式',
-      searchPlaceholder: '搜尋應用程式名稱',
-      empty: '沒有符合的應用程式。',
-      updated: '政策日期',
-      analyticsTitle: '網站使用分析',
-      analyticsBody:
-        '僅在設定 Google Analytics 時，本網站可能為改善體驗而統計頁面瀏覽、語言切換、前往商店和查看截圖等彙總事件。不會蒐集應用程式內的檔案內容、標籤值或帳號資訊。',
-      siteTitle: 'ONNELLAB 網站隱私',
-      siteBody:
-        '本網站提供 ONNELLAB 原創內容與產品資訊。外部發布 API 僅用於經核准的 ONNELLAB 內容和由 ONNELLAB 管理的帳號。我們不會出售或分析其他使用者的私人社群資料。',
-      contactTitle: '聯絡',
-      contactBody: '隱私相關問題請寄至 onnellab.app@gmail.com。',
-      fallbackNotice: 'Papira 隱私權政策提供繁體中文。其他應用程式政策目前提供英文或韓文。'
-    },
-    terms: {
-      seoTitle: 'ONNELLAB 使用條款',
-      description: '適用於 ONNELLAB 應用程式與網站的一般使用條款。',
-      eyebrow: '法律資訊',
-      title: '使用條款',
-      intro: '如產品頁面或應用程式商店說明沒有更具體的規則，本一般條款適用於 ONNELLAB 應用程式與網站。',
-      updatedLabel: '最後更新',
-      updatedValue: '2026-08-21',
-      sections: [
-        { title: '1. 使用 ONNELLAB 產品', paragraphs: ['請依法並依照應用程式商店說明、應用程式內提示和平台規則使用產品。不得以破壞服務或侵害他人資料的方式濫用產品。'] },
-        { title: '2. 使用者檔案與內容', paragraphs: ['使用者對自己選擇處理的檔案、原稿、媒體與其他內容負責。ONNELLAB 不主張使用者內容的所有權。請確認你擁有處理與匯出相關材料所需的權利。'] },
-        { title: '3. 購買與退款', paragraphs: ['下載、購買、訂閱、退款與回復購買由對應應用程式商店依其條款處理。產品價格與權益會在商店或應用程式內說明。'] },
-        { title: '4. 外部服務', paragraphs: ['當產品將資料開啟或分享至其他應用程式、網站、儲存服務或平台時，將適用接收方的條款與隱私權政策。ONNELLAB 不對無法控制的第三方服務負責。'] },
-        { title: '5. 提供與變更', paragraphs: ['我們可能為修正問題、維持相容、符合法律或商店要求及改善體驗而更新產品。受作業系統規則影響，不同平台的功能可能不同。'] },
-        { title: '6. 聯絡', paragraphs: ['有關本條款的問題可寄至 onnellab.app@gmail.com。'] }
-      ]
-    }
+    nav: { apps: '應用程式', about: '關於', blog: '部落格' },
+    seoTitle: 'ONNELLAB 使用條款',
+    description: '適用於 ONNELLAB 應用程式與網站的一般使用條款。',
+    eyebrow: '法律資訊',
+    title: '使用條款',
+    intro: '如產品頁面或應用程式商店說明沒有更具體的規則，本一般條款適用於 ONNELLAB 應用程式與網站。',
+    updatedLabel: '最後更新',
+    updatedValue: '2026-08-21',
+    sections: [
+      { title: '1. 使用 ONNELLAB 產品', paragraphs: ['請依法並依照應用程式商店說明、應用程式內提示和平台規則使用產品。不得以破壞服務或侵害他人資料的方式濫用產品。'] },
+      { title: '2. 使用者檔案與內容', paragraphs: ['使用者對自己選擇處理的檔案、原稿、媒體與其他內容負責。ONNELLAB 不主張使用者內容的所有權。請確認你擁有處理與匯出相關材料所需的權利。'] },
+      { title: '3. 購買與退款', paragraphs: ['下載、購買、訂閱、退款與回復購買由對應應用程式商店依其條款處理。產品價格與權益會在商店或應用程式內說明。'] },
+      { title: '4. 外部服務', paragraphs: ['當產品將資料開啟或分享至其他應用程式、網站、儲存服務或平台時，將適用接收方的條款與隱私權政策。ONNELLAB 不對無法控制的第三方服務負責。'] },
+      { title: '5. 提供與變更', paragraphs: ['我們可能為修正問題、維持相容、符合法律或商店要求及改善體驗而更新產品。受作業系統規則影響，不同平台的功能可能不同。'] },
+      { title: '6. 聯絡', paragraphs: ['有關本條款的問題可寄至 onnellab.app@gmail.com。'] }
+    ]
   }
 };
 
-const { locale, page } = Astro.props;
+const { locale } = Astro.props;
 const copy = copies[locale];
 const definition = localeDefinitions[locale];
-const canonicalPath = routeFor(page, locale);
-const sourceLocale = contentLocale(locale);
-const existingApps = getProductIndexItems(sourceLocale);
-const appHref = (slug: string) => {
-  if (locale === 'ko') return `/apps/${slug}/ko/`;
-  return `/apps/${slug}/`;
-};
-const papiraSummary: Record<SiteLocale, string> = {
-  en: 'Offline TXT-to-EPUB maker for fanfiction, novels, digital zines, and TRPG scenarios.',
-  ko: '팬픽·소설·전자책 동인지·TRPG 시나리오 TXT 원고를 EPUB으로 만들어요.',
-  ja: '二次創作・小説・電子同人誌・TRPGシナリオのTXT原稿をEPUBにまとめます。',
-  'zh-Hans': '把同人文、小说、电子同人志与 TRPG 剧本的 TXT 原稿制作成 EPUB。',
-  'zh-Hant': '把同人文、小說、電子同人誌與 TRPG 劇本的 TXT 原稿製作成 EPUB。'
-};
-const papiraCard = {
-  slug: 'papira',
-  title: 'Papira',
-  status: copy.apps.papiraStatus,
-  platforms: ['iOS', 'Android'],
-  description: papiraSummary[locale],
-  iconPath: '/app-assets/papira/icon.png',
-  href: routeFor('papira', locale),
-  privacy: routeFor('papiraPrivacy', locale)
-};
-const allApps = [papiraCard, ...existingApps.map((app) => ({ ...app, href: appHref(app.slug) }))];
-const featuredOthers = existingApps.slice(0, 4).map((app) => ({ ...app, href: appHref(app.slug) }));
-const privacyDates: Record<string, string> = {
-  Aligna: '2026-06-24',
-  ClipNest: '2026-06-13',
-  Melivra: '2026-07-09',
-  Papira: '2026-08-21',
-  Quivra: '2026-02-10',
-  Segra: '2026-06-12',
-  TagWeaver: '2026-02-14',
-  VaultXT: '2026-03-11'
-};
-const localizedExistingPrivacy = (href: string) => (locale === 'ko' ? href.replace(/\/?$/, '/ko/') : href);
-const policies = [
-  ...existingApps.map((app) => ({
-    title: app.title,
-    href: localizedExistingPrivacy(app.privacy),
-    date: privacyDates[app.title] ?? '2026-01-01',
-    platforms: app.platforms,
-    localized: locale === 'en' || locale === 'ko'
-  })),
-  {
-    title: 'Papira',
-    href: routeFor('papiraPrivacy', locale),
-    date: privacyDates.Papira,
-    platforms: ['iOS', 'Android'],
-    localized: true
-  }
-].sort((a, b) => a.title.localeCompare(b.title));
-
-const pageCopy = copy[page];
-const title = 'seoTitle' in pageCopy ? pageCopy.seoTitle : 'ONNELLAB';
-const description = 'description' in pageCopy ? pageCopy.description : 'ONNELLAB';
-const jsonLd =
-  page === 'home'
-    ? [
-        {
-          '@context': 'https://schema.org',
-          '@type': 'Organization',
-          '@id': new URL('/#organization', Astro.site).toString(),
-          name: 'ONNELLAB',
-          url: new URL('/', Astro.site).toString(),
-          email: 'onnellab.app@gmail.com'
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'WebSite',
-          '@id': new URL('/#website', Astro.site).toString(),
-          name: 'ONNELLAB',
-          url: new URL(canonicalPath, Astro.site).toString(),
-          inLanguage: definition.htmlLang,
-          publisher: { '@id': new URL('/#organization', Astro.site).toString() }
-        }
-      ]
-    : page === 'apps'
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'CollectionPage',
-          name: copy.apps.seoTitle,
-          description: copy.apps.description,
-          url: new URL(canonicalPath, Astro.site).toString(),
-          inLanguage: definition.htmlLang,
-          mainEntity: {
-            '@type': 'ItemList',
-            itemListElement: allApps.map((app, index) => ({
-              '@type': 'ListItem',
-              position: index + 1,
-              name: app.title,
-              url: new URL(app.href, Astro.site).toString()
-            }))
-          }
-        }
-      : page === 'privacy'
-        ? {
-            '@context': 'https://schema.org',
-            '@type': 'CollectionPage',
-            '@id': new URL(`${canonicalPath}#privacy-policies`, Astro.site).toString(),
-            name: copy.privacy.seoTitle,
-            description: copy.privacy.description,
-            url: new URL(canonicalPath, Astro.site).toString(),
-            inLanguage: definition.htmlLang,
-            mainEntity: {
-              '@type': 'ItemList',
-              itemListElement: policies.map((policy, index) => ({
-                '@type': 'ListItem',
-                position: index + 1,
-                name: `${policy.title} Privacy Policy`,
-                url: new URL(policy.href, Astro.site).toString()
-              }))
-            }
-          }
-        : {
-            '@context': 'https://schema.org',
-            '@type': page === 'about' ? 'AboutPage' : 'WebPage',
-            name: title,
-            description,
-            url: new URL(canonicalPath, Astro.site).toString(),
-            inLanguage: definition.htmlLang
-          };
+const canonicalPath = routeFor('terms', locale);
 const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: copy.seoTitle,
+  description: copy.description,
+  url: new URL(canonicalPath, Astro.site).toString(),
+  inLanguage: definition.htmlLang
+};
 ---
 
 <BaseLayout
-  title={title}
-  description={description}
+  title={copy.seoTitle}
+  description={copy.description}
   canonicalPath={canonicalPath}
   lang={definition.htmlLang}
   jsonLd={jsonLd}
-  alternates={localeAlternates(page)}
+  alternates={localeAlternates('terms')}
 >
-  <main class="site-shell" data-core-page={page}>
+  <main class="site-shell" data-core-page="terms">
     <nav class="top-nav" aria-label="Navigation">
       <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
       <div class="nav-links">
         <a href={routeFor('apps', locale)}>{copy.nav.apps}</a>
         <a href={routeFor('about', locale)}>{copy.nav.about}</a>
         <a href={blogHref}>{copy.nav.blog}</a>
-        <LocaleMenu locale={locale} page={page} />
+        <LocaleMenu locale={locale} page="terms" />
       </div>
     </nav>
 
-    {page === 'home' && (
-      <>
-        <header class="home-hero">
-          <p class="eyebrow">{copy.home.eyebrow}</p>
-          <h1>{copy.home.title}</h1>
-          <p class="lede">{copy.home.intro}</p>
-        </header>
-
-        <section class="featured" aria-labelledby="featured-title">
-          <div class="featured-icon">
-            <img src="/app-assets/papira/icon.png" alt="Papira app icon" width="112" height="112" data-no-visual-search="true" />
-          </div>
-          <div>
-            <p class="eyebrow">{copy.home.featuredLabel}</p>
-            <h2 id="featured-title">{copy.home.featuredTitle}</h2>
-            <p>{copy.home.featuredBody}</p>
-            <a class="text-link" href={routeFor('papira', locale)}>{copy.home.featuredAction}</a>
-          </div>
+    <header class="page-hero">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1>{copy.title}</h1>
+      <p class="lede">{copy.intro}</p>
+      <p class="updated"><strong>{copy.updatedLabel}:</strong> {copy.updatedValue}</p>
+    </header>
+    <section class="prose terms-prose">
+      {copy.sections.map((section) => (
+        <section>
+          <h2>{section.title}</h2>
+          {section.paragraphs.map((paragraph) =>
+            paragraph.includes('onnellab.app@gmail.com') ? (
+              <p>{paragraph.replace('onnellab.app@gmail.com', '')}<a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a></p>
+            ) : (
+              <p>{paragraph}</p>
+            )
+          )}
         </section>
-
-        <section class="section" aria-labelledby="apps-title">
-          <div class="section-head">
-            <h2 id="apps-title">{copy.home.appsTitle}</h2>
-            <a href={routeFor('apps', locale)}>{copy.home.allApps}</a>
-          </div>
-          <div class="product-grid">
-            {featuredOthers.map((app) => (
-              <a class="product-card" href={app.href}>
-                <img src={app.iconPath} alt="" width="56" height="56" loading="lazy" data-no-visual-search="true" />
-                <h3>{app.title}</h3>
-                <p>{app.description}</p>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <section class="section values" aria-labelledby="values-title">
-          <h2 id="values-title">{copy.home.valuesTitle}</h2>
-          <div class="value-grid">
-            {copy.home.values.map((value) => (
-              <article>
-                <h3>{value.title}</h3>
-                <p>{value.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-      </>
-    )}
-
-    {page === 'apps' && (
-      <>
-        <header class="page-hero">
-          <p class="eyebrow">{copy.apps.eyebrow}</p>
-          <h1>{copy.apps.title}</h1>
-          <p class="lede">{copy.apps.intro}</p>
-        </header>
-
-        {copy.apps.languageNotice && <p class="language-notice">{copy.apps.languageNotice}</p>}
-
-        <label class="search-field">
-          <span>{copy.apps.searchLabel}</span>
-          <input type="search" placeholder={copy.apps.searchPlaceholder} data-app-search />
-        </label>
-        <p class="empty-state" data-app-empty hidden>{copy.apps.empty}</p>
-
-        <section class="app-list" aria-label={copy.apps.title}>
-          {allApps.map((app) => (
-            <a class="app-row" href={app.href} data-app-row data-app-title={app.title.toLowerCase()}>
-              <img src={app.iconPath} alt="" width="64" height="64" loading="lazy" data-no-visual-search="true" />
-              <div class="app-copy">
-                <div class="app-title-line">
-                  <h2>{app.title}</h2>
-                  <span>{app.status}</span>
-                </div>
-                <p>{app.description}</p>
-              </div>
-              <div class="badges" aria-label="Platforms">
-                {app.platforms.map((platform) => <span>{platform}</span>)}
-              </div>
-            </a>
-          ))}
-        </section>
-        <script is:inline>
-          (() => {
-            const input = document.querySelector('[data-app-search]');
-            const rows = Array.from(document.querySelectorAll('[data-app-row]'));
-            if (!(input instanceof HTMLInputElement)) return;
-            input.addEventListener('input', () => {
-              const query = input.value.trim().toLowerCase();
-              let visible = 0;
-              rows.forEach((row) => {
-                const title = row.getAttribute('data-app-title') ?? '';
-                const hidden = query.length > 0 && !title.includes(query);
-                row.hidden = hidden;
-                if (!hidden) visible += 1;
-              });
-              const empty = document.querySelector('[data-app-empty]');
-              if (empty instanceof HTMLElement) empty.hidden = visible > 0;
-            });
-          })();
-        </script>
-      </>
-    )}
-
-    {page === 'about' && (
-      <>
-        <header class="page-hero">
-          <p class="eyebrow">{copy.about.eyebrow}</p>
-          <h1>{copy.about.title}</h1>
-        </header>
-        <section class="prose lead-prose">
-          {copy.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-        </section>
-        <section class="section values" aria-labelledby="principles-title">
-          <h2 id="principles-title">{copy.about.principlesTitle}</h2>
-          <div class="value-grid">
-            {copy.about.principles.map((principle) => (
-              <article>
-                <h3>{principle.title}</h3>
-                <p>{principle.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-      </>
-    )}
-
-    {page === 'privacy' && (
-      <>
-        <header class="page-hero">
-          <p class="eyebrow">{copy.privacy.eyebrow}</p>
-          <h1>{copy.privacy.title}</h1>
-          <p class="lede">{copy.privacy.intro}</p>
-        </header>
-
-        {copy.privacy.fallbackNotice && <p class="language-notice">{copy.privacy.fallbackNotice}</p>}
-
-        <label class="search-field">
-          <span>{copy.privacy.searchLabel}</span>
-          <input type="search" placeholder={copy.privacy.searchPlaceholder} data-policy-search />
-        </label>
-        <p class="empty-state" data-policy-empty hidden>{copy.privacy.empty}</p>
-
-        <div class="notice-grid">
-          <section>
-            <h2>{copy.privacy.analyticsTitle}</h2>
-            <p>{copy.privacy.analyticsBody}</p>
-          </section>
-          <section>
-            <h2>{copy.privacy.siteTitle}</h2>
-            <p>{copy.privacy.siteBody}</p>
-          </section>
-          <section>
-            <h2>{copy.privacy.contactTitle}</h2>
-            <p>{copy.privacy.contactBody.replace('onnellab.app@gmail.com', '')}<a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a></p>
-          </section>
-        </div>
-
-        <section class="policy-list" aria-label={copy.privacy.title}>
-          {policies.map((policy) => (
-            <a class="policy-row" href={policy.href} data-policy-row data-policy-title={policy.title.toLowerCase()}>
-              <div>
-                <h2>{policy.title}</h2>
-                <p><span>{copy.privacy.updated}</span> <time datetime={policy.date}>{policy.date}</time></p>
-              </div>
-              <div class="badges" aria-label="Platforms">
-                {policy.platforms.map((platform) => <span>{platform}</span>)}
-              </div>
-            </a>
-          ))}
-        </section>
-        <script is:inline>
-          (() => {
-            const input = document.querySelector('[data-policy-search]');
-            const rows = Array.from(document.querySelectorAll('[data-policy-row]'));
-            if (!(input instanceof HTMLInputElement)) return;
-            input.addEventListener('input', () => {
-              const query = input.value.trim().toLowerCase();
-              let visible = 0;
-              rows.forEach((row) => {
-                const title = row.getAttribute('data-policy-title') ?? '';
-                const hidden = query.length > 0 && !title.includes(query);
-                row.hidden = hidden;
-                if (!hidden) visible += 1;
-              });
-              const empty = document.querySelector('[data-policy-empty]');
-              if (empty instanceof HTMLElement) empty.hidden = visible > 0;
-            });
-          })();
-        </script>
-      </>
-    )}
-
-    {page === 'terms' && (
-      <>
-        <header class="page-hero">
-          <p class="eyebrow">{copy.terms.eyebrow}</p>
-          <h1>{copy.terms.title}</h1>
-          <p class="lede">{copy.terms.intro}</p>
-          <p class="updated"><strong>{copy.terms.updatedLabel}:</strong> {copy.terms.updatedValue}</p>
-        </header>
-        <section class="prose terms-prose">
-          {copy.terms.sections.map((section) => (
-            <section>
-              <h2>{section.title}</h2>
-              {section.paragraphs.map((paragraph) =>
-                paragraph.includes('onnellab.app@gmail.com') ? (
-                  <p>{paragraph.replace('onnellab.app@gmail.com', '')}<a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a></p>
-                ) : (
-                  <p>{paragraph}</p>
-                )
-              )}
-            </section>
-          ))}
-        </section>
-      </>
-    )}
+      ))}
+    </section>
 
     <SiteFooter locale={locale} />
   </main>
@@ -926,11 +191,7 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
   }
 
   .top-nav,
-  .nav-links,
-  .section-head,
-  .app-row,
-  .app-title-line,
-  .badges {
+  .nav-links {
     display: flex;
     align-items: center;
   }
@@ -941,8 +202,7 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
   }
 
   .brand,
-  .nav-links > a,
-  .section-head a {
+  .nav-links > a {
     color: #686259;
     font-size: 13px;
     font-weight: 620;
@@ -957,24 +217,15 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
     gap: 16px;
   }
 
-  .top-nav a:hover,
-  .section-head a:hover {
+  .top-nav a:hover {
     color: #2f2d29;
     text-decoration: underline;
     text-underline-offset: 4px;
   }
 
-  .home-hero,
-  .page-hero {
-    padding: clamp(88px, 13vw, 154px) 0 clamp(60px, 8vw, 92px);
-  }
-
-  .home-hero {
-    max-width: 940px;
-  }
-
   .page-hero {
     max-width: 820px;
+    padding: clamp(88px, 13vw, 154px) 0 clamp(60px, 8vw, 92px);
   }
 
   .eyebrow {
@@ -995,8 +246,7 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
     line-height: 0.98;
   }
 
-  .lede,
-  .home-hero .lede {
+  .lede {
     max-width: 760px;
     margin: 28px 0 0;
     color: #6a6359;
@@ -1004,278 +254,8 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
     line-height: 1.75;
   }
 
-  .featured {
-    display: grid;
-    grid-template-columns: 140px minmax(0, 1fr);
-    gap: clamp(28px, 5vw, 58px);
-    align-items: center;
-    border-top: 1px solid #ddd4c8;
-    border-bottom: 1px solid #ddd4c8;
-    padding: 58px 0;
-  }
-
-  .featured-icon img {
-    width: 112px;
-    height: 112px;
-    border-radius: 25px;
-    box-shadow: 0 14px 34px rgba(58, 49, 40, 0.12);
-  }
-
-  .featured h2,
-  .section > h2,
-  .section-head h2 {
-    margin: 0;
-    color: #3b3732;
-    font-size: clamp(28px, 4.3vw, 46px);
-    font-weight: 640;
-    letter-spacing: -0.04em;
-    line-height: 1.12;
-  }
-
-  .featured > div > p:not(.eyebrow) {
-    max-width: 700px;
-    margin: 18px 0 0;
-    color: #696158;
-    font-size: 16px;
-    line-height: 1.75;
-  }
-
-  .text-link {
-    display: inline-block;
-    margin-top: 22px;
-    color: #4d6175;
-    font-size: 14px;
-    font-weight: 650;
-    text-underline-offset: 5px;
-  }
-
-  .section {
-    border-bottom: 1px solid #e1d9cd;
-    padding: 66px 0 72px;
-  }
-
-  .section-head {
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 30px;
-  }
-
-  .section-head a {
-    text-decoration: underline;
-    text-underline-offset: 5px;
-  }
-
-  .product-grid,
-  .value-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-  }
-
-  .product-card {
-    min-height: 185px;
-    border: 1px solid #ded6ca;
-    border-radius: 17px;
-    padding: 25px;
-    background: rgba(255, 253, 248, 0.62);
-    color: inherit;
-    text-decoration: none;
-    transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
-  }
-
-  .product-card:hover,
-  .product-card:focus-visible {
-    border-color: #cfc4b5;
-    background: #fffdf8;
-    transform: translateY(-2px);
-  }
-
-  .product-card:focus-visible,
-  .app-row:focus-visible,
-  .policy-row:focus-visible {
-    outline: 2px solid #827d72;
-    outline-offset: 3px;
-  }
-
-  .product-card img,
-  .app-row img {
-    border-radius: 13px;
-  }
-
-  .product-card h3,
-  .value-grid h3 {
-    margin: 18px 0 0;
-    color: #403b35;
-    font-size: 19px;
-    font-weight: 650;
-  }
-
-  .product-card p,
-  .value-grid p {
-    margin: 10px 0 0;
-    color: #71695f;
-    font-size: 14px;
-    line-height: 1.65;
-  }
-
-  .value-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-top: 32px;
-  }
-
-  .value-grid article {
-    border-top: 2px solid #c7bad3;
-    padding: 22px 8px 0 0;
-  }
-
-  .value-grid h3 {
-    margin-top: 0;
-  }
-
-  .language-notice,
-  .empty-state {
-    border-left: 3px solid #c9b9d6;
-    margin: -34px 0 34px;
-    padding: 12px 16px;
-    background: rgba(247, 242, 249, 0.66);
-    color: #675f6b;
-    font-size: 13px;
-    line-height: 1.65;
-  }
-
-  .search-field {
-    display: grid;
-    gap: 8px;
-    max-width: 340px;
-    margin-bottom: 30px;
-    color: #6f695f;
-    font-size: 13px;
-    font-weight: 640;
-  }
-
-  .search-field input {
-    min-height: 44px;
-    border: 1px solid #ded6ca;
-    border-radius: 9px;
-    padding: 10px 13px;
-    background: rgba(255, 253, 248, 0.78);
-    color: #3f3b35;
-    font: inherit;
-    font-weight: 500;
-  }
-
-  .search-field input:focus {
-    border-color: #c8bdaf;
-    outline: 2px solid #827d72;
-    outline-offset: 3px;
-  }
-
-  .app-list,
-  .policy-list {
-    border-top: 1px solid #ded6ca;
-    border-bottom: 1px solid #ded6ca;
-  }
-
-  .app-row,
-  .policy-row {
-    position: relative;
-    gap: 20px;
-    border-bottom: 1px solid #e8e0d4;
-    padding: 20px 16px;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .app-row:last-child,
-  .policy-row:last-child {
-    border-bottom: 0;
-  }
-
-  .app-row[hidden],
-  .policy-row[hidden] {
-    display: none;
-  }
-
-  .app-row:hover,
-  .policy-row:hover {
-    background: rgba(255, 253, 248, 0.7);
-  }
-
-  .app-copy,
-  .policy-row > div:first-child {
-    min-width: 0;
-    flex: 1;
-  }
-
-  .app-title-line {
-    flex-wrap: wrap;
-    gap: 8px 12px;
-  }
-
-  .app-title-line h2,
-  .policy-row h2 {
-    margin: 0;
-    color: #3e3933;
-    font-size: 21px;
-    font-weight: 650;
-  }
-
-  .app-title-line span {
-    border-radius: 999px;
-    padding: 3px 8px;
-    background: #f0eaf3;
-    color: #665d6d;
-    font-size: 11px;
-    font-weight: 650;
-  }
-
-  .app-copy > p,
-  .policy-row p {
-    margin: 7px 0 0;
-    color: #746c62;
-    font-size: 13px;
-    line-height: 1.55;
-  }
-
-  .policy-row {
-    display: flex;
-    align-items: center;
-  }
-
-  .policy-row p span {
-    font-weight: 630;
-  }
-
-  .badges {
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 5px;
-  }
-
-  .badges span {
-    border: 1px solid #ddd5c8;
-    border-radius: 999px;
-    padding: 3px 7px;
-    color: #737067;
-    font-size: 11px;
-    line-height: 1.4;
-    white-space: nowrap;
-  }
-
   .prose {
     max-width: 790px;
-  }
-
-  .lead-prose {
-    border-top: 1px solid #ded6ca;
-    padding: 50px 0 66px;
-  }
-
-  .prose p {
-    margin: 0 0 22px;
-    color: #5f584f;
-    font-size: clamp(17px, 2vw, 20px);
-    line-height: 1.82;
   }
 
   .terms-prose {
@@ -1288,16 +268,14 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
     padding: 36px 0 30px;
   }
 
-  .terms-prose h2,
-  .notice-grid h2 {
+  .terms-prose h2 {
     margin: 0 0 12px;
     color: #413c36;
     font-size: 20px;
     font-weight: 660;
   }
 
-  .terms-prose p,
-  .notice-grid p {
+  .terms-prose p {
     margin: 0;
     color: #686158;
     font-size: 15px;
@@ -1310,19 +288,6 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
     font-size: 13px;
   }
 
-  .notice-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-    margin: 0 0 42px;
-  }
-
-  .notice-grid section {
-    border-top: 2px solid #c7bad3;
-    padding: 20px 6px 0 0;
-  }
-
-  .notice-grid a,
   .terms-prose a {
     color: #3d5f82;
     text-underline-offset: 4px;
@@ -1342,52 +307,15 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
     .nav-links > a:nth-of-type(3) {
       display: none;
     }
-
-    .featured {
-      grid-template-columns: 1fr;
-    }
-
-    .product-grid,
-    .value-grid,
-    .notice-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .app-row,
-    .policy-row {
-      align-items: flex-start;
-    }
   }
 
   @media (max-width: 520px) {
-    .home-hero,
     .page-hero {
       padding: 72px 0 54px;
     }
 
     h1 {
       font-size: clamp(44px, 14vw, 66px);
-    }
-
-    .app-row,
-    .policy-row {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 14px;
-      padding: 17px 10px;
-    }
-
-    .badges {
-      grid-column: 2;
-      justify-content: flex-start;
-    }
-
-    .policy-row > div:first-child {
-      grid-column: 1 / -1;
-    }
-
-    .policy-row .badges {
-      grid-column: 1 / -1;
     }
   }
 </style>

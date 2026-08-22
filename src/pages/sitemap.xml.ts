@@ -21,18 +21,21 @@ type SitemapEntry = {
 
 const siteUrl = 'https://onnellab.github.io';
 const corePages: LocalizedPage[] = ['home', 'apps', 'about', 'privacy', 'terms'];
-const papiraPages: LocalizedPage[] = ['papira', 'papiraPrivacy'];
-
+const corePageSources: Record<(typeof corePages)[number], string> = {
+  home: 'src/components/HomePage.astro',
+  apps: 'src/components/AppsIndex.astro',
+  about: 'src/components/AboutPage.astro',
+  privacy: 'src/components/PrivacyIndex.astro',
+  terms: 'src/components/CorePage.astro'
+};
 export function GET() {
   const sourceLastmod = sourceFileLastmod();
-  const commonLastmod = sourceLastmod('src/components/CorePage.astro');
   const papiraLastmod = latestLastmod(sourceLastmod, [
     'src/lib/papira.ts',
-    'src/components/ProductTemplate.astro',
-    'src/components/PapiraPage.astro'
+    'src/components/ProductTemplate.astro'
   ]);
   const entries: SitemapEntry[] = [
-    ...corePages.flatMap((page) => localizedEntries(page, commonLastmod)),
+    ...corePages.flatMap((page) => localizedEntries(page, sourceLastmod(corePageSources[page]))),
     ...localizedEntries('papira', papiraLastmod),
     ...localizedEntries('papiraPrivacy', sourceLastmod('src/components/PapiraPrivacyPage.astro')),
     ...productPrivacyEntries(sourceLastmod),

@@ -26,6 +26,49 @@ async function jsonLd(page: Page) {
 }
 
 test.describe('Papira five-language launch surface', () => {
+  test('Papira routes and sitemap depend only on active shared page sources', () => {
+    const obsoleteComponent = ['Papira', 'Page.astro'].join('');
+    const obsoletePage = path.resolve(process.cwd(), 'src/components', obsoleteComponent);
+    expect(fs.existsSync(obsoletePage)).toBe(false);
+
+    const sitemapSource = fs.readFileSync(
+      path.resolve(process.cwd(), 'src/pages/sitemap.xml.ts'),
+      'utf8'
+    );
+    const workflowSource = fs.readFileSync(
+      path.resolve(process.cwd(), '.github/workflows/i18n-smoke.yml'),
+      'utf8'
+    );
+    expect(sitemapSource).not.toContain(obsoleteComponent);
+    expect(workflowSource).not.toContain(obsoleteComponent);
+    for (const activeSource of [
+      'src/components/HomePage.astro',
+      'src/components/AppsIndex.astro',
+      'src/components/AboutPage.astro',
+      'src/components/PrivacyIndex.astro',
+      'src/components/CorePage.astro',
+      'src/lib/papira.ts',
+      'src/components/ProductTemplate.astro'
+    ]) {
+      expect(sitemapSource).toContain(activeSource);
+    }
+    expect(sitemapSource).toContain('sourceLastmod(corePageSources[page])');
+    expect(sitemapSource).not.toContain('commonLastmod');
+
+    const papiraRoutes = [
+      'src/pages/apps/papira/index.astro',
+      'src/pages/apps/papira/ko/index.astro',
+      'src/pages/apps/papira/ja/index.astro',
+      'src/pages/apps/papira/zh-hans/index.astro',
+      'src/pages/apps/papira/zh-hant/index.astro'
+    ];
+    for (const route of papiraRoutes) {
+      const source = fs.readFileSync(path.resolve(process.cwd(), route), 'utf8');
+      expect(source).toContain('ProductTemplate');
+      expect(source).not.toContain(obsoleteComponent.replace('.astro', ''));
+    }
+  });
+
   for (const locale of locales) {
     test(`Papira product page ${locale.hreflang}`, async ({ page }) => {
       await page.goto(`/apps/papira/${locale.path}`);
@@ -364,8 +407,7 @@ test.describe('Papira five-language launch surface', () => {
 
     const papiraSourceFiles = [
       'src/lib/papira.ts',
-      'src/components/ProductTemplate.astro',
-      'src/components/PapiraPage.astro'
+      'src/components/ProductTemplate.astro'
     ];
     const expectedLastmod = papiraSourceFiles
       .map((source) => fs.statSync(path.resolve(process.cwd(), source)).mtime)

@@ -592,6 +592,36 @@ test.describe('site layout and navigation', () => {
     }
   });
 
+  test('terms retain the same five-locale legal page contract', async ({ page }) => {
+    const routes = [
+      { suffix: '', lang: 'en', title: 'Terms of Use', first: '1. Using ONNELLAB products', last: '6. Contact' },
+      { suffix: 'ko/', lang: 'ko', title: '이용약관', first: '1. ONNELLAB 제품 이용', last: '6. 문의' },
+      { suffix: 'ja/', lang: 'ja', title: '利用規約', first: '1. ONNELLAB製品の利用', last: '6. お問い合わせ' },
+      { suffix: 'zh-hans/', lang: 'zh-Hans', title: '使用条款', first: '1. 使用 ONNELLAB 产品', last: '6. 联系' },
+      { suffix: 'zh-hant/', lang: 'zh-Hant', title: '使用條款', first: '1. 使用 ONNELLAB 產品', last: '6. 聯絡' }
+    ] as const;
+
+    for (const route of routes) {
+      await page.goto(`/terms/${route.suffix}`);
+      await expect(page.locator('html')).toHaveAttribute('lang', route.lang);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+        'href',
+        `https://onnellab.github.io/terms/${route.suffix}`
+      );
+      await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(6);
+      const main = page.locator('main.site-shell[data-core-page="terms"]');
+      await expect(main).toHaveCount(1);
+      await expect(main.locator(':scope > .top-nav')).toHaveCount(1);
+      await expect(main.locator(':scope > .page-hero h1')).toHaveText(route.title);
+      await expect(main.locator(':scope > .terms-prose > section')).toHaveCount(6);
+      await expect(main.locator('.terms-prose h2').first()).toHaveText(route.first);
+      await expect(main.locator('.terms-prose h2').last()).toHaveText(route.last);
+      await expect(main.locator(':scope > footer.site-footer')).toHaveCount(1);
+      await expect(main).toContainText('2026-08-21');
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
+    }
+  });
+
   test('about page wordmark has no underline', async ({ page }) => {
     await page.goto('/about/ko/');
 

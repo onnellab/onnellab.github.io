@@ -5,11 +5,14 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/i18n-smoke.yml'
+      - 'src/components/AboutPage.astro'
+      - 'src/components/AppsIndex.astro'
       - 'src/components/CorePage.astro'
       - 'src/components/HomePage.astro'
       - 'src/components/LocaleMenu.astro'
-      - 'src/components/PapiraPage.astro'
       - 'src/components/PapiraPrivacyPage.astro'
+      - 'src/components/PrivacyIndex.astro'
+      - 'src/components/ProductTemplate.astro'
       - 'src/layouts/BaseLayout.astro'
       - 'src/lib/papira.ts'
       - 'src/lib/site-i18n.ts'
