@@ -1,12 +1,86 @@
 import { expect, test, type Page } from '@playwright/test';
 
 const locales = [
-  { code: 'en', segment: '', hreflang: 'en', homeTitle: 'ONNELLAB - Calm, focused software' },
-  { code: 'ko', segment: 'ko/', hreflang: 'ko', homeTitle: 'ONNELLAB - 차분하고 목적이 분명한 소프트웨어' },
-  { code: 'ja', segment: 'ja/', hreflang: 'ja', homeTitle: 'ONNELLAB - 静かで目的の明確なソフトウェア' },
-  { code: 'zh-Hans', segment: 'zh-hans/', hreflang: 'zh-Hans', homeTitle: 'ONNELLAB - 安静而专注的软件' },
-  { code: 'zh-Hant', segment: 'zh-hant/', hreflang: 'zh-Hant', homeTitle: 'ONNELLAB - 安靜而專注的軟體' }
+  {
+    code: 'en',
+    segment: '',
+    hreflang: 'en',
+    homeTitle: 'ONNELLAB - Focused apps for files and creative work',
+    homeDescription: 'ONNELLAB makes focused apps for managing files, media, creative work, and everyday tasks.',
+    homeHeading: 'Small tools. Calmly made.',
+    featuredTitle: 'Edit MP3 and FLAC tags with TagWeaver.',
+    featuredBody: 'Save metadata, artwork, and lyrics to local files, and update multiple tracks at once.'
+  },
+  {
+    code: 'ko',
+    segment: 'ko/',
+    hreflang: 'ko',
+    homeTitle: 'ONNELLAB - 파일과 창작 작업을 위한 앱',
+    homeDescription: 'ONNELLAB은 파일과 미디어를 관리하고 창작 작업과 일상의 일을 돕는 목적이 분명한 앱을 만들어요.',
+    homeHeading: '작은 도구를, 차분하게 만들어요.',
+    featuredTitle: 'TagWeaver로 음악 태그를 직접 정리해요.',
+    featuredBody: 'MP3·FLAC의 정보와 커버, 가사를 파일에 저장하고 여러 곡을 한 번에 수정해요.'
+  },
+  {
+    code: 'ja',
+    segment: 'ja/',
+    hreflang: 'ja',
+    homeTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',
+    homeDescription: 'ONNELLABは、ファイルやメディアの管理、創作、日々の作業に役立つ、目的の明確なアプリをつくります。',
+    homeHeading: '小さな道具を、 静かに。',
+    featuredTitle: 'TagWeaverでMP3・FLACのタグを直接整理できます。',
+    featuredBody: '情報、ジャケット、歌詞をローカルファイルに保存し、複数の曲をまとめて編集できます。'
+  },
+  {
+    code: 'zh-Hans',
+    segment: 'zh-hans/',
+    hreflang: 'zh-Hans',
+    homeTitle: 'ONNELLAB - 专注于文件与创作的应用',
+    homeDescription: 'ONNELLAB 打造用途明确的应用，帮助你管理文件与媒体，完成创作和日常任务。',
+    homeHeading: '把小工具，安静地做好。',
+    featuredTitle: '用 TagWeaver 直接整理 MP3 与 FLAC 标签。',
+    featuredBody: '将信息、封面和歌词保存到本地文件，还能批量编辑多首歌曲。'
+  },
+  {
+    code: 'zh-Hant',
+    segment: 'zh-hant/',
+    hreflang: 'zh-Hant',
+    homeTitle: 'ONNELLAB - 專注於檔案與創作的應用程式',
+    homeDescription: 'ONNELLAB 打造用途明確的應用程式，幫助你管理檔案與媒體，完成創作與日常工作。',
+    homeHeading: '把小工具，安靜地做好。',
+    featuredTitle: '用 TagWeaver 直接整理 MP3 與 FLAC 標籤。',
+    featuredBody: '將資訊、封面與歌詞儲存到本機檔案，還能批次編輯多首歌曲。'
+  }
 ] as const;
+
+const homeSemanticTerms = {
+  en: {
+    seo: { file: /files?/i, creative: /creative/i, app: /apps?/i },
+    featured: {
+      brand: /TagWeaver/,
+      mp3: /MP3/,
+      flac: /FLAC/,
+      localFile: /local files?/i,
+      multiTrack: /multiple tracks?/i
+    }
+  },
+  ko: {
+    seo: { file: /파일/, creative: /창작/, app: /앱/ },
+    featured: { brand: /TagWeaver/, mp3: /MP3/, flac: /FLAC/, localFile: /파일에 저장/, multiTrack: /여러 곡.*한 번에/ }
+  },
+  ja: {
+    seo: { file: /ファイル/, creative: /創作/, app: /アプリ/ },
+    featured: { brand: /TagWeaver/, mp3: /MP3/, flac: /FLAC/, localFile: /ローカルファイルに保存/, multiTrack: /複数の曲.*まとめて/ }
+  },
+  'zh-Hans': {
+    seo: { file: /文件/, creative: /创作/, app: /应用/ },
+    featured: { brand: /TagWeaver/, mp3: /MP3/, flac: /FLAC/, localFile: /本地文件/, multiTrack: /批量.*多首歌曲/ }
+  },
+  'zh-Hant': {
+    seo: { file: /檔案/, creative: /創作/, app: /應用程式/ },
+    featured: { brand: /TagWeaver/, mp3: /MP3/, flac: /FLAC/, localFile: /本機檔案/, multiTrack: /批次.*多首歌曲/ }
+  }
+} as const;
 
 const localizedPath = (base: string, segment: string) => (segment ? `${base}${segment}` : base);
 
@@ -30,7 +104,35 @@ test.describe('five-language core site', () => {
       const path = locale.segment ? `/${locale.segment}` : '/';
       await page.goto(path);
       await expect(page).toHaveTitle(locale.homeTitle);
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', locale.homeDescription);
+      const semanticTerms = homeSemanticTerms[locale.code];
+      const renderedTitle = await page.title();
+      const renderedDescription = await page.locator('meta[name="description"]').getAttribute('content');
+      for (const term of Object.values(semanticTerms.seo)) {
+        expect(renderedTitle).toMatch(term);
+        expect(renderedDescription).toMatch(term);
+      }
       await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
+      await expect(page.locator('.home-hero h1')).toHaveText(locale.homeHeading);
+      const featured = page.locator('a.featured');
+      await expect(featured).toHaveAttribute('href', `/apps/tagweaver/${locale.segment}`);
+      await expect(featured.locator('h2')).toHaveText(locale.featuredTitle);
+      await expect(featured.locator('.featured-copy > p')).toHaveText(locale.featuredBody);
+      const renderedFeaturedTitle = await featured.locator('h2').innerText();
+      const renderedFeaturedBody = await featured.locator('.featured-copy > p').innerText();
+      const renderedFeaturedCopy = `${renderedFeaturedTitle}\n${renderedFeaturedBody}`;
+      for (const term of Object.values(semanticTerms.featured)) {
+        expect(renderedFeaturedCopy).toMatch(term);
+      }
+      const websiteSchema = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
+        scripts
+          .flatMap((script) => {
+            const value = JSON.parse(script.textContent ?? 'null');
+            return Array.isArray(value) ? value : [value];
+          })
+          .find((entry) => entry?.['@type'] === 'WebSite')
+      );
+      expect(websiteSchema?.description).toBe(locale.homeDescription);
       await expect(page.locator('.locale-menu-panel a')).toHaveCount(5);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',

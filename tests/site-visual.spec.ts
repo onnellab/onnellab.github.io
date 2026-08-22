@@ -311,20 +311,15 @@ test.describe('site layout and navigation', () => {
   });
 
   test('home uses the full TagWeaver card as the link and keeps Papira off the homepage', async ({ page }) => {
-    await page.goto('/ko/');
-    const featured = page.locator('a.featured');
-    await expect(featured).toHaveAttribute('href', '/apps/tagweaver/ko/');
-    await expect(featured.locator('h2')).toContainText('TagWeaver');
-    await expect(featured.locator('a')).toHaveCount(0);
-    await expect(featured).not.toContainText('TagWeaver 살펴보기');
-    await expect(page.locator('main')).not.toContainText('Papira');
-    await expect(page.locator('.product-card')).toHaveCount(4);
-
-    await page.goto('/ja/');
-    await expect(page.locator('a.featured')).toHaveAttribute('href', '/apps/tagweaver/ja/');
-
-    await page.goto('/zh-hans/');
-    await expect(page.locator('a.featured')).toHaveAttribute('href', '/apps/tagweaver/zh-hans/');
+    for (const segment of ['', 'ko/', 'ja/', 'zh-hans/', 'zh-hant/']) {
+      await page.goto(`/${segment}`);
+      const featured = page.locator('a.featured');
+      await expect(featured).toHaveAttribute('href', `/apps/tagweaver/${segment}`);
+      await expect(featured.locator('h2')).toContainText('TagWeaver');
+      await expect(featured.locator('a')).toHaveCount(0);
+      await expect(page.locator('main')).not.toContainText('Papira');
+      await expect(page.locator('.product-card')).toHaveCount(4);
+    }
 
     await page.goto('/apps/ko/');
     await expect(page.locator('[data-app-row]').filter({ hasText: 'Papira' })).toHaveCount(1);
