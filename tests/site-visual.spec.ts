@@ -810,6 +810,83 @@ test.describe('site layout and navigation', () => {
     }
   });
 
+  test('homepage locale choices use native list semantics and 12px text meets contrast', async ({ page }) => {
+    await page.goto('/');
+
+    const localeMenu = page.locator('.locale-menu');
+    await localeMenu.locator('summary').click();
+    const localeList = localeMenu.locator('.locale-menu-panel');
+    await expect(localeList).toHaveJSProperty('tagName', 'UL');
+    await expect(localeList.locator(':scope > li')).toHaveCount(5);
+    await expect(localeList.locator(':scope > li > a')).toHaveCount(5);
+
+    const localeLinks = localeList.locator(':scope > li > a');
+    await expect(localeLinks.first()).toHaveAttribute('href', '/');
+    await expect(localeLinks.first()).toHaveAttribute('hreflang', 'en');
+    await expect(localeLinks.first()).toHaveAttribute('aria-current', 'page');
+    await expect(localeLinks.nth(1)).toHaveAttribute('href', '/ko/');
+    await expect(localeLinks.nth(1)).toHaveAttribute('hreflang', 'ko');
+    await localeLinks.nth(1).focus();
+    await expect(localeLinks.nth(1)).toBeFocused();
+    expect(await localeLinks.evaluateAll((links) => links.every((link) => link.getBoundingClientRect().width > 0))).toBe(true);
+
+    const contrast = await page.evaluate(() => {
+      const parseRgb = (value: string) => {
+        const channels = value.match(/[\d.]+/g)?.map(Number) ?? [];
+        return { r: channels[0], g: channels[1], b: channels[2], a: channels[3] ?? 1 };
+      };
+      const composite = (
+        foreground: { r: number; g: number; b: number; a: number },
+        background: { r: number; g: number; b: number; a: number }
+      ) => ({
+        r: foreground.r * foreground.a + background.r * (1 - foreground.a),
+        g: foreground.g * foreground.a + background.g * (1 - foreground.a),
+        b: foreground.b * foreground.a + background.b * (1 - foreground.a),
+        a: 1
+      });
+      const effectiveBackground = (element: Element) => {
+        let background = { r: 255, g: 255, b: 255, a: 1 };
+        const ancestors: Element[] = [];
+        for (let current: Element | null = element; current; current = current.parentElement) ancestors.push(current);
+        for (const current of ancestors.reverse()) {
+          background = composite(parseRgb(getComputedStyle(current).backgroundColor), background);
+        }
+        return background;
+      };
+      const luminance = ({ r, g, b }: { r: number; g: number; b: number }) => {
+        const linear = [r, g, b].map((channel) => {
+          const value = channel / 255;
+          return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+        });
+        return linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
+      };
+      const measure = (selector: string) => {
+        const element = document.querySelector(selector);
+        if (!element) throw new Error(`Missing contrast target: ${selector}`);
+        const style = getComputedStyle(element);
+        const foreground = composite(parseRgb(style.color), effectiveBackground(element));
+        const foregroundLuminance = luminance(foreground);
+        const backgroundLuminance = luminance(effectiveBackground(element));
+        return {
+          fontSize: style.fontSize,
+          ratio:
+            (Math.max(foregroundLuminance, backgroundLuminance) + 0.05) /
+            (Math.min(foregroundLuminance, backgroundLuminance) + 0.05)
+        };
+      };
+
+      return {
+        eyebrow: measure('.home-hero .eyebrow'),
+        copyright: measure('.site-footer > span')
+      };
+    });
+
+    expect(contrast.eyebrow.fontSize).toBe('12px');
+    expect(contrast.copyright.fontSize).toBe('12px');
+    expect(contrast.eyebrow.ratio).toBeGreaterThanOrEqual(4.5);
+    expect(contrast.copyright.ratio).toBeGreaterThanOrEqual(4.5);
+  });
+
   test('terms retain the same five-locale legal page contract', async ({ page }) => {
     const routes = [
       { suffix: '', lang: 'en', title: 'Terms of Use', first: '1. Using ONNELLAB products', last: '6. Contact' },

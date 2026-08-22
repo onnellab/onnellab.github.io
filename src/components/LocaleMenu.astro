@@ -27,23 +27,24 @@ const localeHref = (item: SiteLocale) =>
 
 <details class="locale-menu">
   <summary class="site-language-control" aria-label={`Language: ${current.label}`}>{current.label}</summary>
-  <div class="locale-menu-panel" role="list">
+  <ul class="locale-menu-panel">
     {supported.map((item) => {
       const definition = localeDefinitions[item];
       return (
-        <a
-          href={localeHref(item)}
-          lang={definition.htmlLang}
-          hreflang={definition.hreflang}
-          data-locale-choice={item}
-          aria-current={item === locale ? 'page' : undefined}
-          role="listitem"
-        >
-          {definition.label}
-        </a>
+        <li>
+          <a
+            href={localeHref(item)}
+            lang={definition.htmlLang}
+            hreflang={definition.hreflang}
+            data-locale-choice={item}
+            aria-current={item === locale ? 'page' : undefined}
+          >
+            {definition.label}
+          </a>
+        </li>
       );
     })}
-  </div>
+  </ul>
 </details>
 
 <style>
@@ -103,14 +104,17 @@ const localeHref = (item: SiteLocale) =>
     right: 0;
     display: grid;
     gap: 2px;
+    margin: 0;
     border: 1px solid #ded6ca;
     border-radius: 13px;
     padding: 6px;
     background: #fffdf8;
     box-shadow: 0 14px 34px rgba(57, 48, 39, 0.11);
+    list-style: none;
   }
 
   .locale-menu-panel a {
+    display: block;
     border-radius: 8px;
     padding: 8px 10px;
     color: #5f5a50;
