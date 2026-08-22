@@ -257,6 +257,15 @@ test.describe('site layout and navigation', () => {
     expect(new Set(fontFamilies).size).toBe(1);
   });
 
+  test('about page wordmark has no underline', async ({ page }) => {
+    await page.goto('/about/ko/');
+
+    const decorationLine = await page.locator('.top-nav .brand').evaluate(
+      (brand) => getComputedStyle(brand).textDecorationLine
+    );
+    expect(decorationLine).toBe('none');
+  });
+
   test('core navigation follows the active locale', async ({ page }) => {
     await page.goto('/ja/');
     await expect(page.locator('.top-nav a[href="/apps/ja/"]')).toBeVisible();
