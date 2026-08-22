@@ -102,6 +102,7 @@ const labels = localizedLabels[data.locale];
 const bodyBlocks = renderBlocks(pageBodyDescription(copy));
 const heroIntro = landingSubtitle(copy);
 const heroSignals =
+  data.heroSignals ??
   (bodyBlocks.find((block) => block.type === 'ul')?.value as string[] | undefined)?.slice(0, 3) ?? [];
 const homePath = routeFor('home', data.locale);
 const appsPath = routeFor('apps', data.locale);

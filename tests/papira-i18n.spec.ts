@@ -158,7 +158,7 @@ test.describe('Papira five-language launch surface', () => {
         feature:
           'Dedicated presets for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, with support for other TXT content',
         faq:
-          'Papira is especially suited to fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios. Other finished TXT content can also be converted to EPUB.'
+          'Any finished TXT content can be converted to EPUB. The dedicated presets simply make common creative workflows faster.'
       },
       {
         path: '/apps/papira/ko/',
@@ -167,7 +167,7 @@ test.describe('Papira five-language launch surface', () => {
         feature:
           '팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 작품 유형과 그 밖의 TXT 콘텐츠 지원',
         faq:
-          '팬픽, 연재소설, 개인 창작 소설, 디지털 소책자와 TRPG 시나리오에 특히 잘 맞아요. 그 밖의 완성된 TXT 콘텐츠도 EPUB으로 변환할 수 있어요.'
+          '완성된 TXT 콘텐츠라면 EPUB으로 변환할 수 있어요. 특화된 작품 유형은 자주 쓰는 창작 흐름을 더 빠르게 시작하도록 도와줘요.'
       },
       {
         path: '/apps/papira/ja/',
@@ -176,7 +176,7 @@ test.describe('Papira five-language launch surface', () => {
         feature:
           '二次創作・連載小説・オリジナル小説・デジタル小冊子・TRPGシナリオに特化した作品タイプと、そのほかのTXTコンテンツへの対応',
         faq:
-          '二次創作、連載小説、オリジナル小説、デジタル小冊子、TRPGシナリオに特に適しています。そのほかの完成したTXTコンテンツもEPUBに変換できます。'
+          '完成したTXTコンテンツであればEPUBに変換できます。専用プリセットは、よく使う創作フローをすばやく始めるためのものです。'
       },
       {
         path: '/apps/papira/zh-hans/',
@@ -185,7 +185,7 @@ test.describe('Papira five-language launch surface', () => {
         feature:
           '特别适合同人文、连载小说、原创小说、数字小册子与 TRPG 剧本，也支持其他 TXT 内容',
         faq:
-          'Papira 特别适合同人文、连载小说、原创小说、数字小册子与 TRPG 剧本。其他完成的 TXT 内容也可以转换为 EPUB。'
+          '任何完成的 TXT 内容都可以转换为 EPUB。专用预设只是帮助你更快开始常见的创作流程。'
       },
       {
         path: '/apps/papira/zh-hant/',
@@ -194,7 +194,7 @@ test.describe('Papira five-language launch surface', () => {
         feature:
           '特別適合同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本，也支援其他 TXT 內容',
         faq:
-          'Papira 特別適合同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本。其他完成的 TXT 內容也可以轉換為 EPUB。'
+          '任何完成的 TXT 內容都可以轉換為 EPUB。專用預設只是協助你更快開始常見的創作流程。'
       }
     ];
 
@@ -204,6 +204,25 @@ test.describe('Papira five-language launch surface', () => {
       await expect(main).toContainText(expected.lead);
       await expect(page.getByRole('listitem').filter({ hasText: expected.feature })).toHaveCount(1);
       await expect(main).toContainText(expected.faq);
+    }
+  });
+
+  test('every Papira hero leads with a concise localized TXT-to-EPUB signal', async ({ page }) => {
+    const expectations = [
+      { path: '/apps/papira/', first: 'Finished TXT → EPUB', category: 'fanfiction' },
+      { path: '/apps/papira/ko/', first: '완성된 TXT → EPUB', category: '팬픽' },
+      { path: '/apps/papira/ja/', first: '完成したTXT → EPUB', category: '二次創作' },
+      { path: '/apps/papira/zh-hans/', first: '完成的 TXT → EPUB', category: '同人文' },
+      { path: '/apps/papira/zh-hant/', first: '完成的 TXT → EPUB', category: '同人文' }
+    ];
+
+    for (const expected of expectations) {
+      await page.goto(expected.path);
+      const signals = page.locator('.hero .task-preview .task-row strong');
+      await expect(signals).toHaveCount(3);
+      await expect(signals.first()).toHaveText(expected.first);
+      await expect(page.locator('.hero .task-preview')).not.toContainText(expected.category);
+      expect((await signals.first().innerText()).length).toBeLessThanOrEqual(20);
     }
   });
 
@@ -257,6 +276,11 @@ test.describe('Papira five-language launch surface', () => {
     await page.goto('/apps/tagweaver/');
     await expect(page.getByRole('heading', { level: 2, name: 'Supported editing' })).toHaveCount(1);
     await expect(page.getByRole('listitem').filter({ hasText: 'Edit tag fields' })).toHaveCount(1);
+    await expect(page.locator('.hero .task-row strong')).toHaveText([
+      'Edit tag fields',
+      'Manage album artwork',
+      'Add or edit lyrics'
+    ]);
   });
 
   test('Korean Papira links and schema use the canonical privacy URL exactly once', async ({ page }) => {

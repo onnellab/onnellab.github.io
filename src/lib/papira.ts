@@ -12,6 +12,7 @@ export type PapiraCopy = {
   seoDescription: string;
   eyebrow: string;
   tagline: string;
+  heroSignals: string[];
   lead: string;
   statusLabel: string;
   statusValue: string;
@@ -81,6 +82,7 @@ export function getPapiraProductPageData(locale: SiteLocale): ProductPageData {
     seoDescription: text.seoDescription,
     iconPath: '/app-assets/papira/icon.png',
     eyebrow: text.eyebrow,
+    heroSignals: text.heroSignals,
     screenshotPaths: ['01', '02', '03'].map(
       (name) => `/app-assets/papira/assets/screenshots/${locale}/${name}.png`
     ),
@@ -97,6 +99,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       'Turn finished TXT manuscripts into structured EPUB books with a cover, metadata, chapters, and a table of contents. Papira works entirely on your device.',
     eyebrow: 'Offline EPUB maker for writers',
     tagline: 'Turn your manuscript into a book.',
+    heroSignals: ['Finished TXT → EPUB', 'Cover, chapters, and TOC', 'Entirely on device'],
     lead:
       'Papira assembles any finished TXT manuscript into a well-structured EPUB. It includes dedicated flows for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, while other TXT content can also be converted to EPUB.',
     statusLabel: 'Status',
@@ -141,7 +144,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       },
       {
         question: 'What kinds of works can I prepare?',
-        answer: 'Papira is especially suited to fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios. Other finished TXT content can also be converted to EPUB.'
+        answer: 'Any finished TXT content can be converted to EPUB. The dedicated presets simply make common creative workflows faster.'
       }
     ],
     privacyLabel: 'Privacy Policy',
@@ -155,6 +158,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       '완성된 TXT 원고를 표지, 책 정보, 챕터와 목차가 있는 EPUB 전자책으로 만들어요. Papira의 모든 작업은 기기 안에서 이루어져요.',
     eyebrow: '작가를 위한 오프라인 EPUB 제작 도구',
     tagline: '원고를 한 권의 책으로 만들어요.',
+    heroSignals: ['완성된 TXT → EPUB', '표지·챕터·목차 구성', '모든 작업은 기기 안에서'],
     lead:
       'Papira는 완성된 TXT 원고를 정돈된 EPUB 파일로 만들어요. 팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 제작 흐름을 제공하지만, 그 밖의 TXT 콘텐츠도 EPUB으로 변환할 수 있어요.',
     statusLabel: '상태',
@@ -199,7 +203,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       },
       {
         question: '어떤 작품을 만들 수 있나요?',
-        answer: '팬픽, 연재소설, 개인 창작 소설, 디지털 소책자와 TRPG 시나리오에 특히 잘 맞아요. 그 밖의 완성된 TXT 콘텐츠도 EPUB으로 변환할 수 있어요.'
+        answer: '완성된 TXT 콘텐츠라면 EPUB으로 변환할 수 있어요. 특화된 작품 유형은 자주 쓰는 창작 흐름을 더 빠르게 시작하도록 도와줘요.'
       }
     ],
     privacyLabel: '개인정보 처리방침',
@@ -213,6 +217,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       '完成したTXT原稿を、表紙・書誌情報・章・目次を備えたEPUBにまとめます。処理はすべて端末内で完結します。',
     eyebrow: '創作者のためのオフラインEPUB作成ツール',
     tagline: '原稿を、一冊の本へ。',
+    heroSignals: ['完成したTXT → EPUB', '表紙・章・目次を整理', 'すべて端末内で処理'],
     lead:
       'Papiraは完成したTXT原稿を整ったEPUBにまとめます。二次創作・連載小説・オリジナル小説・デジタル小冊子・TRPGシナリオに特化した作成フローを備えていますが、そのほかのTXTコンテンツもEPUBに変換できます。',
     statusLabel: 'ステータス',
@@ -257,7 +262,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       },
       {
         question: 'どのような作品に使えますか？',
-        answer: '二次創作、連載小説、オリジナル小説、デジタル小冊子、TRPGシナリオに特に適しています。そのほかの完成したTXTコンテンツもEPUBに変換できます。'
+        answer: '完成したTXTコンテンツであればEPUBに変換できます。専用プリセットは、よく使う創作フローをすばやく始めるためのものです。'
       }
     ],
     privacyLabel: 'プライバシーポリシー',
@@ -271,6 +276,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       '把完成的 TXT 文稿整理成带封面、书籍信息、章节与目录的 EPUB。所有处理都在设备本地完成。',
     eyebrow: '面向创作者的离线 EPUB 制作工具',
     tagline: '把文稿做成一本书。',
+    heroSignals: ['完成的 TXT → EPUB', '整理封面、章节与目录', '全程在设备本地处理'],
     lead:
       'Papira 可将完成的 TXT 文稿整理成结构清晰的 EPUB。它特别适合同人文、连载小说、原创小说、数字小册子与 TRPG 剧本，也能将其他 TXT 内容转换为 EPUB。',
     statusLabel: '状态',
@@ -315,7 +321,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       },
       {
         question: '适合制作哪些作品？',
-        answer: 'Papira 特别适合同人文、连载小说、原创小说、数字小册子与 TRPG 剧本。其他完成的 TXT 内容也可以转换为 EPUB。'
+        answer: '任何完成的 TXT 内容都可以转换为 EPUB。专用预设只是帮助你更快开始常见的创作流程。'
       }
     ],
     privacyLabel: '隐私政策',
@@ -329,6 +335,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       '把完成的 TXT 文稿整理成含封面、書籍資訊、章節與目錄的 EPUB。所有處理都在裝置本機完成。',
     eyebrow: '面向創作者的離線 EPUB 製作工具',
     tagline: '把文稿做成一本書。',
+    heroSignals: ['完成的 TXT → EPUB', '整理封面、章節與目錄', '全程在裝置本機處理'],
     lead:
       'Papira 可將完成的 TXT 文稿整理成結構清楚的 EPUB。它特別適合同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本，也能將其他 TXT 內容轉換為 EPUB。',
     statusLabel: '狀態',
@@ -373,7 +380,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       },
       {
         question: '適合製作哪些作品？',
-        answer: 'Papira 特別適合同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本。其他完成的 TXT 內容也可以轉換為 EPUB。'
+        answer: '任何完成的 TXT 內容都可以轉換為 EPUB。專用預設只是協助你更快開始常見的創作流程。'
       }
     ],
     privacyLabel: '隱私權政策',

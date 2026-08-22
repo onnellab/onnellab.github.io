@@ -73,6 +73,7 @@ export type ProductPageData = {
   seoDescription: string;
   iconPath: string;
   eyebrow?: string;
+  heroSignals?: string[];
   screenshotPaths: string[];
   screenshotDimensions?: { width: number; height: number };
   schemaFeatureList?: string[];
