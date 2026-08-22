@@ -146,6 +146,7 @@ const latestReleaseNote = latestReleaseNoteForApp(data.source.slug);
 const releaseNotesUrl = latestReleaseNote ? releaseNotePath(latestReleaseNote) : undefined;
 const alternates = data.alternates;
 const landingScreenshotPaths = data.screenshotPaths;
+const screenshotDimensions = data.screenshotDimensions ?? { width: 1242, height: 2688 };
 const hasScreenshotCarousel = landingScreenshotPaths.length > 3;
 const screenshotUrls = landingScreenshotPaths.map((screenshotPath) =>
   new URL(screenshotPath, Astro.site).toString()
@@ -208,7 +209,9 @@ const jsonLd = {
   inLanguage: data.locale,
   image: iconUrl.toString(),
   ...(meta.price !== undefined ? { isAccessibleForFree: meta.price === 0 } : {}),
-  ...(heroSignals.length > 0 ? { featureList: heroSignals } : {}),
+  ...((data.schemaFeatureList ?? heroSignals).length > 0
+    ? { featureList: data.schemaFeatureList ?? heroSignals }
+    : {}),
   ...(screenshotUrls.length > 0 ? { screenshot: screenshotUrls } : {}),
   ...(storeUrls.length > 0
     ? { downloadUrl: storeUrls, installUrl: storeUrls, sameAs: storeUrls }
@@ -300,6 +303,7 @@ const faqJsonLd = {
         <div class="identity">
           <img src={data.iconPath} alt={`${meta.title} icon`} width="88" height="88" data-no-visual-search="true" />
           <div>
+            {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
             <h1 id="product-title">{meta.title}</h1>
             {heroIntro && <p class="intro">{heroIntro}</p>}
           </div>
@@ -399,8 +403,8 @@ const faqJsonLd = {
                 <img
                   src={screenshotPath}
                   alt={`${meta.title} ${labels.screens} ${index + 1}`}
-                  width="1242"
-                  height="2688"
+                  width={screenshotDimensions.width}
+                  height={screenshotDimensions.height}
                   loading="lazy"
                   decoding="async"
                   data-no-visual-search="true"
@@ -448,8 +452,8 @@ const faqJsonLd = {
                   <img
                     src={screenshotPath}
                     alt=""
-                    width="1242"
-                    height="2688"
+                    width={screenshotDimensions.width}
+                    height={screenshotDimensions.height}
                     loading="lazy"
                     decoding="async"
                     data-no-visual-search="true"

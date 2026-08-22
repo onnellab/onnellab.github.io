@@ -142,6 +142,23 @@ test.describe('Papira five-language launch surface', () => {
     expect(fs.existsSync(path.resolve(process.cwd(), 'public', iconPath.replace(/^\//, '')))).toBe(true);
   });
 
+  test('Papira product pages expose the localized promotional screenshot gallery', async ({ page }) => {
+    for (const locale of locales) {
+      const screenshotLocale = locale.hreflang === 'ko' ? 'ko' : 'en';
+      await page.goto(`/apps/papira/${locale.path}`);
+
+      const screenshots = page.locator('.screenshot-link img');
+      await expect(screenshots).toHaveCount(3);
+      for (let index = 0; index < 3; index += 1) {
+        const source = `/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png`;
+        await expect(screenshots.nth(index)).toHaveAttribute('src', source);
+        await expect(screenshots.nth(index)).toHaveAttribute('width', '1080');
+        await expect(screenshots.nth(index)).toHaveAttribute('height', '2168');
+        expect(fs.existsSync(path.resolve(process.cwd(), 'public', source.replace(/^\//, '')))).toBe(true);
+      }
+    }
+  });
+
   test('English and Korean breadcrumb schema names the apps collection accurately', async ({ page }) => {
     for (const locale of locales.slice(0, 2)) {
       await page.goto(`/apps/papira/${locale.path}`);
@@ -169,6 +186,7 @@ test.describe('Papira five-language launch surface', () => {
           url: 'https://onnellab.github.io/'
         }
       });
+      expect(software?.featureList).toHaveLength(5);
       expect(schemas.some((item) => item['@type'] === 'BreadcrumbList')).toBe(true);
       expect(schemas.some((item) => item['@type'] === 'FAQPage')).toBe(true);
     }

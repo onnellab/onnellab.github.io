@@ -33,7 +33,7 @@ export type PapiraCopy = {
   appsLabel: string;
 };
 
-export function getPapiraProductPageData(locale: 'en' | 'ko'): ProductPageData {
+export function getPapiraProductPageData(locale: SiteLocale): ProductPageData {
   const text = papiraCopy[locale];
   const description = [
     text.lead,
@@ -86,7 +86,12 @@ export function getPapiraProductPageData(locale: 'en' | 'ko'): ProductPageData {
     seoTitle: text.seoTitle,
     seoDescription: text.seoDescription,
     iconPath: '/app-assets/papira/icon.png',
-    screenshotPaths: [],
+    eyebrow: text.eyebrow,
+    screenshotPaths: ['01', '02', '03'].map(
+      (name) => `/app-assets/papira/assets/screenshots/${locale === 'ko' ? 'ko' : 'en'}/${name}.png`
+    ),
+    screenshotDimensions: { width: 1080, height: 2168 },
+    schemaFeatureList: text.features,
     accent: { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' }
   };
 }

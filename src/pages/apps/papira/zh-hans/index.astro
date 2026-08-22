@@ -1,5 +1,6 @@
 ---
-import PapiraPage from '../../../../components/PapiraPage.astro';
+import ProductTemplate from '../../../../components/ProductTemplate.astro';
+import { getPapiraProductPageData } from '../../../../lib/papira';
 ---
 
-<PapiraPage locale="zh-Hans" />
+<ProductTemplate data={getPapiraProductPageData('zh-Hans')} />
