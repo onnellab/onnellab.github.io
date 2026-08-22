@@ -386,6 +386,37 @@ test.describe('site layout and navigation', () => {
     await expect(page.locator('a.featured')).toContainText('TagWeaver');
   });
 
+  test('Japanese home title breaks once after the comma', async ({ page }) => {
+    await page.goto('/ja/');
+
+    const heading = page.locator('.home-hero h1');
+    await expect(heading).toHaveText('小さな道具を、 静かに。');
+    expect(await heading.innerText()).toBe('小さな道具を、\n静かに。');
+    await expect(heading.locator('.title-line')).toHaveText(['小さな道具を、', '静かに。']);
+
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    expect(overflow).toBeLessThanOrEqual(1);
+  });
+
+  test('homepage text navigation uses one system UI font weight in every locale', async ({ page }) => {
+    for (const path of ['/', '/ko/', '/ja/', '/zh-hans/', '/zh-hant/']) {
+      await page.goto(path);
+
+      const styles = await page.locator('.home-hero').evaluate(() =>
+        Array.from(document.querySelectorAll<HTMLElement>('.nav-links > a')).map((link) => {
+          const style = getComputedStyle(link);
+          return { fontFamily: style.fontFamily, fontWeight: style.fontWeight };
+        })
+      );
+      expect(styles).toHaveLength(3);
+      for (const style of styles) {
+        expect(style.fontFamily.split(',')[0]).toBe('system-ui');
+        expect(style.fontFamily).not.toContain('SUIT');
+        expect(style.fontWeight).toBe('600');
+      }
+    }
+  });
+
   test('mobile home keeps About and Blog navigation visible in every locale', async ({ page }) => {
     const routes = [
       { home: '/', about: '/about/', blog: '/blog/', title: 'More apps', all: 'View all' },

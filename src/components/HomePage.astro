@@ -221,6 +221,8 @@ const jsonLd = [
       <h1>
         {locale === 'ko' ? (
           <><span class="title-line">작은 도구를,</span>{' '}<span class="title-line">차분하게 만들어요.</span></>
+        ) : locale === 'ja' ? (
+          <><span class="title-line">小さな道具を、</span>{' '}<span class="title-line">静かに。</span></>
         ) : copy.title}
       </h1>
       <p class="lede">{copy.intro}</p>
@@ -320,6 +322,11 @@ const jsonLd = [
     text-decoration: none;
   }
 
+  .nav-links > a {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 600;
+  }
+
   .brand {
     color: #737067;
     font-size: 14px;
@@ -368,6 +375,10 @@ const jsonLd = [
     letter-spacing: -0.04em;
     line-height: 1.08;
     word-break: keep-all;
+  }
+
+  .site-shell[data-locale='ja'] .home-hero .title-line {
+    display: block;
   }
 
   .lede {
