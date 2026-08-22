@@ -1013,6 +1013,74 @@ test.describe('app and privacy collections', () => {
 });
 
 test.describe('existing product pages', () => {
+  test('all product locales keep readable prose while full-width bands retain their geometry', async ({ page }) => {
+    for (const slug of allProductSlugs) {
+      for (const locale of productLocales) {
+        await page.goto(`/apps/${slug}/${locale.suffix}`);
+        const main = page.locator('main.page-shell');
+        const geometry = await main.evaluate((node) => {
+          const box = (selector: string) => {
+            const element = node.querySelector<HTMLElement>(selector);
+            if (!element) return null;
+            const rect = element.getBoundingClientRect();
+            return { width: rect.width, left: rect.left, borderTopStyle: getComputedStyle(element).borderTopStyle };
+          };
+          const shellRect = node.getBoundingClientRect();
+          return {
+            shell: { width: shellRect.width, left: shellRect.left },
+            hero: box(':scope > .hero'),
+            contentBand: box(':scope > .content-band'),
+            copy: box(':scope > .content-band .copy-column'),
+            faqBand: box(':scope > .faq-band'),
+            faqHeading: box(':scope > .faq-band > h2'),
+            faqList: box(':scope > .faq-band > .faq-list'),
+            screens: box(':scope > .screens-band'),
+            download: box(':scope > .download-band')
+          };
+        });
+
+        expect(geometry.shell).not.toBeNull();
+        const shellWidth = geometry.shell?.width ?? 0;
+        const expectedMeasure = Math.min(800, shellWidth);
+        for (const measure of [geometry.copy, geometry.faqHeading, geometry.faqList]) {
+          expect(measure).not.toBeNull();
+          expect(measure?.width ?? 0).toBeLessThanOrEqual(800.5);
+          expect(Math.abs((measure?.width ?? 0) - expectedMeasure)).toBeLessThan(1.5);
+        }
+        for (const band of [geometry.contentBand, geometry.faqBand, geometry.screens, geometry.download]) {
+          expect(band).not.toBeNull();
+          expect(Math.abs((band?.width ?? 0) - shellWidth)).toBeLessThan(1.5);
+          expect(band?.borderTopStyle).toBe('solid');
+        }
+        expect(Math.abs((geometry.hero?.width ?? 0) - shellWidth)).toBeLessThan(1.5);
+        expect(await page.evaluate(
+          () => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1
+        )).toBe(true);
+
+        if ((page.viewportSize()?.width ?? 0) <= 680) {
+          const mobileType = await main.evaluate((node) => {
+            const prose = node.querySelector<HTMLElement>('.copy-column li, .copy-column p');
+            const faqAnswer = node.querySelector<HTMLElement>('.faq-list p');
+            if (!prose || !faqAnswer) return null;
+            const proseStyle = getComputedStyle(prose);
+            const faqStyle = getComputedStyle(faqAnswer);
+            return {
+              proseFontSize: proseStyle.fontSize,
+              proseLineHeight: proseStyle.lineHeight,
+              faqFontSize: faqStyle.fontSize,
+              faqLineHeight: faqStyle.lineHeight
+            };
+          });
+          expect(mobileType).not.toBeNull();
+          expect(mobileType?.faqFontSize).toBe('16px');
+          expect(mobileType?.faqLineHeight).toBe('26.88px');
+          expect(['16px', '17px']).toContain(mobileType?.proseFontSize);
+          expect(['26.88px', '29.24px']).toContain(mobileType?.proseLineHeight);
+        }
+      }
+    }
+  });
+
   test('all app details and locales share the complete product template contract', async ({ page }) => {
     for (const slug of allProductSlugs) {
       for (const locale of productLocales) {
