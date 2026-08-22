@@ -108,6 +108,7 @@ const homePath = routeFor('home', data.locale);
 const appsPath = routeFor('apps', data.locale);
 const pageStyle = `--accent-border: ${data.accent.border}; --accent-bg: ${data.accent.background}; --accent-text: ${data.accent.text};`;
 const iconUrl = new URL(data.iconPath, Astro.site);
+const socialImagePath = data.socialImagePath ?? data.iconPath;
 const canonicalUrl = new URL(data.canonicalPath, Astro.site);
 const offerPriceCurrency = meta.priceCurrency ?? (meta.price === 0 ? 'USD' : undefined);
 const localizedAppStoreUrl = (url: string | undefined, locale: ProductPageData['locale']) => {
@@ -277,7 +278,7 @@ const faqJsonLd = {
   description={data.seoDescription}
   canonicalPath={data.canonicalPath}
   lang={data.locale}
-  image={data.iconPath}
+  image={socialImagePath}
   jsonLd={faqContent ? [jsonLd, breadcrumbJsonLd, faqJsonLd] : [jsonLd, breadcrumbJsonLd]}
   alternates={alternates}
 >
@@ -398,7 +399,7 @@ const faqJsonLd = {
               >
                 <img
                   src={screenshotPath}
-                  alt={`${meta.title} ${labels.screens} ${index + 1}`}
+                  alt={data.screenshotAlts?.[index] ?? `${meta.title} ${labels.screens} ${index + 1}`}
                   width={screenshotDimensions.width}
                   height={screenshotDimensions.height}
                   loading="lazy"

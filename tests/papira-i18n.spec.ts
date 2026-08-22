@@ -19,6 +19,34 @@ const alternateUrls = {
   'x-default': 'https://onnellab.github.io/apps/papira/'
 } as const;
 
+const screenshotAlts = {
+  en: [
+    'Papira home screen with options to start a full book project or create a quick EPUB',
+    'Papira screen for selecting a work type and configuring the cover',
+    'Papira screen for reviewing book metadata and creating the EPUB'
+  ],
+  ko: [
+    '책 프로젝트를 시작하거나 빠르게 EPUB을 만들 수 있는 Papira 홈 화면',
+    '작품 유형을 선택하고 표지를 설정하는 Papira 화면',
+    '책 정보를 검토하고 EPUB을 만드는 Papira 화면'
+  ],
+  ja: [
+    '本格的な本のプロジェクトまたはクイックEPUBを選ぶPapiraのホーム画面',
+    '作品タイプを選択し、表紙を設定するPapiraの画面',
+    '書誌情報を確認してEPUBを作成するPapiraの画面'
+  ],
+  'zh-Hans': [
+    '可选择完整图书项目或快速制作 EPUB 的 Papira 首页',
+    '选择作品类型并配置封面的 Papira 页面',
+    '检查图书元数据并创建 EPUB 的 Papira 页面'
+  ],
+  'zh-Hant': [
+    '可選擇完整書籍專案或快速製作 EPUB 的 Papira 首頁',
+    '選擇作品類型並設定封面的 Papira 頁面',
+    '檢查書籍中繼資料並建立 EPUB 的 Papira 頁面'
+  ]
+} as const;
+
 async function jsonLd(page: Page) {
   return page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
     scripts.map((script) => JSON.parse(script.textContent ?? 'null'))
@@ -315,6 +343,31 @@ test.describe('Papira five-language launch surface', () => {
     expect(fs.existsSync(path.resolve(process.cwd(), 'public', iconPath.replace(/^\//, '')))).toBe(true);
   });
 
+  test('every Papira locale publishes the large PNG social card while schema keeps the square icon', async ({ page }) => {
+    const socialImageUrl = 'https://onnellab.github.io/app-assets/papira/social-card.png';
+    const iconUrl = 'https://onnellab.github.io/app-assets/papira/icon.png';
+
+    for (const locale of locales) {
+      await page.goto(`/apps/papira/${locale.path}`);
+      await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', socialImageUrl);
+      await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', socialImageUrl);
+
+      const schemas = await jsonLd(page);
+      const software = schemas.find((item) => item['@type'] === 'SoftwareApplication');
+      expect(software?.image).toBe(iconUrl);
+    }
+
+    const response = await page.request.get('/app-assets/papira/social-card.png');
+    expect(response.ok()).toBe(true);
+    expect(response.headers()['content-type']).toContain('image/png');
+    expect(await page.evaluate(async (source) => {
+      const image = new Image();
+      image.src = source;
+      await image.decode();
+      return { width: image.naturalWidth, height: image.naturalHeight };
+    }, '/app-assets/papira/social-card.png')).toEqual({ width: 1200, height: 675 });
+  });
+
   test('Papira product pages expose the localized promotional screenshot gallery', async ({ page }) => {
     for (const locale of locales) {
       const screenshotLocale = locale.hreflang;
@@ -322,6 +375,11 @@ test.describe('Papira five-language launch surface', () => {
 
       const screenshots = page.locator('.screenshot-link img');
       await expect(screenshots).toHaveCount(3);
+      expect(await screenshots.evaluateAll((images) => images.map((image) => image.getAttribute('alt'))))
+        .toEqual([...screenshotAlts[screenshotLocale]]);
+      expect(await page.locator('.viewer-thumb img').evaluateAll((images) =>
+        images.map((image) => image.getAttribute('alt'))
+      )).toEqual(['', '', '']);
       for (let index = 0; index < 3; index += 1) {
         const source = `/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png`;
         await expect(screenshots.nth(index)).toHaveAttribute('src', source);
@@ -339,6 +397,22 @@ test.describe('Papira five-language launch surface', () => {
           .toEqual({ complete: true, naturalWidth: 1080, naturalHeight: 2168 });
       }
     }
+  });
+
+  test('non-Papira products retain icon social metadata and generic screenshot alt fallback', async ({ page }) => {
+    await page.goto('/apps/tagweaver/');
+
+    const iconUrl = 'https://onnellab.github.io/app-assets/tagweaver/assets/icon/tagweaver.png';
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', iconUrl);
+    await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', iconUrl);
+    await expect(page.locator('.screenshot-link img').first()).toHaveAttribute(
+      'alt',
+      'TagWeaver Screenshots 1'
+    );
+
+    const schemas = await jsonLd(page);
+    const software = schemas.find((item) => item['@type'] === 'SoftwareApplication');
+    expect(software?.image).toBe(iconUrl);
   });
 
   test('English and Korean breadcrumb schema names the apps collection accurately', async ({ page }) => {
