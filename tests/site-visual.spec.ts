@@ -167,12 +167,80 @@ test.describe('site layout and navigation', () => {
     });
     expect(titleMetrics.fontSize).toBeLessThanOrEqual(44.1);
     expect(titleMetrics.lineHeight).toBeGreaterThan(titleMetrics.fontSize);
+    expect(await page.locator('.home-hero h1').innerText()).toBe('작은 도구를,\n차분하게 만들어요.');
+    await expect(page.locator('.home-hero h1 .title-line')).toHaveCount(2);
+
+    const mobileNavStyle = await page.locator('.top-nav').evaluate((nav) => {
+      const brand = nav.querySelector('.brand');
+      const links = nav.querySelector('.nav-links');
+      const locale = nav.querySelector('.locale-menu summary');
+      if (!(brand instanceof HTMLElement) || !(links instanceof HTMLElement) || !(locale instanceof HTMLElement)) return null;
+      return {
+        brandSize: Number.parseFloat(getComputedStyle(brand).fontSize),
+        gap: Number.parseFloat(getComputedStyle(links).gap),
+        localeHeight: locale.getBoundingClientRect().height,
+        localePadding: Number.parseFloat(getComputedStyle(locale).paddingInlineStart)
+      };
+    });
+    expect(mobileNavStyle).toEqual({ brandSize: 15, gap: 12, localeHeight: 32, localePadding: 10 });
 
     const featuredBox = await page.locator('a.featured').boundingBox();
     expect(featuredBox).not.toBeNull();
     if (!featuredBox) return;
     expect(featuredBox.y).toBeLessThan(844);
     await expect(page.locator('a.featured')).toContainText('TagWeaver');
+  });
+
+  test('mobile home keeps About and Blog navigation visible in every locale', async ({ page }) => {
+    const routes = [
+      { home: '/', about: '/about/', blog: '/blog/', title: 'More apps', all: 'View all' },
+      { home: '/ko/', about: '/about/ko/', blog: '/blog/ko/', title: '다른 앱', all: '전체 보기' },
+      { home: '/ja/', about: '/about/ja/', blog: '/blog/', title: 'ほかのアプリ', all: '一覧を見る' },
+      { home: '/zh-hans/', about: '/about/zh-hans/', blog: '/blog/', title: '其他应用', all: '查看全部' },
+      { home: '/zh-hant/', about: '/about/zh-hant/', blog: '/blog/', title: '其他應用程式', all: '查看全部' }
+    ];
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    for (const route of routes) {
+      await page.goto(route.home);
+      await expect(page.locator(`.top-nav a[href="${route.about}"]`)).toBeVisible();
+      await expect(page.locator(`.top-nav a[href="${route.blog}"]`)).toBeVisible();
+      await expect(page.locator('#apps-title')).toHaveText(route.title);
+      await expect(page.locator('.section-head a')).toHaveText(route.all);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
+    }
+  });
+
+  test('Japanese and Chinese pages wrap without horizontal mobile scrolling', async ({ page }) => {
+    const locales = ['ja', 'zh-hans', 'zh-hant'];
+    const slugs = ['aligna', 'clipnest', 'melivra', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+    const routes = locales.flatMap((locale) => [
+      `/${locale}/`,
+      `/apps/${locale}/`,
+      `/about/${locale}/`,
+      `/privacy/${locale}/`,
+      `/terms/${locale}/`,
+      ...slugs.map((slug) => `/apps/${slug}/${locale}/`)
+    ]);
+    const failures: string[] = [];
+
+    await page.setViewportSize({ width: 320, height: 844 });
+    for (const route of routes) {
+      await page.goto(route);
+      const overflow = await page.evaluate(() => {
+        const viewportWidth = document.documentElement.clientWidth;
+        if (document.documentElement.scrollWidth <= viewportWidth + 1) return [];
+        return Array.from(document.querySelectorAll<HTMLElement>('body *'))
+          .map((node) => ({ node, rect: node.getBoundingClientRect() }))
+          .filter(({ rect }) => rect.width > 0 && (rect.left < -1 || rect.right > viewportWidth + 1))
+          .sort((a, b) => b.rect.right - a.rect.right)
+          .slice(0, 4)
+          .map(({ node, rect }) => `${document.documentElement.scrollWidth}px right=${Math.round(rect.right)} ${node.tagName.toLowerCase()}.${node.className || '(no-class)'}: ${node.textContent?.trim().slice(0, 80)}`);
+      });
+      if (overflow.length > 0) failures.push(`${route}\n${overflow.join('\n')}`);
+    }
+
+    expect(failures).toEqual([]);
   });
 
   test('ONNELLAB wordmark uses one font across core, blog, and product pages', async ({ page }) => {
@@ -212,6 +280,37 @@ test.describe('site layout and navigation', () => {
 });
 
 test.describe('app and privacy collections', () => {
+  test('Papira app cards use concise noun-phrase summaries in every locale', async ({ page }) => {
+    const summaries = [
+      {
+        path: '/apps/',
+        text: 'Offline TXT-to-EPUB maker for fanfiction, novels, digital booklets, and TRPG scenarios'
+      },
+      {
+        path: '/apps/ko/',
+        text: '팬픽·소설·디지털 소책자·TRPG 시나리오용 오프라인 TXT→EPUB 제작 도구'
+      },
+      {
+        path: '/apps/ja/',
+        text: '二次創作・小説・デジタル小冊子・TRPGシナリオ向けのオフラインTXT→EPUB作成ツール'
+      },
+      {
+        path: '/apps/zh-hans/',
+        text: '面向同人文、小说、数字小册子与 TRPG 剧本的离线 TXT 转 EPUB 制作工具'
+      },
+      {
+        path: '/apps/zh-hant/',
+        text: '適合同人文、小說、數位小冊子與 TRPG 劇本的離線 TXT 轉 EPUB 製作工具'
+      }
+    ];
+
+    for (const summary of summaries) {
+      await page.goto(summary.path);
+      const papira = page.locator('[data-app-row]').filter({ hasText: 'Papira' });
+      await expect(papira.locator('.app-copy > p')).toHaveText(summary.text);
+    }
+  });
+
   test('apps are alphabetically ordered and localized status badges are distinct', async ({ page }) => {
     await page.goto('/apps/ko/');
     await expect(page.locator('[data-app-row] h2')).toHaveText([

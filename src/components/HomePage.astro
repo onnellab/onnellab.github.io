@@ -50,8 +50,8 @@ const copies: Record<SiteLocale, HomeCopy> = {
     featuredTitle: 'TagWeaver keeps MP3 and FLAC metadata under your control.',
     featuredBody:
       'Edit titles, artists, albums, artwork, lyrics, ratings, and batches directly in local audio files—without uploading them.',
-    appsTitle: 'More ONNELLAB apps',
-    allApps: 'View all apps',
+    appsTitle: 'More apps',
+    allApps: 'View all',
     valuesTitle: 'How we build',
     values: [
       { title: 'One clear job', body: 'Each product starts with a focused task and stops before it becomes a platform.' },
@@ -71,8 +71,8 @@ const copies: Record<SiteLocale, HomeCopy> = {
     featuredTitle: 'TagWeaver로 MP3·FLAC 태그를 직접 정리해요.',
     featuredBody:
       '제목, 아티스트, 앨범, 커버, 가사와 별점을 파일에 직접 저장하고 여러 곡을 한 번에 수정해요.',
-    appsTitle: '다른 ONNELLAB 앱',
-    allApps: '모든 앱 보기',
+    appsTitle: '다른 앱',
+    allApps: '전체 보기',
     valuesTitle: '만드는 원칙',
     values: [
       { title: '한 가지 분명한 일', body: '각 앱은 하나의 작업에서 시작하고 플랫폼이 되기 전에 멈춰요.' },
@@ -81,7 +81,7 @@ const copies: Record<SiteLocale, HomeCopy> = {
     ]
   },
   ja: {
-    nav: { apps: 'アプリ', about: 'ONNELLABについて', blog: 'ブログ', privacy: 'プライバシー', terms: '利用規約' },
+    nav: { apps: 'アプリ', about: '紹介', blog: 'ブログ', privacy: 'プライバシー', terms: '利用規約' },
     seoTitle: 'ONNELLAB - 静かで目的の明確なソフトウェア',
     description: 'ONNELLABは、ファイル、創作、日々の作業のための小さく目的の明確なアプリをつくります。',
     eyebrow: 'インディーソフトウェアスタジオ',
@@ -92,8 +92,8 @@ const copies: Record<SiteLocale, HomeCopy> = {
     featuredTitle: 'TagWeaverでMP3・FLACタグを直接整えます。',
     featuredBody:
       'タイトル、アーティスト、アルバム、ジャケット、歌詞、評価を端末上のファイルへ直接保存し、複数曲をまとめて編集できます。',
-    appsTitle: 'ほかのONNELLABアプリ',
-    allApps: 'すべてのアプリ',
+    appsTitle: 'ほかのアプリ',
+    allApps: '一覧を見る',
     valuesTitle: 'ものづくりの原則',
     values: [
       { title: 'ひとつの明確な役割', body: '一つの仕事から始め、プラットフォームになる前に止めます。' },
@@ -113,8 +113,8 @@ const copies: Record<SiteLocale, HomeCopy> = {
     featuredTitle: '用 TagWeaver 直接整理 MP3 与 FLAC 标签。',
     featuredBody:
       '可直接编辑标题、艺术家、专辑、封面、歌词与评分，并批量写入本地音频文件。',
-    appsTitle: '更多 ONNELLAB 应用',
-    allApps: '查看全部应用',
+    appsTitle: '其他应用',
+    allApps: '查看全部',
     valuesTitle: '我们的制作原则',
     values: [
       { title: '只做好一件事', body: '每个产品从一个明确任务开始，并在变成平台之前停下。' },
@@ -134,8 +134,8 @@ const copies: Record<SiteLocale, HomeCopy> = {
     featuredTitle: '用 TagWeaver 直接整理 MP3 與 FLAC 標籤。',
     featuredBody:
       '可直接編輯標題、藝人、專輯、封面、歌詞與評分，並批次寫入本機音訊檔案。',
-    appsTitle: '更多 ONNELLAB 應用程式',
-    allApps: '查看全部應用程式',
+    appsTitle: '其他應用程式',
+    allApps: '查看全部',
     valuesTitle: '我們的製作原則',
     values: [
       { title: '只做好一件事', body: '每個產品從一項明確工作開始，並在變成平台之前停下。' },
@@ -217,7 +217,11 @@ const jsonLd = [
 
     <header class="home-hero">
       <p class="eyebrow">{copy.eyebrow}</p>
-      <h1>{copy.title}</h1>
+      <h1>
+        {locale === 'ko' ? (
+          <><span class="title-line">작은 도구를,</span>{' '}<span class="title-line">차분하게 만들어요.</span></>
+        ) : copy.title}
+      </h1>
       <p class="lede">{copy.intro}</p>
     </header>
 
@@ -639,13 +643,18 @@ const jsonLd = [
       padding-top: 20px;
     }
 
-    .nav-links {
-      gap: 10px;
+    .top-nav {
+      align-items: flex-start;
     }
 
-    .nav-links > a:nth-of-type(2),
-    .nav-links > a:nth-of-type(3) {
-      display: none;
+    .nav-links {
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .brand {
+      font-size: 15px;
     }
 
     .product-grid,
@@ -676,8 +685,13 @@ const jsonLd = [
     }
 
     .site-shell[data-locale='ko'] .home-hero h1 {
+      max-width: none;
       letter-spacing: -0.02em;
       line-height: 1.2;
+    }
+
+    .site-shell[data-locale='ko'] .home-hero .title-line {
+      display: block;
     }
 
     .home-hero .lede {

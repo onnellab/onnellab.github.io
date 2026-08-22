@@ -1437,8 +1437,13 @@ const faqJsonLd = {
 
   .copy-column {
     max-width: none;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  :global(html[lang='ko']) .copy-column {
     word-break: keep-all;
-    overflow-wrap: normal;
+    overflow-wrap: break-word;
   }
 
   h2 {
