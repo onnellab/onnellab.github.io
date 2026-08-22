@@ -163,6 +163,9 @@ const featuredOthers = releasedApps
   .map((app) => ({ ...app, href: appHref(app.slug) }));
 const appCardStyle = (app: ProductIndexItem) =>
   `--accent-border: ${app.accent.border}; --accent-bg: ${app.accent.background}; --accent-text: ${app.accent.text};`;
+const homeIconPath = (slug: string, size: 96 | 192) => `/home-assets/app-icons/${slug}-${size}.webp`;
+const homeIconSrcset = (slug: string) =>
+  `${homeIconPath(slug, 96)} 96w, ${homeIconPath(slug, 192)} 192w`;
 const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
 const jsonLd = [
   {
@@ -239,7 +242,9 @@ const jsonLd = [
         </div>
         <div class="featured-body">
           <img
-            src={featuredApp.iconPath}
+            src={homeIconPath(featuredApp.slug, 96)}
+            srcset={homeIconSrcset(featuredApp.slug)}
+            sizes="(max-width: 520px) 64px, 92px"
             alt="TagWeaver app icon"
             width="92"
             height="92"
@@ -261,7 +266,16 @@ const jsonLd = [
       <div class="product-grid">
         {featuredOthers.map((app) => (
           <a class="product-card" href={app.href} style={appCardStyle(app)}>
-            <img src={app.iconPath} alt="" width="44" height="44" loading="lazy" data-no-visual-search="true" />
+            <img
+              src={homeIconPath(app.slug, 96)}
+              srcset={homeIconSrcset(app.slug)}
+              sizes="44px"
+              alt=""
+              width="44"
+              height="44"
+              loading="lazy"
+              data-no-visual-search="true"
+            />
             <div>
               <h3>{app.title}</h3>
               <p>{app.description}</p>

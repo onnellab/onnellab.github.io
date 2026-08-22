@@ -325,6 +325,101 @@ test.describe('site layout and navigation', () => {
     await expect(page.locator('[data-app-row]').filter({ hasText: 'Papira' })).toHaveCount(1);
   });
 
+  test('home delivers responsive WebP derivatives while product identity keeps its source icon', async ({ page, request }, testInfo) => {
+    const homeIcons = [
+      { slug: 'aligna', width: 44, sizes: '44px', source: '/app-assets/aligna/assets/icon/aligna.png' },
+      { slug: 'clipnest', width: 44, sizes: '44px', source: '/app-assets/clipnest/assets/icon/clipnest.png' },
+      { slug: 'quivra', width: 44, sizes: '44px', source: '/app-assets/quivra/assets/icon/quivra.png' },
+      { slug: 'segra', width: 44, sizes: '44px', source: '/app-assets/segra/assets/icon/segra.png' },
+      {
+        slug: 'tagweaver',
+        width: 92,
+        sizes: '(max-width: 520px) 64px, 92px',
+        source: '/app-assets/tagweaver/assets/icon/tagweaver.png'
+      }
+    ] as const;
+
+    await page.goto('/');
+    const homeMarkup = await page.locator('main[data-core-page="home"]').innerHTML();
+
+    for (const icon of homeIcons) {
+      const image = page.locator(`a[href="/apps/${icon.slug}/"] img`);
+      const expectedSrc = `/home-assets/app-icons/${icon.slug}-96.webp`;
+      const expectedSrcset = [96, 192]
+        .map((size) => `/home-assets/app-icons/${icon.slug}-${size}.webp ${size}w`)
+        .join(', ');
+
+      await expect(image).toHaveAttribute('src', expectedSrc);
+      await expect(image).toHaveAttribute('srcset', expectedSrcset);
+      await expect(image).toHaveAttribute('sizes', icon.sizes);
+      await expect(image).toHaveAttribute('width', String(icon.width));
+      await expect(image).toHaveAttribute('height', String(icon.width));
+      expect(homeMarkup).not.toContain(icon.source);
+
+      const selected = await image.evaluate((node) => {
+        const element = node as HTMLImageElement;
+        return {
+          currentSrc: new URL(element.currentSrc).pathname,
+          naturalWidth: element.naturalWidth,
+          naturalHeight: element.naturalHeight
+        };
+      });
+      const expectedSelectedSize = testInfo.project.name === 'mobile' ? 192 : 96;
+      const expectedNaturalWidth = testInfo.project.name === 'mobile' && icon.slug === 'tagweaver' ? 64 : icon.width;
+      expect(selected.currentSrc).toBe(`/home-assets/app-icons/${icon.slug}-${expectedSelectedSize}.webp`);
+      expect(selected.naturalWidth).toBe(expectedNaturalWidth);
+      expect(selected.naturalHeight).toBe(expectedNaturalWidth);
+
+      for (const size of [96, 192]) {
+        const assetPath = `/home-assets/app-icons/${icon.slug}-${size}.webp`;
+        const response = await request.get(assetPath);
+        expect(response.status(), assetPath).toBe(200);
+        expect(response.headers()['content-type'], assetPath).toContain('image/webp');
+
+        const dimensions = await page.evaluate(
+          ({ path }) => new Promise<{ width: number; height: number }>((resolve, reject) => {
+            const candidate = new Image();
+            candidate.onload = () => resolve({ width: candidate.naturalWidth, height: candidate.naturalHeight });
+            candidate.onerror = () => reject(new Error(`Unable to load ${path}`));
+            candidate.src = path;
+          }),
+          { path: assetPath }
+        );
+        expect(dimensions, assetPath).toEqual({ width: size, height: size });
+      }
+    }
+
+    await page.goto('/apps/tagweaver/');
+    const sourceIcon = '/app-assets/tagweaver/assets/icon/tagweaver.png';
+    await expect(page.locator('.identity img')).toHaveAttribute('src', sourceIcon);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+      'content',
+      `https://onnellab.github.io${sourceIcon}`
+    );
+  });
+
+  test('compact home selects the 96px featured icon at fractional DPR', async ({ browser }) => {
+    const context = await browser.newContext({
+      baseURL: 'http://127.0.0.1:4321',
+      viewport: { width: 500, height: 1000 },
+      deviceScaleFactor: 1.25
+    });
+
+    try {
+      const page = await context.newPage();
+      await page.goto('/');
+      const image = page.locator('a.featured img');
+      await image.evaluate((node) => (node as HTMLImageElement).decode());
+
+      expect(await image.evaluate((node) => (node as HTMLImageElement).getBoundingClientRect().width)).toBe(64);
+      expect(await image.evaluate((node) => new URL((node as HTMLImageElement).currentSrc).pathname)).toBe(
+        '/home-assets/app-icons/tagweaver-96.webp'
+      );
+    } finally {
+      await context.close();
+    }
+  });
+
   test('home introduction uses the card measure and breaks between sentences', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto('/ko/');
