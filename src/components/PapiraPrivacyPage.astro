@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
+import SiteFooter from './SiteFooter.astro';
 import {
   localeAlternates,
   localeDefinitions,
@@ -420,6 +421,7 @@ const emailParts = (value: string) => {
         )}
       </section>
     ))}
+    <SiteFooter locale={locale} privacyHref={routeFor('privacy', locale)} />
   </main>
 </BaseLayout>
 

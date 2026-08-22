@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
+import SiteFooter from './SiteFooter.astro';
 import { landingSubtitle, pageBodyDescription, renderBlocks, type ProductPageData } from '../lib/products';
 import { latestReleaseNoteForApp, releaseNotePath } from '../lib/releaseNotes';
 import { routeFor, type SiteLocale } from '../lib/site-i18n';
@@ -16,7 +17,6 @@ const localizedLabels: Record<SiteLocale, {
   appStore: string;
   googlePlay: string;
   privacy: string;
-  footerPrivacy: string;
   releaseNotes: string;
   latestRelease: string;
   support: string;
@@ -31,7 +31,6 @@ const localizedLabels: Record<SiteLocale, {
     appStore: 'App Store',
     googlePlay: 'Google Play',
     privacy: 'Privacy Policy',
-    footerPrivacy: 'Privacy Policy',
     releaseNotes: 'Release Notes',
     latestRelease: 'Latest release',
     support: 'Contact',
@@ -46,7 +45,6 @@ const localizedLabels: Record<SiteLocale, {
         appStore: 'App Store',
         googlePlay: 'Google Play',
         privacy: '개인정보 처리방침',
-        footerPrivacy: '개인정보 처리방침',
         releaseNotes: '릴리즈 노트',
         latestRelease: '최신 릴리즈',
         support: '문의하기',
@@ -61,7 +59,6 @@ const localizedLabels: Record<SiteLocale, {
         appStore: 'App Store',
         googlePlay: 'Google Play',
         privacy: 'プライバシーポリシー',
-        footerPrivacy: 'プライバシーポリシー',
         releaseNotes: 'リリースノート',
         latestRelease: '最新リリース',
         support: 'お問い合わせ',
@@ -76,7 +73,6 @@ const localizedLabels: Record<SiteLocale, {
         appStore: 'App Store',
         googlePlay: 'Google Play',
         privacy: '隐私政策',
-        footerPrivacy: '隐私政策',
         releaseNotes: '版本说明',
         latestRelease: '最新版本',
         support: '联系我们',
@@ -91,7 +87,6 @@ const localizedLabels: Record<SiteLocale, {
         appStore: 'App Store',
         googlePlay: 'Google Play',
         privacy: '隱私權政策',
-        footerPrivacy: '隱私權政策',
         releaseNotes: '版本說明',
         latestRelease: '最新版本',
         support: '聯絡我們',
@@ -483,10 +478,7 @@ const faqJsonLd = {
       )}
     </section>
 
-    <footer>
-      <a href={privacyUrl}>{labels.footerPrivacy}</a>
-      <a href={`mailto:${meta.supportEmail}`}>{meta.supportEmail}</a>
-    </footer>
+    <SiteFooter locale={data.locale} privacyHref={privacyUrl} />
   </main>
 </BaseLayout>
 
@@ -497,8 +489,7 @@ const faqJsonLd = {
     padding: 24px 0 30px;
   }
 
-  .topbar,
-  footer {
+  .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -508,8 +499,7 @@ const faqJsonLd = {
   }
 
   .brand,
-  .apps-link,
-  footer a {
+  .apps-link {
     text-decoration: none;
   }
 
@@ -1505,34 +1495,6 @@ const faqJsonLd = {
     height: 5px;
     border-radius: 999px;
     background: var(--accent-border);
-  }
-
-  footer {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    justify-items: center;
-    align-items: center;
-    gap: 7px;
-    border-top: 1px solid #e0d8cb;
-    padding-top: 16px;
-    text-align: center;
-  }
-
-  footer > * {
-    justify-self: center;
-    width: fit-content;
-    max-width: 100%;
-    text-align: center;
-  }
-
-  footer a:first-of-type {
-    color: #5f5a50;
-    font-weight: 620;
-  }
-
-  footer a:last-child {
-    color: #827d72;
-    font-size: 13px;
   }
 
   @media (max-width: 680px) {

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteFooter from './SiteFooter.astro';
 import { getBlogAlternatePost, renderMarkdownBlocks, type BlogPost } from '../lib/blog';
 import type { Locale } from '../lib/products';
 
@@ -491,6 +492,8 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
         </div>
       </dialog>
     )}
+
+    <SiteFooter locale={locale} />
   </main>
   <script is:inline>
     (() => {

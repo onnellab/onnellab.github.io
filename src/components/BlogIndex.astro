@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteFooter from './SiteFooter.astro';
 import { getBlogPosts, type BlogPost } from '../lib/blog';
 import type { Locale } from '../lib/products';
 
@@ -191,6 +192,8 @@ const blogJsonLd = [
         </section>
       </>
     )}
+
+    <SiteFooter locale={locale} />
   </main>
   <script is:inline>
     (() => {

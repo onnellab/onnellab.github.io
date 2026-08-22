@@ -1,0 +1,62 @@
+---
+import { routeFor, type SiteLocale } from '../lib/site-i18n';
+
+type Props = {
+  locale: SiteLocale;
+  privacyHref?: string;
+};
+
+const { locale, privacyHref = routeFor('privacy', locale) } = Astro.props;
+const labels: Record<SiteLocale, { privacy: string; terms: string }> = {
+  en: { privacy: 'Privacy Policy', terms: 'Terms' },
+  ko: { privacy: '개인정보 처리방침', terms: '이용약관' },
+  ja: { privacy: 'プライバシーポリシー', terms: '利用規約' },
+  'zh-Hans': { privacy: '隐私政策', terms: '使用条款' },
+  'zh-Hant': { privacy: '隱私權政策', terms: '使用條款' }
+};
+---
+
+<footer class="site-footer">
+  <a href={privacyHref}>{labels[locale].privacy}</a>
+  <a href={routeFor('terms', locale)}>{labels[locale].terms}</a>
+  <a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a>
+  <span>© ONNELLAB</span>
+</footer>
+
+<style>
+  .site-footer.site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px 20px;
+    margin-top: 58px;
+    border-top: 1px solid #ded6ca;
+    padding-top: 28px;
+    color: #857d72;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .site-footer.site-footer a {
+    color: #686259;
+    font-size: inherit;
+    font-weight: 620;
+    text-decoration: none;
+  }
+
+  .site-footer.site-footer a:hover {
+    color: #2f2d29;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .site-footer.site-footer a:focus-visible {
+    outline: 2px solid #827d72;
+    outline-offset: 3px;
+  }
+
+  .site-footer.site-footer span {
+    white-space: nowrap;
+  }
+</style>

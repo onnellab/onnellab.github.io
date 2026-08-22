@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteFooter from './SiteFooter.astro';
 
 type Section = {
   title: string;
@@ -68,6 +69,7 @@ const updatedLabel = lang === 'ko' ? '최종 업데이트' : 'Last updated';
         </section>
       ))}
     </div>
+    <SiteFooter locale={lang} />
   </main>
 </BaseLayout>
 

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
+import SiteFooter from './SiteFooter.astro';
 import { getProductIndexItems } from '../lib/products';
 import {
   contentLocale,
@@ -912,12 +913,7 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
       </>
     )}
 
-    <footer>
-      <a href={routeFor('privacy', locale)}>{copy.nav.privacy}</a>
-      <a href={routeFor('terms', locale)}>{copy.nav.terms}</a>
-      <a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a>
-      <span>© ONNELLAB</span>
-    </footer>
+    <SiteFooter locale={locale} />
   </main>
 </BaseLayout>
 
@@ -934,8 +930,7 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
   .section-head,
   .app-row,
   .app-title-line,
-  .badges,
-  footer {
+  .badges {
     display: flex;
     align-items: center;
   }
@@ -947,8 +942,7 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
 
   .brand,
   .nav-links > a,
-  .section-head a,
-  footer a {
+  .section-head a {
     color: #686259;
     font-size: 13px;
     font-weight: 620;
@@ -964,8 +958,7 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
   }
 
   .top-nav a:hover,
-  .section-head a:hover,
-  footer a:hover {
+  .section-head a:hover {
     color: #2f2d29;
     text-decoration: underline;
     text-underline-offset: 4px;
@@ -1333,17 +1326,6 @@ const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
   .terms-prose a {
     color: #3d5f82;
     text-underline-offset: 4px;
-  }
-
-  footer {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 9px 20px;
-    margin-top: 58px;
-    border-top: 1px solid #ded6ca;
-    padding-top: 28px;
-    color: #857d72;
-    font-size: 12px;
   }
 
   @media (max-width: 760px) {

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteFooter from './SiteFooter.astro';
 import { getProductPageData } from '../lib/products';
 import { releaseNoteKoPath, releaseNotePath, type ReleaseNote } from '../lib/releaseNotes';
 
@@ -137,6 +138,7 @@ const jsonLd = {
         <p>{labels.upgradeText}</p>
       </section>
     </article>
+    <SiteFooter locale={locale} />
   </main>
 </BaseLayout>
 

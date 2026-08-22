@@ -37,6 +37,13 @@ const productLocales = [
   { code: 'zh-Hans', suffix: 'zh-hans/' },
   { code: 'zh-Hant', suffix: 'zh-hant/' }
 ] as const;
+const footerLabels = {
+  en: { privacy: 'Privacy Policy', terms: 'Terms' },
+  ko: { privacy: '개인정보 처리방침', terms: '이용약관' },
+  ja: { privacy: 'プライバシーポリシー', terms: '利用規約' },
+  'zh-Hans': { privacy: '隐私政策', terms: '使用条款' },
+  'zh-Hant': { privacy: '隱私權政策', terms: '使用條款' }
+} as const;
 const productPages = productSlugs.flatMap((slug) => [`/apps/${slug}/`, `/apps/${slug}/ko/`]);
 const privacySlugs = ['aligna', 'clipnest', 'melivra', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const privacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/`);
@@ -423,6 +430,82 @@ test.describe('site layout and navigation', () => {
     expect(failures).toEqual([]);
   });
 
+  test('rendered page families expose one localized semantic site footer', async ({ page }) => {
+    const routes = [
+      { path: '/ko/', locale: 'ko', privacy: '/privacy/ko/', terms: '/terms/ko/' },
+      { path: '/apps/ja/', locale: 'ja', privacy: '/privacy/ja/', terms: '/terms/ja/' },
+      { path: '/about/zh-hans/', locale: 'zh-Hans', privacy: '/privacy/zh-hans/', terms: '/terms/zh-hans/' },
+      { path: '/privacy/zh-hant/', locale: 'zh-Hant', privacy: '/privacy/zh-hant/', terms: '/terms/zh-hant/' },
+      { path: '/terms/', locale: 'en', privacy: '/privacy/', terms: '/terms/' },
+      {
+        path: '/apps/papira/ko/',
+        locale: 'ko',
+        privacy: 'https://onnellab.github.io/privacy/papira/ko/',
+        terms: '/terms/ko/'
+      },
+      { path: '/blog/', locale: 'en', privacy: '/privacy/', terms: '/terms/' },
+      {
+        path: '/blog/ko/read-large-txt-files-without-lag/',
+        locale: 'ko',
+        privacy: '/privacy/ko/',
+        terms: '/terms/ko/'
+      },
+      {
+        path: '/release-notes/tagweaver/2.2/ko/',
+        locale: 'ko',
+        privacy: '/privacy/ko/',
+        terms: '/terms/ko/'
+      },
+      { path: '/oauth/x/callback/', locale: 'en', privacy: '/privacy/', terms: '/terms/' },
+      { path: '/privacy/papira/ja/', locale: 'ja', privacy: '/privacy/ja/', terms: '/terms/ja/' }
+    ] as const;
+
+    for (const route of routes) {
+      await page.goto(route.path);
+      const main = page.locator('main').first();
+      const footer = main.locator(':scope > footer.site-footer');
+      await expect(footer).toHaveCount(1);
+      await expect(footer.locator(':scope > *')).toHaveCount(4);
+      await expect(footer.locator(':scope > a')).toHaveText([
+        footerLabels[route.locale].privacy,
+        footerLabels[route.locale].terms,
+        'onnellab.app@gmail.com'
+      ]);
+      expect(await footer.locator(':scope > a').evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual([
+        route.privacy,
+        route.terms,
+        'mailto:onnellab.app@gmail.com'
+      ]);
+      await expect(footer.locator(':scope > span')).toHaveText('© ONNELLAB');
+      const style = await footer.evaluate((node) => {
+        const computed = getComputedStyle(node);
+        return {
+          display: computed.display,
+          alignItems: computed.alignItems,
+          justifyContent: computed.justifyContent,
+          flexWrap: computed.flexWrap,
+          rowGap: computed.rowGap,
+          columnGap: computed.columnGap,
+          borderTopStyle: computed.borderTopStyle,
+          paddingTop: computed.paddingTop,
+          fontSize: computed.fontSize
+        };
+      });
+      expect(style).toEqual({
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        rowGap: '9px',
+        columnGap: '20px',
+        borderTopStyle: 'solid',
+        paddingTop: '28px',
+        fontSize: '12px'
+      });
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
+    }
+  });
+
   test('about page wordmark has no underline', async ({ page }) => {
     await page.goto('/about/ko/');
 
@@ -648,7 +731,19 @@ test.describe('existing product pages', () => {
         await expect(main.locator(':scope > .faq-band')).toHaveCount(1);
         await expect(main.locator(':scope > .screens-band')).toHaveCount(1);
         await expect(main.locator(':scope > .download-band')).toHaveCount(1);
-        await expect(main.locator(':scope > footer')).toHaveCount(1);
+        const footer = main.locator(':scope > footer.site-footer');
+        await expect(footer).toHaveCount(1);
+        const privacyHref = slug === 'papira'
+          ? `https://onnellab.github.io/privacy/${slug}/${locale.suffix}`
+          : locale.code === 'ko'
+            ? `https://onnellab.github.io/privacy/${slug}/ko/`
+            : `https://onnellab.github.io/privacy/${slug}/`;
+        expect(await footer.locator(':scope > a').evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual([
+          privacyHref,
+          `/terms/${locale.suffix}`,
+          'mailto:onnellab.app@gmail.com'
+        ]);
+        await expect(footer.locator(':scope > span')).toHaveText('© ONNELLAB');
         const localeLinks = main.locator('.locale-menu-panel a[data-locale-choice]');
         await expect(localeLinks).toHaveCount(5);
         expect(await localeLinks.evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual([
