@@ -144,7 +144,7 @@ test.describe('Papira five-language launch surface', () => {
 
   test('Papira product pages expose the localized promotional screenshot gallery', async ({ page }) => {
     for (const locale of locales) {
-      const screenshotLocale = locale.hreflang === 'ko' ? 'ko' : 'en';
+      const screenshotLocale = locale.hreflang;
       await page.goto(`/apps/papira/${locale.path}`);
 
       const screenshots = page.locator('.screenshot-link img');
@@ -155,6 +155,15 @@ test.describe('Papira five-language launch surface', () => {
         await expect(screenshots.nth(index)).toHaveAttribute('width', '1080');
         await expect(screenshots.nth(index)).toHaveAttribute('height', '2168');
         expect(fs.existsSync(path.resolve(process.cwd(), 'public', source.replace(/^\//, '')))).toBe(true);
+        await expect
+          .poll(() =>
+            screenshots.nth(index).evaluate((image: HTMLImageElement) => ({
+              complete: image.complete,
+              naturalWidth: image.naturalWidth,
+              naturalHeight: image.naturalHeight,
+            }))
+          )
+          .toEqual({ complete: true, naturalWidth: 1080, naturalHeight: 2168 });
       }
     }
   });

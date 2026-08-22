@@ -88,7 +88,7 @@ export function getPapiraProductPageData(locale: SiteLocale): ProductPageData {
     iconPath: '/app-assets/papira/icon.png',
     eyebrow: text.eyebrow,
     screenshotPaths: ['01', '02', '03'].map(
-      (name) => `/app-assets/papira/assets/screenshots/${locale === 'ko' ? 'ko' : 'en'}/${name}.png`
+      (name) => `/app-assets/papira/assets/screenshots/${locale}/${name}.png`
     ),
     screenshotDimensions: { width: 1080, height: 2168 },
     schemaFeatureList: text.features,
