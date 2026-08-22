@@ -1,4 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
+import { getAllBlogPages, getBlogAlternatePost } from '../src/lib/blog';
+import { releaseNoteKoPath, releaseNotePath, releaseNotes } from '../src/lib/releaseNotes';
 
 const corePages = [
   '/',
@@ -50,6 +52,107 @@ const legacyPrivacySlugs = ['aligna', 'clipnest', 'melivra', 'quivra', 'segra', 
 const privacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/`);
 const koreanPrivacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/ko/`);
 
+type PublishedRouteContract = {
+  path: string;
+  lang: 'en' | 'ko';
+  h1: string;
+  alternatePath?: string;
+  alternateLocale?: 'en' | 'ko';
+  mainSelector: string;
+  standardizedChrome: boolean;
+};
+
+const blogArticleContracts: PublishedRouteContract[] = getAllBlogPages().map((post) => {
+  const alternate = getBlogAlternatePost(post);
+  return {
+    path: post.href,
+    lang: post.meta.language,
+    h1: post.meta.title,
+    alternatePath: alternate?.href,
+    alternateLocale: alternate?.meta.language,
+    mainSelector: 'main.article-shell',
+    standardizedChrome: true
+  };
+});
+
+const releaseNoteContracts: PublishedRouteContract[] = releaseNotes.flatMap((note) => [
+  {
+    path: releaseNotePath(note),
+    lang: 'en' as const,
+    h1: note.title,
+    alternatePath: releaseNoteKoPath(note),
+    alternateLocale: 'ko' as const,
+    mainSelector: 'main.release-shell',
+    standardizedChrome: true
+  },
+  {
+    path: releaseNoteKoPath(note),
+    lang: 'ko' as const,
+    h1: note.title,
+    alternatePath: releaseNotePath(note),
+    alternateLocale: 'en' as const,
+    mainSelector: 'main.release-shell',
+    standardizedChrome: true
+  }
+]);
+
+const remainingGeneratedPageContracts: PublishedRouteContract[] = [
+  {
+    path: '/blog/',
+    lang: 'en',
+    h1: 'Practical Workflow Guides',
+    alternatePath: '/blog/ko/',
+    alternateLocale: 'ko',
+    mainSelector: 'main.blog-shell',
+    standardizedChrome: true
+  },
+  {
+    path: '/blog/ko/',
+    lang: 'ko',
+    h1: '워크플로 가이드',
+    alternatePath: '/blog/',
+    alternateLocale: 'en',
+    mainSelector: 'main.blog-shell',
+    standardizedChrome: true
+  },
+  {
+    path: '/oauth/x/callback/',
+    lang: 'en',
+    h1: 'X OAuth Callback',
+    alternatePath: '/oauth/x/callback/ko/',
+    alternateLocale: 'ko',
+    mainSelector: 'main.legal-shell',
+    standardizedChrome: true
+  },
+  {
+    path: '/oauth/x/callback/ko/',
+    lang: 'ko',
+    h1: 'X OAuth 콜백',
+    alternatePath: '/oauth/x/callback/',
+    alternateLocale: 'en',
+    mainSelector: 'main.legal-shell',
+    standardizedChrome: true
+  },
+  {
+    path: '/melivra-privacy-policy/',
+    lang: 'en',
+    h1: 'Privacy Policy',
+    alternatePath: '/melivra-privacy-policy/ko/',
+    alternateLocale: 'ko',
+    mainSelector: 'main.policy-page',
+    standardizedChrome: false
+  },
+  {
+    path: '/melivra-privacy-policy/ko/',
+    lang: 'ko',
+    h1: '개인정보 처리방침',
+    alternatePath: '/melivra-privacy-policy/',
+    alternateLocale: 'en',
+    mainSelector: 'main.policy-page',
+    standardizedChrome: false
+  }
+];
+
 async function assertPageIntegrity(page: Page, path: string) {
   await page.goto(path);
   await expect(page.locator('body')).toBeVisible();
@@ -78,7 +181,83 @@ async function assertPageIntegrity(page: Page, path: string) {
   expect(visibleText.trim().length).toBeGreaterThan(40);
 }
 
+async function assertVisibleImagesHealthy(page: Page) {
+  const images = page.locator('main img:visible');
+  for (let index = 0; index < await images.count(); index += 1) {
+    const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded();
+    await expect.poll(() => image.evaluate((node) => ({
+      complete: (node as HTMLImageElement).complete,
+      naturalWidth: (node as HTMLImageElement).naturalWidth
+    }))).toMatchObject({ complete: true });
+    expect(await image.evaluate((node) => (node as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  }
+}
+
 test.describe('site layout and navigation', () => {
+  test('all remaining generated HTML routes retain their supported-locale and rendering contracts', async ({ page }) => {
+    expect(blogArticleContracts.length).toBeGreaterThan(0);
+    expect(releaseNoteContracts.length).toBeGreaterThan(0);
+    const routes = [
+      ...blogArticleContracts,
+      ...releaseNoteContracts,
+      ...remainingGeneratedPageContracts
+    ];
+    expect(routes.length).toBeGreaterThan(0);
+    expect(new Set(routes.map((route) => route.path)).size).toBe(routes.length);
+
+    for (const route of routes) {
+      await test.step(route.path, async () => {
+        const response = await page.goto(route.path);
+        expect(response?.ok()).toBe(true);
+        await expect(page.locator('html')).toHaveAttribute('lang', route.lang);
+        await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+          'href',
+          new URL(route.path, 'https://onnellab.github.io').toString()
+        );
+        const expectedHreflangs = route.alternatePath
+          ? ['en', 'ko', 'x-default']
+          : route.lang === 'en'
+            ? ['en', 'x-default']
+            : ['ko'];
+        expect(await page.locator('link[rel="alternate"][hreflang]').evaluateAll((links) =>
+          links.map((link) => link.getAttribute('hreflang'))
+        )).toEqual(expectedHreflangs);
+
+        const main = page.locator(route.mainSelector);
+        await expect(main).toHaveCount(1);
+        await expect(main.locator('h1')).toHaveCount(1);
+        await expect(main.locator('h1')).toHaveText(route.h1);
+        const languageLink = main.locator(':scope > nav [data-locale-choice]');
+        await expect(languageLink).toHaveCount(route.alternatePath ? 1 : 0);
+        if (route.alternatePath && route.alternateLocale) {
+          await expect(languageLink).toHaveAttribute('href', route.alternatePath);
+          await expect(languageLink).toHaveAttribute('data-locale-choice', route.alternateLocale);
+        }
+        await expect(main.locator('.locale-menu')).toHaveCount(0);
+
+        if (route.standardizedChrome) {
+          await expect(main.locator(':scope > nav.site-header')).toHaveCount(1);
+          const footer = main.locator(':scope > footer.site-footer');
+          await expect(footer).toHaveCount(1);
+          expect(await footer.locator(':scope > a').evaluateAll((links) =>
+            links.map((link) => link.getAttribute('href'))
+          )).toEqual([
+            route.lang === 'ko' ? '/privacy/ko/' : '/privacy/',
+            route.lang === 'ko' ? '/terms/ko/' : '/terms/',
+            'mailto:onnellab.app@gmail.com'
+          ]);
+          await expect(footer.locator(':scope > span')).toHaveText('© ONNELLAB');
+        }
+
+        await assertVisibleImagesHealthy(page);
+        expect(await page.evaluate(
+          () => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1
+        )).toBe(true);
+      });
+    }
+  });
+
   for (const path of corePages) {
     test(`${path} renders without overflow or broken visible images`, async ({ page }) => {
       await assertPageIntegrity(page, path);
