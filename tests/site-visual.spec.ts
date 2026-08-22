@@ -398,9 +398,18 @@ test.describe('site layout and navigation', () => {
     expect(overflow).toBeLessThanOrEqual(1);
   });
 
-  test('homepage text navigation uses one system UI font weight in every locale', async ({ page }) => {
-    for (const path of ['/', '/ko/', '/ja/', '/zh-hans/', '/zh-hant/']) {
-      await page.goto(path);
+  test('Japanese and Chinese home navigation follows the established English and Korean style', async ({ page }) => {
+    const routes = [
+      { path: '/', family: '"SUIT Variable"', weight: '620' },
+      { path: '/ko/', family: '"SUIT Variable"', weight: '620' },
+      { path: '/ja/', family: '"ONNELLAB Japanese Nav"', weight: '600' },
+      { path: '/zh-hans/', family: '"ONNELLAB Simplified Chinese Nav"', weight: '600' },
+      { path: '/zh-hant/', family: '"ONNELLAB Traditional Chinese Nav"', weight: '600' }
+    ];
+
+    for (const route of routes) {
+      await page.goto(route.path);
+      await page.evaluate(() => document.fonts.ready);
 
       const styles = await page.locator('.home-hero').evaluate(() =>
         Array.from(document.querySelectorAll<HTMLElement>('.nav-links > a')).map((link) => {
@@ -410,9 +419,8 @@ test.describe('site layout and navigation', () => {
       );
       expect(styles).toHaveLength(3);
       for (const style of styles) {
-        expect(style.fontFamily.split(',')[0]).toBe('system-ui');
-        expect(style.fontFamily).not.toContain('SUIT');
-        expect(style.fontWeight).toBe('600');
+        expect(style.fontFamily.split(',')[0]).toBe(route.family);
+        expect(style.fontWeight).toBe(route.weight);
       }
     }
   });

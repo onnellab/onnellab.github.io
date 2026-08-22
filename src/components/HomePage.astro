@@ -295,6 +295,30 @@ const jsonLd = [
 </BaseLayout>
 
 <style>
+  @font-face {
+    font-family: "ONNELLAB Japanese Nav";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("/fonts/noto-sans-jp-nav-600.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "ONNELLAB Simplified Chinese Nav";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("/fonts/noto-sans-sc-nav-600.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "ONNELLAB Traditional Chinese Nav";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("/fonts/noto-sans-tc-nav-600.woff2") format("woff2");
+  }
+
   .site-shell {
     width: min(1080px, calc(100% - 40px));
     margin: 0 auto;
@@ -322,8 +346,18 @@ const jsonLd = [
     text-decoration: none;
   }
 
-  .nav-links > a {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  .site-shell[data-locale='ja'] .nav-links > a {
+    font-family: "ONNELLAB Japanese Nav", "SUIT Variable", sans-serif;
+    font-weight: 600;
+  }
+
+  .site-shell[data-locale='zh-Hans'] .nav-links > a {
+    font-family: "ONNELLAB Simplified Chinese Nav", "SUIT Variable", sans-serif;
+    font-weight: 600;
+  }
+
+  .site-shell[data-locale='zh-Hant'] .nav-links > a {
+    font-family: "ONNELLAB Traditional Chinese Nav", "SUIT Variable", sans-serif;
     font-weight: 600;
   }
 
