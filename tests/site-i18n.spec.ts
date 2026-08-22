@@ -99,6 +99,53 @@ async function setBrowserLocales(
 }
 
 test.describe('five-language core site', () => {
+  test('home pages publish shared large social preview metadata', async ({ page }) => {
+    for (const locale of locales) {
+      const path = locale.segment ? `/${locale.segment}` : '/';
+      await page.goto(path);
+
+      await expect.soft(page.locator('meta[property="og:image"]')).toHaveAttribute(
+        'content',
+        'https://onnellab.github.io/social-card.png'
+      );
+      await expect.soft(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+        'content',
+        'https://onnellab.github.io/social-card.png'
+      );
+      await expect.soft(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+        'content',
+        'summary_large_image'
+      );
+      await expect.soft(page.locator('link[rel="canonical"]')).toHaveAttribute(
+        'href',
+        `https://onnellab.github.io${path}`
+      );
+      await expect.soft(page.locator('link[rel="icon"][type="image/svg+xml"]')).toHaveAttribute(
+        'href',
+        'https://onnellab.github.io/favicon.svg?v=20260713-ol-classic-v2'
+      );
+    }
+  });
+
+  test('home social preview asset is a 1200 by 675 PNG', async ({ request }) => {
+    const response = await request.get('/social-card.png');
+    expect(response.status()).toBe(200);
+    expect(response.headers()['content-type']).toBe('image/png');
+
+    const png = await response.body();
+    expect(png.subarray(0, 8)).toEqual(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+    expect(png.readUInt32BE(16)).toBe(1200);
+    expect(png.readUInt32BE(20)).toBe(675);
+  });
+
+  test('product pages keep their product-specific social preview metadata', async ({ page }) => {
+    await page.goto('/apps/tagweaver/');
+    const productImage = 'https://onnellab.github.io/app-assets/tagweaver/assets/icon/tagweaver.png';
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', productImage);
+    await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', productImage);
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+  });
+
   for (const locale of locales) {
     test(`home ${locale.code}`, async ({ page }) => {
       const path = locale.segment ? `/${locale.segment}` : '/';
