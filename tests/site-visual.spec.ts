@@ -517,18 +517,21 @@ test.describe('site layout and navigation', () => {
 
   test('mobile home keeps About and Blog navigation visible in every locale', async ({ page }) => {
     const routes = [
-      { home: '/', about: '/about/', blog: '/blog/', title: 'More apps', all: 'View all' },
-      { home: '/ko/', about: '/about/ko/', blog: '/blog/ko/', title: '다른 앱', all: '전체 보기' },
-      { home: '/ja/', about: '/about/ja/', blog: '/blog/', title: 'ほかのアプリ', all: '一覧を見る' },
-      { home: '/zh-hans/', about: '/about/zh-hans/', blog: '/blog/', title: '其他应用', all: '查看全部' },
-      { home: '/zh-hant/', about: '/about/zh-hant/', blog: '/blog/', title: '其他應用程式', all: '查看全部' }
+      { home: '/', about: '/about/', blog: '/blog/', blogText: 'Blog', title: 'More apps', all: 'View all' },
+      { home: '/ko/', about: '/about/ko/', blog: '/blog/ko/', blogText: '블로그', title: '다른 앱', all: '전체 보기' },
+      { home: '/ja/', about: '/about/ja/', blog: '/blog/', blogText: 'ブログ · EN', title: 'ほかのアプリ', all: '一覧を見る' },
+      { home: '/zh-hans/', about: '/about/zh-hans/', blog: '/blog/', blogText: '博客 · EN', title: '其他应用', all: '查看全部' },
+      { home: '/zh-hant/', about: '/about/zh-hant/', blog: '/blog/', blogText: '部落格 · EN', title: '其他應用程式', all: '查看全部' }
     ];
 
     await page.setViewportSize({ width: 390, height: 844 });
     for (const route of routes) {
       await page.goto(route.home);
       await expect(page.locator(`.top-nav a[href="${route.about}"]`)).toBeVisible();
-      await expect(page.locator(`.top-nav a[href="${route.blog}"]`)).toBeVisible();
+      const blog = page.locator(`.top-nav a[href="${route.blog}"]`);
+      await expect(blog).toBeVisible();
+      await expect(blog).toHaveText(route.blogText);
+      await expect(blog).toHaveAccessibleName(route.blogText);
       await expect(page.locator('#apps-title')).toHaveText(route.title);
       await expect(page.locator('.section-head a')).toHaveText(route.all);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);

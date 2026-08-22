@@ -20,10 +20,13 @@ type HomeCopy = {
   nav: {
     apps: string;
     about: string;
-    blog: string;
     privacy: string;
     terms: string;
   };
+  navLabel: string;
+  platformsLabel: string;
+  featuredIconAlt: string;
+  blogVisibleLabel: string;
   seoTitle: string;
   description: string;
   eyebrow: string;
@@ -40,7 +43,11 @@ type HomeCopy = {
 
 const copies: Record<SiteLocale, HomeCopy> = {
   en: {
-    nav: { apps: 'Apps', about: 'About', blog: 'Blog', privacy: 'Privacy', terms: 'Terms' },
+    nav: { apps: 'Apps', about: 'About', privacy: 'Privacy', terms: 'Terms' },
+    navLabel: 'Navigation',
+    platformsLabel: 'Platforms',
+    featuredIconAlt: 'TagWeaver app icon',
+    blogVisibleLabel: 'Blog',
     seoTitle: 'ONNELLAB - Focused apps for files and creative work',
     description: 'ONNELLAB makes focused apps for managing files, media, creative work, and everyday tasks.',
     eyebrow: 'Independent software studio',
@@ -60,7 +67,11 @@ const copies: Record<SiteLocale, HomeCopy> = {
     ]
   },
   ko: {
-    nav: { apps: '앱', about: '소개', blog: '블로그', privacy: '개인정보', terms: '이용약관' },
+    nav: { apps: '앱', about: '소개', privacy: '개인정보', terms: '이용약관' },
+    navLabel: '탐색',
+    platformsLabel: '플랫폼',
+    featuredIconAlt: 'TagWeaver 앱 아이콘',
+    blogVisibleLabel: '블로그',
     seoTitle: 'ONNELLAB - 파일과 창작 작업을 위한 앱',
     description: 'ONNELLAB은 파일과 미디어를 관리하고 창작 작업과 일상의 일을 돕는 목적이 분명한 앱을 만들어요.',
     eyebrow: '독립 소프트웨어 스튜디오',
@@ -80,7 +91,11 @@ const copies: Record<SiteLocale, HomeCopy> = {
     ]
   },
   ja: {
-    nav: { apps: 'アプリ', about: '紹介', blog: 'ブログ', privacy: 'プライバシー', terms: '利用規約' },
+    nav: { apps: 'アプリ', about: '紹介', privacy: 'プライバシー', terms: '利用規約' },
+    navLabel: 'ナビゲーション',
+    platformsLabel: '対応プラットフォーム',
+    featuredIconAlt: 'TagWeaverアプリアイコン',
+    blogVisibleLabel: 'ブログ · EN',
     seoTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',
     description: 'ONNELLABは、ファイルやメディアの管理、創作、日々の作業に役立つ、目的の明確なアプリをつくります。',
     eyebrow: 'インディーソフトウェアスタジオ',
@@ -100,7 +115,11 @@ const copies: Record<SiteLocale, HomeCopy> = {
     ]
   },
   'zh-Hans': {
-    nav: { apps: '应用', about: '关于', blog: '博客', privacy: '隐私', terms: '使用条款' },
+    nav: { apps: '应用', about: '关于', privacy: '隐私', terms: '使用条款' },
+    navLabel: '导航',
+    platformsLabel: '支持平台',
+    featuredIconAlt: 'TagWeaver 应用图标',
+    blogVisibleLabel: '博客 · EN',
     seoTitle: 'ONNELLAB - 专注于文件与创作的应用',
     description: 'ONNELLAB 打造用途明确的应用，帮助你管理文件与媒体，完成创作和日常任务。',
     eyebrow: '独立软件工作室',
@@ -120,7 +139,11 @@ const copies: Record<SiteLocale, HomeCopy> = {
     ]
   },
   'zh-Hant': {
-    nav: { apps: '應用程式', about: '關於', blog: '部落格', privacy: '隱私', terms: '使用條款' },
+    nav: { apps: '應用程式', about: '關於', privacy: '隱私', terms: '使用條款' },
+    navLabel: '導覽',
+    platformsLabel: '支援平台',
+    featuredIconAlt: 'TagWeaver 應用程式圖示',
+    blogVisibleLabel: '部落格 · EN',
     seoTitle: 'ONNELLAB - 專注於檔案與創作的應用程式',
     description: 'ONNELLAB 打造用途明確的應用程式，幫助你管理檔案與媒體，完成創作與日常工作。',
     eyebrow: '獨立軟體工作室',
@@ -205,12 +228,12 @@ const jsonLd = [
   socialImage="/social-card.png"
 >
   <main class="site-shell" data-core-page="home" data-locale={locale}>
-    <nav class="top-nav site-header" aria-label="Navigation">
+    <nav class="top-nav site-header" aria-label={copy.navLabel}>
       <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
       <div class="nav-links">
         <a href={routeFor('apps', locale)}>{copy.nav.apps}</a>
         <a href={routeFor('about', locale)}>{copy.nav.about}</a>
-        <a href={blogHref}>{copy.nav.blog}</a>
+        <a href={blogHref}>{copy.blogVisibleLabel}</a>
         <LocaleMenu locale={locale} page="home" />
       </div>
     </nav>
@@ -236,7 +259,7 @@ const jsonLd = [
       >
         <div class="featured-topline">
           <span class="featured-label">{copy.featuredLabel}</span>
-          <div class="platform-badges" aria-label="Platforms">
+          <div class="platform-badges" role="group" aria-label={copy.platformsLabel}>
             {featuredApp.platforms.map((platform) => <span>{platform}</span>)}
           </div>
         </div>
@@ -245,7 +268,7 @@ const jsonLd = [
             src={homeIconPath(featuredApp.slug, 96)}
             srcset={homeIconSrcset(featuredApp.slug)}
             sizes="(max-width: 520px) 64px, 92px"
-            alt="TagWeaver app icon"
+            alt={copy.featuredIconAlt}
             width="92"
             height="92"
             data-no-visual-search="true"
@@ -279,7 +302,7 @@ const jsonLd = [
             <div>
               <h3>{app.title}</h3>
               <p>{app.description}</p>
-              <div class="platform-badges" aria-label="Platforms">
+              <div class="platform-badges" role="group" aria-label={copy.platformsLabel}>
                 {app.platforms.map((platform) => <span>{platform}</span>)}
               </div>
             </div>

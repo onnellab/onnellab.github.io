@@ -9,7 +9,14 @@ const locales = [
     homeDescription: 'ONNELLAB makes focused apps for managing files, media, creative work, and everyday tasks.',
     homeHeading: 'Small tools. Calmly made.',
     featuredTitle: 'Edit MP3 and FLAC tags with TagWeaver.',
-    featuredBody: 'Save metadata, artwork, and lyrics to local files, and update multiple tracks at once.'
+    featuredBody: 'Save metadata, artwork, and lyrics to local files, and update multiple tracks at once.',
+    navLabel: 'Navigation',
+    platformsLabel: 'Platforms',
+    featuredIconAlt: 'TagWeaver app icon',
+    blogHref: '/blog/',
+    blogText: 'Blog',
+    languageMenuLabel: 'Language: English',
+    currentLanguage: 'English'
   },
   {
     code: 'ko',
@@ -19,7 +26,14 @@ const locales = [
     homeDescription: 'ONNELLAB은 파일과 미디어를 관리하고 창작 작업과 일상의 일을 돕는 목적이 분명한 앱을 만들어요.',
     homeHeading: '작은 도구를, 차분하게 만들어요.',
     featuredTitle: 'TagWeaver로 음악 태그를 직접 정리해요.',
-    featuredBody: 'MP3·FLAC의 정보와 커버, 가사를 파일에 저장하고 여러 곡을 한 번에 수정해요.'
+    featuredBody: 'MP3·FLAC의 정보와 커버, 가사를 파일에 저장하고 여러 곡을 한 번에 수정해요.',
+    navLabel: '탐색',
+    platformsLabel: '플랫폼',
+    featuredIconAlt: 'TagWeaver 앱 아이콘',
+    blogHref: '/blog/ko/',
+    blogText: '블로그',
+    languageMenuLabel: '언어: 한국어',
+    currentLanguage: '한국어'
   },
   {
     code: 'ja',
@@ -29,7 +43,14 @@ const locales = [
     homeDescription: 'ONNELLABは、ファイルやメディアの管理、創作、日々の作業に役立つ、目的の明確なアプリをつくります。',
     homeHeading: '小さな道具を、 静かに。',
     featuredTitle: 'TagWeaverでMP3・FLACのタグを直接整理できます。',
-    featuredBody: '情報、ジャケット、歌詞をローカルファイルに保存し、複数の曲をまとめて編集できます。'
+    featuredBody: '情報、ジャケット、歌詞をローカルファイルに保存し、複数の曲をまとめて編集できます。',
+    navLabel: 'ナビゲーション',
+    platformsLabel: '対応プラットフォーム',
+    featuredIconAlt: 'TagWeaverアプリアイコン',
+    blogHref: '/blog/',
+    blogText: 'ブログ · EN',
+    languageMenuLabel: '言語: 日本語',
+    currentLanguage: '日本語'
   },
   {
     code: 'zh-Hans',
@@ -39,7 +60,14 @@ const locales = [
     homeDescription: 'ONNELLAB 打造用途明确的应用，帮助你管理文件与媒体，完成创作和日常任务。',
     homeHeading: '把小工具，安静地做好。',
     featuredTitle: '用 TagWeaver 直接整理 MP3 与 FLAC 标签。',
-    featuredBody: '将信息、封面和歌词保存到本地文件，还能批量编辑多首歌曲。'
+    featuredBody: '将信息、封面和歌词保存到本地文件，还能批量编辑多首歌曲。',
+    navLabel: '导航',
+    platformsLabel: '支持平台',
+    featuredIconAlt: 'TagWeaver 应用图标',
+    blogHref: '/blog/',
+    blogText: '博客 · EN',
+    languageMenuLabel: '语言：简体中文',
+    currentLanguage: '简体中文'
   },
   {
     code: 'zh-Hant',
@@ -49,7 +77,14 @@ const locales = [
     homeDescription: 'ONNELLAB 打造用途明確的應用程式，幫助你管理檔案與媒體，完成創作與日常工作。',
     homeHeading: '把小工具，安靜地做好。',
     featuredTitle: '用 TagWeaver 直接整理 MP3 與 FLAC 標籤。',
-    featuredBody: '將資訊、封面與歌詞儲存到本機檔案，還能批次編輯多首歌曲。'
+    featuredBody: '將資訊、封面與歌詞儲存到本機檔案，還能批次編輯多首歌曲。',
+    navLabel: '導覽',
+    platformsLabel: '支援平台',
+    featuredIconAlt: 'TagWeaver 應用程式圖示',
+    blogHref: '/blog/',
+    blogText: '部落格 · EN',
+    languageMenuLabel: '語言：繁體中文',
+    currentLanguage: '繁體中文'
   }
 ] as const;
 
@@ -161,10 +196,21 @@ test.describe('five-language core site', () => {
       }
       await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
       await expect(page.locator('.home-hero h1')).toHaveText(locale.homeHeading);
+      const navigation = page.getByRole('navigation', { name: locale.navLabel, exact: true });
+      await expect(navigation).toHaveCount(1);
+      const blog = navigation.getByRole('link', { name: locale.blogText, exact: true });
+      await expect(blog).toHaveAttribute('href', locale.blogHref);
+      await expect(blog).toHaveText(locale.blogText);
+      await expect(blog).toHaveAccessibleName(locale.blogText);
+      const languageMenu = page.locator('.locale-menu summary');
+      await expect(languageMenu).toHaveAccessibleName(locale.languageMenuLabel);
+      await expect(languageMenu).toHaveText(locale.currentLanguage);
       const featured = page.locator('a.featured');
       await expect(featured).toHaveAttribute('href', `/apps/tagweaver/${locale.segment}`);
       await expect(featured.locator('h2')).toHaveText(locale.featuredTitle);
       await expect(featured.locator('.featured-copy > p')).toHaveText(locale.featuredBody);
+      await expect(featured.getByRole('img', { name: locale.featuredIconAlt, exact: true })).toHaveCount(1);
+      await expect(page.getByRole('group', { name: locale.platformsLabel, exact: true })).toHaveCount(5);
       const renderedFeaturedTitle = await featured.locator('h2').innerText();
       const renderedFeaturedBody = await featured.locator('.featured-copy > p').innerText();
       const renderedFeaturedCopy = `${renderedFeaturedTitle}\n${renderedFeaturedBody}`;
