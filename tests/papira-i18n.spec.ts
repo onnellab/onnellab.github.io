@@ -164,6 +164,52 @@ test.describe('Papira five-language launch surface', () => {
     }
   });
 
+  test('every locale keeps scope guidance positive without a standalone limitations section', async ({ page }) => {
+    const expectations = [
+      {
+        path: '/apps/papira/',
+        removedHeading: 'Papira stays deliberately small',
+        removedCopy: 'publishing-agency services',
+        editing:
+          'Papira is for assembling a finished manuscript into EPUB. Edit the source TXT in your preferred writing tool first.'
+      },
+      {
+        path: '/apps/papira/ko/',
+        removedHeading: 'Papira가 하지 않는 일',
+        removedCopy: 'ISBN 발급이나 출판 대행을 하지 않아요',
+        editing:
+          'Papira는 완성된 원고를 EPUB으로 조립하는 도구예요. 원문 수정은 평소 쓰는 편집기에서 먼저 해요.'
+      },
+      {
+        path: '/apps/papira/ja/',
+        removedHeading: 'Papiraが行わないこと',
+        removedCopy: 'ISBN発行や出版代行は行いません',
+        editing:
+          'Papiraは完成原稿をEPUBにまとめるためのツールです。本文の編集は使い慣れた執筆ツールで先に行ってください。'
+      },
+      {
+        path: '/apps/papira/zh-hans/',
+        removedHeading: 'Papira 不做这些事',
+        removedCopy: '不提供 ISBN 申请或出版代理服务',
+        editing: 'Papira 用于把完成稿整理成 EPUB。请先在常用写作工具中完成正文编辑。'
+      },
+      {
+        path: '/apps/papira/zh-hant/',
+        removedHeading: 'Papira 不做這些事',
+        removedCopy: '不提供 ISBN 申請或出版代理服務',
+        editing: 'Papira 用來把完成稿整理成 EPUB。請先在慣用的寫作工具中完成正文編輯。'
+      }
+    ];
+
+    for (const expected of expectations) {
+      await page.goto(expected.path);
+      const content = page.locator('.content-band');
+      await expect(content.getByRole('heading', { name: expected.removedHeading })).toHaveCount(0);
+      await expect(content).not.toContainText(expected.removedCopy);
+      await expect(page.locator('.faq-band')).toContainText(expected.editing);
+    }
+  });
+
   test('legacy product copy keeps its established section and list rendering', async ({ page }) => {
     await page.goto('/apps/tagweaver/');
     await expect(page.getByRole('heading', { level: 2, name: 'Supported editing' })).toHaveCount(1);
@@ -265,7 +311,7 @@ test.describe('Papira five-language launch surface', () => {
     const expectedCopy = [
       {
         path: '/apps/papira/',
-        includes: ['other TXT content can also be converted to EPUB', 'publishing-agency services']
+        includes: ['other TXT content can also be converted to EPUB', 'finished manuscript into EPUB']
       },
       {
         path: '/apps/papira/ko/',

@@ -23,8 +23,6 @@ export type PapiraCopy = {
   features: string[];
   privacyTitle: string;
   privacyItems: string[];
-  boundariesTitle: string;
-  boundaries: string[];
   faqTitle: string;
   faqs: PapiraFaq[];
   privacyLabel: string;
@@ -47,11 +45,7 @@ export function getPapiraProductPageData(locale: SiteLocale): ProductPageData {
     '',
     `## ${text.privacyTitle}`,
     '',
-    ...text.privacyItems.map((item) => `- ${item}`),
-    '',
-    `## ${text.boundariesTitle}`,
-    '',
-    ...text.boundaries.map((item) => `- ${item}`)
+    ...text.privacyItems.map((item) => `- ${item}`)
   ].join('\n');
   const platformCopy = {
     name: text.tagline,
@@ -135,14 +129,6 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       'TXT manuscripts and cover images are processed locally',
       'Projects and generated EPUB files are not uploaded to an ONNELLAB server'
     ],
-    boundariesTitle: 'Papira stays deliberately small',
-    boundaries: [
-      'Not a manuscript editor',
-      'Not an EPUB reader',
-      'No AI writing or proofreading',
-      'No PDF or DOCX conversion',
-      'No ISBN issuance or publishing-agency services'
-    ],
     faqTitle: 'FAQ',
     faqs: [
       {
@@ -200,14 +186,6 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       '광고·행동 분석·추적 SDK를 사용하지 않아요',
       'TXT 원고와 표지 이미지를 기기 안에서 처리해요',
       '책 프로젝트와 생성한 EPUB을 ONNELLAB 서버에 업로드하지 않아요'
-    ],
-    boundariesTitle: 'Papira가 하지 않는 일',
-    boundaries: [
-      '원고 편집기가 아니에요',
-      'EPUB 리더가 아니에요',
-      'AI 집필·교정 기능이 없어요',
-      'PDF·DOCX 변환을 하지 않아요',
-      'ISBN 발급이나 출판 대행을 하지 않아요'
     ],
     faqTitle: '자주 묻는 질문',
     faqs: [
@@ -267,14 +245,6 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       'TXT原稿と表紙画像を端末内で処理',
       'プロジェクトやEPUBをONNELLABのサーバーへ送信しません'
     ],
-    boundariesTitle: 'Papiraが行わないこと',
-    boundaries: [
-      '原稿エディターではありません',
-      'EPUBリーダーではありません',
-      'AIによる執筆・校正は行いません',
-      'PDF・DOCX変換は行いません',
-      'ISBN発行や出版代行は行いません'
-    ],
     faqTitle: 'よくある質問',
     faqs: [
       {
@@ -333,14 +303,6 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       'TXT 文稿与封面图片在设备本地处理',
       '项目与生成的 EPUB 不会上传到 ONNELLAB 服务器'
     ],
-    boundariesTitle: 'Papira 不做这些事',
-    boundaries: [
-      '不是文稿编辑器',
-      '不是 EPUB 阅读器',
-      '不提供 AI 写作或校对',
-      '不转换 PDF 或 DOCX',
-      '不提供 ISBN 申请或出版代理服务'
-    ],
     faqTitle: '常见问题',
     faqs: [
       {
@@ -398,14 +360,6 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       '不使用廣告、行為分析或追蹤 SDK',
       'TXT 文稿與封面圖片在裝置本機處理',
       '專案與產生的 EPUB 不會上傳到 ONNELLAB 伺服器'
-    ],
-    boundariesTitle: 'Papira 不做這些事',
-    boundaries: [
-      '不是文稿編輯器',
-      '不是 EPUB 閱讀器',
-      '不提供 AI 寫作或校對',
-      '不轉換 PDF 或 DOCX',
-      '不提供 ISBN 申請或出版代理服務'
     ],
     faqTitle: '常見問題',
     faqs: [

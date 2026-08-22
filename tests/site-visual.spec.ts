@@ -29,6 +29,14 @@ const corePages = [
 ];
 
 const productSlugs = ['aligna', 'clipnest', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+const allProductSlugs = ['aligna', 'clipnest', 'melivra', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+const productLocales = [
+  { code: 'en', suffix: '' },
+  { code: 'ko', suffix: 'ko/' },
+  { code: 'ja', suffix: 'ja/' },
+  { code: 'zh-Hans', suffix: 'zh-hans/' },
+  { code: 'zh-Hant', suffix: 'zh-hant/' }
+] as const;
 const productPages = productSlugs.flatMap((slug) => [`/apps/${slug}/`, `/apps/${slug}/ko/`]);
 const privacySlugs = ['aligna', 'clipnest', 'melivra', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const privacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/`);
@@ -469,6 +477,33 @@ test.describe('app and privacy collections', () => {
 });
 
 test.describe('existing product pages', () => {
+  test('all app details and locales share the complete product template contract', async ({ page }) => {
+    for (const slug of allProductSlugs) {
+      for (const locale of productLocales) {
+        await page.goto(`/apps/${slug}/${locale.suffix}`);
+        const main = page.locator('main.page-shell');
+        await expect(main).toHaveAttribute('data-product-slug', slug);
+        await expect(main).toHaveAttribute('data-product-locale', locale.code);
+        await expect(main.locator(':scope > .topbar')).toHaveCount(1);
+        await expect(main.locator(':scope > .hero')).toHaveCount(1);
+        await expect(main.locator(':scope > .content-band')).toHaveCount(1);
+        await expect(main.locator(':scope > .faq-band')).toHaveCount(1);
+        await expect(main.locator(':scope > .screens-band')).toHaveCount(1);
+        await expect(main.locator(':scope > .download-band')).toHaveCount(1);
+        await expect(main.locator(':scope > footer')).toHaveCount(1);
+        const localeLinks = main.locator('.locale-menu-panel a[data-locale-choice]');
+        await expect(localeLinks).toHaveCount(5);
+        expect(await localeLinks.evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual([
+          `/apps/${slug}/`,
+          `/apps/${slug}/ko/`,
+          `/apps/${slug}/ja/`,
+          `/apps/${slug}/zh-hans/`,
+          `/apps/${slug}/zh-hant/`
+        ]);
+      }
+    }
+  });
+
   for (const path of productPages) {
     test(`${path} exposes its FAQ and product schema`, async ({ page }) => {
       await page.goto(path);
