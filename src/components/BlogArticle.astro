@@ -308,13 +308,13 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
   }
 >
   <main class="article-shell">
-    <nav class="top-nav" aria-label="Article navigation">
+    <nav class="top-nav site-header" aria-label="Article navigation">
       <a class="brand" href={homeHref}>ONNELLAB</a>
       <div class="nav-actions">
         <a href={appsHref}>{copy.apps}</a>
         <a href={blogHref}>{copy.blog}</a>
         {alternatePost && (
-          <a class="language" href={alternatePost.href} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={switchAria} title={switchLabel}>{switchLabel}</a>
+          <a class="language site-language-control" href={alternatePost.href} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={switchAria} title={switchLabel}>{switchLabel}</a>
         )}
       </div>
     </nav>

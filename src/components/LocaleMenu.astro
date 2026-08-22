@@ -26,7 +26,7 @@ const localeHref = (item: SiteLocale) =>
 ---
 
 <details class="locale-menu">
-  <summary aria-label={`Language: ${current.label}`}>{current.label}</summary>
+  <summary class="site-language-control" aria-label={`Language: ${current.label}`}>{current.label}</summary>
   <div class="locale-menu-panel" role="list">
     {supported.map((item) => {
       const definition = localeDefinitions[item];
@@ -127,11 +127,6 @@ const localeHref = (item: SiteLocale) =>
   }
 
   @media (max-width: 520px) {
-    .locale-menu summary {
-      min-height: 32px;
-      padding: 5px 10px;
-    }
-
     .locale-menu-panel {
       right: 0;
     }

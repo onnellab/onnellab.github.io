@@ -190,7 +190,7 @@ test.describe('site layout and navigation', () => {
         localePadding: Number.parseFloat(getComputedStyle(locale).paddingInlineStart)
       };
     });
-    expect(mobileNavStyle).toEqual({ brandSize: 15, gap: 12, localeHeight: 32, localePadding: 10 });
+    expect(mobileNavStyle).toEqual({ brandSize: 14, gap: 12, localeHeight: 36, localePadding: 13 });
 
     const featuredBox = await page.locator('a.featured').boundingBox();
     expect(featuredBox).not.toBeNull();
@@ -263,6 +263,106 @@ test.describe('site layout and navigation', () => {
     }
 
     expect(new Set(fontFamilies).size).toBe(1);
+  });
+
+  test('rendered page families share the brand, header, and language-control visual contract', async ({ page }) => {
+    const routes = [
+      '/ko/',
+      '/apps/ko/',
+      '/about/ko/',
+      '/privacy/ko/',
+      '/apps/papira/ko/',
+      '/blog/ko/',
+      '/blog/ko/read-large-txt-files-without-lag/',
+      '/terms/ko/',
+      '/release-notes/tagweaver/2.2/ko/',
+      '/oauth/x/callback/ko/',
+      '/privacy/papira/ko/'
+    ];
+    const failures: Array<{ route: string; metric: string; actual: unknown }> = [];
+
+    for (const route of routes) {
+      await page.goto(route);
+      const header = page.locator('main > :is(nav, header.topbar)').first();
+      const brand = header.locator('.brand');
+      const languageControl = header.locator('.locale-menu summary, .language').first();
+      await expect(header).toBeVisible();
+      await expect(brand).toHaveText('ONNELLAB');
+      await expect(languageControl).toBeVisible();
+
+      const headerStyle = await header.evaluate((node) => {
+        const style = getComputedStyle(node);
+        return { alignItems: style.alignItems, minHeight: style.minHeight };
+      });
+      const brandStyle = await brand.evaluate((node) => {
+        const style = getComputedStyle(node);
+        return {
+          fontFamily: style.fontFamily,
+          fontSize: style.fontSize,
+          fontWeight: style.fontWeight,
+          lineHeight: style.lineHeight,
+          minHeight: style.minHeight,
+          textDecorationLine: style.textDecorationLine
+        };
+      });
+      const controlStyle = await languageControl.evaluate((node) => {
+        const style = getComputedStyle(node);
+        return {
+          minHeight: style.minHeight,
+          borderStyle: style.borderStyle,
+          borderColor: style.borderColor,
+          borderRadius: style.borderRadius,
+          paddingBlock: `${style.paddingTop} ${style.paddingBottom}`,
+          paddingInline: `${style.paddingLeft} ${style.paddingRight}`,
+          fontSize: style.fontSize,
+          fontWeight: style.fontWeight,
+          lineHeight: style.lineHeight,
+          textDecorationLine: style.textDecorationLine
+        };
+      });
+      await languageControl.focus();
+      const focusStyle = await languageControl.evaluate((node) => {
+        const style = getComputedStyle(node);
+        return { outlineStyle: style.outlineStyle, outlineWidth: style.outlineWidth, outlineOffset: style.outlineOffset };
+      });
+
+      const expected = {
+        header: { alignItems: 'center', minHeight: '36px' },
+        brand: {
+          fontFamily: '"Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif',
+          fontSize: '14px',
+          fontWeight: '560',
+          lineHeight: '16.8px',
+          minHeight: '36px',
+          textDecorationLine: 'none'
+        },
+        control: {
+          minHeight: '36px',
+          borderStyle: 'solid',
+          borderColor: 'rgb(222, 214, 202)',
+          borderRadius: '999px',
+          paddingBlock: '7px 7px',
+          paddingInline: '13px 13px',
+          fontSize: '13px',
+          fontWeight: '650',
+          lineHeight: '17.55px',
+          textDecorationLine: 'none'
+        },
+        focus: { outlineStyle: 'solid', outlineWidth: '2px', outlineOffset: '3px' }
+      };
+      for (const [metric, actual] of Object.entries({
+        header: headerStyle,
+        brand: brandStyle,
+        control: controlStyle,
+        focus: focusStyle
+      })) {
+        if (JSON.stringify(actual) !== JSON.stringify(expected[metric as keyof typeof expected])) {
+          failures.push({ route, metric, actual });
+        }
+      }
+    }
+
+    expect(failures).toEqual([]);
   });
 
   test('about page wordmark has no underline', async ({ page }) => {

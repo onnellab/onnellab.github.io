@@ -139,11 +139,11 @@ const blogJsonLd = [
   ]}
 >
   <main class="blog-shell">
-    <nav class="top-nav" aria-label="Blog navigation">
+    <nav class="top-nav site-header" aria-label="Blog navigation">
       <a class="brand" href={isKo ? '/ko/' : '/'}>ONNELLAB</a>
       <div class="nav-actions">
         <a href={copy.appsHref}>{copy.appsLabel}</a>
-        <a class="language" href={copy.switchHref} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={isKo ? 'English' : '한국어'}>{copy.switchLabel}</a>
+        <a class="language site-language-control" href={copy.switchHref} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={isKo ? 'English' : '한국어'}>{copy.switchLabel}</a>
       </div>
     </nav>
 

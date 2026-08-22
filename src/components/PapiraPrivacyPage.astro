@@ -387,7 +387,7 @@ const emailParts = (value: string) => {
   alternates={localeAlternates('papiraPrivacy')}
 >
   <main class="legal-shell" data-papira-privacy data-locale={locale}>
-    <nav class="topbar" aria-label="Navigation">
+    <nav class="topbar site-header" aria-label="Navigation">
       <a class="brand home-link" href={routeFor('home', locale)}>{text.homeLabel}</a>
       <div class="topbar-actions">
         <a class="hub-link" href={routeFor('privacy', locale)}>{text.privacyHubLabel}</a>
@@ -538,7 +538,6 @@ const emailParts = (value: string) => {
     }
 
     .topbar {
-      align-items: flex-start;
       margin-bottom: 42px;
     }
 

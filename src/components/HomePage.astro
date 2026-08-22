@@ -205,7 +205,7 @@ const jsonLd = [
   alternates={localeAlternates('home')}
 >
   <main class="site-shell" data-core-page="home" data-locale={locale}>
-    <nav class="top-nav" aria-label="Navigation">
+    <nav class="top-nav site-header" aria-label="Navigation">
       <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
       <div class="nav-links">
         <a href={routeFor('apps', locale)}>{copy.nav.apps}</a>
@@ -641,10 +641,6 @@ const jsonLd = [
     .site-shell {
       width: min(100% - 30px, 1080px);
       padding-top: 20px;
-    }
-
-    .top-nav {
-      align-items: flex-start;
     }
 
     .nav-links {

@@ -213,6 +213,13 @@ const gaScript = gaMeasurementId
 
   :root {
     --onnellab-wordmark-font: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
+    --site-header-control-height: 36px;
+    --site-header-control-border: #ded6ca;
+    --site-header-control-border-hover: #cfc5b7;
+    --site-header-control-background: rgba(255, 253, 248, 0.82);
+    --site-header-control-background-hover: #fffdf8;
+    --site-header-control-color: #5f5a50;
+    --site-header-focus: #827d72;
   }
 
   body {
@@ -260,6 +267,55 @@ const gaScript = gaMeasurementId
     font-size: 14px;
     font-weight: 560;
     line-height: 1.2;
+  }
+
+  .site-header,
+  main[data-core-page='terms'] > .top-nav {
+    min-height: var(--site-header-control-height);
+    align-items: center;
+  }
+
+  .site-header .brand.brand,
+  main[data-core-page='terms'] > .top-nav .brand.brand {
+    min-height: var(--site-header-control-height);
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    color: #737067;
+    font-family: var(--onnellab-wordmark-font);
+    font-size: 14px;
+    font-weight: 560;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .site-header .site-language-control.site-language-control {
+    min-height: var(--site-header-control-height);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--site-header-control-border);
+    border-radius: 999px;
+    padding: 7px 13px;
+    background: var(--site-header-control-background);
+    box-shadow: none;
+    color: var(--site-header-control-color);
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .site-header .site-language-control.site-language-control:hover,
+  .site-header .site-language-control.site-language-control:focus-visible {
+    border-color: var(--site-header-control-border-hover);
+    background: var(--site-header-control-background-hover);
+  }
+
+  .site-header .brand.brand:focus-visible,
+  .site-header .site-language-control.site-language-control:focus-visible {
+    outline: 2px solid var(--site-header-focus);
+    outline-offset: 3px;
   }
 
   main[data-core-page='about'] .intro-copy {

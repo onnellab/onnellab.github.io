@@ -93,9 +93,9 @@ const jsonLd = {
   ]}
 >
   <main class="release-shell">
-    <nav class="topbar" aria-label="ONNELLAB">
+    <nav class="topbar site-header" aria-label="ONNELLAB">
       <a class="brand" href={isKo ? '/ko/' : '/'}>ONNELLAB</a>
-      <a class="language" href={alternatePath} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={labels.switchLabel}>{labels.switchLabel}</a>
+      <a class="language site-language-control" href={alternatePath} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={labels.switchLabel}>{labels.switchLabel}</a>
     </nav>
 
     <article class="release-note">
