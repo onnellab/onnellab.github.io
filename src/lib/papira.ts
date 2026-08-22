@@ -40,7 +40,7 @@ export function getPapiraProductPageData(locale: SiteLocale): ProductPageData {
     '',
     `## ${text.modesTitle}`,
     '',
-    ...text.modes.flatMap((mode) => [`### ${mode.title}`, '', mode.body, '']),
+    ...text.modes.flatMap((mode, index) => [`### ${index + 1}. ${mode.title}`, '', mode.body, '']),
     `## ${text.featuresTitle}`,
     '',
     ...text.features.map((feature) => `- ${feature}`),

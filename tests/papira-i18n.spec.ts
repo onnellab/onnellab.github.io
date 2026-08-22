@@ -154,14 +154,14 @@ test.describe('Papira five-language launch surface', () => {
       {
         path: '/apps/papira/',
         h2: 'Two focused ways to create',
-        h3: 'Quick EPUB',
+        h3: '1. Quick EPUB',
         item:
           'Dedicated presets for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, with support for other TXT content'
       },
       {
         path: '/apps/papira/ko/',
         h2: '두 가지 제작 흐름',
-        h3: '빠르게 만들기',
+        h3: '1. 빠르게 만들기',
         item:
           '팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 작품 유형과 그 밖의 TXT 콘텐츠 지원'
       }
@@ -174,6 +174,21 @@ test.describe('Papira five-language launch surface', () => {
       await expect(page.getByRole('listitem').filter({ hasText: expected.item })).toHaveCount(1);
       const leakedMarkers = await page.locator('h2, h3').allTextContents();
       expect(leakedMarkers.filter((text) => /^(?:##|###|- )/.test(text.trim()))).toEqual([]);
+    }
+  });
+
+  test('every locale numbers the two Papira creation flows in order', async ({ page }) => {
+    const expectations = [
+      { path: '/apps/papira/', headings: ['1. Quick EPUB', '2. Book project'] },
+      { path: '/apps/papira/ko/', headings: ['1. 빠르게 만들기', '2. 책 프로젝트'] },
+      { path: '/apps/papira/ja/', headings: ['1. すぐにEPUB化', '2. 作品EPUBを作成'] },
+      { path: '/apps/papira/zh-hans/', headings: ['1. 快速制作', '2. 制作作品 EPUB'] },
+      { path: '/apps/papira/zh-hant/', headings: ['1. 快速製作', '2. 製作作品 EPUB'] }
+    ];
+
+    for (const expected of expectations) {
+      await page.goto(expected.path);
+      await expect(page.locator('.copy-column h3')).toHaveText(expected.headings);
     }
   });
 
