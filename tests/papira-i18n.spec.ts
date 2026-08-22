@@ -84,13 +84,15 @@ test.describe('Papira five-language launch surface', () => {
         path: '/apps/papira/',
         h2: 'Two focused ways to create',
         h3: 'Quick EPUB',
-        item: 'Fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenario presets'
+        item:
+          'Dedicated presets for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, with support for other TXT content'
       },
       {
         path: '/apps/papira/ko/',
         h2: '두 가지 제작 흐름',
         h3: '빠르게 만들기',
-        item: '팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오 작품 유형'
+        item:
+          '팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 작품 유형과 그 밖의 TXT 콘텐츠 지원'
       }
     ];
 
@@ -101,6 +103,64 @@ test.describe('Papira five-language launch surface', () => {
       await expect(page.getByRole('listitem').filter({ hasText: expected.item })).toHaveCount(1);
       const leakedMarkers = await page.locator('h2, h3').allTextContents();
       expect(leakedMarkers.filter((text) => /^(?:##|###|- )/.test(text.trim()))).toEqual([]);
+    }
+  });
+
+  test('every locale presents the named formats as specializations rather than conversion limits', async ({ page }) => {
+    const expectations = [
+      {
+        path: '/apps/papira/',
+        lead:
+          'Papira assembles any finished TXT manuscript into a well-structured EPUB. It includes dedicated flows for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, while other TXT content can also be converted to EPUB.',
+        feature:
+          'Dedicated presets for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, with support for other TXT content',
+        faq:
+          'Papira is especially suited to fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios. Other finished TXT content can also be converted to EPUB.'
+      },
+      {
+        path: '/apps/papira/ko/',
+        lead:
+          'Papira는 완성된 TXT 원고를 정돈된 EPUB 파일로 만들어요. 팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 제작 흐름을 제공하지만, 그 밖의 TXT 콘텐츠도 EPUB으로 변환할 수 있어요.',
+        feature:
+          '팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 작품 유형과 그 밖의 TXT 콘텐츠 지원',
+        faq:
+          '팬픽, 연재소설, 개인 창작 소설, 디지털 소책자와 TRPG 시나리오에 특히 잘 맞아요. 그 밖의 완성된 TXT 콘텐츠도 EPUB으로 변환할 수 있어요.'
+      },
+      {
+        path: '/apps/papira/ja/',
+        lead:
+          'Papiraは完成したTXT原稿を整ったEPUBにまとめます。二次創作・連載小説・オリジナル小説・デジタル小冊子・TRPGシナリオに特化した作成フローを備えていますが、そのほかのTXTコンテンツもEPUBに変換できます。',
+        feature:
+          '二次創作・連載小説・オリジナル小説・デジタル小冊子・TRPGシナリオに特化した作品タイプと、そのほかのTXTコンテンツへの対応',
+        faq:
+          '二次創作、連載小説、オリジナル小説、デジタル小冊子、TRPGシナリオに特に適しています。そのほかの完成したTXTコンテンツもEPUBに変換できます。'
+      },
+      {
+        path: '/apps/papira/zh-hans/',
+        lead:
+          'Papira 可将完成的 TXT 文稿整理成结构清晰的 EPUB。它特别适合同人文、连载小说、原创小说、数字小册子与 TRPG 剧本，也能将其他 TXT 内容转换为 EPUB。',
+        feature:
+          '特别适合同人文、连载小说、原创小说、数字小册子与 TRPG 剧本，也支持其他 TXT 内容',
+        faq:
+          'Papira 特别适合同人文、连载小说、原创小说、数字小册子与 TRPG 剧本。其他完成的 TXT 内容也可以转换为 EPUB。'
+      },
+      {
+        path: '/apps/papira/zh-hant/',
+        lead:
+          'Papira 可將完成的 TXT 文稿整理成結構清楚的 EPUB。它特別適合同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本，也能將其他 TXT 內容轉換為 EPUB。',
+        feature:
+          '特別適合同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本，也支援其他 TXT 內容',
+        faq:
+          'Papira 特別適合同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本。其他完成的 TXT 內容也可以轉換為 EPUB。'
+      }
+    ];
+
+    for (const expected of expectations) {
+      await page.goto(expected.path);
+      const main = page.locator('main');
+      await expect(main).toContainText(expected.lead);
+      await expect(page.getByRole('listitem').filter({ hasText: expected.feature })).toHaveCount(1);
+      await expect(main).toContainText(expected.faq);
     }
   });
 
@@ -205,7 +265,7 @@ test.describe('Papira five-language launch surface', () => {
     const expectedCopy = [
       {
         path: '/apps/papira/',
-        includes: ['well-structured EPUB files', 'publishing-agency services']
+        includes: ['other TXT content can also be converted to EPUB', 'publishing-agency services']
       },
       {
         path: '/apps/papira/ko/',

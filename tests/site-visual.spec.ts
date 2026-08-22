@@ -293,23 +293,23 @@ test.describe('app and privacy collections', () => {
     const summaries = [
       {
         path: '/apps/',
-        text: 'Offline TXT-to-EPUB maker for fanfiction, novels, digital booklets, and TRPG scenarios'
+        text: 'Offline TXT-to-EPUB maker'
       },
       {
         path: '/apps/ko/',
-        text: '팬픽·소설·디지털 소책자·TRPG 시나리오용 오프라인 TXT→EPUB 제작 도구'
+        text: '오프라인 TXT→EPUB 제작 도구'
       },
       {
         path: '/apps/ja/',
-        text: '二次創作・小説・デジタル小冊子・TRPGシナリオ向けのオフラインTXT→EPUB作成ツール'
+        text: 'オフラインTXT→EPUB作成ツール'
       },
       {
         path: '/apps/zh-hans/',
-        text: '面向同人文、小说、数字小册子与 TRPG 剧本的离线 TXT 转 EPUB 制作工具'
+        text: '离线 TXT 转 EPUB 制作工具'
       },
       {
         path: '/apps/zh-hant/',
-        text: '適合同人文、小說、數位小冊子與 TRPG 劇本的離線 TXT 轉 EPUB 製作工具'
+        text: '離線 TXT 轉 EPUB 製作工具'
       }
     ];
 
