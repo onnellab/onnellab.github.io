@@ -220,6 +220,13 @@ const gaScript = gaMeasurementId
     --site-header-control-background-hover: #fffdf8;
     --site-header-control-color: #5f5a50;
     --site-header-focus: #827d72;
+    --information-shell-max-width: 1040px;
+    --information-shell-gutter: 40px;
+    --information-shell-padding-top: 26px;
+    --information-shell-padding-bottom: 54px;
+    --information-heading-size: clamp(42px, 7vw, 72px);
+    --information-heading-line-height: 1.04;
+    --information-heading-letter-spacing: -0.01em;
   }
 
   body {
@@ -316,6 +323,22 @@ const gaScript = gaMeasurementId
   .site-header .site-language-control.site-language-control:focus-visible {
     outline: 2px solid var(--site-header-focus);
     outline-offset: 3px;
+  }
+
+  .information-shell {
+    width: min(
+      var(--information-shell-max-width),
+      calc(100% - var(--information-shell-gutter))
+    );
+    margin: 0 auto;
+    padding: var(--information-shell-padding-top) 0 var(--information-shell-padding-bottom);
+  }
+
+  .information-heading {
+    font-size: var(--information-heading-size);
+    font-weight: 650;
+    line-height: var(--information-heading-line-height);
+    letter-spacing: var(--information-heading-letter-spacing);
   }
 
   main[data-core-page='about'] .intro-copy {

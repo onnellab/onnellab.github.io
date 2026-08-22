@@ -161,7 +161,7 @@ const collectionJsonLd = {
   jsonLd={collectionJsonLd}
   alternates={localeAlternates('apps')}
 >
-  <main class="page-shell" data-apps-page data-locale={locale}>
+  <main class="page-shell information-shell" data-apps-page data-locale={locale}>
     <nav class="top-nav site-header" aria-label="Navigation">
       <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
       <LocaleMenu locale={locale} page="apps" />
@@ -169,7 +169,7 @@ const collectionJsonLd = {
 
     <header>
       <p class="eyebrow">{copy.eyebrow}</p>
-      <h1>{copy.heading}</h1>
+      <h1 class="information-heading">{copy.heading}</h1>
       <p>{copy.intro}</p>
     </header>
 
@@ -229,12 +229,6 @@ const collectionJsonLd = {
 </BaseLayout>
 
 <style>
-  .page-shell {
-    width: min(980px, calc(100% - 32px));
-    margin: 0 auto;
-    padding: 28px 0 44px;
-  }
-
   .top-nav {
     display: flex;
     align-items: center;
@@ -262,9 +256,6 @@ const collectionJsonLd = {
   h1 {
     margin: 0;
     color: #36332f;
-    font-size: clamp(42px, 7vw, 72px);
-    line-height: 1;
-    letter-spacing: 0;
   }
 
   header > p:last-child {
@@ -427,11 +418,6 @@ const collectionJsonLd = {
   }
 
   @media (max-width: 680px) {
-    .page-shell {
-      width: min(100% - 28px, 980px);
-      padding-top: 20px;
-    }
-
     header {
       padding: 48px 0 30px;
     }

@@ -183,7 +183,7 @@ const jsonLd = {
   jsonLd={jsonLd}
   alternates={localeAlternates('about')}
 >
-  <main class="page-shell" data-core-page="about">
+  <main class="page-shell information-shell" data-core-page="about">
     <nav class="top-nav site-header" aria-label="Navigation">
       <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
       <div class="nav-actions">
@@ -195,7 +195,7 @@ const jsonLd = {
 
     <header class="page-hero">
       <p class="eyebrow">{copy.eyebrow}</p>
-      <h1>{copy.title}</h1>
+      <h1 class="information-heading">{copy.title}</h1>
     </header>
 
     <section class="aligned-section intro-section" aria-labelledby="intro-title">
@@ -245,9 +245,6 @@ const jsonLd = {
 
 <style>
   .page-shell {
-    width: min(1040px, calc(100% - 40px));
-    margin: 0 auto;
-    padding: 26px 0 54px;
     color: #3f3b35;
   }
 
@@ -303,10 +300,6 @@ const jsonLd = {
     max-width: 900px;
     margin: 0;
     color: #37332e;
-    font-size: clamp(46px, 7.5vw, 78px);
-    font-weight: 650;
-    letter-spacing: -0.045em;
-    line-height: 1.04;
   }
 
   .aligned-section {
@@ -426,11 +419,6 @@ const jsonLd = {
   }
 
   @media (max-width: 760px) {
-    .page-shell {
-      width: min(100% - 30px, 1040px);
-      padding-top: 20px;
-    }
-
     .nav-actions > a:nth-of-type(2) {
       display: none;
     }
@@ -456,11 +444,6 @@ const jsonLd = {
   }
 
   @media (max-width: 520px) {
-    h1 {
-      font-size: clamp(38px, 11vw, 50px);
-      line-height: 1.12;
-    }
-
     .timeline li {
       grid-template-columns: 1fr;
       gap: 4px;

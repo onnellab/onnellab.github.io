@@ -365,6 +365,64 @@ test.describe('site layout and navigation', () => {
     expect(failures).toEqual([]);
   });
 
+  test('information hubs share one shell and heading geometry in every locale', async ({ page }) => {
+    const localeSuffixes = ['', 'ko/', 'ja/', 'zh-hans/', 'zh-hant/'];
+    const routes = ['apps', 'about', 'privacy'].flatMap((section) =>
+      localeSuffixes.map((locale) => `/${section}/${locale}`)
+    );
+    const viewportWidth = page.viewportSize()?.width ?? 1440;
+    const expectedShellWidth = Math.min(1040, viewportWidth - 40);
+    const expectedHeadingSize = Math.min(72, Math.max(42, viewportWidth * 0.07));
+    const failures: Array<{ route: string; metric: string; actual: unknown }> = [];
+
+    for (const route of routes) {
+      await page.goto(route);
+      const shell = page.locator('main').first();
+      const heading = shell.locator('h1').first();
+      const shellBox = await shell.boundingBox();
+      const headingStyle = await heading.evaluate((node) => {
+        const style = getComputedStyle(node);
+        return {
+          fontSize: Number.parseFloat(style.fontSize),
+          fontWeight: style.fontWeight,
+          lineHeight: Number.parseFloat(style.lineHeight),
+          letterSpacing: Number.parseFloat(style.letterSpacing)
+        };
+      });
+      const shellStyle = await shell.evaluate((node) => {
+        const style = getComputedStyle(node);
+        return {
+          paddingTop: style.paddingTop,
+          paddingBottom: style.paddingBottom
+        };
+      });
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1
+      );
+
+      if (!shellBox || Math.abs(shellBox.width - expectedShellWidth) >= 1.5) {
+        failures.push({ route, metric: 'shellWidth', actual: shellBox?.width ?? null });
+      }
+      if (!shellBox || Math.abs(shellBox.x - (viewportWidth - expectedShellWidth) / 2) >= 1.5) {
+        failures.push({ route, metric: 'shellCenter', actual: shellBox?.x ?? null });
+      }
+      if (shellStyle.paddingTop !== '26px' || shellStyle.paddingBottom !== '54px') {
+        failures.push({ route, metric: 'shellPadding', actual: shellStyle });
+      }
+      if (
+        Math.abs(headingStyle.fontSize - expectedHeadingSize) >= 0.15 ||
+        headingStyle.fontWeight !== '650' ||
+        Math.abs(headingStyle.lineHeight - expectedHeadingSize * 1.04) >= 0.15 ||
+        Math.abs(headingStyle.letterSpacing - expectedHeadingSize * -0.01) >= 0.15
+      ) {
+        failures.push({ route, metric: 'heading', actual: headingStyle });
+      }
+      if (overflow) failures.push({ route, metric: 'horizontalOverflow', actual: true });
+    }
+
+    expect(failures).toEqual([]);
+  });
+
   test('about page wordmark has no underline', async ({ page }) => {
     await page.goto('/about/ko/');
 
