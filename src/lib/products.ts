@@ -356,7 +356,7 @@ function readProductMeta(contentDir: string): ProductMeta {
     title: required(values, 'title'),
     status: required(values, 'status'),
     platforms,
-    appstore: required(values, 'appstore'),
+    appstore: values.get('appstore'),
     googleplay: values.get('googleplay'),
     privacy: required(values, 'privacy'),
     supportEmail: required(values, 'supportEmail'),
