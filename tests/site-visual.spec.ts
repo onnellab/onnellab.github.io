@@ -31,7 +31,7 @@ const corePages = [
 ];
 
 const productSlugs = ['aligna', 'clipnest', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
-const allProductSlugs = ['aligna', 'clipnest', 'melivra', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+const allProductSlugs = ['aligna', 'clipnest', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const productLocales = [
   { code: 'en', suffix: '' },
   { code: 'ko', suffix: 'ko/' },
@@ -47,7 +47,7 @@ const footerLabels = {
   'zh-Hant': { privacy: '隱私權政策', terms: '使用條款' }
 } as const;
 const productPages = productSlugs.flatMap((slug) => [`/apps/${slug}/`, `/apps/${slug}/ko/`]);
-const privacySlugs = ['aligna', 'clipnest', 'melivra', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+const privacySlugs = ['aligna', 'clipnest', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const legacyPrivacySlugs = ['aligna', 'clipnest', 'melivra', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const privacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/`);
 const koreanPrivacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/ko/`);
@@ -540,7 +540,7 @@ test.describe('site layout and navigation', () => {
 
   test('Japanese and Chinese pages wrap without horizontal mobile scrolling', async ({ page }) => {
     const locales = ['ja', 'zh-hans', 'zh-hant'];
-    const slugs = ['aligna', 'clipnest', 'melivra', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+    const slugs = ['aligna', 'clipnest', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
     const routes = locales.flatMap((locale) => [
       `/${locale}/`,
       `/apps/${locale}/`,
@@ -1079,6 +1079,7 @@ test.describe('app and privacy collections', () => {
       'Aligna',
       'ClipNest',
       'Melivra',
+      'Meriq',
       'Papira',
       'Quivra',
       'Segra',
