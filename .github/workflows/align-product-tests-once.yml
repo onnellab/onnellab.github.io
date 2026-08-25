@@ -1,0 +1,88 @@
+name: Align product SEO tests once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/product-test-alignment-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Align stale tests with the current product SEO contract
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(text: str, old: str, new: str, label: str) -> str:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected one match, found {count}')
+              return text.replace(old, new, 1)
+
+          papira_path = Path('tests/papira-i18n.spec.ts')
+          papira = papira_path.read_text(encoding='utf-8')
+          papira = replace_once(
+              papira,
+              "test('non-Papira products retain icon social metadata and generic screenshot alt fallback', async ({ page }) => {",
+              "test('non-Papira products retain icon social metadata and semantic screenshot alt text', async ({ page }) => {",
+              'Papira screenshot test title'
+          )
+          papira = replace_once(
+              papira,
+              """    await expect(page.locator('.screenshot-link img').first()).toHaveAttribute(\n      'alt',\n      'TagWeaver Screenshots 1'\n    );\n""",
+              """    await expect(page.locator('.screenshot-link img').first()).toHaveAttribute(\n      'alt',\n      'TagWeaver MP3 and FLAC tag editor for title, artist, and album metadata'\n    );\n""",
+              'Papira screenshot alt expectation'
+          )
+          papira = replace_once(
+              papira,
+              "test('Japanese and Chinese pages publish complete product, breadcrumb, and FAQ schema', async ({ page }) => {",
+              "test('Japanese and Chinese pages publish product and breadcrumb schema while keeping visible FAQ content', async ({ page }) => {",
+              'Papira schema test title'
+          )
+          papira = replace_once(
+              papira,
+              "      expect(schemas.some((item) => item['@type'] === 'FAQPage')).toBe(true);\n",
+              "      expect(schemas.some((item) => item['@type'] === 'FAQPage')).toBe(false);\n      await expect(page.locator('.faq-band details')).toHaveCount(3);\n",
+              'Papira FAQ schema expectation'
+          )
+          papira_path.write_text(papira, encoding='utf-8')
+
+          visual_path = Path('tests/site-visual.spec.ts')
+          visual = visual_path.read_text(encoding='utf-8')
+          visual = replace_once(
+              visual,
+              "test(`${path} exposes its FAQ and product schema`, async ({ page }) => {",
+              "test(`${path} exposes visible FAQ content and product schema`, async ({ page }) => {",
+              'visual product test title'
+          )
+          visual = replace_once(
+              visual,
+              """      const faq = parsed.find((item) => item['@type'] === 'FAQPage');\n      expect(application).toBeDefined();\n      expect(faq).toBeDefined();\n      expect(faq.mainEntity).toHaveLength(3);\n""",
+              """      const faq = parsed.find((item) => item['@type'] === 'FAQPage');\n      const breadcrumb = parsed.find((item) => item['@type'] === 'BreadcrumbList');\n      expect(application).toBeDefined();\n      expect(breadcrumb).toBeDefined();\n      expect(faq).toBeUndefined();\n""",
+              'visual FAQ schema expectation'
+          )
+          visual_path.write_text(visual, encoding='utf-8')
+          PY
+
+          git diff --check
+          npm ci
+          npm run build
+
+      - name: Commit test alignment and remove one-time tooling
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/product-test-alignment-trigger .github/workflows/align-product-tests-once.yml
+          git add tests/papira-i18n.spec.ts tests/site-visual.spec.ts
+          git commit -m 'test: align product SEO regression contract'
+          git push origin HEAD:main
