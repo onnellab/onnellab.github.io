@@ -40,7 +40,7 @@ jobs:
               )
           extended = replace_once(
               extended,
-              "    ])\n};\n",
+              "    ])\n\n};\n",
               "    ])\n  }\n};\n",
               'Papira final locale boundary'
           )
