@@ -36,7 +36,7 @@ for (const locale of locales) {
       await expect(page.locator('a[data-locale-choice]')).toHaveCount(9);
       await expect(
         page.locator('.support-links').getByRole('link', { name: /privacy|privacidade|datenschutz|confidentialité|privacidad/i })
-      ).toHaveAttribute('href', `/privacy/tagweaver/${locale.segment}/`);
+      ).toHaveAttribute('href', canonical(`/privacy/tagweaver/${locale.segment}/`));
       await expect(page.getByRole('link', { name: 'TagWeaver v2.2' })).toHaveAttribute(
         'href',
         `/release-notes/tagweaver/2.2/${locale.segment}/`

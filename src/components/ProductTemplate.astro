@@ -60,9 +60,16 @@ const localizedStatus =
 
 const bodyBlocks = renderBlocks(pageBodyDescription(copy));
 const heroIntro = landingSubtitle(copy);
+const firstFeatureList = (value: string | undefined): string[] | undefined => {
+  if (!value) return undefined;
+  return renderBlocks(value).find((block) => block.type === 'ul')?.value as string[] | undefined;
+};
 const heroSignals =
   data.heroSignals ??
-  (bodyBlocks.find((block) => block.type === 'ul')?.value as string[] | undefined)?.slice(0, 3) ?? [];
+  firstFeatureList(pageBodyDescription(copy))?.slice(0, 3) ??
+  firstFeatureList(copy.android.description)?.slice(0, 3) ??
+  firstFeatureList(copy.ios.description)?.slice(0, 3) ??
+  [];
 const homePath = allRouteFor('home', data.locale);
 const appsPath = allRouteFor('apps', data.locale);
 const pageStyle = `--accent-border: ${data.accent.border}; --accent-bg: ${data.accent.background}; --accent-text: ${data.accent.text};`;
