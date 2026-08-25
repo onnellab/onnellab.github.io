@@ -453,7 +453,7 @@ test.describe('nine-language site core regression', () => {
         );
         await expect(page.locator('.support-links a').first()).toHaveAttribute(
           'href',
-          `https://onnellab.github.io/privacy/${slug}/${segment}/`
+          `https://onnellab.github.io/privacy/${slug}/${segment}`
         );
         const screenshot = page.locator('.screenshot-link img').first();
         if (await screenshot.count()) {
