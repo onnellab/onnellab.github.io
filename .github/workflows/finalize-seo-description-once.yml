@@ -30,9 +30,17 @@ jobs:
           python3 <<'PY'
           from pathlib import Path
 
-          p = Path('src/lib/products.ts')
-          s = p.read_text()
-          old = r'''function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
+          def replace_once(path: str, old: str, new: str, label: str) -> None:
+              p = Path(path)
+              s = p.read_text()
+              count = s.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label} marker count: {count}')
+              p.write_text(s.replace(old, new, 1))
+
+          replace_once(
+              'src/lib/products.ts',
+              r'''function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
             const summary = pageDescription(copy).replace(/\s+/g, ' ').trim();
             const platforms = copy.locale === 'en'
               ? source.meta.platforms.join(' and ')
@@ -77,8 +85,8 @@ jobs:
             if (/^MP3\b/.test(value)) return 'an';
             return /^[aeiou]/i.test(value) ? 'an' : 'a';
           }
-          '''
-          new = r'''function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
+          ''',
+              r'''function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
             const summary = pageDescription(copy).replace(/\s+/g, ' ').trim();
             const platforms = copy.locale === 'en'
               ? source.meta.platforms.join(' and ')
@@ -125,30 +133,83 @@ jobs:
             }
             return `${source.meta.title} - ${subtitle}`;
           }
-          '''
-          if s.count(old) != 1:
-              raise SystemExit(f'products marker count: {s.count(old)}')
-          p.write_text(s.replace(old, new, 1))
+          ''',
+              'products description'
+          )
 
-          p = Path('tests/product-contract.spec.ts')
-          s = p.read_text()
-          old = "] as const;\n\n// Keep schema descriptive and verifiable: no commerce/review claims, only real application semantics."
-          new = "] as const;\nconst metaPlatformMarkers = {\n  en: 'Platforms:',\n  ko: '지원 플랫폼:',\n  ja: '対応プラットフォーム:',\n  'zh-Hans': '支持平台：',\n  'zh-Hant': '支援平台：',\n  'pt-BR': 'Plataformas:',\n  de: 'Plattformen:',\n  fr: 'Plateformes :',\n  es: 'Plataformas:'\n} as const;\n\n// Keep schema descriptive and verifiable: no commerce/review claims, only real application semantics."
-          if s.count(old) != 1:
-              raise SystemExit(f'test locale marker count: {s.count(old)}')
-          s = s.replace(old, new, 1)
+          replace_once(
+              'tests/product-contract.spec.ts',
+              "] as const;\n\n// Keep schema descriptive and verifiable: no commerce/review claims, only real application semantics.",
+              "] as const;\nconst metaPlatformMarkers = {\n  en: 'Platforms:',\n  ko: '지원 플랫폼:',\n  ja: '対応プラットフォーム:',\n  'zh-Hans': '支持平台：',\n  'zh-Hant': '支援平台：',\n  'pt-BR': 'Plataformas:',\n  de: 'Plattformen:',\n  fr: 'Plateformes :',\n  es: 'Plataformas:'\n} as const;\n\n// Keep schema descriptive and verifiable: no commerce/review claims, only real application semantics.",
+              'test locale map'
+          )
 
-          old = "      await expect(page.locator('link[rel=\"describedby\"]')).toHaveAttribute('href', 'https://onnellab.github.io/llms.txt');\n"
-          new = old + "\n      const metaDescription = await page.locator('meta[name=\"description\"]').getAttribute('content');\n      expect(metaDescription).toBeTruthy();\n      expect(metaDescription).toContain(' — ');\n      expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);\n"
-          if s.count(old) != 1:
-              raise SystemExit(f'test description marker count: {s.count(old)}')
-          s = s.replace(old, new, 1)
+          replace_once(
+              'tests/product-contract.spec.ts',
+              "      await expect(page.locator('link[rel=\"describedby\"]')).toHaveAttribute('href', 'https://onnellab.github.io/llms.txt');\n",
+              "      await expect(page.locator('link[rel=\"describedby\"]')).toHaveAttribute('href', 'https://onnellab.github.io/llms.txt');\n\n      const metaDescription = await page.locator('meta[name=\"description\"]').getAttribute('content');\n      expect(metaDescription).toBeTruthy();\n      if (app !== 'papira') {\n        expect(metaDescription).toContain(' — ');\n        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);\n      }\n",
+              'test description contract'
+          )
 
-          old = "  const llmsResponse = await request.get('/llms.txt');\n"
-          new = "  const sitemapResponse = await request.get('/sitemap.xml');\n  expect(sitemapResponse.ok()).toBe(true);\n  const sitemap = await sitemapResponse.text();\n  expect(sitemap).not.toContain('<lastmod>');\n\n" + old
-          if s.count(old) != 1:
-              raise SystemExit(f'test sitemap marker count: {s.count(old)}')
-          p.write_text(s.replace(old, new, 1))
+          replace_once(
+              'tests/product-contract.spec.ts',
+              "  const llmsResponse = await request.get('/llms.txt');\n",
+              "  const sitemapResponse = await request.get('/sitemap.xml');\n  expect(sitemapResponse.ok()).toBe(true);\n  const sitemap = await sitemapResponse.text();\n  expect(sitemap).not.toContain('<lastmod>');\n\n  const llmsResponse = await request.get('/llms.txt');\n",
+              'test sitemap policy'
+          )
+
+          replace_once(
+              'tests/papira-i18n.spec.ts',
+              '''    for (const activeSource of [
+              'src/components/HomePage.astro',
+              'src/components/AppsIndex.astro',
+              'src/components/AboutPage.astro',
+              'src/components/PrivacyIndex.astro',
+              'src/components/CorePage.astro',
+              'src/lib/papira.ts',
+              'src/components/ProductTemplate.astro'
+            ]) {
+              expect(sitemapSource).toContain(activeSource);
+            }
+            expect(sitemapSource).toContain('latestLastmod(sourceLastmod, [corePageSources[page]');
+            expect(sitemapSource).not.toContain('commonLastmod');
+          ''',
+              '''    expect(sitemapSource).toContain("allLocalizedEntries('papira')");
+            expect(sitemapSource).toContain('...productEntries()');
+            expect(sitemapSource).toContain("{ lang: 'x-default', path: pathFor('en') }");
+            expect(sitemapSource).not.toContain('lastmod');
+            expect(sitemapSource).not.toContain('sourceFileLastmod');
+            expect(sitemapSource).not.toContain('latestLastmod');
+            expect(sitemapSource).not.toContain('corePageSources');
+          ''',
+              'papira sitemap source contract'
+          )
+
+          replace_once(
+              'tests/papira-i18n.spec.ts',
+              '''
+            const papiraSourceFiles = [
+              'src/lib/papira.ts',
+              'src/components/ProductTemplate.astro'
+            ];
+            const expectedLastmod = papiraSourceFiles
+              .map((source) => fs.statSync(path.resolve(process.cwd(), source)).mtime)
+              .sort((left, right) => left.getTime() - right.getTime())
+              .at(-1)
+              ?.toISOString()
+              .slice(0, 10);
+            expect(expectedLastmod).toBeTruthy();
+            for (const locale of locales) {
+              const productUrl = `https://onnellab.github.io/apps/papira/${locale.path}`;
+              const entry = sitemap.match(new RegExp(`<loc>${productUrl}</loc>\\s*<lastmod>([^<]+)</lastmod>`));
+              expect(entry?.[1]).toBe(expectedLastmod);
+            }
+          ''',
+              '''
+            expect(sitemap).not.toContain('<lastmod>');
+          ''',
+              'papira sitemap lastmod contract'
+          )
           PY
 
           npm ci
@@ -162,6 +223,6 @@ jobs:
           rm -f .github/workflows/finalize-seo-description-once.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/lib/products.ts tests/product-contract.spec.ts .github/workflows/finalize-seo-description-once.yml
-          git commit -m "fix: normalize product meta descriptions"
+          git add src/lib/products.ts tests/product-contract.spec.ts tests/papira-i18n.spec.ts .github/workflows/finalize-seo-description-once.yml
+          git commit -m "fix: normalize product SEO metadata"
           git push origin main
