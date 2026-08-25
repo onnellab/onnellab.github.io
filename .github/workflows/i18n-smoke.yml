@@ -59,6 +59,7 @@ jobs:
           tests/site-i18n.spec.ts
           tests/extended-i18n.spec.ts
           tests/papira-i18n.spec.ts
+          tests/product-contract.spec.ts
           tests/site-visual.spec.ts
           --project=desktop
 
