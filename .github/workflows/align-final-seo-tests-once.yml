@@ -1,0 +1,56 @@
+name: Align final SEO tests once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/final-seo-test-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Align stale privacy schema expectations
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path_str: str, old: str, new: str, label: str) -> None:
+              path = Path(path_str)
+              text = path.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected one match, found {count}')
+              path.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          replace_once(
+              'tests/papira-i18n.spec.ts',
+              "    expect(software?.privacyPolicy).toBe(privacyUrl);\n",
+              "    expect(software).not.toHaveProperty('privacyPolicy');\n",
+              'Papira privacy schema expectation'
+          )
+          replace_once(
+              'tests/site-visual.spec.ts',
+              "    expect(application.privacyPolicy).toBe('https://onnellab.github.io/privacy/tagweaver/');\n",
+              "    expect(application).not.toHaveProperty('privacyPolicy');\n",
+              'TagWeaver privacy schema expectation'
+          )
+          PY
+          git diff --check
+
+      - name: Commit aligned tests and remove one-time tooling
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/final-seo-test-trigger .github/workflows/align-final-seo-tests-once.yml
+          git add tests/papira-i18n.spec.ts tests/site-visual.spec.ts
+          git commit -m 'test: align privacy checks with schema policy'
+          git push origin HEAD:main
