@@ -1,10 +1,18 @@
 export const siteLocales = ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant'] as const;
 
 export type SiteLocale = (typeof siteLocales)[number];
+export const papiraPrivacyLocales = [
+  ...siteLocales,
+  'pt-BR',
+  'de',
+  'fr',
+  'es'
+] as const;
+export type PapiraPrivacyLocale = (typeof papiraPrivacyLocales)[number];
 export type LocalizedPage = 'home' | 'apps' | 'about' | 'privacy' | 'terms' | 'papira' | 'papiraPrivacy';
 
 export type LocaleDefinition = {
-  code: SiteLocale;
+  code: string;
   pathSegment: string;
   label: string;
   htmlLang: string;
@@ -49,6 +57,14 @@ export const localeDefinitions: Record<SiteLocale, LocaleDefinition> = {
   }
 };
 
+export const papiraPrivacyLocaleDefinitions: Record<PapiraPrivacyLocale, LocaleDefinition> = {
+  ...localeDefinitions,
+  'pt-BR': { code: 'pt-BR', pathSegment: 'pt-br', label: 'Português (Brasil)', htmlLang: 'pt-BR', hreflang: 'pt-BR' },
+  de: { code: 'de', pathSegment: 'de', label: 'Deutsch', htmlLang: 'de', hreflang: 'de' },
+  fr: { code: 'fr', pathSegment: 'fr', label: 'Français', htmlLang: 'fr', hreflang: 'fr' },
+  es: { code: 'es', pathSegment: 'es', label: 'Español', htmlLang: 'es', hreflang: 'es' }
+};
+
 const basePaths: Record<LocalizedPage, string> = {
   home: '/',
   apps: '/apps/',
@@ -67,6 +83,11 @@ export function routeFor(page: LocalizedPage, locale: SiteLocale): string {
   return `${basePath}${segment}/`;
 }
 
+export function papiraPrivacyRouteFor(locale: PapiraPrivacyLocale): string {
+  const segment = papiraPrivacyLocaleDefinitions[locale].pathSegment;
+  return segment ? `${basePaths.papiraPrivacy}${segment}/` : basePaths.papiraPrivacy;
+}
+
 export function localeAlternates(
   page: LocalizedPage,
   supported: readonly SiteLocale[] = siteLocales
@@ -79,6 +100,16 @@ export function localeAlternates(
     alternates.push({ lang: 'x-default', path: routeFor(page, 'en') });
   }
   return alternates;
+}
+
+export function papiraPrivacyLocaleAlternates(): Array<{ lang: string; path: string }> {
+  return [
+    ...papiraPrivacyLocales.map((locale) => ({
+      lang: papiraPrivacyLocaleDefinitions[locale].hreflang,
+      path: papiraPrivacyRouteFor(locale)
+    })),
+    { lang: 'x-default', path: papiraPrivacyRouteFor('en') }
+  ];
 }
 
 export function productRouteFor(slug: string, locale: SiteLocale): string {

@@ -3,14 +3,18 @@ import {
   localeDefinitions,
   routeFor,
   productRouteFor,
+  papiraPrivacyLocaleDefinitions,
+  papiraPrivacyLocales,
+  papiraPrivacyRouteFor,
   siteLocales,
   type LocalizedPage,
+  type PapiraPrivacyLocale,
   type SiteLocale
 } from '../lib/site-i18n';
 
 type BaseProps = {
-  locale: SiteLocale;
-  supported?: readonly SiteLocale[];
+  locale: SiteLocale | PapiraPrivacyLocale;
+  supported?: readonly (SiteLocale | PapiraPrivacyLocale)[];
 };
 
 type Props = BaseProps & (
@@ -18,25 +22,36 @@ type Props = BaseProps & (
   | { page?: never; productSlug: string }
 );
 
-const { locale, page, productSlug, supported = siteLocales } = Astro.props;
-const current = localeDefinitions[locale];
+const { locale, page, productSlug } = Astro.props;
+const privacyPage = page === 'papiraPrivacy';
+const supported = Astro.props.supported ?? (privacyPage ? papiraPrivacyLocales : siteLocales);
+const definitions = privacyPage ? papiraPrivacyLocaleDefinitions : localeDefinitions;
+const current = definitions[locale];
 if (!page && !productSlug) throw new Error('LocaleMenu requires page or productSlug');
 const languageControlLabel = {
   en: `Language: ${current.label}`,
   ko: `언어: ${current.label}`,
   ja: `言語: ${current.label}`,
   'zh-Hans': `语言：${current.label}`,
-  'zh-Hant': `語言：${current.label}`
+  'zh-Hant': `語言：${current.label}`,
+  'pt-BR': `Idioma: ${current.label}`,
+  de: `Sprache: ${current.label}`,
+  fr: `Langue : ${current.label}`,
+  es: `Idioma: ${current.label}`
 }[locale];
-const localeHref = (item: SiteLocale) =>
-  productSlug ? productRouteFor(productSlug, item) : routeFor(page, item);
+const localeHref = (item: SiteLocale | PapiraPrivacyLocale) =>
+  productSlug
+    ? productRouteFor(productSlug, item)
+    : privacyPage
+      ? papiraPrivacyRouteFor(item as PapiraPrivacyLocale)
+      : routeFor(page, item as SiteLocale);
 ---
 
 <details class="locale-menu">
   <summary class="site-language-control" aria-label={languageControlLabel}>{current.label}</summary>
   <ul class="locale-menu-panel">
     {supported.map((item) => {
-      const definition = localeDefinitions[item];
+      const definition = definitions[item];
       return (
         <li>
           <a

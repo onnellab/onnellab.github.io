@@ -5,6 +5,9 @@ import { getBlogPosts } from '../lib/blog';
 import { getProductSources } from '../lib/products';
 import {
   localeDefinitions,
+  papiraPrivacyLocaleAlternates,
+  papiraPrivacyLocales,
+  papiraPrivacyRouteFor,
   productLocaleAlternates,
   productRouteFor,
   routeFor,
@@ -37,7 +40,7 @@ export function GET() {
   const entries: SitemapEntry[] = [
     ...corePages.flatMap((page) => localizedEntries(page, sourceLastmod(corePageSources[page]))),
     ...localizedEntries('papira', papiraLastmod),
-    ...localizedEntries('papiraPrivacy', sourceLastmod('src/components/PapiraPrivacyPage.astro')),
+    ...papiraPrivacyEntries(sourceLastmod('src/components/PapiraPrivacyPage.astro')),
     ...productPrivacyEntries(sourceLastmod),
     ...blogEntries(sourceLastmod),
     ...legacyPageEntries(
@@ -60,6 +63,15 @@ ${uniqueEntries.map(renderEntry).join('\n')}
   return new Response(body, {
     headers: { 'Content-Type': 'application/xml; charset=utf-8' }
   });
+}
+
+function papiraPrivacyEntries(lastmod: string): SitemapEntry[] {
+  const alternates = papiraPrivacyLocaleAlternates();
+  return papiraPrivacyLocales.map((locale) => ({
+    path: papiraPrivacyRouteFor(locale),
+    lastmod,
+    alternates
+  }));
 }
 
 function latestLastmod(sourceLastmod: (sourcePath: string) => string, sourcePaths: string[]): string {

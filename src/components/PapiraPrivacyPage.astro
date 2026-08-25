@@ -3,14 +3,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
 import {
-  localeAlternates,
-  localeDefinitions,
+  papiraPrivacyLocaleAlternates,
+  papiraPrivacyLocaleDefinitions,
+  papiraPrivacyRouteFor,
+  isSiteLocale,
   routeFor,
-  type SiteLocale
+  type PapiraPrivacyLocale
 } from '../lib/site-i18n';
 
 type Props = {
-  locale: SiteLocale;
+  locale: PapiraPrivacyLocale;
 };
 
 type PolicySection = {
@@ -32,7 +34,7 @@ type PolicyCopy = {
   privacyHubLabel: string;
 };
 
-const policies: Record<SiteLocale, PolicyCopy> = {
+const policies: Record<PapiraPrivacyLocale, PolicyCopy> = {
   en: {
     title: 'Papira Privacy Policy',
     description: 'Privacy Policy for the Papira app.',
@@ -172,7 +174,7 @@ const policies: Record<SiteLocale, PolicyCopy> = {
     updatedLabel: '最終更新日',
     updatedValue: '2026-08-21',
     heading: 'プライバシーポリシー',
-    opening: 'Papiraは利用者のプライバシーを尊重し、以下の方針で運営されます。',
+    opening: 'Papiraはユーザーのプライバシーを大切にしています。',
     homeLabel: 'ONNELLAB',
     privacyHubLabel: 'すべてのプライバシーポリシー',
     sections: [
@@ -199,7 +201,7 @@ const policies: Record<SiteLocale, PolicyCopy> = {
         ]
       },
       {
-        title: '4. アプリストアのサービスと決済情報',
+        title: '4. App Storeサービスと決済情報',
         paragraphs: [
           'PapiraはApple App StoreまたはGoogle Playからダウンロードまたは購入できます。ダウンロード、購入、返金、関連するアカウント情報は各ストアがそれぞれのポリシーに従って処理します。PapiraおよびONNELLABは決済カード情報や銀行口座情報へアクセスせず、保存もしません。'
         ]
@@ -226,7 +228,7 @@ const policies: Record<SiteLocale, PolicyCopy> = {
         title: '8. 変更とお問い合わせ',
         paragraphs: [
           'Papiraの機能、法令、ストア要件が変わった場合、本ポリシーを改定し、最終更新日も更新します。',
-          'プライバシーに関するお問い合わせまたは削除依頼: onnellab.app@gmail.com'
+          'プライバシーに関するお問い合わせまたは削除依頼： onnellab.app@gmail.com'
         ]
       }
     ]
@@ -238,7 +240,7 @@ const policies: Record<SiteLocale, PolicyCopy> = {
     updatedLabel: '最后更新',
     updatedValue: '2026-08-21',
     heading: '隐私政策',
-    opening: 'Papira 重视用户隐私，并按照以下方式运行。',
+    opening: 'Papira 重视你的隐私。',
     homeLabel: 'ONNELLAB',
     privacyHubLabel: '全部隐私政策',
     sections: [
@@ -304,7 +306,7 @@ const policies: Record<SiteLocale, PolicyCopy> = {
     updatedLabel: '最後更新',
     updatedValue: '2026-08-21',
     heading: '隱私權政策',
-    opening: 'Papira 重視使用者隱私，並依照以下方式運作。',
+    opening: 'Papira 重視你的隱私。',
     homeLabel: 'ONNELLAB',
     privacyHubLabel: '全部隱私權政策',
     sections: [
@@ -331,7 +333,7 @@ const policies: Record<SiteLocale, PolicyCopy> = {
         ]
       },
       {
-        title: '4. 應用程式商店服務與付款資訊',
+        title: '4. App Store 服務與支付資訊',
         paragraphs: [
           'Papira 可透過 Apple App Store 或 Google Play 下載或購買。下載、購買、退款及相關帳號資訊由對應商店依其政策處理。Papira 與 ONNELLAB 不會存取或儲存支付卡資訊或銀行帳戶資訊。'
         ]
@@ -362,13 +364,74 @@ const policies: Record<SiteLocale, PolicyCopy> = {
         ]
       }
     ]
+  },
+  'pt-BR': {
+    title: 'Política de Privacidade do Papira', description: 'Política de privacidade do aplicativo Papira.',
+    intro: 'Esta Política de Privacidade se aplica ao aplicativo Papira fornecido pela ONNELLAB.', updatedLabel: 'Última atualização', updatedValue: '2026-08-21',
+    heading: 'Política de Privacidade', opening: 'O Papira valoriza a sua privacidade.', homeLabel: 'ONNELLAB', privacyHubLabel: 'Todas as políticas de privacidade',
+    sections: [
+      { title: '1. Contas e identificadores diretos', paragraphs: ['O Papira não exige cadastro ou login com nome, endereço de e-mail ou número de telefone. O conteúdo e o histórico de uso do aplicativo não são enviados à ONNELLAB.'] },
+      { title: '2. Dados acessados ou armazenados no dispositivo', items: ['Manuscritos TXT e imagens de capa que você seleciona explicitamente', 'Projetos de livros, metadados editoriais e padrões, preferências do aplicativo, histórico de saídas recentes, prévias, caches e arquivos EPUB gerados, armazenados no dispositivo', 'O processamento de TXT e capas, a geração de prévias, o salvamento de projetos e a criação de EPUB acontecem no dispositivo', 'O Papira só acessa um arquivo ou uma foto quando você o escolhe pelo seletor do sistema operacional', 'Manuscritos, imagens de capa, projetos e arquivos EPUB gerados não são enviados a um servidor da ONNELLAB'] },
+      { title: '3. Transmissão para servidores', paragraphs: ['O Papira não transmite o conteúdo dos manuscritos, imagens de capa, dados dos projetos, arquivos EPUB gerados ou histórico de uso para um servidor da ONNELLAB.'] },
+      { title: '4. Serviços da loja de aplicativos e informações de pagamento', paragraphs: ['O Papira pode ser baixado ou comprado pela Apple App Store ou pelo Google Play. A loja correspondente processa downloads, compras, reembolsos e informações relacionadas à conta de acordo com sua própria política. O Papira e a ONNELLAB não acessam nem armazenam dados de cartões ou contas bancárias.'] },
+      { title: '5. Publicidade, análise e compartilhamento', paragraphs: ['O Papira não usa SDKs de publicidade, análise comportamental ou rastreamento de terceiros. Os dados não são vendidos nem compartilhados além das finalidades descritas acima. Quando você exporta ou compartilha deliberadamente um EPUB com outro aplicativo, provedor de armazenamento ou serviço usando recursos do sistema operacional, aplica-se a política de privacidade do destino.'] },
+      { title: '6. Retenção e exclusão', paragraphs: ['Projetos, preferências, registros recentes, prévias e caches gerenciados pelo aplicativo podem ser removidos pelos controles de exclusão disponíveis ou com a desinstalação. Arquivos de origem e EPUBs exportados permanecem até que você os exclua. Cópias enviadas a outro aplicativo, provedor ou serviço seguem as regras de retenção do destino. A ONNELLAB não mantém conteúdo do Papira em seus servidores.'] },
+      { title: '7. Segurança e privacidade de crianças', paragraphs: ['A ONNELLAB aplica medidas técnicas e administrativas razoáveis aos dados que precisam ser tratados. Você também deve proteger o acesso ao seu dispositivo e aos arquivos exportados. O Papira não é destinado a crianças menores de 13 anos e não coleta intencionalmente informações pessoais de crianças.'] },
+      { title: '8. Alterações e contato', paragraphs: ['Se a funcionalidade do Papira ou os requisitos legais ou das lojas mudarem, este documento será atualizado e a data da última atualização será alterada.', 'Perguntas sobre privacidade ou solicitações de exclusão: onnellab.app@gmail.com'] }
+    ]
+  },
+  de: {
+    title: 'Datenschutzerklärung für Papira', description: 'Datenschutzerklärung für die Papira-App.',
+    intro: 'Diese Datenschutzerklärung gilt für die von ONNELLAB bereitgestellte Papira-App.', updatedLabel: 'Zuletzt aktualisiert', updatedValue: '2026-08-21',
+    heading: 'Datenschutzerklärung', opening: 'Papira schützt Ihre Privatsphäre.', homeLabel: 'ONNELLAB', privacyHubLabel: 'Alle Datenschutzerklärungen',
+    sections: [
+      { title: '1. Konten und direkte Identifikatoren', paragraphs: ['Papira verlangt keine Registrierung oder Anmeldung mit Name, E-Mail-Adresse oder Telefonnummer. App-Inhalte und Nutzungsverlauf werden nicht an ONNELLAB übertragen.'] },
+      { title: '2. Auf dem Gerät abgerufene oder gespeicherte Daten', items: ['TXT-Manuskripte und Titelbilder, die Sie ausdrücklich auswählen', 'Auf dem Gerät gespeicherte Buchprojekte, Veröffentlichungsmetadaten und Voreinstellungen, App-Einstellungen, der Verlauf der letzten Ausgaben, Vorschauen, Caches und erzeugte EPUB-Dateien', 'Die Verarbeitung von TXT-Dateien und Titelbildern, die Vorschauerstellung, das Speichern von Projekten und die EPUB-Erstellung erfolgen auf dem Gerät', 'Papira greift nur auf eine Datei oder ein Foto zu, wenn Sie es über die Auswahlfunktion des Betriebssystems auswählen', 'Ausgewählte Manuskripte, Titelbilder, Projekte und erzeugte EPUB-Dateien werden nicht auf einen ONNELLAB-Server hochgeladen'] },
+      { title: '3. Übertragung an Server', paragraphs: ['Papira überträgt keine Manuskriptinhalte, Titelbilder, Projektdaten, erzeugten EPUB-Dateien oder Nutzungsverläufe an einen ONNELLAB-Server.'] },
+      { title: '4. App-Store-Dienste und Zahlungsinformationen', paragraphs: ['Papira kann über den Apple App Store oder Google Play heruntergeladen oder gekauft werden. Der jeweilige Store verarbeitet Downloads, Käufe, Rückerstattungen und zugehörige Kontoinformationen nach seiner eigenen Richtlinie. Papira und ONNELLAB greifen nicht auf Karten- oder Bankkontodaten zu und speichern diese nicht.'] },
+      { title: '5. Werbung, Analyse und Weitergabe', paragraphs: ['Papira verwendet keine Werbe-SDKs, SDKs zur Verhaltensanalyse oder Tracking-Tools Dritter. Daten werden außerhalb der oben beschriebenen Zwecke weder verkauft noch weitergegeben. Wenn Sie ein EPUB über Betriebssystemfunktionen bewusst an eine andere App, einen Speicherdienst oder einen anderen Dienst exportieren oder weitergeben, gilt dessen Datenschutzerklärung.'] },
+      { title: '6. Aufbewahrung und Löschung', paragraphs: ['Vom App verwaltete Projekte, Einstellungen, letzte Einträge, Vorschauen und Caches können über die vorgesehenen Löschfunktionen oder durch Deinstallation entfernt werden. Quelldateien und exportierte EPUB-Dateien bleiben erhalten, bis Sie sie löschen. Kopien, die an andere Apps oder Dienste gesendet werden, unterliegen deren Aufbewahrungsregeln. ONNELLAB speichert keine Papira-Inhalte auf seinen Servern.'] },
+      { title: '7. Sicherheit und Datenschutz von Kindern', paragraphs: ['ONNELLAB wendet angemessene technische und organisatorische Schutzmaßnahmen auf notwendigerweise verarbeitete Daten an. Sie sollten außerdem den Zugriff auf Ihre Geräte und exportierten Dateien schützen. Papira richtet sich nicht an Kinder unter 13 Jahren und erfasst nicht wissentlich personenbezogene Daten von Kindern.'] },
+      { title: '8. Änderungen und Kontakt', paragraphs: ['Wenn sich Papira-Funktionen oder gesetzliche beziehungsweise Anforderungen der Stores ändern, wird dieses Dokument aktualisiert und das Datum der letzten Aktualisierung angepasst.', 'Fragen zum Datenschutz oder Löschanträge: onnellab.app@gmail.com'] }
+    ]
+  },
+  fr: {
+    title: 'Politique de confidentialité de Papira', description: 'Politique de confidentialité de l’application Papira.',
+    intro: 'La présente politique de confidentialité s’applique à l’application Papira fournie par ONNELLAB.', updatedLabel: 'Dernière mise à jour', updatedValue: '2026-08-21',
+    heading: 'Politique de confidentialité', opening: 'Papira respecte votre vie privée.', homeLabel: 'ONNELLAB', privacyHubLabel: 'Toutes les politiques de confidentialité',
+    sections: [
+      { title: '1. Comptes et identifiants directs', paragraphs: ['Papira ne demande pas de créer un compte ni de se connecter avec un nom, une adresse e-mail ou un numéro de téléphone. Le contenu de l’application et l’historique d’utilisation ne sont pas transmis à ONNELLAB.'] },
+      { title: '2. Données consultées ou stockées sur l’appareil', items: ['Manuscrits TXT et images de couverture que vous sélectionnez explicitement', 'Projets de livres, métadonnées éditoriales et valeurs par défaut, préférences de l’application, historique des sorties récentes, aperçus, caches et fichiers EPUB générés, stockés sur l’appareil', 'Le traitement des TXT et des couvertures, la génération des aperçus, l’enregistrement des projets et la création des EPUB sont réalisés sur l’appareil', 'Papira n’accède à un fichier ou à une photo que lorsque vous le ou la sélectionnez avec le sélecteur du système d’exploitation', 'Les manuscrits, images de couverture, projets et fichiers EPUB générés sélectionnés ne sont pas téléversés vers un serveur ONNELLAB'] },
+      { title: '3. Transmission à des serveurs', paragraphs: ['Papira ne transmet pas le contenu des manuscrits, les images de couverture, les données des projets, les fichiers EPUB générés ni l’historique d’utilisation à un serveur ONNELLAB.'] },
+      { title: '4. Services des boutiques d’applications et informations de paiement', paragraphs: ['Papira peut être téléchargé ou acheté via l’Apple App Store ou Google Play. La boutique concernée traite les téléchargements, achats, remboursements et informations de compte associées selon sa propre politique. Papira et ONNELLAB n’accèdent pas aux données de carte ou de compte bancaire et ne les stockent pas.'] },
+      { title: '5. Publicité, analyse et partage', paragraphs: ['Papira n’utilise pas de SDK publicitaires, de SDK d’analyse comportementale ni d’outils de suivi tiers. Les données ne sont ni vendues ni partagées au-delà des finalités décrites ci-dessus. Si vous exportez ou partagez volontairement un EPUB vers une autre application, un fournisseur de stockage ou un service au moyen des fonctions du système, la politique de confidentialité du destinataire s’applique.'] },
+      { title: '6. Conservation et suppression', paragraphs: ['Les projets, préférences, historiques récents, aperçus et caches gérés par l’application peuvent être supprimés avec les commandes prévues à cet effet ou en désinstallant l’application. Les fichiers sources et les EPUB exportés restent présents jusqu’à leur suppression par vos soins. Les copies envoyées à une autre application ou à un service suivent les règles de conservation du destinataire. ONNELLAB ne conserve aucun contenu Papira sur ses serveurs.'] },
+      { title: '7. Sécurité et vie privée des enfants', paragraphs: ['ONNELLAB applique des mesures de protection techniques et organisationnelles raisonnables aux données qui doivent être traitées. Vous devez également protéger l’accès à vos appareils et à vos fichiers exportés. Papira ne s’adresse pas aux enfants de moins de 13 ans et ne recueille pas sciemment leurs informations personnelles.'] },
+      { title: '8. Modifications et contact', paragraphs: ['Si les fonctionnalités de Papira ou les exigences légales ou des boutiques évoluent, ce document sera mis à jour et la date de dernière mise à jour changera.', 'Questions relatives à la vie privée ou demandes de suppression : onnellab.app@gmail.com'] }
+    ]
+  },
+  es: {
+    title: 'Política de privacidad de Papira', description: 'Política de privacidad de la aplicación Papira.',
+    intro: 'Esta política de privacidad se aplica a la aplicación Papira proporcionada por ONNELLAB.', updatedLabel: 'Última actualización', updatedValue: '2026-08-21',
+    heading: 'Política de privacidad', opening: 'Papira respeta tu privacidad.', homeLabel: 'ONNELLAB', privacyHubLabel: 'Todas las políticas de privacidad',
+    sections: [
+      { title: '1. Cuentas e identificadores directos', paragraphs: ['Papira no exige registrarse ni iniciar sesión con un nombre, una dirección de correo electrónico o un número de teléfono. El contenido y el historial de uso de la aplicación no se transmiten a ONNELLAB.'] },
+      { title: '2. Datos a los que se accede o que se almacenan en el dispositivo', items: ['Manuscritos TXT e imágenes de portada que seleccionas expresamente', 'Proyectos de libros, metadatos editoriales y valores predeterminados, preferencias de la aplicación, historial de salidas recientes, vistas previas, cachés y archivos EPUB generados, almacenados en el dispositivo', 'El procesamiento de TXT y portadas, la generación de vistas previas, el guardado de proyectos y la creación de EPUB se realizan en el dispositivo', 'Papira solo accede a un archivo o una foto cuando lo eliges mediante el selector del sistema operativo', 'Los manuscritos, imágenes de portada, proyectos y archivos EPUB generados seleccionados no se suben a un servidor de ONNELLAB'] },
+      { title: '3. Transmisión a servidores', paragraphs: ['Papira no transmite el contenido de los manuscritos, las imágenes de portada, los datos de los proyectos, los archivos EPUB generados ni el historial de uso a un servidor de ONNELLAB.'] },
+      { title: '4. Servicios de las tiendas de aplicaciones e información de pago', paragraphs: ['Papira se puede descargar o comprar a través de Apple App Store o Google Play. La tienda correspondiente procesa las descargas, compras, reembolsos y la información asociada a la cuenta según su propia política. Papira y ONNELLAB no acceden a los datos de tarjetas ni cuentas bancarias, ni los almacenan.'] },
+      { title: '5. Publicidad, análisis y uso compartido', paragraphs: ['Papira no utiliza SDK de publicidad, SDK de análisis del comportamiento ni herramientas de seguimiento de terceros. Los datos no se venden ni se comparten fuera de las finalidades descritas anteriormente. Si exportas o compartes deliberadamente un EPUB con otra aplicación, proveedor de almacenamiento o servicio mediante funciones del sistema operativo, se aplica la política de privacidad del destinatario.'] },
+      { title: '6. Conservación y eliminación', paragraphs: ['Los proyectos, preferencias, registros recientes, vistas previas y cachés gestionados por la aplicación se pueden eliminar con los controles correspondientes o al desinstalarla. Los archivos de origen y los EPUB exportados permanecen hasta que los elimines. Las copias enviadas a otra aplicación o servicio están sujetas a las reglas de conservación del destinatario. ONNELLAB no conserva contenido de Papira en sus servidores.'] },
+      { title: '7. Seguridad y privacidad de los menores', paragraphs: ['ONNELLAB aplica medidas técnicas y organizativas razonables a los datos que deben tratarse. También debes proteger el acceso a tus dispositivos y archivos exportados. Papira no está dirigida a menores de 13 años y no recopila conscientemente información personal de menores.'] },
+      { title: '8. Cambios y contacto', paragraphs: ['Si cambian las funciones de Papira o los requisitos legales o de las tiendas, actualizaremos este documento y la fecha de última actualización.', 'Preguntas sobre privacidad o solicitudes de eliminación: onnellab.app@gmail.com'] }
+    ]
   }
 };
 
 const { locale } = Astro.props;
 const text = policies[locale];
-const definition = localeDefinitions[locale];
-const canonicalPath = routeFor('papiraPrivacy', locale);
+const definition = papiraPrivacyLocaleDefinitions[locale];
+const canonicalPath = papiraPrivacyRouteFor(locale);
+const relatedLocale = isSiteLocale(locale) ? locale : 'en';
 const email = 'onnellab.app@gmail.com';
 const emailParts = (value: string) => {
   const index = value.indexOf(email);
@@ -385,13 +448,13 @@ const emailParts = (value: string) => {
   description={text.description}
   canonicalPath={canonicalPath}
   lang={definition.htmlLang}
-  alternates={localeAlternates('papiraPrivacy')}
+  alternates={papiraPrivacyLocaleAlternates()}
 >
   <main class="legal-shell" data-papira-privacy data-locale={locale}>
     <nav class="topbar site-header" aria-label="Navigation">
-      <a class="brand home-link" href={routeFor('home', locale)}>{text.homeLabel}</a>
+      <a class="brand home-link" href={routeFor('home', relatedLocale)}>{text.homeLabel}</a>
       <div class="topbar-actions">
-        <a class="hub-link" href={routeFor('privacy', locale)}>{text.privacyHubLabel}</a>
+        <a class="hub-link" href={routeFor('privacy', relatedLocale)}>{text.privacyHubLabel}</a>
         <LocaleMenu locale={locale} page="papiraPrivacy" />
       </div>
     </nav>
@@ -421,7 +484,7 @@ const emailParts = (value: string) => {
         )}
       </section>
     ))}
-    <SiteFooter locale={locale} privacyHref={routeFor('privacy', locale)} />
+    <SiteFooter locale={relatedLocale} privacyHref={routeFor('privacy', relatedLocale)} />
   </main>
 </BaseLayout>
 

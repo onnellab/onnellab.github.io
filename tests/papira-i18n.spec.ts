@@ -10,6 +10,18 @@ const locales = [
   { path: 'zh-hant/', hreflang: 'zh-Hant', title: 'Papira - 離線 TXT 轉 EPUB 製作工具' }
 ] as const;
 
+const privacyLocales = [
+  { path: '', hreflang: 'en', htmlLang: 'en', keyPhrases: ['Papira values your privacy.', 'App store services and payment information', 'Privacy questions or deletion requests:'] },
+  { path: 'ko/', hreflang: 'ko', htmlLang: 'ko', keyPhrases: ['Papira는 사용자의 개인정보를 중요하게 생각하며', '앱 스토어 서비스 및 결제 정보', '개인정보 관련 문의 또는 삭제 요청:'] },
+  { path: 'ja/', hreflang: 'ja', htmlLang: 'ja', keyPhrases: ['Papiraはユーザーのプライバシーを大切にしています。', 'App Storeサービスと決済情報', 'プライバシーに関するお問い合わせまたは削除依頼：'] },
+  { path: 'zh-hans/', hreflang: 'zh-Hans', htmlLang: 'zh-Hans', keyPhrases: ['Papira 重视你的隐私。', '应用商店服务与支付信息', '隐私问题或删除请求：'] },
+  { path: 'zh-hant/', hreflang: 'zh-Hant', htmlLang: 'zh-Hant', keyPhrases: ['Papira 重視你的隱私。', 'App Store 服務與支付資訊', '隱私問題或刪除請求：'] },
+  { path: 'pt-br/', hreflang: 'pt-BR', htmlLang: 'pt-BR', keyPhrases: ['O Papira valoriza a sua privacidade.', 'Serviços da loja de aplicativos e informações de pagamento', 'Perguntas sobre privacidade ou solicitações de exclusão:'] },
+  { path: 'de/', hreflang: 'de', htmlLang: 'de', keyPhrases: ['Papira schützt Ihre Privatsphäre.', 'App-Store-Dienste und Zahlungsinformationen', 'Fragen zum Datenschutz oder Löschanträge:'] },
+  { path: 'fr/', hreflang: 'fr', htmlLang: 'fr', keyPhrases: ['Papira respecte votre vie privée.', 'Services des boutiques d’applications et informations de paiement', 'Questions relatives à la vie privée ou demandes de suppression :'] },
+  { path: 'es/', hreflang: 'es', htmlLang: 'es', keyPhrases: ['Papira respeta tu privacidad.', 'Servicios de las tiendas de aplicaciones e información de pago', 'Preguntas sobre privacidad o solicitudes de eliminación:'] }
+] as const;
+
 const alternateUrls = {
   en: 'https://onnellab.github.io/apps/papira/',
   ko: 'https://onnellab.github.io/apps/papira/ko/',
@@ -18,6 +30,11 @@ const alternateUrls = {
   'zh-Hant': 'https://onnellab.github.io/apps/papira/zh-hant/',
   'x-default': 'https://onnellab.github.io/apps/papira/'
 } as const;
+
+const privacyAlternateUrls = Object.fromEntries(
+  privacyLocales.map((locale) => [locale.hreflang, `https://onnellab.github.io/privacy/papira/${locale.path}`])
+) as Record<string, string>;
+privacyAlternateUrls['x-default'] = privacyAlternateUrls.en;
 
 const screenshotAlts = {
   en: [
@@ -131,16 +148,34 @@ test.describe('Papira five-language launch surface', () => {
       await expect(page.locator('.locale-menu-panel a')).toHaveCount(5);
     });
 
-    test(`Papira privacy page ${locale.hreflang}`, async ({ page }) => {
+  }
+
+  for (const locale of privacyLocales) {
+    test(`Papira privacy page ${locale.hreflang} publishes the nine-language contract`, async ({ page }) => {
       await page.goto(`/privacy/papira/${locale.path}`);
       await expect(page.locator('main')).toContainText('Papira');
+      await expect(page.locator('html')).toHaveAttribute('lang', locale.htmlLang);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
         `https://onnellab.github.io/privacy/papira/${locale.path}`
       );
-      await expect(page.locator('.locale-menu-panel a')).toHaveCount(5);
+      for (const [hreflang, href] of Object.entries(privacyAlternateUrls)) {
+        await expect(page.locator(`link[rel="alternate"][hreflang="${hreflang}"]`)).toHaveAttribute(
+          'href',
+          href
+        );
+      }
+      await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
+      for (const phrase of locale.keyPhrases) await expect(page.locator('main')).toContainText(phrase);
     });
   }
+
+  test('general site pages keep the established five-language locale menu', async ({ page }) => {
+    for (const route of ['/', '/apps/', '/about/', '/privacy/', '/terms/']) {
+      await page.goto(route);
+      await expect(page.locator('.locale-menu-panel a')).toHaveCount(5);
+    }
+  });
 
   test('localized privacy hubs expose Papira', async ({ page }) => {
     for (const path of ['/privacy/ja/', '/privacy/zh-hans/', '/privacy/zh-hant/']) {
