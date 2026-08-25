@@ -51,12 +51,36 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
       { question: 'Como posso recuperar alterações?', answer: 'O design usa salvamento automático, desfazer e snapshots para oferecer caminhos de recuperação.' },
       { question: 'O conteúdo do arquivo é enviado para um servidor?', answer: 'Não. O processamento e o salvamento permanecem no dispositivo.' }
     ]),
-    papira: make('Criador offline de TXT para EPUB', `Papira transforma um arquivo TXT em um EPUB simples e previsível, totalmente no dispositivo.\n\nEscolha um TXT e o app organiza parágrafos, preserva blocos de diálogo quando necessário e cria um EPUB leve, sem conta, anúncios ou envio para servidor.\n\n## Principais recursos\n\n- Conversão local de TXT para EPUB\n- Estrutura simples de um capítulo\n- Normalização de espaços e parágrafos\n- Preservação de blocos de diálogo\n- Arquivo EPUB pronto para abrir em leitores compatíveis\n\nPapira não é leitor de EPUB nem editor de texto. Ele faz uma tarefa: preparar um TXT como arquivo EPUB.`, 'Perguntas frequentes', [
-      { question: 'O texto é enviado para um servidor?', answer: 'Não. A conversão acontece no dispositivo.' },
-      { question: 'O Papira edita o conteúdo do texto?', answer: 'Não como um editor. Ele reorganiza quebras e espaços conforme as regras de conversão para gerar o EPUB.' },
-      { question: 'Preciso criar uma conta?', answer: 'Não. O app funciona sem conta.' }
+    papira: make('Criador offline de EPUB a partir de TXT', `Papira transforma manuscritos TXT finalizados em livros EPUB estruturados. O app oferece fluxos próprios para fanfics, ficção seriada, romances autorais, zines digitais e cenários de TRPG, além de aceitar outros conteúdos em TXT.
+
+## Duas formas objetivas de criar
+
+### 1. EPUB rápido
+
+Selecione arquivos TXT e crie EPUBs imediatamente, sem capa nem metadados de publicação.
+
+### 2. Projeto de livro
+
+Adicione capa, título, autor, editora, informações de série, regras de capítulos e sumário antes de exportar.
+
+## Feito para manuscritos finalizados
+
+- Predefinições para fanfics, ficção seriada, romances autorais, zines digitais e cenários de TRPG, com suporte a outros conteúdos TXT
+- Detecção automática de capítulos, modo de títulos com # ou opção de capítulo único
+- Imagem de capa, metadados do livro, informações de série, navegação e empacotamento EPUB
+- Os arquivos existentes são preservados; conflitos de nome recebem numeração automática
+- A criação do EPUB e o armazenamento dos projetos permanecem no dispositivo
+
+## Seu manuscrito continua com você
+
+- Sem conta nem login
+- Sem publicidade, análise comportamental ou SDKs de rastreamento
+- Manuscritos TXT e imagens de capa são processados localmente
+- Projetos e EPUBs gerados não são enviados para servidores da ONNELLAB`, 'Perguntas frequentes', [
+      { question: 'Os manuscritos são enviados para um servidor?', answer: 'Não. Arquivos TXT, capas, projetos, prévias e EPUBs gerados são processados no dispositivo.' },
+      { question: 'Posso editar o manuscrito no Papira?', answer: 'O Papira serve para montar um manuscrito finalizado em EPUB. Faça as alterações no TXT primeiro no editor de sua preferência.' },
+      { question: 'Que tipos de obra posso preparar?', answer: 'Qualquer conteúdo TXT finalizado pode ser convertido em EPUB. As predefinições apenas agilizam fluxos criativos comuns.' }
     ])
-  },
   de: {
     aligna: make('Stapel-Umbenennung von Dateien', `Aligna benennt mehrere Dateien mit klaren, vorhersehbaren Regeln um.\n\nWende einheitliche Namensmuster auf Fotos, Musik und Dokumente an: Datum oder laufende Nummer ergänzen, Leerzeichen ersetzen, unzulässige Zeichen entfernen oder Musikdateinamen aus Tags erzeugen.\n\n## Hauptfunktionen\n\n- Datum oder laufende Nummern ergänzen\n- Leerzeichen durch Unterstriche ersetzen\n- Unzulässige Zeichen entfernen\n- Fotos nach Aufnahmedatum ordnen\n- Dateinamen aus Künstler, Tracknummer und Titel erzeugen\n- Änderungen vor dem Anwenden in der Vorschau prüfen\n\nAligna ist weder Dateimanager noch Cloud-Dienst. Es gibt kein Konto und keine Werbung; die Verarbeitung erfolgt auf dem Gerät. Unter iOS kann wegen Systembeschränkungen eine neu benannte Kopie gespeichert werden, statt die Originaldatei direkt umzubenennen.`, 'Häufige Fragen', [{ question: 'Wird die Originaldatei direkt umbenannt?', answer: 'Unter Android können ausgewählte Dateien umbenannt werden. Unter iOS wird wegen Systembeschränkungen eine neue Datei mit dem neuen Namen gespeichert.' }, { question: 'Kann ich die neuen Namen vorher prüfen?', answer: 'Ja. Eine Vorschau zeigt die neuen Dateinamen vor der Anwendung.' }, { question: 'Werden Dateien an einen Server gesendet?', answer: 'Nein. Die Verarbeitung erfolgt lokal auf dem Gerät.' }]),
     clipnest: make('Lokale Zwischenablage und Textbausteine', `ClipNest ist ein lokal arbeitendes Zwischenablage-Werkzeug für iPhone und iPad.\n\nBeim Öffnen der ClipNest-Tastatur wird die aktuelle Zwischenablage einmal geprüft und neuer Text auf dem Gerät gespeichert. So lassen sich Nachrichten, Adressen, E-Mail-Adressen, Links und häufige Textbausteine schnell wiederverwenden.\n\n## Hauptfunktionen\n\n- Kopierten Text beim Öffnen der Tastatur speichern\n- Direkt über die Tastatur einfügen\n- Häufige Einträge anheften\n- Letzte Kopien wiederverwenden\n- Duplikate handhaben\n- Lokale Speicherung auf dem Gerät\n\nDie Zwischenablage wird nicht dauerhaft überwacht. Gespeicherte Texte werden nicht an externe Server gesendet. Es gibt kein Konto, keine Werbung und kein Abonnement.`, 'Häufige Fragen', [{ question: 'Überwacht ClipNest die Zwischenablage ständig?', answer: 'Nein. Der aktuelle Inhalt wird einmal geprüft, wenn die Tastatur geöffnet wird.' }, { question: 'Werden gespeicherte Texte an einen Server gesendet?', answer: 'Nein. Sie bleiben lokal auf dem Gerät.' }, { question: 'Kann ich häufige Texte anheften?', answer: 'Ja. Wichtige Texte können für schnellen Zugriff über die Tastatur angeheftet werden.' }]),
@@ -66,8 +90,36 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
     segra: make('Audio schneiden und zusammenfügen', `Segra ist ein einfaches Werkzeug für häufige Audioarbeiten. Schneide Bereiche aus MP3/WAV, füge mehrere Aufnahmen zusammen oder erstelle ein MP4-Video aus Audio und Bild.\n\nIm Mittelpunkt steht nicht Musikproduktion, sondern das Kürzen langer Aufnahmen, das Zusammenfügen in gewünschter Reihenfolge und einfache Videos für Sprechertext, Podcasts, Hörbücher oder TTS-Audio.\n\n## Hauptfunktionen\n\n- Start- und Endpunkt zum Ausschneiden wählen\n- Mehrere Audiodateien zusammenfügen\n- MP4 aus Audio und Bild erstellen\n- Originaldateien erhalten\n- Komplett lokal und offline verarbeiten\n\nKein Login, kein Datei-Upload, keine Werbung und kein Tracking.`, 'Häufige Fragen', [{ question: 'Wird die Original-Audiodatei verändert?', answer: 'Nein. Ausschnitte und Zusammenführungen werden als neue Dateien gespeichert.' }, { question: 'Welche Audioarbeiten werden unterstützt?', answer: 'MP3/WAV schneiden, Dateien zusammenfügen und MP4 aus Audio plus Bild erstellen.' }, { question: 'Werden Dateien an einen Server gesendet?', answer: 'Nein. Die Verarbeitung erfolgt auf dem Gerät.' }]),
     tagweaver: make('Offline-Editor für MP3- und FLAC-Tags', `TagWeaver ist ein Offline-Tag-Editor zum Prüfen und Bearbeiten von Metadaten, Bewertungen, Coverbildern und Liedtexten in MP3- und FLAC-Dateien.\n\nBearbeite Titel, Künstler, Album, Album-Künstler, Track- und Discnummer, Jahr, Genre, Komponist und Bewertung. Cover und Liedtexte gehören zum selben Bearbeitungsablauf.\n\n## Unterstützte Bearbeitung\n\n- MP3 ID3 und FLAC Vorbis Comment\n- Tag-Felder, Bewertung, Cover und Liedtexte\n- Mehrfachauswahl und Stapelbearbeitung\n\nDie Bibliothek wird nicht automatisch umorganisiert; gespeichert werden nur bestätigte Änderungen. Stapelspeichern für mehrere Dateien gehört zu Pro. Alles wird auf dem Gerät verarbeitet, ohne Login, Upload, Werbung oder Tracking.`, 'Häufige Fragen', [{ question: 'Werden Dateien auf einen Server hochgeladen?', answer: 'Nein. Die Bearbeitung erfolgt lokal ohne Login oder Datei-Upload.' }, { question: 'Kann ich MP3 und FLAC bearbeiten?', answer: 'Ja. Unterstützt werden MP3-ID3-Tags und FLAC-Vorbis-Comments.' }, { question: 'Kann ich mehrere Dateien gemeinsam speichern?', answer: 'Mehrfachauswahl und Stapelbearbeitung werden unterstützt; das Stapelspeichern mehrerer Dateien ist in Pro verfügbar.' }]),
     vaultxt: make('Editor für große TXT-Dateien', `VaultXT ist ein schneller, leichter Texteditor für große Dateien.\n\nÖffne und bearbeite lange Dokumente, Logs, Entwürfe und exportierte Textdaten, die in gewöhnlichen Notiz-Apps schwerfällig werden können. Dateien werden direkt vom Gerät geöffnet und ohne Cloud-Upload gespeichert.\n\n## Hauptfunktionen\n\n- Große TXT-Dateien schnell öffnen\n- Lange Dokumente lesen und bearbeiten\n- Automatisch speichern\n- Wiederherstellung mit Rückgängig und Snapshots\n- Lokal und offline arbeiten\n\nKein Konto, keine Werbung, kein Tracking; Dateiinhalte werden nicht an externe Server gesendet.`, 'Häufige Fragen', [{ question: 'Kann VaultXT sehr große TXT-Dateien öffnen?', answer: 'Ja. Es ist für große TXT-Dateien, lange Dokumente, Logs, Entwürfe und exportierte Textdaten ausgelegt.' }, { question: 'Wie kann ich Änderungen wiederherstellen?', answer: 'Automatisches Speichern, Rückgängig und Snapshots bieten Wiederherstellungsmöglichkeiten.' }, { question: 'Werden Dateiinhalte an einen Server gesendet?', answer: 'Nein. Verarbeitung und Speicherung bleiben lokal.' }]),
-    papira: make('Offline TXT-zu-EPUB-Ersteller', `Papira wandelt eine TXT-Datei vollständig lokal in ein einfaches, vorhersehbares EPUB um.\n\nWähle eine TXT-Datei; die App ordnet Absätze, bewahrt Dialogblöcke bei Bedarf und erstellt ein leichtes EPUB ohne Konto, Werbung oder Server-Upload.\n\n## Hauptfunktionen\n\n- Lokale TXT-zu-EPUB-Konvertierung\n- Einfache Ein-Kapitel-Struktur\n- Normalisierung von Abständen und Absätzen\n- Erhalt von Dialogblöcken\n- EPUB-Datei für kompatible Reader\n\nPapira ist weder EPUB-Reader noch Texteditor. Es erfüllt eine Aufgabe: TXT als EPUB-Datei vorbereiten.`, 'Häufige Fragen', [{ question: 'Wird der Text an einen Server gesendet?', answer: 'Nein. Die Konvertierung findet auf dem Gerät statt.' }, { question: 'Bearbeitet Papira den Textinhalt?', answer: 'Nicht wie ein Editor. Zeilenumbrüche und Abstände werden nach den Konvertierungsregeln strukturiert.' }, { question: 'Brauche ich ein Konto?', answer: 'Nein.' }])
-  },
+    papira: make('Offline-TXT-zu-EPUB-Ersteller', `Papira setzt fertige TXT-Manuskripte zu strukturierten EPUB-Büchern zusammen. Es gibt eigene Abläufe für Fanfiction, Fortsetzungsromane, eigene Romane, digitale Zines und TRPG-Szenarien; andere TXT-Inhalte lassen sich ebenfalls in EPUB umwandeln.
+
+## Zwei gezielte Wege zum EPUB
+
+### 1. Schnell-EPUB
+
+Wähle TXT-Dateien aus und erstelle sofort EPUB-Dateien – ohne Cover oder Veröffentlichungsmetadaten.
+
+### 2. Buchprojekt
+
+Füge vor dem Export Cover, Titel, Autor, Verlag, Serieninformationen, Kapitelregeln und ein Inhaltsverzeichnis hinzu.
+
+## Für fertige Manuskripte ausgelegt
+
+- Voreinstellungen für Fanfiction, Fortsetzungsromane, eigene Romane, digitale Zines und TRPG-Szenarien sowie Unterstützung für andere TXT-Inhalte
+- Automatische Kapitelerkennung, #-Überschriftenmodus oder Einzelkapitel-Option
+- Coverbild, Buchmetadaten, Serieninformationen, Navigation und EPUB-Paketierung
+- Vorhandene Dateien bleiben erhalten; bei Namenskonflikten wird automatisch eine Nummer ergänzt
+- EPUB-Erstellung und Projektspeicherung bleiben auf dem Gerät
+
+## Dein Manuskript bleibt bei dir
+
+- Kein Konto und keine Anmeldung
+- Keine Werbung, Verhaltensanalyse oder Tracking-SDKs
+- TXT-Manuskripte und Coverbilder werden lokal verarbeitet
+- Buchprojekte und erzeugte EPUB-Dateien werden nicht auf ONNELLAB-Server hochgeladen`, 'Häufige Fragen', [
+      { question: 'Werden Manuskripte auf einen Server hochgeladen?', answer: 'Nein. TXT-Dateien, Coverbilder, Projekte, Vorschauen und erzeugte EPUB-Dateien werden auf dem Gerät verarbeitet.' },
+      { question: 'Kann ich das Manuskript in Papira bearbeiten?', answer: 'Papira ist dafür gedacht, ein fertiges Manuskript als EPUB zusammenzusetzen. Bearbeite den TXT-Quelltext vorher in deinem bevorzugten Schreibprogramm.' },
+      { question: 'Welche Arten von Werken kann ich vorbereiten?', answer: 'Jeder fertige TXT-Inhalt kann in EPUB umgewandelt werden. Die Voreinstellungen beschleunigen lediglich häufige kreative Abläufe.' }
+    ])
   fr: {
     aligna: make('Renommage de fichiers par lot', `Aligna renomme plusieurs fichiers avec des règles claires et prévisibles.\n\nAppliquez les mêmes conventions aux photos, musiques et documents : ajoutez une date ou une numérotation, remplacez les espaces, retirez les caractères interdits ou créez des noms musicaux à partir des tags.\n\n## Fonctions principales\n\n- Ajouter date ou numérotation\n- Remplacer les espaces par des tirets bas\n- Retirer les caractères interdits\n- Organiser les photos par date de prise de vue\n- Créer des noms depuis artiste, numéro de piste et titre\n- Vérifier l’aperçu avant application\n\nAligna n’est ni un explorateur de fichiers ni un service cloud. Aucun compte, aucune publicité ; le traitement reste sur l’appareil. Sur iOS, les limites du système peuvent imposer l’enregistrement d’une nouvelle copie renommée plutôt que la modification directe de l’original.`, 'Questions fréquentes', [{ question: 'Le fichier original est-il renommé directement ?', answer: 'Sur Android, les fichiers choisis peuvent être renommés. Sur iOS, une nouvelle copie portant le nouveau nom est enregistrée en raison des limites du système.' }, { question: 'Puis-je vérifier les nouveaux noms avant de les appliquer ?', answer: 'Oui. L’aperçu montre les noms obtenus avant toute modification.' }, { question: 'Les fichiers sont-ils envoyés vers un serveur ?', answer: 'Non. Le traitement reste local.' }]),
     clipnest: make('Presse-papiers local et textes réutilisables', `ClipNest est un outil de presse-papiers local pour iPhone et iPad.\n\nÀ l’ouverture du clavier ClipNest, le presse-papiers courant est vérifié une fois et les nouveaux textes sont enregistrés sur l’appareil. Messages, adresses, e-mails, liens et phrases fréquentes peuvent ainsi être réutilisés rapidement.\n\n## Fonctions principales\n\n- Enregistrer le texte copié à l’ouverture du clavier\n- Coller directement depuis le clavier\n- Épingler les éléments fréquents\n- Réutiliser l’historique récent\n- Gérer les doublons\n- Stockage local sur l’appareil\n\nLe presse-papiers n’est pas surveillé en permanence. Les textes enregistrés ne sont pas envoyés à un serveur externe. Aucun compte, aucune publicité ni abonnement.`, 'Questions fréquentes', [{ question: 'ClipNest surveille-t-il le presse-papiers en continu ?', answer: 'Non. Il vérifie le contenu actuel une seule fois lorsque le clavier s’ouvre.' }, { question: 'Les textes enregistrés sont-ils envoyés à un serveur ?', answer: 'Non. Ils restent sur l’appareil.' }, { question: 'Puis-je épingler les textes souvent utilisés ?', answer: 'Oui. Les éléments importants peuvent être épinglés pour un accès rapide.' }]),
@@ -77,8 +129,36 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
     segra: make('Découper et assembler de l’audio', `Segra simplifie les tâches audio courantes : découper une partie d’un MP3/WAV, assembler plusieurs enregistrements ou créer une vidéo MP4 à partir d’un audio et d’une image.\n\nL’objectif n’est pas la production musicale complète, mais le découpage d’enregistrements longs, l’assemblage dans l’ordre choisi et les vidéos simples pour narration, podcasts, livres audio ou TTS.\n\n## Fonctions principales\n\n- Choisir début et fin d’un extrait\n- Assembler plusieurs fichiers audio\n- Créer un MP4 avec audio et image\n- Préserver les fichiers originaux\n- Tout traiter localement et hors ligne\n\nAucune connexion, aucun envoi de fichier, aucune publicité ni suivi.`, 'Questions fréquentes', [{ question: 'Le fichier audio original est-il modifié ?', answer: 'Non. Les extraits et assemblages sont enregistrés comme nouveaux fichiers.' }, { question: 'Quelles tâches audio sont prises en charge ?', answer: 'Découpe MP3/WAV, assemblage de fichiers et création MP4 avec audio et image.' }, { question: 'Les fichiers sont-ils envoyés à un serveur ?', answer: 'Non.' }]),
     tagweaver: make('Éditeur hors ligne de tags MP3/FLAC', `TagWeaver permet de vérifier et modifier hors ligne métadonnées, notes, pochettes et paroles des fichiers MP3 et FLAC.\n\nModifiez titre, artiste, album, artiste de l’album, numéros de piste et de disque, année, genre, compositeur et note. Pochettes et paroles sont gérées dans le même flux.\n\n## Modifications prises en charge\n\n- ID3 pour MP3 et Vorbis Comment pour FLAC\n- Champs de tags, notes, pochettes et paroles\n- Sélection et édition de plusieurs fichiers\n\nLa bibliothèque n’est pas réorganisée automatiquement : seules les modifications vérifiées sont enregistrées. L’enregistrement en lot de plusieurs fichiers est disponible avec Pro. Tout reste sur l’appareil, sans connexion, envoi, publicité ni suivi.`, 'Questions fréquentes', [{ question: 'Les fichiers sont-ils envoyés à un serveur ?', answer: 'Non. La modification est locale.' }, { question: 'Puis-je modifier MP3 et FLAC ?', answer: 'Oui. ID3 MP3 et Vorbis Comment FLAC sont pris en charge.' }, { question: 'Puis-je enregistrer plusieurs fichiers ensemble ?', answer: 'Oui. La sélection et l’édition en lot sont prises en charge ; l’enregistrement multiple est disponible avec Pro.' }]),
     vaultxt: make('Éditeur de gros fichiers TXT', `VaultXT est un éditeur de texte rapide et léger conçu pour les gros fichiers.\n\nOuvrez et modifiez longs documents, journaux, brouillons et données texte exportées sans les envoyer vers un service cloud.\n\n## Fonctions principales\n\n- Ouvrir rapidement de gros TXT\n- Lire et modifier de longs documents\n- Sauvegarde automatique\n- Récupération avec annulation et snapshots\n- Travail local et hors ligne\n\nAucun compte, aucune publicité ni suivi ; le contenu n’est pas envoyé à un serveur externe.`, 'Questions fréquentes', [{ question: 'Puis-je ouvrir de très gros fichiers TXT ?', answer: 'Oui. VaultXT est conçu pour les gros TXT, longs documents, logs, brouillons et données exportées.' }, { question: 'Comment récupérer mes modifications ?', answer: 'Sauvegarde automatique, annulation et snapshots offrent des voies de récupération.' }, { question: 'Le contenu est-il envoyé à un serveur ?', answer: 'Non.' }]),
-    papira: make('Créateur TXT vers EPUB hors ligne', `Papira transforme localement un fichier TXT en EPUB simple et prévisible.\n\nChoisissez un TXT : l’app organise les paragraphes, préserve les blocs de dialogue si nécessaire et crée un EPUB léger sans compte, publicité ni envoi serveur.\n\n## Fonctions principales\n\n- Conversion TXT vers EPUB locale\n- Structure simple à chapitre unique\n- Normalisation des espaces et paragraphes\n- Préservation des blocs de dialogue\n- EPUB prêt pour les lecteurs compatibles\n\nPapira n’est ni lecteur EPUB ni éditeur de texte. Il prépare simplement un TXT en fichier EPUB.`, 'Questions fréquentes', [{ question: 'Le texte est-il envoyé à un serveur ?', answer: 'Non. La conversion se fait sur l’appareil.' }, { question: 'Papira modifie-t-il le contenu comme un éditeur ?', answer: 'Non. Il restructure uniquement espaces et retours à la ligne selon les règles de conversion.' }, { question: 'Faut-il un compte ?', answer: 'Non.' }])
-  },
+    papira: make('Créateur EPUB hors ligne à partir de TXT', `Papira assemble des manuscrits TXT finalisés en livres EPUB structurés. L’application propose des parcours dédiés aux fanfictions, romans-feuilletons, romans personnels, zines numériques et scénarios de JDR sur table, tout en acceptant d’autres contenus TXT.
+
+## Deux façons ciblées de créer
+
+### 1. EPUB rapide
+
+Sélectionnez des fichiers TXT et créez immédiatement des EPUB, sans couverture ni métadonnées de publication.
+
+### 2. Projet de livre
+
+Ajoutez une couverture, un titre, un auteur, un éditeur, des informations de série, des règles de chapitrage et une table des matières avant l’exportation.
+
+## Pensé pour les manuscrits finalisés
+
+- Préréglages pour fanfictions, romans-feuilletons, romans personnels, zines numériques et scénarios de JDR sur table, avec prise en charge d’autres contenus TXT
+- Détection automatique des chapitres, mode de titres avec # ou option de chapitre unique
+- Image de couverture, métadonnées du livre, informations de série, navigation et empaquetage EPUB
+- Les fichiers existants sont conservés ; un numéro est ajouté automatiquement en cas de conflit de nom
+- La création des EPUB et le stockage des projets restent sur l’appareil
+
+## Votre manuscrit reste avec vous
+
+- Aucun compte ni connexion
+- Aucune publicité, analyse comportementale ou SDK de suivi
+- Les manuscrits TXT et images de couverture sont traités localement
+- Les projets et EPUB générés ne sont pas envoyés vers un serveur ONNELLAB`, 'Questions fréquentes', [
+      { question: 'Les manuscrits sont-ils envoyés vers un serveur ?', answer: 'Non. Les fichiers TXT, couvertures, projets, aperçus et EPUB générés sont traités sur l’appareil.' },
+      { question: 'Puis-je modifier le manuscrit dans Papira ?', answer: 'Papira sert à assembler un manuscrit finalisé en EPUB. Modifiez d’abord le TXT source dans votre outil d’écriture habituel.' },
+      { question: 'Quels types d’œuvres puis-je préparer ?', answer: 'Tout contenu TXT finalisé peut être converti en EPUB. Les préréglages servent seulement à accélérer les flux créatifs courants.' }
+    ])
   es: {
     aligna: make('Renombrador de archivos por lotes', `Aligna cambia el nombre de varios archivos usando reglas claras y predecibles.\n\nAplica patrones uniformes a fotos, música y documentos: añade fechas o números correlativos, cambia espacios por guiones bajos, elimina caracteres no válidos y genera nombres musicales a partir de etiquetas.\n\n## Funciones principales\n\n- Añadir fecha o numeración\n- Sustituir espacios por guiones bajos\n- Eliminar caracteres no válidos\n- Organizar fotos por fecha de captura\n- Crear nombres con artista, número de pista y título\n- Revisar una vista previa antes de aplicar\n\nAligna no es un explorador de archivos ni un servicio en la nube. No requiere cuenta, no tiene anuncios y procesa todo en el dispositivo. En iOS, las restricciones del sistema pueden hacer que se guarde una copia con el nuevo nombre en vez de renombrar directamente el original.`, 'Preguntas frecuentes', [{ question: '¿Se cambia directamente el nombre del archivo original?', answer: 'En Android se pueden renombrar los archivos seleccionados. En iOS se guarda una nueva copia con el nombre nuevo debido a las restricciones del sistema.' }, { question: '¿Puedo revisar los nombres antes de aplicarlos?', answer: 'Sí. La vista previa muestra el resultado antes de modificar nada.' }, { question: '¿Se envían archivos a un servidor?', answer: 'No. El procesamiento es local.' }]),
     clipnest: make('Portapapeles local y textos reutilizables', `ClipNest es una herramienta local de portapapeles para iPhone y iPad.\n\nAl abrir el teclado de ClipNest se revisa una vez el contenido actual del portapapeles y se guarda el texto nuevo en el dispositivo. Así puedes reutilizar mensajes, direcciones, correos, enlaces y frases frecuentes sin volver a buscarlos.\n\n## Funciones principales\n\n- Guardar texto copiado al abrir el teclado\n- Pegar directamente desde el teclado\n- Fijar elementos frecuentes\n- Reutilizar el historial reciente\n- Gestionar duplicados\n- Almacenamiento local\n\nClipNest no vigila el portapapeles continuamente. Los textos guardados no se envían a servidores externos. No hay cuenta, anuncios ni suscripción.`, 'Preguntas frecuentes', [{ question: '¿ClipNest vigila el portapapeles todo el tiempo?', answer: 'No. Comprueba el contenido actual una sola vez al abrir el teclado.' }, { question: '¿Los textos guardados se envían a un servidor?', answer: 'No. Permanecen en el dispositivo.' }, { question: '¿Puedo fijar textos de uso frecuente?', answer: 'Sí. Puedes fijarlos para acceder rápidamente desde el teclado.' }]),
@@ -88,8 +168,37 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
     segra: make('Cortar y unir audio', `Segra simplifica tareas comunes de audio: recortar una parte de MP3/WAV, unir varias grabaciones o crear un vídeo MP4 con audio e imagen.\n\nNo pretende ser una suite de producción musical. Se centra en recortar grabaciones largas, unir archivos en el orden elegido y preparar vídeos sencillos para narración, podcasts, audiolibros o TTS.\n\n## Funciones principales\n\n- Elegir inicio y final del recorte\n- Unir varios archivos de audio\n- Crear MP4 con audio e imagen\n- Conservar originales\n- Procesar todo localmente y sin conexión\n\nNo hay inicio de sesión, subida de archivos, anuncios ni seguimiento.`, 'Preguntas frecuentes', [{ question: '¿Se modifica el audio original?', answer: 'No. Los recortes y uniones se guardan como archivos nuevos.' }, { question: '¿Qué tareas admite?', answer: 'Recorte de MP3/WAV, unión de archivos y creación de MP4 con audio e imagen.' }, { question: '¿Se envían los archivos a un servidor?', answer: 'No.' }]),
     tagweaver: make('Editor sin conexión de etiquetas MP3/FLAC', `TagWeaver permite revisar y editar sin conexión metadatos, puntuaciones, carátulas y letras en archivos MP3 y FLAC.\n\nEdita título, artista, álbum, artista del álbum, números de pista y disco, año, género, compositor y puntuación. Las carátulas y letras se gestionan en el mismo flujo.\n\n## Edición compatible\n\n- ID3 de MP3 y Vorbis Comment de FLAC\n- Campos, puntuaciones, carátulas y letras\n- Selección y edición de varios archivos\n\nLa biblioteca no se reorganiza automáticamente: solo se guardan los cambios que revisas. El guardado por lotes de varios archivos está disponible con Pro. Todo ocurre en el dispositivo, sin login, subidas, anuncios ni seguimiento.`, 'Preguntas frecuentes', [{ question: '¿Se suben los archivos a un servidor?', answer: 'No. La edición es local.' }, { question: '¿Puedo editar MP3 y FLAC?', answer: 'Sí. Se admiten ID3 de MP3 y Vorbis Comment de FLAC.' }, { question: '¿Puedo guardar varios archivos a la vez?', answer: 'Sí. Hay selección y edición por lotes; el guardado múltiple forma parte de Pro.' }]),
     vaultxt: make('Editor de archivos TXT grandes', `VaultXT es un editor de texto rápido y ligero diseñado para archivos grandes.\n\nAbre y edita documentos largos, registros, borradores y datos exportados sin enviarlos a servicios en la nube.\n\n## Funciones principales\n\n- Abrir rápidamente TXT grandes\n- Leer y editar documentos largos\n- Guardado automático\n- Recuperación con deshacer y snapshots\n- Trabajo local y sin conexión\n\nNo hay cuenta, anuncios ni seguimiento; el contenido no se envía a servidores externos.`, 'Preguntas frecuentes', [{ question: '¿Puedo abrir archivos TXT muy grandes?', answer: 'Sí. VaultXT está diseñado para TXT grandes, documentos largos, logs, borradores y datos exportados.' }, { question: '¿Cómo puedo recuperar cambios?', answer: 'Guardado automático, deshacer y snapshots ofrecen opciones de recuperación.' }, { question: '¿Se envía el contenido a un servidor?', answer: 'No.' }]),
-    papira: make('Creador sin conexión de TXT a EPUB', `Papira convierte un archivo TXT en un EPUB sencillo y predecible, completamente en el dispositivo.\n\nElige un TXT: la app organiza párrafos, conserva bloques de diálogo cuando corresponde y crea un EPUB ligero sin cuenta, anuncios ni subida al servidor.\n\n## Funciones principales\n\n- Conversión local TXT a EPUB\n- Estructura simple de un capítulo\n- Normalización de espacios y párrafos\n- Conservación de bloques de diálogo\n- EPUB listo para lectores compatibles\n\nPapira no es un lector EPUB ni un editor de texto. Su única tarea es preparar un TXT como archivo EPUB.`, 'Preguntas frecuentes', [{ question: '¿Se envía el texto a un servidor?', answer: 'No. La conversión se realiza en el dispositivo.' }, { question: '¿Papira edita el texto como un editor?', answer: 'No. Solo reorganiza espacios y saltos según las reglas de conversión.' }, { question: '¿Necesito una cuenta?', answer: 'No.' }])
-  }
+    papira: make('Creador de EPUB sin conexión a partir de TXT', `Papira convierte manuscritos TXT terminados en libros EPUB estructurados. Incluye flujos específicos para fanfiction, ficción por entregas, novelas personales, zines digitales y escenarios de TRPG, y también admite otros contenidos TXT.
+
+## Dos formas directas de crear
+
+### 1. EPUB rápido
+
+Selecciona archivos TXT y crea EPUB de inmediato, sin portada ni metadatos de publicación.
+
+### 2. Proyecto de libro
+
+Añade portada, título, autor, editorial, información de serie, reglas de capítulos y tabla de contenidos antes de exportar.
+
+## Pensado para manuscritos terminados
+
+- Ajustes para fanfiction, ficción por entregas, novelas personales, zines digitales y escenarios de TRPG, además de otros contenidos TXT
+- Detección automática de capítulos, modo de encabezados con # u opción de capítulo único
+- Imagen de portada, metadatos del libro, información de serie, navegación y empaquetado EPUB
+- Los archivos existentes se conservan; si hay conflicto de nombres se añade un número automáticamente
+- La creación del EPUB y el almacenamiento de proyectos permanecen en el dispositivo
+
+## Tu manuscrito se queda contigo
+
+- Sin cuenta ni inicio de sesión
+- Sin publicidad, analítica de comportamiento ni SDK de seguimiento
+- Los manuscritos TXT y las imágenes de portada se procesan localmente
+- Los proyectos y EPUB generados no se suben a servidores de ONNELLAB`, 'Preguntas frecuentes', [
+      { question: '¿Los manuscritos se suben a un servidor?', answer: 'No. Los archivos TXT, portadas, proyectos, vistas previas y EPUB generados se procesan en el dispositivo.' },
+      { question: '¿Puedo editar el manuscrito en Papira?', answer: 'Papira está pensado para montar un manuscrito terminado como EPUB. Edita primero el TXT original en tu herramienta de escritura habitual.' },
+      { question: '¿Qué tipos de obras puedo preparar?', answer: 'Cualquier contenido TXT terminado puede convertirse en EPUB. Los ajustes específicos solo agilizan flujos creativos habituales.' }
+    ])
+
 };
 
 export function getExtendedProductCopy(slug: string, locale: ExtendedSiteLocale): ExtendedProductCopy {
