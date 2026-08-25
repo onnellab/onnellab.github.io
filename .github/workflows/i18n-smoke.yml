@@ -33,6 +33,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout site
         uses: actions/checkout@v4
@@ -53,7 +54,7 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Run nine-language desktop route and regression tests
+      - name: Run nine-language product and site regression tests
         run: >-
           npx playwright test
           tests/site-i18n.spec.ts
