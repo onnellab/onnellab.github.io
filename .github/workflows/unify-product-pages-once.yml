@@ -23,6 +23,19 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
+      - name: Repair one-shot substitution helper
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/unify-product-pages.py')
+          text = path.read_text()
+          old = "out, count = re.subn(pattern, repl, text, count=1, flags=flags)"
+          new = "out, count = re.subn(pattern, lambda _match: repl, text, count=1, flags=flags)"
+          if text.count(old) != 1:
+              raise SystemExit('substitution helper marker missing')
+          path.write_text(text.replace(old, new))
+          PY
+
       - name: Apply unified product migration
         run: python3 scripts/unify-product-pages.py
 
