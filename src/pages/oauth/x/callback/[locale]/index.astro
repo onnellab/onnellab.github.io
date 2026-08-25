@@ -1,0 +1,14 @@
+---
+import OAuthCallbackPage from '../../../../../components/OAuthCallbackPage.astro';
+import { translatedPrivacyLocales, type TranslatedPrivacyLocale } from '../../../../../lib/app-privacy-localizations';
+import { allLocaleDefinitions } from '../../../../../lib/extended-site-i18n';
+
+export function getStaticPaths() {
+  return translatedPrivacyLocales.map((locale) => ({
+    params: { locale: allLocaleDefinitions[locale].pathSegment },
+    props: { locale }
+  }));
+}
+const { locale } = Astro.props as { locale: TranslatedPrivacyLocale };
+---
+<OAuthCallbackPage locale={locale} />
