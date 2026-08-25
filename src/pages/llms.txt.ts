@@ -13,6 +13,7 @@ import {
   renderBlocks
 } from '../lib/products';
 import { getPapiraProductPageData } from '../lib/papira';
+import { getBlogPosts } from '../lib/blog';
 
 const siteUrl = 'https://onnellab.github.io';
 
@@ -26,6 +27,24 @@ function summaryLines(text: string): string[] {
     ...(firstParagraph ? [`- Summary: ${firstParagraph}`] : []),
     ...(tasks ?? []).slice(0, 4).map((task) => `- Task: ${task}`)
   ];
+}
+
+function blogArticleLines(): string[] {
+  return allSiteLocales.flatMap((locale) => {
+    const posts = getBlogPosts(locale);
+    return [
+      `### ${allLocaleDefinitions[locale].label}`,
+      '',
+      ...posts.flatMap((post) => [
+        `#### ${post.meta.title}`,
+        `- Summary: ${post.meta.description}`,
+        `- Article: ${absolute(post.href)}`,
+        ...(post.meta.relatedApps.length ? [`- Related apps: ${post.meta.relatedApps.join(', ')}`] : []),
+        ...(post.meta.tags.length ? [`- Tags: ${post.meta.tags.join(', ')}`] : []),
+        ''
+      ])
+    ];
+  });
 }
 
 export function GET() {
@@ -84,6 +103,9 @@ export function GET() {
         ''
       ];
     }),
+    '## Blog Articles',
+    '',
+    ...blogArticleLines(),
     '## Discovery',
     '',
     `- RSS: ${siteUrl}/rss.xml`,
