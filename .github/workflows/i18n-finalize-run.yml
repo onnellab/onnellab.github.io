@@ -1,0 +1,32 @@
+name: Execute nine-language finalizer
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply deterministic patches
+        run: python3 scripts/i18n-finalize.py
+
+      - name: Commit finalized routes
+        run: |
+          rm -f scripts/i18n-finalize.py
+          rm -f .github/workflows/i18n-finalize-once.yml
+          rm -f .github/workflows/i18n-finalize-run.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'fix: connect nine-language routes across legacy pages'
+          git push origin HEAD:main
