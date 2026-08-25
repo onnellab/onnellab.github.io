@@ -1,7 +1,8 @@
 export function GET() {
   return new Response(
     `# ONNELLAB crawler policy
-# Search discovery is allowed. AI training and bulk dataset crawling are not allowed.
+# Search discovery and user-requested retrieval are allowed.
+# AI training and bulk dataset crawling are not allowed.
 
 User-agent: Googlebot
 Allow: /
@@ -14,6 +15,22 @@ Disallow: /manual-publish/
 Allow: /
 
 User-agent: ChatGPT-User
+Disallow: /manual-publish/
+Allow: /
+
+User-agent: Claude-SearchBot
+Disallow: /manual-publish/
+Allow: /
+
+User-agent: Claude-User
+Disallow: /manual-publish/
+Allow: /
+
+User-agent: PerplexityBot
+Disallow: /manual-publish/
+Allow: /
+
+User-agent: Perplexity-User
 Disallow: /manual-publish/
 Allow: /
 
@@ -30,15 +47,6 @@ User-agent: anthropic-ai
 Disallow: /
 
 User-agent: CCBot
-Disallow: /
-
-User-agent: PerplexityBot
-Disallow: /
-
-User-agent: Perplexity-User
-Disallow: /
-
-User-agent: Claude-User
 Disallow: /
 
 User-agent: Meta-ExternalAgent
