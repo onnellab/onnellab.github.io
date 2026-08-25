@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const appsDir = path.resolve(process.cwd(), 'src/content/apps');
+// Discover product directories so every future app automatically inherits the nine-language contract.
 const apps = [
   ...fs
     .readdirSync(appsDir, { withFileTypes: true })
