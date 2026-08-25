@@ -23,6 +23,18 @@ const locales = [
   { code: 'es', segment: 'es' }
 ] as const;
 
+const schemaClassifications: Record<string, { applicationCategory: string; applicationSubCategory: string }> = {
+  aligna: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'File Renaming Utility' },
+  clipnest: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Clipboard Utility' },
+  melivra: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Offline Music Player' },
+  meriq: { applicationCategory: 'DesignApplication', applicationSubCategory: 'Merchandise Production Tool' },
+  papira: { applicationCategory: 'DesignApplication', applicationSubCategory: 'EPUB Authoring Tool' },
+  quivra: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Media Conversion Utility' },
+  segra: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Audio Editing Utility' },
+  tagweaver: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Audio Metadata Editor' },
+  vaultxt: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Large Text File Editor' }
+};
+
 const canonical = (route: string) => `https://onnellab.github.io${route}`;
 const routeFor = (app: string, segment: string) =>
   segment ? `/apps/${app}/${segment}/` : `/apps/${app}/`;
@@ -67,10 +79,16 @@ for (const app of apps) {
       expect(software.mainEntityOfPage).toBe(canonical(route));
       expect(software.publisher?.name).toBe('ONNELLAB');
       expect(software.featureList?.length ?? 0).toBeGreaterThan(0);
+      expect(schemaClassifications[app]).toBeTruthy();
+      expect(software.applicationCategory).toBe(schemaClassifications[app].applicationCategory);
+      expect(software.applicationSubCategory).toBe(schemaClassifications[app].applicationSubCategory);
       expect(software).not.toHaveProperty('offers');
       expect(software).not.toHaveProperty('aggregateRating');
       expect(software).not.toHaveProperty('review');
       expect(software).not.toHaveProperty('isAccessibleForFree');
+      expect(software).not.toHaveProperty('downloadUrl');
+      expect(software).not.toHaveProperty('softwareHelp');
+      expect(software).not.toHaveProperty('privacyPolicy');
       expect(await page.locator('.faq-band details').count()).toBeGreaterThanOrEqual(3);
 
       const screenshots = page.locator('.screenshot-row img');
@@ -124,6 +142,9 @@ test('product sources permanently exclude price, rating, and review commerce met
   expect(templateSource).not.toMatch(/\baggregateRating\s*:/);
   expect(templateSource).not.toMatch(/\breview\s*:/);
   expect(templateSource).not.toMatch(/\bisAccessibleForFree\s*:/);
+  expect(templateSource).not.toMatch(/\bdownloadUrl\s*:/);
+  expect(templateSource).not.toMatch(/\bsoftwareHelp\s*:/);
+  expect(templateSource).not.toMatch(/\bprivacyPolicy\s*:/);
   expect(templateSource).not.toContain("'@type': 'FAQPage'");
   expect(routeSource).not.toContain('ExtendedProductPage');
   expect(fs.existsSync(path.resolve(process.cwd(), 'src/components/ExtendedProductPage.astro'))).toBe(false);

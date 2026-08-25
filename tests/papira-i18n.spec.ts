@@ -488,8 +488,8 @@ test.describe('Papira nine-language launch surface', () => {
       const software = schemas.find((item) => item['@type'] === 'SoftwareApplication');
       expect(software).toMatchObject({
         mainEntityOfPage: canonical,
-        privacyPolicy: `https://onnellab.github.io/privacy/papira/${locale.path}`,
-        softwareHelp: 'mailto:onnellab.app@gmail.com',
+        applicationCategory: 'DesignApplication',
+        applicationSubCategory: 'EPUB Authoring Tool',
         publisher: {
           '@type': 'Organization',
           name: 'ONNELLAB',
@@ -497,6 +497,9 @@ test.describe('Papira nine-language launch surface', () => {
         }
       });
       expect(software?.featureList).toHaveLength(5);
+      expect(software).not.toHaveProperty('downloadUrl');
+      expect(software).not.toHaveProperty('softwareHelp');
+      expect(software).not.toHaveProperty('privacyPolicy');
       expect(schemas.some((item) => item['@type'] === 'BreadcrumbList')).toBe(true);
       expect(schemas.some((item) => item['@type'] === 'FAQPage')).toBe(false);
       await expect(page.locator('.faq-band details')).toHaveCount(3);

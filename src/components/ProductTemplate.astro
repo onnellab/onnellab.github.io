@@ -170,16 +170,14 @@ const jsonLd = {
     : {}),
   ...(screenshotUrls.length > 0 ? { screenshot: screenshotUrls } : {}),
   ...(storeUrls.length > 0
-    ? { downloadUrl: storeUrls, installUrl: storeUrls, sameAs: storeUrls }
+    ? { installUrl: storeUrls, sameAs: storeUrls }
     : {}),
-  softwareHelp: `mailto:${meta.supportEmail}`,
   publisher: {
     '@type': 'Organization',
     '@id': new URL('/#organization', Astro.site).toString(),
     name: 'ONNELLAB',
     url: new URL('/', Astro.site).toString()
-  },
-  privacyPolicy: privacyUrl
+  }
 };
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
