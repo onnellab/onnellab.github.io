@@ -34,6 +34,16 @@ const alternates = [
   { lang: 'x-default', path: releaseNotePath(note) }
 ];
 const description = `${note.title} ${labels.titleSuffix}. ${text.summary}`;
+const footerLabels: Record<ReleaseLocale, { apps: string; privacy: string }> = {
+  ja: { apps: 'アプリ一覧', privacy: 'プライバシー' },
+  'zh-Hans': { apps: '全部应用', privacy: '隐私' },
+  'zh-Hant': { apps: '全部應用程式', privacy: '隱私權' },
+  'pt-BR': { apps: 'Todos os apps', privacy: 'Privacidade' },
+  de: { apps: 'Alle Apps', privacy: 'Datenschutz' },
+  fr: { apps: 'Toutes les applications', privacy: 'Confidentialité' },
+  es: { apps: 'Todas las aplicaciones', privacy: 'Privacidad' }
+};
+const footer = footerLabels[locale];
 ---
 
 <BaseLayout title={`${note.title} ${labels.titleSuffix} | ONNELLAB`} description={description} canonicalPath={canonicalPath} lang={definition.htmlLang} image={iconPath} ogType="article" alternates={alternates} articleMeta={{ publishedTime: note.releasedDate, modifiedTime: note.releasedDate, section: labels.titleSuffix, tags: [note.appName,note.platform,note.version] }}>
@@ -57,7 +67,7 @@ const description = `${note.title} ${labels.titleSuffix}. ${text.summary}`;
       <section><h2>{labels.compatibility}</h2><p>{labels.compatibilityText(note.appName)}</p></section>
       <section><h2>{labels.upgrade}</h2><p>{labels.upgradeText}</p></section>
     </article>
-    <footer class="footer"><a href={allRouteFor('apps',locale)}>{labels.appPage}</a><a href={allRouteFor('privacy',locale)}>Privacy</a><a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a><span>© ONNELLAB</span></footer>
+    <footer class="footer"><a href={allRouteFor('apps',locale)}>{footer.apps}</a><a href={allRouteFor('privacy',locale)}>{footer.privacy}</a><a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a><span>© ONNELLAB</span></footer>
   </main>
 </BaseLayout>
 <style>
