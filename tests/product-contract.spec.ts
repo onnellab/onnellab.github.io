@@ -67,6 +67,7 @@ for (const app of apps) {
       await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
       await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical(route));
+      await expect(page.locator('link[rel="describedby"]')).toHaveAttribute('href', 'https://onnellab.github.io/llms.txt');
 
       const allSchemas = await schemas(page);
       const software = allSchemas.find((entry) => entry?.['@type'] === 'SoftwareApplication');
@@ -137,16 +138,18 @@ test('AI discovery policy separates search retrieval from training and keeps the
     return next >= 0 ? rest.slice(0, next) : rest;
   };
 
-  for (const userAgent of ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User']) {
+  for (const userAgent of ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'YouBot', 'Meta-ExternalFetcher']) {
     expect(sectionFor(userAgent)).toContain('Allow: /');
   }
-  for (const userAgent of ['GPTBot', 'Google-Extended', 'ClaudeBot']) {
+  for (const userAgent of ['GPTBot', 'Google-Extended', 'ClaudeBot', 'Meta-ExternalAgent']) {
     expect(sectionFor(userAgent)).toContain('Disallow: /');
   }
 
   const llmsResponse = await request.get('/llms.txt');
   expect(llmsResponse.ok()).toBe(true);
   const llms = await llmsResponse.text();
+  expect(llms).toMatch(/^# ONNELLAB\n\n> /);
+  expect(llms).not.toMatch(/^###\s/m);
   expect(llms).toContain('nine languages');
   expect(llms).toContain('## Apps with nine-language product pages');
   expect(llms).toContain('## Blog Articles');

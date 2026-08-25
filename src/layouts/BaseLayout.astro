@@ -156,6 +156,7 @@ const gaScript = gaMeasurementId
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="describedby" href={new URL("/llms.txt", Astro.site)} />
     <link rel="alternate" type="application/rss+xml" title="ONNELLAB RSS" href={new URL('/rss.xml', Astro.site)} />
     {alternates.map((alternate) => (
       <link rel="alternate" hreflang={alternate.lang} href={new URL(alternate.path, Astro.site)} />
