@@ -2,19 +2,19 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { getBlogPosts } from '../lib/blog';
-import { getProductSources } from '../lib/products';
+import { getExtendedBlogPosts } from '../lib/extended-blog';
 import {
-  localeDefinitions,
-  papiraPrivacyLocaleAlternates,
-  papiraPrivacyLocales,
-  papiraPrivacyRouteFor,
-  productLocaleAlternates,
-  productRouteFor,
-  routeFor,
-  siteLocales,
-  type LocalizedPage
-} from '../lib/site-i18n';
-import { releaseNoteKoPath, releaseNotePath, releaseNotes } from '../lib/releaseNotes';
+  allAppPrivacyRouteFor,
+  allLocaleDefinitions,
+  allProductRouteFor,
+  allRouteFor,
+  allSiteLocales,
+  type AllSiteLocale
+} from '../lib/extended-site-i18n';
+import { privacyAppSlugs, translatedPrivacyLocales } from '../lib/app-privacy-localizations';
+import { getProductSources } from '../lib/products';
+import { releaseNotes } from '../lib/releaseNotes';
+import type { LocalizedPage } from '../lib/site-i18n';
 
 type SitemapEntry = {
   path: string;
@@ -31,22 +31,31 @@ const corePageSources: Record<(typeof corePages)[number], string> = {
   privacy: 'src/components/PrivacyIndex.astro',
   terms: 'src/components/CorePage.astro'
 };
+
 export function GET() {
   const sourceLastmod = sourceFileLastmod();
-  const papiraLastmod = latestLastmod(sourceLastmod, [
-    'src/lib/papira.ts',
-    'src/components/ProductTemplate.astro'
-  ]);
   const entries: SitemapEntry[] = [
-    ...corePages.flatMap((page) => localizedEntries(page, sourceLastmod(corePageSources[page]))),
-    ...localizedEntries('papira', papiraLastmod),
-    ...papiraPrivacyEntries(sourceLastmod('src/components/PapiraPrivacyPage.astro')),
+    ...corePages.flatMap((page) =>
+      allLocalizedEntries(
+        page,
+        latestLastmod(sourceLastmod, [corePageSources[page], 'src/components/ExtendedSitePage.astro'])
+      )
+    ),
+    ...allLocalizedEntries(
+      'papira',
+      latestLastmod(sourceLastmod, ['src/lib/papira.ts', 'src/components/ExtendedProductPage.astro'])
+    ),
+    ...papiraPrivacyEntries(
+      latestLastmod(sourceLastmod, ['src/components/PapiraPrivacyPage.astro', 'src/lib/papira-privacy.ts'])
+    ),
     ...productPrivacyEntries(sourceLastmod),
     ...blogEntries(sourceLastmod),
-    ...legacyPageEntries(
-      '/oauth/x/callback/',
-      '/oauth/x/callback/ko/',
-      sourceLastmod('src/pages/oauth/x/callback/index.astro')
+    ...oauthEntries(
+      latestLastmod(sourceLastmod, [
+        'src/components/OAuthCallbackPage.astro',
+        'src/pages/oauth/x/callback/index.astro',
+        'src/pages/oauth/x/callback/ko.astro'
+      ])
     ),
     ...releaseNoteEntries(sourceLastmod),
     ...productEntries(sourceLastmod)
@@ -55,39 +64,25 @@ export function GET() {
   const uniqueEntries = entries.filter(
     (entry, index, all) => all.findIndex((candidate) => candidate.path === entry.path) === index
   );
-  const body = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${uniqueEntries.map(renderEntry).join('\n')}
-</urlset>
-`;
+  const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${uniqueEntries.map(renderEntry).join('\n')}\n</urlset>\n`;
   return new Response(body, {
     headers: { 'Content-Type': 'application/xml; charset=utf-8' }
   });
 }
 
-function papiraPrivacyEntries(lastmod: string): SitemapEntry[] {
-  const alternates = papiraPrivacyLocaleAlternates();
-  return papiraPrivacyLocales.map((locale) => ({
-    path: papiraPrivacyRouteFor(locale),
+function allLocalizedEntries(page: LocalizedPage, lastmod: string): SitemapEntry[] {
+  const alternates = pageAlternates(page);
+  return allSiteLocales.map((locale) => ({
+    path: allRouteFor(page, locale),
     lastmod,
     alternates
   }));
 }
 
-function latestLastmod(sourceLastmod: (sourcePath: string) => string, sourcePaths: string[]): string {
-  return sourcePaths.map(sourceLastmod).sort().at(-1) as string;
-}
-
-function localizedEntries(page: LocalizedPage, lastmod: string): SitemapEntry[] {
-  const alternates = [
-    ...siteLocales.map((locale) => ({
-      lang: localeDefinitions[locale].hreflang,
-      path: routeFor(page, locale)
-    })),
-    { lang: 'x-default', path: routeFor(page, 'en') }
-  ];
-  return siteLocales.map((locale) => ({
-    path: routeFor(page, locale),
+function papiraPrivacyEntries(lastmod: string): SitemapEntry[] {
+  const alternates = pageAlternates('papiraPrivacy');
+  return allSiteLocales.map((locale) => ({
+    path: allRouteFor('papiraPrivacy', locale),
     lastmod,
     alternates
   }));
@@ -95,10 +90,14 @@ function localizedEntries(page: LocalizedPage, lastmod: string): SitemapEntry[] 
 
 function productEntries(sourceLastmod: (sourcePath: string) => string): SitemapEntry[] {
   return getProductSources().flatMap((source) => {
-    const lastmod = sourceLastmod(source.contentDir);
-    const alternates = productLocaleAlternates(source.slug);
-    return siteLocales.map((locale) => ({
-      path: productRouteFor(source.slug, locale),
+    const lastmod = latestLastmod(sourceLastmod, [
+      source.contentDir,
+      'src/lib/product-localizations.ts',
+      'src/lib/extended-product-localizations.ts'
+    ]);
+    const alternates = productAlternates(source.slug);
+    return allSiteLocales.map((locale) => ({
+      path: allProductRouteFor(source.slug, locale),
       lastmod,
       alternates
     }));
@@ -106,70 +105,140 @@ function productEntries(sourceLastmod: (sourcePath: string) => string): SitemapE
 }
 
 function productPrivacyEntries(sourceLastmod: (sourcePath: string) => string): SitemapEntry[] {
-  return getProductSources().flatMap((source) => {
-    const enPath = `/privacy/${source.slug}/`;
-    const koPath = `/privacy/${source.slug}/ko/`;
-    const expectedPrivacyUrl = new URL(enPath, siteUrl).toString();
-    if (source.meta.privacy !== expectedPrivacyUrl) {
-      throw new Error(`Privacy URL mismatch for ${source.slug}: expected ${expectedPrivacyUrl}`);
-    }
-    const enSourcePath = `public/privacy/${source.slug}/index.html`;
-    const koSourcePath = `public/privacy/${source.slug}/ko/index.html`;
-    for (const sourcePath of [enSourcePath, koSourcePath]) {
-      if (!fs.existsSync(path.resolve(process.cwd(), sourcePath))) {
-        throw new Error(`Missing privacy policy source: ${sourcePath}`);
-      }
-    }
-    const lastmod = [sourceLastmod(enSourcePath), sourceLastmod(koSourcePath)].sort().at(-1) as string;
-    const alternates = legacyAlternates(enPath, koPath);
-    return [
-      { path: enPath, lastmod, alternates },
-      { path: koPath, lastmod, alternates }
-    ];
+  return privacyAppSlugs.flatMap((slug) => {
+    const enSourcePath = `public/privacy/${slug}/index.html`;
+    const koSourcePath = `public/privacy/${slug}/ko/index.html`;
+    for (const sourcePath of [enSourcePath, koSourcePath]) assertExists(sourcePath);
+    const lastmod = latestLastmod(sourceLastmod, [
+      enSourcePath,
+      koSourcePath,
+      'src/lib/app-privacy-localizations.ts'
+    ]);
+    const alternates = appPrivacyAlternates(slug);
+    return allSiteLocales.map((locale) => ({
+      path: allAppPrivacyRouteFor(slug, locale),
+      lastmod,
+      alternates
+    }));
   });
 }
 
 function blogEntries(sourceLastmod: (sourcePath: string) => string): SitemapEntry[] {
-  const indexEntries = legacyPageEntries(
-    '/blog/',
-    '/blog/ko/',
-    sourceLastmod('src/pages/blog/index.astro')
-  );
-  const articleEntries = getBlogPosts().map((post) => ({
-    path: post.href,
-    lastmod: sourceLastmod(post.sourcePath),
-    alternates: blogAlternates(post)
+  const indexLastmod = latestLastmod(sourceLastmod, [
+    'src/components/BlogIndex.astro',
+    'src/components/ExtendedBlogIndex.astro',
+    'src/content/blog'
+  ]);
+  const indexAlternates = blogIndexAlternates();
+  const indexEntries = allSiteLocales.map((locale) => ({
+    path: blogIndexPath(locale),
+    lastmod: indexLastmod,
+    alternates: indexAlternates
   }));
+
+  const englishPosts = getBlogPosts('en');
+  const articleEntries = englishPosts.flatMap((englishPost) => {
+    const alternates = blogPostAlternates(englishPost.meta.slug);
+    return allSiteLocales.map((locale) => {
+      const sourcePath = blogSourcePath(locale, englishPost.meta.slug);
+      assertExists(sourcePath);
+      return {
+        path: blogPostPath(locale, englishPost.meta.slug),
+        lastmod: sourceLastmod(sourcePath),
+        alternates
+      };
+    });
+  });
+
+  // Force the translated content readers to parse every locale during the build.
+  for (const locale of translatedPrivacyLocales) getExtendedBlogPosts(locale);
+
   return [...indexEntries, ...articleEntries];
 }
 
+function oauthEntries(lastmod: string): SitemapEntry[] {
+  const alternates = allAlternates((locale) => oauthPath(locale));
+  return allSiteLocales.map((locale) => ({ path: oauthPath(locale), lastmod, alternates }));
+}
+
 function releaseNoteEntries(sourceLastmod: (sourcePath: string) => string): SitemapEntry[] {
+  const lastmod = latestLastmod(sourceLastmod, [
+    'src/lib/releaseNotes.ts',
+    'src/lib/extended-release-notes.ts'
+  ]);
   return releaseNotes.flatMap((note) => {
-    const enPath = releaseNotePath(note);
-    const koPath = releaseNoteKoPath(note);
-    const lastmod = sourceLastmod('src/lib/releaseNotes.ts');
-    const alternates = legacyAlternates(enPath, koPath);
-    return [
-      { path: enPath, lastmod, alternates },
-      { path: koPath, lastmod, alternates }
-    ];
+    const alternates = allAlternates((locale) => releaseNotePathFor(note.appSlug, note.version, locale));
+    return allSiteLocales.map((locale) => ({
+      path: releaseNotePathFor(note.appSlug, note.version, locale),
+      lastmod,
+      alternates
+    }));
   });
 }
 
-function legacyPageEntries(enPath: string, koPath: string, lastmod: string): SitemapEntry[] {
-  const alternates = legacyAlternates(enPath, koPath);
+function pageAlternates(page: LocalizedPage) {
+  return allAlternates((locale) => allRouteFor(page, locale));
+}
+
+function productAlternates(slug: string) {
+  return allAlternates((locale) => allProductRouteFor(slug, locale));
+}
+
+function appPrivacyAlternates(slug: string) {
+  return allAlternates((locale) => allAppPrivacyRouteFor(slug, locale));
+}
+
+function blogIndexAlternates() {
+  return allAlternates(blogIndexPath);
+}
+
+function blogPostAlternates(slug: string) {
+  return allAlternates((locale) => blogPostPath(locale, slug));
+}
+
+function allAlternates(pathFor: (locale: AllSiteLocale) => string) {
   return [
-    { path: enPath, lastmod, alternates },
-    { path: koPath, lastmod, alternates }
+    ...allSiteLocales.map((locale) => ({
+      lang: allLocaleDefinitions[locale].hreflang,
+      path: pathFor(locale)
+    })),
+    { lang: 'x-default', path: pathFor('en') }
   ];
 }
 
-function legacyAlternates(enPath: string, koPath: string) {
-  return [
-    { lang: 'en', path: enPath },
-    { lang: 'ko', path: koPath },
-    { lang: 'x-default', path: enPath }
-  ];
+function blogIndexPath(locale: AllSiteLocale): string {
+  if (locale === 'en') return '/blog/';
+  return `/blog/${allLocaleDefinitions[locale].pathSegment}/`;
+}
+
+function blogPostPath(locale: AllSiteLocale, slug: string): string {
+  if (locale === 'en') return `/blog/en/${slug}/`;
+  return `/blog/${allLocaleDefinitions[locale].pathSegment}/${slug}/`;
+}
+
+function blogSourcePath(locale: AllSiteLocale, slug: string): string {
+  return `src/content/blog/${locale}/${slug}.md`;
+}
+
+function oauthPath(locale: AllSiteLocale): string {
+  if (locale === 'en') return '/oauth/x/callback/';
+  return `/oauth/x/callback/${allLocaleDefinitions[locale].pathSegment}/`;
+}
+
+function releaseNotePathFor(appSlug: string, version: string, locale: AllSiteLocale): string {
+  const base = `/release-notes/${appSlug}/${version}/`;
+  if (locale === 'en') return base;
+  return `${base}${allLocaleDefinitions[locale].pathSegment}/`;
+}
+
+function latestLastmod(sourceLastmod: (sourcePath: string) => string, sourcePaths: string[]): string {
+  return sourcePaths.map(sourceLastmod).sort().at(-1) as string;
+}
+
+function assertExists(sourcePath: string) {
+  if (!fs.existsSync(path.resolve(process.cwd(), sourcePath))) {
+    throw new Error(`Missing localized source: ${sourcePath}`);
+  }
 }
 
 function renderEntry(entry: SitemapEntry): string {
@@ -180,17 +249,13 @@ function renderEntry(entry: SitemapEntry): string {
           `    <xhtml:link rel="alternate" hreflang="${alternate.lang}" href="${new URL(alternate.path, siteUrl).toString()}" />`
       )
       .join('\n') ?? '';
-  return `  <url>
-    <loc>${new URL(entry.path, siteUrl).toString()}</loc>
-    <lastmod>${entry.lastmod}</lastmod>
-${links}
-  </url>`;
+  return `  <url>\n    <loc>${new URL(entry.path, siteUrl).toString()}</loc>\n    <lastmod>${entry.lastmod}</lastmod>\n${links}\n  </url>`;
 }
 
 function sourceFileLastmod() {
   const cache = new Map<string, string>();
   return (sourcePath: string): string => {
-    const absolutePath = path.resolve(process.cwd(), sourcePath);
+    const absolutePath = path.isAbsolute(sourcePath) ? sourcePath : path.resolve(process.cwd(), sourcePath);
     if (cache.has(absolutePath)) return cache.get(absolutePath) as string;
     const stat = fs.statSync(absolutePath);
     const newest = stat.isDirectory() ? newestFileMtime(absolutePath) : stat.mtime;
@@ -208,14 +273,4 @@ function newestFileMtime(dir: string): Date {
     if (mtime > newest) newest = mtime;
   }
   return newest;
-}
-
-function blogAlternates(post: ReturnType<typeof getBlogPosts>[number]) {
-  const alternate = getBlogPosts(post.meta.language === 'ko' ? 'en' : 'ko').find(
-    (item) => item.meta.slug === post.meta.slug
-  );
-  if (!alternate) return undefined;
-  const enPath = post.meta.language === 'en' ? post.href : alternate.href;
-  const koPath = post.meta.language === 'ko' ? post.href : alternate.href;
-  return legacyAlternates(enPath, koPath);
 }
