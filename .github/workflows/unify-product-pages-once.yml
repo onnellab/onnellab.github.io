@@ -1,0 +1,49 @@
+name: Apply unified product architecture once
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.actor != 'github-actions[bot]' && github.event.head_commit.message == 'chore: execute unified product architecture migration'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Apply unified product migration
+        run: python3 scripts/unify-product-pages.py
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify production build before commit
+        run: npm run build
+
+      - name: Verify patch cleanliness
+        run: git diff --check
+
+      - name: Commit structural migration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'Migration produced no changes.' >&2
+            exit 1
+          fi
+          git commit -m 'refactor: unify nine-language product detail architecture'
+          git push origin HEAD:main
