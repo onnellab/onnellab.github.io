@@ -21,7 +21,7 @@ type SitemapEntry = {
   alternates?: Array<{ lang: string; path: string }>;
 };
 
-// Deliberately omit lastmod until dates come from authoritative content metadata rather than build-time filesystem mtimes.
+// Deliberately omit per-URL modification dates until they come from authoritative content metadata rather than build-time filesystem mtimes.
 const siteUrl = 'https://onnellab.github.io';
 const corePages: LocalizedPage[] = ['home', 'apps', 'about', 'privacy', 'terms'];
 
