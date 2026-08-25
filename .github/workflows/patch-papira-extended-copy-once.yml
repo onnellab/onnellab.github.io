@@ -1,0 +1,184 @@
+name: Patch Papira extended copy once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/patch-papira-extended-copy-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Align Papira extended product copy with canonical product scope
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('src/lib/extended-product-localizations.ts')
+          text = path.read_text(encoding='utf-8')
+
+          replacements = {
+            "'pt-BR'": r'''    papira: make('Criador offline de EPUB a partir de TXT', `Papira transforma manuscritos TXT finalizados em livros EPUB estruturados. O app oferece fluxos próprios para fanfics, ficção seriada, romances autorais, zines digitais e cenários de TRPG, além de aceitar outros conteúdos em TXT.
+
+## Duas formas objetivas de criar
+
+### 1. EPUB rápido
+
+Selecione arquivos TXT e crie EPUBs imediatamente, sem capa nem metadados de publicação.
+
+### 2. Projeto de livro
+
+Adicione capa, título, autor, editora, informações de série, regras de capítulos e sumário antes de exportar.
+
+## Feito para manuscritos finalizados
+
+- Predefinições para fanfics, ficção seriada, romances autorais, zines digitais e cenários de TRPG, com suporte a outros conteúdos TXT
+- Detecção automática de capítulos, modo de títulos com # ou opção de capítulo único
+- Imagem de capa, metadados do livro, informações de série, navegação e empacotamento EPUB
+- Os arquivos existentes são preservados; conflitos de nome recebem numeração automática
+- A criação do EPUB e o armazenamento dos projetos permanecem no dispositivo
+
+## Seu manuscrito continua com você
+
+- Sem conta nem login
+- Sem publicidade, análise comportamental ou SDKs de rastreamento
+- Manuscritos TXT e imagens de capa são processados localmente
+- Projetos e EPUBs gerados não são enviados para servidores da ONNELLAB`, 'Perguntas frequentes', [
+      { question: 'Os manuscritos são enviados para um servidor?', answer: 'Não. Arquivos TXT, capas, projetos, prévias e EPUBs gerados são processados no dispositivo.' },
+      { question: 'Posso editar o manuscrito no Papira?', answer: 'O Papira serve para montar um manuscrito finalizado em EPUB. Faça as alterações no TXT primeiro no editor de sua preferência.' },
+      { question: 'Que tipos de obra posso preparar?', answer: 'Qualquer conteúdo TXT finalizado pode ser convertido em EPUB. As predefinições apenas agilizam fluxos criativos comuns.' }
+    ])''',
+            'de': r'''    papira: make('Offline-TXT-zu-EPUB-Ersteller', `Papira setzt fertige TXT-Manuskripte zu strukturierten EPUB-Büchern zusammen. Es gibt eigene Abläufe für Fanfiction, Fortsetzungsromane, eigene Romane, digitale Zines und TRPG-Szenarien; andere TXT-Inhalte lassen sich ebenfalls in EPUB umwandeln.
+
+## Zwei gezielte Wege zum EPUB
+
+### 1. Schnell-EPUB
+
+Wähle TXT-Dateien aus und erstelle sofort EPUB-Dateien – ohne Cover oder Veröffentlichungsmetadaten.
+
+### 2. Buchprojekt
+
+Füge vor dem Export Cover, Titel, Autor, Verlag, Serieninformationen, Kapitelregeln und ein Inhaltsverzeichnis hinzu.
+
+## Für fertige Manuskripte ausgelegt
+
+- Voreinstellungen für Fanfiction, Fortsetzungsromane, eigene Romane, digitale Zines und TRPG-Szenarien sowie Unterstützung für andere TXT-Inhalte
+- Automatische Kapitelerkennung, #-Überschriftenmodus oder Einzelkapitel-Option
+- Coverbild, Buchmetadaten, Serieninformationen, Navigation und EPUB-Paketierung
+- Vorhandene Dateien bleiben erhalten; bei Namenskonflikten wird automatisch eine Nummer ergänzt
+- EPUB-Erstellung und Projektspeicherung bleiben auf dem Gerät
+
+## Dein Manuskript bleibt bei dir
+
+- Kein Konto und keine Anmeldung
+- Keine Werbung, Verhaltensanalyse oder Tracking-SDKs
+- TXT-Manuskripte und Coverbilder werden lokal verarbeitet
+- Buchprojekte und erzeugte EPUB-Dateien werden nicht auf ONNELLAB-Server hochgeladen`, 'Häufige Fragen', [
+      { question: 'Werden Manuskripte auf einen Server hochgeladen?', answer: 'Nein. TXT-Dateien, Coverbilder, Projekte, Vorschauen und erzeugte EPUB-Dateien werden auf dem Gerät verarbeitet.' },
+      { question: 'Kann ich das Manuskript in Papira bearbeiten?', answer: 'Papira ist dafür gedacht, ein fertiges Manuskript als EPUB zusammenzusetzen. Bearbeite den TXT-Quelltext vorher in deinem bevorzugten Schreibprogramm.' },
+      { question: 'Welche Arten von Werken kann ich vorbereiten?', answer: 'Jeder fertige TXT-Inhalt kann in EPUB umgewandelt werden. Die Voreinstellungen beschleunigen lediglich häufige kreative Abläufe.' }
+    ])''',
+            'fr': r'''    papira: make('Créateur EPUB hors ligne à partir de TXT', `Papira assemble des manuscrits TXT finalisés en livres EPUB structurés. L’application propose des parcours dédiés aux fanfictions, romans-feuilletons, romans personnels, zines numériques et scénarios de JDR sur table, tout en acceptant d’autres contenus TXT.
+
+## Deux façons ciblées de créer
+
+### 1. EPUB rapide
+
+Sélectionnez des fichiers TXT et créez immédiatement des EPUB, sans couverture ni métadonnées de publication.
+
+### 2. Projet de livre
+
+Ajoutez une couverture, un titre, un auteur, un éditeur, des informations de série, des règles de chapitrage et une table des matières avant l’exportation.
+
+## Pensé pour les manuscrits finalisés
+
+- Préréglages pour fanfictions, romans-feuilletons, romans personnels, zines numériques et scénarios de JDR sur table, avec prise en charge d’autres contenus TXT
+- Détection automatique des chapitres, mode de titres avec # ou option de chapitre unique
+- Image de couverture, métadonnées du livre, informations de série, navigation et empaquetage EPUB
+- Les fichiers existants sont conservés ; un numéro est ajouté automatiquement en cas de conflit de nom
+- La création des EPUB et le stockage des projets restent sur l’appareil
+
+## Votre manuscrit reste avec vous
+
+- Aucun compte ni connexion
+- Aucune publicité, analyse comportementale ou SDK de suivi
+- Les manuscrits TXT et images de couverture sont traités localement
+- Les projets et EPUB générés ne sont pas envoyés vers un serveur ONNELLAB`, 'Questions fréquentes', [
+      { question: 'Les manuscrits sont-ils envoyés vers un serveur ?', answer: 'Non. Les fichiers TXT, couvertures, projets, aperçus et EPUB générés sont traités sur l’appareil.' },
+      { question: 'Puis-je modifier le manuscrit dans Papira ?', answer: 'Papira sert à assembler un manuscrit finalisé en EPUB. Modifiez d’abord le TXT source dans votre outil d’écriture habituel.' },
+      { question: 'Quels types d’œuvres puis-je préparer ?', answer: 'Tout contenu TXT finalisé peut être converti en EPUB. Les préréglages servent seulement à accélérer les flux créatifs courants.' }
+    ])''',
+            'es': r'''    papira: make('Creador de EPUB sin conexión a partir de TXT', `Papira convierte manuscritos TXT terminados en libros EPUB estructurados. Incluye flujos específicos para fanfiction, ficción por entregas, novelas personales, zines digitales y escenarios de TRPG, y también admite otros contenidos TXT.
+
+## Dos formas directas de crear
+
+### 1. EPUB rápido
+
+Selecciona archivos TXT y crea EPUB de inmediato, sin portada ni metadatos de publicación.
+
+### 2. Proyecto de libro
+
+Añade portada, título, autor, editorial, información de serie, reglas de capítulos y tabla de contenidos antes de exportar.
+
+## Pensado para manuscritos terminados
+
+- Ajustes para fanfiction, ficción por entregas, novelas personales, zines digitales y escenarios de TRPG, además de otros contenidos TXT
+- Detección automática de capítulos, modo de encabezados con # u opción de capítulo único
+- Imagen de portada, metadatos del libro, información de serie, navegación y empaquetado EPUB
+- Los archivos existentes se conservan; si hay conflicto de nombres se añade un número automáticamente
+- La creación del EPUB y el almacenamiento de proyectos permanecen en el dispositivo
+
+## Tu manuscrito se queda contigo
+
+- Sin cuenta ni inicio de sesión
+- Sin publicidad, analítica de comportamiento ni SDK de seguimiento
+- Los manuscritos TXT y las imágenes de portada se procesan localmente
+- Los proyectos y EPUB generados no se suben a servidores de ONNELLAB`, 'Preguntas frecuentes', [
+      { question: '¿Los manuscritos se suben a un servidor?', answer: 'No. Los archivos TXT, portadas, proyectos, vistas previas y EPUB generados se procesan en el dispositivo.' },
+      { question: '¿Puedo editar el manuscrito en Papira?', answer: 'Papira está pensado para montar un manuscrito terminado como EPUB. Edita primero el TXT original en tu herramienta de escritura habitual.' },
+      { question: '¿Qué tipos de obras puedo preparar?', answer: 'Cualquier contenido TXT terminado puede convertirse en EPUB. Los ajustes específicos solo agilizan flujos creativos habituales.' }
+    ])'''
+          }
+
+          markers = [
+              ("'pt-BR'", "  de: {"),
+              ('de', "  fr: {"),
+              ('fr', "  es: {"),
+              ('es', "\n};")
+          ]
+
+          for locale_key, end_marker in markers:
+              section_marker = f"  {locale_key}: {{" if locale_key != "'pt-BR'" else "  'pt-BR': {"
+              start = text.index(section_marker)
+              end = text.index(end_marker, start)
+              section = text[start:end]
+              papira_start = section.index('    papira: make(')
+              section = section[:papira_start] + replacements[locale_key] + '\n'
+              text = text[:start] + section + text[end:]
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+          git diff --check
+          git diff -- src/lib/extended-product-localizations.ts
+
+      - name: Commit and push
+        run: |
+          if git diff --quiet; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/lib/extended-product-localizations.ts
+          git commit -m 'fix: align Papira extended product copy'
+          git push origin HEAD:main
