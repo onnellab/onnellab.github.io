@@ -3,8 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
 import { landingSubtitle, pageBodyDescription, renderBlocks, type ProductPageData } from '../lib/products';
-import { latestReleaseNoteForApp, releaseNotePath } from '../lib/releaseNotes';
-import { routeFor, type SiteLocale } from '../lib/site-i18n';
+import { latestReleaseNoteForApp, releaseNoteKoPath, releaseNotePath } from '../lib/releaseNotes';
+import { localeDefinitions, routeFor, type SiteLocale } from '../lib/site-i18n';
 
 type Props = {
   data: ProductPageData;
@@ -113,18 +113,30 @@ const canonicalUrl = new URL(data.canonicalPath, Astro.site);
 const offerPriceCurrency = meta.priceCurrency ?? (meta.price === 0 ? 'USD' : undefined);
 const localizedAppStoreUrl = (url: string | undefined, locale: ProductPageData['locale']) => {
   if (!url) return undefined;
-  const storeCountry = locale === 'ko' ? 'kr' : 'us';
-  const language = locale === 'ko' ? 'ko' : 'en-US';
+  const storeLocale = {
+    en: { country: 'us', language: 'en-US' },
+    ko: { country: 'kr', language: 'ko' },
+    ja: { country: 'jp', language: 'ja' },
+    'zh-Hans': { country: 'cn', language: 'zh-Hans-CN' },
+    'zh-Hant': { country: 'tw', language: 'zh-Hant-TW' }
+  }[locale];
   const appStoreUrl = new URL(url);
-  appStoreUrl.pathname = appStoreUrl.pathname.replace(/^\/(?:[a-z]{2}\/)?app\//, `/${storeCountry}/app/`);
-  appStoreUrl.searchParams.set('l', language);
+  appStoreUrl.pathname = appStoreUrl.pathname.replace(/^\/(?:[a-z]{2}\/)?app\//, `/${storeLocale.country}/app/`);
+  appStoreUrl.searchParams.set('l', storeLocale.language);
   return appStoreUrl.toString();
 };
 const localizedGooglePlayUrl = (url: string | undefined, locale: ProductPageData['locale']) => {
   if (!url) return undefined;
+  const storeLocale = {
+    en: { language: 'en', country: 'US' },
+    ko: { language: 'ko', country: 'KR' },
+    ja: { language: 'ja', country: 'JP' },
+    'zh-Hans': { language: 'zh-CN', country: 'CN' },
+    'zh-Hant': { language: 'zh-TW', country: 'TW' }
+  }[locale];
   const playStoreUrl = new URL(url);
-  playStoreUrl.searchParams.set('hl', locale === 'ko' ? 'ko' : 'en');
-  playStoreUrl.searchParams.set('gl', locale === 'ko' ? 'KR' : 'US');
+  playStoreUrl.searchParams.set('hl', storeLocale.language);
+  playStoreUrl.searchParams.set('gl', storeLocale.country);
   return playStoreUrl.toString();
 };
 const localizedPrivacyUrl = (url: string, locale: ProductPageData['locale']) => {
@@ -141,7 +153,13 @@ const googlePlayUrl = localizedGooglePlayUrl(meta.googleplay, data.locale);
 const privacyUrl = localizedPrivacyUrl(meta.privacy, data.locale);
 const storeUrls = [appStoreUrl, googlePlayUrl].filter(Boolean);
 const latestReleaseNote = latestReleaseNoteForApp(data.source.slug);
-const releaseNotesUrl = latestReleaseNote ? releaseNotePath(latestReleaseNote) : undefined;
+const releaseNotesUrl = latestReleaseNote
+  ? data.locale === 'en'
+    ? releaseNotePath(latestReleaseNote)
+    : data.locale === 'ko'
+      ? releaseNoteKoPath(latestReleaseNote)
+      : `${releaseNotePath(latestReleaseNote)}${localeDefinitions[data.locale].pathSegment}/`
+  : undefined;
 const alternates = data.alternates;
 const landingScreenshotPaths = data.screenshotPaths;
 const screenshotDimensions = data.screenshotDimensions ?? { width: 1242, height: 2688 };
