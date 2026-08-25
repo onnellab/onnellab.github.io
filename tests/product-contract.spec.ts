@@ -61,7 +61,7 @@ for (const app of apps) {
 
       expect(software).toBeTruthy();
       expect(breadcrumb).toBeTruthy();
-      expect(faq).toBeTruthy();
+      expect(faq).toBeFalsy();
       expect(software.url).toBe(canonical(route));
       expect(software.mainEntityOfPage).toBe(canonical(route));
       expect(software.publisher?.name).toBe('ONNELLAB');
@@ -70,7 +70,7 @@ for (const app of apps) {
       expect(software).not.toHaveProperty('aggregateRating');
       expect(software).not.toHaveProperty('review');
       expect(software).not.toHaveProperty('isAccessibleForFree');
-      expect(faq.mainEntity?.length ?? 0).toBeGreaterThanOrEqual(3);
+      expect(await page.locator('.faq-band details').count()).toBeGreaterThanOrEqual(3);
 
       const screenshots = page.locator('.screenshot-row img');
       const screenshotCount = await screenshots.count();
@@ -79,6 +79,9 @@ for (const app of apps) {
         await expect(image).toHaveAttribute('alt', /\S+/);
         await expect(image).toHaveAttribute('width', /\d+/);
         await expect(image).toHaveAttribute('height', /\d+/);
+        const alt = (await image.getAttribute('alt') ?? '').trim();
+        expect(alt.toLowerCase()).toContain(app.toLowerCase());
+        expect(alt).not.toMatch(/\s\d+$/);
       }
     }
   });
@@ -103,6 +106,7 @@ test('product sources permanently exclude price, rating, and review commerce met
   expect(templateSource).not.toMatch(/\baggregateRating\s*:/);
   expect(templateSource).not.toMatch(/\breview\s*:/);
   expect(templateSource).not.toMatch(/\bisAccessibleForFree\s*:/);
+  expect(templateSource).not.toContain("'@type': 'FAQPage'");
   expect(routeSource).not.toContain('ExtendedProductPage');
   expect(fs.existsSync(path.resolve(process.cwd(), 'src/components/ExtendedProductPage.astro'))).toBe(false);
 });

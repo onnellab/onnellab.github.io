@@ -190,19 +190,6 @@ const breadcrumbJsonLd = {
     }
   ]
 };
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  '@id': `${canonicalUrl.toString()}#faq`,
-  mainEntity: (faqContent?.items ?? []).map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.answer
-    }
-  }))
-};
 ---
 
 <BaseLayout
@@ -211,7 +198,7 @@ const faqJsonLd = {
   canonicalPath={data.canonicalPath}
   lang={allLocaleDefinitions[data.locale].htmlLang}
   image={socialImagePath}
-  jsonLd={faqContent ? [jsonLd, breadcrumbJsonLd, faqJsonLd] : [jsonLd, breadcrumbJsonLd]}
+  jsonLd={[jsonLd, breadcrumbJsonLd]}
   alternates={alternates}
 >
   <main class="page-shell" style={pageStyle} data-product-slug={data.source.slug} data-product-locale={data.locale}>

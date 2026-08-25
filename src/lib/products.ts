@@ -11,6 +11,7 @@ import {
 } from './extended-site-i18n';
 import { getLocalizedProductContent } from './product-localizations';
 import { getExtendedProductCopy } from './extended-product-localizations';
+import { getProductScreenshotAlts } from './product-screenshot-alts';
 
 const appsContentDir = path.resolve(process.cwd(), 'src/content/apps');
 
@@ -161,6 +162,7 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
   const copy = readProductCopy(source.contentDir, locale);
   const seoDescription = seoPageDescription(source, copy);
   const canonicalPath = allProductRouteFor(source.slug, locale);
+  const screenshotPaths = getScreenshotRoutePaths(source, locale);
   return {
     locale,
     source,
@@ -171,7 +173,8 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     seoTitle: productSeoTitle(source, copy),
     seoDescription,
     iconPath: getIconRoutePath(source),
-    screenshotPaths: getScreenshotRoutePaths(source, locale),
+    screenshotPaths,
+    screenshotAlts: getProductScreenshotAlts(source.slug, locale, screenshotPaths.length),
     accent: productAccent(source)
   };
 }
