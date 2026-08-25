@@ -87,6 +87,23 @@ for (const app of apps) {
   });
 }
 
+const papiraExtendedScope = {
+  'pt-BR': [/capa/i, /capítulo/i, /sumário/i, /projeto/i],
+  de: [/Cover/i, /Kapitel/i, /Inhaltsverzeichnis/i, /Buchprojekt/i],
+  fr: [/couverture/i, /chapitr/i, /table des matières/i, /projet/i],
+  es: [/portada/i, /capítulo/i, /tabla de contenidos/i, /proyecto/i]
+} as const;
+
+test('Papira extended locales preserve the canonical book-project scope', async ({ page }) => {
+  for (const locale of locales.filter((item) => item.code in papiraExtendedScope)) {
+    await page.goto(routeFor('papira', locale.segment));
+    const content = await page.locator('.content-band').innerText();
+    for (const term of papiraExtendedScope[locale.code as keyof typeof papiraExtendedScope]) {
+      expect(content).toMatch(term);
+    }
+  }
+});
+
 test('product sources permanently exclude price, rating, and review commerce metadata', () => {
   for (const app of fs.readdirSync(appsDir)) {
     const appMeta = path.join(appsDir, app, 'app.md');
