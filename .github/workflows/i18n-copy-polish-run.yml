@@ -1,0 +1,31 @@
+name: Execute reviewed localization copy polish
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply copy polish
+        run: python3 scripts/i18n-copy-polish.py
+
+      - name: Commit copy polish
+        run: |
+          rm -f scripts/i18n-copy-polish.py
+          rm -f .github/workflows/i18n-copy-polish-run.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'fix: polish translated copy and labels'
+          git push origin HEAD:main
