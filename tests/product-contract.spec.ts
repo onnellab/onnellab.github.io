@@ -124,6 +124,39 @@ test('Papira extended locales preserve the canonical book-project scope', async 
   }
 });
 
+test('AI discovery policy separates search retrieval from training and keeps the nine-language index', async ({ request }) => {
+  const robotsResponse = await request.get('/robots.txt');
+  expect(robotsResponse.ok()).toBe(true);
+  const robots = await robotsResponse.text();
+  const sectionFor = (userAgent: string) => {
+    const marker = `User-agent: ${userAgent}`;
+    const start = robots.indexOf(marker);
+    expect(start).toBeGreaterThanOrEqual(0);
+    const rest = robots.slice(start + marker.length);
+    const next = rest.indexOf('User-agent:');
+    return next >= 0 ? rest.slice(0, next) : rest;
+  };
+
+  for (const userAgent of ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User']) {
+    expect(sectionFor(userAgent)).toContain('Allow: /');
+  }
+  for (const userAgent of ['GPTBot', 'Google-Extended', 'ClaudeBot']) {
+    expect(sectionFor(userAgent)).toContain('Disallow: /');
+  }
+
+  const llmsResponse = await request.get('/llms.txt');
+  expect(llmsResponse.ok()).toBe(true);
+  const llms = await llmsResponse.text();
+  expect(llms).toContain('nine languages');
+  expect(llms).toContain('## Apps with nine-language product pages');
+  expect(llms).toContain('## Blog Articles');
+  expect(llms).toContain('https://onnellab.github.io/apps/papira/es/');
+  expect(llms).toContain('https://onnellab.github.io/blog/de/');
+  expect(llms).not.toContain('five-language');
+  expect(llms).not.toContain('- Pricing:');
+  expect(llms).not.toContain('- 가격:');
+});
+
 test('product sources permanently exclude price, rating, and review commerce metadata', () => {
   for (const app of fs.readdirSync(appsDir)) {
     const appMeta = path.join(appsDir, app, 'app.md');
