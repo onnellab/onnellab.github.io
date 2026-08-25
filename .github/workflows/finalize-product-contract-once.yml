@@ -25,7 +25,9 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Apply final product contract cleanup
-        run: python3 scripts/finalize-product-contract.py
+        run: |
+          python3 scripts/finalize-product-contract.py
+          python3 scripts/finalize-product-visual-tests.py
 
       - name: Install dependencies
         run: npm ci
