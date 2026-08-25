@@ -1,0 +1,90 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LocaleMenu from './LocaleMenu.astro';
+import { getProductSource, getIconRoutePath, productAccent, renderBlocks } from '../lib/products';
+import { latestReleaseNoteForApp, releaseNotePath } from '../lib/releaseNotes';
+import { getExtendedProductCopy } from '../lib/extended-product-localizations';
+import {
+  allAppPrivacyRouteFor,
+  allLocaleDefinitions,
+  allProductLocaleAlternates,
+  allProductRouteFor,
+  allRouteFor,
+  type ExtendedSiteLocale
+} from '../lib/extended-site-i18n';
+
+type Props = { slug: string; locale: ExtendedSiteLocale };
+const { slug, locale } = Astro.props;
+const text = getExtendedProductCopy(slug, locale);
+const labels = {
+  'pt-BR': { platforms: 'Plataformas', apps: 'Todos os apps', privacy: 'Política de Privacidade', release: 'Notas da versão', download: 'Download', screenshots: 'Capturas de tela', contact: 'Contato', appStore: 'App Store', googlePlay: 'Google Play' },
+  de: { platforms: 'Plattformen', apps: 'Alle Apps', privacy: 'Datenschutzerklärung', release: 'Versionshinweise', download: 'Download', screenshots: 'Screenshots', contact: 'Kontakt', appStore: 'App Store', googlePlay: 'Google Play' },
+  fr: { platforms: 'Plateformes', apps: 'Toutes les apps', privacy: 'Politique de confidentialité', release: 'Notes de version', download: 'Télécharger', screenshots: 'Captures d’écran', contact: 'Contact', appStore: 'App Store', googlePlay: 'Google Play' },
+  es: { platforms: 'Plataformas', apps: 'Todas las apps', privacy: 'Política de privacidad', release: 'Notas de la versión', download: 'Descargar', screenshots: 'Capturas de pantalla', contact: 'Contacto', appStore: 'App Store', googlePlay: 'Google Play' }
+}[locale];
+const definition = allLocaleDefinitions[locale];
+const isPapira = slug === 'papira';
+const source = isPapira ? undefined : getProductSource(slug);
+const meta = isPapira ? {
+  title: 'Papira', status: 'Preparing for release', platforms: ['iOS', 'Android'],
+  supportEmail: 'onnellab.app@gmail.com', appstore: undefined, googleplay: undefined
+} : source!.meta;
+const canonicalPath = allProductRouteFor(slug, locale);
+const iconPath = isPapira ? '/app-assets/papira/icon.png' : getIconRoutePath(source!);
+const accent = isPapira ? { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' } : productAccent(source!);
+const bodyBlocks = renderBlocks(text.body);
+const screenshots = (() => {
+  if (isPapira) return ['/app-assets/papira/assets/screenshots/en/01.png', '/app-assets/papira/assets/screenshots/en/02.png', '/app-assets/papira/assets/screenshots/en/03.png'];
+  const dir = path.resolve(source!.contentDir, 'assets/screenshots/en');
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && /\.(?:png|jpg|jpeg|webp)$/i.test(entry.name))
+    .map((entry) => entry.name)
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+    .map((name) => `/app-assets/${slug}/assets/screenshots/en/${name}`);
+})();
+const latestRelease = latestReleaseNoteForApp(slug);
+const privacyHref = isPapira ? allRouteFor('papiraPrivacy', locale) : allAppPrivacyRouteFor(slug, locale);
+const seoTitle = `${meta.title} - ${text.subtitle}`;
+const seoDescription = text.body.split(/\n\s*\n/)[0].replace(/\s+/g, ' ').trim();
+const pageStyle = `--accent-border:${accent.border};--accent-bg:${accent.background};--accent-text:${accent.text};`;
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} canonicalPath={canonicalPath} lang={definition.htmlLang} alternates={allProductLocaleAlternates(slug)} socialImage={iconPath}>
+  <main class="product-shell" style={pageStyle} data-locale={locale}>
+    <nav class="top-nav site-header" aria-label="Navigation">
+      <a class="brand" href={allRouteFor('home', locale)}>ONNELLAB</a>
+      <div class="nav-actions"><a href={allRouteFor('apps', locale)}>{labels.apps}</a><LocaleMenu locale={locale} productSlug={slug} /></div>
+    </nav>
+
+    <header class="hero">
+      <img class="app-icon" src={iconPath} alt="" width="116" height="116" />
+      <div><p class="eyebrow">ONNELLAB</p><h1>{meta.title}</h1><p class="subtitle">{text.subtitle}</p><div class="badges" aria-label={labels.platforms}>{meta.platforms.map((platform) => <span>{platform}</span>)}</div></div>
+    </header>
+
+    <div class="layout">
+      <article class="content">
+        {bodyBlocks.map((block) => block.type === 'h2' ? <h2>{block.value}</h2> : block.type === 'h3' ? <h3>{block.value}</h3> : block.type === 'ul' ? <ul>{(block.value as string[]).map((item) => <li>{item}</li>)}</ul> : <p>{block.value as string}</p>)}
+
+        <section class="faq"><h2>{text.faqTitle}</h2>{text.faq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</section>
+      </article>
+
+      <aside class="side-card">
+        {(meta.appstore || meta.googleplay) && <><h2>{labels.download}</h2>{meta.appstore && <a href={meta.appstore}>{labels.appStore}</a>}{meta.googleplay && <a href={meta.googleplay}>{labels.googlePlay}</a>}</>}
+        <h2>{labels.privacy}</h2><a href={privacyHref}>{labels.privacy}</a>
+        {latestRelease && <><h2>{labels.release}</h2><a href={releaseNotePath(latestRelease)}>{latestRelease.title}</a></>}
+        <h2>{labels.contact}</h2><a href={`mailto:${meta.supportEmail}`}>{meta.supportEmail}</a>
+      </aside>
+    </div>
+
+    {screenshots.length > 0 && <section class="screens"><h2>{labels.screenshots}</h2><div class="shot-row">{screenshots.map((src) => <img src={src} alt="" loading="lazy" />)}</div></section>}
+
+    <footer class="footer"><a href={allRouteFor('apps', locale)}>{labels.apps}</a><a href={privacyHref}>{labels.privacy}</a><a href={`mailto:${meta.supportEmail}`}>{meta.supportEmail}</a><span>© ONNELLAB</span></footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .product-shell{width:min(1060px,calc(100% - 40px));margin:0 auto;padding:26px 0 54px;color:#3f3b35}.top-nav,.nav-actions,.hero,.badges,.footer{display:flex;align-items:center}.top-nav{justify-content:space-between}.nav-actions{gap:16px}.brand,.nav-actions>a,.footer a{color:#686259;text-decoration:none;font-size:13px;font-weight:620}.hero{gap:28px;padding:80px 0 58px}.app-icon{border:1px solid var(--accent-border);border-radius:24px;background:var(--accent-bg)}.eyebrow{margin:0 0 9px;color:var(--accent-text);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}h1{margin:0;color:#37332e;font-size:clamp(48px,8vw,82px);line-height:1}.subtitle{margin:14px 0;color:#655f56;font-size:20px}.badges{gap:8px}.badges span{border:1px solid #ded6ca;border-radius:999px;padding:5px 9px;color:#756e64;font-size:12px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:48px}.content{min-width:0}.content h2,.screens h2{margin-top:42px;color:#37332e;font-size:28px}.content h3{margin-top:28px;color:#45413b}.content p,.content li{color:#5f5a52;font-size:16px;line-height:1.75}.content ul{padding-left:22px}.side-card{align-self:start;position:sticky;top:24px;display:grid;gap:9px;border:1px solid #ded6ca;border-radius:12px;padding:19px;background:#fffdf8}.side-card h2{margin:14px 0 2px;font-size:13px;color:#756e64}.side-card h2:first-child{margin-top:0}.side-card a{color:#49453f;text-decoration:none;font-size:14px;font-weight:620}.faq details{border-top:1px solid #e5ded4;padding:15px 0}.faq summary{cursor:pointer;font-weight:650}.screens{margin-top:60px}.shot-row{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px}.shot-row img{width:min(260px,70vw);height:auto;border:1px solid #ded6ca;border-radius:14px}.footer{justify-content:center;flex-wrap:wrap;gap:10px 20px;margin-top:64px;border-top:1px solid #ded6ca;padding-top:28px;color:#786f65;font-size:12px}@media(max-width:760px){.hero{align-items:flex-start;padding-top:60px}.app-icon{width:84px;height:84px}.layout{grid-template-columns:1fr}.side-card{position:static}.nav-actions>a{display:none}}
+</style>
