@@ -1,0 +1,31 @@
+name: Execute final core product localization fixes
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply final core product localization fixes
+        run: python3 scripts/final-core-product-i18n.py
+
+      - name: Commit final fixes
+        run: |
+          rm -f scripts/final-core-product-i18n.py
+          rm -f .github/workflows/final-core-product-i18n-run.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'fix: localize core product release and store links'
+          git push origin HEAD:main
