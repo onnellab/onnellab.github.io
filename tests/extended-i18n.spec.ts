@@ -28,21 +28,35 @@ for (const locale of locales) {
       });
     }
 
-    test('product and privacy policy stay in the selected locale', async ({ page }) => {
+    test('product, release note, and privacy policy stay in the selected locale', async ({ page }) => {
       const productPath = `/apps/tagweaver/${locale.segment}/`;
       await page.goto(productPath);
       await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical(productPath));
       await expect(page.locator('a[data-locale-choice]')).toHaveCount(9);
-      await expect(page.getByRole('link', { name: /privacy|privacidade|datenschutz|confidentialité|privacidad/i })).toHaveAttribute(
+      await expect(
+        page.getByRole('link', { name: /privacy|privacidade|datenschutz|confidentialité|privacidad/i })
+      ).toHaveAttribute('href', `/privacy/tagweaver/${locale.segment}/`);
+      await expect(page.getByRole('link', { name: 'TagWeaver v2.2' })).toHaveAttribute(
         'href',
-        canonical(`/privacy/tagweaver/${locale.segment}/`)
+        `/release-notes/tagweaver/2.2/${locale.segment}/`
       );
 
       const privacyPath = `/privacy/tagweaver/${locale.segment}/`;
       await page.goto(privacyPath);
       await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical(privacyPath));
+      await expect(page.locator('a[data-locale-choice]')).toHaveCount(9);
+    });
+
+    test('legacy Melivra privacy alias resolves to localized content and preferred canonical', async ({ page }) => {
+      const aliasPath = `/melivra-privacy-policy/${locale.segment}/`;
+      await page.goto(aliasPath);
+      await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+        'href',
+        canonical(`/privacy/melivra/${locale.segment}/`)
+      );
       await expect(page.locator('a[data-locale-choice]')).toHaveCount(9);
     });
 
