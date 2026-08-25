@@ -4,7 +4,8 @@ import path from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
 import { getProductSource, getIconRoutePath, productAccent, renderBlocks } from '../lib/products';
-import { latestReleaseNoteForApp, releaseNotePath } from '../lib/releaseNotes';
+import { latestReleaseNoteForApp } from '../lib/releaseNotes';
+import { releaseNoteLocalePath } from '../lib/extended-release-notes';
 import { getExtendedProductCopy } from '../lib/extended-product-localizations';
 import {
   allAppPrivacyRouteFor,
@@ -19,10 +20,26 @@ type Props = { slug: string; locale: ExtendedSiteLocale };
 const { slug, locale } = Astro.props;
 const text = getExtendedProductCopy(slug, locale);
 const labels = {
-  'pt-BR': { platforms: 'Plataformas', apps: 'Todos os apps', privacy: 'Política de Privacidade', release: 'Notas da versão', download: 'Download', screenshots: 'Capturas de tela', contact: 'Contato', appStore: 'App Store', googlePlay: 'Google Play' },
-  de: { platforms: 'Plattformen', apps: 'Alle Apps', privacy: 'Datenschutzerklärung', release: 'Versionshinweise', download: 'Download', screenshots: 'Screenshots', contact: 'Kontakt', appStore: 'App Store', googlePlay: 'Google Play' },
-  fr: { platforms: 'Plateformes', apps: 'Toutes les apps', privacy: 'Politique de confidentialité', release: 'Notes de version', download: 'Télécharger', screenshots: 'Captures d’écran', contact: 'Contact', appStore: 'App Store', googlePlay: 'Google Play' },
-  es: { platforms: 'Plataformas', apps: 'Todas las apps', privacy: 'Política de privacidad', release: 'Notas de la versión', download: 'Descargar', screenshots: 'Capturas de pantalla', contact: 'Contacto', appStore: 'App Store', googlePlay: 'Google Play' }
+  'pt-BR': {
+    platforms: 'Plataformas', apps: 'Todos os apps', privacy: 'Política de Privacidade',
+    release: 'Notas da versão', download: 'Download', screenshots: 'Capturas de tela',
+    contact: 'Contato', appStore: 'App Store', googlePlay: 'Google Play', nav: 'Navegação'
+  },
+  de: {
+    platforms: 'Plattformen', apps: 'Alle Apps', privacy: 'Datenschutzerklärung',
+    release: 'Versionshinweise', download: 'Download', screenshots: 'Screenshots',
+    contact: 'Kontakt', appStore: 'App Store', googlePlay: 'Google Play', nav: 'Navigation'
+  },
+  fr: {
+    platforms: 'Plateformes', apps: 'Toutes les applications', privacy: 'Politique de confidentialité',
+    release: 'Notes de version', download: 'Télécharger', screenshots: 'Captures d’écran',
+    contact: 'Contact', appStore: 'App Store', googlePlay: 'Google Play', nav: 'Navigation'
+  },
+  es: {
+    platforms: 'Plataformas', apps: 'Todas las aplicaciones', privacy: 'Política de privacidad',
+    release: 'Notas de la versión', download: 'Descargar', screenshots: 'Capturas de pantalla',
+    contact: 'Contacto', appStore: 'App Store', googlePlay: 'Google Play', nav: 'Navegación'
+  }
 }[locale];
 const definition = allLocaleDefinitions[locale];
 const isPapira = slug === 'papira';
@@ -36,7 +53,13 @@ const iconPath = isPapira ? '/app-assets/papira/icon.png' : getIconRoutePath(sou
 const accent = isPapira ? { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' } : productAccent(source!);
 const bodyBlocks = renderBlocks(text.body);
 const screenshots = (() => {
-  if (isPapira) return ['/app-assets/papira/assets/screenshots/en/01.png', '/app-assets/papira/assets/screenshots/en/02.png', '/app-assets/papira/assets/screenshots/en/03.png'];
+  if (isPapira) {
+    return [
+      '/app-assets/papira/assets/screenshots/en/01.png',
+      '/app-assets/papira/assets/screenshots/en/02.png',
+      '/app-assets/papira/assets/screenshots/en/03.png'
+    ];
+  }
   const dir = path.resolve(source!.contentDir, 'assets/screenshots/en');
   if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir, { withFileTypes: true })
@@ -46,42 +69,88 @@ const screenshots = (() => {
     .map((name) => `/app-assets/${slug}/assets/screenshots/en/${name}`);
 })();
 const latestRelease = latestReleaseNoteForApp(slug);
+const releaseHref = latestRelease ? releaseNoteLocalePath(latestRelease, locale) : undefined;
 const privacyHref = isPapira ? allRouteFor('papiraPrivacy', locale) : allAppPrivacyRouteFor(slug, locale);
 const seoTitle = `${meta.title} - ${text.subtitle}`;
 const seoDescription = text.body.split(/\n\s*\n/)[0].replace(/\s+/g, ' ').trim();
 const pageStyle = `--accent-border:${accent.border};--accent-bg:${accent.background};--accent-text:${accent.text};`;
 ---
 
-<BaseLayout title={seoTitle} description={seoDescription} canonicalPath={canonicalPath} lang={definition.htmlLang} alternates={allProductLocaleAlternates(slug)} socialImage={iconPath}>
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  canonicalPath={canonicalPath}
+  lang={definition.htmlLang}
+  alternates={allProductLocaleAlternates(slug)}
+  socialImage={iconPath}
+>
   <main class="product-shell" style={pageStyle} data-locale={locale}>
-    <nav class="top-nav site-header" aria-label="Navigation">
+    <nav class="top-nav site-header" aria-label={labels.nav}>
       <a class="brand" href={allRouteFor('home', locale)}>ONNELLAB</a>
-      <div class="nav-actions"><a href={allRouteFor('apps', locale)}>{labels.apps}</a><LocaleMenu locale={locale} productSlug={slug} /></div>
+      <div class="nav-actions">
+        <a href={allRouteFor('apps', locale)}>{labels.apps}</a>
+        <LocaleMenu locale={locale} productSlug={slug} />
+      </div>
     </nav>
 
     <header class="hero">
       <img class="app-icon" src={iconPath} alt="" width="116" height="116" />
-      <div><p class="eyebrow">ONNELLAB</p><h1>{meta.title}</h1><p class="subtitle">{text.subtitle}</p><div class="badges" aria-label={labels.platforms}>{meta.platforms.map((platform) => <span>{platform}</span>)}</div></div>
+      <div>
+        <p class="eyebrow">ONNELLAB</p>
+        <h1>{meta.title}</h1>
+        <p class="subtitle">{text.subtitle}</p>
+        <div class="badges" aria-label={labels.platforms}>{meta.platforms.map((platform) => <span>{platform}</span>)}</div>
+      </div>
     </header>
 
     <div class="layout">
       <article class="content">
-        {bodyBlocks.map((block) => block.type === 'h2' ? <h2>{block.value}</h2> : block.type === 'h3' ? <h3>{block.value}</h3> : block.type === 'ul' ? <ul>{(block.value as string[]).map((item) => <li>{item}</li>)}</ul> : <p>{block.value as string}</p>)}
-
-        <section class="faq"><h2>{text.faqTitle}</h2>{text.faq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</section>
+        {bodyBlocks.map((block) =>
+          block.type === 'h2' ? <h2>{block.value}</h2>
+            : block.type === 'h3' ? <h3>{block.value}</h3>
+              : block.type === 'ul' ? <ul>{(block.value as string[]).map((item) => <li>{item}</li>)}</ul>
+                : <p>{block.value as string}</p>
+        )}
+        <section class="faq">
+          <h2>{text.faqTitle}</h2>
+          {text.faq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+        </section>
       </article>
 
       <aside class="side-card">
-        {(meta.appstore || meta.googleplay) && <><h2>{labels.download}</h2>{meta.appstore && <a href={meta.appstore}>{labels.appStore}</a>}{meta.googleplay && <a href={meta.googleplay}>{labels.googlePlay}</a>}</>}
-        <h2>{labels.privacy}</h2><a href={privacyHref}>{labels.privacy}</a>
-        {latestRelease && <><h2>{labels.release}</h2><a href={releaseNotePath(latestRelease)}>{latestRelease.title}</a></>}
-        <h2>{labels.contact}</h2><a href={`mailto:${meta.supportEmail}`}>{meta.supportEmail}</a>
+        {(meta.appstore || meta.googleplay) && (
+          <>
+            <h2>{labels.download}</h2>
+            {meta.appstore && <a href={meta.appstore}>{labels.appStore}</a>}
+            {meta.googleplay && <a href={meta.googleplay}>{labels.googlePlay}</a>}
+          </>
+        )}
+        <h2>{labels.privacy}</h2>
+        <a href={privacyHref}>{labels.privacy}</a>
+        {releaseHref && latestRelease && (
+          <>
+            <h2>{labels.release}</h2>
+            <a href={releaseHref}>{latestRelease.title}</a>
+          </>
+        )}
+        <h2>{labels.contact}</h2>
+        <a href={`mailto:${meta.supportEmail}`}>{meta.supportEmail}</a>
       </aside>
     </div>
 
-    {screenshots.length > 0 && <section class="screens"><h2>{labels.screenshots}</h2><div class="shot-row">{screenshots.map((src) => <img src={src} alt="" loading="lazy" />)}</div></section>}
+    {screenshots.length > 0 && (
+      <section class="screens">
+        <h2>{labels.screenshots}</h2>
+        <div class="shot-row">{screenshots.map((src) => <img src={src} alt="" loading="lazy" />)}</div>
+      </section>
+    )}
 
-    <footer class="footer"><a href={allRouteFor('apps', locale)}>{labels.apps}</a><a href={privacyHref}>{labels.privacy}</a><a href={`mailto:${meta.supportEmail}`}>{meta.supportEmail}</a><span>© ONNELLAB</span></footer>
+    <footer class="footer">
+      <a href={allRouteFor('apps', locale)}>{labels.apps}</a>
+      <a href={privacyHref}>{labels.privacy}</a>
+      <a href={`mailto:${meta.supportEmail}`}>{meta.supportEmail}</a>
+      <span>© ONNELLAB</span>
+    </footer>
   </main>
 </BaseLayout>
 
