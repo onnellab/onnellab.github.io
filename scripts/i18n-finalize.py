@@ -1,0 +1,162 @@
+from pathlib import Path
+
+
+def replace(path: str, old: str, new: str, expected: int = 1) -> None:
+    file_path = Path(path)
+    text = file_path.read_text()
+    count = text.count(old)
+    if count != expected:
+        raise SystemExit(
+            f"{path}: expected {expected} occurrence(s), found {count}: {old[:120]!r}"
+        )
+    file_path.write_text(text.replace(old, new))
+
+
+replace(
+    "src/layouts/BaseLayout.astro",
+    """        const localePaths = {\n          en: '/',\n          ko: '/ko/',\n          ja: '/ja/',\n          'zh-Hans': '/zh-hans/',\n          'zh-Hant': '/zh-hant/'\n        };""",
+    """        const localePaths = {\n          en: '/',\n          ko: '/ko/',\n          ja: '/ja/',\n          'zh-Hans': '/zh-hans/',\n          'zh-Hant': '/zh-hant/',\n          'pt-BR': '/pt-br/',\n          de: '/de/',\n          fr: '/fr/',\n          es: '/es/'\n        };""",
+)
+replace(
+    "src/layouts/BaseLayout.astro",
+    "            else if (normalized === 'en' || normalized.startsWith('en-')) preferredLocale = 'en';",
+    """            else if (normalized === 'pt' || normalized.startsWith('pt-')) preferredLocale = 'pt-BR';\n            else if (normalized === 'de' || normalized.startsWith('de-')) preferredLocale = 'de';\n            else if (normalized === 'fr' || normalized.startsWith('fr-')) preferredLocale = 'fr';\n            else if (normalized === 'es' || normalized.startsWith('es-')) preferredLocale = 'es';\n            else if (normalized === 'en' || normalized.startsWith('en-')) preferredLocale = 'en';""",
+)
+
+for path in [
+    "src/components/HomePage.astro",
+    "src/components/AboutPage.astro",
+    "src/components/CorePage.astro",
+]:
+    replace(
+        path,
+        "const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';",
+        """const blogHref = locale === 'ko'\n  ? '/blog/ko/'\n  : locale === 'ja'\n    ? '/blog/ja/'\n    : locale === 'zh-Hans'\n      ? '/blog/zh-hans/'\n      : locale === 'zh-Hant'\n        ? '/blog/zh-hant/'\n        : '/blog/';""",
+    )
+
+replace(
+    "src/components/HomePage.astro",
+    "blogVisibleLabel: 'ブログ · EN',",
+    "blogVisibleLabel: 'ブログ',",
+)
+replace(
+    "src/components/HomePage.astro",
+    "blogVisibleLabel: '博客 · EN',",
+    "blogVisibleLabel: '博客',",
+)
+replace(
+    "src/components/HomePage.astro",
+    "blogVisibleLabel: '部落格 · EN',",
+    "blogVisibleLabel: '部落格',",
+)
+replace(
+    "src/components/HomePage.astro",
+    "availableLanguage: ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant']",
+    "availableLanguage: ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de', 'fr', 'es']",
+)
+
+replace(
+    "src/components/PrivacyIndex.astro",
+    """const existingPolicyHref = (href: string) =>\n  locale === 'ko' ? href.replace(/\\/?$/, '/ko/') : href;""",
+    """const existingPolicyHref = (href: string) => {\n  const segment = localeDefinitions[locale].pathSegment;\n  return segment ? href.replace(/\\/?$/, `/${segment}/`) : href;\n};""",
+)
+replace(
+    "src/components/PrivacyIndex.astro",
+    "    fallbackNotice: 'Papiraのポリシーは日本語で読めます。ほかのアプリのポリシーは現在、英語または韓国語で提供しています。'\n",
+    "",
+)
+replace(
+    "src/components/PrivacyIndex.astro",
+    "    fallbackNotice: 'Papira 隐私政策提供简体中文。其他应用政策目前提供英文或韩文。'\n",
+    "",
+)
+replace(
+    "src/components/PrivacyIndex.astro",
+    "    fallbackNotice: 'Papira 隱私權政策提供繁體中文。其他應用程式政策目前提供英文或韓文。'\n",
+    "",
+)
+
+replace(
+    "src/components/ProductTemplate.astro",
+    """const localizedPrivacyUrl = (url: string, locale: ProductPageData['locale']) => {\n  const privacyUrl = new URL(url, Astro.site);\n  if (locale !== 'ko') return privacyUrl.toString();\n  if (!/\\/ko\\/?$/.test(privacyUrl.pathname)) {\n    privacyUrl.pathname = privacyUrl.pathname.replace(/\\/?$/, '/ko/');\n  }\n  return privacyUrl.toString();\n};""",
+    """const localizedPrivacyUrl = (url: string, locale: ProductPageData['locale']) => {\n  const privacyUrl = new URL(url, Astro.site);\n  const segment = { en: '', ko: 'ko', ja: 'ja', 'zh-Hans': 'zh-hans', 'zh-Hant': 'zh-hant' }[locale];\n  if (!segment) return privacyUrl.toString();\n  if (!privacyUrl.pathname.endsWith(`/${segment}/`)) {\n    privacyUrl.pathname = privacyUrl.pathname.replace(/\\/?$/, `/${segment}/`);\n  }\n  return privacyUrl.toString();\n};""",
+)
+
+replace(
+    "src/components/BlogIndex.astro",
+    "import BaseLayout from '../layouts/BaseLayout.astro';\nimport SiteFooter from './SiteFooter.astro';",
+    "import BaseLayout from '../layouts/BaseLayout.astro';\nimport BlogLocaleMenu from './BlogLocaleMenu.astro';\nimport SiteFooter from './SiteFooter.astro';\nimport { blogIndexAlternates } from '../lib/blog-i18n';",
+)
+replace(
+    "src/components/BlogIndex.astro",
+    "      appsLabel: 'Apps',\n      eyebrow: 'ONNELLAB Blog',\n      heading: '워크플로 가이드',",
+    "      appsLabel: '앱',\n      eyebrow: 'ONNELLAB Blog',\n      heading: '워크플로 가이드',",
+)
+replace(
+    "src/components/BlogIndex.astro",
+    """  alternates={[\n    { lang: 'en', path: '/blog/' },\n    { lang: 'ko', path: '/blog/ko/' },\n    { lang: 'x-default', path: '/blog/' }\n  ]}""",
+    "  alternates={blogIndexAlternates()}",
+)
+replace(
+    "src/components/BlogIndex.astro",
+    "        <a class=\"language site-language-control\" href={copy.switchHref} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={isKo ? 'English' : '한국어'}>{copy.switchLabel}</a>",
+    "        <BlogLocaleMenu locale={locale} />",
+)
+
+replace(
+    "src/components/BlogArticle.astro",
+    "import BaseLayout from '../layouts/BaseLayout.astro';\nimport SiteFooter from './SiteFooter.astro';",
+    "import BaseLayout from '../layouts/BaseLayout.astro';\nimport BlogLocaleMenu from './BlogLocaleMenu.astro';\nimport SiteFooter from './SiteFooter.astro';\nimport { blogPostAlternates } from '../lib/blog-i18n';",
+)
+replace(
+    "src/components/BlogArticle.astro",
+    """      blog: 'Blog',\n      apps: 'Apps',\n      summary: '요약',""",
+    """      blog: '블로그',\n      apps: '앱',\n      summary: '요약',""",
+)
+replace(
+    "src/components/BlogArticle.astro",
+    """  alternates={\n    alternatePost\n      ? [\n          { lang: 'en', path: isKo ? alternatePost.href : post.href },\n          { lang: 'ko', path: isKo ? post.href : alternatePost.href },\n          { lang: 'x-default', path: isKo ? alternatePost.href : post.href }\n        ]\n      : isKo\n        ? [{ lang: 'ko', path: post.href }]\n        : [{ lang: 'en', path: post.href }, { lang: 'x-default', path: post.href }]\n  }""",
+    "  alternates={blogPostAlternates(post.meta.slug)}",
+)
+replace(
+    "src/components/BlogArticle.astro",
+    """        {alternatePost && (\n          <a class=\"language site-language-control\" href={alternatePost.href} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={switchAria} title={switchLabel}>{switchLabel}</a>\n        )}""",
+    "        <BlogLocaleMenu locale={locale} slug={post.meta.slug} />",
+)
+
+path = Path("tests/site-i18n.spec.ts")
+text = path.read_text()
+replacements = {
+    "blogHref: '/blog/',\n    blogText: 'ブログ · EN',": "blogHref: '/blog/ja/',\n    blogText: 'ブログ',",
+    "blogHref: '/blog/',\n    blogText: '博客 · EN',": "blogHref: '/blog/zh-hans/',\n    blogText: '博客',",
+    "blogHref: '/blog/',\n    blogText: '部落格 · EN',": "blogHref: '/blog/zh-hant/',\n    blogText: '部落格',",
+    "test.describe('five-language core site'": "test.describe('nine-language site core regression'",
+    "{ browserLocale: 'en-US', expectedPath: '/' },\n    { browserLocale: 'fr-FR', expectedPath: '/' }": "{ browserLocale: 'en-US', expectedPath: '/' },\n    { browserLocale: 'pt-BR', expectedPath: '/pt-br/' },\n    { browserLocale: 'de-DE', expectedPath: '/de/' },\n    { browserLocale: 'fr-FR', expectedPath: '/fr/' },\n    { browserLocale: 'es-ES', expectedPath: '/es/' }",
+    "await setBrowserLocales(page, ['fr-FR', 'ja-JP'], 'ko-KR');": "await setBrowserLocales(page, ['it-IT', 'ja-JP'], 'ko-KR');",
+    "await setBrowserLocales(page, ['fr-FR'], 'ko-KR');": "await setBrowserLocales(page, ['it-IT'], 'ko-KR');",
+    "localStorage.setItem('onnellab.locale', 'fr')": "localStorage.setItem('onnellab.locale', 'it')",
+    "every app detail supports localized navigation in five languages": "every core app detail keeps content while exposing nine-language navigation",
+    "`https://onnellab.github.io/privacy/${slug}/`": "`https://onnellab.github.io/privacy/${slug}/${segment}/`",
+}
+for old, new in replacements.items():
+    count = text.count(old)
+    if count != 1:
+        raise SystemExit(
+            f"tests/site-i18n.spec.ts: expected 1 occurrence, found {count}: {old!r}"
+        )
+    text = text.replace(old, new)
+
+menu_old = "page.locator('.locale-menu-panel a')).toHaveCount(5)"
+menu_count = text.count(menu_old)
+if menu_count < 4:
+    raise SystemExit(f"expected >=4 legacy locale menu assertions, found {menu_count}")
+text = text.replace(menu_old, "page.locator('.locale-menu-panel a')).toHaveCount(9)")
+
+alt_old = "page.locator('link[rel=\"alternate\"][hreflang]')).toHaveCount(6)"
+if text.count(alt_old) != 1:
+    raise SystemExit("expected one six-alternate assertion")
+text = text.replace(
+    alt_old,
+    "page.locator('link[rel=\"alternate\"][hreflang]')).toHaveCount(10)",
+)
+path.write_text(text)
