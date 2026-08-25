@@ -1,0 +1,54 @@
+name: Patch product schema categories once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/product-schema-category-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply schema classifications
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('src/components/ProductTemplate.astro')
+          text = path.read_text(encoding='utf-8')
+
+          anchor = """const localizedStatus =\n  meta.status === 'Released'\n    ? labels.released\n    : meta.status === 'Preparing for release'\n      ? labels.preparing\n      : meta.status;\n\n"""
+          insert = """const localizedStatus =\n  meta.status === 'Released'\n    ? labels.released\n    : meta.status === 'Preparing for release'\n      ? labels.preparing\n      : meta.status;\n\nconst schemaClassifications: Record<string, { applicationCategory: string; applicationSubCategory: string }> = {\n  aligna: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'File Renaming Utility' },\n  clipnest: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Clipboard Utility' },\n  melivra: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Offline Music Player' },\n  meriq: { applicationCategory: 'DesignApplication', applicationSubCategory: 'Merchandise Production Tool' },\n  papira: { applicationCategory: 'DesignApplication', applicationSubCategory: 'EPUB Authoring Tool' },\n  quivra: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Media Conversion Utility' },\n  segra: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Audio Editing Utility' },\n  tagweaver: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Audio Metadata Editor' },\n  vaultxt: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Large Text File Editor' }\n};\nconst schemaClassification = schemaClassifications[data.source.slug];\nif (!schemaClassification) {\n  throw new Error(`Missing SoftwareApplication schema classification: ${data.source.slug}`);\n}\n\n"""
+          if text.count(anchor) != 1:
+              raise SystemExit(f'classification anchor mismatch: {text.count(anchor)}')
+          text = text.replace(anchor, insert, 1)
+
+          old = """  applicationCategory: 'UtilitiesApplication',\n  applicationSubCategory: copy.android.name || copy.ios.name,\n"""
+          new = """  applicationCategory: schemaClassification.applicationCategory,\n  applicationSubCategory: schemaClassification.applicationSubCategory,\n"""
+          if text.count(old) != 1:
+              raise SystemExit(f'classification fields mismatch: {text.count(old)}')
+          text = text.replace(old, new, 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+
+          git diff --check
+          npm ci
+          npm run build
+
+      - name: Commit schema classification patch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/product-schema-category-trigger .github/workflows/patch-product-schema-categories-once.yml
+          git add src/components/ProductTemplate.astro
+          git commit -m 'fix: classify product application schema accurately'
+          git push origin HEAD:main
