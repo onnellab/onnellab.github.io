@@ -45,9 +45,7 @@ export function GET() {
       'papira',
       latestLastmod(sourceLastmod, ['src/lib/papira.ts', 'src/components/ExtendedProductPage.astro'])
     ),
-    ...papiraPrivacyEntries(
-      latestLastmod(sourceLastmod, ['src/components/PapiraPrivacyPage.astro', 'src/lib/papira-privacy.ts'])
-    ),
+    ...papiraPrivacyEntries(sourceLastmod('src/components/PapiraPrivacyPage.astro')),
     ...productPrivacyEntries(sourceLastmod),
     ...blogEntries(sourceLastmod),
     ...oauthEntries(
@@ -150,7 +148,6 @@ function blogEntries(sourceLastmod: (sourcePath: string) => string): SitemapEntr
     });
   });
 
-  // Force the translated content readers to parse every locale during the build.
   for (const locale of translatedPrivacyLocales) getExtendedBlogPosts(locale);
 
   return [...indexEntries, ...articleEntries];
