@@ -38,6 +38,10 @@ User-agent: YouBot
 Disallow: /manual-publish/
 Allow: /
 
+User-agent: Meta-ExternalFetcher
+Disallow: /manual-publish/
+Allow: /
+
 User-agent: GPTBot
 Disallow: /
 
@@ -54,9 +58,6 @@ User-agent: CCBot
 Disallow: /
 
 User-agent: Meta-ExternalAgent
-Disallow: /
-
-User-agent: Meta-ExternalFetcher
 Disallow: /
 
 User-agent: Applebot-Extended
