@@ -1319,7 +1319,7 @@ test.describe('existing product pages', () => {
       .map((schema) => JSON.parse(schema))
       .find((item) => item['@type'] === 'SoftwareApplication');
     expect(application.name).toBe('TagWeaver');
-    expect(application.privacyPolicy).toBe('https://onnellab.github.io/privacy/tagweaver/');
+    expect(application).not.toHaveProperty('privacyPolicy');
     expect(application.publisher.name).toBe('ONNELLAB');
   });
 

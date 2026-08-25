@@ -376,7 +376,7 @@ test.describe('Papira nine-language launch surface', () => {
 
     const schemas = await jsonLd(page);
     const software = schemas.find((item) => item['@type'] === 'SoftwareApplication');
-    expect(software?.privacyPolicy).toBe(privacyUrl);
+    expect(software).not.toHaveProperty('privacyPolicy');
     expect(JSON.stringify(schemas)).not.toContain('/ko/ko/');
   });
 
