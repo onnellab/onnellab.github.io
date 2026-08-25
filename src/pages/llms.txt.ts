@@ -1,147 +1,99 @@
 import {
+  allAppPrivacyRouteFor,
+  allLocaleDefinitions,
+  allProductRouteFor,
+  allRouteFor,
+  allSiteLocales
+} from '../lib/extended-site-i18n';
+import {
   getProductPageData,
   getProductSources,
   landingSubtitle,
   pageBodyDescription,
   renderBlocks
 } from '../lib/products';
-import { getBlogPosts, renderMarkdownBlocks, type BlogPost } from '../lib/blog';
-import { papiraCopy } from '../lib/papira';
-import { localeDefinitions, productRouteFor, routeFor, siteLocales } from '../lib/site-i18n';
+import { getPapiraProductPageData } from '../lib/papira';
 
 const siteUrl = 'https://onnellab.github.io';
 
-function articleQuestion(post: BlogPost): string {
-  const blocks = renderMarkdownBlocks(post.body);
-  const questionHeadingIndex = blocks.findIndex(
-    (block) => block.type === 'h2' && ['question', '질문'].includes(String(block.value).trim().toLowerCase())
-  );
-  if (questionHeadingIndex === -1) return post.meta.title;
-  const answerBlock = blocks.slice(questionHeadingIndex + 1).find((block) => block.type === 'p');
-  return answerBlock?.type === 'p' ? String(answerBlock.value) : post.meta.title;
+const absolute = (path: string) => new URL(path, siteUrl).toString();
+
+function summaryLines(text: string): string[] {
+  const blocks = renderBlocks(text);
+  const firstParagraph = blocks.find((block) => block.type === 'p')?.value as string | undefined;
+  const tasks = blocks.find((block) => block.type === 'ul')?.value as string[] | undefined;
+  return [
+    ...(firstParagraph ? [`- Summary: ${firstParagraph}`] : []),
+    ...(tasks ?? []).slice(0, 4).map((task) => `- Task: ${task}`)
+  ];
 }
 
 export function GET() {
-  const sources = getProductSources();
-  const apps = sources.map((source) => getProductPageData(source.slug, 'en'));
-  const koreanApps = sources.map((source) => getProductPageData(source.slug, 'ko'));
-  const blogPosts = getBlogPosts();
+  const productSources = getProductSources();
   const lines = [
     '# ONNELLAB',
     '',
     'ONNELLAB is an independent software studio creating calm, focused apps for files, text, audio, media, and creative work.',
     '',
-    '## Website',
+    '## Website languages',
     '',
-    ...siteLocales.flatMap((locale) => {
-      const label = localeDefinitions[locale].label;
+    'ONNELLAB publishes its core site and product pages in nine languages: English, Korean, Japanese, Simplified Chinese, Traditional Chinese, Brazilian Portuguese, German, French, and Spanish.',
+    '',
+    ...allSiteLocales.flatMap((locale) => {
+      const label = allLocaleDefinitions[locale].label;
       return [
-        `- ${label} home: ${new URL(routeFor('home', locale), siteUrl).toString()}`,
-        `- ${label} apps: ${new URL(routeFor('apps', locale), siteUrl).toString()}`,
-        `- ${label} about: ${new URL(routeFor('about', locale), siteUrl).toString()}`,
-        `- ${label} privacy hub: ${new URL(routeFor('privacy', locale), siteUrl).toString()}`,
-        `- ${label} terms: ${new URL(routeFor('terms', locale), siteUrl).toString()}`
+        `### ${label}`,
+        `- Home: ${absolute(allRouteFor('home', locale))}`,
+        `- Apps: ${absolute(allRouteFor('apps', locale))}`,
+        `- About: ${absolute(allRouteFor('about', locale))}`,
+        `- Privacy hub: ${absolute(allRouteFor('privacy', locale))}`,
+        `- Terms: ${absolute(allRouteFor('terms', locale))}`,
+        `- Blog: ${absolute(locale === 'en' ? '/blog/' : `/blog/${allLocaleDefinitions[locale].pathSegment}/`)}`,
+        ''
       ];
     }),
-    `- Blog: ${siteUrl}/blog/`,
-    `- Korean blog: ${siteUrl}/blog/ko/`,
+    '## Apps with nine-language product pages',
+    '',
+    ...productSources.flatMap((source) => [
+      `### ${source.meta.title}`,
+      '',
+      ...allSiteLocales.flatMap((locale) => {
+        const app = getProductPageData(source.slug, locale);
+        return [
+          `#### ${allLocaleDefinitions[locale].label}`,
+          `- Main task: ${landingSubtitle(app.copy)}`,
+          ...summaryLines(pageBodyDescription(app.copy)),
+          `- Product page: ${absolute(allProductRouteFor(source.slug, locale))}`,
+          `- Privacy policy: ${absolute(allAppPrivacyRouteFor(source.slug, locale))}`,
+          `- Platforms: ${app.meta.platforms.join(', ')}`,
+          ''
+        ];
+      })
+    ]),
+    '## Papira',
+    '',
+    ...allSiteLocales.flatMap((locale) => {
+      const app = getPapiraProductPageData(locale);
+      return [
+        `### Papira (${allLocaleDefinitions[locale].label})`,
+        `- Main task: ${landingSubtitle(app.copy)}`,
+        ...summaryLines(pageBodyDescription(app.copy)),
+        `- Product page: ${absolute(allRouteFor('papira', locale))}`,
+        `- Privacy policy: ${absolute(allRouteFor('papiraPrivacy', locale))}`,
+        `- Platforms: ${app.meta.platforms.join(', ')}`,
+        ''
+      ];
+    }),
+    '## Discovery',
+    '',
     `- RSS: ${siteUrl}/rss.xml`,
     `- Sitemap: ${siteUrl}/sitemap.xml`,
     '',
-    '## Papira',
-    '',
-    'Papira is an offline TXT-to-EPUB maker for finished manuscripts. It supports English, Korean, Japanese, Simplified Chinese, and Traditional Chinese.',
-    '',
-    ...siteLocales.flatMap((locale) => {
-      const copy = papiraCopy[locale];
-      return [
-        `### Papira (${localeDefinitions[locale].label})`,
-        '',
-        copy.lead,
-        '',
-        `- Main task: ${copy.tagline}`,
-        `- Product page: ${new URL(routeFor('papira', locale), siteUrl).toString()}`,
-        `- Privacy policy: ${new URL(routeFor('papiraPrivacy', locale), siteUrl).toString()}`,
-        `- Platforms: iOS, Android`,
-        `- Processing: on-device; no account, advertising, behavioral analytics, or file upload`,
-        ''
-      ];
-    }),
-    '## Blog Articles',
-    '',
-    ...blogPosts.flatMap((post) => [
-      `### ${post.meta.title}`,
-      '',
-      post.meta.description,
-      '',
-      `- Primary question: ${articleQuestion(post)}`,
-      `- Short answer: ${post.meta.shortAnswer || post.meta.description}`,
-      `- Language: ${post.meta.language}`,
-      `- Category: ${post.meta.category}`,
-      `- Search intent: ${post.meta.language === 'ko' ? 'problem solving guide in Korean' : 'problem-solving guide'}`,
-      `- Article: ${new URL(post.href, siteUrl).toString()}`,
-      ...(post.meta.relatedApps.length ? [`- Related apps: ${post.meta.relatedApps.join(', ')}`] : []),
-      ...(post.meta.tags.length ? [`- Tags: ${post.meta.tags.join(', ')}`] : []),
-      ''
-    ]),
-    '',
-    '## Apps with five-language product pages',
-    '',
-    ...apps.flatMap((app) => {
-      const bodyBlocks = renderBlocks(pageBodyDescription(app.copy));
-      const firstParagraph = bodyBlocks.find((block) => block.type === 'p')?.value as string | undefined;
-      const tasks = bodyBlocks.find((block) => block.type === 'ul')?.value as string[] | undefined;
-      const taskLines = (tasks ?? []).slice(0, 4).map((task) => `- ${task}`);
-      return [
-        `### ${app.meta.title}`,
-        '',
-        landingSubtitle(app.copy),
-        '',
-        firstParagraph ?? app.seoDescription,
-        '',
-        'Key tasks:',
-        ...taskLines,
-        '',
-        `- Landing page: ${new URL(app.canonicalPath, siteUrl).toString()}`,
-        `- Korean page: ${new URL(productRouteFor(app.source.slug, 'ko'), siteUrl).toString()}`,
-        `- Japanese page: ${new URL(productRouteFor(app.source.slug, 'ja'), siteUrl).toString()}`,
-        `- Simplified Chinese page: ${new URL(productRouteFor(app.source.slug, 'zh-Hans'), siteUrl).toString()}`,
-        `- Traditional Chinese page: ${new URL(productRouteFor(app.source.slug, 'zh-Hant'), siteUrl).toString()}`,
-        `- Privacy policy: ${app.meta.privacy}`,
-        `- Platforms: ${app.meta.platforms.join(', ')}`,
-        ...(app.meta.pricing ? [`- Pricing: ${app.meta.pricing}`] : []),
-        ''
-      ];
-    }),
-    '## Korean App Summaries',
-    '',
-    ...koreanApps.flatMap((app) => {
-      const bodyBlocks = renderBlocks(pageBodyDescription(app.copy));
-      const firstParagraph = bodyBlocks.find((block) => block.type === 'p')?.value as string | undefined;
-      const tasks = bodyBlocks.find((block) => block.type === 'ul')?.value as string[] | undefined;
-      const taskLines = (tasks ?? []).slice(0, 4).map((task) => `- ${task}`);
-      return [
-        `### ${app.meta.title}`,
-        '',
-        landingSubtitle(app.copy),
-        '',
-        firstParagraph ?? app.seoDescription,
-        '',
-        '주요 작업:',
-        ...taskLines,
-        '',
-        `- 한국어 랜딩 페이지: ${new URL(app.canonicalPath, siteUrl).toString()}`,
-        `- 영어 페이지: ${new URL(productRouteFor(app.source.slug, 'en'), siteUrl).toString()}`,
-        `- 개인정보 처리방침: ${app.meta.privacy}`,
-        `- 지원 플랫폼: ${app.meta.platforms.join(', ')}`,
-        ...(app.meta.pricing ? [`- 가격: ${app.meta.pricing}`] : []),
-        ''
-      ];
-    }),
     '## Contact',
     '',
     '- Support: onnellab.app@gmail.com'
   ];
+
   return new Response(`${lines.join('\n')}\n`, {
     headers: { 'Content-Type': 'text/plain; charset=utf-8' }
   });
