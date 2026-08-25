@@ -1,10 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { renderMarkdownBlocks } from '../lib/blog';
-import {
-  extendedBlogPostPath,
-  type ExtendedBlogPost
-} from '../lib/extended-blog';
+import { type ExtendedBlogPost } from '../lib/extended-blog';
 import {
   allLocaleDefinitions,
   allProductRouteFor,
@@ -13,67 +10,194 @@ import {
 } from '../lib/extended-site-i18n';
 
 type Props = { post: ExtendedBlogPost };
+type Category = 'reading' | 'music' | 'productivity' | 'media';
+type Copy = {
+  blog: string;
+  apps: string;
+  published: string;
+  updated: string;
+  related: string;
+  navLabel: string;
+  categories: Record<Category, string>;
+};
+
 const { post } = Astro.props;
 const locale = post.locale;
 const definition = allLocaleDefinitions[locale];
 const blocks = renderMarkdownBlocks(post.body);
-const copy = {
-  ja:{blog:'Blog',apps:'Apps',published:'公開',updated:'更新',related:'関連アプリ',categories:{reading:'読書',music:'音楽',productivity:'生産性',media:'メディア'}},
-  'zh-Hans':{blog:'博客',apps:'Apps',published:'发布',updated:'更新',related:'相关应用',categories:{reading:'阅读',music:'音乐',productivity:'效率',media:'媒体'}},
-  'zh-Hant':{blog:'部落格',apps:'Apps',published:'發布',updated:'更新',related:'相關應用程式',categories:{reading:'閱讀',music:'音樂',productivity:'生產力',media:'媒體'}},
-  'pt-BR':{blog:'Blog',apps:'Apps',published:'Publicado',updated:'Atualizado',related:'Apps relacionados',categories:{reading:'Leitura',music:'Música',productivity:'Produtividade',media:'Mídia'}},
-  de:{blog:'Blog',apps:'Apps',published:'Veröffentlicht',updated:'Aktualisiert',related:'Passende Apps',categories:{reading:'Lesen',music:'Musik',productivity:'Produktivität',media:'Medien'}},
-  fr:{blog:'Blog',apps:'Apps',published:'Publié',updated:'Mis à jour',related:'Apps associées',categories:{reading:'Lecture',music:'Musique',productivity:'Productivité',media:'Médias'}},
-  es:{blog:'Blog',apps:'Apps',published:'Publicado',updated:'Actualizado',related:'Apps relacionadas',categories:{reading:'Lectura',music:'Música',productivity:'Productividad',media:'Multimedia'}}
-}[locale];
-const blogIndexPath = (item: typeof allSiteLocales[number]) => item === 'en' ? '/blog/' : `/blog/${allLocaleDefinitions[item].pathSegment}/`;
-const postPath = (item: typeof allSiteLocales[number]) => {
+const copies: Record<ExtendedBlogPost['locale'], Copy> = {
+  ja: {
+    blog: 'ブログ', apps: 'アプリ', published: '公開', updated: '更新', related: '関連アプリ',
+    navLabel: '記事ナビゲーション',
+    categories: { reading: '読書', music: '音楽', productivity: '生産性', media: 'メディア' }
+  },
+  'zh-Hans': {
+    blog: '博客', apps: '应用', published: '发布', updated: '更新', related: '相关应用',
+    navLabel: '文章导航',
+    categories: { reading: '阅读', music: '音乐', productivity: '效率', media: '媒体' }
+  },
+  'zh-Hant': {
+    blog: '部落格', apps: '應用程式', published: '發布', updated: '更新', related: '相關應用程式',
+    navLabel: '文章導覽',
+    categories: { reading: '閱讀', music: '音樂', productivity: '生產力', media: '媒體' }
+  },
+  'pt-BR': {
+    blog: 'Blog', apps: 'Aplicativos', published: 'Publicado', updated: 'Atualizado', related: 'Aplicativos relacionados',
+    navLabel: 'Navegação do artigo',
+    categories: { reading: 'Leitura', music: 'Música', productivity: 'Produtividade', media: 'Mídia' }
+  },
+  de: {
+    blog: 'Blog', apps: 'Apps', published: 'Veröffentlicht', updated: 'Aktualisiert', related: 'Passende Apps',
+    navLabel: 'Artikel-Navigation',
+    categories: { reading: 'Lesen', music: 'Musik', productivity: 'Produktivität', media: 'Medien' }
+  },
+  fr: {
+    blog: 'Blog', apps: 'Applications', published: 'Publié', updated: 'Mis à jour', related: 'Applications associées',
+    navLabel: 'Navigation de l’article',
+    categories: { reading: 'Lecture', music: 'Musique', productivity: 'Productivité', media: 'Médias' }
+  },
+  es: {
+    blog: 'Blog', apps: 'Aplicaciones', published: 'Publicado', updated: 'Actualizado', related: 'Aplicaciones relacionadas',
+    navLabel: 'Navegación del artículo',
+    categories: { reading: 'Lectura', music: 'Música', productivity: 'Productividad', media: 'Multimedia' }
+  }
+};
+const copy = copies[locale];
+const blogIndexPath = (item: (typeof allSiteLocales)[number]) =>
+  item === 'en' ? '/blog/' : `/blog/${allLocaleDefinitions[item].pathSegment}/`;
+const postPath = (item: (typeof allSiteLocales)[number]) => {
   if (item === 'en') return `/blog/en/${post.slug}/`;
-  if (item === 'ko') return `/blog/ko/${post.slug}/`;
   return `/blog/${allLocaleDefinitions[item].pathSegment}/${post.slug}/`;
 };
-const alternates = [...allSiteLocales.map((item)=>({lang:allLocaleDefinitions[item].hreflang,path:postPath(item)})),{lang:'x-default',path:`/blog/en/${post.slug}/`}];
-const escapeHtml=(value:string)=>value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-const inlineHtml=(value:string)=>{
-  let output=escapeHtml(value);
-  output=output.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
-  output=output.replace(/`([^`]+)`/g,'<code>$1</code>');
-  output=output.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2">$1</a>');
+const alternates = [
+  ...allSiteLocales.map((item) => ({ lang: allLocaleDefinitions[item].hreflang, path: postPath(item) })),
+  { lang: 'x-default', path: `/blog/en/${post.slug}/` }
+];
+const escapeHtml = (value: string) =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const inlineHtml = (value: string) => {
+  let output = escapeHtml(value);
+  output = output.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  output = output.replace(/`([^`]+)`/g, '<code>$1</code>');
+  output = output.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
   return output;
 };
-const categoryLabel=copy.categories[post.category as keyof typeof copy.categories] || post.category;
-const jsonLd={
-  '@context':'https://schema.org','@type':'BlogPosting',headline:post.title,description:post.description,
-  inLanguage:definition.hreflang,url:new URL(post.href,Astro.site).toString(),mainEntityOfPage:new URL(post.href,Astro.site).toString(),
-  datePublished:post.publishedAt,dateModified:post.updatedAt||post.publishedAt,articleSection:post.category,keywords:post.tags,
-  author:{'@type':'Organization',name:'ONNELLAB',url:new URL('/',Astro.site).toString()},
-  publisher:{'@type':'Organization',name:'ONNELLAB',url:new URL('/',Astro.site).toString()}
+const categoryLabel = copy.categories[post.category as Category] ?? post.category;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.description,
+  inLanguage: definition.hreflang,
+  url: new URL(post.href, Astro.site).toString(),
+  mainEntityOfPage: new URL(post.href, Astro.site).toString(),
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt || post.publishedAt,
+  articleSection: post.category,
+  keywords: post.tags,
+  author: { '@type': 'Organization', name: 'ONNELLAB', url: new URL('/', Astro.site).toString() },
+  publisher: { '@type': 'Organization', name: 'ONNELLAB', url: new URL('/', Astro.site).toString() }
 };
 ---
-<BaseLayout title={`${post.title} - ONNELLAB Blog`} description={post.description} canonicalPath={post.href} lang={definition.htmlLang} alternates={alternates} ogType="article" jsonLd={jsonLd} articleMeta={{publishedTime:post.publishedAt,modifiedTime:post.updatedAt||post.publishedAt,section:post.category,tags:post.tags}}>
+
+<BaseLayout
+  title={`${post.title} - ONNELLAB Blog`}
+  description={post.description}
+  canonicalPath={post.href}
+  lang={definition.htmlLang}
+  alternates={alternates}
+  ogType="article"
+  jsonLd={jsonLd}
+  articleMeta={{
+    publishedTime: post.publishedAt,
+    modifiedTime: post.updatedAt || post.publishedAt,
+    section: post.category,
+    tags: post.tags
+  }}
+>
   <main class="article-shell">
-    <nav class="top-nav site-header"><a class="brand" href={allRouteFor('home',locale)}>ONNELLAB</a><div class="actions"><a href={allRouteFor('apps',locale)}>{copy.apps}</a><a href={blogIndexPath(locale)}>{copy.blog}</a><details class="locale-menu"><summary>{definition.label}</summary><ul>{allSiteLocales.map((item)=><li><a href={postPath(item)} lang={allLocaleDefinitions[item].htmlLang} hreflang={allLocaleDefinitions[item].hreflang} data-locale-choice={item} aria-current={item===locale?'page':undefined}>{allLocaleDefinitions[item].label}</a></li>)}</ul></details></div></nav>
+    <nav class="top-nav site-header" aria-label={copy.navLabel}>
+      <a class="brand" href={allRouteFor('home', locale)}>ONNELLAB</a>
+      <div class="actions">
+        <a href={allRouteFor('apps', locale)}>{copy.apps}</a>
+        <a href={blogIndexPath(locale)}>{copy.blog}</a>
+        <details class="locale-menu">
+          <summary>{definition.label}</summary>
+          <ul>
+            {allSiteLocales.map((item) => (
+              <li>
+                <a
+                  href={postPath(item)}
+                  lang={allLocaleDefinitions[item].htmlLang}
+                  hreflang={allLocaleDefinitions[item].hreflang}
+                  data-locale-choice={item}
+                  aria-current={item === locale ? 'page' : undefined}
+                >
+                  {allLocaleDefinitions[item].label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      </div>
+    </nav>
+
     <article>
-      <header class="article-header"><p class="category">{categoryLabel}</p><h1>{post.title}</h1><p class="description">{post.description}</p><div class="meta">{post.publishedAt&&<span>{copy.published} {post.publishedAt.slice(0,10)}</span>}{post.updatedAt&&<span>{copy.updated} {post.updatedAt.slice(0,10)}</span>}</div></header>
-      {post.relatedApps.length>0&&<aside class="related"><strong>{copy.related}</strong>{post.relatedApps.map((app)=><a href={allProductRouteFor(app.toLowerCase(),locale)}>{app}</a>)}</aside>}
+      <header class="article-header">
+        <p class="category">{categoryLabel}</p>
+        <h1>{post.title}</h1>
+        <p class="description">{post.description}</p>
+        <div class="meta">
+          {post.publishedAt && <span>{copy.published} {post.publishedAt.slice(0, 10)}</span>}
+          {post.updatedAt && <span>{copy.updated} {post.updatedAt.slice(0, 10)}</span>}
+        </div>
+      </header>
+
+      {post.relatedApps.length > 0 && (
+        <aside class="related">
+          <strong>{copy.related}</strong>
+          {post.relatedApps.map((app) => (
+            <a href={allProductRouteFor(app.toLowerCase(), locale)}>{app}</a>
+          ))}
+        </aside>
+      )}
+
       <div class="article-body">
-        {blocks.map((block)=>{
-          if(block.type==='h2') return <h2 set:html={inlineHtml(String(block.value))}/>;
-          if(block.type==='h3') return <h3 set:html={inlineHtml(String(block.value))}/>;
-          if(block.type==='p') return <p set:html={inlineHtml(String(block.value))}/>;
-          if(block.type==='blockquote') return <blockquote set:html={inlineHtml(String(block.value))}/>;
-          if(block.type==='ul') return <ul>{block.value.map((item)=><li set:html={inlineHtml(item)}/>)}</ul>;
-          if(block.type==='ol') return <ol>{block.value.map((item)=><li set:html={inlineHtml(item)}/>)}</ol>;
-          if(block.type==='image') return <figure><img src={block.src} alt={block.alt||''} loading="lazy"/><figcaption>{block.caption}</figcaption></figure>;
-          if(block.type==='code') return <pre><code>{block.value}</code></pre>;
-          if(block.type==='table') return <div class="table-wrap"><table><thead><tr>{block.value.headers.map((cell)=><th set:html={inlineHtml(cell)}/>)}</tr></thead><tbody>{block.value.rows.map((row)=><tr>{row.map((cell)=><td set:html={inlineHtml(cell)}/>)}</tr>)}</tbody></table></div>;
+        {blocks.map((block) => {
+          if (block.type === 'h2') return <h2 set:html={inlineHtml(String(block.value))} />;
+          if (block.type === 'h3') return <h3 set:html={inlineHtml(String(block.value))} />;
+          if (block.type === 'p') return <p set:html={inlineHtml(String(block.value))} />;
+          if (block.type === 'blockquote') return <blockquote set:html={inlineHtml(String(block.value))} />;
+          if (block.type === 'ul') return <ul>{block.value.map((item) => <li set:html={inlineHtml(item)} />)}</ul>;
+          if (block.type === 'ol') return <ol>{block.value.map((item) => <li set:html={inlineHtml(item)} />)}</ol>;
+          if (block.type === 'image') return <figure><img src={block.src} alt={block.alt || ''} loading="lazy" /><figcaption>{block.caption}</figcaption></figure>;
+          if (block.type === 'code') return <pre><code>{block.value}</code></pre>;
+          if (block.type === 'table') return <div class="table-wrap"><table><thead><tr>{block.value.headers.map((cell) => <th set:html={inlineHtml(cell)} />)}</tr></thead><tbody>{block.value.rows.map((row) => <tr>{row.map((cell) => <td set:html={inlineHtml(cell)} />)}</tr>)}</tbody></table></div>;
           return null;
         })}
       </div>
     </article>
-    <footer><a href={blogIndexPath(locale)}>{copy.blog}</a><a href={allRouteFor('apps',locale)}>{copy.apps}</a><a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a><span>© ONNELLAB</span></footer>
+
+    <footer>
+      <a href={blogIndexPath(locale)}>{copy.blog}</a>
+      <a href={allRouteFor('apps', locale)}>{copy.apps}</a>
+      <a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a>
+      <span>© ONNELLAB</span>
+    </footer>
   </main>
 </BaseLayout>
+
 <style>
-.article-shell{width:min(900px,calc(100% - 40px));margin:0 auto;padding:22px 0 56px;color:#3f3b35}.top-nav,.actions,.meta,.related,footer{display:flex;align-items:center}.top-nav{justify-content:space-between}.actions{gap:13px}.brand,.actions>a,footer a{color:#5f5a50;text-decoration:none;font-size:14px;font-weight:650}.locale-menu{position:relative}.locale-menu summary{min-height:34px;display:inline-flex;align-items:center;border:1px solid #ded6ca;border-radius:999px;padding:6px 12px;background:#fffdf8;color:#5f5a50;cursor:pointer;list-style:none;font-size:13px}.locale-menu ul{position:absolute;z-index:20;right:0;top:calc(100% + 7px);width:max-content;min-width:170px;display:grid;gap:2px;margin:0;border:1px solid #ded6ca;border-radius:12px;padding:6px;background:#fffdf8;list-style:none}.locale-menu li a{display:block;border-radius:8px;padding:8px 10px;color:#5f5a50;text-decoration:none;font-size:13px}.locale-menu li a:hover,.locale-menu li a[aria-current='page']{background:#f4efe7}.article-header{padding:68px 0 34px;border-bottom:1px solid #e0d8cb}.category{margin:0 0 11px;color:#716a5f;font-size:13px;font-weight:720;text-transform:uppercase}h1{max-width:850px;margin:0;color:#2f2f2f;font-size:clamp(38px,7vw,70px);line-height:1.04}.description{max-width:760px;margin:20px 0 0;color:#5b574f;font-size:18px;line-height:1.65}.meta{gap:14px;flex-wrap:wrap;margin-top:18px;color:#817970;font-size:12px}.related{gap:10px;flex-wrap:wrap;margin:24px 0;border:1px solid #ded6ca;border-radius:9px;padding:14px 16px;background:#fffdf8}.related a{color:#514c45}.article-body{max-width:800px}.article-body :global(h2){margin:48px 0 15px;color:#302d29;font-size:29px}.article-body :global(h3){margin:30px 0 10px;color:#39352f;font-size:22px}.article-body :global(p),.article-body :global(li),.article-body :global(blockquote){color:#514d46;font-size:16px;line-height:1.78}.article-body :global(a){color:#514b8b;text-underline-offset:3px}.article-body :global(blockquote){margin:22px 0;border-left:3px solid #d4c7e8;padding:4px 0 4px 18px}.article-body :global(figure){margin:34px 0}.article-body :global(figure img){max-width:100%;height:auto;border:1px solid #ded6ca;border-radius:12px}.article-body :global(figcaption){margin-top:8px;color:#7d756b;font-size:12px}.table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;background:#fffdf8}th,td{border:1px solid #ded6ca;padding:11px 12px;text-align:left;vertical-align:top;font-size:14px;line-height:1.55}pre{overflow:auto;border-radius:9px;padding:16px;background:#2f2d2a;color:#f7f3ec}footer{justify-content:center;flex-wrap:wrap;gap:10px 20px;margin-top:58px;border-top:1px solid #ded6ca;padding-top:28px;color:#786f65;font-size:12px}@media(max-width:640px){.actions>a{display:none}}
+  .article-shell{width:min(900px,calc(100% - 40px));margin:0 auto;padding:22px 0 56px;color:#3f3b35}
+  .top-nav,.actions,.meta,.related,footer{display:flex;align-items:center}.top-nav{justify-content:space-between}.actions{gap:13px}
+  .brand,.actions>a,footer a{color:#5f5a50;text-decoration:none;font-size:14px;font-weight:650}
+  .locale-menu{position:relative}.locale-menu summary{min-height:34px;display:inline-flex;align-items:center;border:1px solid #ded6ca;border-radius:999px;padding:6px 12px;background:#fffdf8;color:#5f5a50;cursor:pointer;list-style:none;font-size:13px}
+  .locale-menu ul{position:absolute;z-index:20;right:0;top:calc(100% + 7px);width:max-content;min-width:170px;display:grid;gap:2px;margin:0;border:1px solid #ded6ca;border-radius:12px;padding:6px;background:#fffdf8;list-style:none}.locale-menu li a{display:block;border-radius:8px;padding:8px 10px;color:#5f5a50;text-decoration:none;font-size:13px}.locale-menu li a:hover,.locale-menu li a[aria-current='page']{background:#f4efe7}
+  .article-header{padding:68px 0 34px;border-bottom:1px solid #e0d8cb}.category{margin:0 0 11px;color:#716a5f;font-size:13px;font-weight:720;text-transform:uppercase}
+  h1{max-width:850px;margin:0;color:#2f2f2f;font-size:clamp(38px,7vw,70px);line-height:1.04}.description{max-width:760px;margin:20px 0 0;color:#5b574f;font-size:18px;line-height:1.65}
+  .meta{gap:14px;flex-wrap:wrap;margin-top:18px;color:#817970;font-size:12px}.related{gap:10px;flex-wrap:wrap;margin:24px 0;border:1px solid #ded6ca;border-radius:9px;padding:14px 16px;background:#fffdf8}.related a{color:#514c45}
+  .article-body{max-width:800px}.article-body :global(h2){margin:48px 0 15px;color:#302d29;font-size:29px}.article-body :global(h3){margin:30px 0 10px;color:#39352f;font-size:22px}.article-body :global(p),.article-body :global(li),.article-body :global(blockquote){color:#514d46;font-size:16px;line-height:1.78}.article-body :global(a){color:#514b8b;text-underline-offset:3px}.article-body :global(blockquote){margin:22px 0;border-left:3px solid #d4c7e8;padding:4px 0 4px 18px}.article-body :global(figure){margin:34px 0}.article-body :global(figure img){max-width:100%;height:auto;border:1px solid #ded6ca;border-radius:12px}.article-body :global(figcaption){margin-top:8px;color:#7d756b;font-size:12px}
+  .table-wrap{overflow-x:auto;margin:24px 0}table{width:100%;border-collapse:collapse;background:#fffdf8}th,td{border:1px solid #ded6ca;padding:11px 12px;text-align:left;vertical-align:top;font-size:14px;line-height:1.55}pre{overflow:auto;border-radius:9px;padding:16px;background:#2f2d2a;color:#f7f3ec}
+  footer{justify-content:center;flex-wrap:wrap;gap:10px 20px;margin-top:58px;border-top:1px solid #ded6ca;padding-top:28px;color:#786f65;font-size:12px}
+  @media(max-width:640px){.actions>a{display:none}}
 </style>
