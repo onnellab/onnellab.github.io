@@ -23,6 +23,7 @@ const locales = [
   { code: 'es', segment: 'es' }
 ] as const;
 
+// Keep schema descriptive and verifiable: no commerce/review claims, only real application semantics.
 const schemaClassifications: Record<string, { applicationCategory: string; applicationSubCategory: string }> = {
   aligna: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'File Renaming Utility' },
   clipnest: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Clipboard Utility' },
