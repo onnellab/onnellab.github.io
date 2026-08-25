@@ -11,7 +11,4 @@ googleplay: https://play.google.com/store/apps/details?id=com.onnellab.tagweaver
 privacy: https://onnellab.github.io/privacy/tagweaver/
 supportEmail: onnellab.app@gmail.com
 
-pricing: Free download with optional Pro purchase
-price: 0
-
 icon: assets\icon\tagweaver.png

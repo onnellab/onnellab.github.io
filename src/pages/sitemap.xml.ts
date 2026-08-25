@@ -43,7 +43,7 @@ export function GET() {
     ),
     ...allLocalizedEntries(
       'papira',
-      latestLastmod(sourceLastmod, ['src/lib/papira.ts', 'src/components/ExtendedProductPage.astro'])
+      latestLastmod(sourceLastmod, ['src/lib/papira.ts', 'src/components/ProductTemplate.astro'])
     ),
     ...papiraPrivacyEntries(sourceLastmod('src/components/PapiraPrivacyPage.astro')),
     ...productPrivacyEntries(sourceLastmod),

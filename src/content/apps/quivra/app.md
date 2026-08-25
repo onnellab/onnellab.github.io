@@ -11,8 +11,4 @@ googleplay: https://play.google.com/store/apps/details?id=com.onnellab.quivra2
 privacy: https://onnellab.github.io/privacy/quivra/
 supportEmail: onnellab.app@gmail.com
 
-pricing: Paid download
-price: 3300
-priceCurrency: KRW
-
 icon: assets\icon\quivra.png

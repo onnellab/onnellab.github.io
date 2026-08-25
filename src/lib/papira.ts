@@ -1,6 +1,13 @@
 import type { SiteLocale } from './site-i18n';
-import { routeFor } from './site-i18n';
-import type { ProductCopy, ProductPageData } from './products';
+import {
+  allProductLocaleAlternates,
+  allRouteFor,
+  isExtendedSiteLocale,
+  type AllSiteLocale,
+  type ExtendedSiteLocale
+} from './extended-site-i18n';
+import { getExtendedProductCopy } from './extended-product-localizations';
+import { renderBlocks, type ProductCopy, type ProductPageData } from './products';
 
 export type PapiraFaq = {
   question: string;
@@ -33,8 +40,80 @@ export type PapiraCopy = {
   appsLabel: string;
 };
 
-export function getPapiraProductPageData(locale: SiteLocale): ProductPageData {
-  const text = papiraCopy[locale];
+const extendedPapiraStatus: Record<ExtendedSiteLocale, string> = {
+  'pt-BR': 'Em preparação',
+  de: 'In Vorbereitung',
+  fr: 'En préparation',
+  es: 'En preparación'
+};
+
+const extendedPapiraScreenshotAlts: Record<ExtendedSiteLocale, [string, string, string]> = {
+  'pt-BR': [
+    'Tela inicial do Papira para iniciar um projeto de livro ou criar um EPUB rápido',
+    'Tela do Papira para escolher o tipo de obra e configurar a capa',
+    'Tela do Papira para revisar os metadados do livro e criar o EPUB'
+  ],
+  de: [
+    'Papira-Startseite zum Starten eines Buchprojekts oder Erstellen eines schnellen EPUB',
+    'Papira-Seite zur Auswahl des Werktyps und Einrichtung des Covers',
+    'Papira-Seite zum Prüfen der Buchmetadaten und Erstellen des EPUB'
+  ],
+  fr: [
+    'Écran d’accueil de Papira pour démarrer un projet de livre ou créer rapidement un EPUB',
+    'Écran Papira pour choisir le type d’œuvre et configurer la couverture',
+    'Écran Papira pour vérifier les métadonnées du livre et créer l’EPUB'
+  ],
+  es: [
+    'Pantalla de inicio de Papira para comenzar un proyecto de libro o crear un EPUB rápido',
+    'Pantalla de Papira para elegir el tipo de obra y configurar la portada',
+    'Pantalla de Papira para revisar los metadatos del libro y crear el EPUB'
+  ]
+};
+
+export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData {
+  if (isExtendedSiteLocale(locale)) {
+    const text = getExtendedProductCopy('papira', locale);
+    const platformCopy = {
+      name: text.subtitle,
+      landingSubtitle: text.subtitle,
+      landingDescription: text.body,
+      description: text.body,
+      faq: { title: text.faqTitle, items: text.faq }
+    };
+    const copy: ProductCopy = { locale, android: platformCopy, ios: platformCopy };
+    const meta = {
+      title: 'Papira',
+      status: extendedPapiraStatus[locale],
+      platforms: ['iOS', 'Android'],
+      privacy: allRouteFor('papiraPrivacy', locale),
+      supportEmail: 'onnellab.app@gmail.com',
+      icon: 'assets/icon/Papira.png'
+    };
+    const featureList =
+      (renderBlocks(text.body).find((block) => block.type === 'ul')?.value as string[] | undefined) ?? [];
+    return {
+      locale,
+      source: { slug: 'papira', contentDir: '', meta },
+      meta,
+      copy,
+      canonicalPath: allRouteFor('papira', locale),
+      alternates: allProductLocaleAlternates('papira'),
+      seoTitle: `Papira - ${text.subtitle}`,
+      seoDescription: text.body.split(/\n\s*\n/)[0]?.replace(/\s+/g, ' ').trim() ?? text.subtitle,
+      iconPath: '/app-assets/papira/icon.png',
+      socialImagePath: '/app-assets/papira/social-card.png',
+      screenshotPaths: ['01', '02', '03'].map(
+        (name) => `/app-assets/papira/assets/screenshots/en/${name}.png`
+      ),
+      screenshotAlts: extendedPapiraScreenshotAlts[locale],
+      screenshotDimensions: { width: 1080, height: 2168 },
+      schemaFeatureList: featureList,
+      accent: { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' }
+    };
+  }
+
+  const baseLocale = locale as SiteLocale;
+  const text = papiraCopy[baseLocale];
   const description = [
     text.lead,
     '',
@@ -56,29 +135,22 @@ export function getPapiraProductPageData(locale: SiteLocale): ProductPageData {
     description,
     faq: { title: text.faqTitle, items: text.faqs }
   };
-  const copy: ProductCopy = { locale, android: platformCopy, ios: platformCopy };
+  const copy: ProductCopy = { locale: baseLocale, android: platformCopy, ios: platformCopy };
   const meta = {
     title: 'Papira',
     status: text.statusValue,
     platforms: ['iOS', 'Android'],
-    privacy: routeFor('papiraPrivacy', locale),
+    privacy: allRouteFor('papiraPrivacy', baseLocale),
     supportEmail: 'onnellab.app@gmail.com',
     icon: 'assets/icon/Papira.png'
   };
   return {
-    locale,
+    locale: baseLocale,
     source: { slug: 'papira', contentDir: '', meta },
     meta,
     copy,
-    canonicalPath: routeFor('papira', locale),
-    alternates: [
-      { lang: 'en', path: routeFor('papira', 'en') },
-      { lang: 'ko', path: routeFor('papira', 'ko') },
-      { lang: 'ja', path: routeFor('papira', 'ja') },
-      { lang: 'zh-Hans', path: routeFor('papira', 'zh-Hans') },
-      { lang: 'zh-Hant', path: routeFor('papira', 'zh-Hant') },
-      { lang: 'x-default', path: routeFor('papira', 'en') }
-    ],
+    canonicalPath: allRouteFor('papira', baseLocale),
+    alternates: allProductLocaleAlternates('papira'),
     seoTitle: text.seoTitle,
     seoDescription: text.seoDescription,
     iconPath: '/app-assets/papira/icon.png',
@@ -86,7 +158,7 @@ export function getPapiraProductPageData(locale: SiteLocale): ProductPageData {
     eyebrow: text.eyebrow,
     heroSignals: text.heroSignals,
     screenshotPaths: ['01', '02', '03'].map(
-      (name) => `/app-assets/papira/assets/screenshots/${locale}/${name}.png`
+      (name) => `/app-assets/papira/assets/screenshots/${baseLocale}/${name}.png`
     ),
     screenshotAlts: text.screenshotAlts,
     screenshotDimensions: { width: 1080, height: 2168 },

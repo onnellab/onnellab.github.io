@@ -1,14 +1,13 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ProductTemplate from '../../../components/ProductTemplate.astro';
-import ExtendedProductPage from '../../../components/ExtendedProductPage.astro';
+import { getPapiraProductPageData } from '../../../lib/papira';
 import { getProductPageData, getProductSources } from '../../../lib/products';
 import { localeDefinitions, siteLocales, type SiteLocale } from '../../../lib/site-i18n';
 import {
   allLocaleDefinitions,
   extendedSiteLocales,
-  isExtendedSiteLocale,
-  type ExtendedSiteLocale
+  type AllSiteLocale
 } from '../../../lib/extended-site-i18n';
 
 export function getStaticPaths() {
@@ -33,18 +32,18 @@ export function getStaticPaths() {
 }
 
 const app = Astro.params.app as string;
-const { locale } = Astro.props as { locale: SiteLocale | ExtendedSiteLocale };
+const { locale } = Astro.props as { locale: AllSiteLocale };
 const targetPath = '/apps/ko/';
-const extendedLocale = isExtendedSiteLocale(locale);
-const data = !extendedLocale && app !== 'ko' && app !== 'papira'
-  ? getProductPageData(app, locale as SiteLocale)
-  : undefined;
+const data =
+  app === 'ko'
+    ? undefined
+    : app === 'papira'
+      ? getPapiraProductPageData(locale)
+      : getProductPageData(app, locale);
 ---
 
 {
-  extendedLocale ? (
-    <ExtendedProductPage slug={app} locale={locale as ExtendedSiteLocale} />
-  ) : data ? (
+  data ? (
     <ProductTemplate data={data} />
   ) : (
     <BaseLayout

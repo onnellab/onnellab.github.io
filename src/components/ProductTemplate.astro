@@ -4,7 +4,13 @@ import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
 import { landingSubtitle, pageBodyDescription, renderBlocks, type ProductPageData } from '../lib/products';
 import { latestReleaseNoteForApp, releaseNoteKoPath, releaseNotePath } from '../lib/releaseNotes';
-import { localeDefinitions, routeFor, type SiteLocale } from '../lib/site-i18n';
+import { releaseNoteLocalePath, type ReleaseLocale } from '../lib/extended-release-notes';
+import {
+  allAppPrivacyRouteFor,
+  allLocaleDefinitions,
+  allRouteFor,
+  type AllSiteLocale
+} from '../lib/extended-site-i18n';
 
 type Props = {
   data: ProductPageData;
@@ -12,7 +18,7 @@ type Props = {
 
 const { data } = Astro.props;
 const { meta, copy } = data;
-const localizedLabels: Record<SiteLocale, {
+const localizedLabels: Record<AllSiteLocale, {
   platforms: string;
   appStore: string;
   googlePlay: string;
@@ -25,92 +31,44 @@ const localizedLabels: Record<SiteLocale, {
   download: string;
   screens: string;
   stores: string;
+  released: string;
+  preparing: string;
+  icon: string;
+  previousScreenshot: string;
+  nextScreenshot: string;
+  close: string;
+  previous: string;
+  next: string;
 }> = {
-  en: {
-    platforms: 'Platforms',
-    appStore: 'App Store',
-    googlePlay: 'Google Play',
-    privacy: 'Privacy Policy',
-    releaseNotes: 'Release Notes',
-    latestRelease: 'Latest release',
-    support: 'Contact',
-    apps: 'Apps',
-    allApps: 'All apps',
-    download: 'Download',
-    screens: 'Screenshots',
-    stores: 'Stores'
-  },
-  ko: {
-        platforms: '지원 플랫폼',
-        appStore: 'App Store',
-        googlePlay: 'Google Play',
-        privacy: '개인정보 처리방침',
-        releaseNotes: '릴리즈 노트',
-        latestRelease: '최신 릴리즈',
-        support: '문의하기',
-        apps: '앱',
-        allApps: '모든 앱',
-        download: '다운로드',
-        screens: '스크린샷',
-        stores: '스토어'
-      },
-  ja: {
-        platforms: '対応プラットフォーム',
-        appStore: 'App Store',
-        googlePlay: 'Google Play',
-        privacy: 'プライバシーポリシー',
-        releaseNotes: 'リリースノート',
-        latestRelease: '最新リリース',
-        support: 'お問い合わせ',
-        apps: 'アプリ',
-        allApps: 'すべてのアプリ',
-        download: 'ダウンロード',
-        screens: 'スクリーンショット',
-        stores: 'ストア'
-      },
-  'zh-Hans': {
-        platforms: '支持平台',
-        appStore: 'App Store',
-        googlePlay: 'Google Play',
-        privacy: '隐私政策',
-        releaseNotes: '版本说明',
-        latestRelease: '最新版本',
-        support: '联系我们',
-        apps: '应用',
-        allApps: '全部应用',
-        download: '下载',
-        screens: '屏幕截图',
-        stores: '应用商店'
-      },
-  'zh-Hant': {
-        platforms: '支援平台',
-        appStore: 'App Store',
-        googlePlay: 'Google Play',
-        privacy: '隱私權政策',
-        releaseNotes: '版本說明',
-        latestRelease: '最新版本',
-        support: '聯絡我們',
-        apps: '應用程式',
-        allApps: '全部應用程式',
-        download: '下載',
-        screens: '螢幕截圖',
-        stores: '應用程式商店'
-      }
+  en: { platforms:'Platforms', appStore:'App Store', googlePlay:'Google Play', privacy:'Privacy Policy', releaseNotes:'Release Notes', latestRelease:'Latest release', support:'Contact', apps:'Apps', allApps:'All apps', download:'Download', screens:'Screenshots', stores:'Stores', released:'Released', preparing:'Preparing for release', icon:'app icon', previousScreenshot:'Previous screenshot', nextScreenshot:'Next screenshot', close:'Close', previous:'Previous', next:'Next' },
+  ko: { platforms:'지원 플랫폼', appStore:'App Store', googlePlay:'Google Play', privacy:'개인정보 처리방침', releaseNotes:'릴리즈 노트', latestRelease:'최신 릴리즈', support:'문의하기', apps:'앱', allApps:'모든 앱', download:'다운로드', screens:'스크린샷', stores:'스토어', released:'출시됨', preparing:'출시 준비 중', icon:'앱 아이콘', previousScreenshot:'이전 스크린샷', nextScreenshot:'다음 스크린샷', close:'닫기', previous:'이전', next:'다음' },
+  ja: { platforms:'対応プラットフォーム', appStore:'App Store', googlePlay:'Google Play', privacy:'プライバシーポリシー', releaseNotes:'リリースノート', latestRelease:'最新リリース', support:'お問い合わせ', apps:'アプリ', allApps:'すべてのアプリ', download:'ダウンロード', screens:'スクリーンショット', stores:'ストア', released:'公開中', preparing:'リリース準備中', icon:'アプリアイコン', previousScreenshot:'前のスクリーンショット', nextScreenshot:'次のスクリーンショット', close:'閉じる', previous:'前へ', next:'次へ' },
+  'zh-Hans': { platforms:'支持平台', appStore:'App Store', googlePlay:'Google Play', privacy:'隐私政策', releaseNotes:'版本说明', latestRelease:'最新版本', support:'联系我们', apps:'应用', allApps:'全部应用', download:'下载', screens:'屏幕截图', stores:'应用商店', released:'已发布', preparing:'准备发布', icon:'应用图标', previousScreenshot:'上一张屏幕截图', nextScreenshot:'下一张屏幕截图', close:'关闭', previous:'上一张', next:'下一张' },
+  'zh-Hant': { platforms:'支援平台', appStore:'App Store', googlePlay:'Google Play', privacy:'隱私權政策', releaseNotes:'版本說明', latestRelease:'最新版本', support:'聯絡我們', apps:'應用程式', allApps:'全部應用程式', download:'下載', screens:'螢幕截圖', stores:'應用程式商店', released:'已發布', preparing:'準備發布', icon:'應用程式圖示', previousScreenshot:'上一張螢幕截圖', nextScreenshot:'下一張螢幕截圖', close:'關閉', previous:'上一張', next:'下一張' },
+  'pt-BR': { platforms:'Plataformas', appStore:'App Store', googlePlay:'Google Play', privacy:'Política de Privacidade', releaseNotes:'Notas da versão', latestRelease:'Versão mais recente', support:'Contato', apps:'Aplicativos', allApps:'Todos os aplicativos', download:'Download', screens:'Capturas de tela', stores:'Lojas', released:'Disponível', preparing:'Em preparação', icon:'ícone do app', previousScreenshot:'Captura de tela anterior', nextScreenshot:'Próxima captura de tela', close:'Fechar', previous:'Anterior', next:'Próxima' },
+  de: { platforms:'Plattformen', appStore:'App Store', googlePlay:'Google Play', privacy:'Datenschutzerklärung', releaseNotes:'Versionshinweise', latestRelease:'Neueste Version', support:'Kontakt', apps:'Apps', allApps:'Alle Apps', download:'Download', screens:'Screenshots', stores:'Stores', released:'Veröffentlicht', preparing:'In Vorbereitung', icon:'App-Symbol', previousScreenshot:'Vorheriger Screenshot', nextScreenshot:'Nächster Screenshot', close:'Schließen', previous:'Zurück', next:'Weiter' },
+  fr: { platforms:'Plateformes', appStore:'App Store', googlePlay:'Google Play', privacy:'Politique de confidentialité', releaseNotes:'Notes de version', latestRelease:'Dernière version', support:'Contact', apps:'Applications', allApps:'Toutes les applications', download:'Télécharger', screens:'Captures d’écran', stores:'Boutiques', released:'Disponible', preparing:'En préparation', icon:'icône de l’application', previousScreenshot:'Capture précédente', nextScreenshot:'Capture suivante', close:'Fermer', previous:'Précédent', next:'Suivant' },
+  es: { platforms:'Plataformas', appStore:'App Store', googlePlay:'Google Play', privacy:'Política de privacidad', releaseNotes:'Notas de la versión', latestRelease:'Versión más reciente', support:'Contacto', apps:'Aplicaciones', allApps:'Todas las aplicaciones', download:'Descargar', screens:'Capturas de pantalla', stores:'Tiendas', released:'Disponible', preparing:'En preparación', icon:'icono de la aplicación', previousScreenshot:'Captura anterior', nextScreenshot:'Captura siguiente', close:'Cerrar', previous:'Anterior', next:'Siguiente' }
 };
 const labels = localizedLabels[data.locale];
+const localizedStatus =
+  meta.status === 'Released'
+    ? labels.released
+    : meta.status === 'Preparing for release'
+      ? labels.preparing
+      : meta.status;
 
 const bodyBlocks = renderBlocks(pageBodyDescription(copy));
 const heroIntro = landingSubtitle(copy);
 const heroSignals =
   data.heroSignals ??
   (bodyBlocks.find((block) => block.type === 'ul')?.value as string[] | undefined)?.slice(0, 3) ?? [];
-const homePath = routeFor('home', data.locale);
-const appsPath = routeFor('apps', data.locale);
+const homePath = allRouteFor('home', data.locale);
+const appsPath = allRouteFor('apps', data.locale);
 const pageStyle = `--accent-border: ${data.accent.border}; --accent-bg: ${data.accent.background}; --accent-text: ${data.accent.text};`;
 const iconUrl = new URL(data.iconPath, Astro.site);
 const socialImagePath = data.socialImagePath ?? data.iconPath;
 const canonicalUrl = new URL(data.canonicalPath, Astro.site);
-const offerPriceCurrency = meta.priceCurrency ?? (meta.price === 0 ? 'USD' : undefined);
 const localizedAppStoreUrl = (url: string | undefined, locale: ProductPageData['locale']) => {
   if (!url) return undefined;
   const storeLocale = {
@@ -118,7 +76,11 @@ const localizedAppStoreUrl = (url: string | undefined, locale: ProductPageData['
     ko: { country: 'kr', language: 'ko' },
     ja: { country: 'jp', language: 'ja' },
     'zh-Hans': { country: 'cn', language: 'zh-Hans-CN' },
-    'zh-Hant': { country: 'tw', language: 'zh-Hant-TW' }
+    'zh-Hant': { country: 'tw', language: 'zh-Hant-TW' },
+    'pt-BR': { country: 'br', language: 'pt-BR' },
+    de: { country: 'de', language: 'de-DE' },
+    fr: { country: 'fr', language: 'fr-FR' },
+    es: { country: 'es', language: 'es-ES' }
   }[locale];
   const appStoreUrl = new URL(url);
   appStoreUrl.pathname = appStoreUrl.pathname.replace(/^\/(?:[a-z]{2}\/)?app\//, `/${storeLocale.country}/app/`);
@@ -132,25 +94,24 @@ const localizedGooglePlayUrl = (url: string | undefined, locale: ProductPageData
     ko: { language: 'ko', country: 'KR' },
     ja: { language: 'ja', country: 'JP' },
     'zh-Hans': { language: 'zh-CN', country: 'CN' },
-    'zh-Hant': { language: 'zh-TW', country: 'TW' }
+    'zh-Hant': { language: 'zh-TW', country: 'TW' },
+    'pt-BR': { language: 'pt-BR', country: 'BR' },
+    de: { language: 'de', country: 'DE' },
+    fr: { language: 'fr', country: 'FR' },
+    es: { language: 'es', country: 'ES' }
   }[locale];
   const playStoreUrl = new URL(url);
   playStoreUrl.searchParams.set('hl', storeLocale.language);
   playStoreUrl.searchParams.set('gl', storeLocale.country);
   return playStoreUrl.toString();
 };
-const localizedPrivacyUrl = (url: string, locale: ProductPageData['locale']) => {
-  const privacyUrl = new URL(url, Astro.site);
-  const segment = { en: '', ko: 'ko', ja: 'ja', 'zh-Hans': 'zh-hans', 'zh-Hant': 'zh-hant' }[locale];
-  if (!segment) return privacyUrl.toString();
-  if (!privacyUrl.pathname.endsWith(`/${segment}/`)) {
-    privacyUrl.pathname = privacyUrl.pathname.replace(/\/?$/, `/${segment}/`);
-  }
-  return privacyUrl.toString();
-};
+const privacyPath =
+  data.source.slug === 'papira'
+    ? allRouteFor('papiraPrivacy', data.locale)
+    : allAppPrivacyRouteFor(data.source.slug, data.locale);
+const privacyUrl = new URL(privacyPath, Astro.site).toString();
 const appStoreUrl = localizedAppStoreUrl(meta.appstore, data.locale);
 const googlePlayUrl = localizedGooglePlayUrl(meta.googleplay, data.locale);
-const privacyUrl = localizedPrivacyUrl(meta.privacy, data.locale);
 const storeUrls = [appStoreUrl, googlePlayUrl].filter(Boolean);
 const latestReleaseNote = latestReleaseNoteForApp(data.source.slug);
 const releaseNotesUrl = latestReleaseNote
@@ -158,7 +119,7 @@ const releaseNotesUrl = latestReleaseNote
     ? releaseNotePath(latestReleaseNote)
     : data.locale === 'ko'
       ? releaseNoteKoPath(latestReleaseNote)
-      : `${releaseNotePath(latestReleaseNote)}${localeDefinitions[data.locale].pathSegment}/`
+      : releaseNoteLocalePath(latestReleaseNote, data.locale as ReleaseLocale)
   : undefined;
 const alternates = data.alternates;
 const landingScreenshotPaths = data.screenshotPaths;
@@ -167,49 +128,6 @@ const hasScreenshotCarousel = landingScreenshotPaths.length > 3;
 const screenshotUrls = landingScreenshotPaths.map((screenshotPath) =>
   new URL(screenshotPath, Astro.site).toString()
 );
-const tagweaverUseCases: Record<SiteLocale, { title: string; items: string[] }> = {
-  en: {
-      title: 'Use cases',
-      items: [
-        'Clean up title, artist, and album metadata in files you already own',
-        'Review and edit artwork, lyrics, and rating stored inside audio files',
-        'Save only the fields you checked and changed, without automatic library changes'
-      ]
-    },
-  ko: {
-      title: '이럴 때 사용해요',
-      items: [
-        '가지고 있는 파일의 제목, 아티스트, 앨범 정보를 직접 정리하고 싶을 때',
-        '앨범 아트, 가사, 평점처럼 파일 안에 저장된 정보를 확인하고 수정하고 싶을 때',
-        '자동 정리 없이 사용자가 확인한 변경사항만 저장하고 싶을 때'
-      ]
-    },
-  ja: {
-      title: 'こんなときに使えます',
-      items: [
-        '手元のファイルにあるタイトル、アーティスト、アルバム情報を整理したいとき',
-        '音声ファイル内のアートワーク、歌詞、レーティングを確認・編集したいとき',
-        'ライブラリを自動変更せず、確認して変更した項目だけを保存したいとき'
-      ]
-    },
-  'zh-Hans': {
-      title: '适用场景',
-      items: [
-        '整理已有文件中的标题、艺人和专辑信息',
-        '查看并编辑音频文件内的封面、歌词和评分',
-        '不自动更改音乐库，只保存你确认并修改的字段'
-      ]
-    },
-  'zh-Hant': {
-      title: '適用情境',
-      items: [
-        '整理現有檔案中的標題、藝人與專輯資訊',
-        '查看並編輯音訊檔案內的封面、歌詞與評分',
-        '不自動變更音樂庫，只儲存你確認並修改的欄位'
-      ]
-    }
-};
-const useCaseContent = data.source.slug === 'tagweaver' ? tagweaverUseCases[data.locale] : undefined;
 const faqContent = copy.android.faq ?? copy.ios.faq;
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -222,9 +140,8 @@ const jsonLd = {
   applicationCategory: 'UtilitiesApplication',
   applicationSubCategory: copy.android.name || copy.ios.name,
   description: data.seoDescription,
-  inLanguage: data.locale,
+  inLanguage: allLocaleDefinitions[data.locale].hreflang,
   image: iconUrl.toString(),
-  ...(meta.price !== undefined ? { isAccessibleForFree: meta.price === 0 } : {}),
   ...((data.schemaFeatureList ?? heroSignals).length > 0
     ? { featureList: data.schemaFeatureList ?? heroSignals }
     : {}),
@@ -239,17 +156,6 @@ const jsonLd = {
     name: 'ONNELLAB',
     url: new URL('/', Astro.site).toString()
   },
-  ...(meta.price !== undefined
-    ? {
-        offers: {
-          '@type': 'Offer',
-          price: meta.price,
-          ...(offerPriceCurrency ? { priceCurrency: offerPriceCurrency } : {}),
-          ...(meta.pricing ? { description: meta.pricing } : {}),
-          url: canonicalUrl.toString()
-        }
-      }
-    : {}),
   privacyPolicy: privacyUrl
 };
 const breadcrumbJsonLd = {
@@ -296,7 +202,7 @@ const faqJsonLd = {
   title={data.seoTitle}
   description={data.seoDescription}
   canonicalPath={data.canonicalPath}
-  lang={data.locale}
+  lang={allLocaleDefinitions[data.locale].htmlLang}
   image={socialImagePath}
   jsonLd={faqContent ? [jsonLd, breadcrumbJsonLd, faqJsonLd] : [jsonLd, breadcrumbJsonLd]}
   alternates={alternates}
@@ -317,7 +223,7 @@ const faqJsonLd = {
     <section class="hero" aria-labelledby="product-title" data-app={data.source.slug}>
       <div class="hero-grid">
         <div class="identity">
-          <img src={data.iconPath} alt={`${meta.title} icon`} width="88" height="88" data-no-visual-search="true" />
+          <img src={data.iconPath} alt={`${meta.title} ${labels.icon}`} width="88" height="88" data-no-visual-search="true" />
           <div>
             {data.eyebrow && <p class="eyebrow">{data.eyebrow}</p>}
             <h1 id="product-title">{meta.title}</h1>
@@ -342,7 +248,7 @@ const faqJsonLd = {
           {appStoreUrl && <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store" data-store-position="hero">{labels.appStore}</a>}
           {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play" data-store-position="hero">{labels.googlePlay}</a>}
         </div>
-        <div class="support-links" aria-label="Contact links">
+        <div class="support-links" aria-label={labels.support}>
           <a href={privacyUrl}>{labels.privacy}</a>
           <a href={`mailto:${meta.supportEmail}`}>{labels.support}</a>
         </div>
@@ -376,15 +282,6 @@ const faqJsonLd = {
       </div>
     </section>
 
-    {useCaseContent && (
-      <section class="use-cases-band" aria-labelledby="use-cases-title">
-        <h2 id="use-cases-title">{useCaseContent.title}</h2>
-        <ul class="use-case-list">
-          {useCaseContent.items.map((item) => <li>{item}</li>)}
-        </ul>
-      </section>
-    )}
-
     {faqContent && (
       <section class="faq-band" aria-labelledby="faq-title">
         <h2 id="faq-title">{faqContent.title}</h2>
@@ -404,7 +301,7 @@ const faqJsonLd = {
         <summary>{labels.screens}</summary>
         <div class="screenshot-carousel" data-screenshot-carousel>
           {hasScreenshotCarousel && (
-            <button class="screenshot-step screenshot-step-prev" type="button" data-screenshot-prev aria-label="Previous screenshot">‹</button>
+            <button class="screenshot-step screenshot-step-prev" type="button" data-screenshot-prev aria-label={labels.previousScreenshot}>‹</button>
           )}
           <div class="screenshot-row" data-screenshot-row>
           {landingScreenshotPaths.map((screenshotPath, index) => (
@@ -430,7 +327,7 @@ const faqJsonLd = {
           ))}
           </div>
           {hasScreenshotCarousel && (
-            <button class="screenshot-step screenshot-step-next" type="button" data-screenshot-next aria-label="Next screenshot">›</button>
+            <button class="screenshot-step screenshot-step-next" type="button" data-screenshot-next aria-label={labels.nextScreenshot}>›</button>
           )}
           {hasScreenshotCarousel && (
             <div class="screenshot-progress" aria-label={labels.screens}>
@@ -441,10 +338,10 @@ const faqJsonLd = {
         <dialog class="screenshot-viewer" aria-label={labels.screens}>
           <div class="viewer-panel">
             <div class="viewer-bar">
-              <button class="viewer-close" type="button" data-viewer-close aria-label="Close">×</button>
+              <button class="viewer-close" type="button" data-viewer-close aria-label={labels.close}>×</button>
             </div>
             <div class="viewer-frame">
-              <button class="viewer-nav viewer-prev" type="button" data-viewer-prev aria-label="Previous">‹</button>
+              <button class="viewer-nav viewer-prev" type="button" data-viewer-prev aria-label={labels.previous}>‹</button>
               <div class="viewer-image-stage" data-viewer-stage>
                 <img
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
@@ -454,7 +351,7 @@ const faqJsonLd = {
                   hidden
                 />
               </div>
-              <button class="viewer-nav viewer-next" type="button" data-viewer-next aria-label="Next">›</button>
+              <button class="viewer-nav viewer-next" type="button" data-viewer-next aria-label={labels.next}>›</button>
             </div>
             <div class="viewer-thumbs" aria-label={labels.screens}>
               {landingScreenshotPaths.map((screenshotPath, index) => (
@@ -490,7 +387,7 @@ const faqJsonLd = {
           {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play" data-store-position="download">{labels.googlePlay}</a>}
         </div>
       ) : (
-        <p class="release-note-inline">{meta.status}</p>
+        <p class="release-note-inline">{localizedStatus}</p>
       )}
       {releaseNotesUrl && latestReleaseNote && (
         <a class="release-note-inline" href={releaseNotesUrl}>

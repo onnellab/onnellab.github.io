@@ -11,9 +11,6 @@ googleplay: https://play.google.com/store/apps/details?id=com.onnellab.melivra
 privacy: https://onnellab.github.io/privacy/melivra/
 supportEmail: onnellab.app@gmail.com
 
-pricing: Free download with optional Pro purchase
-price: 0
-
 accent: #f1c8bb, #fbf2ed, #6a5148
 
 icon: assets\icon\melivra.png

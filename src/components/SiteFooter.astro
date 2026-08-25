@@ -1,24 +1,28 @@
 ---
-import { routeFor, type SiteLocale } from '../lib/site-i18n';
+import { allRouteFor, type AllSiteLocale } from '../lib/extended-site-i18n';
 
 type Props = {
-  locale: SiteLocale;
+  locale: AllSiteLocale;
   privacyHref?: string;
 };
 
-const { locale, privacyHref = routeFor('privacy', locale) } = Astro.props;
-const labels: Record<SiteLocale, { privacy: string; terms: string }> = {
+const { locale, privacyHref = allRouteFor('privacy', locale) } = Astro.props;
+const labels: Record<AllSiteLocale, { privacy: string; terms: string }> = {
   en: { privacy: 'Privacy Policy', terms: 'Terms' },
   ko: { privacy: '개인정보 처리방침', terms: '이용약관' },
   ja: { privacy: 'プライバシーポリシー', terms: '利用規約' },
   'zh-Hans': { privacy: '隐私政策', terms: '使用条款' },
-  'zh-Hant': { privacy: '隱私權政策', terms: '使用條款' }
+  'zh-Hant': { privacy: '隱私權政策', terms: '使用條款' },
+  'pt-BR': { privacy: 'Política de Privacidade', terms: 'Termos' },
+  de: { privacy: 'Datenschutzerklärung', terms: 'Nutzungsbedingungen' },
+  fr: { privacy: 'Politique de confidentialité', terms: 'Conditions d’utilisation' },
+  es: { privacy: 'Política de privacidad', terms: 'Términos de uso' }
 };
 ---
 
 <footer class="site-footer">
   <a href={privacyHref}>{labels[locale].privacy}</a>
-  <a href={routeFor('terms', locale)}>{labels[locale].terms}</a>
+  <a href={allRouteFor('terms', locale)}>{labels[locale].terms}</a>
   <a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a>
   <span>© ONNELLAB</span>
 </footer>

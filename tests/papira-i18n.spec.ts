@@ -28,6 +28,10 @@ const alternateUrls = {
   ja: 'https://onnellab.github.io/apps/papira/ja/',
   'zh-Hans': 'https://onnellab.github.io/apps/papira/zh-hans/',
   'zh-Hant': 'https://onnellab.github.io/apps/papira/zh-hant/',
+  'pt-BR': 'https://onnellab.github.io/apps/papira/pt-br/',
+  de: 'https://onnellab.github.io/apps/papira/de/',
+  fr: 'https://onnellab.github.io/apps/papira/fr/',
+  es: 'https://onnellab.github.io/apps/papira/es/',
   'x-default': 'https://onnellab.github.io/apps/papira/'
 } as const;
 
@@ -70,7 +74,7 @@ async function jsonLd(page: Page) {
   );
 }
 
-test.describe('Papira five-language launch surface', () => {
+test.describe('Papira nine-language launch surface', () => {
   test('Papira routes and sitemap depend only on active shared page sources', () => {
     const obsoleteComponent = ['Papira', 'Page.astro'].join('');
     const obsoletePage = path.resolve(process.cwd(), 'src/components', obsoleteComponent);
@@ -97,7 +101,7 @@ test.describe('Papira five-language launch surface', () => {
     ]) {
       expect(sitemapSource).toContain(activeSource);
     }
-    expect(sitemapSource).toContain('sourceLastmod(corePageSources[page])');
+    expect(sitemapSource).toContain('latestLastmod(sourceLastmod, [corePageSources[page]');
     expect(sitemapSource).not.toContain('commonLastmod');
 
     const papiraRoutes = [
@@ -145,7 +149,7 @@ test.describe('Papira five-language launch surface', () => {
           href
         );
       }
-      await expect(page.locator('.locale-menu-panel a')).toHaveCount(5);
+      await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
     });
 
   }
@@ -170,10 +174,10 @@ test.describe('Papira five-language launch surface', () => {
     });
   }
 
-  test('general site pages keep the established five-language locale menu', async ({ page }) => {
+  test('general site pages expose the nine-language locale menu', async ({ page }) => {
     for (const route of ['/', '/apps/', '/about/', '/privacy/', '/terms/']) {
       await page.goto(route);
-      await expect(page.locator('.locale-menu-panel a')).toHaveCount(5);
+      await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
     }
   });
 

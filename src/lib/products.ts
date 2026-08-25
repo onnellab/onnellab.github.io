@@ -1,17 +1,20 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { type SiteLocale } from './site-i18n';
 import {
-  productLocaleAlternates,
-  productRouteFor,
-  siteLocales,
-  type SiteLocale
-} from './site-i18n';
+  allProductLocaleAlternates,
+  allProductRouteFor,
+  allSiteLocales,
+  isExtendedSiteLocale,
+  type AllSiteLocale
+} from './extended-site-i18n';
 import { getLocalizedProductContent } from './product-localizations';
+import { getExtendedProductCopy } from './extended-product-localizations';
 
 const appsContentDir = path.resolve(process.cwd(), 'src/content/apps');
 
-export type Locale = SiteLocale;
+export type Locale = AllSiteLocale;
 
 export type ProductMeta = {
   title: string;
@@ -22,9 +25,6 @@ export type ProductMeta = {
   privacy: string;
   supportEmail: string;
   icon: string;
-  pricing?: string;
-  price?: number;
-  priceCurrency?: string;
   accent?: ProductAccent;
 };
 
@@ -160,14 +160,14 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
   const source = getProductSource(slug);
   const copy = readProductCopy(source.contentDir, locale);
   const seoDescription = seoPageDescription(source, copy);
-  const canonicalPath = productRouteFor(source.slug, locale);
+  const canonicalPath = allProductRouteFor(source.slug, locale);
   return {
     locale,
     source,
     meta: source.meta,
     copy,
     canonicalPath,
-    alternates: productLocaleAlternates(source.slug),
+    alternates: allProductLocaleAlternates(source.slug),
     seoTitle: productSeoTitle(source, copy),
     seoDescription,
     iconPath: getIconRoutePath(source),
@@ -187,7 +187,7 @@ export function getProductIndexItems(locale: Locale): ProductIndexItem[] {
       description: landingSubtitle(copy),
       iconPath: getIconRoutePath(source),
       screenshotPath: getScreenshotRoutePaths(source, locale)[0],
-      href: productRouteFor(source.slug, locale),
+      href: allProductRouteFor(source.slug, locale),
       privacy: source.meta.privacy,
       hasStoreListing: Boolean(source.meta.appstore || source.meta.googleplay),
       accent: productAccent(source)
@@ -220,7 +220,7 @@ export function getProductSource(slug: string): ProductSource {
 
 export function getAllProductPages(): ProductPageData[] {
   return getProductSources().flatMap((source) =>
-    siteLocales.map((locale) => getProductPageData(source.slug, locale))
+    allSiteLocales.map((locale) => getProductPageData(source.slug, locale))
   );
 }
 
@@ -243,7 +243,7 @@ export function getAppAssets(): Array<{ routePath: string; filePath: string }> {
   return [...getIconAssets(), ...getScreenshotAssets()];
 }
 
-function getScreenshotRoutePaths(source: ProductSource, locale: Locale): string[] {
+export function getScreenshotRoutePaths(source: ProductSource, locale: Locale): string[] {
   const screenshotLocale = fs.existsSync(path.resolve(source.contentDir, 'assets/screenshots', locale))
     ? locale
     : 'en';
@@ -258,14 +258,19 @@ function getScreenshotRoutePaths(source: ProductSource, locale: Locale): string[
 }
 
 function getScreenshotAssets(): Array<{ routePath: string; filePath: string }> {
-  return getProductSources().flatMap((source) =>
-    (['en', 'ko'] as const).flatMap((locale) =>
-      getScreenshotRoutePaths(source, locale).map((routePath) => ({
-        routePath: routePath.replace(/^\/+/, ''),
-        filePath: path.resolve(source.contentDir, routePath.replace(`/app-assets/${source.slug}/`, ''))
-      }))
-    )
-  );
+  const assets = new Map<string, string>();
+  for (const source of getProductSources()) {
+    for (const locale of allSiteLocales) {
+      for (const routePath of getScreenshotRoutePaths(source, locale)) {
+        const normalizedRoute = routePath.replace(/^\/+/, '');
+        assets.set(
+          normalizedRoute,
+          path.resolve(source.contentDir, routePath.replace(`/app-assets/${source.slug}/`, ''))
+        );
+      }
+    }
+  }
+  return [...assets.entries()].map(([routePath, filePath]) => ({ routePath, filePath }));
 }
 
 export function renderBlocks(text: string): Array<{ type: 'p' | 'h2' | 'h3' | 'ul'; value: string | string[] }> {
@@ -361,14 +366,26 @@ function readProductMeta(contentDir: string): ProductMeta {
     privacy: required(values, 'privacy'),
     supportEmail: required(values, 'supportEmail'),
     icon: required(values, 'icon'),
-    pricing: values.get('pricing'),
-    price: optionalNumber(values.get('price')),
-    priceCurrency: values.get('priceCurrency'),
     accent: optionalAccent(values.get('accent'))
   };
 }
 
 function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
+  if (isExtendedSiteLocale(locale)) {
+    const slug = path.basename(contentDir);
+    const localized = getExtendedProductCopy(slug, locale);
+    const platform = {
+      name: localized.subtitle,
+      landingSubtitle: localized.subtitle,
+      landingDescription: localized.body,
+      description: localized.body,
+      faq: {
+        title: localized.faqTitle,
+        items: localized.faq
+      }
+    };
+    return { locale, android: platform, ios: platform };
+  }
   if (locale !== 'en' && locale !== 'ko') {
     const slug = path.basename(contentDir);
     const localized = getLocalizedProductContent(slug, locale);
@@ -441,6 +458,18 @@ function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
   if (copy.locale === 'zh-Hant') {
     return `${source.meta.title} 是適用於 ${platforms} 的${category}。${summary}`;
   }
+  if (copy.locale === 'pt-BR') {
+    return `${source.meta.title} é ${category} para ${platforms}. ${summary}`;
+  }
+  if (copy.locale === 'de') {
+    return `${source.meta.title} ist ${category} für ${platforms}. ${summary}`;
+  }
+  if (copy.locale === 'fr') {
+    return `${source.meta.title} est ${category} pour ${platforms}. ${summary}`;
+  }
+  if (copy.locale === 'es') {
+    return `${source.meta.title} es ${category} para ${platforms}. ${summary}`;
+  }
   return `${source.meta.title} is ${indefiniteArticle(category)} ${category} for ${platforms}. ${summary}`;
 }
 
@@ -495,7 +524,7 @@ function field(text: string, label: string): string | undefined {
   return value || undefined;
 }
 
-function parseFaqField(value: string | undefined, locale: Locale): ProductFaq | undefined {
+function parseFaqField(value: string | undefined, locale: SiteLocale): ProductFaq | undefined {
   if (!value) return undefined;
   const questionLabel = locale === 'ko' ? '질문:' : 'Q:';
   const answerLabel = locale === 'ko' ? '답변:' : 'A:';
@@ -566,12 +595,6 @@ function optionalAccent(value: string | undefined): ProductAccent | undefined {
   if (!border || !background || !text) return undefined;
   if (![border, background, text].every((item) => /^#[0-9a-fA-F]{6}$/.test(item))) return undefined;
   return { border, background, text };
-}
-
-function optionalNumber(value: string | undefined): number | undefined {
-  if (value === undefined) return undefined;
-  const numericValue = Number(value);
-  return Number.isFinite(numericValue) ? numericValue : undefined;
 }
 
 function hashSlug(value: string): number {
