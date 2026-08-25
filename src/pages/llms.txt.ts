@@ -7,6 +7,7 @@ import {
 import { getProductPageData, getProductSources } from '../lib/products';
 import { getPapiraProductPageData } from '../lib/papira';
 
+// llms.txt v2 stays concise and link-oriented; detailed product facts live on destination pages.
 const siteUrl = 'https://onnellab.github.io';
 
 const absolute = (path: string) => new URL(path, siteUrl).toString();
