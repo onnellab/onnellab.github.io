@@ -182,3 +182,5 @@ Añade portada, título, autor, editorial, información de serie, reglas de cap�
           git add src/lib/extended-product-localizations.ts
           git commit -m 'fix: align Papira extended product copy'
           git push origin HEAD:main
+
+# trigger: workflow already exists on main
