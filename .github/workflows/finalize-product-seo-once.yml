@@ -29,6 +29,23 @@ jobs:
                   raise SystemExit(f'{label}: expected one match, found {count}')
               return text.replace(old, new, 1)
 
+          extended_path = Path('src/lib/extended-product-localizations.ts')
+          extended = extended_path.read_text(encoding='utf-8')
+          for next_locale in ('de', 'fr', 'es'):
+              extended = replace_once(
+                  extended,
+                  f"    ])\n  {next_locale}: {{",
+                  f"    ])\n  }},\n  {next_locale}: {{",
+                  f'Papira locale boundary before {next_locale}'
+              )
+          extended = replace_once(
+              extended,
+              "    ])\n};\n",
+              "    ])\n  }\n};\n",
+              'Papira final locale boundary'
+          )
+          extended_path.write_text(extended, encoding='utf-8')
+
           products_path = Path('src/lib/products.ts')
           products = products_path.read_text(encoding='utf-8')
           products = replace_once(
@@ -119,6 +136,6 @@ test('Papira extended locales preserve the canonical book-project scope', async 
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git rm .github/product-seo-patch-trigger .github/workflows/finalize-product-seo-once.yml
-          git add src/lib/products.ts src/components/ProductTemplate.astro tests/product-contract.spec.ts
+          git add src/lib/extended-product-localizations.ts src/lib/products.ts src/components/ProductTemplate.astro tests/product-contract.spec.ts
           git commit -m 'fix: finalize product SEO semantics'
           git push origin HEAD:main
