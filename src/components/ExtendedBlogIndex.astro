@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LocaleMenu from './LocaleMenu.astro';
+import {
+  extendedBlogIndexPath,
+  getExtendedBlogPosts,
+  type ExtendedBlogLocale
+} from '../lib/extended-blog';
+import {
+  allLocaleDefinitions,
+  allRouteFor,
+  allSiteLocales
+} from '../lib/extended-site-i18n';
+
+type Props = { locale: ExtendedBlogLocale };
+const { locale } = Astro.props;
+const posts = getExtendedBlogPosts(locale);
+const definition = allLocaleDefinitions[locale];
+const copy = {
+  ja: { title:'ONNELLABブログ - 落ち着いたデジタルワークフローの実践ガイド', description:'読書、音楽、生産性、メディア作業を扱うONNELLABの実践記事です。', heading:'実践ワークフローガイド', intro:'読書、音楽、ファイル、メディア作業を落ち着いて整理するための実用的な記事です。', apps:'Apps', all:'すべて', categories:{reading:'読書',music:'音楽',productivity:'生産性',media:'メディア'}, published:'公開記事' },
+  'zh-Hans': { title:'ONNELLAB 博客 - 平静数字工作流实用指南', description:'关于阅读、音乐、效率和媒体工作流的 ONNELLAB 实用文章。', heading:'实用工作流指南', intro:'帮助你更平静地处理阅读、音乐、文件和媒体工作的实用文章。', apps:'Apps', all:'全部', categories:{reading:'阅读',music:'音乐',productivity:'效率',media:'媒体'}, published:'已发布文章' },
+  'zh-Hant': { title:'ONNELLAB 部落格 - 平靜數位工作流程實用指南', description:'關於閱讀、音樂、生產力與媒體工作流程的 ONNELLAB 實用文章。', heading:'實用工作流程指南', intro:'協助你更平靜地處理閱讀、音樂、檔案與媒體工作的實用文章。', apps:'Apps', all:'全部', categories:{reading:'閱讀',music:'音樂',productivity:'生產力',media:'媒體'}, published:'已發布文章' },
+  'pt-BR': { title:'Blog ONNELLAB - Guias práticos para fluxos digitais mais calmos', description:'Artigos práticos da ONNELLAB sobre leitura, música, produtividade e mídia.', heading:'Guias práticos de fluxo de trabalho', intro:'Artigos focados para organizar leitura, música, arquivos e tarefas de mídia com mais calma.', apps:'Apps', all:'Todos', categories:{reading:'Leitura',music:'Música',productivity:'Produtividade',media:'Mídia'}, published:'Artigos publicados' },
+  de: { title:'ONNELLAB Blog - Praktische Leitfäden für ruhige digitale Abläufe', description:'Praktische ONNELLAB-Artikel zu Lesen, Musik, Produktivität und Medien.', heading:'Praktische Workflow-Leitfäden', intro:'Fokussierte Artikel für ruhigere Abläufe bei Lesen, Musik, Dateien und Medien.', apps:'Apps', all:'Alle', categories:{reading:'Lesen',music:'Musik',productivity:'Produktivität',media:'Medien'}, published:'Veröffentlichte Artikel' },
+  fr: { title:'Blog ONNELLAB - Guides pratiques pour des flux numériques plus calmes', description:'Articles pratiques ONNELLAB sur la lecture, la musique, la productivité et les médias.', heading:'Guides pratiques de workflow', intro:'Des articles ciblés pour organiser plus sereinement lecture, musique, fichiers et médias.', apps:'Apps', all:'Tous', categories:{reading:'Lecture',music:'Musique',productivity:'Productivité',media:'Médias'}, published:'Articles publiés' },
+  es: { title:'Blog de ONNELLAB - Guías prácticas para flujos digitales más tranquilos', description:'Artículos prácticos de ONNELLAB sobre lectura, música, productividad y contenido multimedia.', heading:'Guías prácticas de flujo de trabajo', intro:'Artículos enfocados para organizar con más calma la lectura, la música, los archivos y las tareas multimedia.', apps:'Apps', all:'Todos', categories:{reading:'Lectura',music:'Música',productivity:'Productividad',media:'Multimedia'}, published:'Artículos publicados' }
+}[locale];
+const canonicalPath = extendedBlogIndexPath(locale);
+const blogPath = (item: typeof allSiteLocales[number]) => {
+  if (item === 'en') return '/blog/';
+  return `/blog/${allLocaleDefinitions[item].pathSegment}/`;
+};
+const alternates = [...allSiteLocales.map((item)=>({lang:allLocaleDefinitions[item].hreflang,path:blogPath(item)})),{lang:'x-default',path:'/blog/'}];
+const categories = Array.from(new Set(posts.map((post)=>post.category))).sort();
+---
+<BaseLayout title={copy.title} description={copy.description} canonicalPath={canonicalPath} lang={definition.htmlLang} alternates={alternates}>
+  <main class="blog-shell">
+    <nav class="top-nav site-header" aria-label="Blog navigation"><a class="brand" href={allRouteFor('home',locale)}>ONNELLAB</a><div class="actions"><a href={allRouteFor('apps',locale)}>{copy.apps}</a><details class="locale-menu"><summary>{definition.label}</summary><ul>{allSiteLocales.map((item)=><li><a href={blogPath(item)} lang={allLocaleDefinitions[item].htmlLang} hreflang={allLocaleDefinitions[item].hreflang} data-locale-choice={item} aria-current={item===locale?'page':undefined}>{allLocaleDefinitions[item].label}</a></li>)}</ul></details></div></nav>
+    <header class="blog-header"><p class="eyebrow">ONNELLAB Blog</p><h1>{copy.heading}</h1><p>{copy.intro}</p></header>
+    <div class="filter-row" role="group"><button type="button" class="filter is-active" data-blog-filter="all">{copy.all}</button>{categories.map((category)=><button type="button" class="filter" data-blog-filter={category}>{copy.categories[category as keyof typeof copy.categories] || category}</button>)}</div>
+    <section class="post-list" aria-label={copy.published}>{posts.map((post)=><a class="post-card" href={post.href} data-post-category={post.category}><article><p>{copy.categories[post.category as keyof typeof copy.categories] || post.category}</p><h2>{post.cardTitle}</h2><span>{post.description}</span></article></a>)}</section>
+    <footer><a href={allRouteFor('apps',locale)}>{copy.apps}</a><a href={allRouteFor('privacy',locale)}>Privacy</a><a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a><span>© ONNELLAB</span></footer>
+  </main>
+  <script is:inline>{`(()=>{const f=[...document.querySelectorAll('[data-blog-filter]')],c=[...document.querySelectorAll('[data-post-category]')];f.forEach(x=>x.addEventListener('click',()=>{const v=x.getAttribute('data-blog-filter')||'all';f.forEach(y=>y.classList.toggle('is-active',y===x));c.forEach(y=>{y.hidden=v!=='all'&&y.getAttribute('data-post-category')!==v})}))})()`}</script>
+</BaseLayout>
+<style>
+.blog-shell{width:min(920px,calc(100% - 40px));margin:0 auto;padding:22px 0 56px;color:#3f3b35}.top-nav,.actions,footer{display:flex;align-items:center}.top-nav{justify-content:space-between}.actions{gap:14px}.brand,.actions>a,footer a{color:#5f5a50;text-decoration:none;font-size:14px;font-weight:650}.locale-menu{position:relative}.locale-menu summary{min-height:34px;display:inline-flex;align-items:center;border:1px solid #ded6ca;border-radius:999px;padding:6px 12px;background:#fffdf8;color:#5f5a50;cursor:pointer;list-style:none;font-size:13px}.locale-menu ul{position:absolute;z-index:20;right:0;top:calc(100% + 7px);width:max-content;min-width:170px;display:grid;gap:2px;margin:0;border:1px solid #ded6ca;border-radius:12px;padding:6px;background:#fffdf8;list-style:none}.locale-menu li a{display:block;border-radius:8px;padding:8px 10px;color:#5f5a50;text-decoration:none;font-size:13px}.locale-menu li a:hover,.locale-menu li a[aria-current='page']{background:#f4efe7}.blog-header{padding:64px 0 36px;border-bottom:1px solid #e0d8cb}.eyebrow,.post-card p{margin:0 0 10px;color:#716a5f;font-size:13px;font-weight:720;text-transform:uppercase}h1{max-width:780px;margin:0;color:#2f2f2f;font-size:clamp(36px,7vw,68px);line-height:1.02}.blog-header>p:last-child{max-width:680px;margin:22px 0 0;color:#5b574f;font-size:18px;line-height:1.65}.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0}.filter{border:1px solid #ded6ca;border-radius:999px;padding:7px 12px;background:#fffdf8;color:#625d55;cursor:pointer}.filter.is-active{background:#eee8df;color:#37342f}.post-list{display:grid;gap:10px}.post-card{border:1px solid #ded6ca;border-radius:10px;padding:20px;background:#fffdf8;color:inherit;text-decoration:none}.post-card h2{margin:0;color:#302e2a;font-size:23px}.post-card span{display:block;margin-top:9px;color:#666057;line-height:1.6}footer{justify-content:center;flex-wrap:wrap;gap:10px 20px;margin-top:54px;border-top:1px solid #ded6ca;padding-top:28px;color:#786f65;font-size:12px}@media(max-width:640px){.actions>a{display:none}}
+</style>
