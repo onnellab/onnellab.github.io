@@ -1,0 +1,7 @@
+---
+import ExtendedSitePage from '../../components/ExtendedSitePage.astro';
+import { extendedSiteLocales, allLocaleDefinitions, type ExtendedSiteLocale } from '../../lib/extended-site-i18n';
+export function getStaticPaths() { return extendedSiteLocales.map((locale) => ({ params: { locale: allLocaleDefinitions[locale].pathSegment }, props: { locale } })); }
+const { locale } = Astro.props as { locale: ExtendedSiteLocale };
+---
+<ExtendedSitePage locale={locale} page="terms" />
