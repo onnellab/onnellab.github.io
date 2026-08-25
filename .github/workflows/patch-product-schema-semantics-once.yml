@@ -31,7 +31,6 @@ jobs:
 
           template_path = Path('src/components/ProductTemplate.astro')
           template = template_path.read_text(encoding='utf-8')
-          template = replace_once(template, "const privacyUrl = new URL(privacyPath, Astro.site).toString();\n", "", 'privacyUrl declaration')
           old_store = "  ...(storeUrls.length > 0\n    ? { downloadUrl: storeUrls, installUrl: storeUrls, sameAs: storeUrls }\n    : {}),\n  softwareHelp: `mailto:${meta.supportEmail}`,\n  publisher: {\n"
           new_store = "  ...(storeUrls.length > 0\n    ? { installUrl: storeUrls, sameAs: storeUrls }\n    : {}),\n  publisher: {\n"
           template = replace_once(template, old_store, new_store, 'store and softwareHelp schema block')
