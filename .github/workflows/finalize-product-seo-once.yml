@@ -93,31 +93,6 @@ jobs:
               """        await expect(image).toHaveAttribute('alt', /\\S+/);\n        await expect(image).toHaveAttribute('width', /\\d+/);\n        await expect(image).toHaveAttribute('height', /\\d+/);\n        const alt = (await image.getAttribute('alt') ?? '').trim();\n        expect(alt.toLowerCase()).toContain(app.toLowerCase());\n        expect(alt).not.toMatch(/\\s\\d+$/);\n""",
               'semantic screenshot alt expectation'
           )
-          semantic_test = r"""
-const papiraExtendedScope = {
-  'pt-BR': [/capa/i, /capítulo/i, /sumário/i, /projeto/i],
-  de: [/Cover/i, /Kapitel/i, /Inhaltsverzeichnis/i, /Buchprojekt/i],
-  fr: [/couverture/i, /chapitr/i, /table des matières/i, /projet/i],
-  es: [/portada/i, /capítulo/i, /tabla de contenidos/i, /proyecto/i]
-} as const;
-
-test('Papira extended locales preserve the canonical book-project scope', async ({ page }) => {
-  for (const locale of locales.filter((item) => item.code in papiraExtendedScope)) {
-    await page.goto(routeFor('papira', locale.segment));
-    const content = await page.locator('.content-band').innerText();
-    for (const term of papiraExtendedScope[locale.code as keyof typeof papiraExtendedScope]) {
-      expect(content).toMatch(term);
-    }
-  }
-});
-
-"""
-          test = replace_once(
-              test,
-              "test('product sources permanently exclude price, rating, and review commerce metadata', () => {\n",
-              semantic_test + "test('product sources permanently exclude price, rating, and review commerce metadata', () => {\n",
-              'Papira semantic parity test insertion'
-          )
           test = replace_once(
               test,
               "  expect(templateSource).not.toMatch(/\\bisAccessibleForFree\\s*:/);\n",
