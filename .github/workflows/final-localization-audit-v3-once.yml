@@ -1,0 +1,145 @@
+name: Final race-safe nine-language localization audit
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: definitive-localization-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out latest repository state
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply any still-pending deterministic fixes
+        run: |
+          if [ -f scripts/final-core-product-i18n.py ] && ! grep -q "releaseNoteKoPath" src/components/ProductTemplate.astro; then
+            python3 scripts/final-core-product-i18n.py
+          fi
+          if [ -f scripts/upgrade-static-privacy-i18n.py ] && [ "$(grep -c 'data-locale-choice=' public/privacy/tagweaver/index.html)" -ne 9 ]; then
+            python3 scripts/upgrade-static-privacy-i18n.py
+          fi
+          if [ -f scripts/fix-final-i18n-tests.py ] && ! grep -q "side-card.*getByRole" tests/extended-i18n.spec.ts; then
+            python3 scripts/fix-final-i18n-tests.py
+          fi
+
+      - name: Verify nine-language source and navigation parity
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          locales = ['en','ko','ja','zh-Hans','zh-Hant','pt-BR','de','fr','es']
+          root = Path('src/content/blog')
+          expected = sorted(p.name for p in (root / 'en').glob('*.md'))
+          assert len(expected) == 9, f'expected 9 English blog posts, found {len(expected)}'
+          for locale in locales:
+              actual = sorted(p.name for p in (root / locale).glob('*.md'))
+              assert actual == expected, f'blog parity mismatch for {locale}'
+
+          product = Path('src/components/ProductTemplate.astro').read_text()
+          for marker in [
+              'releaseNoteKoPath',
+              "ja: { country: 'jp', language: 'ja' }",
+              "'zh-Hans': { country: 'cn', language: 'zh-Hans-CN' }",
+              "'zh-Hant': { country: 'tw', language: 'zh-Hant-TW' }",
+              "ja: { language: 'ja', country: 'JP' }",
+              "'zh-Hans': { language: 'zh-CN', country: 'CN' }",
+              "'zh-Hant': { language: 'zh-TW', country: 'TW' }",
+          ]:
+              assert marker in product, f'missing core product marker: {marker}'
+
+          privacy_slugs = ['aligna','clipnest','melivra','meriq','quivra','segra','tagweaver','vaultxt']
+          hreflangs = ['en','ko','ja','zh-Hans','zh-Hant','pt-BR','de','fr','es','x-default']
+          for slug in privacy_slugs:
+              for path in [Path('public/privacy')/slug/'index.html', Path('public/privacy')/slug/'ko'/'index.html']:
+                  text = path.read_text()
+                  for lang in hreflangs:
+                      assert f'hreflang="{lang}"' in text, f'{path}: missing {lang}'
+                  assert text.count('data-locale-choice=') == 9, f'{path}: expected nine language choices'
+
+          bad = {
+              'src/content/blog/fr/reuse-copied-text-snippets-iphone.md': ['espaces accidentelles','espaces réservées'],
+              'src/content/blog/es/verify-audio-clips-before-combining.md': ['formato de sample','del señal','Inventaría los archivos'],
+          }
+          for path, phrases in bad.items():
+              text = Path(path).read_text()
+              for phrase in phrases:
+                  assert phrase not in text, f'{path}: {phrase}'
+
+          for path in ['src/components/ExtendedBlogIndex.astro','src/components/ExtendedBlogArticle.astro','src/components/ExtendedReleaseNotePage.astro']:
+              assert '>Privacy</a>' not in Path(path).read_text(), f'English Privacy residue: {path}'
+
+          extended_product = Path('src/components/ExtendedProductPage.astro').read_text()
+          assert 'releaseNoteLocalePath(latestRelease, locale)' in extended_product
+          tests = Path('tests/extended-i18n.spec.ts').read_text()
+          assert "page.locator('.side-card').getByRole" in tests
+          assert '`https://onnellab.github.io/privacy/${slug}/${segment}/`' not in Path('tests/site-i18n.spec.ts').read_text()
+          PY
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production site
+        run: npm run build
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run full nine-language desktop regression suite
+        run: >-
+          npx playwright test
+          tests/site-i18n.spec.ts
+          tests/extended-i18n.spec.ts
+          tests/papira-i18n.spec.ts
+          tests/site-visual.spec.ts
+          --project=desktop
+
+      - name: Record PASS and clean all one-time localization tooling
+        run: |
+          mkdir -p docs
+          cat > docs/localization-audit-2026-08-25.md <<EOF
+          # ONNELLAB website localization audit — 2026-08-25
+
+          Status: PASS
+
+          Audited commit: ${GITHUB_SHA}
+
+          Languages: ko / en / ja / zh-Hans / zh-Hant / pt-BR / de / fr / es
+
+          Verified:
+          - all nine blog source sets have identical nine-post slug coverage;
+          - all eight legacy app privacy-policy English/Korean source pages expose nine language choices and nine hreflang locales plus x-default;
+          - Astro production build succeeds;
+          - core and extended locale routing, canonical URLs and hreflang alternates pass the desktop Playwright regression suite;
+          - product-to-privacy and product-to-release-note links stay in the selected language;
+          - Japanese, Simplified Chinese and Traditional Chinese core product store links use matching regional language parameters;
+          - Papira, OAuth callback, release notes, sitemap and the legacy Melivra privacy alias pass representative localization checks;
+          - reviewed French and Spanish copy corrections are present;
+          - translated blog and release-note interfaces contain no reviewed English privacy-label residue.
+          EOF
+
+          rm -f scripts/final-core-product-i18n.py scripts/upgrade-static-privacy-i18n.py scripts/fix-final-i18n-tests.py
+          rm -f .github/workflows/final-core-product-i18n-run.yml
+          rm -f .github/workflows/static-privacy-i18n-once.yml
+          rm -f .github/workflows/fix-final-i18n-tests-once.yml
+          rm -f .github/workflows/final-localization-audit-once.yml
+          rm -f .github/workflows/final-localization-audit-v2-once.yml
+          rm -f .github/workflows/final-localization-audit-v3-once.yml
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'test: pass final race-safe nine-language localization audit'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
