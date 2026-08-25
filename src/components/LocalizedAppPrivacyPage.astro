@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  getAppPrivacyCopy,
+  type PrivacyAppSlug,
+  type TranslatedPrivacyLocale
+} from '../lib/app-privacy-localizations';
+import {
+  allAppPrivacyRouteFor,
+  allLocaleDefinitions,
+  allRouteFor,
+  allSiteLocales
+} from '../lib/extended-site-i18n';
+
+type Props = { slug: PrivacyAppSlug; locale: TranslatedPrivacyLocale };
+const { slug, locale } = Astro.props;
+const { localeText, details } = getAppPrivacyCopy(slug, locale);
+const definition = allLocaleDefinitions[locale];
+const canonicalPath = allAppPrivacyRouteFor(slug, locale);
+const alternates = [
+  ...allSiteLocales.map((item) => ({
+    lang: allLocaleDefinitions[item].hreflang,
+    path: allAppPrivacyRouteFor(slug, item)
+  })),
+  { lang: 'x-default', path: allAppPrivacyRouteFor(slug, 'en') }
+];
+const title = `${details.appName} · ${localeText.policyTitle}`;
+const description = localeText.applies(details.appName);
+const email = 'onnellab.app@gmail.com';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  lang={definition.htmlLang}
+  alternates={alternates}
+  ogType="article"
+>
+  <main class="privacy-shell">
+    <nav class="topbar" aria-label={localeText.nav}>
+      <a class="home-link" href={allRouteFor('home', locale)}>ONNELLAB</a>
+      <details class="locale-menu">
+        <summary aria-label={`${definition.label}`}>{definition.label}</summary>
+        <ul>
+          {allSiteLocales.map((item) => {
+            const itemDefinition = allLocaleDefinitions[item];
+            return (
+              <li>
+                <a
+                  href={allAppPrivacyRouteFor(slug, item)}
+                  lang={itemDefinition.htmlLang}
+                  hreflang={itemDefinition.hreflang}
+                  data-locale-choice={item}
+                  aria-current={item === locale ? 'page' : undefined}
+                >
+                  {itemDefinition.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </details>
+    </nav>
+
+    <header>
+      <h1>{details.appName} {localeText.policyTitle}</h1>
+      <p>{localeText.applies(details.appName)}</p>
+      <p><strong>{localeText.updated}:</strong> <time datetime={details.updatedAt}>{details.updatedAt}</time></p>
+    </header>
+
+    <hr />
+    <h2>{localeText.policyTitle}</h2>
+    <p>{localeText.intro(details.appName)}</p>
+
+    <section>
+      <h3>{localeText.headings[0]}</h3>
+      <p>{details.accounts}</p>
+    </section>
+
+    <section>
+      <h3>{localeText.headings[1]}</h3>
+      <ul>{details.deviceItems.map((item) => <li>{item}</li>)}</ul>
+      <ul>{details.deviceNotes.map((item) => <li>{item}</li>)}</ul>
+    </section>
+
+    <section>
+      <h3>{localeText.headings[2]}</h3>
+      {details.serverItems && <ul>{details.serverItems.map((item) => <li>{item}</li>)}</ul>}
+      <p>{details.serverBody}</p>
+    </section>
+
+    <section>
+      <h3>{localeText.headings[3]}</h3>
+      <p>{details.payment}</p>
+    </section>
+
+    <section>
+      <h3>{localeText.headings[4]}</h3>
+      <p>{details.sharing}</p>
+    </section>
+
+    <section>
+      <h3>{localeText.headings[5]}</h3>
+      <p>{details.retention}</p>
+    </section>
+
+    <section>
+      <h3>{localeText.headings[6]}</h3>
+      <p>{details.security}</p>
+    </section>
+
+    <section>
+      <h3>{localeText.headings[7]}</h3>
+      <p>{localeText.change}</p>
+      <p>{localeText.contact} <a href={`mailto:${email}`}>{email}</a></p>
+    </section>
+
+    <footer class="site-footer">
+      <a href={allRouteFor('privacy', locale)}>{localeText.privacy}</a>
+      <a href={allRouteFor('terms', locale)}>{localeText.terms}</a>
+      <a href={`mailto:${email}`}>{email}</a>
+      <span>© ONNELLAB</span>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .privacy-shell{width:min(860px,calc(100% - 36px));margin:0 auto;padding:28px 0 56px;color:#4d4942;line-height:1.75}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}.home-link{color:#68645c;text-decoration:none;font-size:14px;font-weight:620}.locale-menu{position:relative}.locale-menu summary{min-height:40px;display:inline-flex;align-items:center;border:1px solid #ded6ca;border-radius:999px;padding:7px 13px;background:rgba(255,253,248,.82);color:#5f5a50;cursor:pointer;font-size:13px;font-weight:620;list-style:none}.locale-menu summary::-webkit-details-marker{display:none}.locale-menu ul{position:absolute;z-index:20;right:0;top:calc(100% + 7px);width:max-content;min-width:170px;display:grid;gap:2px;margin:0;border:1px solid #ded6ca;border-radius:12px;padding:6px;background:#fffdf8;box-shadow:0 14px 34px rgba(57,48,39,.11);list-style:none}.locale-menu a{display:block;border-radius:8px;padding:8px 10px;color:#5f5a50;text-decoration:none;font-size:13px}.locale-menu a:hover,.locale-menu a[aria-current='page']{background:#f4efe7;color:#383631}header{margin:58px 0 22px}h1{margin:0;color:#282723;font-size:clamp(38px,6vw,64px);line-height:1.04}h2{margin:30px 0 8px;color:#34322d;font-size:26px}h3{margin:0 0 10px;color:#34322d;font-size:21px;line-height:1.3}p{margin:10px 0 0;font-size:16px}ul{padding-left:24px}li{margin:6px 0}section{border-top:1px solid #e5ded4;margin-top:22px;padding-top:22px}hr{border:0;border-top:1px solid #e5ded4;margin:24px 0}.site-footer{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:9px 20px;margin-top:58px;border-top:1px solid #ded6ca;padding-top:28px;color:#786f65;font-size:12px}.site-footer a{color:#686259;text-decoration:none;font-weight:620}@media(max-width:640px){.privacy-shell{width:min(100% - 28px,860px);padding-top:22px}header{margin-top:38px}.locale-menu ul{right:0}}
+</style>
