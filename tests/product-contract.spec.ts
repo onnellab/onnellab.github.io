@@ -2,7 +2,14 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const apps = ['aligna', 'clipnest', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'] as const;
+const appsDir = path.resolve(process.cwd(), 'src/content/apps');
+const apps = [
+  ...fs
+    .readdirSync(appsDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name),
+  'papira'
+].sort();
 const locales = [
   { code: 'en', segment: '' },
   { code: 'ko', segment: 'ko' },
@@ -78,7 +85,6 @@ for (const app of apps) {
 }
 
 test('product sources permanently exclude price, rating, and review commerce metadata', () => {
-  const appsDir = path.resolve(process.cwd(), 'src/content/apps');
   for (const app of fs.readdirSync(appsDir)) {
     const appMeta = path.join(appsDir, app, 'app.md');
     if (!fs.existsSync(appMeta)) continue;
