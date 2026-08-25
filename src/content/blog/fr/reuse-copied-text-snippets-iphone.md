@@ -57,10 +57,10 @@ Universal Clipboard répond à un autre besoin. Il permet de transférer le cont
 
 1. **Commencez petit.** Choisissez cinq à dix éléments récurrents plutôt que d’importer tout l’historique récent.
 2. **Capturez volontairement.** Copiez un fragment, ouvrez l’endroit où vous le conservez et vérifiez que le texte complet a bien été enregistré.
-3. **Nettoyez le contenu.** Supprimez espaces accidentelles, salutations obsolètes, paramètres de suivi et détails privés inutiles au modèle.
+3. **Nettoyez le contenu.** Supprimez les espaces accidentels, les salutations obsolètes, les paramètres de suivi et les détails privés inutiles au modèle.
 4. **Ajoutez du contexte.** Utilisez un nom ou une première ligne qui explique le public et l’usage. Gardez des variantes séparées si leur formulation diffère réellement.
 5. **Épinglez avec parcimonie.** Réservez l’accès le plus rapide à quelques éléments très fréquents. Une longue liste d’éléments épinglés n’est plus une priorité.
-6. **Collez puis adaptez.** Relisez le message autour du fragment avant envoi. Remplacez noms, dates, montants et espaces réservées ; ne considérez jamais le fragment comme un texte final automatique.
+6. **Collez puis adaptez.** Relisez le message autour du fragment avant envoi. Remplacez les noms, les dates, les montants et les marqueurs ; ne considérez jamais le fragment comme un texte final automatique.
 7. **Traitez les données sensibles à part.** Ne stockez pas mots de passe, codes à usage unique, clés de récupération, données de paiement, informations médicales ou données privées de clients comme de simples fragments.
 8. **Révisez régulièrement.** Supprimez doublons et liens expirés, mettez à jour les informations et désépinglez ce qui n’est plus fréquent.
 
@@ -128,4 +128,4 @@ N’utilisez pas une liste ordinaire pour mots de passe, codes de récupération
 
 ### Pourquoi relire après le collage ?
 
-Un texte enregistré peut être obsolète ou arriver dans le mauvais contexte. Une relecture rapide repère liens expirés, mauvais noms, espaces réservées non remplacées et erreurs de mise en forme avant l’envoi.
+Un texte enregistré peut être obsolète ou arriver dans le mauvais contexte. Une relecture rapide repère liens expirés, mauvais noms, marqueurs non remplacés et erreurs de mise en forme avant l’envoi.

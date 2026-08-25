@@ -26,7 +26,7 @@ image_specs: "Flujo de verificación antes de unir|Concatenación o recodificaci
 
 ## Respuesta breve
 
-Haz un inventario, fija el orden previsto y confirma que cada clip se abre y contiene el material correcto. Compara codec, frecuencia de muestreo, formato de sample y disposición de canales antes de decidir si se pueden concatenar directamente o necesitan conversión. Escucha cada clip completo y después cada transición en secuencia, buscando palabras cortadas, audio repetido, silencios no deseados, solapamientos, clics, cambios bruscos de ambiente y saltos de volumen. Exporta una prueba o una copia completa de revisión, comprueba duración y reproducción y conserva las fuentes intactas hasta que el resultado final supere esas verificaciones.
+Haz un inventario, fija el orden previsto y confirma que cada clip se abre y contiene el material correcto. Compara codec, frecuencia de muestreo, formato de muestra y disposición de canales antes de decidir si se pueden concatenar directamente o necesitan conversión. Escucha cada clip completo y después cada transición en secuencia, buscando palabras cortadas, audio repetido, silencios no deseados, solapamientos, clics, cambios bruscos de ambiente y saltos de volumen. Exporta una prueba o una copia completa de revisión, comprueba duración y reproducción y conserva las fuentes intactas hasta que el resultado final supere esas verificaciones.
 
 Ningún medidor ni forma de onda sustituye la escucha. El nivel de pico ayuda a detectar riesgo de clipping; la medición de **sonoridad (loudness)** describe el nivel a lo largo del tiempo. Ambas son útiles, pero responden a preguntas distintas.
 
@@ -40,7 +40,7 @@ Compara el inventario con las duraciones. Recortes y solapamientos cambiarán el
 
 ## Comprueba la compatibilidad técnica antes de editar
 
-La extensión no describe por completo una señal de audio. Revisa contenedor y codec, además de frecuencia de muestreo, formato de sample o profundidad de bits, número y disposición de canales. Anota metadatos extraños de tiempo inicial o indicios de truncamiento. Dos archivos `.wav` pueden no compartir las mismas propiedades.
+La extensión no describe por completo una señal de audio. Revisa contenedor y codec, además de frecuencia de muestreo, formato de muestra o profundidad de bits, número y disposición de canales. Anota metadatos extraños de tiempo inicial o indicios de truncamiento. Dos archivos `.wav` pueden no compartir las mismas propiedades.
 
 La frecuencia de muestreo indica cuántas muestras se representan por segundo. La disposición de canales asigna funciones como mono o estéreo izquierda/derecha. Define ambas cosas deliberadamente para la salida. Una voz mono no debería acabar solo en el canal izquierdo de un proyecto estéreo sin intención.
 
@@ -74,7 +74,7 @@ El solapamiento también depende del contexto. Uno accidental repite material y 
 
 ## Compara la sonoridad, no solo los picos
 
-El nivel de pico muestra la mayor excursión del señal y ayuda a evitar saturación. Dos clips con picos parecidos pueden sonar a niveles muy diferentes. La medición de **sonoridad** evalúa el audio en el tiempo y suele ser más útil para comparar cómo se perciben voz o material de programa. La EBU distingue expresamente la normalización por sonoridad de la simple lectura de medidores de pico.
+El nivel de pico muestra la mayor excursión de la señal y ayuda a evitar saturación. Dos clips con picos parecidos pueden sonar a niveles muy diferentes. La medición de **sonoridad** evalúa el audio en el tiempo y suele ser más útil para comparar cómo se perciben voz o material de programa. La EBU distingue expresamente la normalización por sonoridad de la simple lectura de medidores de pico.
 
 Usa los medidores para localizar diferencias y confirma por oído con fragmentos representativos. Picos iguales no garantizan una percepción igual. Tampoco apliques sin contexto un objetivo profesional de radiodifusión a una grabación personal.
 
@@ -92,7 +92,7 @@ El concat demuxer de FFmpeg ilustra la diferencia: su documentación exige strea
 
 ## Flujo recomendado
 
-1. Inventaría los archivos y fija el orden.
+1. Haz un inventario de los archivos y fija el orden.
 2. Protege los originales y usa copias para cualquier cambio.
 3. Compara formato, codec, frecuencia de muestreo, canales y duración.
 4. Escucha cada clip completo.
