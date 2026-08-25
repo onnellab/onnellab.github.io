@@ -453,7 +453,7 @@ test.describe('Papira nine-language launch surface', () => {
     }
   });
 
-  test('non-Papira products retain icon social metadata and generic screenshot alt fallback', async ({ page }) => {
+  test('non-Papira products retain icon social metadata and semantic screenshot alt text', async ({ page }) => {
     await page.goto('/apps/tagweaver/');
 
     const iconUrl = 'https://onnellab.github.io/app-assets/tagweaver/assets/icon/tagweaver.png';
@@ -461,7 +461,7 @@ test.describe('Papira nine-language launch surface', () => {
     await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', iconUrl);
     await expect(page.locator('.screenshot-link img').first()).toHaveAttribute(
       'alt',
-      'TagWeaver Screenshots 1'
+      'TagWeaver MP3 and FLAC tag editor for title, artist, and album metadata'
     );
 
     const schemas = await jsonLd(page);
@@ -480,7 +480,7 @@ test.describe('Papira nine-language launch surface', () => {
     }
   });
 
-  test('Japanese and Chinese pages publish complete product, breadcrumb, and FAQ schema', async ({ page }) => {
+  test('Japanese and Chinese pages publish product and breadcrumb schema while keeping visible FAQ content', async ({ page }) => {
     for (const locale of locales.slice(2)) {
       const canonical = `https://onnellab.github.io/apps/papira/${locale.path}`;
       await page.goto(`/apps/papira/${locale.path}`);
@@ -498,7 +498,8 @@ test.describe('Papira nine-language launch surface', () => {
       });
       expect(software?.featureList).toHaveLength(5);
       expect(schemas.some((item) => item['@type'] === 'BreadcrumbList')).toBe(true);
-      expect(schemas.some((item) => item['@type'] === 'FAQPage')).toBe(true);
+      expect(schemas.some((item) => item['@type'] === 'FAQPage')).toBe(false);
+      await expect(page.locator('.faq-band details')).toHaveCount(3);
     }
   });
 

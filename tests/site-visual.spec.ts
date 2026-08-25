@@ -1244,7 +1244,7 @@ test.describe('existing product pages', () => {
   });
 
   for (const path of productPages) {
-    test(`${path} exposes its FAQ and product schema`, async ({ page }) => {
+    test(`${path} exposes visible FAQ content and product schema`, async ({ page }) => {
       await page.goto(path);
       const isKo = path.endsWith('/ko/');
       await expect(page.locator('#faq-title')).toHaveText(isKo ? '자주 묻는 질문' : 'FAQ');
@@ -1254,9 +1254,10 @@ test.describe('existing product pages', () => {
       const parsed = schemas.map((schema) => JSON.parse(schema));
       const application = parsed.find((item) => item['@type'] === 'SoftwareApplication');
       const faq = parsed.find((item) => item['@type'] === 'FAQPage');
+      const breadcrumb = parsed.find((item) => item['@type'] === 'BreadcrumbList');
       expect(application).toBeDefined();
-      expect(faq).toBeDefined();
-      expect(faq.mainEntity).toHaveLength(3);
+      expect(breadcrumb).toBeDefined();
+      expect(faq).toBeUndefined();
     });
   }
 
