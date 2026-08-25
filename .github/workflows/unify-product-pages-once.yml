@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   migrate:
+    if: ${{ github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -38,6 +39,11 @@ jobs:
 
       - name: Apply unified product migration
         run: python3 scripts/unify-product-pages.py
+
+      - name: Restore workflow files managed outside this runner
+        run: |
+          git checkout HEAD -- .github/workflows/i18n-smoke.yml
+          git checkout HEAD -- .github/workflows/unify-product-pages-once.yml
 
       - name: Install dependencies
         run: npm ci
