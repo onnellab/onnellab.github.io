@@ -22,6 +22,17 @@ const locales = [
   { code: 'fr', segment: 'fr' },
   { code: 'es', segment: 'es' }
 ] as const;
+const metaPlatformMarkers = {
+  en: 'Platforms:',
+  ko: '지원 플랫폼:',
+  ja: '対応プラットフォーム:',
+  'zh-Hans': '支持平台：',
+  'zh-Hant': '支援平台：',
+  'pt-BR': 'Plataformas:',
+  de: 'Plattformen:',
+  fr: 'Plateformes :',
+  es: 'Plataformas:'
+} as const;
 
 // Keep schema descriptive and verifiable: no commerce/review claims, only real application semantics.
 const schemaClassifications: Record<string, { applicationCategory: string; applicationSubCategory: string }> = {
@@ -68,6 +79,13 @@ for (const app of apps) {
       await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical(route));
       await expect(page.locator('link[rel="describedby"]')).toHaveAttribute('href', 'https://onnellab.github.io/llms.txt');
+
+      const metaDescription = await page.locator('meta[name="description"]').getAttribute('content');
+      expect(metaDescription).toBeTruthy();
+      if (app !== 'papira') {
+        expect(metaDescription).toContain(' — ');
+        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
+      }
 
       const allSchemas = await schemas(page);
       const software = allSchemas.find((entry) => entry?.['@type'] === 'SoftwareApplication');
@@ -144,6 +162,11 @@ test('AI discovery policy separates search retrieval from training and keeps the
   for (const userAgent of ['GPTBot', 'Google-Extended', 'ClaudeBot', 'Meta-ExternalAgent']) {
     expect(sectionFor(userAgent)).toContain('Disallow: /');
   }
+
+  const sitemapResponse = await request.get('/sitemap.xml');
+  expect(sitemapResponse.ok()).toBe(true);
+  const sitemap = await sitemapResponse.text();
+  expect(sitemap).not.toContain('<lastmod>');
 
   const llmsResponse = await request.get('/llms.txt');
   expect(llmsResponse.ok()).toBe(true);

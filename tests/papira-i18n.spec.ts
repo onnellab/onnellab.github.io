@@ -90,19 +90,13 @@ test.describe('Papira nine-language launch surface', () => {
     );
     expect(sitemapSource).not.toContain(obsoleteComponent);
     expect(workflowSource).not.toContain(obsoleteComponent);
-    for (const activeSource of [
-      'src/components/HomePage.astro',
-      'src/components/AppsIndex.astro',
-      'src/components/AboutPage.astro',
-      'src/components/PrivacyIndex.astro',
-      'src/components/CorePage.astro',
-      'src/lib/papira.ts',
-      'src/components/ProductTemplate.astro'
-    ]) {
-      expect(sitemapSource).toContain(activeSource);
-    }
-    expect(sitemapSource).toContain('latestLastmod(sourceLastmod, [corePageSources[page]');
-    expect(sitemapSource).not.toContain('commonLastmod');
+    expect(sitemapSource).toContain("allLocalizedEntries('papira')");
+  expect(sitemapSource).toContain('...productEntries()');
+  expect(sitemapSource).toContain("{ lang: 'x-default', path: pathFor('en') }");
+  expect(sitemapSource).not.toContain('lastmod');
+  expect(sitemapSource).not.toContain('sourceFileLastmod');
+  expect(sitemapSource).not.toContain('latestLastmod');
+  expect(sitemapSource).not.toContain('corePageSources');
 
     const papiraRoutes = [
       'src/pages/apps/papira/index.astro',
@@ -561,21 +555,6 @@ test.describe('Papira nine-language launch surface', () => {
       expect(sitemap.split(`<loc>${privacyUrl}</loc>`).length - 1).toBe(1);
     }
 
-    const papiraSourceFiles = [
-      'src/lib/papira.ts',
-      'src/components/ProductTemplate.astro'
-    ];
-    const expectedLastmod = papiraSourceFiles
-      .map((source) => fs.statSync(path.resolve(process.cwd(), source)).mtime)
-      .sort((left, right) => left.getTime() - right.getTime())
-      .at(-1)
-      ?.toISOString()
-      .slice(0, 10);
-    expect(expectedLastmod).toBeTruthy();
-    for (const locale of locales) {
-      const productUrl = `https://onnellab.github.io/apps/papira/${locale.path}`;
-      const entry = sitemap.match(new RegExp(`<loc>${productUrl}</loc>\\s*<lastmod>([^<]+)</lastmod>`));
-      expect(entry?.[1]).toBe(expectedLastmod);
-    }
+    expect(sitemap).not.toContain('<lastmod>');
   });
 });

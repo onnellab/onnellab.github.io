@@ -448,32 +448,39 @@ function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
   const platforms = copy.locale === 'en'
     ? source.meta.platforms.join(' and ')
     : source.meta.platforms.join('/');
-  const category = landingSubtitle(copy);
+  const category = landingSubtitle(copy)
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/[.!?。！？]+$/u, '');
+  const normalize = (value: string) =>
+    value.replace(/[.!?。！？]+$/u, '').trim().toLocaleLowerCase();
+  const detail = normalize(summary) === normalize(category) ? '' : ` ${summary}`;
+
   if (copy.locale === 'ko') {
-    return `${source.meta.title}는 ${platforms}용 ${category}입니다. ${summary}`;
+    return `${source.meta.title} — ${category}. 지원 플랫폼: ${platforms}.${detail}`;
   }
   if (copy.locale === 'ja') {
-    return `${source.meta.title}は${platforms}向けの${category}です。${summary}`;
+    return `${source.meta.title} — ${category}。対応プラットフォーム: ${platforms}。${detail}`;
   }
   if (copy.locale === 'zh-Hans') {
-    return `${source.meta.title} 是适用于 ${platforms} 的${category}。${summary}`;
+    return `${source.meta.title} — ${category}。支持平台：${platforms}。${detail}`;
   }
   if (copy.locale === 'zh-Hant') {
-    return `${source.meta.title} 是適用於 ${platforms} 的${category}。${summary}`;
+    return `${source.meta.title} — ${category}。支援平台：${platforms}。${detail}`;
   }
   if (copy.locale === 'pt-BR') {
-    return `${source.meta.title} é ${category} para ${platforms}. ${summary}`;
+    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${detail}`;
   }
   if (copy.locale === 'de') {
-    return `${source.meta.title} ist ${category} für ${platforms}. ${summary}`;
+    return `${source.meta.title} — ${category}. Plattformen: ${platforms}.${detail}`;
   }
   if (copy.locale === 'fr') {
-    return `${source.meta.title} est ${category} pour ${platforms}. ${summary}`;
+    return `${source.meta.title} — ${category}. Plateformes : ${platforms}.${detail}`;
   }
   if (copy.locale === 'es') {
-    return `${source.meta.title} es ${category} para ${platforms}. ${summary}`;
+    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${detail}`;
   }
-  return `${source.meta.title} is ${indefiniteArticle(category)} ${category} for ${platforms}. ${summary}`;
+  return `${source.meta.title} — ${category}. Platforms: ${platforms}.${detail}`;
 }
 
 function productSeoTitle(source: ProductSource, copy: ProductCopy): string {
@@ -482,11 +489,6 @@ function productSeoTitle(source: ProductSource, copy: ProductCopy): string {
     return source.meta.title;
   }
   return `${source.meta.title} - ${subtitle}`;
-}
-
-function indefiniteArticle(value: string): 'a' | 'an' {
-  if (/^MP3\b/.test(value)) return 'an';
-  return /^[aeiou]/i.test(value) ? 'an' : 'a';
 }
 
 export function landingSubtitle(copy: ProductCopy): string {
