@@ -1,0 +1,42 @@
+name: Finalize llms v2 discovery once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/llms-v2-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply llms v2 discovery contract
+        shell: bash
+        run: |
+          python3 -c 'from pathlib import Path; p=Path("src/layouts/BaseLayout.astro"); s=p.read_text(); old="    <link rel=\"canonical\" href={canonicalUrl} />\n"; new=old+"    <link rel=\"describedby\" href={new URL(\"/llms.txt\", Astro.site)} />\n"; assert s.count(old)==1; p.write_text(s.replace(old,new,1))'
+          python3 -c 'from pathlib import Path; p=Path("tests/product-contract.spec.ts"); s=p.read_text(); old="      await expect(page.locator(\u0027link[rel=\"canonical\"]\u0027)).toHaveAttribute(\u0027href\u0027, canonical(route));\n"; new=old+"      await expect(page.locator(\u0027link[rel=\"describedby\"]\u0027)).toHaveAttribute(\u0027href\u0027, \u0027https://onnellab.github.io/llms.txt\u0027);\n"; assert s.count(old)==1; p.write_text(s.replace(old,new,1))'
+          python3 -c 'from pathlib import Path; p=Path("tests/product-contract.spec.ts"); s=p.read_text(); old="[\u0027OAI-SearchBot\u0027, \u0027ChatGPT-User\u0027, \u0027Claude-SearchBot\u0027, \u0027Claude-User\u0027, \u0027PerplexityBot\u0027, \u0027Perplexity-User\u0027]"; new="[\u0027OAI-SearchBot\u0027, \u0027ChatGPT-User\u0027, \u0027Claude-SearchBot\u0027, \u0027Claude-User\u0027, \u0027PerplexityBot\u0027, \u0027Perplexity-User\u0027, \u0027YouBot\u0027, \u0027Meta-ExternalFetcher\u0027]"; assert s.count(old)==1; p.write_text(s.replace(old,new,1))'
+          python3 -c 'from pathlib import Path; p=Path("tests/product-contract.spec.ts"); s=p.read_text(); old="[\u0027GPTBot\u0027, \u0027Google-Extended\u0027, \u0027ClaudeBot\u0027]"; new="[\u0027GPTBot\u0027, \u0027Google-Extended\u0027, \u0027ClaudeBot\u0027, \u0027Meta-ExternalAgent\u0027]"; assert s.count(old)==1; p.write_text(s.replace(old,new,1))'
+          python3 -c 'from pathlib import Path; p=Path("tests/product-contract.spec.ts"); s=p.read_text(); old="  expect(llms).toContain(\u0027nine languages\u0027);\n"; new="  expect(llms).toMatch(/^# ONNELLAB\\n\\n> /);\n  expect(llms).not.toMatch(/^###\\s/m);\n"+old; assert s.count(old)==1; p.write_text(s.replace(old,new,1))'
+          npm ci
+          npm run build
+          npx playwright install --with-deps chromium
+          npx playwright test tests/product-contract.spec.ts --project=desktop
+
+      - name: Commit llms v2 discovery patch
+        shell: bash
+        run: |
+          rm -f .github/workflows/finalize-llms-v2-once.yml .github/llms-v2-trigger
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/layouts/BaseLayout.astro tests/product-contract.spec.ts .github/workflows/finalize-llms-v2-once.yml .github/llms-v2-trigger
+          git commit -m "test: lock llms v2 discovery contract"
+          git push origin main
