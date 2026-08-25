@@ -6,15 +6,21 @@ import {
   papiraPrivacyLocaleDefinitions,
   papiraPrivacyLocales,
   papiraPrivacyRouteFor,
-  siteLocales,
   type LocalizedPage,
   type PapiraPrivacyLocale,
   type SiteLocale
 } from '../lib/site-i18n';
+import {
+  allLocaleDefinitions,
+  allProductRouteFor,
+  allRouteFor,
+  allSiteLocales,
+  type AllSiteLocale
+} from '../lib/extended-site-i18n';
 
 type BaseProps = {
-  locale: SiteLocale | PapiraPrivacyLocale;
-  supported?: readonly (SiteLocale | PapiraPrivacyLocale)[];
+  locale: AllSiteLocale;
+  supported?: readonly AllSiteLocale[];
 };
 
 type Props = BaseProps & (
@@ -24,9 +30,8 @@ type Props = BaseProps & (
 
 const { locale, page, productSlug } = Astro.props;
 const privacyPage = page === 'papiraPrivacy';
-const supported = Astro.props.supported ?? (privacyPage ? papiraPrivacyLocales : siteLocales);
-const definitions = privacyPage ? papiraPrivacyLocaleDefinitions : localeDefinitions;
-const current = definitions[locale];
+const supported = Astro.props.supported ?? allSiteLocales;
+const current = allLocaleDefinitions[locale];
 if (!page && !productSlug) throw new Error('LocaleMenu requires page or productSlug');
 const languageControlLabel = {
   en: `Language: ${current.label}`,
@@ -39,19 +44,18 @@ const languageControlLabel = {
   fr: `Langue : ${current.label}`,
   es: `Idioma: ${current.label}`
 }[locale];
-const localeHref = (item: SiteLocale | PapiraPrivacyLocale) =>
-  productSlug
-    ? productRouteFor(productSlug, item)
-    : privacyPage
-      ? papiraPrivacyRouteFor(item as PapiraPrivacyLocale)
-      : routeFor(page, item as SiteLocale);
+const localeHref = (item: AllSiteLocale) => {
+  if (productSlug) return allProductRouteFor(productSlug, item);
+  if (!page) throw new Error('LocaleMenu requires page');
+  return allRouteFor(page, item);
+};
 ---
 
 <details class="locale-menu">
   <summary class="site-language-control" aria-label={languageControlLabel}>{current.label}</summary>
   <ul class="locale-menu-panel">
     {supported.map((item) => {
-      const definition = definitions[item];
+      const definition = allLocaleDefinitions[item];
       return (
         <li>
           <a
