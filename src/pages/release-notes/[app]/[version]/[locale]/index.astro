@@ -1,0 +1,21 @@
+---
+import ExtendedReleaseNotePage from '../../../../../components/ExtendedReleaseNotePage.astro';
+import { releaseNotes, type ReleaseNote } from '../../../../../lib/releaseNotes';
+import { translatedPrivacyLocales, type TranslatedPrivacyLocale } from '../../../../../lib/app-privacy-localizations';
+import { allLocaleDefinitions } from '../../../../../lib/extended-site-i18n';
+
+export function getStaticPaths() {
+  return releaseNotes.flatMap((note) =>
+    translatedPrivacyLocales.map((locale) => ({
+      params: {
+        app: note.appSlug,
+        version: note.version,
+        locale: allLocaleDefinitions[locale].pathSegment
+      },
+      props: { note, locale }
+    }))
+  );
+}
+const { note, locale } = Astro.props as { note: ReleaseNote; locale: TranslatedPrivacyLocale };
+---
+<ExtendedReleaseNotePage note={note} locale={locale} />
