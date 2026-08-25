@@ -1,119 +1,64 @@
 import {
-  allAppPrivacyRouteFor,
   allLocaleDefinitions,
   allProductRouteFor,
   allRouteFor,
   allSiteLocales
 } from '../lib/extended-site-i18n';
-import {
-  getProductPageData,
-  getProductSources,
-  landingSubtitle,
-  pageBodyDescription,
-  renderBlocks
-} from '../lib/products';
+import { getProductPageData, getProductSources } from '../lib/products';
 import { getPapiraProductPageData } from '../lib/papira';
-import { getBlogPosts } from '../lib/blog';
 
 const siteUrl = 'https://onnellab.github.io';
 
 const absolute = (path: string) => new URL(path, siteUrl).toString();
-
-function summaryLines(text: string): string[] {
-  const blocks = renderBlocks(text);
-  const firstParagraph = blocks.find((block) => block.type === 'p')?.value as string | undefined;
-  const tasks = blocks.find((block) => block.type === 'ul')?.value as string[] | undefined;
-  return [
-    ...(firstParagraph ? [`- Summary: ${firstParagraph}`] : []),
-    ...(tasks ?? []).slice(0, 4).map((task) => `- Task: ${task}`)
-  ];
-}
-
-function blogArticleLines(): string[] {
-  return allSiteLocales.flatMap((locale) => {
-    const posts = getBlogPosts(locale);
-    return [
-      `### ${allLocaleDefinitions[locale].label}`,
-      '',
-      ...posts.flatMap((post) => [
-        `#### ${post.meta.title}`,
-        `- Summary: ${post.meta.description}`,
-        `- Article: ${absolute(post.href)}`,
-        ...(post.meta.relatedApps.length ? [`- Related apps: ${post.meta.relatedApps.join(', ')}`] : []),
-        ...(post.meta.tags.length ? [`- Tags: ${post.meta.tags.join(', ')}`] : []),
-        ''
-      ])
-    ];
-  });
-}
+const blogIndexPath = (locale: (typeof allSiteLocales)[number]) =>
+  locale === 'en' ? '/blog/' : `/blog/${allLocaleDefinitions[locale].pathSegment}/`;
 
 export function GET() {
   const productSources = getProductSources();
   const lines = [
     '# ONNELLAB',
     '',
-    'ONNELLAB is an independent software studio creating calm, focused apps for files, text, audio, media, and creative work.',
+    '> ONNELLAB is an independent software studio creating calm, focused apps for files, text, audio, media, and creative work.',
     '',
-    '## Website languages',
+    'Product pages and core site navigation are available in nine languages: English, Korean, Japanese, Simplified Chinese, Traditional Chinese, Brazilian Portuguese, German, French, and Spanish. Follow the localized indexes below when a language-specific page is needed.',
     '',
-    'ONNELLAB publishes its core site and product pages in nine languages: English, Korean, Japanese, Simplified Chinese, Traditional Chinese, Brazilian Portuguese, German, French, and Spanish.',
+    'Support: onnellab.app@gmail.com',
     '',
-    ...allSiteLocales.flatMap((locale) => {
-      const label = allLocaleDefinitions[locale].label;
-      return [
-        `### ${label}`,
-        `- Home: ${absolute(allRouteFor('home', locale))}`,
-        `- Apps: ${absolute(allRouteFor('apps', locale))}`,
-        `- About: ${absolute(allRouteFor('about', locale))}`,
-        `- Privacy hub: ${absolute(allRouteFor('privacy', locale))}`,
-        `- Terms: ${absolute(allRouteFor('terms', locale))}`,
-        `- Blog: ${absolute(locale === 'en' ? '/blog/' : `/blog/${allLocaleDefinitions[locale].pathSegment}/`)}`,
-        ''
-      ];
-    }),
     '## Apps with nine-language product pages',
     '',
-    ...productSources.flatMap((source) => [
-      `### ${source.meta.title}`,
-      '',
-      ...allSiteLocales.flatMap((locale) => {
-        const app = getProductPageData(source.slug, locale);
-        return [
-          `#### ${allLocaleDefinitions[locale].label}`,
-          `- Main task: ${landingSubtitle(app.copy)}`,
-          ...summaryLines(pageBodyDescription(app.copy)),
-          `- Product page: ${absolute(allProductRouteFor(source.slug, locale))}`,
-          `- Privacy policy: ${absolute(allAppPrivacyRouteFor(source.slug, locale))}`,
-          `- Platforms: ${app.meta.platforms.join(', ')}`,
-          ''
-        ];
-      })
-    ]),
+    ...productSources.map((source) => {
+      const app = getProductPageData(source.slug, 'en');
+      return `- [${source.meta.title}](${absolute(allProductRouteFor(source.slug, 'en'))}): ${app.seoDescription}`;
+    }),
+    `- [TagWeaver — Japanese](${absolute(allProductRouteFor('tagweaver', 'ja'))}): Representative Japanese localized product page.`,
+    `- [TagWeaver — Traditional Chinese](${absolute(allProductRouteFor('tagweaver', 'zh-Hant'))}): Representative Traditional Chinese localized product page.`,
+    '',
     '## Papira',
     '',
-    ...allSiteLocales.flatMap((locale) => {
-      const app = getPapiraProductPageData(locale);
-      return [
-        `### Papira (${allLocaleDefinitions[locale].label})`,
-        `- Main task: ${landingSubtitle(app.copy)}`,
-        ...summaryLines(pageBodyDescription(app.copy)),
-        `- Product page: ${absolute(allRouteFor('papira', locale))}`,
-        `- Privacy policy: ${absolute(allRouteFor('papiraPrivacy', locale))}`,
-        `- Platforms: ${app.meta.platforms.join(', ')}`,
-        ''
-      ];
-    }),
+    `- [Papira](${absolute(allRouteFor('papira', 'en'))}): ${getPapiraProductPageData('en').seoDescription}`,
+    `- [Papira — Spanish](${absolute(allRouteFor('papira', 'es'))}): Spanish localized product page.`,
+    `- [Papira — Traditional Chinese](${absolute(allRouteFor('papira', 'zh-Hant'))}): Traditional Chinese localized product page.`,
+    '',
+    '## Localized app indexes',
+    '',
+    ...allSiteLocales.map((locale) =>
+      `- [Apps — ${allLocaleDefinitions[locale].label}](${absolute(allRouteFor('apps', locale))}): Product index in ${allLocaleDefinitions[locale].label}.`
+    ),
+    '',
     '## Blog Articles',
     '',
-    ...blogArticleLines(),
-    '## Discovery',
+    ...allSiteLocales.map((locale) =>
+      `- [Guides — ${allLocaleDefinitions[locale].label}](${absolute(blogIndexPath(locale))}): ONNELLAB guides and answer-focused articles in ${allLocaleDefinitions[locale].label}.`
+    ),
     '',
-    `- RSS: ${siteUrl}/rss.xml`,
-    `- Sitemap: ${siteUrl}/sitemap.xml`,
+    '## Optional',
     '',
-    '## Contact',
-    '',
-    '- Support: onnellab.app@gmail.com'
+    `- [Home](${absolute(allRouteFor('home', 'en'))}): ONNELLAB studio home.`,
+    `- [About](${absolute(allRouteFor('about', 'en'))}): Studio background and product principles.`,
+    `- [Privacy](${absolute(allRouteFor('privacy', 'en'))}): Privacy hub for ONNELLAB apps.`,
+    `- [Terms](${absolute(allRouteFor('terms', 'en'))}): Site terms.`,
+    `- [Sitemap](${siteUrl}/sitemap.xml): Complete indexable URL inventory with language alternates.`,
+    `- [RSS](${siteUrl}/rss.xml): Latest ONNELLAB guide feed.`
   ];
 
   return new Response(`${lines.join('\n')}\n`, {
