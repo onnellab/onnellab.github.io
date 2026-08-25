@@ -30,63 +30,20 @@ jobs:
           python3 <<'PY'
           from pathlib import Path
 
-          def replace_once(path: str, old: str, new: str, label: str) -> None:
-              p = Path(path)
-              s = p.read_text()
-              count = s.count(old)
-              if count != 1:
-                  raise SystemExit(f'{label} marker count: {count}')
-              p.write_text(s.replace(old, new, 1))
+          def replace_between(source: str, start_marker: str, end_marker: str, replacement: str, label: str) -> str:
+              start = source.find(start_marker)
+              if start < 0:
+                  raise SystemExit(f'{label}: start marker missing')
+              end_start = source.find(end_marker, start)
+              if end_start < 0:
+                  raise SystemExit(f'{label}: end marker missing')
+              end = end_start + len(end_marker)
+              return source[:start] + replacement + source[end:]
 
-          replace_once(
-              'src/lib/products.ts',
-              r'''function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
-            const summary = pageDescription(copy).replace(/\s+/g, ' ').trim();
-            const platforms = copy.locale === 'en'
-              ? source.meta.platforms.join(' and ')
-              : source.meta.platforms.join('/');
-            const category = landingSubtitle(copy);
-            if (copy.locale === 'ko') {
-              return `${source.meta.title}는 ${platforms}용 ${category}입니다. ${summary}`;
-            }
-            if (copy.locale === 'ja') {
-              return `${source.meta.title}は${platforms}向けの${category}です。${summary}`;
-            }
-            if (copy.locale === 'zh-Hans') {
-              return `${source.meta.title} 是适用于 ${platforms} 的${category}。${summary}`;
-            }
-            if (copy.locale === 'zh-Hant') {
-              return `${source.meta.title} 是適用於 ${platforms} 的${category}。${summary}`;
-            }
-            if (copy.locale === 'pt-BR') {
-              return `${source.meta.title} é ${category} para ${platforms}. ${summary}`;
-            }
-            if (copy.locale === 'de') {
-              return `${source.meta.title} ist ${category} für ${platforms}. ${summary}`;
-            }
-            if (copy.locale === 'fr') {
-              return `${source.meta.title} est ${category} pour ${platforms}. ${summary}`;
-            }
-            if (copy.locale === 'es') {
-              return `${source.meta.title} es ${category} para ${platforms}. ${summary}`;
-            }
-            return `${source.meta.title} is ${indefiniteArticle(category)} ${category} for ${platforms}. ${summary}`;
-          }
-
-          function productSeoTitle(source: ProductSource, copy: ProductCopy): string {
-            const subtitle = landingSubtitle(copy).replace(/\s+/g, ' ').trim();
-            if (!subtitle || subtitle.toLowerCase() === source.meta.title.toLowerCase()) {
-              return source.meta.title;
-            }
-            return `${source.meta.title} - ${subtitle}`;
-          }
-
-          function indefiniteArticle(value: string): 'a' | 'an' {
-            if (/^MP3\b/.test(value)) return 'an';
-            return /^[aeiou]/i.test(value) ? 'an' : 'a';
-          }
-          ''',
-              r'''function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
+          # Replace only the description generator and remove its obsolete article helper.
+          p = Path('src/lib/products.ts')
+          s = p.read_text()
+          generator = r'''function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
             const summary = pageDescription(copy).replace(/\s+/g, ' ').trim();
             const platforms = copy.locale === 'en'
               ? source.meta.platforms.join(' and ')
@@ -126,54 +83,55 @@ jobs:
             return `${source.meta.title} — ${category}. Platforms: ${platforms}.${detail}`;
           }
 
-          function productSeoTitle(source: ProductSource, copy: ProductCopy): string {
-            const subtitle = landingSubtitle(copy).replace(/\s+/g, ' ').trim();
-            if (!subtitle || subtitle.toLowerCase() === source.meta.title.toLowerCase()) {
-              return source.meta.title;
-            }
-            return `${source.meta.title} - ${subtitle}`;
-          }
-          ''',
-              'products description'
+          '''
+          s = replace_between(
+              s,
+              'function seoPageDescription(source: ProductSource, copy: ProductCopy): string {',
+              'function productSeoTitle(source: ProductSource, copy: ProductCopy): string {',
+              generator + 'function productSeoTitle(source: ProductSource, copy: ProductCopy): string {',
+              'products description generator'
           )
+          if 'function indefiniteArticle(' in s:
+              s = replace_between(
+                  s,
+                  "function indefiniteArticle(value: string): 'a' | 'an' {",
+                  'export function landingSubtitle(copy: ProductCopy): string {',
+                  'export function landingSubtitle(copy: ProductCopy): string {',
+                  'obsolete article helper'
+              )
+          p.write_text(s)
 
-          replace_once(
-              'tests/product-contract.spec.ts',
-              "] as const;\n\n// Keep schema descriptive and verifiable: no commerce/review claims, only real application semantics.",
-              "] as const;\nconst metaPlatformMarkers = {\n  en: 'Platforms:',\n  ko: '지원 플랫폼:',\n  ja: '対応プラットフォーム:',\n  'zh-Hans': '支持平台：',\n  'zh-Hant': '支援平台：',\n  'pt-BR': 'Plataformas:',\n  de: 'Plattformen:',\n  fr: 'Plateformes :',\n  es: 'Plataformas:'\n} as const;\n\n// Keep schema descriptive and verifiable: no commerce/review claims, only real application semantics.",
-              'test locale map'
-          )
+          # Lock the normal-app description format while preserving Papira's bespoke good copy.
+          p = Path('tests/product-contract.spec.ts')
+          s = p.read_text()
+          if 'const metaPlatformMarkers =' not in s:
+              locale_start = s.index('const locales = [')
+              locale_end = s.index('] as const;', locale_start) + len('] as const;')
+              marker_map = "\nconst metaPlatformMarkers = {\n  en: 'Platforms:',\n  ko: '지원 플랫폼:',\n  ja: '対応プラットフォーム:',\n  'zh-Hans': '支持平台：',\n  'zh-Hant': '支援平台：',\n  'pt-BR': 'Plataformas:',\n  de: 'Plattformen:',\n  fr: 'Plateformes :',\n  es: 'Plataformas:'\n} as const;"
+              s = s[:locale_end] + marker_map + s[locale_end:]
 
-          replace_once(
-              'tests/product-contract.spec.ts',
-              "      await expect(page.locator('link[rel=\"describedby\"]')).toHaveAttribute('href', 'https://onnellab.github.io/llms.txt');\n",
-              "      await expect(page.locator('link[rel=\"describedby\"]')).toHaveAttribute('href', 'https://onnellab.github.io/llms.txt');\n\n      const metaDescription = await page.locator('meta[name=\"description\"]').getAttribute('content');\n      expect(metaDescription).toBeTruthy();\n      if (app !== 'papira') {\n        expect(metaDescription).toContain(' — ');\n        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);\n      }\n",
-              'test description contract'
-          )
+          if 'const metaDescription = await page.locator' not in s:
+              anchor = "      await expect(page.locator('link[rel=\"describedby\"]')).toHaveAttribute('href', 'https://onnellab.github.io/llms.txt');\n"
+              if s.count(anchor) != 1:
+                  raise SystemExit(f'product meta anchor count: {s.count(anchor)}')
+              addition = "\n      const metaDescription = await page.locator('meta[name=\"description\"]').getAttribute('content');\n      expect(metaDescription).toBeTruthy();\n      if (app !== 'papira') {\n        expect(metaDescription).toContain(' — ');\n        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);\n      }\n"
+              s = s.replace(anchor, anchor + addition, 1)
 
-          replace_once(
-              'tests/product-contract.spec.ts',
-              "  const llmsResponse = await request.get('/llms.txt');\n",
-              "  const sitemapResponse = await request.get('/sitemap.xml');\n  expect(sitemapResponse.ok()).toBe(true);\n  const sitemap = await sitemapResponse.text();\n  expect(sitemap).not.toContain('<lastmod>');\n\n  const llmsResponse = await request.get('/llms.txt');\n",
-              'test sitemap policy'
-          )
+          if "expect(sitemap).not.toContain('<lastmod>');" not in s:
+              anchor = "  const llmsResponse = await request.get('/llms.txt');\n"
+              if s.count(anchor) != 1:
+                  raise SystemExit(f'sitemap policy anchor count: {s.count(anchor)}')
+              addition = "  const sitemapResponse = await request.get('/sitemap.xml');\n  expect(sitemapResponse.ok()).toBe(true);\n  const sitemap = await sitemapResponse.text();\n  expect(sitemap).not.toContain('<lastmod>');\n\n"
+              s = s.replace(anchor, addition + anchor, 1)
+          p.write_text(s)
 
-          replace_once(
-              'tests/papira-i18n.spec.ts',
-              '''    for (const activeSource of [
-              'src/components/HomePage.astro',
-              'src/components/AppsIndex.astro',
-              'src/components/AboutPage.astro',
-              'src/components/PrivacyIndex.astro',
-              'src/components/CorePage.astro',
-              'src/lib/papira.ts',
-              'src/components/ProductTemplate.astro'
-            ]) {
-              expect(sitemapSource).toContain(activeSource);
-            }
-            expect(sitemapSource).toContain('latestLastmod(sourceLastmod, [corePageSources[page]');
-            expect(sitemapSource).not.toContain('commonLastmod');
-          ''',
+          # Align Papira's old sitemap tests with the authoritative no-lastmod policy.
+          p = Path('tests/papira-i18n.spec.ts')
+          s = p.read_text()
+          s = replace_between(
+              s,
+              '    for (const activeSource of [',
+              "    expect(sitemapSource).not.toContain('commonLastmod');\n",
               '''    expect(sitemapSource).toContain("allLocalizedEntries('papira')");
             expect(sitemapSource).toContain('...productEntries()');
             expect(sitemapSource).toContain("{ lang: 'x-default', path: pathFor('en') }");
@@ -182,34 +140,16 @@ jobs:
             expect(sitemapSource).not.toContain('latestLastmod');
             expect(sitemapSource).not.toContain('corePageSources');
           ''',
-              'papira sitemap source contract'
+              'Papira sitemap source contract'
           )
-
-          replace_once(
-              'tests/papira-i18n.spec.ts',
-              '''
-            const papiraSourceFiles = [
-              'src/lib/papira.ts',
-              'src/components/ProductTemplate.astro'
-            ];
-            const expectedLastmod = papiraSourceFiles
-              .map((source) => fs.statSync(path.resolve(process.cwd(), source)).mtime)
-              .sort((left, right) => left.getTime() - right.getTime())
-              .at(-1)
-              ?.toISOString()
-              .slice(0, 10);
-            expect(expectedLastmod).toBeTruthy();
-            for (const locale of locales) {
-              const productUrl = `https://onnellab.github.io/apps/papira/${locale.path}`;
-              const entry = sitemap.match(new RegExp(`<loc>${productUrl}</loc>\\s*<lastmod>([^<]+)</lastmod>`));
-              expect(entry?.[1]).toBe(expectedLastmod);
-            }
-          ''',
-              '''
-            expect(sitemap).not.toContain('<lastmod>');
-          ''',
-              'papira sitemap lastmod contract'
+          s = replace_between(
+              s,
+              '    const papiraSourceFiles = [',
+              '      expect(entry?.[1]).toBe(expectedLastmod);\n    }\n',
+              "    expect(sitemap).not.toContain('<lastmod>');\n",
+              'Papira sitemap lastmod contract'
           )
+          p.write_text(s)
           PY
 
           npm ci
