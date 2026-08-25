@@ -83,6 +83,16 @@ export function routeFor(page: LocalizedPage, locale: SiteLocale): string {
   return `${basePath}${segment}/`;
 }
 
+function routeForAnyLocale(page: LocalizedPage, locale: PapiraPrivacyLocale): string {
+  if ((siteLocales as readonly string[]).includes(locale)) {
+    return routeFor(page, locale as SiteLocale);
+  }
+  const basePath = basePaths[page];
+  const segment = papiraPrivacyLocaleDefinitions[locale].pathSegment;
+  if (page === 'home') return `/${segment}/`;
+  return `${basePath}${segment}/`;
+}
+
 export function papiraPrivacyRouteFor(locale: PapiraPrivacyLocale): string {
   const segment = papiraPrivacyLocaleDefinitions[locale].pathSegment;
   return segment ? `${basePaths.papiraPrivacy}${segment}/` : basePaths.papiraPrivacy;
@@ -90,11 +100,11 @@ export function papiraPrivacyRouteFor(locale: PapiraPrivacyLocale): string {
 
 export function localeAlternates(
   page: LocalizedPage,
-  supported: readonly SiteLocale[] = siteLocales
+  supported: readonly PapiraPrivacyLocale[] = papiraPrivacyLocales
 ): Array<{ lang: string; path: string }> {
   const alternates = supported.map((locale) => ({
-    lang: localeDefinitions[locale].hreflang,
-    path: routeFor(page, locale)
+    lang: papiraPrivacyLocaleDefinitions[locale].hreflang,
+    path: routeForAnyLocale(page, locale)
   }));
   if (supported.includes('en')) {
     alternates.push({ lang: 'x-default', path: routeFor(page, 'en') });
@@ -119,10 +129,13 @@ export function productRouteFor(slug: string, locale: SiteLocale): string {
 
 export function productLocaleAlternates(slug: string) {
   return [
-    ...siteLocales.map((locale) => ({
-      lang: localeDefinitions[locale].hreflang,
-      path: productRouteFor(slug, locale)
-    })),
+    ...papiraPrivacyLocales.map((locale) => {
+      const definition = papiraPrivacyLocaleDefinitions[locale];
+      return {
+        lang: definition.hreflang,
+        path: definition.pathSegment ? `/apps/${slug}/${definition.pathSegment}/` : `/apps/${slug}/`
+      };
+    }),
     { lang: 'x-default', path: productRouteFor(slug, 'en') }
   ];
 }
