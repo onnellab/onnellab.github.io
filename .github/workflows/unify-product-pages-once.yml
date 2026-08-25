@@ -9,7 +9,6 @@ permissions:
 
 jobs:
   migrate:
-    if: github.actor != 'github-actions[bot]' && github.event.head_commit.message == 'chore: execute unified product architecture migration'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
