@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogLocaleMenu from './BlogLocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
+import { blogIndexAlternates } from '../lib/blog-i18n';
 import { getBlogPosts, type BlogPost } from '../lib/blog';
 import type { Locale } from '../lib/products';
 
@@ -19,7 +21,7 @@ const copy = isKo
       switchHref: '/blog/',
       switchLabel: 'English',
       appsHref: '/apps/ko/',
-      appsLabel: 'Apps',
+      appsLabel: '앱',
       eyebrow: 'ONNELLAB Blog',
       heading: '워크플로 가이드',
       intro: '읽기, 음악, 생산성, 미디어 작업을 차분하게 정리하는 실전 글입니다.',
@@ -133,18 +135,14 @@ const blogJsonLd = [
   canonicalPath={copy.canonicalPath}
   lang={locale}
   jsonLd={blogJsonLd}
-  alternates={[
-    { lang: 'en', path: '/blog/' },
-    { lang: 'ko', path: '/blog/ko/' },
-    { lang: 'x-default', path: '/blog/' }
-  ]}
+  alternates={blogIndexAlternates()}
 >
   <main class="blog-shell">
     <nav class="top-nav site-header" aria-label="Blog navigation">
       <a class="brand" href={isKo ? '/ko/' : '/'}>ONNELLAB</a>
       <div class="nav-actions">
         <a href={copy.appsHref}>{copy.appsLabel}</a>
-        <a class="language site-language-control" href={copy.switchHref} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={isKo ? 'English' : '한국어'}>{copy.switchLabel}</a>
+        <BlogLocaleMenu locale={locale} />
       </div>
     </nav>
 

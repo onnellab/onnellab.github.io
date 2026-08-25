@@ -74,7 +74,11 @@ const gaScript = gaMeasurementId
           ko: '/ko/',
           ja: '/ja/',
           'zh-Hans': '/zh-hans/',
-          'zh-Hant': '/zh-hant/'
+          'zh-Hant': '/zh-hant/',
+          'pt-BR': '/pt-br/',
+          de: '/de/',
+          fr: '/fr/',
+          es: '/es/'
         };
         let preferredLocale = null;
         try {
@@ -110,6 +114,10 @@ const gaScript = gaMeasurementId
               normalized === 'zh-hant' ||
               normalized.startsWith('zh-hant-')
             ) preferredLocale = 'zh-Hant';
+            else if (normalized === 'pt' || normalized.startsWith('pt-')) preferredLocale = 'pt-BR';
+            else if (normalized === 'de' || normalized.startsWith('de-')) preferredLocale = 'de';
+            else if (normalized === 'fr' || normalized.startsWith('fr-')) preferredLocale = 'fr';
+            else if (normalized === 'es' || normalized.startsWith('es-')) preferredLocale = 'es';
             else if (normalized === 'en' || normalized.startsWith('en-')) preferredLocale = 'en';
             if (preferredLocale) break;
           }

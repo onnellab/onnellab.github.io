@@ -129,9 +129,10 @@ const localizedGooglePlayUrl = (url: string | undefined, locale: ProductPageData
 };
 const localizedPrivacyUrl = (url: string, locale: ProductPageData['locale']) => {
   const privacyUrl = new URL(url, Astro.site);
-  if (locale !== 'ko') return privacyUrl.toString();
-  if (!/\/ko\/?$/.test(privacyUrl.pathname)) {
-    privacyUrl.pathname = privacyUrl.pathname.replace(/\/?$/, '/ko/');
+  const segment = { en: '', ko: 'ko', ja: 'ja', 'zh-Hans': 'zh-hans', 'zh-Hant': 'zh-hant' }[locale];
+  if (!segment) return privacyUrl.toString();
+  if (!privacyUrl.pathname.endsWith(`/${segment}/`)) {
+    privacyUrl.pathname = privacyUrl.pathname.replace(/\/?$/, `/${segment}/`);
   }
   return privacyUrl.toString();
 };

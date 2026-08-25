@@ -91,7 +91,6 @@ const copies: Record<SiteLocale, PrivacyCopy> = {
       '本サイトはONNELLABのコンテンツと製品情報を提供します。外部投稿APIは承認済みのONNELLABコンテンツとONNELLAB管理アカウントにのみ使用します。他の利用者の非公開ソーシャルデータを販売または分析しません。',
     contactTitle: 'お問い合わせ',
     contactBody: 'プライバシーに関するお問い合わせは onnellab.app@gmail.com までお送りください。',
-    fallbackNotice: 'Papiraのポリシーは日本語で読めます。ほかのアプリのポリシーは現在、英語または韓国語で提供しています。'
   },
   'zh-Hans': {
     title: 'ONNELLAB 隐私政策',
@@ -111,7 +110,6 @@ const copies: Record<SiteLocale, PrivacyCopy> = {
       '本网站提供 ONNELLAB 原创内容与产品信息。外部发布 API 仅用于经批准的 ONNELLAB 内容和由 ONNELLAB 管理的账号。我们不会出售或分析其他用户的私密社交数据。',
     contactTitle: '联系',
     contactBody: '隐私相关问题请发送至 onnellab.app@gmail.com。',
-    fallbackNotice: 'Papira 隐私政策提供简体中文。其他应用政策目前提供英文或韩文。'
   },
   'zh-Hant': {
     title: 'ONNELLAB 隱私權政策',
@@ -131,7 +129,6 @@ const copies: Record<SiteLocale, PrivacyCopy> = {
       '本網站提供 ONNELLAB 原創內容與產品資訊。外部發布 API 僅用於經核准的 ONNELLAB 內容和由 ONNELLAB 管理的帳號。我們不會出售或分析其他使用者的私人社群資料。',
     contactTitle: '聯絡',
     contactBody: '隱私相關問題請寄至 onnellab.app@gmail.com。',
-    fallbackNotice: 'Papira 隱私權政策提供繁體中文。其他應用程式政策目前提供英文或韓文。'
   }
 };
 
@@ -151,8 +148,10 @@ const privacyUpdatedAtByTitle: Record<string, string> = {
   VaultXT: '2026-03-11'
 };
 const existingApps = getProductIndexItems(contentLocale(locale));
-const existingPolicyHref = (href: string) =>
-  locale === 'ko' ? href.replace(/\/?$/, '/ko/') : href;
+const existingPolicyHref = (href: string) => {
+  const segment = localeDefinitions[locale].pathSegment;
+  return segment ? href.replace(/\/?$/, `/${segment}/`) : href;
+};
 const policies = [
   ...existingApps.map((app) => ({
     title: app.title,

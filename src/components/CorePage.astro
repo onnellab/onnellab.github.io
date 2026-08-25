@@ -127,7 +127,15 @@ const { locale } = Astro.props;
 const copy = copies[locale];
 const definition = localeDefinitions[locale];
 const canonicalPath = routeFor('terms', locale);
-const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
+const blogHref = locale === 'ko'
+  ? '/blog/ko/'
+  : locale === 'ja'
+    ? '/blog/ja/'
+    : locale === 'zh-Hans'
+      ? '/blog/zh-hans/'
+      : locale === 'zh-Hant'
+        ? '/blog/zh-hant/'
+        : '/blog/';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',

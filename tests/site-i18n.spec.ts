@@ -47,8 +47,8 @@ const locales = [
     navLabel: 'ナビゲーション',
     platformsLabel: '対応プラットフォーム',
     featuredIconAlt: 'TagWeaverアプリアイコン',
-    blogHref: '/blog/',
-    blogText: 'ブログ · EN',
+    blogHref: '/blog/ja/',
+    blogText: 'ブログ',
     languageMenuLabel: '言語: 日本語',
     currentLanguage: '日本語'
   },
@@ -64,8 +64,8 @@ const locales = [
     navLabel: '导航',
     platformsLabel: '支持平台',
     featuredIconAlt: 'TagWeaver 应用图标',
-    blogHref: '/blog/',
-    blogText: '博客 · EN',
+    blogHref: '/blog/zh-hans/',
+    blogText: '博客',
     languageMenuLabel: '语言：简体中文',
     currentLanguage: '简体中文'
   },
@@ -81,8 +81,8 @@ const locales = [
     navLabel: '導覽',
     platformsLabel: '支援平台',
     featuredIconAlt: 'TagWeaver 應用程式圖示',
-    blogHref: '/blog/',
-    blogText: '部落格 · EN',
+    blogHref: '/blog/zh-hant/',
+    blogText: '部落格',
     languageMenuLabel: '語言：繁體中文',
     currentLanguage: '繁體中文'
   }
@@ -133,7 +133,7 @@ async function setBrowserLocales(
   );
 }
 
-test.describe('five-language core site', () => {
+test.describe('nine-language site core regression', () => {
   test('home pages publish shared large social preview metadata', async ({ page }) => {
     for (const locale of locales) {
       const path = locale.segment ? `/${locale.segment}` : '/';
@@ -226,7 +226,7 @@ test.describe('five-language core site', () => {
           .find((entry) => entry?.['@type'] === 'WebSite')
       );
       expect(websiteSchema?.description).toBe(locale.homeDescription);
-      await expect(page.locator('.locale-menu-panel a')).toHaveCount(5);
+      await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
         `https://onnellab.github.io${path}`
@@ -247,7 +247,7 @@ test.describe('five-language core site', () => {
           'href',
           `https://onnellab.github.io${path}`
         );
-        await expect(page.locator('.locale-menu-panel a')).toHaveCount(5);
+        await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
       });
     }
   }
@@ -260,7 +260,10 @@ test.describe('five-language core site', () => {
     { browserLocale: 'zh-TW', expectedPath: '/zh-hant/' },
     { browserLocale: 'zh-Hant', expectedPath: '/zh-hant/' },
     { browserLocale: 'en-US', expectedPath: '/' },
-    { browserLocale: 'fr-FR', expectedPath: '/' }
+    { browserLocale: 'pt-BR', expectedPath: '/pt-br/' },
+    { browserLocale: 'de-DE', expectedPath: '/de/' },
+    { browserLocale: 'fr-FR', expectedPath: '/fr/' },
+    { browserLocale: 'es-ES', expectedPath: '/es/' }
   ]) {
     test(`root follows system locale ${browserLocale}`, async ({ page }) => {
       await setBrowserLocales(page, [browserLocale]);
@@ -270,13 +273,13 @@ test.describe('five-language core site', () => {
   }
 
   test('checks navigator languages in order and skips unsupported locales', async ({ page }) => {
-    await setBrowserLocales(page, ['fr-FR', 'ja-JP'], 'ko-KR');
+    await setBrowserLocales(page, ['it-IT', 'ja-JP'], 'ko-KR');
     await page.goto('/');
     await expect.poll(() => new URL(page.url()).pathname).toBe('/ja/');
   });
 
   test('falls back from navigator languages to navigator language', async ({ page }) => {
-    await setBrowserLocales(page, ['fr-FR'], 'ko-KR');
+    await setBrowserLocales(page, ['it-IT'], 'ko-KR');
     await page.goto('/');
     await expect.poll(() => new URL(page.url()).pathname).toBe('/ko/');
   });
@@ -301,7 +304,7 @@ test.describe('five-language core site', () => {
 
   test('invalid stored locale falls back to the system locale', async ({ page }) => {
     await setBrowserLocales(page, ['ko-KR']);
-    await page.addInitScript(() => localStorage.setItem('onnellab.locale', 'fr'));
+    await page.addInitScript(() => localStorage.setItem('onnellab.locale', 'it'));
     await page.goto('/');
     await expect.poll(() => new URL(page.url()).pathname).toBe('/ko/');
   });
@@ -357,7 +360,7 @@ test.describe('five-language core site', () => {
     expect(await page.evaluate(() => localStorage.getItem('onnellab.locale'))).toBe('ja');
   });
 
-  test('every app detail supports localized navigation in five languages', async ({ page }) => {
+  test('every core app detail keeps content while exposing nine-language navigation', async ({ page }) => {
     const cases = [
       { segment: '', lang: 'en', allApps: 'All apps', subtitle: 'Offline MP3/FLAC Tag Editor' },
       { segment: 'ko/', lang: 'ko', allApps: '모든 앱', subtitle: 'MP3/FLAC 오프라인 태그 편집기' },
@@ -372,7 +375,7 @@ test.describe('five-language core site', () => {
       await expect(page.locator('html')).toHaveAttribute('lang', item.lang);
       await expect(page.locator('.apps-link')).toHaveText(item.allApps);
       await expect(page.locator('.apps-link')).toHaveAttribute('href', `/apps/${item.segment}`);
-      await expect(page.locator('.locale-menu-panel a')).toHaveCount(5);
+      await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
       await expect(page.locator('.intro')).toHaveText(item.subtitle);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
@@ -442,15 +445,15 @@ test.describe('five-language core site', () => {
         await page.goto(path);
         await expect(page.locator('html')).toHaveAttribute('lang', htmlLang[segment as keyof typeof htmlLang]);
         await expect(page.locator('.intro')).toHaveText(subtitle);
-        await expect(page.locator('.locale-menu-panel a')).toHaveCount(5);
-        await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(6);
+        await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
+        await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
         await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
           'href',
           `https://onnellab.github.io${path}`
         );
         await expect(page.locator('.support-links a').first()).toHaveAttribute(
           'href',
-          `https://onnellab.github.io/privacy/${slug}/`
+          `https://onnellab.github.io/privacy/${slug}/${segment}/`
         );
         const screenshot = page.locator('.screenshot-link img').first();
         if (await screenshot.count()) {

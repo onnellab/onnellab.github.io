@@ -95,7 +95,7 @@ const copies: Record<SiteLocale, HomeCopy> = {
     navLabel: 'ナビゲーション',
     platformsLabel: '対応プラットフォーム',
     featuredIconAlt: 'TagWeaverアプリアイコン',
-    blogVisibleLabel: 'ブログ · EN',
+    blogVisibleLabel: 'ブログ',
     seoTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',
     description: 'ONNELLABは、ファイルやメディアの管理、創作、日々の作業に役立つ、目的の明確なアプリをつくります。',
     eyebrow: 'インディーソフトウェアスタジオ',
@@ -119,7 +119,7 @@ const copies: Record<SiteLocale, HomeCopy> = {
     navLabel: '导航',
     platformsLabel: '支持平台',
     featuredIconAlt: 'TagWeaver 应用图标',
-    blogVisibleLabel: '博客 · EN',
+    blogVisibleLabel: '博客',
     seoTitle: 'ONNELLAB - 专注于文件与创作的应用',
     description: 'ONNELLAB 打造用途明确的应用，帮助你管理文件与媒体，完成创作和日常任务。',
     eyebrow: '独立软件工作室',
@@ -143,7 +143,7 @@ const copies: Record<SiteLocale, HomeCopy> = {
     navLabel: '導覽',
     platformsLabel: '支援平台',
     featuredIconAlt: 'TagWeaver 應用程式圖示',
-    blogVisibleLabel: '部落格 · EN',
+    blogVisibleLabel: '部落格',
     seoTitle: 'ONNELLAB - 專注於檔案與創作的應用程式',
     description: 'ONNELLAB 打造用途明確的應用程式，幫助你管理檔案與媒體，完成創作與日常工作。',
     eyebrow: '獨立軟體工作室',
@@ -189,7 +189,15 @@ const appCardStyle = (app: ProductIndexItem) =>
 const homeIconPath = (slug: string, size: 96 | 192) => `/home-assets/app-icons/${slug}-${size}.webp`;
 const homeIconSrcset = (slug: string) =>
   `${homeIconPath(slug, 96)} 96w, ${homeIconPath(slug, 192)} 192w`;
-const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
+const blogHref = locale === 'ko'
+  ? '/blog/ko/'
+  : locale === 'ja'
+    ? '/blog/ja/'
+    : locale === 'zh-Hans'
+      ? '/blog/zh-hans/'
+      : locale === 'zh-Hant'
+        ? '/blog/zh-hant/'
+        : '/blog/';
 const jsonLd = [
   {
     '@context': 'https://schema.org',
@@ -202,7 +210,7 @@ const jsonLd = [
       '@type': 'ContactPoint',
       email: 'onnellab.app@gmail.com',
       contactType: 'customer support',
-      availableLanguage: ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant']
+      availableLanguage: ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de', 'fr', 'es']
     }
   },
   {

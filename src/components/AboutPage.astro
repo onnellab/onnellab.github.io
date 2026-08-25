@@ -142,7 +142,15 @@ const { locale } = Astro.props;
 const copy = copies[locale];
 const definition = localeDefinitions[locale];
 const canonicalPath = routeFor('about', locale);
-const blogHref = locale === 'ko' ? '/blog/ko/' : '/blog/';
+const blogHref = locale === 'ko'
+  ? '/blog/ko/'
+  : locale === 'ja'
+    ? '/blog/ja/'
+    : locale === 'zh-Hans'
+      ? '/blog/zh-hans/'
+      : locale === 'zh-Hant'
+        ? '/blog/zh-hant/'
+        : '/blog/';
 const timelineItems = [
   { date: '2026-03-30', month: '2026.03', app: 'TagWeaver', en: 'MP3/FLAC tag editor', ko: 'MP3·FLAC 태그 편집기', ja: 'MP3・FLACタグ編集', hans: 'MP3/FLAC 标签编辑器', hant: 'MP3/FLAC 標籤編輯器' },
   { date: '2026-04-02', month: '2026.04', app: 'Quivra', en: 'media converter', ko: '미디어 변환기', ja: 'メディア変換ツール', hans: '媒体转换工具', hant: '媒體轉換工具' },
