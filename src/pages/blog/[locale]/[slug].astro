@@ -1,0 +1,17 @@
+---
+import ExtendedBlogArticle from '../../../components/ExtendedBlogArticle.astro';
+import { translatedPrivacyLocales, type TranslatedPrivacyLocale } from '../../../lib/app-privacy-localizations';
+import { allLocaleDefinitions } from '../../../lib/extended-site-i18n';
+import { getExtendedBlogPosts, type ExtendedBlogPost } from '../../../lib/extended-blog';
+
+export function getStaticPaths() {
+  return translatedPrivacyLocales.flatMap((locale) =>
+    getExtendedBlogPosts(locale).map((post) => ({
+      params: { locale: allLocaleDefinitions[locale].pathSegment, slug: post.slug },
+      props: { post }
+    }))
+  );
+}
+const { post } = Astro.props as { post: ExtendedBlogPost };
+---
+<ExtendedBlogArticle post={post} />
