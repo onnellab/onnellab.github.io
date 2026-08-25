@@ -58,6 +58,22 @@ const localizedStatus =
       ? labels.preparing
       : meta.status;
 
+const schemaClassifications: Record<string, { applicationCategory: string; applicationSubCategory: string }> = {
+  aligna: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'File Renaming Utility' },
+  clipnest: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Clipboard Utility' },
+  melivra: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Offline Music Player' },
+  meriq: { applicationCategory: 'DesignApplication', applicationSubCategory: 'Merchandise Production Tool' },
+  papira: { applicationCategory: 'DesignApplication', applicationSubCategory: 'EPUB Authoring Tool' },
+  quivra: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Media Conversion Utility' },
+  segra: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Audio Editing Utility' },
+  tagweaver: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Audio Metadata Editor' },
+  vaultxt: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Large Text File Editor' }
+};
+const schemaClassification = schemaClassifications[data.source.slug];
+if (!schemaClassification) {
+  throw new Error(`Missing SoftwareApplication schema classification: ${data.source.slug}`);
+}
+
 const bodyBlocks = renderBlocks(pageBodyDescription(copy));
 const heroIntro = landingSubtitle(copy);
 const firstFeatureList = (value: string | undefined): string[] | undefined => {
@@ -144,8 +160,8 @@ const jsonLd = {
   url: canonicalUrl.toString(),
   mainEntityOfPage: canonicalUrl.toString(),
   operatingSystem: meta.platforms.join(', '),
-  applicationCategory: 'UtilitiesApplication',
-  applicationSubCategory: copy.android.name || copy.ios.name,
+  applicationCategory: schemaClassification.applicationCategory,
+  applicationSubCategory: schemaClassification.applicationSubCategory,
   description: data.seoDescription,
   inLanguage: allLocaleDefinitions[data.locale].hreflang,
   image: iconUrl.toString(),
