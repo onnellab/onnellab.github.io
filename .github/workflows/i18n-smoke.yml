@@ -1,33 +1,25 @@
-name: Verify five-language site
+name: Verify nine-language site
 
 on:
   push:
     branches: [main]
     paths:
       - '.github/workflows/i18n-smoke.yml'
-      - 'src/components/AboutPage.astro'
-      - 'src/components/AppsIndex.astro'
-      - 'src/components/CorePage.astro'
-      - 'src/components/HomePage.astro'
-      - 'src/components/LocaleMenu.astro'
-      - 'src/components/PapiraPrivacyPage.astro'
-      - 'src/components/PrivacyIndex.astro'
-      - 'src/components/ProductTemplate.astro'
-      - 'src/layouts/BaseLayout.astro'
-      - 'src/lib/papira.ts'
-      - 'src/lib/site-i18n.ts'
-      - 'src/pages/apps/**'
-      - 'src/pages/about/**'
-      - 'src/pages/privacy/**'
-      - 'src/pages/terms/**'
-      - 'src/pages/ja/**'
-      - 'src/pages/zh-hans/**'
-      - 'src/pages/zh-hant/**'
-      - 'src/pages/index.astro'
-      - 'src/pages/sitemap.xml.ts'
-      - 'tests/papira-i18n.spec.ts'
-      - 'tests/site-i18n.spec.ts'
-      - 'tests/site-visual.spec.ts'
+      - 'src/**'
+      - 'public/privacy/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'playwright.config.ts'
+  pull_request:
+    paths:
+      - '.github/workflows/i18n-smoke.yml'
+      - 'src/**'
+      - 'public/privacy/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'playwright.config.ts'
   workflow_dispatch:
 
 permissions:
@@ -61,10 +53,11 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Run desktop route and regression tests
+      - name: Run nine-language desktop route and regression tests
         run: >-
           npx playwright test
           tests/site-i18n.spec.ts
+          tests/extended-i18n.spec.ts
           tests/papira-i18n.spec.ts
           tests/site-visual.spec.ts
           --project=desktop
@@ -78,10 +71,10 @@ jobs:
         run: |
           if [ "$JOB_RESULT" = "success" ]; then
             state=success
-            description="Five-language desktop regression tests passed"
+            description="Nine-language desktop regression tests passed"
           else
             state=failure
-            description="Five-language desktop regression tests failed"
+            description="Nine-language desktop regression tests failed"
           fi
 
           gh api \
