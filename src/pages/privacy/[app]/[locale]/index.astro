@@ -1,0 +1,26 @@
+---
+import LocalizedAppPrivacyPage from '../../../../components/LocalizedAppPrivacyPage.astro';
+import {
+  privacyAppSlugs,
+  translatedPrivacyLocales,
+  type PrivacyAppSlug,
+  type TranslatedPrivacyLocale
+} from '../../../../lib/app-privacy-localizations';
+import { allLocaleDefinitions } from '../../../../lib/extended-site-i18n';
+
+export function getStaticPaths() {
+  return privacyAppSlugs.flatMap((app) =>
+    translatedPrivacyLocales.map((locale) => ({
+      params: { app, locale: allLocaleDefinitions[locale].pathSegment },
+      props: { app, locale }
+    }))
+  );
+}
+
+const { app, locale } = Astro.props as {
+  app: PrivacyAppSlug;
+  locale: TranslatedPrivacyLocale;
+};
+---
+
+<LocalizedAppPrivacyPage slug={app} locale={locale} />
