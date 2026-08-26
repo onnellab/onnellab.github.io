@@ -78,12 +78,6 @@ for (const app of apps) {
         await expect(page.locator('.download-band')).toHaveAttribute('aria-label', 'Baixar');
         await expect(page.locator('.download-band > .eyebrow')).toHaveText('Baixar');
       }
-      if (locale.code === 'de') {
-        const storeActions = page.locator('.download-band .actions.compact');
-        if (await storeActions.count()) {
-          await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');
-        }
-      }
       await expect(page.locator('.site-footer')).toHaveCount(1);
       await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
       await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
@@ -142,6 +136,14 @@ for (const app of apps) {
     }
   });
 }
+
+test('German store actions require the localized App-Stores label on a released app', async ({ page }) => {
+  await page.goto(routeFor('tagweaver', 'de'));
+  const storeActions = page.locator('.download-band .actions.compact');
+  await expect(storeActions).toHaveCount(1);
+  await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');
+  expect(await storeActions.locator('a[data-store-link]').count()).toBeGreaterThan(0);
+});
 
 const papiraExtendedScope = {
   'pt-BR': [/capa/i, /capítulo/i, /sumário/i, /projeto/i],
