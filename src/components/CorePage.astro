@@ -20,6 +20,7 @@ type TermsCopy = {
     about: string;
     blog: string;
   };
+  navLabel: string;
   seoTitle: string;
   description: string;
   eyebrow: string;
@@ -33,6 +34,7 @@ type TermsCopy = {
 const copies: Record<SiteLocale, TermsCopy> = {
   en: {
     nav: { apps: 'Apps', about: 'About', blog: 'Blog' },
+    navLabel: 'Navigation',
     seoTitle: 'ONNELLAB Terms of Use',
     description: 'General terms for ONNELLAB apps and websites.',
     eyebrow: 'Legal',
@@ -51,6 +53,7 @@ const copies: Record<SiteLocale, TermsCopy> = {
   },
   ko: {
     nav: { apps: '앱', about: '소개', blog: '블로그' },
+    navLabel: '탐색',
     seoTitle: 'ONNELLAB 이용약관',
     description: 'ONNELLAB 앱과 웹사이트의 일반 이용약관이에요.',
     eyebrow: '법적 안내',
@@ -69,6 +72,7 @@ const copies: Record<SiteLocale, TermsCopy> = {
   },
   ja: {
     nav: { apps: 'アプリ', about: 'ONNELLABについて', blog: 'ブログ' },
+    navLabel: 'ナビゲーション',
     seoTitle: 'ONNELLAB 利用規約',
     description: 'ONNELLABアプリとウェブサイトの一般利用規約です。',
     eyebrow: '法的情報',
@@ -87,6 +91,7 @@ const copies: Record<SiteLocale, TermsCopy> = {
   },
   'zh-Hans': {
     nav: { apps: '应用', about: '关于', blog: '博客' },
+    navLabel: '导航',
     seoTitle: 'ONNELLAB 使用条款',
     description: '适用于 ONNELLAB 应用与网站的一般使用条款。',
     eyebrow: '法律信息',
@@ -105,6 +110,7 @@ const copies: Record<SiteLocale, TermsCopy> = {
   },
   'zh-Hant': {
     nav: { apps: '應用程式', about: '關於', blog: '部落格' },
+    navLabel: '導覽',
     seoTitle: 'ONNELLAB 使用條款',
     description: '適用於 ONNELLAB 應用程式與網站的一般使用條款。',
     eyebrow: '法律資訊',
@@ -155,7 +161,7 @@ const jsonLd = {
   alternates={localeAlternates('terms')}
 >
   <main class="site-shell" data-core-page="terms">
-    <nav class="top-nav" aria-label="Navigation">
+    <nav class="top-nav" aria-label={copy.navLabel}>
       <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
       <div class="nav-links">
         <a href={routeFor('apps', locale)}>{copy.nav.apps}</a>
