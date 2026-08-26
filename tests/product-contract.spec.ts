@@ -74,7 +74,17 @@ for (const app of apps) {
       await expect(page.locator('.content-band')).toHaveCount(1);
       await expect(page.locator('.faq-band')).toHaveCount(1);
       await expect(page.locator('.download-band')).toHaveCount(1);
-      await expect(page.locator('.site-footer')).toHaveCount(1);
+    if (locale.code === 'pt-BR') {
+      await expect(page.locator('.download-band')).toHaveAttribute('aria-label', 'Baixar');
+      await expect(page.locator('.download-band > .eyebrow')).toHaveText('Baixar');
+    }
+    if (locale.code === 'de') {
+      const storeActions = page.locator('.download-band .actions.compact');
+      if (await storeActions.count()) {
+        await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');
+      }
+    }
+    await expect(page.locator('.site-footer')).toHaveCount(1);
       await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
       await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical(route));
