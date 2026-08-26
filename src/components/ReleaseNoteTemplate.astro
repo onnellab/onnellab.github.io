@@ -1,8 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteFooter from './SiteFooter.astro';
+import ReleaseNoteLocaleMenu from './ReleaseNoteLocaleMenu.astro';
 import { getProductPageData } from '../lib/products';
-import { releaseNoteKoPath, releaseNotePath, type ReleaseNote } from '../lib/releaseNotes';
+import {
+  releaseNoteKoPath,
+  releaseNotePath,
+  type ReleaseNote
+} from '../lib/releaseNotes';
+import {
+  releaseNoteLocalePath,
+  type ReleaseLocale
+} from '../lib/extended-release-notes';
+import {
+  allLocaleDefinitions,
+  allSiteLocales,
+  type AllSiteLocale
+} from '../lib/extended-site-i18n';
 
 type Props = {
   note: ReleaseNote;
@@ -13,14 +27,12 @@ const { note, locale } = Astro.props;
 const isKo = locale === 'ko';
 const product = getProductPageData(note.appSlug, locale);
 const canonicalPath = isKo ? releaseNoteKoPath(note) : releaseNotePath(note);
-const alternatePath = isKo ? releaseNotePath(note) : releaseNoteKoPath(note);
 const appPath = isKo ? `/apps/${note.appSlug}/ko/` : `/apps/${note.appSlug}/`;
 const summary = isKo ? note.summaryKo : note.summary;
 const changes = isKo ? note.changesKo : note.changes;
 const labels = isKo
   ? {
       titleSuffix: '릴리즈 노트',
-      switchLabel: 'English',
       eyebrow: '릴리즈 노트',
       released: '출시일',
       platform: '플랫폼',
@@ -34,7 +46,6 @@ const labels = isKo
     }
   : {
       titleSuffix: 'Release Notes',
-      switchLabel: '한국어',
       eyebrow: 'Release Notes',
       released: 'Released',
       platform: 'Platform',
@@ -46,6 +57,19 @@ const labels = isKo
       upgradeText: 'No special upgrade steps are required.',
       appPage: 'App page'
     };
+
+const releasePathFor = (item: AllSiteLocale): string => {
+  if (item === 'en') return releaseNotePath(note);
+  if (item === 'ko') return releaseNoteKoPath(note);
+  return releaseNoteLocalePath(note, item as ReleaseLocale);
+};
+const alternates = [
+  ...allSiteLocales.map((item) => ({
+    lang: allLocaleDefinitions[item].hreflang,
+    path: releasePathFor(item)
+  })),
+  { lang: 'x-default', path: releaseNotePath(note) }
+];
 const canonicalUrl = new URL(canonicalPath, Astro.site);
 const description = `${note.title} ${labels.titleSuffix}. ${summary}`;
 const jsonLd = {
@@ -87,16 +111,12 @@ const jsonLd = {
     tags: [note.appName, note.platform, note.version]
   }}
   jsonLd={jsonLd}
-  alternates={[
-    { lang: 'en', path: releaseNotePath(note) },
-    { lang: 'ko', path: releaseNoteKoPath(note) },
-    { lang: 'x-default', path: releaseNotePath(note) }
-  ]}
+  alternates={alternates}
 >
   <main class="release-shell">
     <nav class="topbar site-header" aria-label="ONNELLAB">
       <a class="brand" href={isKo ? '/ko/' : '/'}>ONNELLAB</a>
-      <a class="language site-language-control" href={alternatePath} data-locale-choice={isKo ? 'en' : 'ko'} aria-label={isKo ? 'Switch to English' : '한국어로 보기'} title={labels.switchLabel}>{labels.switchLabel}</a>
+      <ReleaseNoteLocaleMenu note={note} locale={locale} />
     </nav>
 
     <article class="release-note">
@@ -170,28 +190,6 @@ const jsonLd = {
     text-decoration: none;
   }
 
-  .language {
-    min-height: 34px;
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid #ded6ca;
-    border-radius: 999px;
-    padding: 6px 12px;
-    background: rgba(255, 253, 248, 0.72);
-    color: #5f5a50;
-    font-size: 13px;
-    font-weight: 650;
-    line-height: 1.35;
-    text-decoration: none;
-  }
-
-  .language:hover,
-  .language:focus-visible {
-    border-color: #cfc5b7;
-    background: #fffdf8;
-  }
-
-  .language:focus-visible,
   .brand:focus-visible,
   .app-link:focus-visible {
     outline: 2px solid #827d72;
@@ -324,9 +322,10 @@ const jsonLd = {
       margin-bottom: 36px;
     }
 
-    .brand,
-    .language {
+    .brand {
       min-height: 40px;
+      display: inline-flex;
+      align-items: center;
     }
 
     h1 {
