@@ -27,6 +27,14 @@ const alternates = [
 const title = `${details.appName} · ${localeText.policyTitle}`;
 const description = localeText.applies(details.appName);
 const email = 'onnellab.app@gmail.com';
+const payment = locale === 'zh-Hant'
+  ? details.payment.replace('驗證與回復購買', '驗證並恢復購買')
+  : details.payment;
+const serverItems = locale === 'de' && slug === 'melivra'
+  ? details.serverItems?.map((item) =>
+      item.replace('Anonymer, vom Server ausgegebener Subjektbezeichner', 'Anonyme, vom Server vergebene Benutzerkennung')
+    )
+  : details.serverItems;
 ---
 
 <BaseLayout
@@ -86,13 +94,13 @@ const email = 'onnellab.app@gmail.com';
 
     <section>
       <h3>{localeText.headings[2]}</h3>
-      {details.serverItems && <ul>{details.serverItems.map((item) => <li>{item}</li>)}</ul>}
+      {serverItems && <ul>{serverItems.map((item) => <li>{item}</li>)}</ul>}
       <p>{details.serverBody}</p>
     </section>
 
     <section>
       <h3>{localeText.headings[3]}</h3>
-      <p>{details.payment}</p>
+      <p>{payment}</p>
     </section>
 
     <section>
