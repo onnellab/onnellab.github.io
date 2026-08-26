@@ -51,14 +51,12 @@ export const releaseNotes: ReleaseNote[] = [
     previousVersion: '2.1',
     internalGitHubUrl: 'https://github.com/onnellab/tagweaver/releases/tag/v2.2',
     changes: [
-      'Improved stability for the public iOS 2.2 release.',
-      'Kept the notes scoped to App Store-visible stability fixes.',
-      'Excluded private-test-only and local build metadata changes from the public notes.'
+      'Improved overall stability on iOS.',
+      'Made everyday tag editing more reliable.'
     ],
     changesKo: [
-      '공개 iOS 2.2 릴리즈의 안정성을 개선했습니다.',
-      'App Store에 공개된 안정성 수정 범위로 릴리즈 노트를 한정했습니다.',
-      '비공개 테스트 전용 변경과 로컬 빌드 메타데이터 변경은 공개 노트에서 제외했습니다.'
+      'iOS 전반의 안정성을 개선했습니다.',
+      '일상적인 태그 편집이 더 안정적으로 동작하도록 다듬었습니다.'
     ]
   },
   {
