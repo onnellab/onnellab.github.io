@@ -457,9 +457,41 @@ test.describe('nine-language site core regression', () => {
         );
         const screenshot = page.locator('.screenshot-link img').first();
         if (await screenshot.count()) {
-          await expect(screenshot).toHaveAttribute('src', new RegExp(`/app-assets/${slug}/assets/screenshots/en/`));
+          const screenshotLocale = slug === 'tagweaver'
+            ? htmlLang[segment as keyof typeof htmlLang]
+            : 'en';
+          await expect(screenshot).toHaveAttribute(
+            'src',
+            new RegExp(`/app-assets/${slug}/assets/screenshots/${screenshotLocale}/`)
+          );
         }
       }
+    }
+  });
+
+  test('TagWeaver detail pages use the matching localized screenshot directory', async ({ page }) => {
+    const screenshotLocales = [
+      { code: 'en', segment: '' },
+      { code: 'ko', segment: 'ko' },
+      { code: 'ja', segment: 'ja' },
+      { code: 'zh-Hans', segment: 'zh-hans' },
+      { code: 'zh-Hant', segment: 'zh-hant' },
+      { code: 'pt-BR', segment: 'pt-br' },
+      { code: 'de', segment: 'de' },
+      { code: 'fr', segment: 'fr' },
+      { code: 'es', segment: 'es' }
+    ] as const;
+
+    for (const locale of screenshotLocales) {
+      const route = locale.segment
+        ? `/apps/tagweaver/${locale.segment}/`
+        : '/apps/tagweaver/';
+      await page.goto(route);
+      const screenshot = page.locator('.screenshot-link img').first();
+      await expect(screenshot).toHaveAttribute(
+        'src',
+        `/app-assets/tagweaver/assets/screenshots/${locale.code}/1.png`
+      );
     }
   });
 
