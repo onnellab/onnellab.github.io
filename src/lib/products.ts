@@ -454,10 +454,11 @@ function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
     .replace(/[.!?。！？]+$/u, '');
   const normalize = (value: string) =>
     value.replace(/[.!?。！？]+$/u, '').trim().toLocaleLowerCase();
-  const detail = normalize(summary) === normalize(category) ? '' : ` ${summary}`;
+  const detail = normalize(summary) === normalize(category) ? '' : summary;
+  const spacedDetail = detail ? ` ${detail}` : '';
 
   if (copy.locale === 'ko') {
-    return `${source.meta.title} — ${category}. 지원 플랫폼: ${platforms}.${detail}`;
+    return `${source.meta.title} — ${category}. 지원 플랫폼: ${platforms}.${spacedDetail}`;
   }
   if (copy.locale === 'ja') {
     return `${source.meta.title} — ${category}。対応プラットフォーム: ${platforms}。${detail}`;
@@ -469,18 +470,18 @@ function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
     return `${source.meta.title} — ${category}。支援平台：${platforms}。${detail}`;
   }
   if (copy.locale === 'pt-BR') {
-    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${detail}`;
+    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${spacedDetail}`;
   }
   if (copy.locale === 'de') {
-    return `${source.meta.title} — ${category}. Plattformen: ${platforms}.${detail}`;
+    return `${source.meta.title} — ${category}. Plattformen: ${platforms}.${spacedDetail}`;
   }
   if (copy.locale === 'fr') {
-    return `${source.meta.title} — ${category}. Plateformes : ${platforms}.${detail}`;
+    return `${source.meta.title} — ${category}. Plateformes\u00A0: ${platforms}.${spacedDetail}`;
   }
   if (copy.locale === 'es') {
-    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${detail}`;
+    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${spacedDetail}`;
   }
-  return `${source.meta.title} — ${category}. Platforms: ${platforms}.${detail}`;
+  return `${source.meta.title} — ${category}. Platforms: ${platforms}.${spacedDetail}`;
 }
 
 function productSeoTitle(source: ProductSource, copy: ProductCopy): string {

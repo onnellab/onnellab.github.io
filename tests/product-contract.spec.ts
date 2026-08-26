@@ -30,7 +30,7 @@ const metaPlatformMarkers = {
   'zh-Hant': '支援平台：',
   'pt-BR': 'Plataformas:',
   de: 'Plattformen:',
-  fr: 'Plateformes :',
+  fr: 'Plateformes\u00A0:',
   es: 'Plataformas:'
 } as const;
 
@@ -85,6 +85,13 @@ for (const app of apps) {
       if (app !== 'papira') {
         expect(metaDescription).toContain(' — ');
         expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
+        if (locale.code === 'ja' || locale.code === 'zh-Hans' || locale.code === 'zh-Hant') {
+          expect(metaDescription).not.toMatch(/。[ \t]/u);
+        }
+        if (locale.code === 'fr') {
+          expect(metaDescription).toContain('Plateformes\u00A0:');
+          expect(metaDescription).not.toContain('Plateformes :');
+        }
       }
 
       const allSchemas = await schemas(page);
