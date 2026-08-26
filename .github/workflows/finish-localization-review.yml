@@ -42,35 +42,11 @@ jobs:
           git config user.name "ONNELLAB Automation"
           git config user.email "actions@users.noreply.github.com"
 
-      - name: Localize accessibility labels
-        run: |
-          set -euo pipefail
-          git pull --rebase origin main
-          python - <<'PY'
-          from pathlib import Path
-          path = Path('src/components/ExtendedSitePage.astro')
-          source = path.read_text(encoding='utf-8')
-          source = source.replace(
-              "<small>{item.platforms.join(' · ')}</small>",
-              "<small class=\"platform-badges\" aria-label={copy.common.platforms}>{item.platforms.join(' · ')}</small>",
-          )
-          path.write_text(source, encoding='utf-8')
-          PY
-          node scripts/apply-localization-review.mjs accessibility
-          git checkout -- .github/workflows/i18n-smoke.yml
-          npm run build
-          npx playwright test tests/accessibility-i18n.spec.ts --project=desktop
-          git add src tests
-          if ! git diff --cached --quiet; then
-            git commit -m "Localize accessibility labels across nine languages"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
-
       - name: Correct confirmed localization errors
         run: |
           set -euo pipefail
           git pull --rebase origin main
+          node --check scripts/apply-localization-review.mjs
           node scripts/apply-localization-review.mjs corrections
           npm run build
           npx playwright test tests/papira-i18n.spec.ts tests/extended-i18n.spec.ts --project=desktop
