@@ -28,7 +28,7 @@ test('confirmed language-quality corrections remain visible', async ({ page }) =
   await expect(page.locator('h1')).toHaveText('Warum das Öffnen großer Textdateien lange dauert');
 
   await page.goto('/blog/ja/txt-vs-epub-for-long-reading/');
-  await expect(page.locator('main')).toContainText('正本（Source of Truth）');
+  await expect(page.locator('main')).toContainText('一つを正本と定め、そこから再生成します。');
 
   await page.goto('/release-notes/tagweaver/2.2/ko/');
   await expect(page.locator('main')).toContainText('일상적인 태그 편집이 더 안정적으로 동작하도록 다듬었습니다.');
