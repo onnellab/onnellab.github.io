@@ -8,6 +8,7 @@ on:
       - 'src/**'
       - 'public/privacy/**'
       - 'tests/**'
+      - 'scripts/check-localization-quality.mjs'
       - 'package.json'
       - 'package-lock.json'
       - 'playwright.config.ts'
@@ -17,6 +18,7 @@ on:
       - 'src/**'
       - 'public/privacy/**'
       - 'tests/**'
+      - 'scripts/check-localization-quality.mjs'
       - 'package.json'
       - 'package-lock.json'
       - 'playwright.config.ts'
@@ -48,6 +50,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check localization quality
+        run: npm run check:i18n-quality
+
       - name: Build site
         run: npm run build
 
@@ -61,6 +66,8 @@ jobs:
           tests/extended-i18n.spec.ts
           tests/papira-i18n.spec.ts
           tests/product-contract.spec.ts
+          tests/accessibility-i18n.spec.ts
+          tests/localization-copy.spec.ts
           tests/site-visual.spec.ts
           --project=desktop
 
@@ -73,10 +80,10 @@ jobs:
         run: |
           if [ "$JOB_RESULT" = "success" ]; then
             state=success
-            description="Nine-language desktop regression tests passed"
+            description="Nine-language localization regression tests passed"
           else
             state=failure
-            description="Nine-language desktop regression tests failed"
+            description="Nine-language localization regression tests failed"
           fi
 
           gh api \
