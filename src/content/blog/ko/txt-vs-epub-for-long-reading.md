@@ -16,7 +16,7 @@ canonical_url: "https://onnellab.github.io/blog/ko/txt-vs-epub-for-long-reading/
 published_at: "2026-08-11T09:00:00+09:00"
 updated_at: "2026-08-11T09:00:00+09:00"
 image_specs: "긴 글 TXT·EPUB 비교 작업 흐름도|실용적인 선택지 비교 도표|관련 앱 화면 이미지 요구사항"
-related_articles: "대용량 TXT 파일을 지연 없이 읽는 방법 => https://onnellab.github.io/blog/ko/read-large-txt-files-without-lag/|로컬 미디어 파일을 비공개로 변환하는 방법 => https://onnellab.github.io/blog/ko/convert-local-media-files-privately/|음악 정리 전 MP3 메타데이터를 정돈하는 방법 => https://onnellab.github.io/blog/ko/clean-up-mp3-metadata-before-organizing-music/|아이폰에서 복사한 텍스트 조각을 다시 사용하는 방법 => https://onnellab.github.io/blog/ko/reuse-copied-text-snippets-iphone/"
+related_articles: "대용량 TXT 파일을 지연 없이 읽는 방법 => https://onnellab.github.io/blog/ko/read-large-txt-files-without-lag/|로컬 미디어 파일을 기기 안에서 변환하는 방법 => https://onnellab.github.io/blog/ko/convert-local-media-files-privately/|음악 정리 전 MP3 메타데이터를 정돈하는 방법 => https://onnellab.github.io/blog/ko/clean-up-mp3-metadata-before-organizing-music/|아이폰에서 복사한 텍스트 조각을 다시 사용하는 방법 => https://onnellab.github.io/blog/ko/reuse-copied-text-snippets-iphone/"
 ---
 
 # 긴 글 읽기를 위한 TXT와 EPUB 비교
@@ -75,7 +75,7 @@ TXT는 문자를 그대로 제공하므로 스크린 리더, 화면 확대, 고�
 | 자주 편집하거나 스크립트로 처리하기 | 예 |  | 내용을 직접 확인하고 비교·변환·저장하기 쉬움 |
 | 안정적인 목차와 도서 메타데이터 |  | 예 | EPUB이 탐색, 읽기 순서, 패키지 메타데이터를 정의함 |
 | 기본 텍스트 도구로 폭넓게 접근하기 | 예 |  | 출판 패키지를 이해하지 않는 범용 도구도 내용을 열 수 있음 |
-| 풍부한 접근성 의미 구조 |  | 예 | 올바르게 제작하면 문서 구조와 접근성 메타데이터를 표현할 수 있음 |
+| 풍부한 접근성을 위한 의미 구조 |  | 예 | 올바르게 제작하면 문서 구조와 접근성 메타데이터를 표현할 수 있음 |
 | 문장만 투명하고 단순하게 보관하기 | 예 |  | 내용을 레이아웃과 패키지에서 분리해 유지할 수 있음 |
 | 이미지, 주석, 링크, 서식 요소 |  | 예 | 여러 자원의 관계와 의미를 보존할 수 있음 |
 | 한 원본으로 여러 배포 형식 만들기 | 원본으로 적합 | 결과물로 적합 | 원본 편집과 읽기용 표현을 분리할 수 있음 |

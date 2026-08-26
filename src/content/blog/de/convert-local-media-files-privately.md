@@ -81,7 +81,7 @@ Quivra ist kein umfassendes Schnitt- oder Produktionspaket. Seine Rolle ist bewu
 - Private Dateikonvertierung
 - Offline-Medienkonvertierung
 - Kompatibilität von Dateiformaten
-- Local-first-Workflows für Medien
+- lokale Arbeitsabläufe für Medien
 
 ## Referenzen
 

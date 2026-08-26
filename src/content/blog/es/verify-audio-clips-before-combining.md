@@ -78,13 +78,13 @@ El nivel de pico muestra la mayor excursión de la señal y ayuda a evitar satur
 
 Usa los medidores para localizar diferencias y confirma por oído con fragmentos representativos. Picos iguales no garantizan una percepción igual. Tampoco apliques sin contexto un objetivo profesional de radiodifusión a una grabación personal.
 
-Mantén headroom para evitar sobrecarga inesperada durante el procesamiento. Si existe una especificación de entrega, síguela y revisa el archivo codificado final, no solo la línea de tiempo. Los cambios de nivel deben ser reversibles y quedar registrados; evita normalizar repetidamente sobrescribiendo archivos con pérdidas.
+Mantén margen dinámico para evitar sobrecarga inesperada durante el procesamiento. Si existe una especificación de entrega, síguela y revisa el archivo codificado final, no solo la línea de tiempo. Los cambios de nivel deben ser reversibles y quedar registrados; evita normalizar repetidamente sobrescribiendo archivos con pérdidas.
 
 ## Concatenar o recodificar
 
 | Camino | Cuándo encaja | Principal limitación | Qué revisar |
 | --- | --- | --- | --- |
-| Concatenación directa o stream copy | Entradas compatibles y sin procesamiento | Codecs, bases de tiempo o duraciones incompatibles pueden impedir un resultado limpio | Orden, timestamps, duración y cada unión |
+| Concatenación directa o copia directa del flujo | Entradas compatibles y sin procesamiento | Codecs, bases de tiempo o duraciones incompatibles pueden impedir un resultado limpio | Orden, timestamps, duración y cada unión |
 | Decodificar, procesar y recodificar | Remuestreo, canales, ganancia, fades, crossfades o formatos mixtos | La codificación puede cambiar calidad y tamaño | Formato común, picos, sonoridad, uniones y reproducción final |
 | Intermedio sin pérdidas y codificación final | Varias ediciones antes de un formato de entrega con pérdidas | Requiere más almacenamiento y una etapa extra | Integridad del intermedio y compatibilidad final |
 
@@ -121,7 +121,7 @@ Para verificar clips antes de combinarlos, controla primero las entradas: invent
 
 ### ¿Todos los clips deben tener la misma frecuencia de muestreo?
 
-Deben formar una línea de tiempo de salida coherente. Un stream copy directo suele exigir streams compatibles. Si las frecuencias u otras propiedades difieren, convierte copias de trabajo a una especificación común dentro de un proceso controlado.
+Deben formar una línea de tiempo de salida coherente. Un copia directa del flujo directo suele exigir streams compatibles. Si las frecuencias u otras propiedades difieren, convierte copias de trabajo a una especificación común dentro de un proceso controlado.
 
 ### ¿Debo normalizar todos los clips antes de unirlos?
 

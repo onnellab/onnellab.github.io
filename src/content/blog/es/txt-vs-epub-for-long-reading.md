@@ -26,7 +26,7 @@ image_specs: "Flujo TXT a EPUB|Comparación de edición y lectura|VaultXT en el 
 
 ## Respuesta breve
 
-Elige **EPUB cuando el documento sea principalmente un libro para leer**. Un EPUB reflowable bien creado puede adaptarse al tamaño de pantalla y a los ajustes del lector mientras conserva capítulos, encabezados, tabla de contenidos, metadatos del libro, énfasis, enlaces y descripciones de imágenes.
+Elige **EPUB cuando el documento sea principalmente un libro para leer**. Un EPUB redistribuible bien creado puede adaptarse al tamaño de pantalla y a los ajustes del lector mientras conserva capítulos, encabezados, tabla de contenidos, metadatos del libro, énfasis, enlaces y descripciones de imágenes.
 
 Elige **TXT cuando el contenido sea principalmente texto para conservar, buscar, intercambiar o editar**. El texto sin formato es fácil de inspeccionar y modificar con muchas herramientas, pero el archivo no transporta de forma fiable estructura de libro, tipografía, navegación ni semántica rica de accesibilidad.
 
@@ -38,13 +38,13 @@ Un archivo TXT guarda caracteres representados como bytes. Los saltos de línea 
 
 Una publicación EPUB es un paquete de recursos web. Normalmente contiene contenido estructurado, estilos, un documento de navegación obligatorio, metadatos de publicación y un manifiesto. Esa estructura permite que el lector comprenda capítulos, orden de lectura, encabezados, enlaces, imágenes e información del libro.
 
-La mayoría de los EPUB centrados en texto son **reflowable**: el lector recalcula el diseño cuando cambian el tamaño de pantalla, la fuente, el tamaño del texto, los márgenes, el interlineado o la orientación. EPUB también permite diseño fijo, así que la extensión `.epub` por sí sola no garantiza reflow.
+La mayoría de los EPUB centrados en texto son **redistribuible**: el lector recalcula el diseño cuando cambian el tamaño de pantalla, la fuente, el tamaño del texto, los márgenes, el interlineado o la orientación. EPUB también permite diseño fijo, así que la extensión `.epub` por sí sola no garantiza reflow.
 
 ## Experiencia de lectura: reflow, tipografía y navegación
 
 TXT y EPUB pueden ajustar líneas a una pantalla estrecha, pero un salto visual de línea no equivale a reflow estructurado. Un lector TXT puede aplicar fuente, tamaño, colores e interlineado a todo el archivo, pero no puede deducir de forma fiable jerarquía de capítulos, citas, pies o énfasis sin una convención adicional.
 
-Un EPUB reflowable puede conservar encabezados, párrafos, listas, citas, énfasis y notas como estructura real y adaptar al mismo tiempo la presentación. La calidad de autoría sigue siendo importante: estilos rígidos, encabezados ausentes o marcado deficiente pueden hacer que un EPUB resulte peor que un TXT limpio.
+Un EPUB redistribuible puede conservar encabezados, párrafos, listas, citas, énfasis y notas como estructura real y adaptar al mismo tiempo la presentación. La calidad de autoría sigue siendo importante: estilos rígidos, encabezados ausentes o marcado deficiente pueden hacer que un EPUB resulte peor que un TXT limpio.
 
 La navegación es la diferencia práctica más clara. TXT depende del desplazamiento, la búsqueda, marcadores propios de la aplicación o convenciones como `CAPÍTULO 12`. Esos marcadores pueden no viajar con el archivo.
 
@@ -126,7 +126,7 @@ Cuando necesites ambas cosas, no obligues a un solo archivo a cumplir los dos pa
 
 ## FAQ
 
-### ¿EPUB siempre es reflowable?
+### ¿EPUB siempre es redistribuible?
 
 No. Es habitual en libros de texto, pero EPUB también admite diseño fijo. Comprueba el archivo real y prueba cambios de tamaño de fuente.
 

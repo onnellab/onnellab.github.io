@@ -28,7 +28,7 @@ Sollte ich für lange Texte TXT oder EPUB verwenden?
 
 Wähle **EPUB, wenn das Dokument hauptsächlich ein Buch zum Lesen ist**. Ein gut erstelltes, reflow-fähiges EPUB kann sich an Bildschirmgröße und Reader-Einstellungen anpassen und zugleich Kapitel, Überschriften, Inhaltsverzeichnis, Buchmetadaten, Hervorhebungen, Links und Bildbeschreibungen erhalten.
 
-Wähle **TXT, wenn der Inhalt vor allem aufbewahrt, durchsucht, ausgetauscht oder bearbeitet werden soll**. Klartext ist mit sehr vielen Werkzeugen einfach zu prüfen und zu ändern, trägt aber von sich aus keine verlässliche Buchstruktur, Typografie, Navigation oder reichen Barrierefreiheits-Semantiken.
+Wähle **TXT, wenn der Inhalt vor allem aufbewahrt, durchsucht, ausgetauscht oder bearbeitet werden soll**. Klartext ist mit sehr vielen Werkzeugen einfach zu prüfen und zu ändern, trägt aber von sich aus keine verlässliche Buchstruktur, Typografie, Navigation oder reichen semantische Informationen für Barrierefreiheit.
 
 Keines der Formate ist immer besser. Für einen fertigen Roman oder ein Handbuch ist EPUB meist angenehmer zu lesen. Für Entwürfe, Logs, Transkripte und häufig bearbeitetes Ausgangsmaterial ist TXT oft robuster. TXT als Quelle zu behalten und daraus eine EPUB-Lesekopie zu erzeugen, verbindet häufig beide Vorteile.
 

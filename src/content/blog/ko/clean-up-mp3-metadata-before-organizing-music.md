@@ -16,7 +16,7 @@ image_specs: "백업부터 검증까지 이어지는 MP3 메타데이터 정돈 
 canonical_url: "https://onnellab.github.io/blog/ko/clean-up-mp3-metadata-before-organizing-music/"
 published_at: "2026-07-20T14:56:51+09:00"
 updated_at: "2026-07-20T14:56:51+09:00"
-related_articles: "대용량 TXT 파일을 지연 없이 읽는 방법 => https://onnellab.github.io/blog/ko/read-large-txt-files-without-lag/|로컬 미디어 파일을 비공개로 변환하는 방법 => https://onnellab.github.io/blog/ko/convert-local-media-files-privately/"
+related_articles: "대용량 TXT 파일을 지연 없이 읽는 방법 => https://onnellab.github.io/blog/ko/read-large-txt-files-without-lag/|로컬 미디어 파일을 기기 안에서 변환하는 방법 => https://onnellab.github.io/blog/ko/convert-local-media-files-privately/"
 ---
 
 # 음악 정리 전 MP3 메타데이터를 정돈하는 방법

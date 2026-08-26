@@ -105,7 +105,7 @@ Segraを使っても、このガイドの判断は利用者が行います。原
 
 ## 関連トピック
 
-- [ローカルのメディアファイルをプライベートに変換する方法](/blog/ja/convert-local-media-files-privately/)
+- [ローカルのメディアファイルを端末内で変換する方法](/blog/ja/convert-local-media-files-privately/)
 - 保管用と配布用の音声形式の選び方
 - 結合前に音声クリップを検証する方法
 - 録音を共有する前のメタデータ確認

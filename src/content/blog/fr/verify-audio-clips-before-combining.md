@@ -4,14 +4,14 @@ card_title: "Vérifier des clips audio avant de les combiner"
 slug: "verify-audio-clips-before-combining"
 category: "media"
 language: "fr"
-description: "Vérifiez ordre, format, limites, loudness et intégrité d’export des clips audio avant de les combiner dans un fichier fiable."
+description: "Vérifiez ordre, format, limites, niveau sonore perçu et intégrité d’export des clips audio avant de les combiner dans un fichier fiable."
 status: "published"
 topic_id: "TOPIC-0015"
 search_intent: "workflow"
 primary_keyword: "vérifier clips audio avant fusion"
-secondary_keywords: "ordre fusion audio|limites clips|cohérence loudness|Segra"
+secondary_keywords: "ordre fusion audio|limites clips|cohérence niveau sonore perçu|Segra"
 related_apps: "Segra"
-tags: "vérification audio|fusion audio|limites clips|loudness|Segra"
+tags: "vérification audio|fusion audio|limites clips|niveau sonore perçu|Segra"
 canonical_url: "https://onnellab.github.io/blog/fr/verify-audio-clips-before-combining/"
 published_at: "2026-08-23T09:00:00+09:00"
 updated_at: "2026-08-23T09:00:00+09:00"
@@ -28,7 +28,7 @@ Comment vérifier plusieurs clips audio avant de les combiner en un seul fichier
 
 Dressez un inventaire, fixez l’ordre voulu et confirmez que chaque clip s’ouvre et contient le bon contenu. Comparez codec, fréquence d’échantillonnage, format d’échantillon et disposition des canaux avant de choisir entre concaténation directe et conversion. Écoutez chaque clip en entier puis chaque jonction dans l’ordre, en recherchant mots coupés, répétitions, silence indésirable, chevauchements, clics, changements brusques d’ambiance et sauts de niveau. Exportez un test ou une copie complète de contrôle, vérifiez durée et lecture et conservez les sources intactes jusqu’à validation du résultat final.
 
-Aucun indicateur ni aucune forme d’onde ne remplace l’écoute. Le niveau de crête aide à repérer un risque de clipping ; la mesure de **loudness** décrit le niveau sur la durée. Ces mesures sont complémentaires mais ne répondent pas à la même question.
+Aucun indicateur ni aucune forme d’onde ne remplace l’écoute. Le niveau de crête aide à repérer un risque de clipping ; la mesure de **niveau sonore perçu** décrit le niveau sur la durée. Ces mesures sont complémentaires mais ne répondent pas à la même question.
 
 ## Commencer par un inventaire et un ordre fixe
 
@@ -72,20 +72,20 @@ Le chevauchement dépend lui aussi du contexte. Un chevauchement accidentel rép
 
 ![Schéma de vérification](/blog-assets/en/verify-audio-clips-before-combining/workflow-diagram.svg "Inventorier, vérifier, ordonner, joindre et contrôler les clips audio")
 
-## Comparer la loudness sans se limiter aux crêtes
+## Comparer la niveau sonore perçu sans se limiter aux crêtes
 
-Le niveau de crête indique la plus forte excursion du signal et aide à prévenir la saturation. Deux clips aux crêtes proches peuvent toutefois sembler très différents en volume. La mesure de **loudness** évalue le signal sur la durée et convient mieux pour comparer la présence perçue de voix ou de programme. Les recommandations de l’EBU distinguent explicitement la normalisation en loudness d’une simple lecture des crêtes.
+Le niveau de crête indique la plus forte excursion du signal et aide à prévenir la saturation. Deux clips aux crêtes proches peuvent toutefois sembler très différents en volume. La mesure de **niveau sonore perçu** évalue le signal sur la durée et convient mieux pour comparer la présence perçue de voix ou de programme. Les recommandations de l’EBU distinguent explicitement la normalisation en niveau sonore perçu d’une simple lecture des crêtes.
 
 Utilisez les mesures pour repérer les écarts, puis confirmez à l’oreille avec des passages représentatifs. Des crêtes identiques ne garantissent pas un volume perçu identique. N’appliquez pas non plus automatiquement une cible de diffusion professionnelle à un enregistrement personnel.
 
-Gardez de la marge (headroom) pour éviter une surcharge inattendue pendant le traitement. S’il existe une spécification de livraison, suivez-la et vérifiez le fichier encodé final, pas seulement la timeline. Les changements de niveau doivent rester réversibles et documentés ; évitez de normaliser plusieurs fois en écrasant des fichiers avec perte.
+Gardez de la marge (marge dynamique) pour éviter une surcharge inattendue pendant le traitement. S’il existe une spécification de livraison, suivez-la et vérifiez le fichier encodé final, pas seulement la timeline. Les changements de niveau doivent rester réversibles et documentés ; évitez de normaliser plusieurs fois en écrasant des fichiers avec perte.
 
 ## Concaténation ou réencodage ?
 
 | Méthode | Quand elle convient | Limite principale | Contrôle prioritaire |
 | --- | --- | --- | --- |
-| Concaténation directe ou stream copy | Flux compatibles et aucun traitement audio nécessaire | Codecs, bases de temps ou durées incompatibles peuvent poser problème | Ordre, timestamps, durée et chaque jonction |
-| Décodage, traitement et réencodage | Rééchantillonnage, canaux, gain, fades, crossfades ou formats mixtes | Le choix d’encodage peut changer qualité et taille | Format commun, crêtes, loudness, jonctions et lecture finale |
+| Concaténation directe ou copie directe du flux | Flux compatibles et aucun traitement audio nécessaire | Codecs, bases de temps ou durées incompatibles peuvent poser problème | Ordre, timestamps, durée et chaque jonction |
+| Décodage, traitement et réencodage | Rééchantillonnage, canaux, gain, fades, crossfades ou formats mixtes | Le choix d’encodage peut changer qualité et taille | Format commun, crêtes, niveau sonore perçu, jonctions et lecture finale |
 | Intermédiaire sans perte puis encodage de livraison | Plusieurs modifications avant un format final avec perte | Demande plus de stockage et une étape de plus | Intégrité de l’intermédiaire et compatibilité finale |
 
 Le concat demuxer de FFmpeg illustre cette différence : sa documentation exige des flux compatibles, notamment codecs et bases de temps, et avertit que des durées sources incorrectes peuvent provoquer des artefacts. Les filtres `acrossfade` et `loudnorm` réalisent, eux, un traitement réel et ne sont pas une simple copie de paquets.
@@ -105,27 +105,27 @@ Le concat demuxer de FFmpeg illustre cette différence : sa documentation exige 
 
 ## Application ONNELLAB
 
-Une fois la méthode de vérification définie, [Segra](/apps/segra/fr/) peut convenir à l’étape de préparation lorsque la tâche consiste à découper et organiser des segments audio. C’est le périmètre pertinent documenté ici. Cet article ne suppose pas que Segra réalise à lui seul la concaténation finale, la conformité de loudness ou le contrôle de livraison. Utilisez ensuite un outil dont les fonctions documentées couvrent les étapes requises.
+Une fois la méthode de vérification définie, [Segra](/apps/segra/fr/) peut convenir à l’étape de préparation lorsque la tâche consiste à découper et organiser des segments audio. C’est le périmètre pertinent documenté ici. Cet article ne suppose pas que Segra réalise à lui seul la concaténation finale, la conformité de niveau sonore perçu ou le contrôle de livraison. Utilisez ensuite un outil dont les fonctions documentées couvrent les étapes requises.
 
 ## Références
 
 - [FFmpeg Formats Documentation](https://ffmpeg.org/ffmpeg-formats.html#concat) décrit concat demuxer, compatibilité des flux, timestamps et précautions de durée.
 - [FFmpeg Filters Documentation](https://ffmpeg.org/ffmpeg-filters.html#acrossfade) documente `acrossfade`, `loudnorm` et d’autres filtres audio.
-- [EBU Loudness](https://tech.ebu.ch/loudness/) fournit la présentation officielle de la mesure de loudness et de la recommandation EBU R128.
+- [EBU Loudness](https://tech.ebu.ch/niveau sonore perçu/) fournit la présentation officielle de la mesure de niveau sonore perçu et de la recommandation EBU R128.
 
 ## Conclusion
 
-Pour vérifier des clips avant de les combiner, maîtrisez d’abord les entrées : inventaire, ordre, propriétés techniques et conservation des originaux. Écoutez les clips complets et toutes les jonctions, distinguez loudness perçue et crêtes et n’utilisez fades ou crossfades que lorsque la transition le demande. Exportez ensuite une copie séparée et contrôlez format, durée, jonctions, début, fin et, si nécessaire, intégrité du transfert.
+Pour vérifier des clips avant de les combiner, maîtrisez d’abord les entrées : inventaire, ordre, propriétés techniques et conservation des originaux. Écoutez les clips complets et toutes les jonctions, distinguez niveau sonore perçu perçue et crêtes et n’utilisez fades ou crossfades que lorsque la transition le demande. Exportez ensuite une copie séparée et contrôlez format, durée, jonctions, début, fin et, si nécessaire, intégrité du transfert.
 
 ## FAQ
 
 ### Tous les clips doivent-ils avoir la même fréquence d’échantillonnage ?
 
-Ils doivent former une timeline de sortie cohérente. Un stream copy direct exige généralement des flux compatibles. Si fréquences ou autres propriétés diffèrent, convertissez des copies de travail vers une spécification commune dans un processus contrôlé.
+Ils doivent former une timeline de sortie cohérente. Un copie directe du flux direct exige généralement des flux compatibles. Si fréquences ou autres propriétés diffèrent, convertissez des copies de travail vers une spécification commune dans un processus contrôlé.
 
 ### Faut-il normaliser chaque clip avant la fusion ?
 
-Pas automatiquement. Mesurez loudness et crêtes, comparez des passages représentatifs à l’oreille et n’ajustez que ce qui en a besoin. Gardez les changements réversibles et réécoutez les jonctions après une modification de gain.
+Pas automatiquement. Mesurez niveau sonore perçu et crêtes, comparez des passages représentatifs à l’oreille et n’ajustez que ce qui en a besoin. Gardez les changements réversibles et réécoutez les jonctions après une modification de gain.
 
 ### Un crossfade est-il toujours meilleur qu’une jonction directe ?
 

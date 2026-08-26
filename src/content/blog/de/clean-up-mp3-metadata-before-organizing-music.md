@@ -4,7 +4,7 @@ card_title: "MP3-Metadaten vor dem Sortieren der Musiksammlung bereinigen"
 slug: "clean-up-mp3-metadata-before-organizing-music"
 category: "music"
 language: "de"
-description: "Bereinige MP3-Metadaten sicher mit einem Backup-zuerst-Workflow für Titel, Interpreten, Alben, Tracknummern, Cover und die anschließende Kontrolle in der Musikbibliothek."
+description: "Bereinige MP3-Metadaten sicher mit einem Arbeitsablauf mit vorheriger Sicherung für Titel, Interpreten, Alben, Tracknummern, Cover und die anschließende Kontrolle in der Musikbibliothek."
 status: "published"
 topic_id: "TOPIC-0008"
 search_intent: "workflow"
@@ -15,7 +15,7 @@ tags: "MP3-Metadaten|ID3-Tags|Musiksammlung organisieren|Albumcover|TagWeaver"
 canonical_url: "https://onnellab.github.io/blog/de/clean-up-mp3-metadata-before-organizing-music/"
 published_at: "2026-07-20T14:56:51+09:00"
 updated_at: "2026-07-20T14:56:51+09:00"
-image_specs: "Backup-zuerst-Workflow für MP3-Metadaten|Vergleich der Feldkonsistenz|Kontrolle nach dem Speichern"
+image_specs: "Arbeitsablauf mit vorheriger Sicherung für MP3-Metadaten|Vergleich der Feldkonsistenz|Kontrolle nach dem Speichern"
 ---
 
 # MP3-Metadaten vor dem Sortieren der Musiksammlung bereinigen
@@ -63,7 +63,7 @@ Das Ziel ist nicht, jedes Feld zu füllen. Entscheidend ist, dass die Angaben, d
 7. **Speichere und öffne die Dateien erneut.** Schließe den Editor, öffne die Testgruppe erneut und kontrolliere, ob Text, Nummerierung und Cover tatsächlich geschrieben wurden.
 8. **Teste die Zielbibliothek.** Importiere nur die kleine Testgruppe. Prüfe Gruppierung, Sortierung, Suche, nichtlateinische Zeichen und Coverdarstellung, bevor du den Workflow auf die ganze Sammlung anwendest.
 
-![Workflow-Diagramm](/blog-assets/en/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "Backup-zuerst-Workflow zur Bereinigung von MP3-Metadaten")
+![Workflow-Diagramm](/blog-assets/en/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "Arbeitsablauf mit vorheriger Sicherung zur Bereinigung von MP3-Metadaten")
 
 ## Priorität der Felder
 

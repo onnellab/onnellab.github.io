@@ -16,7 +16,7 @@ canonical_url: "https://onnellab.github.io/blog/ko/trim-audio-recordings-without
 published_at: "2026-08-17T09:00:00+09:00"
 updated_at: "2026-08-17T09:00:00+09:00"
 image_specs: "오디오 녹음 자르기 앱 워크플로 다이어그램|실용적인 방법 비교 다이어그램|관련 앱 화면 요구사항"
-related_articles: "로컬 미디어 파일을 비공개로 변환하는 방법 => https://onnellab.github.io/blog/ko/convert-local-media-files-privately/|대용량 TXT 파일을 지연 없이 읽는 방법 => https://onnellab.github.io/blog/ko/read-large-txt-files-without-lag/|음악 정리 전 MP3 메타데이터를 정돈하는 방법 => https://onnellab.github.io/blog/ko/clean-up-mp3-metadata-before-organizing-music/|아이폰에서 복사한 텍스트 조각을 다시 사용하는 방법 => https://onnellab.github.io/blog/ko/reuse-copied-text-snippets-iphone/"
+related_articles: "로컬 미디어 파일을 기기 안에서 변환하는 방법 => https://onnellab.github.io/blog/ko/convert-local-media-files-privately/|대용량 TXT 파일을 지연 없이 읽는 방법 => https://onnellab.github.io/blog/ko/read-large-txt-files-without-lag/|음악 정리 전 MP3 메타데이터를 정돈하는 방법 => https://onnellab.github.io/blog/ko/clean-up-mp3-metadata-before-organizing-music/|아이폰에서 복사한 텍스트 조각을 다시 사용하는 방법 => https://onnellab.github.io/blog/ko/reuse-copied-text-snippets-iphone/"
 ---
 
 # 전문 편집기 없이 오디오 녹음을 자르는 방법
@@ -107,7 +107,7 @@ Segra가 이 글의 판단 과정을 대신하지는 않습니다. 원본을 보
 
 ## 관련 주제
 
-- [로컬 미디어 파일을 비공개로 변환하는 방법](/blog/ko/convert-local-media-files-privately/)
+- [로컬 미디어 파일을 기기 안에서 변환하는 방법](/blog/ko/convert-local-media-files-privately/)
 - 보관본과 전달본에 맞는 오디오 출력 형식 선택
 - 오디오 클립을 합치기 전 검증하는 방법
 - 녹음을 공유하기 전 메타데이터 정리하기

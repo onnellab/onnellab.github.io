@@ -4,7 +4,7 @@ card_title: "Como recortar gravações de áudio sem usar um editor completo"
 slug: "trim-audio-recordings-without-full-editor"
 category: "media"
 language: "pt-BR"
-description: "Um fluxo seguro para escolher pontos de entrada e saída, evitar cliques, decidir entre lossless, stream copy e recodificação e validar o arquivo exportado."
+description: "Um fluxo seguro para escolher pontos de entrada e saída, evitar cliques, decidir entre lossless, cópia direta do fluxo e recodificação e validar o arquivo exportado."
 status: "published"
 topic_id: "TOPIC-0009"
 search_intent: "solve"
@@ -43,7 +43,7 @@ Não recorte a única cópia. Preserve o original e trabalhe em uma cópia, ou c
 
 As partes removidas podem conter nomes, locais, alertas do telefone ou conversas confidenciais. Processamento local evita upload sem necessidade. Quando um serviço online for inevitável, revise antes as regras de armazenamento, retenção, exclusão e acesso. Remover o som audível também não garante que metadados identificáveis tenham sido eliminados.
 
-## Lossless, stream copy e recodificação
+## Lossless, cópia direta do fluxo e recodificação
 
 “Sem perdas” pode descrever tanto um codec quanto um fluxo, por isso vale separar os conceitos.
 
@@ -51,13 +51,13 @@ Em PCM não comprimido, manter taxa de amostragem, profundidade de bits e canais
 
 MP3, AAC, Opus e Vorbis são codecs com perdas. Decodificar e gravar novamente em um formato com perdas cria outra geração de codificação. Repetir esse ciclo pode acumular alterações, então não faça recodificações sucessivas apenas porque um formato de saída é familiar.
 
-Algumas ferramentas oferecem **stream copy**, copiando frames ou pacotes comprimidos sem recodificar. Isso evita uma nova geração com perdas, mas o corte pode ficar limitado a fronteiras do formato. Precisão arbitrária por amostra e ausência total de recodificação nem sempre são possíveis ao mesmo tempo; por isso a saída deve ser validada.
+Algumas ferramentas oferecem **cópia direta do fluxo**, copiando frames ou pacotes comprimidos sem recodificar. Isso evita uma nova geração com perdas, mas o corte pode ficar limitado a fronteiras do formato. Precisão arbitrária por amostra e ausência total de recodificação nem sempre são possíveis ao mesmo tempo; por isso a saída deve ser validada.
 
 | Método | O que faz | Principal vantagem | Principal limitação |
 | --- | --- | --- | --- |
 | PCM → PCM equivalente | Grava as amostras mantidas em arquivo não comprimido | Sem nova geração com perdas e boa precisão | Arquivos grandes; metadados ainda precisam ser verificados |
 | FLAC → FLAC | Decodifica e comprime novamente sem perdas | Preserva a informação sonora com tamanho menor | Compatibilidade e metadados dependem da ferramenta |
-| Stream copy comprimido | Copia frames/pacotes existentes | Evita recodificação | Corte pode ser menos preciso e depende do formato |
+| Cópia direta do fluxo comprimido | Copia frames/pacotes existentes | Evita recodificação | Corte pode ser menos preciso e depende do formato |
 | Recodificação com perdas | Decodifica, corta e codifica novamente | Boa compatibilidade e tamanho menor | Cria outra geração com perdas |
 
 ## Use a forma de onda e os ouvidos
@@ -118,7 +118,7 @@ Um recorte confiável é mais do que arrastar dois marcadores. Preserve o origin
 
 ### Dá para recortar sem perder qualidade?
 
-Sim, quando o fluxo preserva as amostras de forma lossless, como PCM equivalente ou FLAC. Stream copy também evita nova recodificação, embora possa limitar a precisão do corte.
+Sim, quando o fluxo preserva as amostras de forma lossless, como PCM equivalente ou FLAC. Cópia direta do fluxo também evita nova recodificação, embora possa limitar a precisão do corte.
 
 ### Cortar no zero crossing garante que não haverá click?
 

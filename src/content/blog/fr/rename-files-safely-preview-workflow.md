@@ -73,7 +73,7 @@ Les noms participent aussi à d’autres flux de travail. Un document peut être
 | Renommage un par un | Quelques fichiers sans lien | Orthographe et numérotation incohérentes | Garder le motif cible visible |
 | Renommage du gestionnaire de fichiers | Petite sélection simple | Aperçu ou contrôle limité | Tester sur des copies et préserver les extensions |
 | Renommage en lot par règles | Motifs répétés sur beaucoup de fichiers | Une règle trop large touche toutes les correspondances | Vérifier chaque destination dans l’aperçu |
-| Script de renommage | Processus techniques reproductibles | Une erreur de logique ou de chemin peut toucher un grand arbre | Faire un dry run, limiter le dossier et journaliser les correspondances |
+| Script de renommage | Processus techniques reproductibles | Une erreur de logique ou de chemin peut toucher un grand arbre | Faire un simulation, limiter le dossier et journaliser les correspondances |
 | Renommage à l’export | Fichiers produits par la même application | L’identité de la source peut se perdre | Conserver un manifeste ou une copie originale |
 
 ## Précautions pratiques

@@ -16,7 +16,7 @@ canonical_url: "https://onnellab.github.io/blog/ko/rename-files-safely-preview-w
 published_at: "2026-08-20T09:00:00+09:00"
 updated_at: "2026-08-20T09:00:00+09:00"
 image_specs: "계획부터 미리보기와 적용까지의 이름 변경 과정|수동 변경과 규칙 기반 변경 비교|충돌과 확장자 확인"
-related_articles: "아이폰에서 복사한 텍스트 조각을 다시 사용하는 방법 => https://onnellab.github.io/blog/ko/reuse-copied-text-snippets-iphone/|대용량 TXT 파일을 지연 없이 읽는 방법 => https://onnellab.github.io/blog/ko/read-large-txt-files-without-lag/|로컬 미디어 파일을 비공개로 변환하는 방법 => https://onnellab.github.io/blog/ko/convert-local-media-files-privately/|음악 정리 전 MP3 메타데이터를 정돈하는 방법 => https://onnellab.github.io/blog/ko/clean-up-mp3-metadata-before-organizing-music/"
+related_articles: "아이폰에서 복사한 텍스트 조각을 다시 사용하는 방법 => https://onnellab.github.io/blog/ko/reuse-copied-text-snippets-iphone/|대용량 TXT 파일을 지연 없이 읽는 방법 => https://onnellab.github.io/blog/ko/read-large-txt-files-without-lag/|로컬 미디어 파일을 기기 안에서 변환하는 방법 => https://onnellab.github.io/blog/ko/convert-local-media-files-privately/|음악 정리 전 MP3 메타데이터를 정돈하는 방법 => https://onnellab.github.io/blog/ko/clean-up-mp3-metadata-before-organizing-music/"
 ---
 
 # 미리보기로 여러 파일의 이름을 안전하게 바꾸는 방법

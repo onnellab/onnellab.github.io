@@ -51,7 +51,7 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
   de: {
     'clipnest/1.0.2': { summary: 'Öffentliches iOS-Store-Update für ClipNest 1.0.2.', changes: ['Die Übergabe zur Tastaturbearbeitung wurde verbessert.','Das Verhalten des Clip-Aktionsmenüs wurde korrigiert.','Stabilitätskorrekturen für die öffentliche App-Store-Version 1.0.2 wurden aufgenommen.'] },
     'tagweaver/2.2': { summary: 'Öffentliches iOS-Store-Update für TagWeaver 2.2.', changes: ['Die allgemeine Stabilität unter iOS wurde verbessert.','Die tägliche Tag-Bearbeitung wurde zuverlässiger gemacht.'] },
-    'tagweaver/2.1.3': { summary: 'Öffentliches Android-Store-Update für TagWeaver 2.1.3.', changes: ['Die Android-Tag-Speicherleistung wurde verbessert, indem unveränderte Rückschreibungen übersprungen werden.','Für geänderte Basis-Tags wird ein schnellerer Speicherpfad verwendet.','Für große Dateistapel wurden Android-Schreibzeitprüfungen ergänzt.'] },
+    'tagweaver/2.1.3': { summary: 'Öffentliches Android-Store-Update für TagWeaver 2.1.3.', changes: ['Die Leistung beim Speichern von Tags unter Android wurde verbessert, indem unveränderte Rückschreibungen übersprungen werden.','Für geänderte Basis-Tags wird ein schnellerer Speicherpfad verwendet.','Für große Dateistapel wurden Prüfungen der Schreibdauer unter Android ergänzt.'] },
     'segra/1.0.2': { summary: 'Öffentliches Android-Store-Update für Segra 1.0.2.', changes: ['Das Layout der Audio-Merge-Liste wurde verbessert.','Die Nummerierung der Zusammenführungselemente wurde korrigiert.','Die Darstellung der Audio-Merge-Dateiliste wurde stabilisiert.','Abstände wurden für klarere wiederholte Arbeitsabläufe angepasst.'] }
   },
   fr: {

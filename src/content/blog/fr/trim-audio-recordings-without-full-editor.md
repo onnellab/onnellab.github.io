@@ -36,7 +36,7 @@ Décidez d’abord de l’usage de l’extrait. Une citation peut avoir besoin d
 
 Notez les positions de début et de fin si la précision compte. Le **point d’entrée** est le début du son conservé ; le **point de sortie** en est la fin. Utilisez le même format de temps pendant toute l’opération afin d’éviter les erreurs de transcription.
 
-Le découpage ne répare pas le clipping, ne retire pas automatiquement le bruit de fond, n’égalise pas la loudness et ne mélange pas plusieurs pistes. Ce sont des tâches distinctes. Garder un objectif étroit évite qu’un simple nettoyage ne devienne un projet de production inutile.
+Le découpage ne répare pas le clipping, ne retire pas automatiquement le bruit de fond, n’égalise pas la niveau sonore perçu et ne mélange pas plusieurs pistes. Ce sont des tâches distinctes. Garder un objectif étroit évite qu’un simple nettoyage ne devienne un projet de production inutile.
 
 ## Protéger la source et garder le traitement local
 
@@ -50,13 +50,13 @@ Le terme « sans perte » peut décrire un codec ou un processus. Avec de l’au
 
 MP3, AAC, Opus et Vorbis sont des codecs avec perte. Exporter de l’audio décodé vers l’un de ces formats crée une nouvelle génération avec perte. Les réencodages répétés peuvent cumuler les altérations ; évitez donc de convertir un enregistrement déjà compressé uniquement parce que l’éditeur propose ce format par défaut.
 
-Certains outils proposent un **stream copy**, c’est-à-dire une découpe sans réencodage des données compressées. Ils copient alors des frames ou paquets existants, mais les limites disponibles peuvent dépendre de ces unités ou du conteneur. Une position temporelle à l’échantillon près n’est donc pas toujours compatible avec une découpe sans réencodage. Il faut écouter le résultat.
+Certains outils proposent un **copie directe du flux**, c’est-à-dire une découpe sans réencodage des données compressées. Ils copient alors des frames ou paquets existants, mais les limites disponibles peuvent dépendre de ces unités ou du conteneur. Une position temporelle à l’échantillon près n’est donc pas toujours compatible avec une découpe sans réencodage. Il faut écouter le résultat.
 
 | Méthode | Ce qui se passe | Avantage | Limite |
 | --- | --- | --- | --- |
 | PCM vers PCM équivalent | Les échantillons conservés sont écrits dans un nouveau fichier non compressé | Pas de génération avec perte ; précision pratique | Fichier plus gros ; métadonnées à vérifier |
 | FLAC vers FLAC | L’audio est décodé puis recompressé sans perte | Préserve le signal décodé avec un fichier plus compact | Compatibilité et métadonnées variables |
-| Stream copy compressé | Les frames ou paquets existants sont copiés | Pas de nouvelle compression avec perte | Points de coupe parfois moins précis |
+| Copie directe du flux compressé | Les frames ou paquets existants sont copiés | Pas de nouvelle compression avec perte | Points de coupe parfois moins précis |
 | Réencodage avec perte | L’audio est décodé, découpé puis encodé à nouveau | Large compatibilité et fichiers plus petits | Ajoute une nouvelle génération avec perte |
 
 ## Choisir les limites avec les yeux et les oreilles
@@ -117,7 +117,7 @@ Une découpe fiable ne se résume pas à déplacer deux poignées. Préservez la
 
 ### Peut-on découper sans perte de qualité ?
 
-Oui, si le processus conserve les échantillons décodés sans perte, par exemple en PCM équivalent ou FLAC vers FLAC, et évite les transformations inutiles. Le stream copy peut aussi éviter une nouvelle génération avec perte, mais ses limites peuvent être moins précises selon le format.
+Oui, si le processus conserve les échantillons décodés sans perte, par exemple en PCM équivalent ou FLAC vers FLAC, et évite les transformations inutiles. Le copie directe du flux peut aussi éviter une nouvelle génération avec perte, mais ses limites peuvent être moins précises selon le format.
 
 ### Un passage par zéro suffit-il toujours à éviter les clics ?
 

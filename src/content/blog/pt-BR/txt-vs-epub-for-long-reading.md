@@ -25,11 +25,11 @@ Para ler textos muito longos, é melhor usar TXT ou EPUB?
 
 ## Resposta curta
 
-Quando o objetivo principal é **ler como um livro**, EPUB costuma ser a melhor escolha. Um EPUB reflowable bem produzido consegue adaptar o layout ao tamanho da tela e às preferências de leitura enquanto mantém capítulos, títulos, sumário, metadados bibliográficos, ênfase, links e descrições de imagens.
+Quando o objetivo principal é **ler como um livro**, EPUB costuma ser a melhor escolha. Um EPUB com layout adaptável bem produzido consegue adaptar o layout ao tamanho da tela e às preferências de leitura enquanto mantém capítulos, títulos, sumário, metadados bibliográficos, ênfase, links e descrições de imagens.
 
 Quando o objetivo principal é **preservar, pesquisar, trocar e editar o texto como texto**, TXT costuma ser mais direto. Texto simples pode ser lido e alterado por inúmeras ferramentas, mas o arquivo em si não expressa de forma robusta hierarquia de capítulos, tipografia, navegação ou semântica rica de acessibilidade.
 
-Nenhum formato é sempre superior. Romance finalizado, manual e distribuição combinam bem com EPUB; rascunho, log, transcrição e fonte editável combinam bem com TXT. Um fluxo prático é manter TXT como source of truth e gerar um EPUB separado para leitura.
+Nenhum formato é sempre superior. Romance finalizado, manual e distribuição combinam bem com EPUB; rascunho, log, transcrição e fonte editável combinam bem com TXT. Um fluxo prático é manter TXT como fonte de referência e gerar um EPUB separado para leitura.
 
 ## O que TXT e EPUB realmente armazenam
 
@@ -37,13 +37,13 @@ TXT guarda caracteres como bytes. Quebras de linha e espaços podem sugerir cap�
 
 EPUB é um pacote de publicação construído com tecnologias web. Normalmente contém conteúdo estruturado, estilos, um documento de navegação obrigatório, metadados da publicação e uma lista de recursos. Por isso, um reading system pode entender capítulos, ordem de leitura, cabeçalhos, links, imagens e dados bibliográficos.
 
-EPUBs voltados principalmente a texto normalmente são **reflowable**: o conteúdo se reorganiza quando largura de tela, fonte, tamanho, margens, espaçamento ou orientação mudam. Mas EPUB também aceita fixed layout. Ter a extensão `.epub` não garante que todo conteúdo responderá bem ao aumento de fonte; teste o arquivo real quando texto ajustável for importante.
+EPUBs voltados principalmente a texto normalmente são **com layout adaptável**: o conteúdo se reorganiza quando largura de tela, fonte, tamanho, margens, espaçamento ou orientação mudam. Mas EPUB também aceita fixed layout. Ter a extensão `.epub` não garante que todo conteúdo responderá bem ao aumento de fonte; teste o arquivo real quando texto ajustável for importante.
 
 ## Experiência de leitura: reflow, tipografia e navegação
 
 Um leitor TXT também pode quebrar linhas e aplicar fonte, tamanho, cores e espaçamento. O limite é que o documento continua sendo apenas uma sequência de caracteres. Sem uma convenção explícita, o app não consegue distinguir com segurança capítulo, citação, título ou ênfase.
 
-Um EPUB reflowable pode manter a semântica de headings, parágrafos, listas, citações e links enquanto se adapta ao dispositivo. Ainda assim, um EPUB mal produzido pode ser pior que um TXT limpo: CSS rígido, ausência de headings e markup incorreto prejudicam a leitura.
+Um EPUB com layout adaptável pode manter a semântica de headings, parágrafos, listas, citações e links enquanto se adapta ao dispositivo. Ainda assim, um EPUB mal produzido pode ser pior que um TXT limpo: CSS rígido, ausência de headings e markup incorreto prejudicam a leitura.
 
 Navegação deixa a diferença mais clara. TXT normalmente depende de rolagem, pesquisa, bookmarks próprios do aplicativo ou convenções como `CHAPTER 12`. Esses bookmarks podem ficar no banco de dados do app e não acompanhar o arquivo para outro leitor.
 
@@ -101,7 +101,7 @@ Detecção automática de capítulos também pode errar: separadores, listas ou 
 
 Um conversor não recupera semântica ausente no TXT. Itálico, links, notas, legendas, mudanças de idioma e texto alternativo podem exigir decisão humana.
 
-Depois da conversão, não mantenha TXT e EPUB sendo editados independentemente. Dois “originais” divergem. Escolha um source of truth e mantenha o processo reproduzível.
+Depois da conversão, não mantenha TXT e EPUB sendo editados independentemente. Dois “originais” divergem. Escolha um fonte de referência e mantenha o processo reproduzível.
 
 ## Como isso se relaciona à ONNELLAB
 
@@ -125,7 +125,7 @@ Se você precisa dos dois, não force um formato a cumprir todas as funções. P
 
 ## FAQ
 
-### Todo EPUB é reflowable?
+### Todo EPUB é com layout adaptável?
 
 Não. Fixed layout também existe. Mude o tamanho da fonte no arquivo real para verificar.
 

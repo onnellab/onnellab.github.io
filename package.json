@@ -10,7 +10,8 @@
     "generate:blog-social-cards": "node scripts/generate-blog-social-cards.mjs",
     "preview": "astro preview",
     "test:blog-template": "node --test scripts/blog-template-contract.mjs",
-    "test:visual": "playwright test"
+    "test:visual": "playwright test",
+    "check:i18n-quality": "node scripts/check-localization-quality.mjs"
   },
   "dependencies": {
     "astro": "^7.0.4"

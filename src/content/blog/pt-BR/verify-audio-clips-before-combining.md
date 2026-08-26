@@ -76,7 +76,7 @@ O pico informa a maior excursão do sinal observada pelo medidor. É importante 
 
 Use os medidores para localizar diferenças e confirme por ouvido com trechos representativos. Picos iguais não garantem volume percebido igual, e uma meta de transmissão profissional não deve ser aplicada automaticamente a uma gravação pessoal.
 
-Mantenha headroom para que o processamento não provoque sobrecarga inesperada. Quando houver uma especificação de entrega, siga-a e verifique o arquivo codificado final, não apenas a linha do tempo de edição.
+Mantenha margem dinâmica para que o processamento não provoque sobrecarga inesperada. Quando houver uma especificação de entrega, siga-a e verifique o arquivo codificado final, não apenas a linha do tempo de edição.
 
 Mantenha ajustes de nível reversíveis e registre qualquer ganho aplicado. Evite normalizar repetidamente e sobrescrever arquivos com compressão com perdas. Depois de qualquer mudança de ganho, ouça novamente as transições afetadas.
 
@@ -84,7 +84,7 @@ Mantenha ajustes de nível reversíveis e registre qualquer ganho aplicado. Evit
 
 | Caminho | Quando faz sentido | Principal limitação | O que verificar |
 | --- | --- | --- | --- |
-| Concatenação direta ou stream copy | Entradas com fluxos compatíveis e sem processamento | Codecs, bases de tempo ou durações incompatíveis podem impedir um resultado limpo | Ordem, timestamps, duração e todas as junções |
+| Concatenação direta ou cópia direta do fluxo | Entradas com fluxos compatíveis e sem processamento | Codecs, bases de tempo ou durações incompatíveis podem impedir um resultado limpo | Ordem, timestamps, duração e todas as junções |
 | Decodificar, processar e recodificar | Quando há reamostragem, mapeamento de canais, ganho, fades, crossfades ou formatos mistos | A codificação pode mudar qualidade e tamanho | Formato comum, picos, loudness, junções e reprodução final |
 | Intermediário sem perdas e codificação final | Projetos com várias edições antes de um formato final com perdas | Exige mais armazenamento e uma etapa adicional | Integridade do intermediário e compatibilidade da entrega |
 
@@ -121,7 +121,7 @@ Para verificar clipes antes da combinação, controle primeiro as entradas: inve
 
 ### Todos os clipes precisam ter a mesma taxa de amostragem antes da combinação?
 
-Eles precisam formar uma linha do tempo de saída consistente. Uma operação direta de stream copy geralmente exige fluxos compatíveis. Se taxas de amostragem ou outras propriedades forem diferentes, converta cópias de trabalho para uma especificação comum dentro de um fluxo controlado de recodificação.
+Eles precisam formar uma linha do tempo de saída consistente. Uma operação direta de cópia direta do fluxo geralmente exige fluxos compatíveis. Se taxas de amostragem ou outras propriedades forem diferentes, converta cópias de trabalho para uma especificação comum dentro de um fluxo controlado de recodificação.
 
 ### Devo normalizar todos os clipes antes de combiná-los?
 

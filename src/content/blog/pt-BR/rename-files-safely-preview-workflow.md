@@ -72,7 +72,7 @@ Nomes de arquivo também participam de fluxos externos. Um documento pode ser re
 | Renomear manualmente | Poucos arquivos sem padrão comum | Inconsistência de grafia e numeração | Mantenha o padrão de destino visível |
 | Renomeação em lote do gerenciador | Seleções pequenas e simples | Pouco controle ou pouca prévia | Teste em cópias e preserve extensões |
 | Regras de renomeação | Muitos arquivos com uma transformação repetida | Regra ampla demais afeta tudo que combina | Revise todos os resultados e as colisões |
-| Script | Fluxos técnicos reproduzíveis e versionados | Erro de lógica ou caminho pode atingir uma árvore grande | Dry run, diretório limitado e log de mapeamento |
+| Script | Fluxos técnicos reproduzíveis e versionados | Erro de lógica ou caminho pode atingir uma árvore grande | Simulação, diretório limitado e log de mapeamento |
 | Nomear durante exportação | Arquivos produzidos pelo mesmo app | Pode ser difícil rastrear a origem mais tarde | Preserve manifesto de exportação ou originais |
 
 ## Cuidados práticos

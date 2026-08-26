@@ -73,7 +73,7 @@ Los nombres también participan en flujos externos. Un documento puede estar enl
 | Renombrar uno a uno | Pocos archivos sin relación | Inconsistencias de escritura o numeración | Mantener visible el patrón objetivo |
 | Renombrado del gestor de archivos | Selección pequeña y simple | Control o vista previa limitados | Probar con copias y conservar extensiones |
 | Renombrado por reglas | Patrones repetidos en muchos archivos | Una regla amplia afecta a todas las coincidencias | Revisar cada destino antes de aplicar |
-| Script de renombrado | Flujos técnicos reproducibles | Un error de lógica o ruta puede afectar a un árbol grande | Hacer dry run, limitar el directorio y registrar el mapeo |
+| Script de renombrado | Flujos técnicos reproducibles | Un error de lógica o ruta puede afectar a un árbol grande | Hacer simulación, limitar el directorio y registrar el mapeo |
 | Renombrado durante exportación | Archivos creados por la misma aplicación | Puede perderse la identidad de origen | Conservar un manifiesto o copia original |
 
 ## Precauciones prácticas

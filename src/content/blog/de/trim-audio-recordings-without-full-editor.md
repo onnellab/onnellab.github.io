@@ -92,7 +92,7 @@ Metadaten müssen separat geprüft werden. Titel, Kommentare, Cover, Daten, Stan
 9. **Export verifizieren.** Datei möglichst in einem unabhängigen Player neu öffnen und Anfang, Ende, Dauer, Seeking, beide Kanäle und hörbare Qualität prüfen.
 10. **Original aufbewahren.** Mindestens bis der Ausschnitt am Ziel angekommen und dort geprüft ist.
 
-![Audio-Trim-Workflow](/blog-assets/en/trim-audio-recordings-without-full-editor/workflow-diagram.svg "Backup-zuerst-Workflow für Auswahl, Vorschau, Export und Prüfung eines Audioausschnitts")
+![Audio-Trim-Workflow](/blog-assets/en/trim-audio-recordings-without-full-editor/workflow-diagram.svg "Arbeitsablauf mit vorheriger Sicherung für Auswahl, Vorschau, Export und Prüfung eines Audioausschnitts")
 
 ## ONNELLAB-Anwendung
 

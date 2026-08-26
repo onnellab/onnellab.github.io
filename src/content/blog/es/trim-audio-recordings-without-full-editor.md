@@ -50,13 +50,13 @@ Las grabaciones pueden contener voces, lugares, nombres, notificaciones o conver
 
 MP3, AAC, Opus y Vorbis son codecs con pérdidas. Exportar audio decodificado de nuevo a uno de ellos crea otra generación con pérdida. Repetir ese proceso puede acumular cambios, así que evita convertir una grabación ya comprimida solo porque el editor ofrece un formato conocido por defecto.
 
-Algunas herramientas ofrecen **stream copy** o corte sin recodificación. Copian frames o paquetes existentes, pero los puntos disponibles pueden estar condicionados por esas unidades o por el contenedor. Un corte exacto a nivel de sample y un stream copy no siempre son compatibles; escucha la salida.
+Algunas herramientas ofrecen **copia directa del flujo** o corte sin recodificación. Copian frames o paquetes existentes, pero los puntos disponibles pueden estar condicionados por esas unidades o por el contenedor. Un corte exacto a nivel de sample y un copia directa del flujo no siempre son compatibles; escucha la salida.
 
 | Método | Qué ocurre | Ventaja | Límite |
 | --- | --- | --- | --- |
 | PCM a PCM equivalente | Se escriben los samples conservados en un nuevo archivo sin comprimir | Sin nueva pérdida y con gran precisión | Archivos mayores; revisar metadatos |
 | FLAC a FLAC | Se decodifica y recomprime sin pérdida | Conserva el audio decodificado con menor tamaño | Compatibilidad y metadatos varían |
-| Stream copy | Se copian frames o paquetes existentes | Evita una nueva recodificación con pérdidas | Los puntos de corte pueden ser menos exactos |
+| Copia directa del flujo | Se copian frames o paquetes existentes | Evita una nueva recodificación con pérdidas | Los puntos de corte pueden ser menos exactos |
 | Recodificación con pérdidas | Se decodifica, recorta y codifica de nuevo | Amplia compatibilidad y archivos más pequeños | Añade otra generación con pérdida |
 
 ## Elige los límites con la vista y el oído
@@ -117,7 +117,7 @@ Un recorte fiable es más que mover dos controles. Protege la fuente, selecciona
 
 ### ¿Puedo recortar audio sin perder calidad?
 
-Sí, si el proceso mantiene los samples decodificados sin pérdidas, por ejemplo con PCM equivalente o FLAC a FLAC, y evita transformaciones innecesarias. Un stream copy también puede evitar otra generación con pérdidas, pero los puntos disponibles pueden ser menos precisos.
+Sí, si el proceso mantiene los samples decodificados sin pérdidas, por ejemplo con PCM equivalente o FLAC a FLAC, y evita transformaciones innecesarias. Un copia directa del flujo también puede evitar otra generación con pérdidas, pero los puntos disponibles pueden ser menos precisos.
 
 ### ¿Un cruce por cero elimina siempre los clics?
 

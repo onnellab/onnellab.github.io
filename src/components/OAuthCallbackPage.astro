@@ -31,16 +31,16 @@ const copies: Record<AllSiteLocale, Copy> = {
   ko: {
     title:'ONNELLAB X OAuth 콜백',description:'ONNELLAB 게시 자동화를 위한 X OAuth 콜백 페이지입니다.',heading:'X OAuth 콜백',updated:'최종 업데이트',navLabel:'탐색',privacy:'개인정보 처리방침',terms:'이용약관',
     sections:[
-      {title:'목적',body:['이 페이지는 ONNELLAB X API 인증을 위해 등록된 OAuth 콜백 엔드포인트입니다.','ONNELLAB 콘텐츠 워크플로에서 승인된 글을 ONNELLAB X 계정에 게시하기 위한, 소유자 승인 OAuth 흐름을 완료하는 용도로만 사용됩니다.']},
+      {title:'목적',body:['이 페이지는 ONNELLAB X API 인증을 위해 등록된 OAuth 콜백 엔드포인트입니다.','ONNELLAB 콘텐츠 워크플로에서 승인된 글을 ONNELLAB X 계정에 게시하기 위한, ONNELLAB 계정 소유자가 승인한 OAuth 흐름을 완료하는 용도로만 사용됩니다.']},
       {title:'데이터 처리',body:['ONNELLAB은 이 페이지를 통해 X 사용자 데이터를 수집, 판매, 분석하지 않습니다.','X API 연동은 ONNELLAB이 소유한 콘텐츠를 ONNELLAB이 관리하는 X 계정에 게시하고, 기본 인증 상태를 확인하기 위한 용도입니다.']},
       {title:'인증 코드',body:['X가 인증 코드를 포함해 이 URL로 리다이렉트하는 경우, 해당 코드는 임시 값이며 X OAuth 요구사항에 따라 서버 측 또는 신뢰할 수 있는 로컬 도구에서 교환되어야 합니다.','인증 코드, 액세스 토큰, 리프레시 토큰, 클라이언트 시크릿, 앱 자격 증명을 공개적으로 공유하지 마세요.']},
-      {title:'문의',body:['OAuth 또는 개발자 플랫폼 관련 문의는 onnellab.app@gmail.com 으로 연락할 수 있습니다.']}
+      {title:'문의',body:['OAuth 또는 개발자 플랫폼 관련 문의는 onnellab.app@gmail.com으로 연락할 수 있습니다.']}
     ]
   },
   ja: {
     title:'ONNELLAB X OAuth コールバック',description:'ONNELLABの投稿自動化に使用する、登録済みX OAuthコールバックページです。',heading:'X OAuth コールバック',updated:'最終更新日',navLabel:'ナビゲーション',privacy:'プライバシーポリシー',terms:'利用規約',
     sections:[
-      {title:'目的',body:['このページは、ONNELLABのX API認証用に登録されたOAuthコールバックエンドポイントです。','ONNELLABのコンテンツワークフローで承認された投稿を、ONNELLABが管理するXアカウントへ公開するための、所有者承認済みOAuthフローを完了する目的にのみ使用されます。']},
+      {title:'目的',body:['このページは、ONNELLABのX API認証用に登録されたOAuthコールバックエンドポイントです。','ONNELLABのコンテンツワークフローで承認された投稿を、ONNELLABが管理するXアカウントへ公開するための、ONNELLABアカウントの所有者が承認したOAuthフローを完了する目的にのみ使用されます。']},
       {title:'データの取り扱い',body:['ONNELLABは、このページを通じてX利用者のデータを収集、販売、分析しません。','X API連携は、ONNELLAB所有のコンテンツをONNELLAB管理のXアカウントへ投稿し、基本的な認証状態を確認するためのものです。']},
       {title:'認証コード',body:['Xが認証コードを含めてこのURLへリダイレクトした場合、そのコードは一時的な値であり、X OAuthの要件に従ってサーバー側または信頼できるローカルツールで交換する必要があります。','認証コード、アクセストークン、リフレッシュトークン、クライアントシークレット、アプリ資格情報を公開しないでください。']},
       {title:'お問い合わせ',body:['OAuthまたは開発者プラットフォームに関するお問い合わせは onnellab.app@gmail.com までご連絡ください。']}
@@ -49,7 +49,7 @@ const copies: Record<AllSiteLocale, Copy> = {
   'zh-Hans': {
     title:'ONNELLAB X OAuth 回调',description:'用于 ONNELLAB 发布自动化的已注册 X OAuth 回调页面。',heading:'X OAuth 回调',updated:'最后更新',navLabel:'导航',privacy:'隐私政策',terms:'使用条款',
     sections:[
-      {title:'用途',body:['此页面是为 ONNELLAB X API 身份验证注册的 OAuth 回调端点。','它仅用于完成经所有者授权的 X OAuth 流程，以便从 ONNELLAB 内容工作流向 ONNELLAB 管理的 X 账号发布已批准的内容。']},
+      {title:'用途',body:['此页面是为 ONNELLAB X API 身份验证注册的 OAuth 回调端点。','它仅用于完成经 ONNELLAB 账号所有者授权的 X OAuth 流程，以便从 ONNELLAB 内容工作流向 ONNELLAB 管理的 X 账号发布已批准的内容。']},
       {title:'数据处理',body:['ONNELLAB 不会通过此页面收集、出售或分析 X 用户数据。','X API 集成仅用于把 ONNELLAB 自有内容发布到 ONNELLAB 管理的 X 账号，并进行基本凭据验证。']},
       {title:'授权码',body:['如果 X 携带授权码重定向到此 URL，该授权码是临时值，应按照 X OAuth 要求在服务器端或可信的本地工具中进行交换。','请勿公开分享授权码、访问令牌、刷新令牌、客户端密钥或应用凭据。']},
       {title:'联系',body:['有关 OAuth 或开发者平台的问题，请通过 onnellab.app@gmail.com 联系 ONNELLAB。']}
@@ -58,7 +58,7 @@ const copies: Record<AllSiteLocale, Copy> = {
   'zh-Hant': {
     title:'ONNELLAB X OAuth 回呼',description:'用於 ONNELLAB 發布自動化的已註冊 X OAuth 回呼頁面。',heading:'X OAuth 回呼',updated:'最後更新',navLabel:'導覽',privacy:'隱私權政策',terms:'使用條款',
     sections:[
-      {title:'用途',body:['此頁面是為 ONNELLAB X API 驗證註冊的 OAuth 回呼端點。','僅用於完成經擁有者授權的 X OAuth 流程，以便從 ONNELLAB 內容工作流程將已核准內容發布至 ONNELLAB 管理的 X 帳號。']},
+      {title:'用途',body:['此頁面是為 ONNELLAB X API 驗證註冊的 OAuth 回呼端點。','僅用於完成經 ONNELLAB 帳號擁有者授權的 X OAuth 流程，以便從 ONNELLAB 內容工作流程將已核准內容發布至 ONNELLAB 管理的 X 帳號。']},
       {title:'資料處理',body:['ONNELLAB 不會透過此頁面蒐集、出售或分析 X 使用者資料。','X API 整合僅用於將 ONNELLAB 自有內容發布至 ONNELLAB 管理的 X 帳號，並進行基本憑證驗證。']},
       {title:'授權碼',body:['若 X 帶著授權碼重新導向至此 URL，該授權碼是暫時值，應依照 X OAuth 要求在伺服器端或可信任的本機工具中交換。','請勿公開分享授權碼、存取權杖、重新整理權杖、用戶端密鑰或應用程式憑證。']},
       {title:'聯絡',body:['如有 OAuth 或開發者平台相關問題，請寄信至 onnellab.app@gmail.com 聯絡 ONNELLAB。']}
@@ -67,7 +67,7 @@ const copies: Record<AllSiteLocale, Copy> = {
   'pt-BR': {
     title:'Callback OAuth do X · ONNELLAB',description:'Página registrada de callback OAuth do X para a automação de publicações da ONNELLAB.',heading:'Callback OAuth do X',updated:'Última atualização',navLabel:'Navegação',privacy:'Política de Privacidade',terms:'Termos de Uso',
     sections:[
-      {title:'Finalidade',body:['Esta página é o endpoint de callback OAuth registrado para a autenticação da API do X pela ONNELLAB.','Ela é usada somente para concluir um fluxo OAuth do X autorizado pelo proprietário, destinado a publicar posts aprovados da ONNELLAB em uma conta do X controlada pela ONNELLAB.']},
+      {title:'Finalidade',body:['Esta página é o endpoint de callback OAuth registrado para a autenticação da API do X pela ONNELLAB.','Ela é usada somente para concluir um fluxo OAuth do X autorizado pelo titular da conta ONNELLAB, destinado a publicar posts aprovados da ONNELLAB em uma conta do X controlada pela ONNELLAB.']},
       {title:'Tratamento de dados',body:['A ONNELLAB não coleta, vende nem analisa dados de usuários do X por meio desta página.','A integração com a API do X serve para publicar conteúdo pertencente à ONNELLAB em uma conta controlada pela ONNELLAB e para verificações básicas de credenciais.']},
       {title:'Código de autorização',body:['Se o X redirecionar para este URL com um código de autorização, esse código é temporário e deve ser trocado no servidor ou em uma ferramenta local confiável conforme os requisitos do OAuth do X.','Não compartilhe publicamente códigos de autorização, tokens de acesso, tokens de atualização, segredos do cliente ou credenciais do app.']},
       {title:'Contato',body:['Para dúvidas sobre OAuth ou a plataforma de desenvolvedores, fale com a ONNELLAB em onnellab.app@gmail.com.']}
@@ -76,7 +76,7 @@ const copies: Record<AllSiteLocale, Copy> = {
   de: {
     title:'ONNELLAB X OAuth-Callback',description:'Registrierte X-OAuth-Callback-Seite für die ONNELLAB-Veröffentlichungsautomatisierung.',heading:'X OAuth-Callback',updated:'Zuletzt aktualisiert',navLabel:'Navigation',privacy:'Datenschutzerklärung',terms:'Nutzungsbedingungen',
     sections:[
-      {title:'Zweck',body:['Diese Seite ist der registrierte OAuth-Callback-Endpunkt für die X-API-Authentifizierung von ONNELLAB.','Sie wird ausschließlich verwendet, um einen vom Eigentümer autorisierten X-OAuth-Ablauf abzuschließen, mit dem freigegebene ONNELLAB-Beiträge aus dem ONNELLAB-Content-Workflow auf einem von ONNELLAB kontrollierten X-Konto veröffentlicht werden.']},
+      {title:'Zweck',body:['Diese Seite ist der registrierte OAuth-Callback-Endpunkt für die X-API-Authentifizierung von ONNELLAB.','Sie wird ausschließlich verwendet, um einen vom Inhaber des ONNELLAB-Kontos autorisierten X-OAuth-Ablauf abzuschließen, mit dem freigegebene ONNELLAB-Beiträge aus dem ONNELLAB-Content-Workflow auf einem von ONNELLAB kontrollierten X-Konto veröffentlicht werden.']},
       {title:'Datenverarbeitung',body:['ONNELLAB erhebt, verkauft oder analysiert über diese Seite keine X-Nutzerdaten.','Die X-API-Integration dient dazu, ONNELLAB-eigene Inhalte auf einem von ONNELLAB kontrollierten X-Konto zu veröffentlichen und grundlegende Zugangsdaten zu prüfen.']},
       {title:'Autorisierungscode',body:['Wenn X mit einem Autorisierungscode zu dieser URL weiterleitet, ist der Code nur vorübergehend und muss gemäß den X-OAuth-Anforderungen serverseitig oder mit einem vertrauenswürdigen lokalen Werkzeug ausgetauscht werden.','Autorisierungscodes, Access Tokens, Refresh Tokens, Client Secrets oder App-Zugangsdaten dürfen nicht öffentlich geteilt werden.']},
       {title:'Kontakt',body:['Fragen zu OAuth oder der Entwicklerplattform bitte an onnellab.app@gmail.com senden.']}
@@ -85,7 +85,7 @@ const copies: Record<AllSiteLocale, Copy> = {
   fr: {
     title:'Callback OAuth X · ONNELLAB',description:'Page de callback OAuth X enregistrée pour l’automatisation des publications ONNELLAB.',heading:'Callback OAuth X',updated:'Dernière mise à jour',navLabel:'Navigation',privacy:'Politique de confidentialité',terms:'Conditions d’utilisation',
     sections:[
-      {title:'Finalité',body:['Cette page est le point de callback OAuth enregistré pour l’authentification de l’API X d’ONNELLAB.','Elle sert uniquement à terminer un flux OAuth X autorisé par le propriétaire afin de publier les contenus ONNELLAB approuvés depuis le workflow de contenu ONNELLAB vers un compte X contrôlé par ONNELLAB.']},
+      {title:'Finalité',body:['Cette page est le point de callback OAuth enregistré pour l’authentification de l’API X d’ONNELLAB.','Elle sert uniquement à terminer un flux OAuth X autorisé par le titulaire du compte ONNELLAB afin de publier les contenus ONNELLAB approuvés depuis le workflow de contenu ONNELLAB vers un compte X contrôlé par ONNELLAB.']},
       {title:'Traitement des données',body:['ONNELLAB ne collecte, ne vend et n’analyse aucune donnée d’utilisateur X via cette page.','L’intégration à l’API X sert à publier du contenu appartenant à ONNELLAB sur un compte X contrôlé par ONNELLAB et à effectuer une vérification de base des identifiants.']},
       {title:'Code d’autorisation',body:['Si X redirige vers cette URL avec un code d’autorisation, ce code est temporaire et doit être échangé côté serveur ou depuis un outil local de confiance, conformément aux exigences OAuth de X.','Ne partagez publiquement aucun code d’autorisation, jeton d’accès, jeton d’actualisation, secret client ou identifiant d’application.']},
       {title:'Contact',body:['Pour toute question concernant OAuth ou la plateforme développeur, contactez ONNELLAB à onnellab.app@gmail.com.']}
@@ -94,7 +94,7 @@ const copies: Record<AllSiteLocale, Copy> = {
   es: {
     title:'Callback OAuth de X · ONNELLAB',description:'Página de callback OAuth de X registrada para la automatización de publicaciones de ONNELLAB.',heading:'Callback OAuth de X',updated:'Última actualización',navLabel:'Navegación',privacy:'Política de privacidad',terms:'Términos de uso',
     sections:[
-      {title:'Finalidad',body:['Esta página es el endpoint de callback OAuth registrado para la autenticación de la API de X de ONNELLAB.','Se usa únicamente para completar un flujo OAuth de X autorizado por el propietario y publicar contenido aprobado de ONNELLAB desde el flujo de contenido de ONNELLAB en una cuenta de X controlada por ONNELLAB.']},
+      {title:'Finalidad',body:['Esta página es el endpoint de callback OAuth registrado para la autenticación de la API de X de ONNELLAB.','Se usa únicamente para completar un flujo OAuth de X autorizado por el titular de la cuenta ONNELLAB y publicar contenido aprobado de ONNELLAB desde el flujo de contenido de ONNELLAB en una cuenta de X controlada por ONNELLAB.']},
       {title:'Tratamiento de datos',body:['ONNELLAB no recopila, vende ni analiza datos de usuarios de X a través de esta página.','La integración con la API de X sirve para publicar contenido propiedad de ONNELLAB en una cuenta de X controlada por ONNELLAB y para realizar comprobaciones básicas de credenciales.']},
       {title:'Código de autorización',body:['Si X redirige a esta URL con un código de autorización, este es temporal y debe intercambiarse en el servidor o mediante una herramienta local de confianza, conforme a los requisitos OAuth de X.','No compartas públicamente códigos de autorización, tokens de acceso, tokens de actualización, secretos del cliente ni credenciales de la app.']},
       {title:'Contacto',body:['Para preguntas sobre OAuth o la plataforma para desarrolladores, contacta con ONNELLAB en onnellab.app@gmail.com.']}
