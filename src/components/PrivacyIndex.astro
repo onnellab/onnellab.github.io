@@ -21,6 +21,9 @@ type PrivacyCopy = {
   eyebrow: string;
   heading: string;
   intro: string;
+  navLabel: string;
+  platformsLabel: string;
+  policyName: (appName: string) => string;
   searchLabel: string;
   searchPlaceholder: string;
   empty: string;
@@ -41,6 +44,9 @@ const copies: Record<SiteLocale, PrivacyCopy> = {
     eyebrow: 'Legal',
     heading: 'Privacy Policies',
     intro: 'Choose an app to read the policy that matches its actual data flow and platform features.',
+    navLabel: 'Navigation',
+    platformsLabel: 'Platforms',
+    policyName: (appName) => `${appName} Privacy Policy`,
     searchLabel: 'Find app',
     searchPlaceholder: 'Search app name',
     empty: 'No matching apps.',
@@ -60,6 +66,9 @@ const copies: Record<SiteLocale, PrivacyCopy> = {
     eyebrow: '법적 안내',
     heading: '개인정보 처리방침',
     intro: '앱마다 실제 데이터 흐름과 플랫폼 기능에 맞는 개인정보 처리방침을 제공해요.',
+    navLabel: '탐색',
+    platformsLabel: '플랫폼',
+    policyName: (appName) => `${appName} 개인정보 처리방침`,
     searchLabel: '앱 찾기',
     searchPlaceholder: '앱 이름을 검색해요',
     empty: '일치하는 앱이 없어요.',
@@ -79,6 +88,9 @@ const copies: Record<SiteLocale, PrivacyCopy> = {
     eyebrow: '法的情報',
     heading: 'プライバシーポリシー',
     intro: '各アプリの実際のデータフローとプラットフォーム機能に合わせたポリシーを掲載しています。',
+    navLabel: 'ナビゲーション',
+    platformsLabel: '対応プラットフォーム',
+    policyName: (appName) => `${appName} プライバシーポリシー`,
     searchLabel: 'アプリを探す',
     searchPlaceholder: 'アプリ名で検索',
     empty: '該当するアプリはありません。',
@@ -90,7 +102,7 @@ const copies: Record<SiteLocale, PrivacyCopy> = {
     siteBody:
       '本サイトはONNELLABのコンテンツと製品情報を提供します。外部投稿APIは承認済みのONNELLABコンテンツとONNELLAB管理アカウントにのみ使用します。他の利用者の非公開ソーシャルデータを販売または分析しません。',
     contactTitle: 'お問い合わせ',
-    contactBody: 'プライバシーに関するお問い合わせは onnellab.app@gmail.com までお送りください。',
+    contactBody: 'プライバシーに関するお問い合わせは onnellab.app@gmail.com までお送りください。'
   },
   'zh-Hans': {
     title: 'ONNELLAB 隐私政策',
@@ -98,6 +110,9 @@ const copies: Record<SiteLocale, PrivacyCopy> = {
     eyebrow: '法律信息',
     heading: '隐私政策',
     intro: '每款应用都提供与实际数据流和平台功能相符的隐私政策。',
+    navLabel: '导航',
+    platformsLabel: '支持平台',
+    policyName: (appName) => `${appName} 隐私政策`,
     searchLabel: '查找应用',
     searchPlaceholder: '搜索应用名称',
     empty: '没有匹配的应用。',
@@ -109,7 +124,7 @@ const copies: Record<SiteLocale, PrivacyCopy> = {
     siteBody:
       '本网站提供 ONNELLAB 原创内容与产品信息。外部发布 API 仅用于经批准的 ONNELLAB 内容和由 ONNELLAB 管理的账号。我们不会出售或分析其他用户的私密社交数据。',
     contactTitle: '联系',
-    contactBody: '隐私相关问题请发送至 onnellab.app@gmail.com。',
+    contactBody: '隐私相关问题请发送至 onnellab.app@gmail.com。'
   },
   'zh-Hant': {
     title: 'ONNELLAB 隱私權政策',
@@ -117,6 +132,9 @@ const copies: Record<SiteLocale, PrivacyCopy> = {
     eyebrow: '法律資訊',
     heading: '隱私權政策',
     intro: '每款應用程式都提供與實際資料流程和平台功能相符的隱私權政策。',
+    navLabel: '導覽',
+    platformsLabel: '支援平台',
+    policyName: (appName) => `${appName} 隱私權政策`,
     searchLabel: '尋找應用程式',
     searchPlaceholder: '搜尋應用程式名稱',
     empty: '沒有符合的應用程式。',
@@ -128,7 +146,7 @@ const copies: Record<SiteLocale, PrivacyCopy> = {
     siteBody:
       '本網站提供 ONNELLAB 原創內容與產品資訊。外部發布 API 僅用於經核准的 ONNELLAB 內容和由 ONNELLAB 管理的帳號。我們不會出售或分析其他使用者的私人社群資料。',
     contactTitle: '聯絡',
-    contactBody: '隱私相關問題請寄至 onnellab.app@gmail.com。',
+    contactBody: '隱私相關問題請寄至 onnellab.app@gmail.com。'
   }
 };
 
@@ -184,7 +202,7 @@ const collectionJsonLd = {
     itemListElement: policies.map((policy, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      name: `${policy.title} Privacy Policy`,
+      name: copy.policyName(policy.title),
       url: new URL(policy.href, Astro.site).toString()
     }))
   }
@@ -200,7 +218,7 @@ const collectionJsonLd = {
   alternates={localeAlternates('privacy')}
 >
   <main class="page-shell information-shell" data-privacy-page data-locale={locale}>
-    <nav class="top-nav site-header" aria-label="Navigation">
+    <nav class="top-nav site-header" aria-label={copy.navLabel}>
       <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
       <LocaleMenu locale={locale} page="privacy" />
     </nav>
@@ -242,7 +260,7 @@ const collectionJsonLd = {
             <h2>{policy.title}</h2>
             <p><span>{copy.updated}</span> <time datetime={policy.date}>{policy.date}</time></p>
           </div>
-          <div class="platform-badges" aria-label="Platforms">
+          <div class="platform-badges" aria-label={copy.platformsLabel}>
             {policy.platforms.map((platform) => <span>{platform}</span>)}
           </div>
         </a>
