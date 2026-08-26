@@ -45,7 +45,7 @@ jobs:
       - name: Localize accessibility labels
         run: |
           set -euo pipefail
-          node scripts/apply-localization-review.mjs accessibility
+          node scripts/run-localization-review.mjs accessibility
           npm run build
           npx playwright test tests/accessibility-i18n.spec.ts --project=desktop
           git add src tests .github/workflows/i18n-smoke.yml
@@ -58,7 +58,7 @@ jobs:
       - name: Correct confirmed localization errors
         run: |
           set -euo pipefail
-          node scripts/apply-localization-review.mjs corrections
+          node scripts/run-localization-review.mjs corrections
           npm run build
           git add src
           if ! git diff --cached --quiet; then
@@ -70,7 +70,7 @@ jobs:
       - name: Clarify privacy and purchase terminology
         run: |
           set -euo pipefail
-          node scripts/apply-localization-review.mjs legal
+          node scripts/run-localization-review.mjs legal
           npm run build
           git add src
           if ! git diff --cached --quiet; then
@@ -82,7 +82,7 @@ jobs:
       - name: Rewrite release notes for users
         run: |
           set -euo pipefail
-          node scripts/apply-localization-review.mjs release
+          node scripts/run-localization-review.mjs release
           npm run build
           npx playwright test tests/product-contract.spec.ts --project=desktop
           git add src
@@ -95,7 +95,7 @@ jobs:
       - name: Normalize terminology and add regression checks
         run: |
           set -euo pipefail
-          node scripts/apply-localization-review.mjs terminology
+          node scripts/run-localization-review.mjs terminology
           npm run check:i18n-quality
           npm run build
           git add src tests scripts/check-localization-quality.mjs package.json .github/workflows/i18n-smoke.yml
@@ -109,7 +109,10 @@ jobs:
         run: |
           set -euo pipefail
           git pull --rebase origin main
-          rm -f scripts/apply-localization-review.mjs .github/workflows/finish-localization-review.yml
+          rm -f \
+            scripts/apply-localization-review.mjs \
+            scripts/run-localization-review.mjs \
+            .github/workflows/finish-localization-review.yml
           npm run check:i18n-quality
           npm run build
           npx playwright test \
