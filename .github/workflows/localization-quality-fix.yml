@@ -101,6 +101,7 @@ jobs:
       - name: Remove one-time migration files
         run: |
           rm -f \
+            scripts/utils.mjs \
             scripts/localization-fix-utils.mjs \
             scripts/localization-fix-accessibility.mjs \
             scripts/localization-fix-corrections.mjs \
