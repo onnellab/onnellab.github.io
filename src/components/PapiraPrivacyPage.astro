@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { uiLabels } from '../lib/ui-labels';
 import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
 import {
@@ -451,7 +452,7 @@ const emailParts = (value: string) => {
   alternates={papiraPrivacyLocaleAlternates()}
 >
   <main class="legal-shell" data-papira-privacy data-locale={locale}>
-    <nav class="topbar site-header" aria-label="Navigation">
+    <nav class="topbar site-header" aria-label={uiLabels[locale].navigation}>
       <a class="brand home-link" href={routeFor('home', relatedLocale)}>{text.homeLabel}</a>
       <div class="topbar-actions">
         <a class="hub-link" href={routeFor('privacy', relatedLocale)}>{text.privacyHubLabel}</a>

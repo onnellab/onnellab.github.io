@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { uiLabels } from '../lib/ui-labels';
 import LocaleMenu from './LocaleMenu.astro';
 import { getIconRoutePath, getProductSources } from '../lib/products';
 import {
@@ -219,7 +220,7 @@ const email = 'onnellab.app@gmail.com';
 
 <BaseLayout title={title} description={description} canonicalPath={canonicalPath} lang={definition.htmlLang} alternates={allLocaleAlternates(page)} socialImage={page === 'home' ? '/social-card.png' : undefined}>
   <main class="extended-shell" data-core-page={page} data-locale={locale}>
-    <nav class="top-nav site-header" aria-label="Navigation">
+    <nav class="top-nav site-header" aria-label={uiLabels[locale].navigation}>
       <a class="brand" href={allRouteFor('home', locale)}>ONNELLAB</a>
       <div class="nav-links">
         {page !== 'apps' && <a href={allRouteFor('apps', locale)}>{copy.nav.apps}</a>}
@@ -257,7 +258,7 @@ const email = 'onnellab.app@gmail.com';
         <header class="hero compact"><p class="eyebrow">{copy.apps.eyebrow}</p><h1>{copy.apps.title}</h1><p class="lede">{copy.apps.intro}</p></header>
         <label class="search"><span class="sr-only">{copy.apps.search}</span><input type="search" placeholder={copy.apps.search} data-search /></label>
         <p data-empty hidden>{copy.apps.empty}</p>
-        <section class="app-list">{appItems.map((item) => <a class="app-row" href={item.href} data-row data-title={item.title.toLowerCase()}><img src={item.icon} alt="" width="58" height="58" /><div><div class="title-row"><h2>{item.title}</h2><span>{item.status}</span></div><p>{item.description}</p><small>{item.platforms.join(' · ')}</small></div></a>)}</section>
+        <section class="app-list">{appItems.map((item) => <a class="app-row" href={item.href} data-row data-title={item.title.toLowerCase()}><img src={item.icon} alt="" width="58" height="58" /><div><div class="title-row"><h2>{item.title}</h2><span>{item.status}</span></div><p>{item.description}</p><small class="platform-badges" aria-label={copy.common.platforms}>{item.platforms.join(' · ')}</small></div></a>)}</section>
         <script is:inline>{`(()=>{const i=document.querySelector('[data-search]');if(!(i instanceof HTMLInputElement))return;const r=[...document.querySelectorAll('[data-row]')];i.addEventListener('input',()=>{const q=i.value.trim().toLowerCase();let n=0;r.forEach(x=>{const h=q&&!(x.getAttribute('data-title')||'').includes(q);x.hidden=!!h;if(!h)n++});const e=document.querySelector('[data-empty]');if(e instanceof HTMLElement)e.hidden=n>0})})()`}</script>
       </>
     )}
@@ -277,7 +278,7 @@ const email = 'onnellab.app@gmail.com';
         <div class="notice-grid"><section class="card"><h2>{copy.privacy.analyticsTitle}</h2><p>{copy.privacy.analyticsBody}</p></section><section class="card"><h2>{copy.privacy.siteTitle}</h2><p>{copy.privacy.siteBody}</p></section><section class="card"><h2>{copy.privacy.contactTitle}</h2><p>{copy.privacy.contactBody}</p></section></div>
         <label class="search"><span class="sr-only">{copy.privacy.search}</span><input type="search" placeholder={copy.privacy.search} data-search /></label>
         <p data-empty hidden>{copy.privacy.empty}</p>
-        <section class="policy-list">{appItems.map((item) => <a class="policy-row" href={item.privacy} data-row data-title={item.title.toLowerCase()}><div><h2>{item.title}</h2><p>{copy.privacy.updated}</p></div><small>{item.platforms.join(' · ')}</small></a>)}</section>
+        <section class="policy-list">{appItems.map((item) => <a class="policy-row" href={item.privacy} data-row data-title={item.title.toLowerCase()}><div><h2>{item.title}</h2><p>{copy.privacy.updated}</p></div><small class="platform-badges" aria-label={copy.common.platforms}>{item.platforms.join(' · ')}</small></a>)}</section>
         <script is:inline>{`(()=>{const i=document.querySelector('[data-search]');if(!(i instanceof HTMLInputElement))return;const r=[...document.querySelectorAll('[data-row]')];i.addEventListener('input',()=>{const q=i.value.trim().toLowerCase();let n=0;r.forEach(x=>{const h=q&&!(x.getAttribute('data-title')||'').includes(q);x.hidden=!!h;if(!h)n++});const e=document.querySelector('[data-empty]');if(e instanceof HTMLElement)e.hidden=n>0})})()`}</script>
       </>
     )}

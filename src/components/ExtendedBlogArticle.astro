@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { uiLabels } from '../lib/ui-labels';
 import { renderMarkdownBlocks } from '../lib/blog';
 import { type ExtendedBlogPost } from '../lib/extended-blog';
 import {
@@ -147,7 +148,7 @@ const jsonLd = {
         <p class="category">{categoryLabel}</p>
         <h1>{post.title}</h1>
         <p class="description">{post.description}</p>
-        <div class="meta">
+        <div class="meta" aria-label={uiLabels[locale].articleMetadata}>
           {post.publishedAt && <span>{copy.published} {post.publishedAt.slice(0, 10)}</span>}
           {post.updatedAt && <span>{copy.updated} {post.updatedAt.slice(0, 10)}</span>}
         </div>

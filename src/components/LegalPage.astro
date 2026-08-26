@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { uiLabels } from '../lib/ui-labels';
 import SiteFooter from './SiteFooter.astro';
 
 type Section = {
@@ -44,7 +45,7 @@ const updatedLabel = lang === 'ko' ? '최종 업데이트' : 'Last updated';
 
 <BaseLayout title={title} description={description} canonicalPath={canonicalPath} lang={lang} alternates={alternates}>
   <main class="legal-shell">
-    <nav class="site-header" aria-label="Navigation">
+    <nav class="site-header" aria-label={uiLabels[lang].navigation}>
       <a class="brand" href={homeHref}>ONNELLAB</a>
       <a class="language site-language-control" href={languageHref} data-locale-choice={languageCode} aria-label={lang === 'ko' ? 'Switch to English' : '한국어로 보기'} title={languageLabel}>{languageLabel}</a>
     </nav>

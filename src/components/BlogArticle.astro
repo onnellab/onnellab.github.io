@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { uiLabels } from '../lib/ui-labels';
 import BlogLocaleMenu from './BlogLocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
 import { blogPostAlternates } from '../lib/blog-i18n';
@@ -301,7 +302,7 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
   alternates={blogPostAlternates(post.meta.slug)}
 >
   <main class="article-shell">
-    <nav class="top-nav site-header" aria-label="Article navigation">
+    <nav class="top-nav site-header" aria-label={uiLabels[locale].articleNavigation}>
       <a class="brand" href={homeHref}>ONNELLAB</a>
       <div class="nav-actions">
         <a href={appsHref}>{copy.apps}</a>
@@ -316,7 +317,7 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
         <h1>{post.meta.title}</h1>
         <p class="description">{post.meta.description}</p>
         {hasMeta && (
-          <div class="meta-grid" aria-label="Article metadata">
+          <div class="meta-grid" aria-label={uiLabels[locale].articleMetadata}>
             {post.meta.publishedAt && <span class="meta-date">{copy.published} {dateLabel(post.meta.publishedAt)}</span>}
             {post.meta.updatedAt && <span class="meta-date">{copy.updated} {dateLabel(post.meta.updatedAt)}</span>}
             {post.meta.relatedApps.map((app) => <a class="meta-app" href={appHref(app)}>{app}</a>)}
@@ -469,9 +470,9 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
     </article>
 
     {articleImages.length > 0 && (
-      <dialog class="article-image-viewer" aria-label="Article image">
+      <dialog class="article-image-viewer" aria-label={uiLabels[locale].articleImage}>
         <div class="article-image-viewer-panel">
-          <button class="article-image-close" type="button" data-article-image-close aria-label="Close">×</button>
+          <button class="article-image-close" type="button" data-article-image-close aria-label={uiLabels[locale].close}>×</button>
           <img
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
             alt=""
