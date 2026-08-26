@@ -57,6 +57,10 @@ jobs:
               "title: '小さな道具を、 静かに。',",
               "title: '小さな道具を、静かに。',",
               'Japanese home heading')
+          replace_value(home,
+              '''<><span class="title-line">小さな道具を、</span>{' '}<span class="title-line">静かに。</span></>''',
+              '''<><span class="title-line">小さな道具を、</span><span class="title-line">静かに。</span></>''',
+              'Japanese split-heading separator')
 
           tests = Path('tests/site-i18n.spec.ts')
           replace_value(tests,
