@@ -1,3 +1,4 @@
+# Permanent localization quality gate for all nine supported languages.
 name: Verify nine-language site
 
 on:
