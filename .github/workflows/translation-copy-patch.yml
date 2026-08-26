@@ -1,0 +1,234 @@
+name: One-time translation copy patch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/translation-copy-patch.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Configure Git
+        run: |
+          git config user.name "ONNELLAB i18n patch"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+
+      - name: Fix Japanese home copy and its regression fixture
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          def replace_once(path: str, old: str, new: str) -> None:
+              file = Path(path)
+              text = file.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{path}: expected one match, found {count}: {old!r}')
+              file.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          replace_once(
+              'src/components/HomePage.astro',
+              "seoTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',",
+              "seoTitle: 'ONNELLAB - ファイル管理と創作のためのアプリ',",
+          )
+
+          home = Path('src/components/HomePage.astro')
+          home_text = home.read_text(encoding='utf-8')
+          home_text = home_text.replace("title: '小さな道具を、 静かに。',", "title: '小さな道具を、静かに。',")
+          home.write_text(home_text, encoding='utf-8')
+
+          replace_once(
+              'tests/site-i18n.spec.ts',
+              "homeTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',",
+              "homeTitle: 'ONNELLAB - ファイル管理と創作のためのアプリ',",
+          )
+          replace_once(
+              'tests/site-i18n.spec.ts',
+              "homeHeading: '小さな道具を、 静かに。',",
+              "homeHeading: '小さな道具を、静かに。',",
+          )
+          PY
+          git add src/components/HomePage.astro tests/site-i18n.spec.ts
+          git commit -m "Polish Japanese home copy"
+
+      - name: Fix CJK and French metadata typography
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          import re
+
+          products_path = Path('src/lib/products.ts')
+          products = products_path.read_text(encoding='utf-8')
+          pattern = re.compile(
+              r"function seoPageDescription\(source: ProductSource, copy: ProductCopy\): string \{.*?\n\}\n\nfunction productSeoTitle",
+              re.S,
+          )
+          replacement = r'''function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
+            const summary = pageDescription(copy).replace(/\s+/g, ' ').trim();
+            const platforms = copy.locale === 'en'
+              ? source.meta.platforms.join(' and ')
+              : source.meta.platforms.join('/');
+            const category = landingSubtitle(copy)
+              .replace(/\s+/g, ' ')
+              .trim()
+              .replace(/[.!?。！？]+$/u, '');
+            const normalize = (value: string) =>
+              value.replace(/[.!?。！？]+$/u, '').trim().toLocaleLowerCase();
+            const detail = normalize(summary) === normalize(category) ? '' : summary;
+            const spacedDetail = detail ? ` ${detail}` : '';
+
+            if (copy.locale === 'ko') {
+              return `${source.meta.title} — ${category}. 지원 플랫폼: ${platforms}.${spacedDetail}`;
+            }
+            if (copy.locale === 'ja') {
+              return `${source.meta.title} — ${category}。対応プラットフォーム: ${platforms}。${detail}`;
+            }
+            if (copy.locale === 'zh-Hans') {
+              return `${source.meta.title} — ${category}。支持平台：${platforms}。${detail}`;
+            }
+            if (copy.locale === 'zh-Hant') {
+              return `${source.meta.title} — ${category}。支援平台：${platforms}。${detail}`;
+            }
+            if (copy.locale === 'pt-BR') {
+              return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${spacedDetail}`;
+            }
+            if (copy.locale === 'de') {
+              return `${source.meta.title} — ${category}. Plattformen: ${platforms}.${spacedDetail}`;
+            }
+            if (copy.locale === 'fr') {
+              return `${source.meta.title} — ${category}. Plateformes\u00A0: ${platforms}.${spacedDetail}`;
+            }
+            if (copy.locale === 'es') {
+              return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${spacedDetail}`;
+            }
+            return `${source.meta.title} — ${category}. Platforms: ${platforms}.${spacedDetail}`;
+          }
+
+          function productSeoTitle'''
+          updated, count = pattern.subn(replacement, products, count=1)
+          if count != 1:
+              raise SystemExit(f'products.ts: expected one seoPageDescription function, found {count}')
+          products_path.write_text(updated, encoding='utf-8')
+
+          test_path = Path('tests/product-contract.spec.ts')
+          tests = test_path.read_text(encoding='utf-8')
+          old_marker = "  fr: 'Plateformes :',"
+          new_marker = "  fr: 'Plateformes\\u00A0:',"
+          if tests.count(old_marker) != 1:
+              raise SystemExit('product-contract.spec.ts: French platform marker not found exactly once')
+          tests = tests.replace(old_marker, new_marker, 1)
+
+          old_checks = '''      if (app !== 'papira') {
+                expect(metaDescription).toContain(' — ');
+                expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
+              }
+          '''
+          new_checks = '''      if (app !== 'papira') {
+                expect(metaDescription).toContain(' — ');
+                expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
+                if (locale.code === 'ja' || locale.code === 'zh-Hans' || locale.code === 'zh-Hant') {
+                  expect(metaDescription).not.toMatch(/。[ \\t]/u);
+                }
+                if (locale.code === 'fr') {
+                  expect(metaDescription).toContain('Plateformes\\u00A0:');
+                  expect(metaDescription).not.toContain('Plateformes :');
+                }
+              }
+          '''
+          if tests.count(old_checks) != 1:
+              raise SystemExit('product-contract.spec.ts: metadata assertion block not found exactly once')
+          tests = tests.replace(old_checks, new_checks, 1)
+          test_path.write_text(tests, encoding='utf-8')
+          PY
+          git add src/lib/products.ts tests/product-contract.spec.ts
+          git commit -m "Refine localized metadata typography"
+
+      - name: Localize Portuguese and German store labels
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          template_path = Path('src/components/ProductTemplate.astro')
+          template = template_path.read_text(encoding='utf-8')
+
+          old_pt = "download:'Download', screens:'Capturas de tela', stores:'Lojas'"
+          new_pt = "download:'Baixar', screens:'Capturas de tela', stores:'Lojas'"
+          if template.count(old_pt) != 1:
+              raise SystemExit('ProductTemplate.astro: Portuguese download label not found exactly once')
+          template = template.replace(old_pt, new_pt, 1)
+
+          old_de = "download:'Download', screens:'Screenshots', stores:'Stores'"
+          new_de = "download:'Download', screens:'Screenshots', stores:'App-Stores'"
+          if template.count(old_de) != 1:
+              raise SystemExit('ProductTemplate.astro: German store label not found exactly once')
+          template = template.replace(old_de, new_de, 1)
+          template_path.write_text(template, encoding='utf-8')
+
+          test_path = Path('tests/product-contract.spec.ts')
+          tests = test_path.read_text(encoding='utf-8')
+          marker = "      await expect(page.locator('.download-band')).toHaveCount(1);\n      await expect(page.locator('.site-footer')).toHaveCount(1);"
+          replacement = """      await expect(page.locator('.download-band')).toHaveCount(1);
+              if (locale.code === 'pt-BR') {
+                await expect(page.locator('.download-band')).toHaveAttribute('aria-label', 'Baixar');
+                await expect(page.locator('.download-band > .eyebrow')).toHaveText('Baixar');
+              }
+              if (locale.code === 'de') {
+                const storeActions = page.locator('.download-band .actions.compact');
+                if (await storeActions.count()) {
+                  await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');
+                }
+              }
+              await expect(page.locator('.site-footer')).toHaveCount(1);"""
+          if tests.count(marker) != 1:
+              raise SystemExit('product-contract.spec.ts: download-band assertion marker not found exactly once')
+          tests = tests.replace(marker, replacement, 1)
+          test_path.write_text(tests, encoding='utf-8')
+          PY
+          git add src/components/ProductTemplate.astro tests/product-contract.spec.ts
+          git commit -m "Localize Portuguese and German store labels"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run full visual and i18n regression suite
+        run: npm run test:visual
+
+      - name: Push sequential commits to main
+        shell: bash
+        run: |
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep 5
+          done
+          exit 1
