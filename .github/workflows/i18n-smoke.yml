@@ -59,17 +59,23 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Run nine-language product and site regression tests
+      - name: Run core nine-language regression tests
         run: >-
           npx playwright test
           tests/site-i18n.spec.ts
           tests/extended-i18n.spec.ts
           tests/papira-i18n.spec.ts
           tests/product-contract.spec.ts
-          tests/accessibility-i18n.spec.ts
-          tests/localization-copy.spec.ts
-          tests/site-visual.spec.ts
           --project=desktop
+
+      - name: Run localized accessibility regression tests
+        run: npx playwright test tests/accessibility-i18n.spec.ts --project=desktop
+
+      - name: Run localized copy regression tests
+        run: npx playwright test tests/localization-copy.spec.ts --project=desktop
+
+      - name: Run site visual regression tests
+        run: npx playwright test tests/site-visual.spec.ts --project=desktop
 
       - name: Publish commit status
         if: always()
