@@ -42,60 +42,18 @@ jobs:
           git config user.name "ONNELLAB Automation"
           git config user.email "actions@users.noreply.github.com"
 
-      - name: Correct confirmed localization errors
+      - name: Verify user-facing release notes
         run: |
           set -euo pipefail
           git pull --rebase origin main
-          python - <<'PY'
-          from pathlib import Path
-          path = Path('tests/papira-i18n.spec.ts')
-          source = path.read_text(encoding='utf-8')
-          source = source.replace('Papira schützt Ihre Privatsphäre.', 'Papira respektiert Ihre Privatsphäre.')
-          path.write_text(source, encoding='utf-8')
-          PY
-          node --check scripts/apply-localization-review.mjs
-          node scripts/apply-localization-review.mjs corrections
-          npm run build
-          npx playwright test tests/papira-i18n.spec.ts tests/extended-i18n.spec.ts --project=desktop
-          git add src tests/papira-i18n.spec.ts
-          if ! git diff --cached --quiet; then
-            git commit -m "Correct confirmed localization errors"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
-
-      - name: Clarify privacy and purchase terminology
-        run: |
-          set -euo pipefail
-          git pull --rebase origin main
-          node scripts/apply-localization-review.mjs legal
-          npm run build
-          npx playwright test tests/site-i18n.spec.ts tests/extended-i18n.spec.ts tests/papira-i18n.spec.ts --project=desktop
-          git add src
-          if ! git diff --cached --quiet; then
-            git commit -m "Clarify localized privacy and purchase terminology"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
-
-      - name: Rewrite release notes for users
-        run: |
-          set -euo pipefail
-          git pull --rebase origin main
-          node scripts/apply-localization-review.mjs release
           npm run build
           npx playwright test tests/product-contract.spec.ts --project=desktop
-          git add src
-          if ! git diff --cached --quiet; then
-            git commit -m "Rewrite TagWeaver release notes for users"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
 
       - name: Normalize terminology and add regression checks
         run: |
           set -euo pipefail
           git pull --rebase origin main
+          node --check scripts/apply-localization-review.mjs
           node scripts/apply-localization-review.mjs terminology
           git checkout -- .github/workflows/i18n-smoke.yml
           npm run check:i18n-quality
@@ -107,7 +65,7 @@ jobs:
             git push origin HEAD:main
           fi
 
-      - name: Verify final tree and remove one-time scripts
+      - name: Verify final tree and remove one-time automation
         run: |
           set -euo pipefail
           git pull --rebase origin main
@@ -121,8 +79,14 @@ jobs:
             tests/product-contract.spec.ts \
             tests/site-visual.spec.ts \
             --project=desktop
-          rm -f scripts/apply-localization-review.mjs scripts/run-localization-review.mjs
-          git add -u scripts
+          rm -f \
+            scripts/apply-localization-review.mjs \
+            scripts/run-localization-review.mjs \
+            .github/workflows/finish-localization-review.yml \
+            .github/workflows/apply-localization-review.yml \
+            .github/workflows/apply-remaining-localization-fixes.yml \
+            scripts/apply_remaining_localization_fixes.py
+          git add -A
           if ! git diff --cached --quiet; then
             git commit -m "Complete nine-language localization quality pass"
             git pull --rebase origin main
