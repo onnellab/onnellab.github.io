@@ -60,25 +60,36 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run site i18n regression tests
-        run: npx playwright test tests/site-i18n.spec.ts --project=desktop
+        run: npx playwright test tests/site-i18n.spec.ts --project=desktop --reporter=line,html
 
       - name: Run extended i18n regression tests
-        run: npx playwright test tests/extended-i18n.spec.ts --project=desktop
+        run: npx playwright test tests/extended-i18n.spec.ts --project=desktop --reporter=line,html
 
       - name: Run Papira i18n regression tests
-        run: npx playwright test tests/papira-i18n.spec.ts --project=desktop
+        run: npx playwright test tests/papira-i18n.spec.ts --project=desktop --reporter=line,html
 
       - name: Run product contract regression tests
-        run: npx playwright test tests/product-contract.spec.ts --project=desktop
+        run: npx playwright test tests/product-contract.spec.ts --project=desktop --reporter=line,html
 
       - name: Run localized accessibility regression tests
-        run: npx playwright test tests/accessibility-i18n.spec.ts --project=desktop
+        run: npx playwright test tests/accessibility-i18n.spec.ts --project=desktop --reporter=line,html
 
       - name: Run localized copy regression tests
-        run: npx playwright test tests/localization-copy.spec.ts --project=desktop
+        run: npx playwright test tests/localization-copy.spec.ts --project=desktop --reporter=line,html
 
       - name: Run site visual regression tests
-        run: npx playwright test tests/site-visual.spec.ts --project=desktop
+        run: npx playwright test tests/site-visual.spec.ts --project=desktop --reporter=line,html
+
+      - name: Upload Playwright failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: i18n-playwright-failure-${{ github.run_id }}
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: ignore
+          retention-days: 3
 
       - name: Publish commit status
         if: always()
