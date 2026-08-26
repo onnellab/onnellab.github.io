@@ -66,6 +66,9 @@ jobs:
       - name: Run extended i18n regression tests
         run: npx playwright test tests/extended-i18n.spec.ts --project=desktop --reporter=line,html
 
+      - name: Run release note localization regression tests
+        run: npx playwright test tests/release-notes-i18n.spec.ts --project=desktop --reporter=line,html
+
       - name: Run Papira i18n regression tests
         run: npx playwright test tests/papira-i18n.spec.ts --project=desktop --reporter=line,html
 
@@ -97,7 +100,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           JOB_RESULT: ${{ job.status }}
-          TARGET_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          TARGET_URL: ${{ github.server_url }}/${{ github.repository}/actions/runs/${{ github.run_id }}
         run: |
           if [ "$JOB_RESULT" = "success" ]; then
             state=success
