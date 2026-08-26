@@ -1,0 +1,326 @@
+name: Verify and repair localization quality
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/localization-quality-verify-20260826.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: localization-quality-fix
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Configure Git and synchronize main
+        run: |
+          git config user.name "ONNELLAB localization verifier"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+
+      - name: Install dependencies and Chromium
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Verify and repair localized copy
+        run: |
+          cat > /tmp/verify_localization.py <<'PY'
+          from __future__ import annotations
+
+          import json
+          import re
+          from pathlib import Path
+
+          root = Path.cwd()
+
+          def file(rel: str) -> Path:
+              return root / rel
+
+          def read(rel: str) -> str:
+              return file(rel).read_text(encoding='utf-8')
+
+          def write(rel: str, text: str) -> None:
+              target = file(rel)
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_text(text, encoding='utf-8')
+
+          def replace(rel: str, old: str, new: str) -> None:
+              text = read(rel)
+              if old in text:
+                  write(rel, text.replace(old, new))
+
+          def replace_tree(directory: str, replacements: dict[str, str]) -> None:
+              for target in sorted(file(directory).rglob('*')):
+                  if not target.is_file() or target.suffix not in {'.astro', '.ts', '.md'}:
+                      continue
+                  text = target.read_text(encoding='utf-8')
+                  updated = text
+                  for old, new in replacements.items():
+                      updated = updated.replace(old, new)
+                  if updated != text:
+                      target.write_text(updated, encoding='utf-8')
+
+          def ensure_import(rel: str) -> None:
+              text = read(rel)
+              line = "import { uiLabels } from '../lib/ui-labels';"
+              if line not in text:
+                  if not text.startswith('---\n'):
+                      raise RuntimeError(f'Unexpected Astro file: {rel}')
+                  write(rel, text.replace('---\n', f'---\n{line}\n', 1))
+
+          labels = """import type { AllSiteLocale } from './extended-site-i18n';
+
+export const uiLabels: Record<AllSiteLocale, {
+  navigation: string; platforms: string; blogNavigation: string; articleNavigation: string;
+  articleMetadata: string; articleImage: string; close: string; privacyPolicy: string; terms: string;
+}> = {
+  en: { navigation:'Navigation', platforms:'Platforms', blogNavigation:'Blog navigation', articleNavigation:'Article navigation', articleMetadata:'Article information', articleImage:'Article image', close:'Close', privacyPolicy:'Privacy Policy', terms:'Terms' },
+  ko: { navigation:'탐색', platforms:'플랫폼', blogNavigation:'블로그 탐색', articleNavigation:'글 탐색', articleMetadata:'글 정보', articleImage:'글 이미지', close:'닫기', privacyPolicy:'개인정보 처리방침', terms:'이용약관' },
+  ja: { navigation:'ナビゲーション', platforms:'対応プラットフォーム', blogNavigation:'ブログナビゲーション', articleNavigation:'記事ナビゲーション', articleMetadata:'記事情報', articleImage:'記事画像', close:'閉じる', privacyPolicy:'プライバシーポリシー', terms:'利用規約' },
+  'zh-Hans': { navigation:'导航', platforms:'支持平台', blogNavigation:'博客导航', articleNavigation:'文章导航', articleMetadata:'文章信息', articleImage:'文章图片', close:'关闭', privacyPolicy:'隐私政策', terms:'使用条款' },
+  'zh-Hant': { navigation:'導覽', platforms:'支援平台', blogNavigation:'部落格導覽', articleNavigation:'文章導覽', articleMetadata:'文章資訊', articleImage:'文章圖片', close:'關閉', privacyPolicy:'隱私權政策', terms:'使用條款' },
+  'pt-BR': { navigation:'Navegação', platforms:'Plataformas', blogNavigation:'Navegação do blog', articleNavigation:'Navegação do artigo', articleMetadata:'Informações do artigo', articleImage:'Imagem do artigo', close:'Fechar', privacyPolicy:'Política de Privacidade', terms:'Termos de Uso' },
+  de: { navigation:'Navigation', platforms:'Plattformen', blogNavigation:'Blog-Navigation', articleNavigation:'Artikelnavigation', articleMetadata:'Artikelinformationen', articleImage:'Artikelbild', close:'Schließen', privacyPolicy:'Datenschutzerklärung', terms:'Nutzungsbedingungen' },
+  fr: { navigation:'Navigation', platforms:'Plateformes', blogNavigation:'Navigation du blog', articleNavigation:'Navigation de l’article', articleMetadata:'Informations sur l’article', articleImage:'Image de l’article', close:'Fermer', privacyPolicy:'Politique de confidentialité', terms:'Conditions d’utilisation' },
+  es: { navigation:'Navegación', platforms:'Plataformas', blogNavigation:'Navegación del blog', articleNavigation:'Navegación del artículo', articleMetadata:'Información del artículo', articleImage:'Imagen del artículo', close:'Cerrar', privacyPolicy:'Política de privacidad', terms:'Términos de uso' }
+};
+"""
+          if not file('src/lib/ui-labels.ts').exists():
+              write('src/lib/ui-labels.ts', labels)
+
+          attrs = {
+              'aria-label="Navigation"': 'navigation',
+              'aria-label="Platforms"': 'platforms',
+              'aria-label="Blog navigation"': 'blogNavigation',
+              'aria-label="Article navigation"': 'articleNavigation',
+              'aria-label="Article metadata"': 'articleMetadata',
+              'aria-label="Article image"': 'articleImage',
+              'aria-label="Close"': 'close'
+          }
+          for target in sorted(file('src/components').glob('*.astro')):
+              text = target.read_text(encoding='utf-8')
+              if not any(old in text for old in attrs):
+                  continue
+              owner = 'locale' if re.search(r'const\s*\{[^}]*\blocale\b[^}]*\}\s*=\s*Astro\.props', text, re.S) else 'lang' if re.search(r'const\s*\{[^}]*\blang\b[^}]*\}\s*=\s*Astro\.props', text, re.S) else None
+              if owner is None:
+                  raise RuntimeError(f'No locale variable for {target}')
+              rel = target.relative_to(root).as_posix()
+              ensure_import(rel)
+              text = read(rel)
+              for old, key in attrs.items():
+                  text = text.replace(old, f'aria-label={{uiLabels[{owner}].{key}}}')
+              write(rel, text)
+
+          oauth = 'src/components/OAuthCallbackPage.astro'
+          ensure_import(oauth)
+          replace(oauth, '<nav class="topbar">', '<nav class="topbar" aria-label={uiLabels[locale].navigation}>')
+          replace(oauth, '<footer><a href={allRouteFor(\'privacy\',locale)}>Privacy</a><a href={allRouteFor(\'terms\',locale)}>Terms</a>', '<footer><a href={allRouteFor(\'privacy\',locale)}>{uiLabels[locale].privacyPolicy}</a><a href={allRouteFor(\'terms\',locale)}>{uiLabels[locale].terms}</a>')
+
+          privacy_index = 'src/components/PrivacyIndex.astro'
+          ensure_import(privacy_index)
+          replace(privacy_index, 'name: `${policy.title} Privacy Policy`,', 'name: `${policy.title} ${uiLabels[locale].privacyPolicy}`,')
+
+          text = read(privacy_index)
+          def locale_updated(source: str, locale: str, desired: str) -> str:
+              pattern = rf"('{re.escape(locale)}':\s*\{{.*?\bupdated:\s*)'[^']*'"
+              updated, count = re.subn(pattern, lambda match: match.group(1) + repr(desired), source, count=1, flags=re.S)
+              if count != 1:
+                  raise RuntimeError(f'Could not set privacy date label for {locale}')
+              return updated
+          for locale, desired in [('en','Last updated'),('ko','최종 업데이트'),('ja','最終更新日'),('zh-Hans','最后更新'),('zh-Hant','最後更新')]:
+              text = locale_updated(text, locale, desired)
+          write(privacy_index, text)
+
+          text = read('src/components/ExtendedSitePage.astro')
+          for locale, desired in [('pt-BR','Última atualização'),('de','Zuletzt aktualisiert'),('fr','Dernière mise à jour'),('es','Última actualización')]:
+              pattern = rf"('{re.escape(locale)}':\s*\{{.*?privacy:\s*\{{.*?\bupdated:\s*)'[^']*'"
+              text, count = re.subn(pattern, lambda match: match.group(1) + repr(desired), text, count=1, flags=re.S)
+              if count != 1:
+                  raise RuntimeError(f'Could not set extended privacy date label for {locale}')
+          write('src/components/ExtendedSitePage.astro', text)
+
+          replace_tree('src', {
+              '驗證與回復購買':'驗證並恢復購買',
+              'Papira schützt Ihre Privatsphäre.':'Papira respektiert Ihre Privatsphäre.',
+              'Vom App verwaltete Projekte':'Von der App verwaltete Projekte',
+              'Wenn sich Papira-Funktionen oder gesetzliche beziehungsweise Anforderungen der Stores ändern':'Wenn sich Papira-Funktionen, gesetzliche Anforderungen oder Anforderungen der App-Stores ändern',
+              'Warum große Textdateien langsam öffnen können':'Warum das Öffnen großer Textdateien lange dauern kann',
+              'Warum große Textdateien langsam öffnen':'Warum das Öffnen großer Textdateien lange dauert',
+              '一つをSoTにして再生成します。':'一つを正本（Source of Truth）と定め、そこから再生成します。',
+              "{ title: 'Calmo por padrão'":"{ title: 'Calma por padrão'",
+              "{ title: 'Enfocado'":"{ title: 'Enfoque'",
+              "{ title: 'Tranquilo'":"{ title: 'Calma'",
+              "{ title: 'Respetuoso'":"{ title: 'Respeto'",
+              'feat. 表记':'feat. 的标注方式',
+              'feat. 表記':'feat. 的標記方式',
+              'Subjektbezeichner':'Anonyme, vom Server vergebene Benutzerkennung',
+              'Vom App verwaltete':'Von der App verwaltete',
+              'Aucune connexion,':'Aucun compte requis,',
+              'Backup-zuerst-Workflow':'Workflow mit vorherigem Backup',
+              'Barrierefreiheits-Semantiken':'semantische Informationen für Barrierefreiheit',
+              'Android-Tag-Speicherleistung':'Leistung beim Speichern von Tags unter Android',
+              'Android-Schreibzeitprüfungen':'Prüfungen der Schreibdauer unter Android',
+              'Local-first-Workflows':'lokale Workflows'
+          })
+
+          replace('src/content/blog/ko/txt-vs-epub-for-long-reading.md', 'image_specs: "Workflow diagram for 긴 글 TXT EPUB 비교|Comparison diagram for practical options|Screenshot requirements for related applications"', 'image_specs: "긴 글 TXT·EPUB 비교 작업 흐름도|실용적인 선택지 비교 도표|관련 앱 화면 요구사항"')
+          replace_tree('src/content/blog/pt-BR', {'arte do álbum':'capa do álbum','Arte do álbum':'Capa do álbum'})
+
+          replace_many = {
+              'src/lib/releaseNotes.ts': {
+                  "'Improved stability for the public iOS 2.2 release.'":"'Improved overall stability on iOS.'",
+                  "'Kept the notes scoped to App Store-visible stability fixes.'":"'Made everyday tag editing more reliable.'",
+                  "'Excluded private-test-only and local build metadata changes from the public notes.'":"'Resolved minor issues found during release testing.'",
+                  "'공개 iOS 2.2 릴리즈의 안정성을 개선했습니다.'":"'iOS에서 전반적인 안정성을 개선했어요.'",
+                  "'App Store에 공개된 안정성 수정 범위로 릴리즈 노트를 한정했습니다.'":"'일상적인 태그 편집이 더 안정적으로 동작하도록 개선했어요.'",
+                  "'비공개 테스트 전용 변경과 로컬 빌드 메타데이터 변경은 공개 노트에서 제외했습니다.'":"'출시 테스트에서 발견한 사소한 문제를 수정했어요.'"
+              },
+              'src/lib/extended-release-notes.ts': {
+                  'リリースノートを App Store に公開される安定性修正の範囲に限定しました。':'日常的なタグ編集がより安定して動作するよう改善しました。',
+                  '非公開テスト専用の変更とローカルビルドのメタデータ変更は公開ノートから除外しました。':'リリーステストで見つかった軽微な問題を修正しました。',
+                  '发布说明仅保留 App Store 可见的稳定性修复。':'让日常标签编辑更加可靠。',
+                  '公开说明不包含仅用于私有测试的更改和本地构建元数据更改。':'修复了发布测试中发现的细小问题。',
+                  '版本說明僅保留 App Store 可見的穩定性修正。':'讓日常標籤編輯更加可靠。',
+                  '公開說明不包含僅用於私人測試的變更與本機建置中繼資料變更。':'修正了發布測試中發現的小問題。',
+                  'Mantivemos as notas restritas às correções de estabilidade visíveis na App Store.':'Deixamos a edição cotidiana de tags mais confiável.',
+                  'Alterações exclusivas de testes privados e metadados de build local não foram incluídos nas notas públicas.':'Corrigimos pequenos problemas encontrados nos testes da versão.',
+                  'Die Versionshinweise bleiben auf öffentlich sichtbare App-Store-Stabilitätskorrekturen beschränkt.':'Die alltägliche Bearbeitung von Tags funktioniert zuverlässiger.',
+                  'Änderungen nur für private Tests und lokale Build-Metadaten wurden aus den öffentlichen Hinweisen ausgeschlossen.':'Kleinere Probleme aus den Veröffentlichungstests wurden behoben.',
+                  'Les notes restent limitées aux correctifs de stabilité visibles sur l’App Store.':'L’édition quotidienne des tags est désormais plus fiable.',
+                  'Les changements réservés aux tests privés et les métadonnées de build local sont exclus des notes publiques.':'Correction de problèmes mineurs détectés pendant les tests de publication.',
+                  'Limitamos las notas a las correcciones de estabilidad visibles en la App Store.':'Hicimos más fiable la edición cotidiana de etiquetas.',
+                  'Los cambios exclusivos de pruebas privadas y los metadatos de compilación local no se incluyen en las notas públicas.':'Corregimos pequeños problemas detectados durante las pruebas de publicación.'
+              }
+          }
+          for rel, mapping in replace_many.items():
+              text = read(rel)
+              for old, new in mapping.items():
+                  text = text.replace(old, new)
+              write(rel, text)
+
+          legal_terms = {
+              'Informações de direito de compra':'Informações sobre o status da licença',
+              'Direito de compra armazenado':'Status da licença armazenado',
+              'direito de compra armazenado':'status da licença armazenado',
+              'status de compra':'status da licença',
+              'Kaufberechtigung':'Lizenzstatus',
+              'Berechtigungsinformationen':'Lizenzinformationen',
+              'Informations de droit d’achat':'Informations sur l’état de la licence',
+              'Droit d’achat stocké':'État de la licence stocké',
+              'droit d’achat stocké':'état de la licence stocké',
+              'état du droit d’achat':'état de la licence',
+              'Información del derecho de compra':'Información sobre el estado de la licencia',
+              'Derecho de compra almacenado':'Estado de la licencia almacenado',
+              'derecho de compra almacenado':'estado de la licencia almacenado',
+              'estado del derecho de compra':'estado de la licencia'
+          }
+          replace_tree('src', legal_terms)
+
+          quality = """import fs from 'node:fs';
+import path from 'node:path';
+const root = path.resolve(process.cwd(), 'src');
+const banned = ['aria-label="Navigation"','aria-label="Platforms"','aria-label="Blog navigation"','aria-label="Article navigation"','aria-label="Article metadata"','aria-label="Article image"','aria-label="Close"','驗證與回復購買','Vom App verwaltete','Warum große Textdateien langsam öffnen','一つをSoTにして','feat. 表记','feat. 表記','Calmo por padrão','Subjektbezeichner',"updated: 'Policy date'"];
+const failures=[];
+const walk=(dir)=>{for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const full=path.join(dir,entry.name);if(entry.isDirectory())walk(full);else if(/\\.(?:astro|ts|md)$/.test(entry.name)){const source=fs.readFileSync(full,'utf8');for(const phrase of banned)if(source.includes(phrase))failures.push(`${path.relative(process.cwd(),full)}: ${phrase}`)}}};
+walk(root);
+if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+console.log('Localization quality guard passed.');
+"""
+          write('scripts/check-localization-quality.mjs', quality)
+          package = json.loads(read('package.json'))
+          package.setdefault('scripts', {})['check:i18n-quality'] = 'node scripts/check-localization-quality.mjs'
+          write('package.json', json.dumps(package, ensure_ascii=False, indent=2) + '\n')
+
+          copy_test = """import { expect, test } from '@playwright/test';
+
+const privacyDates = [
+  ['/privacy/', 'Last updated'], ['/privacy/ko/', '최종 업데이트'], ['/privacy/ja/', '最終更新日'],
+  ['/privacy/zh-hans/', '最后更新'], ['/privacy/zh-hant/', '最後更新'], ['/privacy/pt-br/', 'Última atualização'],
+  ['/privacy/de/', 'Zuletzt aktualisiert'], ['/privacy/fr/', 'Dernière mise à jour'], ['/privacy/es/', 'Última actualización']
+] as const;
+
+for (const [route, label] of privacyDates) {
+  test(`privacy date label ${route}`, async ({ page }) => {
+    await page.goto(route);
+    await expect(page.locator('.policy-row').first()).toContainText(label);
+  });
+}
+
+test('confirmed localization corrections remain applied', async ({ page }) => {
+  await page.goto('/privacy/papira/de/');
+  await expect(page.locator('main')).toContainText('Von der App verwaltete Projekte');
+  await expect(page.locator('main')).toContainText('Papira respektiert Ihre Privatsphäre.');
+  await page.goto('/blog/de/large-text-file-slow-to-open/');
+  await expect(page.locator('h1')).toHaveText('Warum das Öffnen großer Textdateien lange dauert');
+  await page.goto('/release-notes/tagweaver/2.2/ko/');
+  await expect(page.locator('main')).toContainText('일상적인 태그 편집이 더 안정적으로 동작하도록 개선했어요.');
+});
+"""
+          write('tests/localization-copy.spec.ts', copy_test)
+
+          workflow = '.github/workflows/i18n-smoke.yml'
+          text = read(workflow)
+          for marker, entry in [
+              ('          tests/site-i18n.spec.ts\n', '          tests/accessibility-i18n.spec.ts\n'),
+              ('          tests/accessibility-i18n.spec.ts\n', '          tests/localization-copy.spec.ts\n')
+          ]:
+              if entry not in text:
+                  if marker not in text:
+                      raise RuntimeError(f'Unable to add {entry.strip()} to CI')
+                  text = text.replace(marker, marker + entry, 1)
+          check_step = "\n      - name: Check localization quality\n        run: npm run check:i18n-quality\n"
+          build_step = "\n      - name: Build site\n        run: npm run build\n"
+          if check_step not in text:
+              text = text.replace(build_step, build_step + check_step, 1)
+          write(workflow, text)
+          PY
+          python /tmp/verify_localization.py
+
+      - name: Run complete localization verification
+        run: |
+          npm run check:i18n-quality
+          npm run build
+          npx playwright test tests/site-i18n.spec.ts tests/extended-i18n.spec.ts tests/papira-i18n.spec.ts tests/product-contract.spec.ts tests/accessibility-i18n.spec.ts tests/localization-copy.spec.ts tests/site-visual.spec.ts --project=desktop
+          git diff --check
+
+      - name: Commit localization repairs
+        run: |
+          git add src tests scripts/check-localization-quality.mjs package.json .github/workflows/i18n-smoke.yml
+          if ! git diff --cached --quiet; then
+            git commit -m "Verify and repair nine-language localization quality"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Remove temporary localization workflows
+        if: success()
+        run: |
+          rm -f scripts/localization-fix-*.mjs
+          rm -f .github/workflows/localization-quality-fix*.yml
+          rm -f .github/workflows/localization-quality-verify-20260826.yml
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Remove temporary localization workflows"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
