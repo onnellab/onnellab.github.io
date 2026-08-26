@@ -8,11 +8,10 @@ let source = fs.readFileSync(sourcePath, 'utf8');
 const brokenTail = "'Hicimos más fiable la edición habitual de etiquetas.'] }\"\n  ];";
 const fixedTail = "'Hicimos más fiable la edición habitual de etiquetas.'] }\"]\n  ];";
 
-if (!source.includes(brokenTail)) {
-  throw new Error('Expected localization script syntax marker was not found');
+if (source.includes(brokenTail)) {
+  source = source.replace(brokenTail, fixedTail);
 }
 
-source = source.replace(brokenTail, fixedTail);
 const temporaryPath = path.join(os.tmpdir(), `apply-localization-review-${process.pid}.mjs`);
 fs.writeFileSync(temporaryPath, source, 'utf8');
 
