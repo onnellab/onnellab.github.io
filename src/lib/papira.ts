@@ -53,31 +53,31 @@ const extendedPapiraScreenshotAlts: Record<
 > = {
   'pt-BR': [
     'Tela inicial do Papira para converter TXT em EPUB',
-    'Escolha do tipo de obra, capa e estrutura do texto',
-    'Prévia do livro com capa, sumário e dados',
-    'Detecção de capítulos e prévia do sumário',
-    'Exportação do EPUB para salvar no dispositivo'
+    'Tela do Papira para escolher o tipo de obra, a capa e a estrutura do texto',
+    'Prévia do Papira com capa, sumário e dados do livro',
+    'Tela do Papira com detecção de capítulos e prévia do sumário',
+    'Tela do Papira para exportar o EPUB e salvá-lo no dispositivo'
   ],
   de: [
     'Papira-Startseite zur Umwandlung von TXT in EPUB',
-    'Auswahl des Werktyps mit Cover- und Textaufbau',
-    'Buchvorschau mit Cover, Inhaltsverzeichnis und Buchdaten',
-    'Kapitelerkennung und Inhaltsverzeichnis-Vorschau',
-    'EPUB-Export zum Speichern auf dem Gerät'
+    'Papira-Auswahl des Werktyps mit Cover- und Textaufbau',
+    'Papira-Buchvorschau mit Cover, Inhaltsverzeichnis und Buchdaten',
+    'Papira-Kapitelerkennung mit Vorschau des Inhaltsverzeichnisses',
+    'Papira-EPUB-Export zum Speichern auf dem Gerät'
   ],
   fr: [
     'Écran d’accueil de Papira pour convertir un TXT en EPUB',
-    'Choix du type de texte, de la couverture et de la structure',
-    'Aperçu du livre avec couverture, sommaire et informations',
-    'Détection des chapitres et aperçu du sommaire',
-    'Exportation de l’EPUB vers l’appareil'
+    'Écran Papira pour choisir le type de texte, la couverture et la structure',
+    'Aperçu Papira du livre avec couverture, sommaire et informations',
+    'Écran Papira de détection des chapitres et d’aperçu du sommaire',
+    'Écran Papira d’exportation de l’EPUB vers l’appareil'
   ],
   es: [
     'Pantalla de inicio de Papira para convertir TXT a EPUB',
-    'Elección del tipo de obra, portada y estructura del texto',
-    'Vista previa del libro con portada, índice y datos',
-    'Detección de capítulos y vista previa del índice',
-    'Exportación del EPUB para guardarlo en el dispositivo'
+    'Pantalla de Papira para elegir el tipo de obra, la portada y la estructura del texto',
+    'Vista previa de Papira con portada, índice y datos del libro',
+    'Pantalla de Papira para detectar capítulos y previsualizar el índice',
+    'Pantalla de Papira para exportar el EPUB y guardarlo en el dispositivo'
   ]
 };
 
@@ -320,10 +320,10 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     heroSignals: ['完成したTXT → EPUB', '表紙・章・目次を整理', 'すべて端末内で処理'],
     screenshotAlts: [
       'Papiraのホーム画面、TXT原稿をEPUBに変換',
-      '作品種類の選択画面、表紙と本文の設定',
-      '表紙・目次・本の情報を確認するPapiraのプレビュー',
-      '章タイトルの検出と目次プレビュー',
-      'EPUBを書き出して端末に保存する画面'
+      'Papiraの作品種類選択画面で、表紙と本文を設定',
+      'Papiraで表紙・目次・本の情報を確認するプレビュー画面',
+      'Papiraの章タイトル検出と目次プレビュー画面',
+      'PapiraでEPUBを書き出して端末に保存する画面'
     ],
     lead:
       'Papiraは完成したTXT原稿を整ったEPUBにまとめます。二次創作・連載小説・オリジナル小説・デジタル小冊子・TRPGシナリオに特化した作成フローを備えていますが、そのほかのTXTコンテンツもEPUBに変換できます。',
@@ -386,10 +386,10 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     heroSignals: ['完成的 TXT → EPUB', '整理封面、章节与目录', '全程在设备本地处理'],
     screenshotAlts: [
       'Papira 首页，将 TXT 原稿转换为 EPUB',
-      '作品类型选择，设置封面与正文',
-      '电子书预览，查看封面、目录和书籍信息',
-      '章节识别与目录预览',
-      '导出 EPUB 并保存到设备'
+      'Papira 作品类型选择界面，用于设置封面与正文',
+      'Papira 电子书预览界面，用于查看封面、目录和书籍信息',
+      'Papira 章节识别与目录预览界面',
+      'Papira EPUB 导出界面，用于保存到设备'
     ],
     lead:
       'Papira 可将完成的 TXT 文稿整理成结构清晰的 EPUB。它特别适合同人文、连载小说、原创小说、数字小册子与 TRPG 剧本，也能将其他 TXT 内容转换为 EPUB。',
@@ -452,10 +452,10 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     heroSignals: ['完成的 TXT → EPUB', '整理封面、章節與目錄', '全程在裝置本機處理'],
     screenshotAlts: [
       'Papira 首頁，將 TXT 原稿轉換為 EPUB',
-      '作品類型選擇，設定封面與內文',
-      '電子書預覽，查看封面、目錄與書籍資訊',
-      '章節辨識與目錄預覽',
-      '匯出 EPUB 並儲存到裝置'
+      'Papira 作品類型選擇畫面，用於設定封面與內文',
+      'Papira 電子書預覽畫面，用於查看封面、目錄與書籍資訊',
+      'Papira 章節辨識與目錄預覽畫面',
+      'Papira EPUB 匯出畫面，用於儲存到裝置'
     ],
     lead:
       'Papira 可將完成的 TXT 文稿整理成結構清楚的 EPUB。它特別適合同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本，也能將其他 TXT 內容轉換為 EPUB。',
