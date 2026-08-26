@@ -32,52 +32,12 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main
 
-      - name: Fix Japanese home copy and regression fixture
+      - name: Apply and commit translation fixes sequentially
         shell: bash
         run: |
           python <<'PY'
           from pathlib import Path
-
-          def replace_once(path: str, old: str, new: str) -> None:
-              file = Path(path)
-              text = file.read_text(encoding='utf-8')
-              count = text.count(old)
-              if count != 1:
-                  raise SystemExit(f'{path}: expected one match, found {count}: {old!r}')
-              file.write_text(text.replace(old, new, 1), encoding='utf-8')
-
-          replace_once(
-              'src/components/HomePage.astro',
-              "seoTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',",
-              "seoTitle: 'ONNELLAB - ファイル管理と創作のためのアプリ',",
-          )
-          home = Path('src/components/HomePage.astro')
-          home.write_text(
-              home.read_text(encoding='utf-8').replace(
-                  "title: '小さな道具を、 静かに。',",
-                  "title: '小さな道具を、静かに。',",
-              ),
-              encoding='utf-8',
-          )
-          replace_once(
-              'tests/site-i18n.spec.ts',
-              "homeTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',",
-              "homeTitle: 'ONNELLAB - ファイル管理と創作のためのアプリ',",
-          )
-          replace_once(
-              'tests/site-i18n.spec.ts',
-              "homeHeading: '小さな道具を、 静かに。',",
-              "homeHeading: '小さな道具を、静かに。',",
-          )
-          PY
-          git add src/components/HomePage.astro tests/site-i18n.spec.ts
-          git commit -m "Polish Japanese home copy"
-
-      - name: Fix CJK and French metadata typography
-        shell: bash
-        run: |
-          python <<'PY'
-          from pathlib import Path
+          import subprocess
 
           def replace_once(text: str, old: str, new: str, label: str) -> str:
               count = text.count(old)
@@ -85,37 +45,94 @@ jobs:
                   raise SystemExit(f'{label}: expected one match, found {count}: {old!r}')
               return text.replace(old, new, 1)
 
+          def commit(message: str, *paths: str) -> None:
+              subprocess.run(['git', 'add', *paths], check=True)
+              subprocess.run(['git', 'commit', '-m', message], check=True)
+
+          # 1. Japanese home copy.
+          home_path = Path('src/components/HomePage.astro')
+          home = home_path.read_text(encoding='utf-8')
+          home = replace_once(
+              home,
+              "seoTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',",
+              "seoTitle: 'ONNELLAB - ファイル管理と創作のためのアプリ',",
+              'Japanese home SEO title',
+          )
+          home = home.replace("title: '小さな道具を、 静かに。',", "title: '小さな道具を、静かに。',")
+          home_path.write_text(home, encoding='utf-8')
+
+          site_test_path = Path('tests/site-i18n.spec.ts')
+          site_tests = site_test_path.read_text(encoding='utf-8')
+          site_tests = replace_once(
+              site_tests,
+              "homeTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',",
+              "homeTitle: 'ONNELLAB - ファイル管理と創作のためのアプリ',",
+              'Japanese home title fixture',
+          )
+          site_tests = replace_once(
+              site_tests,
+              "homeHeading: '小さな道具を、 静かに。',",
+              "homeHeading: '小さな道具を、静かに。',",
+              'Japanese home heading fixture',
+          )
+          site_test_path.write_text(site_tests, encoding='utf-8')
+          commit('Polish Japanese home copy', str(home_path), str(site_test_path))
+
+          # 2. CJK sentence spacing and French non-breaking punctuation in metadata.
           products_path = Path('src/lib/products.ts')
           products = products_path.read_text(encoding='utf-8')
           products = replace_once(
               products,
               "  const detail = normalize(summary) === normalize(category) ? '' : ` ${summary}`;",
               "  const detail = normalize(summary) === normalize(category) ? '' : summary;\n  const spacedDetail = detail ? ` ${detail}` : '';",
-              'products.ts detail',
+              'metadata detail separator',
           )
-          products = replace_once(products, "${platforms}.${detail}`;\n  }\n  if (copy.locale === 'ja')", "${platforms}.${spacedDetail}`;\n  }\n  if (copy.locale === 'ja')", 'products.ts ko')
-          products = replace_once(products, "${platforms}.${detail}`;\n  }\n  if (copy.locale === 'de')", "${platforms}.${spacedDetail}`;\n  }\n  if (copy.locale === 'de')", 'products.ts pt-BR')
-          products = replace_once(products, "${platforms}.${detail}`;\n  }\n  if (copy.locale === 'fr')", "${platforms}.${spacedDetail}`;\n  }\n  if (copy.locale === 'fr')", 'products.ts de')
-          products = replace_once(
-              products,
-              "return `${source.meta.title} — ${category}. Plateformes : ${platforms}.${detail}`;",
-              "return `${source.meta.title} — ${category}. Plateformes\\u00A0: ${platforms}.${spacedDetail}`;",
-              'products.ts fr',
-          )
-          products = replace_once(products, "${platforms}.${detail}`;\n  }\n  return `${source.meta.title}", "${platforms}.${spacedDetail}`;\n  }\n  return `${source.meta.title}", 'products.ts es')
-          products = replace_once(
-              products,
-              "return `${source.meta.title} — ${category}. Platforms: ${platforms}.${detail}`;",
-              "return `${source.meta.title} — ${category}. Platforms: ${platforms}.${spacedDetail}`;",
-              'products.ts en',
-          )
+          latin_replacements = [
+              (
+                  "    return `${source.meta.title} — ${category}. 지원 플랫폼: ${platforms}.${detail}`;",
+                  "    return `${source.meta.title} — ${category}. 지원 플랫폼: ${platforms}.${spacedDetail}`;",
+                  'Korean metadata detail',
+              ),
+              (
+                  "    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${detail}`;",
+                  "    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${spacedDetail}`;",
+                  'Portuguese metadata detail',
+              ),
+              (
+                  "    return `${source.meta.title} — ${category}. Plattformen: ${platforms}.${detail}`;",
+                  "    return `${source.meta.title} — ${category}. Plattformen: ${platforms}.${spacedDetail}`;",
+                  'German metadata detail',
+              ),
+              (
+                  "    return `${source.meta.title} — ${category}. Plateformes : ${platforms}.${detail}`;",
+                  "    return `${source.meta.title} — ${category}. Plateformes\\u00A0: ${platforms}.${spacedDetail}`;",
+                  'French metadata typography',
+              ),
+              (
+                  "    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${detail}`;",
+                  "    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${spacedDetail}`;",
+                  'Spanish metadata detail',
+              ),
+              (
+                  "  return `${source.meta.title} — ${category}. Platforms: ${platforms}.${detail}`;",
+                  "  return `${source.meta.title} — ${category}. Platforms: ${platforms}.${spacedDetail}`;",
+                  'English metadata detail',
+              ),
+          ]
+          for old, new, label in latin_replacements:
+              products = replace_once(products, old, new, label)
           products_path.write_text(products, encoding='utf-8')
 
-          test_path = Path('tests/product-contract.spec.ts')
-          tests = test_path.read_text(encoding='utf-8')
-          tests = replace_once(tests, "  fr: 'Plateformes :',", "  fr: 'Plateformes\\u00A0:',", 'product test fr marker')
+          product_test_path = Path('tests/product-contract.spec.ts')
+          product_tests = product_test_path.read_text(encoding='utf-8')
+          product_tests = replace_once(
+              product_tests,
+              "  fr: 'Plateformes :',",
+              "  fr: 'Plateformes\\u00A0:',",
+              'French metadata marker fixture',
+          )
           assertion = "        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);"
-          insertion = """        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
+          assertion_with_guards = """        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
                   if (locale.code === 'ja' || locale.code === 'zh-Hans' || locale.code === 'zh-Hant') {
                     expect(metaDescription).not.toMatch(/。[ \\t]/u);
                   }
@@ -123,44 +140,35 @@ jobs:
                     expect(metaDescription).toContain('Plateformes\\u00A0:');
                     expect(metaDescription).not.toContain('Plateformes :');
                   }"""
-          tests = replace_once(tests, assertion, insertion, 'product test metadata assertions')
-          test_path.write_text(tests, encoding='utf-8')
-          PY
-          git add src/lib/products.ts tests/product-contract.spec.ts
-          git commit -m "Refine localized metadata typography"
+          product_tests = replace_once(
+              product_tests,
+              assertion,
+              assertion_with_guards,
+              'metadata typography regression assertions',
+          )
+          product_test_path.write_text(product_tests, encoding='utf-8')
+          commit('Refine localized metadata typography', str(products_path), str(product_test_path))
 
-      - name: Localize Portuguese and German store labels
-        shell: bash
-        run: |
-          python <<'PY'
-          from pathlib import Path
-
-          def replace_once(text: str, old: str, new: str, label: str) -> str:
-              count = text.count(old)
-              if count != 1:
-                  raise SystemExit(f'{label}: expected one match, found {count}: {old!r}')
-              return text.replace(old, new, 1)
-
+          # 3. Portuguese and German UI labels.
           template_path = Path('src/components/ProductTemplate.astro')
-          template = template_path.read_text(encoding='utf-8')
-          template = replace_once(
-              template,
-              "download:'Download', screens:'Capturas de tela', stores:'Lojas'",
-              "download:'Baixar', screens:'Capturas de tela', stores:'Lojas'",
-              'Portuguese download label',
-          )
-          template = replace_once(
-              template,
-              "download:'Download', screens:'Screenshots', stores:'Stores'",
-              "download:'Download', screens:'Screenshots', stores:'App-Stores'",
-              'German store label',
-          )
-          template_path.write_text(template, encoding='utf-8')
+          template_lines = template_path.read_text(encoding='utf-8').splitlines()
 
-          test_path = Path('tests/product-contract.spec.ts')
-          tests = test_path.read_text(encoding='utf-8')
+          def patch_locale_line(prefix: str, old: str, new: str, label: str) -> None:
+              matches = [index for index, line in enumerate(template_lines) if line.lstrip().startswith(prefix)]
+              if len(matches) != 1:
+                  raise SystemExit(f'{label}: expected one locale line, found {len(matches)}')
+              index = matches[0]
+              if template_lines[index].count(old) != 1:
+                  raise SystemExit(f'{label}: expected one label on locale line')
+              template_lines[index] = template_lines[index].replace(old, new, 1)
+
+          patch_locale_line("'pt-BR':", "download:'Download'", "download:'Baixar'", 'Portuguese download label')
+          patch_locale_line('de:', "stores:'Stores'", "stores:'App-Stores'", 'German store label')
+          template_path.write_text('\n'.join(template_lines) + '\n', encoding='utf-8')
+
+          product_tests = product_test_path.read_text(encoding='utf-8')
           marker = "      await expect(page.locator('.download-band')).toHaveCount(1);\n      await expect(page.locator('.site-footer')).toHaveCount(1);"
-          replacement = """      await expect(page.locator('.download-band')).toHaveCount(1);
+          label_guards = """      await expect(page.locator('.download-band')).toHaveCount(1);
               if (locale.code === 'pt-BR') {
                 await expect(page.locator('.download-band')).toHaveAttribute('aria-label', 'Baixar');
                 await expect(page.locator('.download-band > .eyebrow')).toHaveText('Baixar');
@@ -172,11 +180,15 @@ jobs:
                 }
               }
               await expect(page.locator('.site-footer')).toHaveCount(1);"""
-          tests = replace_once(tests, marker, replacement, 'product test localized labels')
-          test_path.write_text(tests, encoding='utf-8')
+          product_tests = replace_once(
+              product_tests,
+              marker,
+              label_guards,
+              'localized product label regression assertions',
+          )
+          product_test_path.write_text(product_tests, encoding='utf-8')
+          commit('Localize Portuguese and German store labels', str(template_path), str(product_test_path))
           PY
-          git add src/components/ProductTemplate.astro tests/product-contract.spec.ts
-          git commit -m "Localize Portuguese and German store labels"
 
       - name: Install dependencies
         run: npm ci
