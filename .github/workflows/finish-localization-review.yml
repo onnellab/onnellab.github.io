@@ -46,11 +46,18 @@ jobs:
         run: |
           set -euo pipefail
           git pull --rebase origin main
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('tests/papira-i18n.spec.ts')
+          source = path.read_text(encoding='utf-8')
+          source = source.replace('Papira schützt Ihre Privatsphäre.', 'Papira respektiert Ihre Privatsphäre.')
+          path.write_text(source, encoding='utf-8')
+          PY
           node --check scripts/apply-localization-review.mjs
           node scripts/apply-localization-review.mjs corrections
           npm run build
           npx playwright test tests/papira-i18n.spec.ts tests/extended-i18n.spec.ts --project=desktop
-          git add src
+          git add src tests/papira-i18n.spec.ts
           if ! git diff --cached --quiet; then
             git commit -m "Correct confirmed localization errors"
             git pull --rebase origin main
