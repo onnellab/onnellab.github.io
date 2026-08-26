@@ -45,10 +45,22 @@ jobs:
       - name: Localize accessibility labels
         run: |
           set -euo pipefail
-          node scripts/run-localization-review.mjs accessibility
+          git pull --rebase origin main
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('src/components/ExtendedSitePage.astro')
+          source = path.read_text(encoding='utf-8')
+          source = source.replace(
+              "<small>{item.platforms.join(' · ')}</small>",
+              "<small class=\"platform-badges\" aria-label={copy.common.platforms}>{item.platforms.join(' · ')}</small>",
+          )
+          path.write_text(source, encoding='utf-8')
+          PY
+          node scripts/apply-localization-review.mjs accessibility
+          git checkout -- .github/workflows/i18n-smoke.yml
           npm run build
           npx playwright test tests/accessibility-i18n.spec.ts --project=desktop
-          git add src tests .github/workflows/i18n-smoke.yml
+          git add src tests
           if ! git diff --cached --quiet; then
             git commit -m "Localize accessibility labels across nine languages"
             git pull --rebase origin main
@@ -58,8 +70,10 @@ jobs:
       - name: Correct confirmed localization errors
         run: |
           set -euo pipefail
-          node scripts/run-localization-review.mjs corrections
+          git pull --rebase origin main
+          node scripts/apply-localization-review.mjs corrections
           npm run build
+          npx playwright test tests/papira-i18n.spec.ts tests/extended-i18n.spec.ts --project=desktop
           git add src
           if ! git diff --cached --quiet; then
             git commit -m "Correct confirmed localization errors"
@@ -70,8 +84,10 @@ jobs:
       - name: Clarify privacy and purchase terminology
         run: |
           set -euo pipefail
-          node scripts/run-localization-review.mjs legal
+          git pull --rebase origin main
+          node scripts/apply-localization-review.mjs legal
           npm run build
+          npx playwright test tests/site-i18n.spec.ts tests/extended-i18n.spec.ts tests/papira-i18n.spec.ts --project=desktop
           git add src
           if ! git diff --cached --quiet; then
             git commit -m "Clarify localized privacy and purchase terminology"
@@ -82,7 +98,8 @@ jobs:
       - name: Rewrite release notes for users
         run: |
           set -euo pipefail
-          node scripts/run-localization-review.mjs release
+          git pull --rebase origin main
+          node scripts/apply-localization-review.mjs release
           npm run build
           npx playwright test tests/product-contract.spec.ts --project=desktop
           git add src
@@ -95,24 +112,22 @@ jobs:
       - name: Normalize terminology and add regression checks
         run: |
           set -euo pipefail
-          node scripts/run-localization-review.mjs terminology
+          git pull --rebase origin main
+          node scripts/apply-localization-review.mjs terminology
+          git checkout -- .github/workflows/i18n-smoke.yml
           npm run check:i18n-quality
           npm run build
-          git add src tests scripts/check-localization-quality.mjs package.json .github/workflows/i18n-smoke.yml
+          git add src tests scripts/check-localization-quality.mjs package.json
           if ! git diff --cached --quiet; then
             git commit -m "Normalize localized terminology and guard quality"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
 
-      - name: Verify final tree and remove one-time files
+      - name: Verify final tree and remove one-time scripts
         run: |
           set -euo pipefail
           git pull --rebase origin main
-          rm -f \
-            scripts/apply-localization-review.mjs \
-            scripts/run-localization-review.mjs \
-            .github/workflows/finish-localization-review.yml
           npm run check:i18n-quality
           npm run build
           npx playwright test \
@@ -123,6 +138,10 @@ jobs:
             tests/product-contract.spec.ts \
             tests/site-visual.spec.ts \
             --project=desktop
-          git add -A
-          git commit -m "Complete nine-language localization quality pass"
-          git push origin HEAD:main
+          rm -f scripts/apply-localization-review.mjs scripts/run-localization-review.mjs
+          git add -u scripts
+          if ! git diff --cached --quiet; then
+            git commit -m "Complete nine-language localization quality pass"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
