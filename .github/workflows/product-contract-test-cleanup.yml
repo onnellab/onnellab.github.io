@@ -40,36 +40,40 @@ jobs:
           from pathlib import Path
 
           path = Path('tests/product-contract.spec.ts')
-          source = path.read_text(encoding='utf-8')
-          old = """      await expect(page.locator('.download-band')).toHaveCount(1);
-          if (locale.code === 'pt-BR') {
-            await expect(page.locator('.download-band')).toHaveAttribute('aria-label', 'Baixar');
-            await expect(page.locator('.download-band > .eyebrow')).toHaveText('Baixar');
-          }
-          if (locale.code === 'de') {
-            const storeActions = page.locator('.download-band .actions.compact');
-            if (await storeActions.count()) {
-              await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');
-            }
-          }
-          await expect(page.locator('.site-footer')).toHaveCount(1);"""
-          new = """      await expect(page.locator('.download-band')).toHaveCount(1);
-                if (locale.code === 'pt-BR') {
-                  await expect(page.locator('.download-band')).toHaveAttribute('aria-label', 'Baixar');
-                  await expect(page.locator('.download-band > .eyebrow')).toHaveText('Baixar');
-                }
-                if (locale.code === 'de') {
-                  const storeActions = page.locator('.download-band .actions.compact');
-                  if (await storeActions.count()) {
-                    await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');
-                  }
-                }
-                await expect(page.locator('.site-footer')).toHaveCount(1);"""
-          old = old.replace('          if', '    if').replace('            await', '      await').replace('            const', '      const').replace('            if', '      if').replace('              await', '        await').replace('            }', '      }').replace('          }', '    }').replace('          await expect(page.locator(\'.site-footer\'))', '    await expect(page.locator(\'.site-footer\'))')
-          new = new.replace('                if', '      if').replace('                  await', '        await').replace('                  const', '        const').replace('                  if', '        if').replace('                    await', '          await').replace('                  }', '        }').replace('                }', '      }').replace('                await expect(page.locator(\'.site-footer\'))', '      await expect(page.locator(\'.site-footer\'))')
-          if source.count(old) != 1:
-              raise SystemExit(f'indentation block count: {source.count(old)}')
-          path.write_text(source.replace(old, new, 1), encoding='utf-8')
+          lines = path.read_text(encoding='utf-8').splitlines()
+          expected = [
+              "      await expect(page.locator('.download-band')).toHaveCount(1);",
+              "    if (locale.code === 'pt-BR') {",
+              "      await expect(page.locator('.download-band')).toHaveAttribute('aria-label', 'Baixar');",
+              "      await expect(page.locator('.download-band > .eyebrow')).toHaveText('Baixar');",
+              "    }",
+              "    if (locale.code === 'de') {",
+              "      const storeActions = page.locator('.download-band .actions.compact');",
+              "      if (await storeActions.count()) {",
+              "        await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');",
+              "      }",
+              "    }",
+              "    await expect(page.locator('.site-footer')).toHaveCount(1);",
+          ]
+          replacement = [
+              "      await expect(page.locator('.download-band')).toHaveCount(1);",
+              "      if (locale.code === 'pt-BR') {",
+              "        await expect(page.locator('.download-band')).toHaveAttribute('aria-label', 'Baixar');",
+              "        await expect(page.locator('.download-band > .eyebrow')).toHaveText('Baixar');",
+              "      }",
+              "      if (locale.code === 'de') {",
+              "        const storeActions = page.locator('.download-band .actions.compact');",
+              "        if (await storeActions.count()) {",
+              "          await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');",
+              "        }",
+              "      }",
+              "      await expect(page.locator('.site-footer')).toHaveCount(1);",
+          ]
+          start = lines.index(expected[0])
+          if lines[start:start + len(expected)] != expected:
+              raise SystemExit('unexpected product contract indentation block')
+          lines[start:start + len(expected)] = replacement
+          path.write_text('\n'.join(lines) + '\n', encoding='utf-8')
           PY
           git add tests/product-contract.spec.ts
           git commit -m "Normalize product contract test indentation"
@@ -81,24 +85,28 @@ jobs:
           from pathlib import Path
 
           path = Path('tests/product-contract.spec.ts')
-          source = path.read_text(encoding='utf-8')
-          old = """      if (locale.code === 'de') {
-                const storeActions = page.locator('.download-band .actions.compact');
-                if (await storeActions.count()) {
-                  await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');
-                }
-              }"""
-          old = old.replace('                const', '        const').replace('                if', '        if').replace('                  await', '          await').replace('                }', '        }').replace('              }', '      }')
-          new = """      // TagWeaver is released on both stores, so this assertion cannot pass vacuously.
-              if (locale.code === 'de' && app === 'tagweaver') {
-                const storeActions = page.locator('.download-band .actions.compact');
-                await expect(storeActions).toHaveCount(1);
-                await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');
-              }"""
-          new = new.replace('              if', '      if').replace('                const', '        const').replace('                await', '        await').replace('              }', '      }')
-          if source.count(old) != 1:
-              raise SystemExit(f'German store block count: {source.count(old)}')
-          path.write_text(source.replace(old, new, 1), encoding='utf-8')
+          lines = path.read_text(encoding='utf-8').splitlines()
+          expected = [
+              "      if (locale.code === 'de') {",
+              "        const storeActions = page.locator('.download-band .actions.compact');",
+              "        if (await storeActions.count()) {",
+              "          await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');",
+              "        }",
+              "      }",
+          ]
+          replacement = [
+              "      // TagWeaver is released on both stores, so this assertion cannot pass vacuously.",
+              "      if (locale.code === 'de' && app === 'tagweaver') {",
+              "        const storeActions = page.locator('.download-band .actions.compact');",
+              "        await expect(storeActions).toHaveCount(1);",
+              "        await expect(storeActions).toHaveAttribute('aria-label', 'App-Stores');",
+              "      }",
+          ]
+          start = lines.index(expected[0])
+          if lines[start:start + len(expected)] != expected:
+              raise SystemExit('unexpected German store label block')
+          lines[start:start + len(expected)] = replacement
+          path.write_text('\n'.join(lines) + '\n', encoding='utf-8')
           PY
           git add tests/product-contract.spec.ts
           git rm .github/workflows/product-contract-test-cleanup.yml
