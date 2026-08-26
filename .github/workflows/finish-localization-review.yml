@@ -42,54 +42,30 @@ jobs:
           git config user.name "ONNELLAB Automation"
           git config user.email "actions@users.noreply.github.com"
 
-      - name: Fix Papira screenshot alt localization contract
+      - name: Localize legacy Melivra privacy navigation
         run: |
           set -euo pipefail
           git pull --rebase origin main
           python - <<'PY'
           from pathlib import Path
 
-          path = Path('src/lib/papira.ts')
-          source = path.read_text(encoding='utf-8')
-          replacements = {
-              '作品種類の選択画面、表紙と本文の設定': 'Papiraの作品種類選択画面で、表紙と本文を設定',
-              '表紙・目次・本の情報を確認するPapiraのプレビュー': 'Papiraで表紙・目次・本の情報を確認するプレビュー画面',
-              '章タイトルの検出と目次プレビュー': 'Papiraの章タイトル検出と目次プレビュー画面',
-              'EPUBを書き出して端末に保存する画面': 'PapiraでEPUBを書き出して端末に保存する画面',
-              '作品类型选择，设置封面与正文': 'Papira 作品类型选择界面，用于设置封面与正文',
-              '电子书预览，查看封面、目录和书籍信息': 'Papira 电子书预览界面，用于查看封面、目录和书籍信息',
-              '章节识别与目录预览': 'Papira 章节识别与目录预览界面',
-              '导出 EPUB 并保存到设备': 'Papira EPUB 导出界面，用于保存到设备',
-              '作品類型選擇，設定封面與內文': 'Papira 作品類型選擇畫面，用於設定封面與內文',
-              '電子書預覽，查看封面、目錄與書籍資訊': 'Papira 電子書預覽畫面，用於查看封面、目錄與書籍資訊',
-              '章節辨識與目錄預覽': 'Papira 章節辨識與目錄預覽畫面',
-              '匯出 EPUB 並儲存到裝置': 'Papira EPUB 匯出畫面，用於儲存到裝置',
-              'Escolha do tipo de obra, capa e estrutura do texto': 'Tela do Papira para escolher o tipo de obra, a capa e a estrutura do texto',
-              'Prévia do livro com capa, sumário e dados': 'Prévia do Papira com capa, sumário e dados do livro',
-              'Detecção de capítulos e prévia do sumário': 'Tela do Papira com detecção de capítulos e prévia do sumário',
-              'Exportação do EPUB para salvar no dispositivo': 'Tela do Papira para exportar o EPUB e salvá-lo no dispositivo',
-              'Auswahl des Werktyps mit Cover- und Textaufbau': 'Papira-Auswahl des Werktyps mit Cover- und Textaufbau',
-              'Buchvorschau mit Cover, Inhaltsverzeichnis und Buchdaten': 'Papira-Buchvorschau mit Cover, Inhaltsverzeichnis und Buchdaten',
-              'Kapitelerkennung und Inhaltsverzeichnis-Vorschau': 'Papira-Kapitelerkennung mit Vorschau des Inhaltsverzeichnisses',
-              'EPUB-Export zum Speichern auf dem Gerät': 'Papira-EPUB-Export zum Speichern auf dem Gerät',
-              'Choix du type de texte, de la couverture et de la structure': 'Écran Papira pour choisir le type de texte, la couverture et la structure',
-              'Aperçu du livre avec couverture, sommaire et informations': 'Aperçu Papira du livre avec couverture, sommaire et informations',
-              'Détection des chapitres et aperçu du sommaire': 'Écran Papira de détection des chapitres et d’aperçu du sommaire',
-              'Exportation de l’EPUB vers l’appareil': 'Écran Papira d’exportation de l’EPUB vers l’appareil',
-              'Elección del tipo de obra, portada y estructura del texto': 'Pantalla de Papira para elegir el tipo de obra, la portada y la estructura del texto',
-              'Vista previa del libro con portada, índice y datos': 'Vista previa de Papira con portada, índice y datos del libro',
-              'Detección de capítulos y vista previa del índice': 'Pantalla de Papira para detectar capítulos y previsualizar el índice',
-              'Exportación del EPUB para guardarlo en el dispositivo': 'Pantalla de Papira para exportar el EPUB y guardarlo en el dispositivo',
-          }
-          for old, new in replacements.items():
-              source = source.replace(old, new)
-          path.write_text(source, encoding='utf-8')
+          english = Path('src/pages/melivra-privacy-policy/index.astro')
+          source = english.read_text(encoding='utf-8')
+          source = source.replace('aria-label="Navigation"', 'aria-label="Site navigation"')
+          source = source.replace('aria-label="한국어로 보기"', 'aria-label="View in Korean"')
+          english.write_text(source, encoding='utf-8')
+
+          korean = Path('src/pages/melivra-privacy-policy/ko.astro')
+          source = korean.read_text(encoding='utf-8')
+          source = source.replace('aria-label="Navigation"', 'aria-label="탐색"')
+          source = source.replace('aria-label="Switch to English"', 'aria-label="영어로 보기"')
+          source = source.replace('작성 날짜 {updatedAt}', '최종 업데이트 {updatedAt}')
+          korean.write_text(source, encoding='utf-8')
           PY
           npm run build
-          npx playwright test tests/product-contract.spec.ts --project=desktop
-          git add src/lib/papira.ts
+          git add src/pages/melivra-privacy-policy
           if ! git diff --cached --quiet; then
-            git commit -m "Fix Papira screenshot alt localization contract"
+            git commit -m "Localize legacy Melivra privacy navigation"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
@@ -110,7 +86,7 @@ jobs:
             git push origin HEAD:main
           fi
 
-      - name: Verify final tree and remove one-time automation
+      - name: Verify final tree and remove one-time scripts
         run: |
           set -euo pipefail
           git pull --rebase origin main
@@ -127,11 +103,8 @@ jobs:
           rm -f \
             scripts/apply-localization-review.mjs \
             scripts/run-localization-review.mjs \
-            .github/workflows/finish-localization-review.yml \
-            .github/workflows/apply-localization-review.yml \
-            .github/workflows/apply-remaining-localization-fixes.yml \
             scripts/apply_remaining_localization_fixes.py
-          git add -A
+          git add -u scripts
           if ! git diff --cached --quiet; then
             git commit -m "Complete nine-language localization quality pass"
             git pull --rebase origin main
