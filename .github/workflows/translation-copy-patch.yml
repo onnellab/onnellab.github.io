@@ -32,7 +32,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main
 
-      - name: Fix Japanese home copy and its regression fixture
+      - name: Fix Japanese home copy and regression fixture
         shell: bash
         run: |
           python <<'PY'
@@ -51,12 +51,14 @@ jobs:
               "seoTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',",
               "seoTitle: 'ONNELLAB - ファイル管理と創作のためのアプリ',",
           )
-
           home = Path('src/components/HomePage.astro')
-          home_text = home.read_text(encoding='utf-8')
-          home_text = home_text.replace("title: '小さな道具を、 静かに。',", "title: '小さな道具を、静かに。',")
-          home.write_text(home_text, encoding='utf-8')
-
+          home.write_text(
+              home.read_text(encoding='utf-8').replace(
+                  "title: '小さな道具を、 静かに。',",
+                  "title: '小さな道具を、静かに。',",
+              ),
+              encoding='utf-8',
+          )
           replace_once(
               'tests/site-i18n.spec.ts',
               "homeTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',",
@@ -76,89 +78,52 @@ jobs:
         run: |
           python <<'PY'
           from pathlib import Path
-          import re
+
+          def replace_once(text: str, old: str, new: str, label: str) -> str:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected one match, found {count}: {old!r}')
+              return text.replace(old, new, 1)
 
           products_path = Path('src/lib/products.ts')
           products = products_path.read_text(encoding='utf-8')
-          pattern = re.compile(
-              r"function seoPageDescription\(source: ProductSource, copy: ProductCopy\): string \{.*?\n\}\n\nfunction productSeoTitle",
-              re.S,
+          products = replace_once(
+              products,
+              "  const detail = normalize(summary) === normalize(category) ? '' : ` ${summary}`;",
+              "  const detail = normalize(summary) === normalize(category) ? '' : summary;\n  const spacedDetail = detail ? ` ${detail}` : '';",
+              'products.ts detail',
           )
-          replacement = r'''function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
-            const summary = pageDescription(copy).replace(/\s+/g, ' ').trim();
-            const platforms = copy.locale === 'en'
-              ? source.meta.platforms.join(' and ')
-              : source.meta.platforms.join('/');
-            const category = landingSubtitle(copy)
-              .replace(/\s+/g, ' ')
-              .trim()
-              .replace(/[.!?。！？]+$/u, '');
-            const normalize = (value: string) =>
-              value.replace(/[.!?。！？]+$/u, '').trim().toLocaleLowerCase();
-            const detail = normalize(summary) === normalize(category) ? '' : summary;
-            const spacedDetail = detail ? ` ${detail}` : '';
-
-            if (copy.locale === 'ko') {
-              return `${source.meta.title} — ${category}. 지원 플랫폼: ${platforms}.${spacedDetail}`;
-            }
-            if (copy.locale === 'ja') {
-              return `${source.meta.title} — ${category}。対応プラットフォーム: ${platforms}。${detail}`;
-            }
-            if (copy.locale === 'zh-Hans') {
-              return `${source.meta.title} — ${category}。支持平台：${platforms}。${detail}`;
-            }
-            if (copy.locale === 'zh-Hant') {
-              return `${source.meta.title} — ${category}。支援平台：${platforms}。${detail}`;
-            }
-            if (copy.locale === 'pt-BR') {
-              return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${spacedDetail}`;
-            }
-            if (copy.locale === 'de') {
-              return `${source.meta.title} — ${category}. Plattformen: ${platforms}.${spacedDetail}`;
-            }
-            if (copy.locale === 'fr') {
-              return `${source.meta.title} — ${category}. Plateformes\u00A0: ${platforms}.${spacedDetail}`;
-            }
-            if (copy.locale === 'es') {
-              return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${spacedDetail}`;
-            }
-            return `${source.meta.title} — ${category}. Platforms: ${platforms}.${spacedDetail}`;
-          }
-
-          function productSeoTitle'''
-          updated, count = pattern.subn(replacement, products, count=1)
-          if count != 1:
-              raise SystemExit(f'products.ts: expected one seoPageDescription function, found {count}')
-          products_path.write_text(updated, encoding='utf-8')
+          products = replace_once(products, "${platforms}.${detail}`;\n  }\n  if (copy.locale === 'ja')", "${platforms}.${spacedDetail}`;\n  }\n  if (copy.locale === 'ja')", 'products.ts ko')
+          products = replace_once(products, "${platforms}.${detail}`;\n  }\n  if (copy.locale === 'de')", "${platforms}.${spacedDetail}`;\n  }\n  if (copy.locale === 'de')", 'products.ts pt-BR')
+          products = replace_once(products, "${platforms}.${detail}`;\n  }\n  if (copy.locale === 'fr')", "${platforms}.${spacedDetail}`;\n  }\n  if (copy.locale === 'fr')", 'products.ts de')
+          products = replace_once(
+              products,
+              "return `${source.meta.title} — ${category}. Plateformes : ${platforms}.${detail}`;",
+              "return `${source.meta.title} — ${category}. Plateformes\\u00A0: ${platforms}.${spacedDetail}`;",
+              'products.ts fr',
+          )
+          products = replace_once(products, "${platforms}.${detail}`;\n  }\n  return `${source.meta.title}", "${platforms}.${spacedDetail}`;\n  }\n  return `${source.meta.title}", 'products.ts es')
+          products = replace_once(
+              products,
+              "return `${source.meta.title} — ${category}. Platforms: ${platforms}.${detail}`;",
+              "return `${source.meta.title} — ${category}. Platforms: ${platforms}.${spacedDetail}`;",
+              'products.ts en',
+          )
+          products_path.write_text(products, encoding='utf-8')
 
           test_path = Path('tests/product-contract.spec.ts')
           tests = test_path.read_text(encoding='utf-8')
-          old_marker = "  fr: 'Plateformes :',"
-          new_marker = "  fr: 'Plateformes\\u00A0:',"
-          if tests.count(old_marker) != 1:
-              raise SystemExit('product-contract.spec.ts: French platform marker not found exactly once')
-          tests = tests.replace(old_marker, new_marker, 1)
-
-          old_checks = '''      if (app !== 'papira') {
-                expect(metaDescription).toContain(' — ');
-                expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
-              }
-          '''
-          new_checks = '''      if (app !== 'papira') {
-                expect(metaDescription).toContain(' — ');
-                expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
-                if (locale.code === 'ja' || locale.code === 'zh-Hans' || locale.code === 'zh-Hant') {
-                  expect(metaDescription).not.toMatch(/。[ \\t]/u);
-                }
-                if (locale.code === 'fr') {
-                  expect(metaDescription).toContain('Plateformes\\u00A0:');
-                  expect(metaDescription).not.toContain('Plateformes :');
-                }
-              }
-          '''
-          if tests.count(old_checks) != 1:
-              raise SystemExit('product-contract.spec.ts: metadata assertion block not found exactly once')
-          tests = tests.replace(old_checks, new_checks, 1)
+          tests = replace_once(tests, "  fr: 'Plateformes :',", "  fr: 'Plateformes\\u00A0:',", 'product test fr marker')
+          assertion = "        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);"
+          insertion = """        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
+                  if (locale.code === 'ja' || locale.code === 'zh-Hans' || locale.code === 'zh-Hant') {
+                    expect(metaDescription).not.toMatch(/。[ \\t]/u);
+                  }
+                  if (locale.code === 'fr') {
+                    expect(metaDescription).toContain('Plateformes\\u00A0:');
+                    expect(metaDescription).not.toContain('Plateformes :');
+                  }"""
+          tests = replace_once(tests, assertion, insertion, 'product test metadata assertions')
           test_path.write_text(tests, encoding='utf-8')
           PY
           git add src/lib/products.ts tests/product-contract.spec.ts
@@ -170,20 +135,26 @@ jobs:
           python <<'PY'
           from pathlib import Path
 
+          def replace_once(text: str, old: str, new: str, label: str) -> str:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected one match, found {count}: {old!r}')
+              return text.replace(old, new, 1)
+
           template_path = Path('src/components/ProductTemplate.astro')
           template = template_path.read_text(encoding='utf-8')
-
-          old_pt = "download:'Download', screens:'Capturas de tela', stores:'Lojas'"
-          new_pt = "download:'Baixar', screens:'Capturas de tela', stores:'Lojas'"
-          if template.count(old_pt) != 1:
-              raise SystemExit('ProductTemplate.astro: Portuguese download label not found exactly once')
-          template = template.replace(old_pt, new_pt, 1)
-
-          old_de = "download:'Download', screens:'Screenshots', stores:'Stores'"
-          new_de = "download:'Download', screens:'Screenshots', stores:'App-Stores'"
-          if template.count(old_de) != 1:
-              raise SystemExit('ProductTemplate.astro: German store label not found exactly once')
-          template = template.replace(old_de, new_de, 1)
+          template = replace_once(
+              template,
+              "download:'Download', screens:'Capturas de tela', stores:'Lojas'",
+              "download:'Baixar', screens:'Capturas de tela', stores:'Lojas'",
+              'Portuguese download label',
+          )
+          template = replace_once(
+              template,
+              "download:'Download', screens:'Screenshots', stores:'Stores'",
+              "download:'Download', screens:'Screenshots', stores:'App-Stores'",
+              'German store label',
+          )
           template_path.write_text(template, encoding='utf-8')
 
           test_path = Path('tests/product-contract.spec.ts')
@@ -201,9 +172,7 @@ jobs:
                 }
               }
               await expect(page.locator('.site-footer')).toHaveCount(1);"""
-          if tests.count(marker) != 1:
-              raise SystemExit('product-contract.spec.ts: download-band assertion marker not found exactly once')
-          tests = tests.replace(marker, replacement, 1)
+          tests = replace_once(tests, marker, replacement, 'product test localized labels')
           test_path.write_text(tests, encoding='utf-8')
           PY
           git add src/components/ProductTemplate.astro tests/product-contract.spec.ts
