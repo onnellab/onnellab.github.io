@@ -21,7 +21,7 @@ const privacyLocales = [
   { path: 'zh-hans/', hreflang: 'zh-Hans', htmlLang: 'zh-Hans', keyPhrases: ['Papira 重视你的隐私。', '应用商店服务与支付信息', '隐私问题或删除请求：'] },
   { path: 'zh-hant/', hreflang: 'zh-Hant', htmlLang: 'zh-Hant', keyPhrases: ['Papira 重視你的隱私。', 'App Store 服務與支付資訊', '隱私問題或刪除請求：'] },
   { path: 'pt-br/', hreflang: 'pt-BR', htmlLang: 'pt-BR', keyPhrases: ['O Papira valoriza a sua privacidade.', 'Serviços da loja de aplicativos e informações de pagamento', 'Perguntas sobre privacidade ou solicitações de exclusão:'] },
-  { path: 'de/', hreflang: 'de', htmlLang: 'de', keyPhrases: ['Papira schützt Ihre Privatsphäre.', 'App-Store-Dienste und Zahlungsinformationen', 'Fragen zum Datenschutz oder Löschanträge:'] },
+  { path: 'de/', hreflang: 'de', htmlLang: 'de', keyPhrases: ['Papira respektiert Ihre Privatsphäre.', 'App-Store-Dienste und Zahlungsinformationen', 'Fragen zum Datenschutz oder Löschanträge:'] },
   { path: 'fr/', hreflang: 'fr', htmlLang: 'fr', keyPhrases: ['Papira respecte votre vie privée.', 'Services des boutiques d’applications et informations de paiement', 'Questions relatives à la vie privée ou demandes de suppression :'] },
   { path: 'es/', hreflang: 'es', htmlLang: 'es', keyPhrases: ['Papira respeta tu privacidad.', 'Servicios de las tiendas de aplicaciones e información de pago', 'Preguntas sobre privacidad o solicitudes de eliminación:'] }
 ] as const;
