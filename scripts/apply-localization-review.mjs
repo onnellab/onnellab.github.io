@@ -101,12 +101,22 @@ export const uiLabels: Record<AllSiteLocale, UiLabels> = {
     write(relativePath, source);
   }
 
+  let extendedSite = read('src/components/ExtendedSitePage.astro');
+  extendedSite = insertUiLabelsImport('src/components/ExtendedSitePage.astro', extendedSite);
+  extendedSite = extendedSite.replaceAll(
+    '<small>{item.platforms.join(\' · \')}</small>',
+    '<small class="platform-badges" aria-label={copy.common.platforms}>{item.platforms.join(\' · \')}</small>'
+  );
+  write('src/components/ExtendedSitePage.astro', extendedSite);
+
   let extendedArticle = read('src/components/ExtendedBlogArticle.astro');
   extendedArticle = insertUiLabelsImport('src/components/ExtendedBlogArticle.astro', extendedArticle);
-  extendedArticle = extendedArticle.replace(
-    '<div class="meta">',
-    '<div class="meta" aria-label={uiLabels[locale].articleMetadata}>'
-  );
+  if (!extendedArticle.includes('class="meta" aria-label=')) {
+    extendedArticle = extendedArticle.replace(
+      '<div class="meta">',
+      '<div class="meta" aria-label={uiLabels[locale].articleMetadata}>'
+    );
+  }
   write('src/components/ExtendedBlogArticle.astro', extendedArticle);
 
   const testSource = `import { expect, test } from '@playwright/test';
@@ -181,10 +191,10 @@ function applyCorrections() {
   replaceOptional(papiraPrivacy, 'Wenn sich Papira-Funktionen oder gesetzliche beziehungsweise Anforderungen der Stores ändern', 'Wenn sich Papira-Funktionen, gesetzliche Anforderungen oder Anforderungen der App-Stores ändern');
 
   const germanArticle = 'src/content/blog/de/large-text-file-slow-to-open.md';
-  replaceOptional(germanArticle, 'Warum große Textdateien langsam öffnen', 'Warum das Öffnen großer Textdateien lange dauert');
-  replaceOptional(germanArticle, 'Warum sich große Textdateien langsam öffnen', 'Warum das Öffnen großer Textdateien lange dauert');
-  replaceOptional(germanArticle, 'Warum große Textdateien langsam öffnen können', 'Warum das Öffnen großer Textdateien lange dauern kann');
   replaceOptional(germanArticle, 'Warum sich große Textdateien langsam öffnen können', 'Warum das Öffnen großer Textdateien lange dauern kann');
+  replaceOptional(germanArticle, 'Warum große Textdateien langsam öffnen können', 'Warum das Öffnen großer Textdateien lange dauern kann');
+  replaceOptional(germanArticle, 'Warum sich große Textdateien langsam öffnen', 'Warum das Öffnen großer Textdateien lange dauert');
+  replaceOptional(germanArticle, 'Warum große Textdateien langsam öffnen', 'Warum das Öffnen großer Textdateien lange dauert');
 
   replaceOptional('src/content/blog/ja/txt-vs-epub-for-long-reading.md', '一つをSoTにして再生成します。', '一つを正本（Source of Truth）と定め、そこから再生成します。');
   replaceOptional('src/components/ExtendedSitePage.astro', "{ title: 'Calmo por padrão', body:", "{ title: 'Calma por padrão', body:");
@@ -204,13 +214,19 @@ function applyCorrections() {
 
 function applyLegal() {
   const privacyIndex = 'src/components/PrivacyIndex.astro';
-  for (const [from, to] of [
-    ["updated: 'Policy date'", "updated: 'Last updated'"],
-    ["updated: '작성 날짜'", "updated: '최종 업데이트'"],
-    ["updated: 'ポリシー日付'", "updated: '最終更新日'"],
-    ["updated: '政策日期'", "updated: '最后更新'"],
-    ["updated: '政策日期'", "updated: '最後更新'"]
-  ]) replaceOptional(privacyIndex, from, to);
+  replaceOptional(privacyIndex, "updated: 'Policy date'", "updated: 'Last updated'");
+  replaceOptional(privacyIndex, "updated: '작성 날짜'", "updated: '최종 업데이트'");
+  replaceOptional(privacyIndex, "updated: 'ポリシー日付'", "updated: '最終更新日'");
+  replaceOptional(
+    privacyIndex,
+    "empty: '没有匹配的应用。',\n    updated: '政策日期',",
+    "empty: '没有匹配的应用。',\n    updated: '最后更新',"
+  );
+  replaceOptional(
+    privacyIndex,
+    "empty: '沒有符合的應用程式。',\n    updated: '政策日期',",
+    "empty: '沒有符合的應用程式。',\n    updated: '最後更新',"
+  );
 
   const extended = 'src/components/ExtendedSitePage.astro';
   for (const [from, to] of [
@@ -320,50 +336,6 @@ function applyTerminology() {
     ['onnellab.app@gmail.com 으로', 'onnellab.app@gmail.com으로']
   ]) replaceOptional(oauth, from, to);
 
-  const qualityScript = `import fs from 'node:fs';
-import path from 'node:path';
-
-const root = process.cwd();
-const extensions = new Set(['.astro', '.ts', '.md']);
-const files = [];
-function walk(directory) {
-  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-    const full = path.join(directory, entry.name);
-    if (entry.isDirectory()) walk(full);
-    else if (extensions.has(path.extname(entry.name))) files.push(full);
-  }
-}
-walk(path.join(root, 'src'));
-
-const banned = [
-  'aria-label="Navigation"', 'aria-label="Platforms"', 'aria-label="Blog navigation"',
-  'aria-label="Article navigation"', 'aria-label="Article metadata"',
-  'aria-label="Article image"', 'aria-label="Close"',
-  '驗證與回復購買', 'Vom App verwaltete', 'gesetzliche beziehungsweise Anforderungen',
-  'Warum große Textdateien langsam öffnen', 'Warum sich große Textdateien langsam öffnen',
-  '一つをSoTにして', 'feat. 表记', 'feat. 表記', 'Workflow diagram for 긴 글',
-  'Calmo por padrão', "title: 'Enfocado'", "title: 'Tranquilo'", "title: 'Respetuoso'",
-  'Aucune connexion', 'Subjektbezeichner', "updated: 'Policy date'", "updated: 'ポリシー日付'",
-  "updated: '政策日期'", "updated: 'Data da política'", "updated: 'Stand der Richtlinie'",
-  "updated: 'Date de la politique'", "updated: 'Fecha de la política'",
-  'direito de compra', 'droit d’achat', 'Kaufberechtigung',
-  'Kept the notes scoped to App Store-visible stability fixes.',
-  'Excluded private-test-only and local build metadata changes from the public notes.',
-  'App Store에 공개된 안정성 수정 범위로 릴리즈 노트를 한정했습니다.'
-];
-const violations = [];
-for (const file of files) {
-  const source = fs.readFileSync(file, 'utf8');
-  for (const phrase of banned) if (source.includes(phrase)) violations.push(`${path.relative(root, file)}: banned localization phrase ${JSON.stringify(phrase)}`);
-}
-if (violations.length) {
-  console.error(violations.join('\n'));
-  process.exit(1);
-}
-console.log(`Localization quality check passed for ${files.length} source files.`);
-`;
-  write('scripts/check-localization-quality.mjs', qualityScript);
-
   const packageJson = JSON.parse(read('package.json'));
   packageJson.scripts['check:i18n-quality'] = 'node scripts/check-localization-quality.mjs';
   write('package.json', `${JSON.stringify(packageJson, null, 2)}\n`);
@@ -371,8 +343,10 @@ console.log(`Localization quality check passed for ${files.length} source files.
   const workflowPath = '.github/workflows/i18n-smoke.yml';
   let workflow = read(workflowPath);
   if (!workflow.includes("      - 'scripts/check-localization-quality.mjs'")) {
-    workflow = workflow.replace("      - 'package.json'\n", "      - 'package.json'\n      - 'scripts/check-localization-quality.mjs'\n");
-    workflow = workflow.replace("      - 'package.json'\n", "      - 'package.json'\n      - 'scripts/check-localization-quality.mjs'\n");
+    workflow = workflow.replaceAll(
+      "      - 'package.json'\n",
+      "      - 'package.json'\n      - 'scripts/check-localization-quality.mjs'\n"
+    );
   }
   if (!workflow.includes('name: Check localization copy quality')) {
     workflow = workflow.replace(
@@ -391,6 +365,7 @@ const handlers = {
   release: applyReleaseNotes,
   terminology: applyTerminology
 };
+
 if (!handlers[stage]) throw new Error(`Unknown stage: ${stage}`);
 handlers[stage]();
 console.log(`Completed localization review stage: ${stage}`);
