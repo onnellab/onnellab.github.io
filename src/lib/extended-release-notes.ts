@@ -26,43 +26,43 @@ type ReleaseLabels = {
 const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
   ja: {
     'clipnest/1.0.2': { summary: 'ClipNest 1.0.2 の公開 iOS ストアアップデートです。', changes: ['キーボードでの編集引き継ぎを改善しました。','クリップ操作メニューの動作を修正しました。','公開 1.0.2 リリースに App Store 向けの安定性修正を含めました。'] },
-    'tagweaver/2.2': { summary: 'TagWeaver 2.2 の公開 iOS ストアアップデートです。', changes: ['公開 iOS 2.2 リリースの安定性を改善しました。','リリースノートを App Store に公開される安定性修正の範囲に限定しました。','非公開テスト専用の変更とローカルビルドのメタデータ変更は公開ノートから除外しました。'] },
+    'tagweaver/2.2': { summary: 'TagWeaver 2.2 の公開 iOS ストアアップデートです。', changes: ['iOS 全体の安定性を改善しました。','日常的なタグ編集をより安定して行えるよう調整しました。'] },
     'tagweaver/2.1.3': { summary: 'TagWeaver 2.1.3 の公開 Android ストアアップデートです。', changes: ['変更のない書き戻しを省略して Android のタグ保存性能を改善しました。','変更された基本タグの保存により高速な経路を使用しました。','大量ファイル向けに Android の書き込み時間チェックを追加しました。'] },
     'segra/1.0.2': { summary: 'Segra 1.0.2 の公開 Android ストアアップデートです。', changes: ['Audio Merge のリストレイアウトを改善しました。','結合項目の番号表示を修正しました。','Audio Merge のファイルリスト表示を安定化しました。','繰り返し使う流れが見やすくなるよう余白を調整しました。'] }
   },
   'zh-Hans': {
     'clipnest/1.0.2': { summary: 'ClipNest 1.0.2 的公开 iOS 商店更新。', changes: ['改进了键盘编辑交接流程。','修复了剪贴项操作菜单的行为。','公开 1.0.2 版本包含 App Store 稳定性修复。'] },
-    'tagweaver/2.2': { summary: 'TagWeaver 2.2 的公开 iOS 商店更新。', changes: ['提升了公开 iOS 2.2 版本的稳定性。','发布说明仅保留 App Store 可见的稳定性修复。','公开说明不包含仅用于私有测试的更改和本地构建元数据更改。'] },
+    'tagweaver/2.2': { summary: 'TagWeaver 2.2 的公开 iOS 商店更新。', changes: ['提升了 iOS 版的整体稳定性。','让日常标签编辑更加稳定可靠。'] },
     'tagweaver/2.1.3': { summary: 'TagWeaver 2.1.3 的公开 Android 商店更新。', changes: ['跳过未更改数据的回写，提高了 Android 标签保存性能。','对已更改的基础标签保存采用更快的处理路径。','为大批量文件加入 Android 写入耗时检查。'] },
     'segra/1.0.2': { summary: 'Segra 1.0.2 的公开 Android 商店更新。', changes: ['改进了 Audio Merge 列表布局。','修复了合并项目编号。','提升了 Audio Merge 文件列表渲染的稳定性。','调整了间距，让重复操作流程更清晰。'] }
   },
   'zh-Hant': {
     'clipnest/1.0.2': { summary: 'ClipNest 1.0.2 的公開 iOS 商店更新。', changes: ['改善鍵盤編輯交接流程。','修正剪貼項目操作選單的行為。','公開 1.0.2 版本包含 App Store 穩定性修正。'] },
-    'tagweaver/2.2': { summary: 'TagWeaver 2.2 的公開 iOS 商店更新。', changes: ['提升公開 iOS 2.2 版本的穩定性。','版本說明僅保留 App Store 可見的穩定性修正。','公開說明不包含僅用於私人測試的變更與本機建置中繼資料變更。'] },
+    'tagweaver/2.2': { summary: 'TagWeaver 2.2 的公開 iOS 商店更新。', changes: ['提升 iOS 版的整體穩定性。','讓日常標籤編輯更加穩定可靠。'] },
     'tagweaver/2.1.3': { summary: 'TagWeaver 2.1.3 的公開 Android 商店更新。', changes: ['略過未變更資料的回寫，改善 Android 標籤儲存效能。','已變更的基本標籤儲存採用更快的處理路徑。','為大量檔案加入 Android 寫入耗時檢查。'] },
     'segra/1.0.2': { summary: 'Segra 1.0.2 的公開 Android 商店更新。', changes: ['改善 Audio Merge 清單版面。','修正合併項目的編號。','提升 Audio Merge 檔案清單呈現的穩定性。','調整間距，讓重複操作流程更清楚。'] }
   },
   'pt-BR': {
     'clipnest/1.0.2': { summary: 'Atualização pública do ClipNest 1.0.2 na App Store para iOS.', changes: ['Melhoramos a transição para edição pelo teclado.','Corrigimos o comportamento do menu de ações dos recortes.','Incluímos correções de estabilidade da App Store na versão pública 1.0.2.'] },
-    'tagweaver/2.2': { summary: 'Atualização pública do TagWeaver 2.2 na App Store para iOS.', changes: ['Melhoramos a estabilidade da versão pública 2.2 para iOS.','Mantivemos as notas restritas às correções de estabilidade visíveis na App Store.','Alterações exclusivas de testes privados e metadados de build local não foram incluídos nas notas públicas.'] },
+    'tagweaver/2.2': { summary: 'Atualização pública do TagWeaver 2.2 na App Store para iOS.', changes: ['Melhoramos a estabilidade geral no iOS.','Deixamos a edição cotidiana de tags mais estável e confiável.'] },
     'tagweaver/2.1.3': { summary: 'Atualização pública do TagWeaver 2.1.3 no Google Play para Android.', changes: ['Melhoramos o desempenho ao salvar tags no Android evitando regravações sem alteração.','Usamos um caminho mais rápido para salvar tags básicas modificadas.','Adicionamos verificações de tempo de gravação no Android para lotes grandes de arquivos.'] },
     'segra/1.0.2': { summary: 'Atualização pública do Segra 1.0.2 no Google Play para Android.', changes: ['Melhoramos o layout da lista do Audio Merge.','Corrigimos a numeração dos itens de combinação.','Estabilizamos a renderização da lista de arquivos do Audio Merge.','Ajustamos o espaçamento para deixar fluxos repetidos mais claros.'] }
   },
   de: {
     'clipnest/1.0.2': { summary: 'Öffentliches iOS-Store-Update für ClipNest 1.0.2.', changes: ['Die Übergabe zur Tastaturbearbeitung wurde verbessert.','Das Verhalten des Clip-Aktionsmenüs wurde korrigiert.','Stabilitätskorrekturen für die öffentliche App-Store-Version 1.0.2 wurden aufgenommen.'] },
-    'tagweaver/2.2': { summary: 'Öffentliches iOS-Store-Update für TagWeaver 2.2.', changes: ['Die Stabilität der öffentlichen iOS-Version 2.2 wurde verbessert.','Die Versionshinweise bleiben auf öffentlich sichtbare App-Store-Stabilitätskorrekturen beschränkt.','Änderungen nur für private Tests und lokale Build-Metadaten wurden aus den öffentlichen Hinweisen ausgeschlossen.'] },
+    'tagweaver/2.2': { summary: 'Öffentliches iOS-Store-Update für TagWeaver 2.2.', changes: ['Die allgemeine Stabilität unter iOS wurde verbessert.','Die tägliche Tag-Bearbeitung wurde zuverlässiger gemacht.'] },
     'tagweaver/2.1.3': { summary: 'Öffentliches Android-Store-Update für TagWeaver 2.1.3.', changes: ['Die Android-Tag-Speicherleistung wurde verbessert, indem unveränderte Rückschreibungen übersprungen werden.','Für geänderte Basis-Tags wird ein schnellerer Speicherpfad verwendet.','Für große Dateistapel wurden Android-Schreibzeitprüfungen ergänzt.'] },
     'segra/1.0.2': { summary: 'Öffentliches Android-Store-Update für Segra 1.0.2.', changes: ['Das Layout der Audio-Merge-Liste wurde verbessert.','Die Nummerierung der Zusammenführungselemente wurde korrigiert.','Die Darstellung der Audio-Merge-Dateiliste wurde stabilisiert.','Abstände wurden für klarere wiederholte Arbeitsabläufe angepasst.'] }
   },
   fr: {
     'clipnest/1.0.2': { summary: 'Mise à jour publique iOS de ClipNest 1.0.2 sur l’App Store.', changes: ['Amélioration du passage à l’édition via le clavier.','Correction du comportement du menu d’actions des extraits.','Ajout de correctifs de stabilité App Store pour la version publique 1.0.2.'] },
-    'tagweaver/2.2': { summary: 'Mise à jour publique iOS de TagWeaver 2.2 sur l’App Store.', changes: ['Amélioration de la stabilité de la version publique iOS 2.2.','Les notes restent limitées aux correctifs de stabilité visibles sur l’App Store.','Les changements réservés aux tests privés et les métadonnées de build local sont exclus des notes publiques.'] },
+    'tagweaver/2.2': { summary: 'Mise à jour publique iOS de TagWeaver 2.2 sur l’App Store.', changes: ['Amélioration de la stabilité générale sur iOS.','L’édition courante des tags est désormais plus fiable.'] },
     'tagweaver/2.1.3': { summary: 'Mise à jour publique Android de TagWeaver 2.1.3.', changes: ['Amélioration des performances d’enregistrement des tags Android en évitant de réécrire les données inchangées.','Utilisation d’un chemin plus rapide pour l’enregistrement des tags de base modifiés.','Ajout de contrôles de temps d’écriture Android pour les lots volumineux.'] },
     'segra/1.0.2': { summary: 'Mise à jour publique Android de Segra 1.0.2.', changes: ['Amélioration de la disposition de la liste Audio Merge.','Correction de la numérotation des éléments fusionnés.','Stabilisation de l’affichage de la liste des fichiers Audio Merge.','Ajustement des espacements pour rendre les usages répétés plus clairs.'] }
   },
   es: {
     'clipnest/1.0.2': { summary: 'Actualización pública de ClipNest 1.0.2 para iOS en la App Store.', changes: ['Mejoramos la transición a la edición desde el teclado.','Corregimos el comportamiento del menú de acciones de los recortes.','Incluimos correcciones de estabilidad de la App Store en la versión pública 1.0.2.'] },
-    'tagweaver/2.2': { summary: 'Actualización pública de TagWeaver 2.2 para iOS en la App Store.', changes: ['Mejoramos la estabilidad de la versión pública 2.2 para iOS.','Limitamos las notas a las correcciones de estabilidad visibles en la App Store.','Los cambios exclusivos de pruebas privadas y los metadatos de compilación local no se incluyen en las notas públicas.'] },
+    'tagweaver/2.2': { summary: 'Actualización pública de TagWeaver 2.2 para iOS en la App Store.', changes: ['Mejoramos la estabilidad general en iOS.','Hicimos más fiable la edición habitual de etiquetas.'] },
     'tagweaver/2.1.3': { summary: 'Actualización pública de TagWeaver 2.1.3 para Android.', changes: ['Mejoramos el rendimiento del guardado de etiquetas en Android omitiendo reescrituras sin cambios.','Usamos una ruta más rápida para guardar etiquetas básicas modificadas.','Añadimos comprobaciones del tiempo de escritura en Android para lotes grandes.'] },
     'segra/1.0.2': { summary: 'Actualización pública de Segra 1.0.2 para Android.', changes: ['Mejoramos la disposición de la lista de Audio Merge.','Corregimos la numeración de los elementos combinados.','Estabilizamos la renderización de la lista de archivos de Audio Merge.','Ajustamos el espaciado para que los flujos repetidos sean más claros.'] }
   }
