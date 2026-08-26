@@ -1,10 +1,10 @@
 ---
-title: "Warum große Textdateien langsam öffnen"
-card_title: "Warum große Textdateien langsam öffnen"
+title: "Warum sich große Textdateien langsam öffnen"
+card_title: "Warum sich große Textdateien langsam öffnen"
 slug: "large-text-file-slow-to-open"
 category: "reading"
 language: "de"
-description: "Warum große Textdateien langsam öffnen können und wie Dateistruktur, Dekodierung, Layout, Suche und Speicherbedarf die Leistung beeinflussen."
+description: "Warum sich große Textdateien langsam öffnen können und wie Dateistruktur, Dekodierung, Layout, Suche und Speicherbedarf die Leistung beeinflussen."
 status: "published"
 topic_id: "TOPIC-0004"
 search_intent: "learn"
@@ -18,7 +18,7 @@ updated_at: "2026-08-14T09:00:00+09:00"
 image_specs: "Diagnose-Workflow für große Textdateien|Vergleich von Streaming, Windowing und Virtualisierung|VaultXT für große Klartextdateien"
 ---
 
-# Warum große Textdateien langsam öffnen
+# Warum sich große Textdateien langsam öffnen
 
 ## Frage
 
