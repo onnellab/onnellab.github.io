@@ -22,6 +22,7 @@ const copy = isKo
       switchLabel: 'English',
       appsHref: '/apps/ko/',
       appsLabel: '앱',
+      navLabel: '블로그 탐색',
       eyebrow: 'ONNELLAB Blog',
       heading: '워크플로 가이드',
       intro: '읽기, 음악, 생산성, 미디어 작업을 차분하게 정리하는 실전 글입니다.',
@@ -40,6 +41,7 @@ const copy = isKo
       switchLabel: '한국어',
       appsHref: '/apps/',
       appsLabel: 'Apps',
+      navLabel: 'Blog navigation',
       eyebrow: 'ONNELLAB Blog',
       heading: 'Practical Workflow Guides',
       intro: 'Focused articles for calmer reading, music, productivity, and media workflows.',
@@ -138,7 +140,7 @@ const blogJsonLd = [
   alternates={blogIndexAlternates()}
 >
   <main class="blog-shell">
-    <nav class="top-nav site-header" aria-label="Blog navigation">
+    <nav class="top-nav site-header" aria-label={copy.navLabel}>
       <a class="brand" href={isKo ? '/ko/' : '/'}>ONNELLAB</a>
       <div class="nav-actions">
         <a href={copy.appsHref}>{copy.appsLabel}</a>
