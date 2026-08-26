@@ -27,7 +27,7 @@ Como organizar os metadados de MP3 antes de adicionar os arquivos a uma bibliote
 
 ## Resposta curta
 
-Trabalhe em uma cópia, defina uma convenção de escrita e corrija primeiro os campos que identificam e ordenam as faixas. Depois de padronizar os textos, adicione a arte do álbum. Salve apenas um pequeno lote de teste e abra os arquivos novamente no player que você realmente usa. Não invente informações incertas com base apenas no nome do arquivo. Um bom fluxo de edição de metadados prioriza valores confirmados e consistentes, e não o preenchimento de todos os campos vazios.
+Trabalhe em uma cópia, defina uma convenção de escrita e corrija primeiro os campos que identificam e ordenam as faixas. Depois de padronizar os textos, adicione a capa do álbum. Salve apenas um pequeno lote de teste e abra os arquivos novamente no player que você realmente usa. Não invente informações incertas com base apenas no nome do arquivo. Um bom fluxo de edição de metadados prioriza valores confirmados e consistentes, e não o preenchimento de todos os campos vazios.
 
 ## Conceitos que vale conhecer
 
@@ -94,7 +94,7 @@ O app executa as decisões que você tomou; ele não é uma fonte de verdade sob
 - Diferença entre Album Artist e artista da faixa em coletâneas
 - Quando registrar total de faixas e total de discos
 - Como codificação de caracteres afeta tags com alfabetos não latinos
-- Como verificar arte incorporada sem alterar o áudio
+- Como verificar a capa incorporada sem alterar o áudio
 
 ## Referências
 
