@@ -1,0 +1,149 @@
+---
+import {
+  allLocaleDefinitions,
+  allSiteLocales,
+  type AllSiteLocale
+} from '../lib/extended-site-i18n';
+import {
+  releaseNoteKoPath,
+  releaseNotePath,
+  type ReleaseNote
+} from '../lib/releaseNotes';
+import {
+  releaseNoteLocalePath,
+  type ReleaseLocale
+} from '../lib/extended-release-notes';
+
+type Props = {
+  note: ReleaseNote;
+  locale: AllSiteLocale;
+};
+
+const { note, locale } = Astro.props;
+const current = allLocaleDefinitions[locale];
+const languageControlLabel: Record<AllSiteLocale, string> = {
+  en: `Language: ${current.label}`,
+  ko: `언어: ${current.label}`,
+  ja: `言語: ${current.label}`,
+  'zh-Hans': `语言：${current.label}`,
+  'zh-Hant': `語言：${current.label}`,
+  'pt-BR': `Idioma: ${current.label}`,
+  de: `Sprache: ${current.label}`,
+  fr: `Langue : ${current.label}`,
+  es: `Idioma: ${current.label}`
+};
+
+const releaseHref = (item: AllSiteLocale): string => {
+  if (item === 'en') return releaseNotePath(note);
+  if (item === 'ko') return releaseNoteKoPath(note);
+  return releaseNoteLocalePath(note, item as ReleaseLocale);
+};
+---
+
+<details class="locale-menu">
+  <summary class="site-language-control" aria-label={languageControlLabel[locale]}>
+    {current.label}
+  </summary>
+  <ul class="locale-menu-panel">
+    {allSiteLocales.map((item) => {
+      const definition = allLocaleDefinitions[item];
+      return (
+        <li>
+          <a
+            href={releaseHref(item)}
+            lang={definition.htmlLang}
+            hreflang={definition.hreflang}
+            data-locale-choice={item}
+            aria-current={item === locale ? 'page' : undefined}
+          >
+            {definition.label}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</details>
+
+<style>
+  .locale-menu {
+    position: relative;
+    z-index: 20;
+  }
+
+  .locale-menu summary {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ded6ca;
+    border-radius: 999px;
+    padding: 7px 13px;
+    background: rgba(255, 253, 248, 0.82);
+    color: #5f5a50;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.35;
+    list-style: none;
+    white-space: nowrap;
+  }
+
+  .locale-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .locale-menu summary::after {
+    content: '⌄';
+    margin-left: 7px;
+    color: #90877b;
+    font-size: 12px;
+    transform: translateY(-1px);
+  }
+
+  .locale-menu[open] summary,
+  .locale-menu summary:hover,
+  .locale-menu summary:focus-visible {
+    border-color: #cfc5b7;
+    background: #fffdf8;
+  }
+
+  .locale-menu summary:focus-visible,
+  .locale-menu-panel a:focus-visible {
+    outline: 2px solid #827d72;
+    outline-offset: 3px;
+  }
+
+  .locale-menu-panel {
+    width: max-content;
+    min-width: 156px;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    border: 1px solid #ded6ca;
+    border-radius: 13px;
+    padding: 6px;
+    background: #fffdf8;
+    box-shadow: 0 14px 34px rgba(57, 48, 39, 0.11);
+    list-style: none;
+  }
+
+  .locale-menu-panel a {
+    display: block;
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: #5f5a50;
+    font-size: 13px;
+    font-weight: 560;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .locale-menu-panel a:hover,
+  .locale-menu-panel a[aria-current='page'] {
+    background: #f4efe7;
+    color: #383631;
+  }
+</style>
