@@ -472,7 +472,7 @@ test.describe('site layout and navigation', () => {
     await page.goto('/ja/');
 
     const heading = page.locator('.home-hero h1');
-    await expect(heading).toHaveText('小さな道具を、 静かに。');
+    await expect(heading).toHaveText('小さな道具を、静かに。');
     expect(await heading.innerText()).toBe('小さな道具を、\n静かに。');
     await expect(heading.locator('.title-line')).toHaveText(['小さな道具を、', '静かに。']);
 
