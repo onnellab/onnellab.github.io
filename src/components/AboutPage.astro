@@ -12,6 +12,7 @@ import {
 type Props = { locale: SiteLocale };
 type AboutCopy = {
   nav: { apps: string; blog: string };
+  navLabel: string;
   seoTitle: string;
   description: string;
   eyebrow: string;
@@ -28,6 +29,7 @@ type AboutCopy = {
 const copies: Record<SiteLocale, AboutCopy> = {
   en: {
     nav: { apps: 'Apps', blog: 'Blog' },
+    navLabel: 'Navigation',
     seoTitle: 'About ONNELLAB',
     description: 'ONNELLAB is an independent software studio from Korea building calm, focused utilities.',
     eyebrow: 'Independent software studio',
@@ -50,6 +52,7 @@ const copies: Record<SiteLocale, AboutCopy> = {
   },
   ko: {
     nav: { apps: '앱', blog: '블로그' },
+    navLabel: '탐색',
     seoTitle: 'ONNELLAB 소개',
     description: 'ONNELLAB은 한국에서 차분하고 목적이 분명한 도구를 만드는 독립 소프트웨어 스튜디오예요.',
     eyebrow: '독립 소프트웨어 스튜디오',
@@ -72,6 +75,7 @@ const copies: Record<SiteLocale, AboutCopy> = {
   },
   ja: {
     nav: { apps: 'アプリ', blog: 'ブログ' },
+    navLabel: 'ナビゲーション',
     seoTitle: 'ONNELLABについて',
     description: 'ONNELLABは韓国で、静かで目的の明確なツールをつくるインディーソフトウェアスタジオです。',
     eyebrow: 'インディーソフトウェアスタジオ',
@@ -94,6 +98,7 @@ const copies: Record<SiteLocale, AboutCopy> = {
   },
   'zh-Hans': {
     nav: { apps: '应用', blog: '博客' },
+    navLabel: '导航',
     seoTitle: '关于 ONNELLAB',
     description: 'ONNELLAB 是一家来自韩国、打造安静而专注工具的独立软件工作室。',
     eyebrow: '独立软件工作室',
@@ -116,6 +121,7 @@ const copies: Record<SiteLocale, AboutCopy> = {
   },
   'zh-Hant': {
     nav: { apps: '應用程式', blog: '部落格' },
+    navLabel: '導覽',
     seoTitle: '關於 ONNELLAB',
     description: 'ONNELLAB 是一家來自韓國、打造安靜而專注工具的獨立軟體工作室。',
     eyebrow: '獨立軟體工作室',
@@ -193,7 +199,7 @@ const jsonLd = {
   alternates={localeAlternates('about')}
 >
   <main class="page-shell information-shell" data-core-page="about">
-    <nav class="top-nav site-header" aria-label="Navigation">
+    <nav class="top-nav site-header" aria-label={copy.navLabel}>
       <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
       <div class="nav-actions">
         <a href={routeFor('apps', locale)}>{copy.nav.apps}</a>
