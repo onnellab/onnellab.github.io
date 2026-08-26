@@ -71,8 +71,14 @@ jobs:
               "homeHeading: '小さな道具を、 静かに。',",
               "homeHeading: '小さな道具を、静かに。',",
               'Japanese heading fixture')
+
+          visual_tests = Path('tests/site-visual.spec.ts')
+          replace_value(visual_tests,
+              "await expect(heading).toHaveText('小さな道具を、 静かに。');",
+              "await expect(heading).toHaveText('小さな道具を、静かに。');",
+              'Japanese visual heading fixture')
           PY
-          git add src/components/HomePage.astro tests/site-i18n.spec.ts
+          git add src/components/HomePage.astro tests/site-i18n.spec.ts tests/site-visual.spec.ts
           git commit -m "Polish Japanese home copy"
 
       - name: Refine localized metadata typography
