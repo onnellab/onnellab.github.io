@@ -42,12 +42,41 @@ jobs:
           git config user.name "ONNELLAB Automation"
           git config user.email "actions@users.noreply.github.com"
 
-      - name: Verify user-facing release notes
+      - name: Fix Papira screenshot alt localization contract
         run: |
           set -euo pipefail
           git pull --rebase origin main
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('src/lib/papira.ts')
+          source = path.read_text(encoding='utf-8')
+          replacements = {
+              '作品種類の選択画面、表紙と本文の設定': 'Papiraの作品種類選択画面で、表紙と本文を設定',
+              '表紙・目次・本の情報を確認するPapiraのプレビュー': 'Papiraで表紙・目次・本の情報を確認するプレビュー画面',
+              '章タイトルの検出と目次プレビュー': 'Papiraの章タイトル検出と目次プレビュー画面',
+              'EPUBを書き出して端末に保存する画面': 'PapiraでEPUBを書き出して端末に保存する画面',
+              '作品类型选择，设置封面与正文': 'Papira 作品类型选择界面，用于设置封面与正文',
+              '电子书预览，查看封面、目录和书籍信息': 'Papira 电子书预览界面，用于查看封面、目录和书籍信息',
+              '章节识别与目录预览': 'Papira 章节识别与目录预览界面',
+              '导出 EPUB 并保存到设备': 'Papira EPUB 导出界面，用于保存到设备',
+              '作品類型選擇，設定封面與內文': 'Papira 作品類型選擇畫面，用於設定封面與內文',
+              '電子書預覽，查看封面、目錄與書籍資訊': 'Papira 電子書預覽畫面，用於查看封面、目錄與書籍資訊',
+              '章節辨識與目錄預覽': 'Papira 章節辨識與目錄預覽畫面',
+              '匯出 EPUB 並儲存到裝置': 'Papira EPUB 匯出畫面，用於儲存到裝置',
+          }
+          for old, new in replacements.items():
+              source = source.replace(old, new)
+          path.write_text(source, encoding='utf-8')
+          PY
           npm run build
           npx playwright test tests/product-contract.spec.ts --project=desktop
+          git add src/lib/papira.ts
+          if ! git diff --cached --quiet; then
+            git commit -m "Fix Papira screenshot alt localization contract"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
 
       - name: Normalize terminology and add regression checks
         run: |
