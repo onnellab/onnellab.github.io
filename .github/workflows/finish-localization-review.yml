@@ -64,6 +64,22 @@ jobs:
               '電子書預覽，查看封面、目錄與書籍資訊': 'Papira 電子書預覽畫面，用於查看封面、目錄與書籍資訊',
               '章節辨識與目錄預覽': 'Papira 章節辨識與目錄預覽畫面',
               '匯出 EPUB 並儲存到裝置': 'Papira EPUB 匯出畫面，用於儲存到裝置',
+              'Escolha do tipo de obra, capa e estrutura do texto': 'Tela do Papira para escolher o tipo de obra, a capa e a estrutura do texto',
+              'Prévia do livro com capa, sumário e dados': 'Prévia do Papira com capa, sumário e dados do livro',
+              'Detecção de capítulos e prévia do sumário': 'Tela do Papira com detecção de capítulos e prévia do sumário',
+              'Exportação do EPUB para salvar no dispositivo': 'Tela do Papira para exportar o EPUB e salvá-lo no dispositivo',
+              'Auswahl des Werktyps mit Cover- und Textaufbau': 'Papira-Auswahl des Werktyps mit Cover- und Textaufbau',
+              'Buchvorschau mit Cover, Inhaltsverzeichnis und Buchdaten': 'Papira-Buchvorschau mit Cover, Inhaltsverzeichnis und Buchdaten',
+              'Kapitelerkennung und Inhaltsverzeichnis-Vorschau': 'Papira-Kapitelerkennung mit Vorschau des Inhaltsverzeichnisses',
+              'EPUB-Export zum Speichern auf dem Gerät': 'Papira-EPUB-Export zum Speichern auf dem Gerät',
+              'Choix du type de texte, de la couverture et de la structure': 'Écran Papira pour choisir le type de texte, la couverture et la structure',
+              'Aperçu du livre avec couverture, sommaire et informations': 'Aperçu Papira du livre avec couverture, sommaire et informations',
+              'Détection des chapitres et aperçu du sommaire': 'Écran Papira de détection des chapitres et d’aperçu du sommaire',
+              'Exportation de l’EPUB vers l’appareil': 'Écran Papira d’exportation de l’EPUB vers l’appareil',
+              'Elección del tipo de obra, portada y estructura del texto': 'Pantalla de Papira para elegir el tipo de obra, la portada y la estructura del texto',
+              'Vista previa del libro con portada, índice y datos': 'Vista previa de Papira con portada, índice y datos del libro',
+              'Detección de capítulos y vista previa del índice': 'Pantalla de Papira para detectar capítulos y previsualizar el índice',
+              'Exportación del EPUB para guardarlo en el dispositivo': 'Pantalla de Papira para exportar el EPUB y guardarlo en el dispositivo',
           }
           for old, new in replacements.items():
               source = source.replace(old, new)
