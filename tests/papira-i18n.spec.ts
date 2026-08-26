@@ -7,7 +7,11 @@ const locales = [
   { path: 'ko/', hreflang: 'ko', title: 'Papira - 오프라인 TXT EPUB 제작 도구' },
   { path: 'ja/', hreflang: 'ja', title: 'Papira - オフラインTXT・EPUB作成ツール' },
   { path: 'zh-hans/', hreflang: 'zh-Hans', title: 'Papira - 离线 TXT 转 EPUB 制作工具' },
-  { path: 'zh-hant/', hreflang: 'zh-Hant', title: 'Papira - 離線 TXT 轉 EPUB 製作工具' }
+  { path: 'zh-hant/', hreflang: 'zh-Hant', title: 'Papira - 離線 TXT 轉 EPUB 製作工具' },
+  { path: 'pt-br/', hreflang: 'pt-BR', title: 'Papira - Criador offline de EPUB a partir de TXT' },
+  { path: 'de/', hreflang: 'de', title: 'Papira - Offline-TXT-zu-EPUB-Ersteller' },
+  { path: 'fr/', hreflang: 'fr', title: 'Papira - Créateur EPUB hors ligne à partir de TXT' },
+  { path: 'es/', hreflang: 'es', title: 'Papira - Creador de EPUB sin conexión a partir de TXT' }
 ] as const;
 
 const privacyLocales = [
@@ -42,29 +46,67 @@ privacyAlternateUrls['x-default'] = privacyAlternateUrls.en;
 
 const screenshotAlts = {
   en: [
-    'Papira home screen with options to start a full book project or create a quick EPUB',
-    'Papira screen for selecting a work type and configuring the cover',
-    'Papira screen for reviewing book metadata and creating the EPUB'
+    'Papira home screen for converting TXT to EPUB',
+    'Papira work type screen with cover and body setup',
+    'Papira book preview with cover, table of contents, and book details',
+    'Papira chapter detection and table of contents preview',
+    'Papira EPUB export screen for saving to the device'
   ],
   ko: [
-    '책 프로젝트를 시작하거나 빠르게 EPUB을 만들 수 있는 Papira 홈 화면',
-    '작품 유형을 선택하고 표지를 설정하는 Papira 화면',
-    '책 정보를 검토하고 EPUB을 만드는 Papira 화면'
+    'Papira 홈 화면, TXT 원고를 EPUB으로 변환',
+    'Papira 작품 종류 화면, 표지와 본문 구성 선택',
+    'Papira 책 미리보기, 표지·목차·책 정보 확인',
+    'Papira 챕터 감지와 목차 미리보기 화면',
+    'Papira EPUB 내보내기 화면, 기기에 저장'
   ],
   ja: [
-    '本格的な本のプロジェクトまたはクイックEPUBを選ぶPapiraのホーム画面',
-    '作品タイプを選択し、表紙を設定するPapiraの画面',
-    '書誌情報を確認してEPUBを作成するPapiraの画面'
+    'Papiraのホーム画面、TXT原稿をEPUBに変換',
+    '作品種類の選択画面、表紙と本文の設定',
+    '表紙・目次・本の情報を確認するPapiraのプレビュー',
+    '章タイトルの検出と目次プレビュー',
+    'EPUBを書き出して端末に保存する画面'
   ],
   'zh-Hans': [
-    '可选择完整图书项目或快速制作 EPUB 的 Papira 首页',
-    '选择作品类型并配置封面的 Papira 页面',
-    '检查图书元数据并创建 EPUB 的 Papira 页面'
+    'Papira 首页，将 TXT 原稿转换为 EPUB',
+    '作品类型选择，设置封面与正文',
+    '电子书预览，查看封面、目录和书籍信息',
+    '章节识别与目录预览',
+    '导出 EPUB 并保存到设备'
   ],
   'zh-Hant': [
-    '可選擇完整書籍專案或快速製作 EPUB 的 Papira 首頁',
-    '選擇作品類型並設定封面的 Papira 頁面',
-    '檢查書籍中繼資料並建立 EPUB 的 Papira 頁面'
+    'Papira 首頁，將 TXT 原稿轉換為 EPUB',
+    '作品類型選擇，設定封面與內文',
+    '電子書預覽，查看封面、目錄與書籍資訊',
+    '章節辨識與目錄預覽',
+    '匯出 EPUB 並儲存到裝置'
+  ],
+  'pt-BR': [
+    'Tela inicial do Papira para converter TXT em EPUB',
+    'Escolha do tipo de obra, capa e estrutura do texto',
+    'Prévia do livro com capa, sumário e dados',
+    'Detecção de capítulos e prévia do sumário',
+    'Exportação do EPUB para salvar no dispositivo'
+  ],
+  de: [
+    'Papira-Startseite zur Umwandlung von TXT in EPUB',
+    'Auswahl des Werktyps mit Cover- und Textaufbau',
+    'Buchvorschau mit Cover, Inhaltsverzeichnis und Buchdaten',
+    'Kapitelerkennung und Inhaltsverzeichnis-Vorschau',
+    'EPUB-Export zum Speichern auf dem Gerät'
+  ],
+  fr: [
+    'Écran d’accueil de Papira pour convertir un TXT en EPUB',
+    'Choix du type de texte, de la couverture et de la structure',
+    'Aperçu du livre avec couverture, sommaire et informations',
+    'Détection des chapitres et aperçu du sommaire',
+    'Exportation de l’EPUB vers l’appareil'
+  ],
+  es: [
+    'Pantalla de inicio de Papira para convertir TXT a EPUB',
+    'Elección del tipo de obra, portada y estructura del texto',
+    'Vista previa del libro con portada, índice y datos',
+    'Detección de capítulos y vista previa del índice',
+    'Exportación del EPUB para guardarlo en el dispositivo'
   ]
 } as const;
 
@@ -103,7 +145,8 @@ test.describe('Papira nine-language launch surface', () => {
       'src/pages/apps/papira/ko/index.astro',
       'src/pages/apps/papira/ja/index.astro',
       'src/pages/apps/papira/zh-hans/index.astro',
-      'src/pages/apps/papira/zh-hant/index.astro'
+      'src/pages/apps/papira/zh-hant/index.astro',
+      'src/pages/apps/[app]/[locale].astro'
     ];
     for (const route of papiraRoutes) {
       const source = fs.readFileSync(path.resolve(process.cwd(), route), 'utf8');
@@ -422,13 +465,13 @@ test.describe('Papira nine-language launch surface', () => {
       await page.goto(`/apps/papira/${locale.path}`);
 
       const screenshots = page.locator('.screenshot-link img');
-      await expect(screenshots).toHaveCount(3);
+      await expect(screenshots).toHaveCount(5);
       expect(await screenshots.evaluateAll((images) => images.map((image) => image.getAttribute('alt'))))
         .toEqual([...screenshotAlts[screenshotLocale]]);
       expect(await page.locator('.viewer-thumb img').evaluateAll((images) =>
         images.map((image) => image.getAttribute('alt'))
-      )).toEqual(['', '', '']);
-      for (let index = 0; index < 3; index += 1) {
+      )).toEqual(['', '', '', '', '']);
+      for (let index = 0; index < 5; index += 1) {
         const source = `/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png`;
         await expect(screenshots.nth(index)).toHaveAttribute('src', source);
         await expect(screenshots.nth(index)).toHaveAttribute('width', '1080');
@@ -444,6 +487,15 @@ test.describe('Papira nine-language launch surface', () => {
           )
           .toEqual({ complete: true, naturalWidth: 1080, naturalHeight: 2168 });
       }
+      const schemas = await jsonLd(page);
+      const software = schemas.find((item) => item['@type'] === 'SoftwareApplication');
+      expect(software?.screenshot).toEqual(
+        Array.from(
+          { length: 5 },
+          (_, index) =>
+            `https://onnellab.github.io/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png`
+        )
+      );
     }
   });
 

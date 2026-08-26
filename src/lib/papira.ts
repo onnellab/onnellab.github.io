@@ -20,7 +20,7 @@ export type PapiraCopy = {
   eyebrow: string;
   tagline: string;
   heroSignals: string[];
-  screenshotAlts: [string, string, string];
+  screenshotAlts: [string, string, string, string, string];
   lead: string;
   statusLabel: string;
   statusValue: string;
@@ -47,26 +47,37 @@ const extendedPapiraStatus: Record<ExtendedSiteLocale, string> = {
   es: 'En preparación'
 };
 
-const extendedPapiraScreenshotAlts: Record<ExtendedSiteLocale, [string, string, string]> = {
+const extendedPapiraScreenshotAlts: Record<
+  ExtendedSiteLocale,
+  [string, string, string, string, string]
+> = {
   'pt-BR': [
-    'Tela inicial do Papira para iniciar um projeto de livro ou criar um EPUB rápido',
-    'Tela do Papira para escolher o tipo de obra e configurar a capa',
-    'Tela do Papira para revisar os metadados do livro e criar o EPUB'
+    'Tela inicial do Papira para converter TXT em EPUB',
+    'Escolha do tipo de obra, capa e estrutura do texto',
+    'Prévia do livro com capa, sumário e dados',
+    'Detecção de capítulos e prévia do sumário',
+    'Exportação do EPUB para salvar no dispositivo'
   ],
   de: [
-    'Papira-Startseite zum Starten eines Buchprojekts oder Erstellen eines schnellen EPUB',
-    'Papira-Seite zur Auswahl des Werktyps und Einrichtung des Covers',
-    'Papira-Seite zum Prüfen der Buchmetadaten und Erstellen des EPUB'
+    'Papira-Startseite zur Umwandlung von TXT in EPUB',
+    'Auswahl des Werktyps mit Cover- und Textaufbau',
+    'Buchvorschau mit Cover, Inhaltsverzeichnis und Buchdaten',
+    'Kapitelerkennung und Inhaltsverzeichnis-Vorschau',
+    'EPUB-Export zum Speichern auf dem Gerät'
   ],
   fr: [
-    'Écran d’accueil de Papira pour démarrer un projet de livre ou créer rapidement un EPUB',
-    'Écran Papira pour choisir le type d’œuvre et configurer la couverture',
-    'Écran Papira pour vérifier les métadonnées du livre et créer l’EPUB'
+    'Écran d’accueil de Papira pour convertir un TXT en EPUB',
+    'Choix du type de texte, de la couverture et de la structure',
+    'Aperçu du livre avec couverture, sommaire et informations',
+    'Détection des chapitres et aperçu du sommaire',
+    'Exportation de l’EPUB vers l’appareil'
   ],
   es: [
-    'Pantalla de inicio de Papira para comenzar un proyecto de libro o crear un EPUB rápido',
-    'Pantalla de Papira para elegir el tipo de obra y configurar la portada',
-    'Pantalla de Papira para revisar los metadatos del libro y crear el EPUB'
+    'Pantalla de inicio de Papira para convertir TXT a EPUB',
+    'Elección del tipo de obra, portada y estructura del texto',
+    'Vista previa del libro con portada, índice y datos',
+    'Detección de capítulos y vista previa del índice',
+    'Exportación del EPUB para guardarlo en el dispositivo'
   ]
 };
 
@@ -102,8 +113,8 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
       seoDescription: text.body.split(/\n\s*\n/)[0]?.replace(/\s+/g, ' ').trim() ?? text.subtitle,
       iconPath: '/app-assets/papira/icon.png',
       socialImagePath: '/app-assets/papira/social-card.png',
-      screenshotPaths: ['01', '02', '03'].map(
-        (name) => `/app-assets/papira/assets/screenshots/en/${name}.png`
+      screenshotPaths: ['01', '02', '03', '04', '05'].map(
+        (name) => `/app-assets/papira/assets/screenshots/${locale}/${name}.png`
       ),
       screenshotAlts: extendedPapiraScreenshotAlts[locale],
       screenshotDimensions: { width: 1080, height: 2168 },
@@ -157,7 +168,7 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
     socialImagePath: '/app-assets/papira/social-card.png',
     eyebrow: text.eyebrow,
     heroSignals: text.heroSignals,
-    screenshotPaths: ['01', '02', '03'].map(
+    screenshotPaths: ['01', '02', '03', '04', '05'].map(
       (name) => `/app-assets/papira/assets/screenshots/${baseLocale}/${name}.png`
     ),
     screenshotAlts: text.screenshotAlts,
@@ -176,9 +187,11 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     tagline: 'Turn your manuscript into a book.',
     heroSignals: ['Finished TXT → EPUB', 'Cover, chapters, and TOC', 'Entirely on device'],
     screenshotAlts: [
-      'Papira home screen with options to start a full book project or create a quick EPUB',
-      'Papira screen for selecting a work type and configuring the cover',
-      'Papira screen for reviewing book metadata and creating the EPUB'
+      'Papira home screen for converting TXT to EPUB',
+      'Papira work type screen with cover and body setup',
+      'Papira book preview with cover, table of contents, and book details',
+      'Papira chapter detection and table of contents preview',
+      'Papira EPUB export screen for saving to the device'
     ],
     lead:
       'Papira assembles any finished TXT manuscript into a well-structured EPUB. It includes dedicated flows for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, while other TXT content can also be converted to EPUB.',
@@ -240,9 +253,11 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     tagline: '원고를 한 권의 책으로 만들어요.',
     heroSignals: ['완성된 TXT → EPUB', '표지·챕터·목차 구성', '모든 작업은 기기 안에서'],
     screenshotAlts: [
-      '책 프로젝트를 시작하거나 빠르게 EPUB을 만들 수 있는 Papira 홈 화면',
-      '작품 유형을 선택하고 표지를 설정하는 Papira 화면',
-      '책 정보를 검토하고 EPUB을 만드는 Papira 화면'
+      'Papira 홈 화면, TXT 원고를 EPUB으로 변환',
+      'Papira 작품 종류 화면, 표지와 본문 구성 선택',
+      'Papira 책 미리보기, 표지·목차·책 정보 확인',
+      'Papira 챕터 감지와 목차 미리보기 화면',
+      'Papira EPUB 내보내기 화면, 기기에 저장'
     ],
     lead:
       'Papira는 완성된 TXT 원고를 정돈된 EPUB 파일로 만들어요. 팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 제작 흐름을 제공하지만, 그 밖의 TXT 콘텐츠도 EPUB으로 변환할 수 있어요.',
@@ -304,9 +319,11 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     tagline: '原稿を、一冊の本へ。',
     heroSignals: ['完成したTXT → EPUB', '表紙・章・目次を整理', 'すべて端末内で処理'],
     screenshotAlts: [
-      '本格的な本のプロジェクトまたはクイックEPUBを選ぶPapiraのホーム画面',
-      '作品タイプを選択し、表紙を設定するPapiraの画面',
-      '書誌情報を確認してEPUBを作成するPapiraの画面'
+      'Papiraのホーム画面、TXT原稿をEPUBに変換',
+      '作品種類の選択画面、表紙と本文の設定',
+      '表紙・目次・本の情報を確認するPapiraのプレビュー',
+      '章タイトルの検出と目次プレビュー',
+      'EPUBを書き出して端末に保存する画面'
     ],
     lead:
       'Papiraは完成したTXT原稿を整ったEPUBにまとめます。二次創作・連載小説・オリジナル小説・デジタル小冊子・TRPGシナリオに特化した作成フローを備えていますが、そのほかのTXTコンテンツもEPUBに変換できます。',
@@ -368,9 +385,11 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     tagline: '把文稿做成一本书。',
     heroSignals: ['完成的 TXT → EPUB', '整理封面、章节与目录', '全程在设备本地处理'],
     screenshotAlts: [
-      '可选择完整图书项目或快速制作 EPUB 的 Papira 首页',
-      '选择作品类型并配置封面的 Papira 页面',
-      '检查图书元数据并创建 EPUB 的 Papira 页面'
+      'Papira 首页，将 TXT 原稿转换为 EPUB',
+      '作品类型选择，设置封面与正文',
+      '电子书预览，查看封面、目录和书籍信息',
+      '章节识别与目录预览',
+      '导出 EPUB 并保存到设备'
     ],
     lead:
       'Papira 可将完成的 TXT 文稿整理成结构清晰的 EPUB。它特别适合同人文、连载小说、原创小说、数字小册子与 TRPG 剧本，也能将其他 TXT 内容转换为 EPUB。',
@@ -432,9 +451,11 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     tagline: '把文稿做成一本書。',
     heroSignals: ['完成的 TXT → EPUB', '整理封面、章節與目錄', '全程在裝置本機處理'],
     screenshotAlts: [
-      '可選擇完整書籍專案或快速製作 EPUB 的 Papira 首頁',
-      '選擇作品類型並設定封面的 Papira 頁面',
-      '檢查書籍中繼資料並建立 EPUB 的 Papira 頁面'
+      'Papira 首頁，將 TXT 原稿轉換為 EPUB',
+      '作品類型選擇，設定封面與內文',
+      '電子書預覽，查看封面、目錄與書籍資訊',
+      '章節辨識與目錄預覽',
+      '匯出 EPUB 並儲存到裝置'
     ],
     lead:
       'Papira 可將完成的 TXT 文稿整理成結構清楚的 EPUB。它特別適合同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本，也能將其他 TXT 內容轉換為 EPUB。',
