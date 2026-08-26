@@ -28,6 +28,8 @@ type AppsCopy = {
   eyebrow: string;
   heading: string;
   intro: string;
+  navLabel: string;
+  platformsLabel: string;
   searchLabel: string;
   searchPlaceholder: string;
   empty: string;
@@ -41,6 +43,8 @@ const copies: Record<SiteLocale, AppsCopy> = {
     eyebrow: 'Products',
     heading: 'Apps',
     intro: 'Small tools with clear boundaries. Open a product to see exactly what it does—and what it deliberately leaves out.',
+    navLabel: 'Navigation',
+    platformsLabel: 'Platforms',
     searchLabel: 'Find an app',
     searchPlaceholder: 'Search app name',
     empty: 'No matching apps.',
@@ -52,6 +56,8 @@ const copies: Record<SiteLocale, AppsCopy> = {
     eyebrow: '제품',
     heading: '앱',
     intro: '작지만 경계가 분명한 도구들이에요. 각 제품 페이지에서 무엇을 하고, 무엇을 하지 않는지 정확히 확인해요.',
+    navLabel: '탐색',
+    platformsLabel: '플랫폼',
     searchLabel: '앱 찾기',
     searchPlaceholder: '앱 이름을 검색해요',
     empty: '일치하는 앱이 없어요.',
@@ -63,6 +69,8 @@ const copies: Record<SiteLocale, AppsCopy> = {
     eyebrow: 'プロダクト',
     heading: 'アプリ',
     intro: '小さく、境界の明確な道具です。各ページで、できることと、あえて行わないことを確認できます。',
+    navLabel: 'ナビゲーション',
+    platformsLabel: '対応プラットフォーム',
     searchLabel: 'アプリを探す',
     searchPlaceholder: 'アプリ名で検索',
     empty: '該当するアプリはありません。',
@@ -74,6 +82,8 @@ const copies: Record<SiteLocale, AppsCopy> = {
     eyebrow: '产品',
     heading: '应用',
     intro: '小而边界清晰的工具。每个产品页都会说明它能做什么，以及刻意不做什么。',
+    navLabel: '导航',
+    platformsLabel: '支持平台',
     searchLabel: '查找应用',
     searchPlaceholder: '搜索应用名称',
     empty: '没有匹配的应用。',
@@ -85,6 +95,8 @@ const copies: Record<SiteLocale, AppsCopy> = {
     eyebrow: '產品',
     heading: '應用程式',
     intro: '小而邊界清楚的工具。每個產品頁都會說明能做什麼，以及刻意不做什麼。',
+    navLabel: '導覽',
+    platformsLabel: '支援平台',
     searchLabel: '尋找應用程式',
     searchPlaceholder: '搜尋應用程式名稱',
     empty: '沒有符合的應用程式。',
@@ -163,7 +175,7 @@ const collectionJsonLd = {
   alternates={localeAlternates('apps')}
 >
   <main class="page-shell information-shell" data-apps-page data-locale={locale}>
-    <nav class="top-nav site-header" aria-label="Navigation">
+    <nav class="top-nav site-header" aria-label={copy.navLabel}>
       <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
       <LocaleMenu locale={locale} page="apps" />
     </nav>
@@ -198,7 +210,7 @@ const collectionJsonLd = {
               <span class="status-badge" data-status-kind={app.statusKind}>{app.status}</span>
             </div>
             <p>{app.description}</p>
-            <div class="platform-badges" aria-label="Platforms">
+            <div class="platform-badges" aria-label={copy.platformsLabel}>
               {app.platforms.map((platform) => <span>{platform}</span>)}
             </div>
           </div>
