@@ -38,48 +38,38 @@ jobs:
           python <<'PY'
           from pathlib import Path
 
-          def replace_once(path: Path, old: str, new: str, label: str) -> None:
+          def replace_value(path: Path, old: str, new: str, label: str) -> None:
               text = path.read_text(encoding='utf-8')
               if old in text:
                   if text.count(old) != 1:
-                      raise SystemExit(f'{label}: expected one old value, found {text.count(old)}')
+                      raise SystemExit(f'{label}: old value appears {text.count(old)} times')
                   text = text.replace(old, new, 1)
               elif new not in text:
-                  raise SystemExit(f'{label}: neither old nor new value exists')
+                  raise SystemExit(f'{label}: expected value not found')
               path.write_text(text, encoding='utf-8')
 
           home = Path('src/components/HomePage.astro')
-          replace_once(
-              home,
+          replace_value(home,
               "seoTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',",
               "seoTitle: 'ONNELLAB - ファイル管理と創作のためのアプリ',",
-              'Japanese home SEO title',
-          )
-          replace_once(
-              home,
+              'Japanese home SEO title')
+          replace_value(home,
               "title: '小さな道具を、 静かに。',",
               "title: '小さな道具を、静かに。',",
-              'Japanese home heading',
-          )
+              'Japanese home heading')
 
-          fixture = Path('tests/site-i18n.spec.ts')
-          replace_once(
-              fixture,
+          tests = Path('tests/site-i18n.spec.ts')
+          replace_value(tests,
               "homeTitle: 'ONNELLAB - ファイルと創作作業のためのアプリ',",
               "homeTitle: 'ONNELLAB - ファイル管理と創作のためのアプリ',",
-              'Japanese home title fixture',
-          )
-          replace_once(
-              fixture,
+              'Japanese title fixture')
+          replace_value(tests,
               "homeHeading: '小さな道具を、 静かに。',",
               "homeHeading: '小さな道具を、静かに。',",
-              'Japanese home heading fixture',
-          )
+              'Japanese heading fixture')
           PY
           git add src/components/HomePage.astro tests/site-i18n.spec.ts
-          if ! git diff --cached --quiet; then
-            git commit -m "Polish Japanese home copy"
-          fi
+          git commit -m "Polish Japanese home copy"
 
       - name: Refine localized metadata typography
         shell: bash
@@ -89,11 +79,10 @@ jobs:
           import re
 
           products_path = Path('src/lib/products.ts')
-          products = products_path.read_text(encoding='utf-8')
+          source = products_path.read_text(encoding='utf-8')
           pattern = re.compile(
               r"function seoPageDescription\(source: ProductSource, copy: ProductCopy\): string \{.*?\n\}\n\nfunction productSeoTitle",
-              re.S,
-          )
+              re.S)
           replacement = r'''function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
             const summary = pageDescription(copy).replace(/\s+/g, ' ').trim();
             const platforms = copy.locale === 'en'
@@ -136,14 +125,17 @@ jobs:
           }
 
           function productSeoTitle'''
-          updated, count = pattern.subn(lambda _: replacement, products, count=1)
+          updated, count = pattern.subn(lambda _: replacement, source, count=1)
           if count != 1:
-              raise SystemExit(f'Expected one seoPageDescription function, found {count}')
+              raise SystemExit(f'seoPageDescription: expected one function, found {count}')
           products_path.write_text(updated, encoding='utf-8')
 
           tests_path = Path('tests/product-contract.spec.ts')
           tests = tests_path.read_text(encoding='utf-8')
-          tests = tests.replace("  fr: 'Plateformes :',", "  fr: 'Plateformes\\u00A0:',", 1)
+          old_marker = "  fr: 'Plateformes :',"
+          if tests.count(old_marker) != 1:
+              raise SystemExit(f'French marker appears {tests.count(old_marker)} times')
+          tests = tests.replace(old_marker, "  fr: 'Plateformes\\u00A0:',", 1)
           assertion = "        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);"
           guarded = """        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
                   if (locale.code === 'ja' || locale.code === 'zh-Hans' || locale.code === 'zh-Hant') {
@@ -153,16 +145,13 @@ jobs:
                     expect(metaDescription).toContain('Plateformes\\u00A0:');
                     expect(metaDescription).not.toContain('Plateformes :');
                   }"""
-          if guarded not in tests:
-              if tests.count(assertion) != 1:
-                  raise SystemExit(f'Expected one metadata assertion, found {tests.count(assertion)}')
-              tests = tests.replace(assertion, guarded, 1)
+          if tests.count(assertion) != 1:
+              raise SystemExit(f'Metadata assertion appears {tests.count(assertion)} times')
+          tests = tests.replace(assertion, guarded, 1)
           tests_path.write_text(tests, encoding='utf-8')
           PY
           git add src/lib/products.ts tests/product-contract.spec.ts
-          if ! git diff --cached --quiet; then
-            git commit -m "Refine localized metadata typography"
-          fi
+          git commit -m "Refine localized metadata typography"
 
       - name: Localize Portuguese and German store labels
         shell: bash
@@ -173,18 +162,19 @@ jobs:
           template_path = Path('src/components/ProductTemplate.astro')
           lines = template_path.read_text(encoding='utf-8').splitlines()
 
-          def patch_locale_line(prefix: str, old: str, new: str, label: str) -> None:
-              matches = [i for i, line in enumerate(lines) if line.lstrip().startswith(prefix)]
+          def patch_label(locale_token: str, old: str, new: str, label: str) -> None:
+              matches = [
+                  i for i, line in enumerate(lines)
+                  if locale_token in line and 'download:' in line and 'stores:' in line and (old in line or new in line)
+              ]
               if len(matches) != 1:
-                  raise SystemExit(f'{label}: expected one locale line, found {len(matches)}')
+                  raise SystemExit(f'{label}: expected one localized label row, found {len(matches)}')
               index = matches[0]
               if old in lines[index]:
                   lines[index] = lines[index].replace(old, new, 1)
-              elif new not in lines[index]:
-                  raise SystemExit(f'{label}: neither old nor new value exists')
 
-          patch_locale_line("'pt-BR':", "download:'Download'", "download:'Baixar'", 'Portuguese download label')
-          patch_locale_line('de:', "stores:'Stores'", "stores:'App-Stores'", 'German store label')
+          patch_label("'pt-BR': {", "download:'Download'", "download:'Baixar'", 'Portuguese download')
+          patch_label("  de: {", "stores:'Stores'", "stores:'App-Stores'", 'German stores')
           template_path.write_text('\n'.join(lines) + '\n', encoding='utf-8')
 
           tests_path = Path('tests/product-contract.spec.ts')
@@ -202,16 +192,13 @@ jobs:
                 }
               }
               await expect(page.locator('.site-footer')).toHaveCount(1);"""
-          if guarded not in tests:
-              if tests.count(marker) != 1:
-                  raise SystemExit(f'Expected one download assertion marker, found {tests.count(marker)}')
-              tests = tests.replace(marker, guarded, 1)
+          if tests.count(marker) != 1:
+              raise SystemExit(f'Download assertion marker appears {tests.count(marker)} times')
+          tests = tests.replace(marker, guarded, 1)
           tests_path.write_text(tests, encoding='utf-8')
           PY
           git add src/components/ProductTemplate.astro tests/product-contract.spec.ts
-          if ! git diff --cached --quiet; then
-            git commit -m "Localize Portuguese and German store labels"
-          fi
+          git commit -m "Localize Portuguese and German store labels"
 
       - name: Install dependencies
         run: npm ci
