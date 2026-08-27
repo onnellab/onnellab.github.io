@@ -1,0 +1,137 @@
+name: One-time publish TagWeaver 2.3 release notes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/one-time-publish-tagweaver-2-3-notes.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-publish-tagweaver-2-3-notes
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Add common iOS and Android release notes in nine languages
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          core_path = Path('src/lib/releaseNotes.ts')
+          extended_path = Path('src/lib/extended-release-notes.ts')
+
+          core = core_path.read_text(encoding='utf-8')
+          marker = "export const releaseNotes: ReleaseNote[] = [\n"
+          if core.count(marker) != 1:
+              raise SystemExit(f'core marker count was {core.count(marker)}, expected 1')
+          if "version: '2.3'" in core or "'tagweaver/2.3'" in core:
+              raise SystemExit('TagWeaver 2.3 release note already exists')
+
+          entry = """  {
+            appSlug: 'tagweaver',
+            appName: 'TagWeaver',
+            version: '2.3',
+            tag: 'v2.3.0',
+            platform: 'iOS · Android',
+            releasedDate: '2026-08-27',
+            title: 'TagWeaver v2.3',
+            summary: 'Release notes for the TagWeaver 2.3 update submitted for review on iOS and Android.',
+            summaryKo: 'iOS와 Android에 심사를 제출한 TagWeaver 2.3 업데이트의 공용 릴리즈 노트예요.',
+            previousVersion: '2.2.2',
+            internalGitHubUrl: 'https://github.com/onnellab/tagweaver/commit/b58791c056bf811cb30bc9fe32966901a9f39202',
+            changes: [
+              'Fixed an issue where FLAC cover images might not be saved.',
+              'Fixed minor issues and added 7 languages, bringing support to 9 languages in total.'
+            ],
+            changesKo: [
+              'FLAC 파일의 커버 이미지가 저장되지 않을 수 있던 문제를 해결했어요.',
+              '사소한 오류를 수정하고 7개 언어를 추가해 총 9개 언어를 지원해요.'
+            ]
+          },
+          """
+          core = core.replace(marker, marker + entry, 1)
+          core_path.write_text(core, encoding='utf-8')
+
+          extended = extended_path.read_text(encoding='utf-8')
+          additions = {
+              "  ja: {\n": "    'tagweaver/2.3': { summary: 'iOS と Android で審査提出した TagWeaver 2.3 共通のリリースノートです。', changes: ['FLACファイルのカバー画像が保存されないことがある問題を修正しました。','軽微な不具合を修正し、7言語を追加して、対応言語は合計9言語になりました。'] },\n",
+              "  'zh-Hans': {\n": "    'tagweaver/2.3': { summary: '这是已提交 iOS 和 Android 审核的 TagWeaver 2.3 共用版本说明。', changes: ['修复了 FLAC 文件的封面图片有时无法保存的问题。','修复了若干小问题，并新增 7 种语言，目前共支持 9 种语言。'] },\n",
+              "  'zh-Hant': {\n": "    'tagweaver/2.3': { summary: '這是已提交 iOS 與 Android 審核的 TagWeaver 2.3 共用版本說明。', changes: ['修正 FLAC 檔案的封面圖片有時無法儲存的問題。','修正一些小問題，並新增 7 種語言，目前共支援 9 種語言。'] },\n",
+              "  'pt-BR': {\n": "    'tagweaver/2.3': { summary: 'Notas da versão do TagWeaver 2.3, enviado para análise no iOS e no Android.', changes: ['Corrigimos um problema que podia impedir o salvamento da capa em arquivos FLAC.','Corrigimos pequenos problemas e adicionamos 7 idiomas, totalizando 9 idiomas compatíveis.'] },\n",
+              "  de: {\n": "    'tagweaver/2.3': { summary: 'Gemeinsame Versionshinweise für TagWeaver 2.3, das für iOS und Android zur Prüfung eingereicht wurde.', changes: ['Ein Problem wurde behoben, durch das Coverbilder in FLAC-Dateien möglicherweise nicht gespeichert wurden.','Kleinere Fehler wurden behoben und 7 Sprachen hinzugefügt. Damit werden insgesamt 9 Sprachen unterstützt.'] },\n",
+              "  fr: {\n": "    'tagweaver/2.3': { summary: 'Notes de version communes de TagWeaver 2.3, soumis à validation sur iOS et Android.', changes: ['Correction d’un problème pouvant empêcher l’enregistrement des pochettes dans les fichiers FLAC.','Correction de problèmes mineurs et ajout de 7 langues, pour un total de 9 langues prises en charge.'] },\n",
+              "  es: {\n": "    'tagweaver/2.3': { summary: 'Notas de la versión de TagWeaver 2.3, enviada a revisión para iOS y Android.', changes: ['Corregimos un problema que podía impedir que se guardaran las carátulas en archivos FLAC.','Corregimos problemas menores y añadimos 7 idiomas, para un total de 9 idiomas compatibles.'] },\n",
+          }
+
+          for marker, addition in additions.items():
+              count = extended.count(marker)
+              if count != 1:
+                  raise SystemExit(f'extended marker {marker!r} count was {count}, expected 1')
+              extended = extended.replace(marker, marker + addition, 1)
+
+          if extended.count("'tagweaver/2.3'") != 7:
+              raise SystemExit('expected exactly seven extended TagWeaver 2.3 localizations')
+          extended_path.write_text(extended, encoding='utf-8')
+
+          combined = core_path.read_text(encoding='utf-8') + extended_path.read_text(encoding='utf-8')
+          expected = [
+              "version: '2.3'",
+              "iOS와 Android에 심사를 제출한 TagWeaver 2.3 업데이트의 공용 릴리즈 노트예요.",
+              "iOS と Android で審査提出した TagWeaver 2.3 共通のリリースノートです。",
+              "这是已提交 iOS 和 Android 审核的 TagWeaver 2.3 共用版本说明。",
+              "這是已提交 iOS 與 Android 審核的 TagWeaver 2.3 共用版本說明。",
+              "Notas da versão do TagWeaver 2.3, enviado para análise no iOS e no Android.",
+              "Gemeinsame Versionshinweise für TagWeaver 2.3, das für iOS und Android zur Prüfung eingereicht wurde.",
+              "Notes de version communes de TagWeaver 2.3, soumis à validation sur iOS et Android.",
+              "Notas de la versión de TagWeaver 2.3, enviada a revisión para iOS y Android.",
+          ]
+          for text in expected:
+              if combined.count(text) != 1:
+                  raise SystemExit(f'localization validation failed for: {text}')
+
+          print('Added TagWeaver 2.3 release notes for all nine site locales.')
+          PY
+
+          git diff --check
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Validate localization and production build
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run check:i18n-quality
+          npm run build
+
+      - name: Commit release notes and remove this workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/one-time-publish-tagweaver-2-3-notes.yml
+          git config user.name "ONNELLAB"
+          git config user.email "akinstun21@gmail.com"
+          git add src/lib/releaseNotes.ts src/lib/extended-release-notes.ts .github/workflows/one-time-publish-tagweaver-2-3-notes.yml
+          git diff --cached --check
+          git commit -m "docs: publish TagWeaver 2.3 release notes" -m "Add common iOS and Android release notes in all nine website languages."
+          git pull --rebase origin main
+          git push origin HEAD:main
