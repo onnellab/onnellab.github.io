@@ -12,6 +12,7 @@ export type ReleaseNote = {
   changesKo: string[];
   previousVersion: string;
   internalGitHubUrl: string;
+  storeStatus?: 'submitted' | 'published';
 };
 
 export const releaseNotes: ReleaseNote[] = [
@@ -27,6 +28,7 @@ export const releaseNotes: ReleaseNote[] = [
   summaryKo: 'iOS와 Android 스토어 심사에 제출한 TagWeaver 2.3 업데이트의 공용 릴리즈 노트예요.',
   previousVersion: '2.2.2',
   internalGitHubUrl: 'https://github.com/onnellab/tagweaver/commit/b58791c056bf811cb30bc9fe32966901a9f39202',
+  storeStatus: 'submitted',
   changes: [
     'Fixed an issue where FLAC cover images might not be saved.',
     'Fixed minor issues and added 7 languages, bringing support to 9 languages in total.'
