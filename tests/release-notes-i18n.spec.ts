@@ -26,7 +26,7 @@ const deploymentStatusTerms: Record<AllSiteLocale, RegExp> = {
   'zh-Hans': /审核|批准|商店上架|分发/,
   'zh-Hant': /審核|批准|商店上架|分發/,
   'pt-BR': /análise|aprovação|status nas lojas|distribuída pela/i,
-  de: /Prüfung|Freigabe|Store-Status|verteilt/i,
+  de: /zur Prüfung eingereicht|nach (?:der jeweiligen )?Freigabe|Store-Status|öffentlichen App-Store-Eintrag/i,
   fr: /validation|approbation|disponibilité dans les stores|distribuée/i,
   es: /revisión|aprobación|estado en las tiendas|se distribuye/i
 };
