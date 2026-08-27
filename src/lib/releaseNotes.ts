@@ -24,7 +24,7 @@ export const releaseNotes: ReleaseNote[] = [
   releasedDate: '2026-08-27',
   title: 'TagWeaver v2.3',
   summary: 'Release notes for the TagWeaver 2.3 update submitted for review on iOS and Android.',
-  summaryKo: 'iOS와 Android에 심사를 제출한 TagWeaver 2.3 업데이트의 공용 릴리즈 노트예요.',
+  summaryKo: 'iOS와 Android 스토어 심사에 제출한 TagWeaver 2.3 업데이트의 공용 릴리즈 노트예요.',
   previousVersion: '2.2.2',
   internalGitHubUrl: 'https://github.com/onnellab/tagweaver/commit/b58791c056bf811cb30bc9fe32966901a9f39202',
   changes: [
