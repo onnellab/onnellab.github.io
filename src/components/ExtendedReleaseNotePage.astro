@@ -27,66 +27,7 @@ type Props = {
 
 const { note, locale } = Astro.props;
 const text = getExtendedReleaseCopy(note, locale);
-const submittedLabels: Record<ReleaseLocale, {
-  released: string;
-  compatibility: string;
-  compatibilityText: (app: string) => string;
-  upgrade: string;
-  upgradeText: string;
-}> = {
-  ja: {
-    released: 'ウェブ掲載日',
-    compatibility: 'ストア公開状況',
-    compatibilityText: () => 'このアップデートは iOS と Android の審査に提出済みです。各ストアで承認され次第、順次公開されます。',
-    upgrade: 'アップデートについて',
-    upgradeText: 'ストアでバージョン2.3が公開された後、通常のアップデートとしてインストールできます。'
-  },
-  'zh-Hans': {
-    released: '网页发布日期',
-    compatibility: '商店上架状态',
-    compatibilityText: () => '此更新已提交 iOS 和 Android 审核，将在各商店审核通过后陆续上架。',
-    upgrade: '更新说明',
-    upgradeText: '2.3 版本在商店上架后，可按常规方式更新。'
-  },
-  'zh-Hant': {
-    released: '網頁發布日',
-    compatibility: '商店上架狀態',
-    compatibilityText: () => '此更新已提交 iOS 與 Android 審核，將在各商店審核通過後陸續上架。',
-    upgrade: '更新說明',
-    upgradeText: '2.3 版本在商店上架後，可依一般方式更新。'
-  },
-  'pt-BR': {
-    released: 'Publicação no site',
-    compatibility: 'Status nas lojas',
-    compatibilityText: () => 'Esta atualização foi enviada para análise no iOS e no Android. Ela será disponibilizada em cada loja após a respectiva aprovação.',
-    upgrade: 'Como atualizar',
-    upgradeText: 'Quando a versão 2.3 estiver disponível na sua loja, ela poderá ser instalada como uma atualização normal.'
-  },
-  de: {
-    released: 'Web-Veröffentlichung',
-    compatibility: 'Store-Status',
-    compatibilityText: () => 'Dieses Update wurde für iOS und Android zur Prüfung eingereicht. Es wird in jedem Store nach der jeweiligen Freigabe veröffentlicht.',
-    upgrade: 'Update-Hinweise',
-    upgradeText: 'Sobald Version 2.3 in deinem Store verfügbar ist, kann sie wie ein normales Update installiert werden.'
-  },
-  fr: {
-    released: 'Publication sur le site',
-    compatibility: 'Disponibilité dans les stores',
-    compatibilityText: () => 'Cette mise à jour a été soumise à validation sur iOS et Android. Elle sera publiée dans chaque boutique après approbation.',
-    upgrade: 'Mise à jour',
-    upgradeText: 'Lorsque la version 2.3 sera disponible dans votre boutique, elle pourra être installée comme une mise à jour normale.'
-  },
-  es: {
-    released: 'Publicación en la web',
-    compatibility: 'Estado en las tiendas',
-    compatibilityText: () => 'Esta actualización se ha enviado a revisión para iOS y Android. Se publicará en cada tienda cuando reciba la aprobación correspondiente.',
-    upgrade: 'Cómo actualizar',
-    upgradeText: 'Cuando la versión 2.3 esté disponible en tu tienda, podrás instalarla como una actualización normal.'
-  }
-};
-const labels = note.storeStatus === 'submitted'
-  ? { ...releaseLabels[locale], ...submittedLabels[locale] }
-  : releaseLabels[locale];
+const labels = releaseLabels[locale];
 const definition = allLocaleDefinitions[locale];
 const canonicalPath = releaseNoteLocalePath(note, locale);
 const source = getProductSource(note.appSlug);
@@ -171,16 +112,12 @@ const footer = footerLabels[locale];
         <a class="app-link" href={appPath}>{note.appName} {labels.appPage}</a>
         <dl class="facts">
           <div>
-            <dt>{labels.released}</dt>
+            <dt>{labels.date}</dt>
             <dd>{note.releasedDate}</dd>
           </div>
           <div>
             <dt>{labels.platform}</dt>
             <dd>{note.platform}</dd>
-          </div>
-          <div>
-            <dt>{labels.previous}</dt>
-            <dd>{note.previousVersion}</dd>
           </div>
         </dl>
       </header>
@@ -190,16 +127,6 @@ const footer = footerLabels[locale];
         <ul>
           {text.changes.map((change) => <li>{change}</li>)}
         </ul>
-      </section>
-
-      <section aria-labelledby="compat-heading">
-        <h2 id="compat-heading">{labels.compatibility}</h2>
-        <p>{labels.compatibilityText(note.appName)}</p>
-      </section>
-
-      <section aria-labelledby="upgrade-heading">
-        <h2 id="upgrade-heading">{labels.upgrade}</h2>
-        <p>{labels.upgradeText}</p>
       </section>
     </article>
 
@@ -289,7 +216,7 @@ const footer = footerLabels[locale];
 
   .facts {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
     margin: 28px 0 42px;
   }

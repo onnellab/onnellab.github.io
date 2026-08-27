@@ -19,6 +19,18 @@ import {
 
 const canonical = (path: string) => `https://onnellab.github.io${path}`;
 
+const deploymentStatusTerms: Record<AllSiteLocale, RegExp> = {
+  en: /submitted|review|approval|store availability|distributed through/i,
+  ko: /심사|승인|스토어 공개|배포/,
+  ja: /審査|承認|ストア公開|配信/,
+  'zh-Hans': /审核|批准|商店上架|分发/,
+  'zh-Hant': /審核|批准|商店上架|分發/,
+  'pt-BR': /análise|aprovação|status nas lojas|distribuída pela/i,
+  de: /Prüfung|Freigabe|Store-Status|verteilt/i,
+  fr: /validation|approbation|disponibilité dans les stores|distribuée/i,
+  es: /revisión|aprobación|estado en las tiendas|se distribuye/i
+};
+
 function releasePathFor(note: ReleaseNote, locale: AllSiteLocale): string {
   if (locale === 'en') return releaseNotePath(note);
   if (locale === 'ko') return releaseNoteKoPath(note);
@@ -35,7 +47,7 @@ function localizedCopy(note: ReleaseNote, locale: AllSiteLocale) {
   return getExtendedReleaseCopy(note, locale as ReleaseLocale);
 }
 
-test('every published release note has complete copy in all nine languages', () => {
+test('every release note has complete copy in all nine languages', () => {
   expect(releaseNotes.length).toBeGreaterThan(0);
 
   for (const note of releaseNotes) {
@@ -46,11 +58,17 @@ test('every published release note has complete copy in all nine languages', () 
       for (const change of copy.changes) {
         expect(change.trim(), `${note.appSlug}/${note.version}/${locale} change`).not.toBe('');
       }
+
+      const combinedCopy = [copy.summary, ...copy.changes].join('\n');
+      expect(
+        combinedCopy,
+        `${note.appSlug}/${note.version}/${locale} must not describe store review or availability`
+      ).not.toMatch(deploymentStatusTerms[locale]);
     }
   }
 });
 
-test('every published release note exposes the same nine-language page contract', async ({ page }) => {
+test('every release note exposes the same evergreen nine-language page contract', async ({ page }) => {
   for (const note of releaseNotes) {
     for (const locale of allSiteLocales) {
       const definition = allLocaleDefinitions[locale];
@@ -81,6 +99,20 @@ test('every published release note exposes the same nine-language page contract'
         page.locator('.release-note section').first().locator('li'),
         `${context} changes`
       ).toHaveText(copy.changes);
+      await expect.soft(
+        page.locator('.release-note .facts > div'),
+        `${context} stable facts`
+      ).toHaveCount(2);
+      await expect.soft(
+        page.locator('.release-note > section'),
+        `${context} changes-only sections`
+      ).toHaveCount(1);
+
+      const renderedCopy = await page.locator('.release-note').innerText();
+      expect(
+        renderedCopy,
+        `${context} page must not describe store review or availability`
+      ).not.toMatch(deploymentStatusTerms[locale]);
 
       const techArticle = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
         scripts

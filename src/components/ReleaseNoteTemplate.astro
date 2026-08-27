@@ -25,67 +25,28 @@ type Props = {
 
 const { note, locale } = Astro.props;
 const isKo = locale === 'ko';
-const isSubmitted = note.storeStatus === 'submitted';
 const product = getProductPageData(note.appSlug, locale);
 const canonicalPath = isKo ? releaseNoteKoPath(note) : releaseNotePath(note);
 const appPath = isKo ? `/apps/${note.appSlug}/ko/` : `/apps/${note.appSlug}/`;
 const summary = isKo ? note.summaryKo : note.summary;
 const changes = isKo ? note.changesKo : note.changes;
 const labels = isKo
-  ? isSubmitted
-    ? {
-        titleSuffix: '릴리즈 노트',
-        eyebrow: '릴리즈 노트',
-        released: '웹 게시일',
-        platform: '플랫폼',
-        previous: '이전 공개 버전',
-        changed: '변경 사항',
-        compatibility: '스토어 공개 상태',
-        compatibilityText: '이 업데이트는 iOS와 Android 스토어 심사에 제출됐어요. 각 스토어의 승인이 끝난 뒤 순차적으로 공개돼요.',
-        upgrade: '업데이트 안내',
-        upgradeText: '스토어에서 2.3이 공개된 뒤 일반 업데이트와 같은 방식으로 설치할 수 있어요.',
-        appPage: '앱 페이지'
-      }
-    : {
-        titleSuffix: '릴리즈 노트',
-        eyebrow: '릴리즈 노트',
-        released: '출시일',
-        platform: '플랫폼',
-        previous: '이전 공개 버전',
-        changed: '변경 사항',
-        compatibility: '호환성',
-        compatibilityText: `이 업데이트는 ${note.appName}의 공개 앱 스토어 목록을 통해 배포됩니다.`,
-        upgrade: '업데이트 안내',
-        upgradeText: '별도의 업데이트 절차는 필요하지 않습니다.',
-        appPage: '앱 페이지'
-      }
-  : isSubmitted
-    ? {
-        titleSuffix: 'Release Notes',
-        eyebrow: 'Release Notes',
-        released: 'Published on the web',
-        platform: 'Platform',
-        previous: 'Previous public version',
-        changed: 'What Changed',
-        compatibility: 'Store availability',
-        compatibilityText: 'This update has been submitted for review on iOS and Android. It will become available in each store after approval.',
-        upgrade: 'Upgrade Notes',
-        upgradeText: 'Once version 2.3 is available in your store, it can be installed as a regular update.',
-        appPage: 'App page'
-      }
-    : {
-        titleSuffix: 'Release Notes',
-        eyebrow: 'Release Notes',
-        released: 'Released',
-        platform: 'Platform',
-        previous: 'Previous public version',
-        changed: 'What Changed',
-        compatibility: 'Compatibility',
-        compatibilityText: `This update is distributed through the public app store listing for ${note.appName}.`,
-        upgrade: 'Upgrade Notes',
-        upgradeText: 'No special upgrade steps are required.',
-        appPage: 'App page'
-      };
+  ? {
+      titleSuffix: '릴리즈 노트',
+      eyebrow: '릴리즈 노트',
+      date: '날짜',
+      platform: '플랫폼',
+      changed: '변경 사항',
+      appPage: '앱 페이지'
+    }
+  : {
+      titleSuffix: 'Release Notes',
+      eyebrow: 'Release Notes',
+      date: 'Date',
+      platform: 'Platform',
+      changed: 'What Changed',
+      appPage: 'App page'
+    };
 
 const releasePathFor = (item: AllSiteLocale): string => {
   if (item === 'en') return releaseNotePath(note);
@@ -156,16 +117,12 @@ const jsonLd = {
         <a class="app-link" href={appPath}>{note.appName} {labels.appPage}</a>
         <dl class="facts">
           <div>
-            <dt>{labels.released}</dt>
+            <dt>{labels.date}</dt>
             <dd>{note.releasedDate}</dd>
           </div>
           <div>
             <dt>{labels.platform}</dt>
             <dd>{note.platform}</dd>
-          </div>
-          <div>
-            <dt>{labels.previous}</dt>
-            <dd>{note.previousVersion}</dd>
           </div>
         </dl>
       </header>
@@ -175,16 +132,6 @@ const jsonLd = {
         <ul>
           {changes.map((change) => <li>{change}</li>)}
         </ul>
-      </section>
-
-      <section aria-labelledby="compat-heading">
-        <h2 id="compat-heading">{labels.compatibility}</h2>
-        <p>{labels.compatibilityText}</p>
-      </section>
-
-      <section aria-labelledby="upgrade-heading">
-        <h2 id="upgrade-heading">{labels.upgrade}</h2>
-        <p>{labels.upgradeText}</p>
       </section>
     </article>
     <SiteFooter locale={locale} />
@@ -271,7 +218,7 @@ const jsonLd = {
 
   .facts {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
     margin: 28px 0 42px;
   }
