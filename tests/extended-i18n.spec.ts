@@ -7,6 +7,7 @@ const locales = [
   { code: 'es', segment: 'es' }
 ] as const;
 
+const latestTagWeaverVersion = '2.3';
 const canonical = (path: string) => `https://onnellab.github.io${path}`;
 
 for (const locale of locales) {
@@ -37,9 +38,9 @@ for (const locale of locales) {
       await expect(
         page.locator('.support-links').getByRole('link', { name: /privacy|privacidade|datenschutz|confidentialité|privacidad/i })
       ).toHaveAttribute('href', canonical(`/privacy/tagweaver/${locale.segment}/`));
-      await expect(page.getByRole('link', { name: 'TagWeaver v2.2' })).toHaveAttribute(
+      await expect(page.getByRole('link', { name: `TagWeaver v${latestTagWeaverVersion}` })).toHaveAttribute(
         'href',
-        `/release-notes/tagweaver/2.2/${locale.segment}/`
+        `/release-notes/tagweaver/${latestTagWeaverVersion}/${locale.segment}/`
       );
 
       const privacyPath = `/privacy/tagweaver/${locale.segment}/`;
@@ -76,7 +77,7 @@ for (const locale of locales) {
     });
 
     test('release note and OAuth callback are localized', async ({ page }) => {
-      const releasePath = `/release-notes/tagweaver/2.2/${locale.segment}/`;
+      const releasePath = `/release-notes/tagweaver/${latestTagWeaverVersion}/${locale.segment}/`;
       await page.goto(releasePath);
       await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical(releasePath));
@@ -98,7 +99,7 @@ test('sitemap exposes representative routes from all nine-language surfaces', as
     '/apps/tagweaver/de/',
     '/privacy/tagweaver/es/',
     '/blog/pt-br/read-large-txt-files-without-lag/',
-    '/release-notes/tagweaver/2.2/zh-hant/',
+    `/release-notes/tagweaver/${latestTagWeaverVersion}/zh-hant/`,
     '/oauth/x/callback/ja/'
   ]) {
     expect(xml).toContain(canonical(path));
