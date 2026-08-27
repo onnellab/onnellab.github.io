@@ -1,0 +1,125 @@
+name: One-time refine home focus copy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/one-time-refine-home-focus-copy.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-refine-home-focus-copy
+  cancel-in-progress: false
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Refine the calm-by-default copy in all nine locales
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              Path('src/components/HomePage.astro'): [
+                  (
+                      'Soft visuals, readable copy, and fewer interruptions keep the work in front.',
+                      'A calm interface, readable text, and fewer interruptions help you stay focused on the work in front of you.',
+                  ),
+                  (
+                      '부드러운 화면과 읽기 쉬운 문구, 방해를 줄여 작업에 집중할 수 있게 해요.',
+                      '편안한 화면 구성과 읽기 쉬운 문구로 방해 요소를 줄이고, 작업에 더 집중할 수 있게 해요.',
+                  ),
+                  (
+                      '柔らかな画面、読みやすい文章、中断を減らし、作業に集中できるようにします。',
+                      '落ち着いた画面と読みやすい言葉で気が散る要素を減らし、目の前の作業に集中しやすくします。',
+                  ),
+                  (
+                      '柔和的界面、易读的文字和更少的打扰，让任务始终在前。',
+                      '舒适的界面和清晰易读的文字减少干扰，让你更专注于手头的工作。',
+                  ),
+                  (
+                      '柔和的畫面、易讀的文字與更少的打擾，讓工作始終在前。',
+                      '舒適的介面與清楚易讀的文字減少干擾，讓你更專注於手邊的工作。',
+                  ),
+              ],
+              Path('src/components/ExtendedSitePage.astro'): [
+                  (
+                      'Visuais suaves, textos claros e menos interrupções deixam o trabalho em primeiro plano.',
+                      'Uma interface tranquila, textos fáceis de ler e menos interrupções ajudam você a manter o foco no trabalho.',
+                  ),
+                  (
+                      'Sanfte Gestaltung, klare Texte und weniger Unterbrechungen halten die eigentliche Arbeit im Vordergrund.',
+                      'Eine ruhige Oberfläche, gut lesbare Texte und weniger Unterbrechungen helfen dir, dich auf deine Arbeit zu konzentrieren.',
+                  ),
+                  (
+                      'Une interface douce, des textes lisibles et moins d’interruptions laissent le travail au premier plan.',
+                      'Une interface apaisée, des textes faciles à lire et moins d’interruptions vous permettent de vous concentrer sur votre travail.',
+                  ),
+                  (
+                      'Una interfaz suave, textos legibles y menos interrupciones mantienen el trabajo en primer plano.',
+                      'Una interfaz tranquila, textos fáciles de leer y menos interrupciones te ayudan a concentrarte en tu trabajo.',
+                  ),
+              ],
+          }
+
+          changed = []
+          for path, pairs in replacements.items():
+              text = path.read_text(encoding='utf-8')
+              for old, new in pairs:
+                  count = text.count(old)
+                  if count != 1:
+                      raise SystemExit(f'{path}: expected exactly one match, found {count}: {old}')
+                  text = text.replace(old, new)
+              path.write_text(text, encoding='utf-8')
+              changed.append(path)
+
+          expected_new = [new for pairs in replacements.values() for _, new in pairs]
+          combined = '\n'.join(path.read_text(encoding='utf-8') for path in changed)
+          for sentence in expected_new:
+              if combined.count(sentence) != 1:
+                  raise SystemExit(f'new sentence validation failed: {sentence}')
+
+          print(f'Refined {len(expected_new)} localized sentences across {len(changed)} files.')
+          PY
+
+          git diff --check
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Validate localization and production build
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run check:i18n-quality
+          npm run build
+
+      - name: Commit copy changes and remove this one-time workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/one-time-refine-home-focus-copy.yml
+          git config user.name "ONNELLAB"
+          git config user.email "akinstun21@gmail.com"
+          git add src/components/HomePage.astro src/components/ExtendedSitePage.astro .github/workflows/one-time-refine-home-focus-copy.yml
+          git diff --cached --check
+          git commit -m "fix: refine home focus copy" -m "Naturalize the calm-by-default message across all nine site locales."
+          git pull --rebase origin main
+          git push origin HEAD:main
