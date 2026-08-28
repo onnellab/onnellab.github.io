@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  allAppPrivacyRouteFor,
+  allLocaleDefinitions,
+  allRouteFor,
+  allSiteLocales
+} from '../lib/extended-site-i18n';
+
+type Locale = 'en' | 'ko';
+type Copy = {
+  policyTitle: string;
+  applies: string;
+  updated: string;
+  intro: string;
+  nav: string;
+  headings: [string, string, string, string, string, string, string, string];
+  accounts: string;
+  deviceItems: string[];
+  deviceNotes: string[];
+  server: string;
+  payment: string;
+  sharing: string;
+  retention: string;
+  security: string;
+  change: string;
+  contact: string;
+  privacy: string;
+  terms: string;
+};
+
+const copies: Record<Locale, Copy> = {
+  en: {
+    policyTitle: 'Privacy Policy',
+    applies: 'This Privacy Policy applies to the Segra app provided by ONNELLAB.',
+    updated: 'Last updated',
+    intro: 'Segra respects your privacy and works as described below.',
+    nav: 'Navigation',
+    headings: [
+      '1. Accounts and direct identifiers',
+      '2. Data accessed or stored on the device',
+      '3. Server transmission',
+      '4. Payment information',
+      '5. Advertising, analytics, and sharing',
+      '6. Retention and deletion',
+      '7. Security and children’s privacy',
+      '8. Changes and contact'
+    ],
+    accounts: 'Segra does not require registration or sign-in with a name, email address, or phone number. App content and usage history are not sent to ONNELLAB.',
+    deviceItems: [
+      'Audio and image files that you explicitly select',
+      'Generated audio or video files and app preferences stored on the device',
+      'Purchase entitlement stored on the device'
+    ],
+    deviceNotes: [
+      'Audio trimming and media generation occur on the device.',
+      'Selected files are not uploaded to an ONNELLAB server unless you later share an output through another app.'
+    ],
+    server: 'Segra does not send selected file contents or usage history to an ONNELLAB server. When you choose to share a generated file, the receiving app or service applies its own privacy policy.',
+    payment: 'In-app purchases are processed by Apple App Store or Google Play. Segra and ONNELLAB do not access or store card numbers or bank account information. Product, transaction, and entitlement information supplied by the store may be used to verify and restore purchases.',
+    sharing: 'Segra does not use advertising SDKs, behavioral analytics SDKs, or third-party tracking tools. Data is not sold or shared except when you intentionally hand content to another app or service through the operating system.',
+    retention: 'Local data managed by the app can be removed through the applicable delete function or by uninstalling the app. Source and output files under your control remain under your control. ONNELLAB does not retain app content on a server.',
+    security: 'Segra is not directed to children under 13 and does not knowingly collect personal information from children.',
+    change: 'If app functions, legal requirements, or store requirements change, this document and its last-updated date will be revised.',
+    contact: 'Privacy questions or deletion requests:',
+    privacy: 'Privacy Policy',
+    terms: 'Terms of Service'
+  },
+  ko: {
+    policyTitle: '개인정보 처리방침',
+    applies: '이 개인정보 처리방침은 ONNELLAB이 제공하는 Segra 앱에 적용됩니다.',
+    updated: '최종 업데이트',
+    intro: 'Segra는 개인정보를 중요하게 다루며 다음과 같이 작동합니다.',
+    nav: '탐색',
+    headings: [
+      '1. 계정 및 직접 식별정보',
+      '2. 기기에서 접근하거나 저장하는 데이터',
+      '3. 서버 전송',
+      '4. 결제 정보',
+      '5. 광고·분석·공유',
+      '6. 보관 및 삭제',
+      '7. 보안 및 아동 개인정보',
+      '8. 변경 및 문의'
+    ],
+    accounts: 'Segra는 이름, 이메일 주소 또는 전화번호를 이용한 회원가입이나 로그인을 요구하지 않습니다. 앱의 콘텐츠와 이용 기록은 ONNELLAB로 전송되지 않습니다.',
+    deviceItems: [
+      '사용자가 명시적으로 선택한 오디오 및 이미지 파일',
+      '기기에 저장되는 생성 오디오·영상 파일과 앱 설정',
+      '기기에 저장되는 구매 권한 정보'
+    ],
+    deviceNotes: [
+      '오디오 구간 추출과 미디어 생성은 기기에서 처리됩니다.',
+      '사용자가 나중에 다른 앱을 통해 출력 파일을 공유하지 않는 한 선택한 파일은 ONNELLAB 서버에 업로드되지 않습니다.'
+    ],
+    server: 'Segra는 선택한 파일 내용이나 이용 기록을 ONNELLAB 서버로 전송하지 않습니다. 사용자가 생성 파일을 다른 앱이나 서비스로 공유하면 해당 서비스의 개인정보 처리방침이 적용됩니다.',
+    payment: '인앱 구매는 Apple App Store 또는 Google Play가 처리합니다. Segra와 ONNELLAB은 카드 번호나 은행 계좌 정보에 접근하거나 이를 저장하지 않습니다. 스토어가 제공하는 상품·거래·구매 권한 정보는 구매 확인과 복원에 사용될 수 있습니다.',
+    sharing: 'Segra는 광고 SDK, 행동 분석 SDK 또는 제3자 추적 도구를 사용하지 않습니다. 사용자가 운영체제의 공유 기능으로 다른 앱이나 서비스에 콘텐츠를 직접 전달하는 경우를 제외하고 데이터를 판매하거나 공유하지 않습니다.',
+    retention: '앱이 관리하는 로컬 데이터는 해당 삭제 기능 또는 앱 삭제로 제거할 수 있습니다. 사용자가 관리하는 원본 및 출력 파일은 계속 사용자 관리 아래에 있습니다. ONNELLAB은 앱 콘텐츠를 서버에 보관하지 않습니다.',
+    security: 'Segra는 만 13세 미만 아동을 대상으로 하지 않으며, 아동의 개인정보를 고의로 수집하지 않습니다.',
+    change: '앱 기능, 법령 또는 스토어 요구사항이 변경되면 이 문서와 최종 업데이트일을 함께 수정합니다.',
+    contact: '개인정보 관련 문의 또는 삭제 요청:',
+    privacy: '개인정보 처리방침',
+    terms: '이용약관'
+  }
+};
+
+const { locale } = Astro.props as { locale: Locale };
+const copy = copies[locale];
+const definition = allLocaleDefinitions[locale];
+const canonicalPath = allAppPrivacyRouteFor('segra', locale);
+const alternates = [
+  ...allSiteLocales.map((item) => ({
+    lang: allLocaleDefinitions[item].hreflang,
+    path: allAppPrivacyRouteFor('segra', item)
+  })),
+  { lang: 'x-default', path: allAppPrivacyRouteFor('segra', 'en') }
+];
+const email = 'onnellab.app@gmail.com';
+const updatedAt = '2026-07-30';
+---
+
+<BaseLayout
+  title={`Segra · ${copy.policyTitle}`}
+  description={copy.applies}
+  canonicalPath={canonicalPath}
+  lang={definition.htmlLang}
+  alternates={alternates}
+  ogType="article"
+>
+  <main class="privacy-shell">
+    <nav class="topbar" aria-label={copy.nav}>
+      <a class="home-link" href={allRouteFor('home', locale)}>ONNELLAB</a>
+      <details class="locale-menu">
+        <summary aria-label={definition.label}>{definition.label}</summary>
+        <ul>
+          {allSiteLocales.map((item) => {
+            const itemDefinition = allLocaleDefinitions[item];
+            return (
+              <li>
+                <a
+                  href={allAppPrivacyRouteFor('segra', item)}
+                  lang={itemDefinition.htmlLang}
+                  hreflang={itemDefinition.hreflang}
+                  data-locale-choice={item}
+                  aria-current={item === locale ? 'page' : undefined}
+                >
+                  {itemDefinition.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </details>
+    </nav>
+
+    <header>
+      <h1>Segra {copy.policyTitle}</h1>
+      <p>{copy.applies}</p>
+      <p><strong>{copy.updated}:</strong> <time datetime={updatedAt}>{updatedAt}</time></p>
+    </header>
+
+    <hr />
+    <h2>{copy.policyTitle}</h2>
+    <p>{copy.intro}</p>
+    <section><h3>{copy.headings[0]}</h3><p>{copy.accounts}</p></section>
+    <section>
+      <h3>{copy.headings[1]}</h3>
+      <ul>{copy.deviceItems.map((item) => <li>{item}</li>)}</ul>
+      <ul>{copy.deviceNotes.map((item) => <li>{item}</li>)}</ul>
+    </section>
+    <section><h3>{copy.headings[2]}</h3><p>{copy.server}</p></section>
+    <section><h3>{copy.headings[3]}</h3><p>{copy.payment}</p></section>
+    <section><h3>{copy.headings[4]}</h3><p>{copy.sharing}</p></section>
+    <section><h3>{copy.headings[5]}</h3><p>{copy.retention}</p></section>
+    <section><h3>{copy.headings[6]}</h3><p>{copy.security}</p></section>
+    <section>
+      <h3>{copy.headings[7]}</h3>
+      <p>{copy.change}</p>
+      <p>{copy.contact} <a href={`mailto:${email}`}>{email}</a></p>
+    </section>
+
+    <footer class="site-footer">
+      <a href={allRouteFor('privacy', locale)}>{copy.privacy}</a>
+      <a href={allRouteFor('terms', locale)}>{copy.terms}</a>
+      <a href={`mailto:${email}`}>{email}</a>
+      <span>© ONNELLAB</span>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .privacy-shell{width:min(860px,calc(100% - 36px));margin:0 auto;padding:28px 0 56px;color:#4d4942;line-height:1.75}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}.home-link{color:#68645c;text-decoration:none;font-size:14px;font-weight:620}.locale-menu{position:relative}.locale-menu summary{min-height:40px;display:inline-flex;align-items:center;border:1px solid #ded6ca;border-radius:999px;padding:7px 13px;background:rgba(255,253,248,.82);color:#5f5a50;cursor:pointer;font-size:13px;font-weight:620;list-style:none}.locale-menu summary::-webkit-details-marker{display:none}.locale-menu ul{position:absolute;z-index:20;right:0;top:calc(100% + 7px);width:max-content;min-width:170px;display:grid;gap:2px;margin:0;border:1px solid #ded6ca;border-radius:12px;padding:6px;background:#fffdf8;box-shadow:0 14px 34px rgba(57,48,39,.11);list-style:none}.locale-menu a{display:block;border-radius:8px;padding:8px 10px;color:#5f5a50;text-decoration:none;font-size:13px}.locale-menu a:hover,.locale-menu a[aria-current='page']{background:#f4efe7;color:#383631}header{margin:58px 0 22px}h1{margin:0;color:#282723;font-size:clamp(38px,6vw,64px);line-height:1.04}h2{margin:30px 0 8px;color:#34322d;font-size:26px}h3{margin:0 0 10px;color:#34322d;font-size:21px;line-height:1.3}p{margin:10px 0 0;font-size:16px}ul{padding-left:24px}li{margin:6px 0}section{border-top:1px solid #e5ded4;margin-top:22px;padding-top:22px}hr{border:0;border-top:1px solid #e5ded4;margin:24px 0}.site-footer{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:9px 20px;margin-top:58px;border-top:1px solid #ded6ca;padding-top:28px;color:#786f65;font-size:12px}.site-footer a{color:#686259;text-decoration:none;font-weight:620}@media(max-width:640px){.privacy-shell{width:min(100% - 28px,860px);padding-top:22px}header{margin-top:38px}.locale-menu ul{right:0}}
+</style>
