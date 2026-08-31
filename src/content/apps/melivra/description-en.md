@@ -3,7 +3,7 @@ Android
 Melivra - Offline Music Player
 
 간단한 설명:
-Offline music player with local library, AI transcript, and AI translation.
+Offline MP3/FLAC player with local library, AI transcript, and translation.
 
 Landing subtitle:
 Local Audio Library Player
@@ -25,7 +25,13 @@ Features
 • Bookmarks
 • A-B repeat
 • Playback speed control
+• Built-in EQ presets and manual band controls
+• Embedded ReplayGain playback
+• Gapless Playback
 • Playlist management
+• M3U/M3U8 playlist import and export
+• Manual backup and restore of complete app data and listening history
+• Basic all-time summary of plays, listening time, and unique tracks
 • Local lyrics support
 • AI transcript generation
 • AI translation
@@ -34,34 +40,51 @@ Features
 
 Melivra Pro
 
-• Multi-band EQ
-• Volume Normalization
-• Gapless Playback
-• Playlist Backup & Restore
+• Save custom EQ presets
+• Automatic loudness analysis for tracks without ReplayGain
+• Advanced weekly, monthly, and yearly listening statistics
+• Listening statistics CSV export
+• Playlist backup and restore in Melivra's proprietary JSON format
+• One purchase includes lifetime access to all current and future Melivra Pro features, with no additional Pro upgrade charges
+• AI Credits and other separately sold consumables are not included
 
 Melivra is made for your own music collection — not endless recommendations.
 
 Landing page:
-Melivra is an offline music player for local audio collections. Play MP3, FLAC, WAV, ALAC, AIFF, M4A, and OGG files in one focused local music library.
+Melivra is an offline music player for MP3, FLAC, WAV, ALAC, AIFF, M4A, OGG, and other local audio collections. It keeps multiple audio formats organized in one focused local music library.
 
-Browse by album, artist, composer, genre, or folder, and use integrated music search when you need a track quickly.
+Browse your local music library by album, artist, composer, genre, or folder, and use integrated music search to find tracks quickly.
 
-There is no streaming service, account system, or recommendation feed. Melivra is built for music files you already own.
+There is no streaming service, account system, or recommendation feed. Melivra is built around music files you already own, with local library management and a focused listening flow.
 
-For long tracks and repeat listening, Melivra includes resume playback, bookmarks, A-B repeat, and playback speed control. With your approval, AI Tokens can also create AI transcripts and AI translations, then export saved results.
+For long tracks and repeat listening, Melivra includes resume playback, bookmarks, A-B repeat, and playback speed control. You can browse albums with cover-focused grid view or use list view when you want more direct library navigation.
+
+Melivra also supports AI transcript generation and AI translation. With your approval, Melivra uses AI Tokens to process selected audio, save the AI result, and export transcripts or translations as TXT, SRT, LRC, or JSON.
 
 Supported features
 
 • MP3, FLAC, WAV, ALAC, AIFF, M4A, and OGG playback
+• Local music library management
 • Album, Artist, Composer, Genre, and Folder views
 • Integrated music search
-• Resume playback and bookmarks
-• A-B repeat and playback speed control
+• Resume playback
+• Bookmarks
+• A-B repeat
+• Playback speed control
+• Built-in EQ presets and manual band controls
+• Embedded ReplayGain playback
+• Gapless Playback
 • Playlist management
-• AI transcript and AI translation export
-• List view and album grid view
+• M3U/M3U8 playlist import and export
+• Manual backup and restore of complete app data and listening history
+• Basic all-time summary of plays, listening time, and unique tracks
+• Local lyrics support
+• AI transcript generation
+• AI translation
+• AI result export
+• Large music collection support
 
-Melivra Pro adds multi-band EQ, Volume Normalization, Gapless Playback, and Playlist Backup & Restore.
+Melivra Pro adds custom EQ preset saving, automatic loudness analysis for tracks without ReplayGain, advanced weekly, monthly, and yearly listening statistics with CSV export, and playlist backup and restore in Melivra's proprietary JSON format. One purchase includes lifetime access to all current and future Melivra Pro features, with no additional Pro upgrade charges. AI Credits and other separately sold consumables are not included.
 
 FAQ:
 Q: Are music files uploaded to a server?
@@ -69,6 +92,9 @@ A: No. Melivra is a local music player without streaming or cloud library sync. 
 
 Q: Which audio files can it play?
 A: Melivra supports MP3, FLAC, WAV, ALAC, AIFF, M4A, and OGG playback.
+
+Q: Is it useful for audiobooks or long tracks?
+A: Yes. Resume playback, bookmarks, A-B repeat, and playback speed control help with long-form listening.
 
 Q: Can Melivra create transcripts or translations?
 A: Yes. With your approval, Melivra can use AI Tokens to create AI transcripts and AI translations, then export saved results as TXT, SRT, LRC, or JSON.
@@ -81,7 +107,7 @@ Melivra - Offline Music Player
 Local Music, AI Transcript
 
 프로모션 텍스트:
-Offline music player for MP3, FLAC, WAV, ALAC, and more. Browse your local music library, save bookmarks, use A-B repeat, resume playback, and create AI transcripts or translations.
+Offline MP3/FLAC player for local libraries. Browse albums and folders, bookmark, A-B repeat, resume playback, and create AI transcripts or translations.
 
 설명:
 Melivra is an offline music player built for local music collections.
@@ -102,6 +128,7 @@ Features
 • Resume playback
 • Bookmarks
 • A-B repeat
+• Playback speed control
 • Playlist management
 • Local lyrics support
 • AI transcript generation
@@ -113,4 +140,4 @@ Features
 Melivra is designed for people who own their music and want a powerful local music player with a clean and focused listening experience.
 
 키워드:
-music player,offline music,mp3 player,flac player,audio player,ai transcript,ai translation,lyrics,bookmark,ab repeat
+offline music,mp3,flac,audio player,transcript,translation,lyrics,bookmark,ab repeat,local files
