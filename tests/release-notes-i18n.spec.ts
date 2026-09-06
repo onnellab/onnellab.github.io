@@ -20,7 +20,7 @@ import {
 const canonical = (path: string) => `https://onnellab.github.io${path}`;
 
 const deploymentStatusTerms: Record<AllSiteLocale, RegExp> = {
-  en: /submitted|review|approval|store availability|distributed through/i,
+  en: /\b(?:submitted|review|approval|store availability|distributed through)\b/i,
   ko: /심사|승인|스토어 공개|배포/,
   ja: /審査|承認|ストア公開|配信/,
   'zh-Hans': /审核|批准|商店上架|分发/,
@@ -46,6 +46,13 @@ function localizedCopy(note: ReleaseNote, locale: AllSiteLocale) {
   }
   return getExtendedReleaseCopy(note, locale as ReleaseLocale);
 }
+
+test('English status detection preserves preview feature descriptions', () => {
+  expect('Preview changes before saving.').not.toMatch(deploymentStatusTerms.en);
+  for (const status of ['Submitted for review', 'Pending approval', 'Store availability', 'Distributed through the store']) {
+    expect(status).toMatch(deploymentStatusTerms.en);
+  }
+});
 
 test('every release note has complete copy in all nine languages', () => {
   expect(releaseNotes.length).toBeGreaterThan(0);
