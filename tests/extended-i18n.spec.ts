@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { latestReleaseNoteForApp } from '../src/lib/releaseNotes';
 
 const locales = [
   { code: 'pt-BR', segment: 'pt-br' },
@@ -7,7 +8,9 @@ const locales = [
   { code: 'es', segment: 'es' }
 ] as const;
 
-const latestTagWeaverVersion = '2.3';
+const latestTagWeaver = latestReleaseNoteForApp('tagweaver');
+if (!latestTagWeaver) throw new Error('TagWeaver release notes are required');
+const latestTagWeaverVersion = latestTagWeaver.version;
 const canonical = (path: string) => `https://onnellab.github.io${path}`;
 
 for (const locale of locales) {
