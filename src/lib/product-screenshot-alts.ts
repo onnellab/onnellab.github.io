@@ -366,76 +366,76 @@ const screenshotAltCopy = {
   },
   tagweaver: {
     "en": [
-      "Tag editor showing title, artist, album, rating fields and a Save button.",
-      "Library screen with multiple MP3 and FLAC files selected for tag editing.",
+      "TagWeaver: Tag editor showing title, artist, album, rating fields and a Save button.",
+      "TagWeaver: Library screen with multiple MP3 and FLAC files selected for tag editing.",
       "Settings screen showing TagWeaver language settings.",
-      "Extra tags editor showing advanced metadata fields such as BPM, comments, and ISRC.",
-      "Lyrics editor with a lyrics input and controls for plain or synced lyrics.",
-      "Cover editor showing album artwork controls to add, preview, replace, or remove a cover."
+      "TagWeaver: Extra tags editor showing advanced metadata fields such as BPM, comments, and ISRC.",
+      "TagWeaver: Lyrics editor with a lyrics input and controls for plain or synced lyrics.",
+      "TagWeaver: Cover editor showing album artwork controls to add, preview, replace, or remove a cover."
     ],
     "ko": [
-      "제목, 아티스트, 앨범, 평점 필드와 저장 버튼이 보이는 태그 편집 화면.",
-      "여러 MP3와 FLAC 파일을 선택해 태그를 편집하는 라이브러리 화면.",
+      "TagWeaver: 제목, 아티스트, 앨범, 평점 필드와 저장 버튼이 보이는 태그 편집 화면.",
+      "TagWeaver: 여러 MP3와 FLAC 파일을 선택해 태그를 편집하는 라이브러리 화면.",
       "TagWeaver 언어 설정이 보이는 설정 화면.",
-      "BPM, 코멘트, ISRC 같은 추가 메타데이터를 편집하는 화면.",
-      "가사 입력란과 일반 또는 싱크 가사 선택 기능이 보이는 가사 편집 화면.",
-      "앨범 커버를 추가, 미리보기, 교체, 제거하는 앨범 아트 편집 화면."
+      "TagWeaver: BPM, 코멘트, ISRC 같은 추가 메타데이터를 편집하는 화면.",
+      "TagWeaver: 가사 입력란과 일반 또는 싱크 가사 선택 기능이 보이는 가사 편집 화면.",
+      "TagWeaver: 앨범 커버를 추가, 미리보기, 교체, 제거하는 앨범 아트 편집 화면."
     ],
     "ja": [
-      "タイトル、アーティスト、アルバム、評価と保存ボタンを表示したタグ編集画面。",
-      "複数のMP3とFLACを選択してタグを編集するライブラリ画面。",
+      "TagWeaver: タイトル、アーティスト、アルバム、評価と保存ボタンを表示したタグ編集画面。",
+      "TagWeaver: 複数のMP3とFLACを選択してタグを編集するライブラリ画面。",
       "TagWeaverの言語設定を表示した画面。",
-      "BPM、コメント、ISRCなどの追加メタデータを編集する画面。",
-      "歌詞入力欄と通常・同期歌詞の切り替えを表示した歌詞編集画面。",
-      "アルバムカバーを追加、プレビュー、置換、削除するアート編集画面。"
+      "TagWeaver: BPM、コメント、ISRCなどの追加メタデータを編集する画面。",
+      "TagWeaver: 歌詞入力欄と通常・同期歌詞の切り替えを表示した歌詞編集画面。",
+      "TagWeaver: アルバムカバーを追加、プレビュー、置換、削除するアート編集画面。"
     ],
     "zh-Hant": [
-      "顯示標題、藝人、專輯、評分欄位與儲存按鈕的標籤編輯畫面。",
-      "選取多個 MP3 與 FLAC 檔案進行標籤編輯的媒體庫畫面。",
+      "TagWeaver: 顯示標題、藝人、專輯、評分欄位與儲存按鈕的標籤編輯畫面。",
+      "TagWeaver: 選取多個 MP3 與 FLAC 檔案進行標籤編輯的媒體庫畫面。",
       "顯示 TagWeaver 語言設定的畫面。",
-      "編輯 BPM、評論、ISRC 等進階中繼資料欄位的畫面。",
-      "顯示歌詞輸入欄位與純文字或同步歌詞控制項的歌詞編輯畫面。",
-      "新增、預覽、替換或移除專輯封面的封面編輯畫面。"
+      "TagWeaver: 編輯 BPM、評論、ISRC 等進階中繼資料欄位的畫面。",
+      "TagWeaver: 顯示歌詞輸入欄位與純文字或同步歌詞控制項的歌詞編輯畫面。",
+      "TagWeaver: 新增、預覽、替換或移除專輯封面的封面編輯畫面。"
     ],
     "zh-Hans": [
-      "显示标题、艺人、专辑、评分字段和保存按钮的标签编辑界面。",
-      "选择多个 MP3 和 FLAC 文件进行标签编辑的媒体库界面。",
+      "TagWeaver: 显示标题、艺人、专辑、评分字段和保存按钮的标签编辑界面。",
+      "TagWeaver: 选择多个 MP3 和 FLAC 文件进行标签编辑的媒体库界面。",
       "显示 TagWeaver 语言设置的界面。",
-      "编辑 BPM、评论、ISRC 等高级元数据字段的界面。",
-      "显示歌词输入框和纯文本或同步歌词控件的歌词编辑界面。",
-      "添加、预览、替换或移除专辑封面的封面编辑界面。"
+      "TagWeaver: 编辑 BPM、评论、ISRC 等高级元数据字段的界面。",
+      "TagWeaver: 显示歌词输入框和纯文本或同步歌词控件的歌词编辑界面。",
+      "TagWeaver: 添加、预览、替换或移除专辑封面的封面编辑界面。"
     ],
     "pt-BR": [
-      "Editor de tags com campos de título, artista, álbum, avaliação e botão Salvar.",
-      "Biblioteca com vários arquivos MP3 e FLAC selecionados para edição de tags.",
+      "TagWeaver: Editor de tags com campos de título, artista, álbum, avaliação e botão Salvar.",
+      "TagWeaver: Biblioteca com vários arquivos MP3 e FLAC selecionados para edição de tags.",
       "Tela de configurações do TagWeaver com o idioma definido.",
-      "Editor de tags extras com campos de metadados como BPM, comentários e ISRC.",
-      "Editor de letras com campo de texto e controles para letras simples ou sincronizadas.",
-      "Editor de capas com controles para adicionar, visualizar, substituir ou remover a capa."
+      "TagWeaver: Editor de tags extras com campos de metadados como BPM, comentários e ISRC.",
+      "TagWeaver: Editor de letras com campo de texto e controles para letras simples ou sincronizadas.",
+      "TagWeaver: Editor de capas com controles para adicionar, visualizar, substituir ou remover a capa."
     ],
     "de": [
-      "Tag-Editor mit Feldern für Titel, Interpret, Album, Bewertung und Speichern-Schaltfläche.",
-      "Mediathek mit mehreren ausgewählten MP3- und FLAC-Dateien zur Tag-Bearbeitung.",
+      "TagWeaver: Tag-Editor mit Feldern für Titel, Interpret, Album, Bewertung und Speichern-Schaltfläche.",
+      "TagWeaver: Mediathek mit mehreren ausgewählten MP3- und FLAC-Dateien zur Tag-Bearbeitung.",
       "TagWeaver-Einstellungen mit Sprachoptionen.",
-      "Editor für zusätzliche Tags mit Feldern wie BPM, Kommentaren und ISRC.",
-      "Liedtext-Editor mit Texteingabe und Auswahl für normale oder synchronisierte Texte.",
-      "Cover-Editor zum Hinzufügen, Ansehen, Ersetzen oder Entfernen eines Albumcovers."
+      "TagWeaver: Editor für zusätzliche Tags mit Feldern wie BPM, Kommentaren und ISRC.",
+      "TagWeaver: Liedtext-Editor mit Texteingabe und Auswahl für normale oder synchronisierte Texte.",
+      "TagWeaver: Cover-Editor zum Hinzufügen, Ansehen, Ersetzen oder Entfernen eines Albumcovers."
     ],
     "fr": [
-      "Éditeur de tags avec les champs titre, artiste, album, note et le bouton Enregistrer.",
-      "Bibliothèque affichant plusieurs fichiers MP3 et FLAC sélectionnés pour modifier leurs tags.",
+      "TagWeaver: Éditeur de tags avec les champs titre, artiste, album, note et le bouton Enregistrer.",
+      "TagWeaver: Bibliothèque affichant plusieurs fichiers MP3 et FLAC sélectionnés pour modifier leurs tags.",
       "Écran des réglages de TagWeaver avec les options de langue.",
-      "Éditeur de tags supplémentaires avec des champs comme BPM, commentaires et ISRC.",
-      "Éditeur de paroles avec saisie et commandes pour paroles simples ou synchronisées.",
-      "Éditeur de pochette avec les commandes pour ajouter, prévisualiser, remplacer ou supprimer l’image."
+      "TagWeaver: Éditeur de tags supplémentaires avec des champs comme BPM, commentaires et ISRC.",
+      "TagWeaver: Éditeur de paroles avec saisie et commandes pour paroles simples ou synchronisées.",
+      "TagWeaver: Éditeur de pochette avec les commandes pour ajouter, prévisualiser, remplacer ou supprimer l’image."
     ],
     "es": [
-      "Editor de etiquetas con campos de título, artista, álbum, valoración y botón Guardar.",
-      "Biblioteca con varios archivos MP3 y FLAC seleccionados para editar sus etiquetas.",
+      "TagWeaver: Editor de etiquetas con campos de título, artista, álbum, valoración y botón Guardar.",
+      "TagWeaver: Biblioteca con varios archivos MP3 y FLAC seleccionados para editar sus etiquetas.",
       "Pantalla de ajustes de TagWeaver con opciones de idioma.",
-      "Editor de etiquetas adicionales con campos de metadatos como BPM, comentarios e ISRC.",
-      "Editor de letras con entrada y controles para letras simples o sincronizadas.",
-      "Editor de portadas con controles para añadir, previsualizar, sustituir o eliminar la portada."
+      "TagWeaver: Editor de etiquetas adicionales con campos de metadatos como BPM, comentarios e ISRC.",
+      "TagWeaver: Editor de letras con entrada y controles para letras simples o sincronizadas.",
+      "TagWeaver: Editor de portadas con controles para añadir, previsualizar, sustituir o eliminar la portada."
     ]
   },
   vaultxt: {

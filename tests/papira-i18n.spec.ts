@@ -507,7 +507,7 @@ test.describe('Papira nine-language launch surface', () => {
     await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', iconUrl);
     await expect(page.locator('.screenshot-link img').first()).toHaveAttribute(
       'alt',
-      'TagWeaver MP3 and FLAC tag editor for title, artist, and album metadata'
+      'TagWeaver: Tag editor showing title, artist, album, rating fields and a Save button.'
     );
 
     const schemas = await jsonLd(page);

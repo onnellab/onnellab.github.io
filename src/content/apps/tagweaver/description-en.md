@@ -47,7 +47,7 @@ TagWeaver lets you inspect and edit MP3/FLAC metadata, rating, artwork, and lyri
 
 Update the title, artist, album, track number, year, genre, rating, and other metadata stored inside your music files. Album artwork and lyrics can be managed from the same editing flow.
 
-TagWeaver does not try to reorganize your library automatically. It saves only the fields you review and change.
+Review your changes, then save the fields you edited.
 
 Supported editing
 
