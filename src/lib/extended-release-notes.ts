@@ -20,6 +20,13 @@ type ReleaseLabels = {
 
 const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
   ja: {
+    'tagweaver/2.5': {
+      "summary": "TagWeaver 2.5（iOS / Android）の変更内容です。",
+      "changes": [
+        "追加したファイルを相対フォルダー、ローカル検索、パス順、クイックインデックス、手動順で探せます。",
+        "フォルダーを折りたたみ・展開し、保存前に変更を確認して選択したトラックを連番にできます。"
+      ]
+    },
     'tagweaver/2.3': {
       summary: 'TagWeaver 2.3（iOS / Android）の変更内容です。',
       changes: [
@@ -61,6 +68,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   'zh-Hans': {
+    'tagweaver/2.5': {
+      "summary": "TagWeaver 2.5（iOS 和 Android）的变更内容。",
+      "changes": [
+        "按相对文件夹、本地搜索、路径排序、快速索引或手动顺序查找已添加的文件。",
+        "折叠或展开文件夹，保存前预览更改，并按顺序设置所选曲目的编号。"
+      ]
+    },
     'tagweaver/2.3': {
       summary: 'TagWeaver 2.3（iOS 和 Android）的变更内容。',
       changes: [
@@ -102,6 +116,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   'zh-Hant': {
+    'tagweaver/2.5': {
+      "summary": "TagWeaver 2.5（iOS 與 Android）的變更內容。",
+      "changes": [
+        "依相對資料夾、裝置內搜尋、路徑排序、快速索引或手動順序尋找已加入的檔案。",
+        "收合或展開資料夾，儲存前預覽變更，並為選取的曲目依序編號。"
+      ]
+    },
     'tagweaver/2.3': {
       summary: 'TagWeaver 2.3（iOS 與 Android）的變更內容。',
       changes: [
@@ -143,6 +164,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   'pt-BR': {
+    'tagweaver/2.5': {
+      "summary": "Novidades do TagWeaver 2.5 para iOS e Android.",
+      "changes": [
+        "Encontre arquivos adicionados por pasta relativa, busca local, ordenação por caminho, índice rápido ou ordem manual.",
+        "Recolha ou expanda pastas, veja as alterações antes de salvar e numere as faixas selecionadas em sequência."
+      ]
+    },
     'tagweaver/2.3': {
       summary: 'Alterações do TagWeaver 2.3 para iOS e Android.',
       changes: [
@@ -184,6 +212,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   de: {
+    'tagweaver/2.5': {
+      "summary": "Änderungen in TagWeaver 2.5 für iOS und Android.",
+      "changes": [
+        "Finde hinzugefügte Dateien nach relativem Ordner, lokaler Suche, Pfadsortierung, Schnellindex oder manueller Reihenfolge.",
+        "Klappe Ordner ein oder aus, prüfe Änderungen vor dem Speichern und nummeriere ausgewählte Titel fortlaufend."
+      ]
+    },
     'tagweaver/2.3': {
       summary: 'Änderungen in TagWeaver 2.3 für iOS und Android.',
       changes: [
@@ -225,6 +260,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   fr: {
+    'tagweaver/2.5': {
+      "summary": "Nouveautés de TagWeaver 2.5 pour iOS et Android.",
+      "changes": [
+        "Retrouvez les fichiers ajoutés par dossier relatif, recherche locale, tri par chemin, index rapide ou ordre manuel.",
+        "Réduisez ou développez les dossiers, prévisualisez les changements avant l’enregistrement et numérotez les pistes sélectionnées."
+      ]
+    },
     'tagweaver/2.3': {
       summary: 'Modifications de TagWeaver 2.3 pour iOS et Android.',
       changes: [
@@ -266,6 +308,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   es: {
+    'tagweaver/2.5': {
+      "summary": "Novedades de TagWeaver 2.5 para iOS y Android.",
+      "changes": [
+        "Encuentra archivos añadidos por carpeta relativa, búsqueda local, ordenación por ruta, índice rápido u orden manual.",
+        "Contrae o expande carpetas, revisa los cambios antes de guardar y numera secuencialmente las pistas seleccionadas."
+      ]
+    },
     'tagweaver/2.3': {
       summary: 'Cambios de TagWeaver 2.3 para iOS y Android.',
       changes: [

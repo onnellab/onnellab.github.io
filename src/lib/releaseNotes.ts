@@ -15,6 +15,26 @@ export type ReleaseNote = {
 
 export const releaseNotes: ReleaseNote[] = [
   {
+    "appSlug": "tagweaver",
+    "appName": "TagWeaver",
+    "version": "2.5",
+    "tag": "v2.5.0",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-09-07",
+    "title": "TagWeaver v2.5",
+    "summary": "Changes in TagWeaver 2.5 for iOS and Android.",
+    "summaryKo": "TagWeaver 2.5 iOS·Android 버전의 변경 사항이에요.",
+    "internalGitHubUrl": "https://github.com/onnellab/tagweaver/commit/d48776bb3942532ea6a6f413494111bb311c70d4",
+    "changes": [
+      "Find added files by relative folder, local search, path sorting, quick index, or manual order.",
+      "Collapse or expand folder sections, preview changes before saving, and number selected tracks sequentially."
+    ],
+    "changesKo": [
+      "직접 추가한 파일을 상대 폴더, 로컬 검색, 경로 정렬, 빠른 색인과 수동 순서로 찾아보세요.",
+      "폴더를 접거나 펼치고, 저장 전에 변경 사항을 미리 보고 선택한 트랙 번호를 순서대로 적용할 수 있어요."
+    ]
+  },
+  {
     appSlug: 'tagweaver',
     appName: 'TagWeaver',
     version: '2.3',
