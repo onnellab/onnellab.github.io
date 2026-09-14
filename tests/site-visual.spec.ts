@@ -1247,7 +1247,9 @@ test.describe('existing product pages', () => {
     test(`${path} exposes visible FAQ content and product schema`, async ({ page }) => {
       await page.goto(path);
       const isKo = path.endsWith('/ko/');
-      await expect(page.locator('#faq-title')).toHaveText(isKo ? '자주 묻는 질문' : 'FAQ');
+      const faqTitle = isKo ? '자주 묻는 질문'
+        : path === '/apps/vaultxt/' ? 'Frequently asked questions' : 'FAQ';
+      await expect(page.locator('#faq-title')).toHaveText(faqTitle);
       await expect(page.locator('.faq-list details')).toHaveCount(3);
 
       const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
