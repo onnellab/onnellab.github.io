@@ -416,7 +416,7 @@ test.describe('nine-language site core regression', () => {
         quivra: 'メディア変換ツール',
         segra: '音声カット・結合ツール',
         tagweaver: 'オフラインMP3/FLACタグエディター',
-        vaultxt: 'テキストエディタ'
+        vaultxt: '大容量テキスト・ログ・設定ファイルエディタ'
       },
       'zh-hans': {
         aligna: '批量文件重命名工具',
@@ -425,7 +425,7 @@ test.describe('nine-language site core regression', () => {
         quivra: '媒体转换器',
         segra: '音频剪切与合并工具',
         tagweaver: '离线 MP3/FLAC 标签编辑器',
-        vaultxt: '文本编辑器'
+        vaultxt: '大型文本文件、日志文件与配置文件编辑器'
       },
       'zh-hant': {
         aligna: '批次檔案重新命名工具',
@@ -434,7 +434,7 @@ test.describe('nine-language site core regression', () => {
         quivra: '媒體轉換工具',
         segra: '音訊剪輯與合併工具',
         tagweaver: '離線 MP3/FLAC 標籤編輯器',
-        vaultxt: '文字編輯器'
+        vaultxt: '大型文字檔案、記錄檔與設定檔編輯器'
       }
     } as const;
     const htmlLang = { ja: 'ja', 'zh-hans': 'zh-Hans', 'zh-hant': 'zh-Hant' } as const;
