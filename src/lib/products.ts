@@ -63,6 +63,19 @@ export type ProductSource = {
   meta: ProductMeta;
 };
 
+type VaultxtPromoCopy = {
+  appName: string;
+  subtitle: string;
+  promotionalText: string;
+  shortDescription: string;
+  keywords: string;
+  description: string;
+  landingSubtitle: string;
+  landingBody: string;
+  faq: ProductFaqItem[];
+  screenshots: Array<{ title: string; subtitle: string; alt: string }>;
+};
+
 export type ProductPageData = {
   locale: Locale;
   source: ProductSource;
@@ -174,7 +187,7 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     seoDescription,
     iconPath: getIconRoutePath(source),
     screenshotPaths,
-    screenshotAlts: getProductScreenshotAlts(source.slug, locale, screenshotPaths.length),
+    screenshotAlts: getProductScreenshotAltsFromCopy(source, locale, screenshotPaths.length),
     accent: productAccent(source)
   };
 }
@@ -374,6 +387,34 @@ function readProductMeta(contentDir: string): ProductMeta {
 }
 
 function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
+  const promo = readVaultxtPromoCopy(contentDir, locale);
+  if (promo) {
+    const platform = {
+      name: promo.appName,
+      shortDescription: promo.shortDescription,
+      subtitle: promo.subtitle,
+      promo: promo.promotionalText,
+      landingSubtitle: promo.landingSubtitle,
+      landingDescription: promo.landingBody,
+      description: promo.description,
+      keywords: promo.keywords,
+      faq: {
+        title: {
+          en: 'Frequently asked questions',
+          ko: '자주 묻는 질문',
+          ja: 'よくある質問',
+          'zh-Hans': '常见问题',
+          'zh-Hant': '常見問題',
+          'pt-BR': 'Perguntas frequentes',
+          de: 'Häufige Fragen',
+          fr: 'Questions fréquentes',
+          es: 'Preguntas frecuentes'
+        }[locale],
+        items: promo.faq
+      }
+    };
+    return { locale, android: platform, ios: platform };
+  }
   if (isExtendedSiteLocale(locale)) {
     const slug = path.basename(contentDir);
     const localized = getExtendedProductCopy(slug, locale);
@@ -415,6 +456,26 @@ function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
     android: parsePlatformCopy(section(raw, 'Android')),
     ios: parsePlatformCopy(section(raw, 'ios'))
   };
+}
+
+function readVaultxtPromoCopy(contentDir: string, locale: Locale): VaultxtPromoCopy | undefined {
+  if (path.basename(contentDir) !== 'vaultxt') return undefined;
+  const filePath = path.join(contentDir, 'promo-copy.json');
+  if (!fs.existsSync(filePath)) return undefined;
+  const raw = JSON.parse(fs.readFileSync(filePath, 'utf8')) as Record<string, VaultxtPromoCopy>;
+  return raw[locale];
+}
+
+function getProductScreenshotAltsFromCopy(
+  source: ProductSource,
+  locale: Locale,
+  count: number
+): string[] {
+  const promo = readVaultxtPromoCopy(source.contentDir, locale);
+  if (promo?.screenshots?.length) {
+    return promo.screenshots.map((screenshot) => screenshot.alt).slice(0, count);
+  }
+  return getProductScreenshotAlts(source.slug, locale, count);
 }
 
 function parsePlatformCopy(text: string): PlatformCopy {

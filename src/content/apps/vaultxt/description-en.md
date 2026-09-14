@@ -1,109 +1,45 @@
 Android
 앱 이름:
-VaultXT - Large Text Editor
+VaultXT
 
 간단한 설명:
-Fast text editor for large files. Open, edit, and save TXT locally.
-
-Landing subtitle:
-Large TXT Editor
+Edit text with autosave, find/replace, snapshots, and local settings.
 
 자세한 설명:
-VaultXT is a fast and lightweight text editor designed for large files.
+VaultXT is a local text workspace for TXT files. Imported files are copied into the Library, so you can separate your working copy from your original source.
 
-Many text editors become slow or unstable when opening large TXT documents. VaultXT is built to handle long text files smoothly while keeping the editing experience simple and responsive.
+• Edit text with autosave
+• Use find and replace on one document
+• Keep older states in snapshots and revisit them
+• Split and merge documents when you need a new draft
+• Tune font size and display settings
 
-Whether you are editing notes, logs, drafts, or plain text documents, VaultXT provides a clean and distraction-free writing environment.
+Editing and autosave are available for free. The free workspace keeps 2 open documents, 3 Library documents, and the 5 latest snapshots. Pro is a one-time purchase for a larger workspace. There are no subscriptions or ads.
 
-Key features
-
-• Fast opening for large TXT files  
-• Clean and simple text editing interface  
-• Local file editing with no cloud dependency  
-• No ads and no tracking  
-• Works completely offline  
-
-VaultXT focuses on doing one thing well: editing text files quickly and reliably.
-
-There are no unnecessary features, no accounts, and no data collection. All files stay on your device.
-
-VaultXT is perfect for:
-
-• opening large TXT files  
-• editing plain text documents  
-• viewing logs or exported text data  
-• writing drafts without distractions  
-• working with long text notes  
-
-If you need a minimal and reliable text editor for large files, VaultXT is built for you.
-
-Landing page:
-VaultXT opens and edits large TXT files without getting in the way.
-
-Use it for long documents, logs, drafts, exported data, and plain text files that feel too heavy for a basic notes app.
-
-Files are opened directly from your device. You can review the content, make changes, and save the edited text back without uploading it to a cloud service.
-
-Core tasks
-
-• Open large TXT files
-• Review long documents
-• Edit with autosave
-• Recover with undo and snapshots
-• Keep working offline
-
-VaultXT focuses on the basic editing flow: open the file, edit the text, keep the work recoverable, and save locally.
-
-There are no accounts, ads, or tracking. File contents are not sent to external servers.
-
-FAQ:
-Q: Can VaultXT open large TXT files?
-A: Yes. VaultXT focuses on opening and editing large TXT files, long documents, logs, drafts, and exported text data.
-
-Q: How are edits kept recoverable?
-A: VaultXT is designed around autosave, undo, and snapshots so editing work can be recovered.
-
-Q: Is file content sent to a server?
-A: No. File contents are not sent to external servers and are processed on your device.
+Documents stay on your device. No cloud sync is provided. Format checks do not block saving, and exports go to your selected path.
 
 ios
 앱 이름:
-VaultXT - TXT Editor
+VaultXT
 
 부제:
-Autosave keeps your edits safe
+TXT text editor with autosave
 
 프로모션 텍스트:
-Edit large text files safely — auto-save, undo, and snapshots keep everything recoverable.
+Import TXT files, edit in a local workspace, and keep moving with autosave. Use snapshots to review and restore earlier versions.
 
 설명:
-VaultXT is a fast and lightweight text editor designed for large files.
+VaultXT is a local text workspace for TXT files. Imported files are copied into the Library, so you can separate your working copy from your original source.
 
-Many text editors become slow or unstable when opening large TXT documents. VaultXT is built to handle long text files smoothly while keeping the editing experience simple and responsive.
+• Edit text with autosave
+• Use find and replace on one document
+• Keep older states in snapshots and revisit them
+• Split and merge documents when you need a new draft
+• Tune font size and display settings
 
-Whether you are editing notes, logs, drafts, or plain text documents, VaultXT provides a clean and distraction-free writing environment.
+Editing and autosave are available for free. The free workspace keeps 2 open documents, 3 Library documents, and the 5 latest snapshots. Pro is a one-time purchase for a larger workspace. There are no subscriptions or ads.
 
-Key features
-
-• Fast opening for large TXT files  
-• Clean and simple text editing interface  
-• Local file editing with no cloud dependency  
-• No ads and no tracking  
-• Works completely offline  
-
-VaultXT focuses on doing one thing well: editing text files quickly and reliably.
-
-There are no unnecessary features, no accounts, and no data collection. All files stay on your device.
-
-VaultXT is perfect for:
-
-• opening large TXT files  
-• editing plain text documents  
-• viewing logs or exported text data  
-• writing drafts without distractions  
-• working with long text notes  
-
-If you need a minimal and reliable text editor for large files, VaultXT is built for you.
+Documents stay on your device. No cloud sync is provided. Format checks do not block saving, and exports go to your selected path.
 
 키워드:
-txt,editor,texteditor,notepad,txtviewer,fileeditor
+text,txt,editor,notes,autosave,find and replace,snapshots,library,files
