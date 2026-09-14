@@ -3,43 +3,35 @@ Android
 VaultXT
 
 간단한 설명:
-Edit text with autosave, find/replace, snapshots, and local settings.
+Edit large text files locally with autosave, search, snapshots, and folders.
 
 자세한 설명:
-VaultXT is a local text workspace for TXT files. Imported files are copied into the Library, so you can separate your working copy from your original source.
+VaultXT is a local editor for large text documents. It handles the text content of .txt, .md, .log, .csv, .json, .yaml, .yml, and .arb files.
 
-• Edit text with autosave
-• Use find and replace on one document
-• Keep older states in snapshots and revisit them
-• Split and merge documents when you need a new draft
-• Tune font size and display settings
+Edit large files in one continuous editor, use find and replace, and let autosave run after a pause in typing. Review and restore snapshots, organize documents in named, colored, nested folders with manual ordering, and create new drafts by splitting or merging documents.
 
-Editing and autosave are available for free. The free workspace keeps 2 open documents, 3 Library documents, and the 5 latest snapshots. Pro is a one-time purchase for a larger workspace. There are no subscriptions or ads.
+Format checks are available for JSON, ARB, YAML, and YML. They never block saving and may be skipped for large files. Imported files become local working copies, separate from the external originals, and you choose the destination when exporting. Editing works offline on your device.
 
-Documents stay on your device. No cloud sync is provided. Format checks do not block saving, and exports go to your selected path.
+Free includes editing, 10 open documents, 10 documents in the Library, the 10 latest snapshots per document, splitting into up to 10 pieces, and merging up to 10 documents. Pro is a one-time purchase that expands these limits, with no subscription and no ads.
 
 ios
 앱 이름:
 VaultXT
 
 부제:
-TXT text editor with autosave
+Large text editor
 
 프로모션 텍스트:
-Import TXT files, edit in a local workspace, and keep moving with autosave. Use snapshots to review and restore earlier versions.
+Edit large text locally, from long documents to logs and config files. Includes autosave, search, snapshots, folders, split and merge, and optional format checks.
 
 설명:
-VaultXT is a local text workspace for TXT files. Imported files are copied into the Library, so you can separate your working copy from your original source.
+VaultXT is a local editor for large text documents. It handles the text content of .txt, .md, .log, .csv, .json, .yaml, .yml, and .arb files.
 
-• Edit text with autosave
-• Use find and replace on one document
-• Keep older states in snapshots and revisit them
-• Split and merge documents when you need a new draft
-• Tune font size and display settings
+Edit large files in one continuous editor, use find and replace, and let autosave run after a pause in typing. Review and restore snapshots, organize documents in named, colored, nested folders with manual ordering, and create new drafts by splitting or merging documents.
 
-Editing and autosave are available for free. The free workspace keeps 2 open documents, 3 Library documents, and the 5 latest snapshots. Pro is a one-time purchase for a larger workspace. There are no subscriptions or ads.
+Format checks are available for JSON, ARB, YAML, and YML. They never block saving and may be skipped for large files. Imported files become local working copies, separate from the external originals, and you choose the destination when exporting. Editing works offline on your device.
 
-Documents stay on your device. No cloud sync is provided. Format checks do not block saving, and exports go to your selected path.
+Free includes editing, 10 open documents, 10 documents in the Library, the 10 latest snapshots per document, splitting into up to 10 pieces, and merging up to 10 documents. Pro is a one-time purchase that expands these limits, with no subscription and no ads.
 
 키워드:
-text,txt,editor,notes,autosave,find and replace,snapshots,library,files
+large text,editor,txt,markdown,log,csv,json,yaml,arb,autosave,snapshot

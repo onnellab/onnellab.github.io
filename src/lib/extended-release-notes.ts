@@ -23,6 +23,8 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     'vaultxt/2.0.0': {
       summary: 'VaultXT 2.0.0（iOS / Android）の変更内容です。',
       changes: [
+        "無料版の上限を、ライブラリ内の文書10件、同時に開く文書10件、各文書のスナップショット10件、最大10分割、10文書の結合に引き上げました。",
+        "AndroidでのPro購入におけるGoogle Playの課金対応を更新しました。",
         'テキスト編集体験を更新し、9言語で利用できるようになりました。',
         '別のドキュメントを開く前に編集中の内容を保存するよう、ドキュメント切り替えを改善しました。',
         '設定からアプリの言語に合わせたプライバシーポリシーを開けます。',
@@ -80,6 +82,8 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     'vaultxt/2.0.0': {
       summary: 'VaultXT 2.0.0（iOS 和 Android）的变更内容。',
       changes: [
+        "免费版上限已提高为文档库10个文档、同时打开10个文档、每个文档10份快照、最多分成10份及合并10个文档。",
+        "更新 Android 版 Pro 购买的 Google Play 结算支持。",
         '更新文本编辑体验，现已支持 9 种语言。',
         '改进文档切换流程，在打开其他文档前保存当前编辑内容。',
         '可在设置中打开与应用语言匹配的隐私政策。',
@@ -137,6 +141,8 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     'vaultxt/2.0.0': {
       summary: 'VaultXT 2.0.0（iOS 與 Android）的變更內容。',
       changes: [
+        "免費版上限已提高為文件庫10份文件、同時開啟10份文件、每份文件10份快照、最多分成10份及合併10份文件。",
+        "更新 Android 版 Pro 購買的 Google Play 付款支援。",
         '更新文字編輯體驗，現已支援 9 種語言。',
         '改善文件切換流程，在開啟其他文件前儲存目前的編輯內容。',
         '可在設定中開啟與應用程式語言相符的隱私權政策。',
@@ -194,6 +200,8 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     'vaultxt/2.0.0': {
       summary: 'Alterações do VaultXT 2.0.0 para iOS e Android.',
       changes: [
+        "A versão gratuita agora permite 10 documentos na Biblioteca, 10 abertos, 10 instantâneos por documento, divisão em 10 partes e união de 10 documentos.",
+        "Atualizamos o suporte ao sistema de faturamento do Google Play para compras Pro no Android.",
         'Experiência de edição de texto atualizada, agora disponível em nove idiomas.',
         'Melhoramos a troca de documentos para salvar suas edições atuais antes de abrir outro documento.',
         'Abra a política de privacidade no idioma do app pelas Configurações.',
@@ -251,6 +259,8 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     'vaultxt/2.0.0': {
       summary: 'Änderungen in VaultXT 2.0.0 für iOS und Android.',
       changes: [
+        "Die kostenlose Version erlaubt jetzt 10 Bibliotheksdokumente, 10 geöffnete Dokumente, 10 Snapshots pro Dokument, bis zu 10 Teile pro Aufteilung und das Zusammenführen von 10 Dokumenten.",
+        "Die Unterstützung der Google Play-Abrechnung für Pro-Käufe auf Android wurde aktualisiert.",
         'Überarbeitete Textbearbeitung, jetzt in neun Sprachen verfügbar.',
         'Der Dokumentwechsel speichert aktuelle Bearbeitungen jetzt, bevor ein anderes Dokument geöffnet wird.',
         'Öffne die Datenschutzerklärung in der App-Sprache über die Einstellungen.',
@@ -308,6 +318,8 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     'vaultxt/2.0.0': {
       summary: 'Modifications de VaultXT 2.0.0 pour iOS et Android.',
       changes: [
+        "La version gratuite permet désormais 10 documents en Bibliothèque, 10 documents ouverts, 10 instantanés par document, jusqu’à 10 parties par division et la fusion de 10 documents.",
+        "Mise à jour de la prise en charge de la facturation Google Play pour les achats Pro sur Android.",
         'Expérience d’édition de texte mise à jour, désormais disponible en neuf langues.',
         'Amélioration du changement de document pour enregistrer les modifications en cours avant d’en ouvrir un autre.',
         'Ouvrez la politique de confidentialité dans la langue de l’app depuis les réglages.',
@@ -365,6 +377,8 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     'vaultxt/2.0.0': {
       summary: 'Cambios de VaultXT 2.0.0 para iOS y Android.',
       changes: [
+        "La versión gratuita ahora permite 10 documentos en la Biblioteca, 10 abiertos, 10 versiones por documento, división en hasta 10 partes y fusión de 10 documentos.",
+        "Actualizamos la compatibilidad con la facturación de Google Play para las compras Pro en Android.",
         'Experiencia de edición de texto actualizada, ahora disponible en nueve idiomas.',
         'Mejoramos el cambio de documentos para guardar las ediciones actuales antes de abrir otro documento.',
         'Abre la política de privacidad en el idioma de la app desde Ajustes.',
