@@ -176,6 +176,8 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
   const seoDescription = seoPageDescription(source, copy);
   const canonicalPath = allProductRouteFor(source.slug, locale);
   const screenshotPaths = getScreenshotRoutePaths(source, locale);
+  const promo = readVaultxtPromoCopy(source.contentDir, locale);
+  const promoFeatures = promo?.screenshots.map((screenshot) => screenshot.title);
   return {
     locale,
     source,
@@ -185,6 +187,7 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     alternates: allProductLocaleAlternates(source.slug),
     seoTitle: productSeoTitle(source, copy),
     seoDescription,
+    schemaFeatureList: promoFeatures,
     iconPath: getIconRoutePath(source),
     screenshotPaths,
     screenshotAlts: getProductScreenshotAltsFromCopy(source, locale, screenshotPaths.length),

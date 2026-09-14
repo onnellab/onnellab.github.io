@@ -396,7 +396,7 @@ test.describe('nine-language site core regression', () => {
       },
       {
         path: '/apps/vaultxt/ja/',
-        sentence: 'VaultXTはTXTファイルとその他のプレーンテキスト文書を端末内のローカルワークスペースで読む・編集するアプリです。'
+        sentence: 'VaultXTは、大容量テキスト文書を端末内で読む・編集するローカルエディタで、.txt、.md、.log、.csv、.json、.yaml、.yml、.arbのテキスト内容を一つの作業環境で扱えます。'
       }
     ];
 

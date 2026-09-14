@@ -1,13 +1,13 @@
 {
   "en": {
     "appName": "VaultXT",
-    "subtitle": "TXT text editor with autosave",
-    "promotionalText": "Import TXT files, edit in a local workspace, and keep moving with autosave. Use snapshots to review and restore earlier versions.",
-    "shortDescription": "Edit TXT and other plain-text files locally with autosave, find and replace, snapshots, imports, exports, and document tools.",
-    "keywords": "text,txt,editor,notes,autosave,find and replace,snapshots,library,files",
-    "description": "VaultXT is a local text workspace for TXT files. Imported files are copied into the Library, so you can separate your working copy from your original source.\n\n• Edit text with autosave\n• Use find and replace on one document\n• Keep older states in snapshots and revisit them\n• Split and merge documents when you need a new draft\n• Tune font size and display settings\n\nEditing and autosave are available for free. The free workspace keeps 2 open documents, 3 Library documents, and the 5 latest snapshots. Pro is a one-time purchase for a larger workspace. There are no subscriptions or ads.\n\nDocuments stay on your device. No cloud sync is provided. Format checks do not block saving, and exports go to your selected path.",
+    "subtitle": "Large text editor",
+    "promotionalText": "Edit large text locally, from long documents to logs and config files. Includes autosave, search, snapshots, folders, split and merge, and optional format checks.",
+    "shortDescription": "Edit large text files locally with autosave, search, snapshots, and folders.",
+    "keywords": "large text,editor,txt,markdown,log,csv,json,yaml,arb,autosave,snapshot",
+    "description": "VaultXT is a local editor for large text documents. It handles the text content of .txt, .md, .log, .csv, .json, .yaml, .yml, and .arb files.\n\nEdit large files in one continuous editor, use find and replace, and let autosave run after a pause in typing. Review and restore snapshots, organize documents in named, colored, nested folders with manual ordering, and create new drafts by splitting or merging documents.\n\nFormat checks are available for JSON, ARB, YAML, and YML. They never block saving and may be skipped for large files. Imported files become local working copies, separate from the external originals, and you choose the destination when exporting. Editing works offline on your device.\n\nFree includes editing, 2 open documents, 3 documents in the Library, the 5 latest snapshots, splitting into up to 3 pieces, and merging up to 2 documents. Pro is a one-time purchase that expands these limits, with no subscription and no ads.",
     "landingSubtitle": "Text editor",
-    "landingBody": "Open TXT files and other plain-text documents in a local workspace while keeping the original source untouched. VaultXT copies imported files into the Library as working documents, so you can edit drafts while keeping the source file separate.\n\nEdit long notes, logs, drafts, and other plain-text documents with autosave after a short pause. Find and replace text in a document, review or restore earlier snapshots, and manage documents in the Library. Import TXT files, export to a path you choose, and split or merge documents when you need a new draft.\n\nText editing works offline on your device. Adjust font size and display settings for comfortable reading, and document switching attempts to save current edits before opening another document.",
+    "landingBody": "VaultXT is a local editor for large text documents. It works with the text content of .txt, .md, .log, .csv, .json, .yaml, .yml, and .arb files, so long drafts, logs, data files, and localization resources can share one editing workspace.\n\nLarge files remain editable in one continuous editor. Find and replace text, let autosave run after a short pause, and review or restore earlier content with snapshots. Split a document into new pieces or merge documents into a new draft when the source material needs reshaping.\n\nKeep documents in named, colored, nested folders and arrange them manually. Imported files are copied into the Library as local working copies, separate from the external originals; when you export, you choose the destination. Editing works offline on your device.\n\nOptional checks are available for JSON, ARB, YAML, and YML, without blocking saves; checks may be skipped for large files. Free includes 2 open documents, 3 Library documents, 5 recent snapshots, splitting into 3 pieces, and merging 2 documents. A one-time Pro purchase expands these limits, with no subscription and no ads.",
     "faq": [
       {
         "question": "Is my data stored locally?",
@@ -24,8 +24,8 @@
     ],
     "screenshots": [
       {
-        "title": "Start a draft and edit immediately",
-        "subtitle": "Open imported text and keep typing in the local editor.",
+        "title": "Edit large text files",
+        "subtitle": "Work with long documents, logs, and configuration files in one editor.",
         "alt": "VaultXT — Text editor screen with a draft open"
       },
       {
@@ -57,13 +57,13 @@
   },
   "ko": {
     "appName": "VaultXT",
-    "subtitle": "TXT 편집기와 자동저장",
-    "promotionalText": "TXT 파일을 가져와 바로 읽고 편집하세요. 변경 사항은 자동저장되고, 스냅샷에서 이전 버전을 확인할 수 있어요.",
-    "shortDescription": "TXT와 일반 텍스트 파일을 기기에서 편집하며 자동저장, 찾기/바꾸기, 스냅샷, 가져오기와 내보내기를 지원합니다.",
-    "keywords": "텍스트,메모,편집기,자동저장,TXT,찾기,바꾸기,스냅샷,라이브러리,문서",
-    "description": "VaultXT는 기기 내부에서 TXT 파일을 읽고 편집하는 텍스트 워크스페이스입니다. 가져온 파일은 라이브러리에 복사되어 외부 원본과 작업본을 분리해 관리할 수 있습니다.\n\n• 텍스트 편집과 자동저장\n• 문서 내 찾기와 바꾸기\n• 스냅샷에서 이전 내용 확인 및 복원\n• 문서 분할/병합으로 새 초안 만들기\n• 글꼴 크기 및 화면 표시 설정\n\n편집과 자동저장 기능은 무료로 사용할 수 있습니다. 무료 워크스페이스는 동시에 열린 문서 2개, 라이브러리 3개, 최근 스냅샷 5개를 지원합니다. Pro는 일회성 구매로 더 많은 문서와 스냅샷을 사용할 수 있습니다. 구독이나 광고는 없습니다.\n\n모든 문서는 기기에 보관되며 클라우드 동기화는 제공되지 않습니다. 형식 검사가 저장 동작을 막지 않습니다. 내보내기는 사용자가 선택한 경로로 진행됩니다.",
+    "subtitle": "대용량 텍스트 편집기",
+    "promotionalText": "긴 문서부터 로그와 설정 파일까지 대용량 텍스트를 로컬에서 편집하세요. 자동저장, 찾기/바꾸기, 스냅샷, 폴더, 분할·병합과 선택형 형식 검사를 지원해요.",
+    "shortDescription": "대용량 텍스트를 로컬에서 편집하고 자동저장, 검색, 스냅샷으로 관리해요.",
+    "keywords": "대용량,텍스트,편집기,TXT,마크다운,로그,CSV,JSON,YAML,ARB,자동저장",
+    "description": "VaultXT는 대용량 텍스트 문서를 읽고 편집하는 로컬 편집기입니다. TXT뿐 아니라 Markdown, 로그, CSV, JSON, YAML, YML, ARB 등 다양한 확장자의 텍스트 내용을 다룰 수 있습니다.\n\n대용량 파일을 하나의 편집 화면에서 다루고, 찾기와 바꾸기를 사용하며, 입력을 잠시 멈추면 자동으로 저장합니다. 스냅샷에서 이전 내용을 확인하거나 복원할 수 있고, 이름·색상·하위 폴더와 수동 순서로 문서를 정리할 수 있습니다. 문서를 나누거나 합쳐 새 초안을 만들 수도 있습니다.\n\nJSON, ARB, YAML, YML 형식 검사를 사용할 수 있습니다. 검사는 저장을 막지 않으며 대용량 파일에서는 건너뛸 수 있습니다. 가져온 파일은 외부 원본과 분리된 로컬 작업본으로 복사되고, 내보낼 때 저장 경로를 선택합니다. 편집은 기기에서 오프라인으로 진행됩니다.\n\n무료 버전은 열린 문서 2개, 문서함 문서 3개, 최근 스냅샷 5개, 최대 3조각 분할과 2개 문서 병합을 지원합니다. Pro는 일회성 구매로 이 한도를 늘리며 구독과 광고가 없습니다.",
     "landingSubtitle": "텍스트 편집기",
-    "landingBody": "VaultXT는 TXT를 비롯한 일반 텍스트 파일을 기기의 로컬 작업 공간에서 읽고 편집하는 앱입니다. 파일을 가져오면 라이브러리에 작업본으로 복사하므로 외부 원본은 그대로 두고 초안을 따로 관리할 수 있습니다.\n\n긴 메모, 로그, 초안 같은 일반 텍스트 문서를 잠시 멈춘 뒤 자동저장하는 흐름으로 편집할 수 있습니다. 문서 안에서 찾기와 바꾸기를 사용하고, 스냅샷에서 이전 상태를 확인하거나 복원할 수 있습니다. TXT를 가져오고 원하는 경로로 내보내며, 새 초안이 필요할 때 문서를 나누거나 합칠 수도 있습니다.\n\n텍스트 편집은 기기에서 오프라인으로 진행됩니다. 라이브러리에서 문서를 정리하고 글꼴 크기와 화면 표시를 조절할 수 있습니다. 다른 문서를 열기 전에는 현재 편집 내용의 저장을 시도합니다.",
+    "landingBody": "VaultXT는 대용량 텍스트 문서를 읽고 편집하는 로컬 편집기입니다. TXT뿐 아니라 Markdown, 로그, CSV, JSON, YAML, YML, ARB 등 다양한 확장자의 텍스트 내용을 한 작업 공간에서 다룰 수 있습니다.\n\n대용량 파일도 하나의 편집 화면에서 이어서 편집할 수 있습니다. 문서 안에서 찾기와 바꾸기를 사용하고, 입력을 잠시 멈추면 자동저장하며, 스냅샷에서 이전 내용을 확인하거나 복원합니다. 원본을 바꾸지 않고 새 초안이 필요할 때는 문서를 나누거나 합칠 수 있습니다.\n\n문서는 이름과 색상을 지정한 하위 폴더에 넣고 수동 순서로 정리할 수 있습니다. 가져온 파일은 외부 원본과 분리된 로컬 작업본으로 문서함에 복사되며, 내보낼 때 원하는 저장 경로를 선택합니다. 편집은 기기에서 오프라인으로 진행됩니다.\n\nJSON, ARB, YAML, YML 형식 검사는 선택해서 사용할 수 있고 저장을 막지 않으며 대용량 파일에서는 건너뛸 수 있습니다. 무료 버전은 열린 문서 2개, 문서함 문서 3개, 최근 스냅샷 5개, 최대 3조각 분할과 2개 문서 병합을 지원합니다. Pro는 일회성 구매로 이 한도를 늘리며 구독과 광고가 없습니다.",
     "faq": [
       {
         "question": "인터넷 없이도 사용할 수 있나요?",
@@ -75,13 +75,13 @@
       },
       {
         "question": "편집하면 원본 파일도 바뀌나요?",
-        "answer": "가져온 파일은 라이브러리에 복사됩니다. 편집 내용은 이 작업 사본에 저장되며, 내보낼 때 저장 위치를 선택합니다."
+        "answer": "가져온 파일은 문서함에 복사됩니다. 편집 내용은 이 작업 사본에 저장되며, 내보낼 때 저장 위치를 선택합니다."
       }
     ],
     "screenshots": [
       {
-        "title": "초안을 열고 바로 편집해요",
-        "subtitle": "가져온 파일을 열고 바로 편집을 시작해요.",
+        "title": "대용량 텍스트도 편집해요",
+        "subtitle": "긴 문서부터 로그와 설정 파일까지 다뤄요.",
         "alt": "VaultXT — 텍스트 초안 편집 화면"
       },
       {
@@ -101,8 +101,8 @@
       },
       {
         "title": "문서를 깔끔하게 정리해요",
-        "subtitle": "가져온 파일의 작업 사본을 라이브러리에서 관리해요.",
-        "alt": "VaultXT — 라이브러리에서 정렬된 문서 목록"
+        "subtitle": "가져온 파일의 작업 사본을 문서함에서 관리해요.",
+        "alt": "VaultXT — 문서함에서 정렬된 문서 목록"
       }
     ],
     "sample": {
@@ -113,13 +113,13 @@
   },
   "ja": {
     "appName": "VaultXT",
-    "subtitle": "自動保存付きテキスト編集",
-    "promotionalText": "TXTファイルを取り込んで、すぐに編集できます。変更は自動保存され、スナップショットで以前の状態を確認できます。",
-    "shortDescription": "TXTとその他のプレーンテキストを端末で編集し、自動保存、検索と置換、スナップショット、読み込みと書き出しを使えます。",
-    "keywords": "テキスト,エディタ,TXT,自動保存,検索,置換,スナップショット,ライブラリ,ファイル",
-    "description": "VaultXTはTXTをローカルで読む・編集できるワークスペースです。取り込んだファイルはライブラリにコピーされ、元ファイルと作業コピーを分けて管理できます。\n\n• テキスト編集と自動保存\n• 文書内の検索と置換\n• スナップショットで履歴確認と復元\n• 分割・統合で新しいドラフト作成\n• 文字サイズと表示設定\n\n編集と自動保存は無料です。無料版は同時に2ドキュメント、ライブラリ3ドキュメント、最新5スナップショットを保持します。Proは一度の購入で上限が広がります。サブスクや広告はありません。\n\nデータはデバイス内に保存され、クラウド同期はありません。形式チェックは保存を妨げません。エクスポートは選択先に従って行われます。",
+    "subtitle": "大容量テキスト編集と自動保存",
+    "promotionalText": "長い文書からログや設定ファイルまで、大容量テキストを端末内で編集。自動保存、検索と置換、スナップショット、フォルダ、分割・結合、任意の形式チェックに対応。",
+    "shortDescription": "大容量テキストを端末内で編集。自動保存、検索、スナップショット、フォルダに対応。",
+    "keywords": "大容量,テキスト,編集,TXT,Markdown,ログ,CSV,JSON,YAML,ARB,自動保存",
+    "description": "VaultXTは、大容量テキスト文書を端末内で読む・編集するローカルエディタで、.txt、.md、.log、.csv、.json、.yaml、.yml、.arbのテキスト内容を扱えます。\n\n大容量ファイルを一つの編集画面で扱い、検索と置換を行い、入力を少し止めると自動保存できます。スナップショットから以前の内容を確認・復元し、名前、色、入れ子にしたフォルダと手動順序で文書を整理できます。文書の分割・結合で新しい下書きも作れます。\n\nJSON、ARB、YAML、YMLの形式チェックを利用できます。チェックは保存を妨げず、大容量ファイルでは省略される場合があります。取り込んだファイルは外部の原本とは別のローカル作業用コピーになり、書き出し先は自分で選べます。編集はオフラインで行えます。\n\n無料版では、開いておける文書は2件、ライブラリ内の文書は3件、最新スナップショットは5件です。最大3分割、2文書の結合にも対応します。Proは一度の購入でこれらの上限を拡張します。サブスクリプションも広告もありません。",
     "landingSubtitle": "テキストエディタ",
-    "landingBody": "VaultXTはTXTファイルとその他のプレーンテキスト文書を端末内のローカルワークスペースで読む・編集するアプリです。取り込んだファイルはライブラリに作業用コピーとして保存されるため、元のファイルを残したまま草稿を編集できます。\n\n長いメモ、ログ、草稿などを、入力を少し止めた後の自動保存で編集できます。文書内の検索と置換、スナップショットの確認と復元、ライブラリでの文書整理に対応しています。TXTの取り込みと選択先への書き出し、必要に応じた文書の分割と結合も行えます。\n\nテキスト編集は端末上でオフラインで行えます。文字サイズと表示設定を調整でき、別の文書を開く前には現在の編集内容の保存を試みます。",
+    "landingBody": "VaultXTは、大容量テキスト文書を端末内で読む・編集するローカルエディタで、.txt、.md、.log、.csv、.json、.yaml、.yml、.arbのテキスト内容を一つの作業環境で扱えます。\n\n大容量ファイルも一つの編集画面で編集できます。文書内の検索と置換、入力を少し止めた後の自動保存、スナップショットからの確認と復元に対応します。元の文書を変えずに新しい下書きが必要なときは、文書を分割・結合できます。\n\n名前と色を付けた入れ子のフォルダに文書をまとめ、手動で順序を整えられます。取り込んだファイルは外部の原本とは別のローカル作業用コピーとしてライブラリに保存され、書き出し先は自分で選べます。編集は端末上でオフラインで行えます。\n\nJSON、ARB、YAML、YMLの形式チェックは任意で利用でき、保存を妨げません。大容量ファイルでは省略される場合があります。無料版は文書2件を開き、ライブラリに3件を保管し、最新スナップショット5件、最大3分割、2文書の結合を利用できます。一度購入するProではこれらの上限が広がり、サブスクリプションも広告もありません。",
     "faq": [
       {
         "question": "オフラインでも使えますか？",
@@ -136,8 +136,8 @@
     ],
     "screenshots": [
       {
-        "title": "草稿を開いてすぐ編集",
-        "subtitle": "取り込んだファイルを開いて、すぐに編集できます。",
+        "title": "大容量テキストを編集",
+        "subtitle": "長い文書からログ、設定ファイルまで一つの画面で扱えます。",
         "alt": "VaultXT — ワークスペースでドラフト編集中の画面"
       },
       {
@@ -169,13 +169,13 @@
   },
   "zh-Hant": {
     "appName": "VaultXT",
-    "subtitle": "支援自動存檔的文字編輯器",
-    "promotionalText": "匯入 TXT 檔後即可閱讀與編輯。變更會自動存檔，可透過快照回看歷史版本。",
-    "shortDescription": "在本機編輯 TXT 與其他純文字文件，使用自動存檔、搜尋取代、快照，以及匯入與輸出工具。",
-    "keywords": "文字,編輯器,TXT,自動存檔,搜尋,取代,快照,文件庫,檔案",
-    "description": "VaultXT 是在本機使用的 TXT 文字工作區。匯入的檔案會先複製到文件庫，讓外部原始檔與工作副本分開管理。\n\n• 文字編輯與自動存檔\n• 全文件搜尋與取代\n• 從快照查看並回復先前內容\n• 文件分割與合併建立新草稿\n• 字型大小與顯示設定\n\n編輯與自動存檔免費提供。免費版可同時開啟2份文件、文件庫3份文件與最新5張快照。Pro 為一次性付費方案，提升可用配額。無訂閱、無廣告。\n\n文件保存在裝置上，不提供雲端同步。格式檢查不會阻斷儲存。輸出將依使用者指定路徑進行。",
+    "subtitle": "大型文字檔案編輯器",
+    "promotionalText": "在本機編輯大型文字檔案，從長篇文件到記錄與設定檔都適用。支援自動儲存、搜尋取代、快照、資料夾、分割合併及選用的格式檢查。",
+    "shortDescription": "在本機編輯大型文字檔案，並以自動儲存、搜尋、快照和資料夾管理。",
+    "keywords": "大篇幅,文字,編輯器,TXT,Markdown,記錄,CSV,JSON,YAML,ARB,自動儲存",
+    "description": "VaultXT 是在裝置內閱讀與編輯大型文字檔案的本機編輯器，可處理 .txt、.md、.log、.csv、.json、.yaml、.yml、.arb 等檔案的文字內容。\n\n在同一個編輯畫面處理大型檔案，搜尋與取代文字，並在暫停輸入後自動儲存。你也可以查看或還原快照，以名稱、顏色、巢狀資料夾及手動排序整理文件，或透過分割與合併建立新草稿。\n\nJSON、ARB、YAML、YML 可使用格式檢查。檢查不會阻擋儲存，處理大型檔案時可能略過。匯入檔案會成為本機工作副本，與外部原始檔分開；匯出時由你選擇儲存位置。編輯可在裝置上離線進行。\n\n免費版可同時開啟2份文件、在文件庫保存3份文件、保留最近5份快照、最多分成3份及合併2份文件。Pro 是一次性購買，可提高這些上限，沒有訂閱或廣告。",
     "landingSubtitle": "文字編輯器",
-    "landingBody": "VaultXT 是在裝置內本機使用的 TXT 與其他純文字文件工作區。匯入的檔案會複製到文件庫作為工作副本，讓你保留外部原始檔，同時編輯自己的草稿。\n\n長篇筆記、記錄、草稿與其他純文字文件都能搭配短暫停頓後的自動存檔進行編輯。你可以在文件內搜尋與取代文字、查看或還原快照、在文件庫整理文件，也能匯入 TXT、輸出到指定路徑，並在需要新草稿時分割或合併文件。\n\n文字編輯可在裝置上離線進行。你可以調整字型大小與顯示設定，開啟其他文件前也會嘗試儲存目前的編輯內容。",
+    "landingBody": "VaultXT 是在裝置內閱讀與編輯大型文字檔案的本機編輯器，可在同一個工作空間處理 .txt、.md、.log、.csv、.json、.yaml、.yml、.arb 等檔案的文字內容。\n\n大型檔案可在同一個編輯畫面持續編輯。你可以搜尋與取代文字，在暫停輸入後自動儲存，並透過快照查看或還原先前內容。需要重整素材時，也能分割文件或合併多份文件來建立新草稿。\n\n文件可放入具名稱、顏色和子資料夾的資料夾，並手動調整順序。匯入檔案會複製為本機工作副本，與外部原始檔分開；匯出時由你選擇儲存位置。編輯可在裝置上離線進行。\n\nJSON、ARB、YAML、YML 提供選用的格式檢查，且不會阻擋儲存；大型檔案可能略過檢查。免費版可開啟2份文件、在文件庫保存3份文件、保留最近5份快照、最多分成3份及合併2份文件。一次性購買Pro可提高這些上限，沒有訂閱或廣告。",
     "faq": [
       {
         "question": "需要網路嗎？",
@@ -192,8 +192,8 @@
     ],
     "screenshots": [
       {
-        "title": "開啟並編輯草稿",
-        "subtitle": "匯入後立即開始閱讀與修改",
+        "title": "編輯大型文字檔案",
+        "subtitle": "長篇文件、記錄與設定檔都能在同一個編輯器處理。",
         "alt": "VaultXT — 顯示草稿編輯的文字編輯介面"
       },
       {
@@ -225,13 +225,13 @@
   },
   "zh-Hans": {
     "appName": "VaultXT",
-    "subtitle": "支持自动保存的文本编辑器",
-    "promotionalText": "导入 TXT 文件后即可阅读和编辑。变更会自动保存，快照可帮助回看历史版本。",
-    "shortDescription": "在本地编辑 TXT 和其他纯文本文件，使用自动保存、查找替换、快照，以及导入和导出工具。",
-    "keywords": "文本,编辑器,TXT,自动保存,查找,替换,快照,文档库,文件",
-    "description": "VaultXT 是一款在本机使用的 TXT 文本工作区。导入文件会先复制到文档库，便于将外部原始文件与工作副本分开管理。\n\n• 文本编辑与自动保存\n• 全文查找与替换\n• 通过快照查看并恢复历史内容\n• 文档分割和合并创建新草稿\n• 字体大小与显示设置\n\n编辑和自动保存功能免费提供。免费工作区可同时打开2个文档、文档库3个文档和最近5条快照。Pro 为一次性付费，可提高可用配额。无订阅，无广告。\n\n文件保存在设备内，不提供云同步。格式检查不会阻止保存。导出时使用用户选择的路径。",
+    "subtitle": "大型文本文件编辑器",
+    "promotionalText": "在本地编辑大型文本文件，从长文档到日志和配置文件都适用。支持自动保存、查找替换、快照、文件夹、分割合并和可选格式检查。",
+    "shortDescription": "在本地编辑大型文本文件，并用自动保存、搜索、快照和文件夹管理。",
+    "keywords": "大篇幅,文本,编辑器,TXT,Markdown,日志,CSV,JSON,YAML,ARB,自动保存",
+    "description": "VaultXT 是一款在设备上阅读和编辑大型文本文件的本地编辑器，可处理 .txt、.md、.log、.csv、.json、.yaml、.yml、.arb 等文件的文本内容。\n\n在同一个编辑界面处理大型文件，查找和替换文本，并在暂停输入后自动保存。你还可以查看或恢复快照，使用名称、颜色、嵌套文件夹和手动排序整理文档，或通过分割和合并创建新草稿。\n\nJSON、ARB、YAML、YML 可使用格式检查。检查不会阻止保存，处理大型文件时可能跳过。导入文件会成为本地工作副本，与外部原始文件分开；导出时由你选择保存位置。编辑可在设备上离线进行。\n\n免费版可同时打开2个文档、在文档库保存3个文档、保留最近5份快照、最多分成3份及合并2个文档。Pro 是一次性购买，可提高这些上限，没有订阅或广告。",
     "landingSubtitle": "文本编辑器",
-    "landingBody": "VaultXT 是在设备上本地使用的 TXT 和其他纯文本文件工作区。导入的文件会复制到文档库作为工作副本，让你保留外部原始文件，同时编辑自己的草稿。\n\n长篇笔记、日志、草稿和其他纯文本文件都可以配合短暂停顿后的自动保存进行编辑。你可以在文档中查找和替换文本，查看或恢复快照，在文档库整理文档，也可以导入 TXT、导出到指定路径，并在需要新草稿时分割或合并文档。\n\n文本编辑可在设备上离线进行。你可以调整字体大小和显示设置，打开其他文档前也会尝试保存当前编辑内容。",
+    "landingBody": "VaultXT 是一款在设备上阅读和编辑大型文本文件的本地编辑器，可在同一个工作空间处理 .txt、.md、.log、.csv、.json、.yaml、.yml、.arb 等文件的文本内容。\n\n大型文件可在同一个编辑界面持续编辑。你可以查找和替换文本，在暂停输入后自动保存，并通过快照查看或恢复以前的内容。需要重组素材时，还可以分割文档或合并多个文档来创建新草稿。\n\n文档可放入带名称、颜色和子文件夹的文件夹，并手动调整顺序。导入文件会复制为本地工作副本，与外部原始文件分开；导出时由你选择保存位置。编辑可在设备上离线进行。\n\nJSON、ARB、YAML、YML 提供可选的格式检查，且不会阻止保存；大型文件可能跳过检查。免费版可打开2个文档、在文档库保存3个文档、保留最近5份快照、最多分成3份及合并2个文档。一次性购买Pro可提高这些上限，没有订阅或广告。",
     "faq": [
       {
         "question": "是否可以离线使用？",
@@ -248,8 +248,8 @@
     ],
     "screenshots": [
       {
-        "title": "打开并编辑草稿",
-        "subtitle": "导入后立即进行阅读与编辑",
+        "title": "编辑大型文本文件",
+        "subtitle": "长文档、日志和配置文件都能在同一个编辑器中处理。",
         "alt": "VaultXT — 显示草稿编辑的文本编辑画面"
       },
       {
@@ -281,13 +281,13 @@
   },
   "pt-BR": {
     "appName": "VaultXT",
-    "subtitle": "Editor de texto TXT",
-    "promotionalText": "Importe arquivos TXT e comece a editar. As alterações são salvas automaticamente, e os instantâneos ajudam a rever versões anteriores.",
-    "shortDescription": "Edite TXT e outros textos simples no dispositivo com salvamento automático, localizar e substituir, instantâneos, importação e exportação.",
-    "keywords": "texto,editor,TXT,salvamento automático,localizar,substituir,instantâneos,biblioteca,arquivos",
-    "description": "VaultXT é uma área de trabalho de texto local para arquivos TXT. Os arquivos importados são copiados para a Biblioteca para separar o original do seu rascunho de trabalho.\n\n• Edição de texto com salvamento automático\n• Localizar e substituir no mesmo documento\n• Conferir e restaurar versões anteriores por instantâneos\n• Dividir e unir documentos para criar novos rascunhos\n• Ajustes de fonte e aparência\n\nEdição e salvamento automático estão disponíveis gratuitamente. A versão gratuita permite 2 documentos abertos, 3 documentos na Biblioteca e os 5 instantâneos mais recentes. Pro é uma compra única para mais capacidade de uso. Não há assinatura nem anúncios.\n\nOs arquivos ficam no dispositivo. Não há sincronização em nuvem. A validação de formato não bloqueia salvar, e a exportação segue o caminho escolhido pelo usuário.",
+    "subtitle": "Editor de arquivos grandes",
+    "promotionalText": "Edite textos grandes no dispositivo, de documentos a logs e configurações. Inclui salvamento automático, busca, instantâneos, pastas, divisão, união e validação opcional.",
+    "shortDescription": "Edite arquivos grandes com salvamento automático, busca e instantâneos.",
+    "keywords": "texto grande,editor,TXT,Markdown,log,CSV,JSON,YAML,ARB,salvar,pastas",
+    "description": "VaultXT é um editor local para documentos de texto grandes. Ele trabalha com o conteúdo de arquivos .txt, .md, .log, .csv, .json, .yaml, .yml e .arb.\n\nEdite arquivos grandes em uma única tela, localize e substitua texto e deixe o salvamento automático agir após uma pausa na digitação. Consulte ou restaure instantâneos, organize documentos em pastas nomeadas, coloridas e aninhadas com ordem manual e crie novos rascunhos ao dividir ou unir documentos.\n\nHá validação de formato para JSON, ARB, YAML e YML. Ela não bloqueia o salvamento e pode ser ignorada em arquivos grandes. Arquivos importados viram cópias de trabalho locais, separadas dos originais externos; na exportação, você escolhe o destino. A edição funciona offline no dispositivo.\n\nA versão gratuita permite 2 documentos abertos, 3 na Biblioteca, os 5 instantâneos mais recentes, divisão em até 3 partes e união de 2 documentos. Pro é uma compra única que amplia esses limites, sem assinatura nem anúncios.",
     "landingSubtitle": "Editor de texto",
-    "landingBody": "VaultXT é uma área de trabalho de texto local para arquivos TXT e outros documentos de texto simples. Os arquivos importados são copiados para a Biblioteca como documentos de trabalho, para que você mantenha o original externo separado enquanto edita seus rascunhos.\n\nEdite notas longas, logs, rascunhos e outros documentos de texto simples com salvamento automático após uma breve pausa. Use localizar e substituir no documento, consulte ou restaure instantâneos, organize documentos na Biblioteca, importe TXT, exporte para o caminho escolhido e divida ou una documentos quando precisar criar um novo rascunho.\n\nA edição de texto funciona offline no dispositivo. Ajuste o tamanho da fonte e a aparência para ler com conforto, e a troca de documentos tenta salvar as edições atuais antes de abrir outro documento.",
+    "landingBody": "VaultXT é um editor local para documentos de texto grandes. O conteúdo de arquivos .txt, .md, .log, .csv, .json, .yaml, .yml e .arb pode ser trabalhado no mesmo espaço, de rascunhos longos a logs e arquivos de configuração.\n\nArquivos grandes continuam editáveis em uma única tela. Localize e substitua texto, use o salvamento automático após uma breve pausa e consulte ou restaure conteúdo anterior com instantâneos. Para reorganizar o material sem alterar a origem, divida um documento ou una vários em um novo rascunho.\n\nAgrupe documentos em pastas nomeadas, coloridas e aninhadas e ajuste a ordem manualmente. Arquivos importados são copiados para a Biblioteca como versões de trabalho locais, separadas dos originais externos; ao exportar, você escolhe o destino. A edição funciona offline no dispositivo.\n\nJSON, ARB, YAML e YML têm validação opcional, que não bloqueia o salvamento e pode ser ignorada em arquivos grandes. A versão gratuita oferece 2 documentos abertos, 3 na Biblioteca, 5 instantâneos recentes, divisão em 3 partes e união de 2 documentos. Uma compra única do Pro amplia esses limites, sem assinatura nem anúncios.",
     "faq": [
       {
         "question": "Precisa de internet?",
@@ -304,8 +304,8 @@
     ],
     "screenshots": [
       {
-        "title": "Abra o rascunho e comece a editar",
-        "subtitle": "Abra o arquivo importado e continue escrevendo.",
+        "title": "Edite arquivos grandes",
+        "subtitle": "Trabalhe com documentos longos, logs e configurações em uma única tela.",
         "alt": "VaultXT — Tela do editor com um rascunho aberto"
       },
       {
@@ -337,13 +337,13 @@
   },
   "de": {
     "appName": "VaultXT",
-    "subtitle": "Texteditor für TXT-Dateien",
-    "promotionalText": "Importieren Sie TXT-Dateien und arbeiten direkt weiter. Änderungen werden automatisch gespeichert, frühere Versionen finden Sie in Snapshots wieder.",
-    "shortDescription": "TXT-Dateien und andere reine Textdokumente lokal bearbeiten mit automatischem Speichern, Suchen und Ersetzen, Snapshots sowie Import und Export.",
-    "keywords": "text,editor,TXT,automatisches Speichern,suchen,ersetzen,Snapshots,bibliothek,dateien",
-    "description": "VaultXT ist ein lokaler Text-Workspace für TXT-Dateien. Importierte Dateien werden in die Bibliothek kopiert, sodass Originaldateien und Arbeitsversionen getrennt bleiben.\n\n• Textbearbeitung mit automatischem Speichern\n• Suchen und Ersetzen im Dokument\n• Vorherige Zustände aus Snapshots prüfen und wiederherstellen\n• Dokumente aufteilen und zusammenführen\n• Schriftgröße und Anzeigeeinstellungen\n\nBearbeitung und automatisches Speichern sind kostenlos nutzbar. Die kostenlose Nutzung erlaubt 2 geöffnete Dokumente, 3 Bibliotheksdokumente und die letzten 5 Snapshots. Pro ist ein einmaliger Kauf für mehr Kapazität. Keine Abonnements, keine Werbung.\n\nDaten bleiben auf dem Gerät. Cloud-Synchronisierung ist nicht enthalten. Die Formatprüfung blockiert kein Speichern. Exporte erfolgen zum vom Nutzer gewählten Ziel.",
+    "subtitle": "Editor für große Texte",
+    "promotionalText": "Große Texte lokal bearbeiten. Mit automatischem Speichern, Suche, Snapshots, Ordnern, Aufteilen, Zusammenführen und optionalen Formatchecks für Dokumente und Logs.",
+    "shortDescription": "Große Texte lokal bearbeiten: automatisch speichern, suchen und organisieren.",
+    "keywords": "große Texte,Editor,TXT,Markdown,Log,CSV,JSON,YAML,ARB,Speichern,Ordner",
+    "description": "VaultXT ist ein lokaler Editor für große Textdokumente. Er verarbeitet Textinhalte aus .txt-, .md-, .log-, .csv-, .json-, .yaml-, .yml- und .arb-Dateien.\n\nBearbeiten Sie große Dateien in einer durchgehenden Editoransicht, suchen und ersetzen Sie Text und lassen Sie Änderungen nach einer Eingabepause automatisch speichern. Prüfen oder restaurieren Sie Snapshots, ordnen Sie Dokumente in benannten, farbigen und verschachtelten Ordnern mit manueller Reihenfolge und erstellen Sie durch Aufteilen oder Zusammenführen von Dokumenten neue Entwürfe.\n\nFür JSON, ARB, YAML und YML stehen Formatprüfungen bereit. Sie blockieren das Speichern nicht und können bei großen Dateien übersprungen werden. Importierte Dateien werden lokale Arbeitskopien, getrennt von den externen Originalen; beim Export wählen Sie das Ziel. Die Bearbeitung funktioniert offline auf dem Gerät.\n\nKostenlos enthalten sind 2 geöffnete Dokumente, 3 Dokumente in der Bibliothek, die 5 neuesten Snapshots, die Aufteilung in bis zu 3 Teile und das Zusammenführen von 2 Dokumenten. Der einmalige Pro-Kauf erweitert diese Grenzen, ohne Abo und ohne Werbung.",
     "landingSubtitle": "Texteditor",
-    "landingBody": "VaultXT ist ein lokaler Text-Workspace für TXT-Dateien und andere reine Textdokumente. Importierte Dateien werden als Arbeitsdokumente in die Bibliothek kopiert. So bleiben Originaldatei und bearbeiteter Entwurf getrennt.\n\nBearbeiten Sie lange Notizen, Logs, Entwürfe und andere reine Textdokumente mit automatischem Speichern nach einer kurzen Pause. Suchen und Ersetzen Sie Text im Dokument, prüfen oder stellen Sie Snapshots wieder her und ordnen Sie Dokumente in der Bibliothek. Importieren Sie TXT-Dateien, exportieren Sie sie an ein Ziel Ihrer Wahl und teilen Sie Dokumente auf oder führen Sie sie zusammen, wenn Sie einen neuen Entwurf brauchen.\n\nDie Textbearbeitung funktioniert offline auf Ihrem Gerät. Passen Sie Schriftgröße und Anzeige an, und beim Dokumentwechsel wird versucht, aktuelle Änderungen vor dem Öffnen eines anderen Dokuments zu speichern.",
+    "landingBody": "VaultXT ist ein lokaler Editor für große Textdokumente. Textinhalte aus .txt-, .md-, .log-, .csv-, .json-, .yaml-, .yml- und .arb-Dateien lassen sich in einem Arbeitsbereich bearbeiten, von langen Entwürfen bis zu Logs und Konfigurationen.\n\nGroße Dateien bleiben in einer durchgehenden Editoransicht bearbeitbar. Suchen und ersetzen Sie Text, nutzen Sie das automatische Speichern nach einer kurzen Pause und prüfen oder restaurieren Sie frühere Inhalte aus Snapshots. Dokumente lassen sich in neue Teile aufteilen oder zu einem neuen Entwurf zusammenführen.\n\nOrdnen Sie Dokumente in benannten, farbigen und verschachtelten Ordnern und legen Sie die Reihenfolge manuell fest. Importierte Dateien werden als lokale Arbeitskopien in die Bibliothek kopiert und bleiben von externen Originalen getrennt; beim Export wählen Sie das Ziel. Die Bearbeitung funktioniert offline.\n\nOptionale Formatprüfungen für JSON, ARB, YAML und YML blockieren das Speichern nicht und können bei großen Dateien übersprungen werden. Kostenlos sind 2 geöffnete und 3 gespeicherte Dokumente, 5 aktuelle Snapshots, 3 Teile pro Aufteilung und das Zusammenführen von 2 Dokumenten enthalten. Der einmalige Pro-Kauf erweitert diese Grenzen, ohne Abo und Werbung.",
     "faq": [
       {
         "question": "Funktioniert die App offline?",
@@ -360,8 +360,8 @@
     ],
     "screenshots": [
       {
-        "title": "Entwurf öffnen und bearbeiten",
-        "subtitle": "Importierte Texte öffnen und direkt bearbeiten",
+        "title": "Große Texte bearbeiten",
+        "subtitle": "Lange Dokumente, Logs und Konfigurationen in einem Editor bearbeiten.",
         "alt": "VaultXT — Screenshot eines geöffneten TXT-Editors"
       },
       {
@@ -393,13 +393,13 @@
   },
   "fr": {
     "appName": "VaultXT",
-    "subtitle": "Éditeur de fichiers TXT",
-    "promotionalText": "Importez des fichiers TXT et éditez-les immédiatement. Les changements sont automatiquement sauvegardés, et les instantanés gardent un historique visible.",
-    "shortDescription": "Éditez localement vos fichiers TXT et autres documents en texte brut avec enregistrement automatique, recherche, remplacement, instantanés, import et export.",
-    "keywords": "texte,éditeur,TXT,enregistrement automatique,recherche,remplacer,instantanés,bibliothèque,fichiers",
-    "description": "VaultXT est un espace de travail texte local pour vos fichiers TXT. Les fichiers importés sont copiés dans la Bibliothèque pour séparer l’original externe du document de travail.\n\n• Édition avec enregistrement automatique\n• Recherche et remplacement\n• Revue et restauration via instantanés\n• Division et fusion de documents\n• Taille de police et réglages d’affichage\n\nL’édition et l’enregistrement automatique sont inclus gratuitement. La version gratuite autorise 2 documents ouverts, 3 documents en Bibliothèque et 5 derniers instantanés. Pro est un achat unique pour une capacité élargie. Pas d’abonnement, pas de publicité.\n\nLes fichiers restent sur votre appareil. Aucune synchronisation cloud n’est proposée. Les vérifications de format n’arrêtent pas la sauvegarde. L’export se fait au dossier choisi par l’utilisateur.",
+    "subtitle": "Éditeur de gros fichiers texte",
+    "promotionalText": "Modifiez de grands textes : documents, journaux et configurations. Avec enregistrement auto, recherche, instantanés, dossiers, division, fusion et vérification.",
+    "shortDescription": "Modifiez de gros fichiers texte avec enregistrement automatique et recherche.",
+    "keywords": "grand texte,éditeur,TXT,Markdown,journal,CSV,JSON,YAML,ARB,sauvegarde,dossiers",
+    "description": "VaultXT est un éditeur local pour les documents texte volumineux. Il traite le contenu des fichiers .txt, .md, .log, .csv, .json, .yaml, .yml et .arb.\n\nModifiez de grands fichiers dans un éditeur continu, recherchez et remplacez du texte, puis laissez l’enregistrement automatique agir après une pause de saisie. Consultez ou restaurez des instantanés, rangez les documents dans des dossiers nommés, colorés et imbriqués avec un ordre manuel, et créez de nouveaux brouillons en divisant ou fusionnant des documents.\n\nDes vérifications de format sont proposées pour JSON, ARB, YAML et YML. Elles ne bloquent pas l’enregistrement et peuvent être ignorées pour les grands fichiers. Les fichiers importés deviennent des copies de travail locales, séparées des originaux externes ; vous choisissez la destination à l’export. L’édition fonctionne hors ligne.\n\nLa version gratuite comprend 2 documents ouverts, 3 documents dans la Bibliothèque, les 5 derniers instantanés, jusqu’à 3 parties par division et la fusion de 2 documents. L’achat unique de Pro augmente ces limites, sans abonnement ni publicité.",
     "landingSubtitle": "Éditeur de texte",
-    "landingBody": "VaultXT est un espace de travail texte local pour vos fichiers TXT et autres documents en texte brut. Les fichiers importés sont copiés dans la Bibliothèque comme documents de travail : l’original externe reste séparé de votre brouillon.\n\nModifiez de longues notes, des journaux, des brouillons et d’autres documents en texte brut avec enregistrement automatique après une courte pause. Recherchez et remplacez du texte dans le document, consultez ou restaurez des instantanés, organisez vos documents dans la Bibliothèque, importez des TXT, exportez-les vers l’emplacement choisi et divisez ou fusionnez des documents pour créer un nouveau brouillon.\n\nLa modification de texte fonctionne hors connexion sur votre appareil. Réglez la taille du texte et l’affichage pour lire confortablement, et le changement de document essaie d’enregistrer les modifications en cours avant d’en ouvrir un autre.",
+    "landingBody": "VaultXT est un éditeur local pour les documents texte volumineux. Le contenu des fichiers .txt, .md, .log, .csv, .json, .yaml, .yml et .arb se travaille dans le même espace, des longs brouillons aux journaux et fichiers de configuration.\n\nLes grands fichiers restent modifiables dans un éditeur continu. Recherchez et remplacez du texte, profitez de l’enregistrement automatique après une courte pause, puis consultez ou restaurez d’anciens contenus grâce aux instantanés. Divisez un document ou fusionnez-en plusieurs pour produire un nouveau brouillon.\n\nClassez les documents dans des dossiers nommés, colorés et imbriqués, avec un ordre manuel. Les fichiers importés deviennent des copies de travail locales dans la Bibliothèque, séparées des originaux externes ; vous choisissez la destination à l’export. L’édition fonctionne hors ligne.\n\nLes vérifications facultatives de JSON, ARB, YAML et YML ne bloquent pas l’enregistrement et peuvent être ignorées pour les grands fichiers. La version gratuite offre 2 documents ouverts, 3 en Bibliothèque, 5 instantanés récents, 3 parties par division et la fusion de 2 documents. L’achat unique de Pro augmente ces limites, sans abonnement ni publicité.",
     "faq": [
       {
         "question": "L’app fonctionne-t-elle hors ligne ?",
@@ -416,8 +416,8 @@
     ],
     "screenshots": [
       {
-        "title": "Lire et écrire un brouillon",
-        "subtitle": "Ouvrez le texte importé et poursuivez la rédaction.",
+        "title": "Modifiez de gros fichiers texte",
+        "subtitle": "Travaillez sur de longs documents, journaux et configurations dans un éditeur.",
         "alt": "VaultXT — Éditeur texte avec un brouillon ouvert"
       },
       {
@@ -449,13 +449,13 @@
   },
   "es": {
     "appName": "VaultXT",
-    "subtitle": "Editor de archivos TXT",
-    "promotionalText": "Importa archivos TXT y empieza a editar. Los cambios se guardan automáticamente, y las capturas te ayudan a revisar versiones anteriores.",
-    "shortDescription": "Edita archivos TXT y otros documentos de texto sin formato en el dispositivo con guardado automático, buscar y reemplazar, versiones guardadas, importación y exportación.",
-    "keywords": "texto,editor,TXT,guardado automático,buscar,reemplazar,capturas,biblioteca,archivos",
-    "description": "VaultXT es un espacio de trabajo de texto local para archivos TXT. Los archivos importados se copian a la Biblioteca para mantener separados el original y el trabajo en curso.\n\n• Edición con guardado automático\n• Buscar y reemplazar en el documento\n• Revisar y restaurar estados anteriores desde capturas\n• Dividir y fusionar documentos para crear nuevos borradores\n• Tamaño de letra y ajustes de vista\n\nLa edición y el guardado automático están disponibles gratis. La versión gratuita permite 2 documentos abiertos, 3 en la Biblioteca y las últimas 5 capturas. Pro es una compra única para más capacidad. Sin suscripción ni anuncios.\n\nLos archivos permanecen en el dispositivo. No se ofrece sincronización en la nube. Las validaciones de formato no bloquean el guardado. La exportación usa la ruta que elijas.",
+    "subtitle": "Editor de archivos grandes",
+    "promotionalText": "Edita textos grandes: documentos, registros y configuraciones. Incluye guardado automático, búsqueda, versiones, carpetas, división, fusión y validación.",
+    "shortDescription": "Edita archivos grandes con guardado automático, búsqueda y versiones.",
+    "keywords": "texto grande,editor,TXT,Markdown,registro,CSV,JSON,YAML,ARB,guardado,carpetas",
+    "description": "VaultXT es un editor local para documentos de texto grandes. Trabaja con el contenido de archivos .txt, .md, .log, .csv, .json, .yaml, .yml y .arb.\n\nEdita archivos grandes en una sola vista continua, busca y reemplaza texto y deja que el guardado automático actúe tras una pausa al escribir. Revisa o restaura versiones, organiza documentos en carpetas con nombre, color, subcarpetas y orden manual, y crea nuevos borradores al dividir o fusionar documentos.\n\nHay validación de formato para JSON, ARB, YAML y YML. No bloquea el guardado y puede omitirse en archivos grandes. Los archivos importados se convierten en copias de trabajo locales, separadas de los originales externos; al exportar, eliges el destino. La edición funciona sin conexión.\n\nLa versión gratuita permite 2 documentos abiertos, 3 en la Biblioteca, las 5 versiones más recientes, división en hasta 3 partes y fusión de 2 documentos. Pro es una compra única que amplía estos límites, sin suscripción ni anuncios.",
     "landingSubtitle": "Editor de texto",
-    "landingBody": "VaultXT es un espacio de trabajo de texto local para archivos TXT y otros documentos de texto sin formato. Los archivos importados se copian a la Biblioteca como documentos de trabajo, para que conserves separado el original externo mientras editas tus borradores.\n\nEdita notas largas, registros, borradores y otros documentos de texto sin formato con guardado automático tras una breve pausa. Busca y reemplaza texto en el documento, revisa o restaura versiones guardadas, organiza documentos en la Biblioteca, importa TXT, exporta a la ruta que elijas y divide o fusiona documentos cuando necesites crear un borrador nuevo.\n\nLa edición de texto funciona sin conexión en tu dispositivo. Ajusta el tamaño de letra y la vista para leer cómodamente, y el cambio de documento intenta guardar las ediciones actuales antes de abrir otro documento.",
+    "landingBody": "VaultXT es un editor local para documentos de texto grandes. El contenido de archivos .txt, .md, .log, .csv, .json, .yaml, .yml y .arb se trabaja en el mismo espacio, desde borradores largos hasta registros y archivos de configuración.\n\nLos archivos grandes siguen siendo editables en una sola vista continua. Busca y reemplaza texto, usa el guardado automático tras una breve pausa y revisa o restaura contenido anterior mediante versiones. Divide un documento o fusiona varios para crear un borrador nuevo.\n\nAgrupa documentos en carpetas con nombre, color y subcarpetas, y ordénalos manualmente. Los archivos importados se copian a la Biblioteca como versiones de trabajo locales, separadas de los originales externos; al exportar, eliges el destino. La edición funciona sin conexión.\n\nLas validaciones opcionales de JSON, ARB, YAML y YML no bloquean el guardado y pueden omitirse en archivos grandes. La versión gratuita ofrece 2 documentos abiertos, 3 en la Biblioteca, 5 versiones recientes, 3 partes por división y la fusión de 2 documentos. La compra única de Pro amplía estos límites, sin suscripción ni anuncios.",
     "faq": [
       {
         "question": "¿Funciona sin conexión?",
@@ -472,8 +472,8 @@
     ],
     "screenshots": [
       {
-        "title": "Abrir y editar un borrador",
-        "subtitle": "Importa el archivo y sigue editando",
+        "title": "Edita archivos de gran tamaño",
+        "subtitle": "Trabaja con documentos largos, registros y configuraciones en un editor.",
         "alt": "VaultXT — Pantalla del editor de texto con un borrador abierto"
       },
       {
