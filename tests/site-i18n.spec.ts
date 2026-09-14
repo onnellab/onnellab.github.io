@@ -396,7 +396,7 @@ test.describe('nine-language site core regression', () => {
       },
       {
         path: '/apps/vaultxt/ja/',
-        sentence: 'TXTをデバイス内で開き、自動保存しながら編集できます。'
+        sentence: 'VaultXTはTXTファイルとその他のプレーンテキスト文書を端末内のローカルワークスペースで読む・編集するアプリです。'
       }
     ];
 
@@ -416,7 +416,7 @@ test.describe('nine-language site core regression', () => {
         quivra: 'メディア変換ツール',
         segra: '音声カット・結合ツール',
         tagweaver: 'オフラインMP3/FLACタグエディター',
-        vaultxt: 'TXT下書きを自動保存しながら編集します。'
+        vaultxt: 'テキストエディタ'
       },
       'zh-hans': {
         aligna: '批量文件重命名工具',
@@ -425,7 +425,7 @@ test.describe('nine-language site core regression', () => {
         quivra: '媒体转换器',
         segra: '音频剪切与合并工具',
         tagweaver: '离线 MP3/FLAC 标签编辑器',
-        vaultxt: '快速打开 TXT 草稿，自动保存保持编辑连贯性。'
+        vaultxt: '文本编辑器'
       },
       'zh-hant': {
         aligna: '批次檔案重新命名工具',
@@ -434,7 +434,7 @@ test.describe('nine-language site core regression', () => {
         quivra: '媒體轉換工具',
         segra: '音訊剪輯與合併工具',
         tagweaver: '離線 MP3/FLAC 標籤編輯器',
-        vaultxt: '快速開啟 TXT 草稿，以自動存檔維持編輯節奏。'
+        vaultxt: '文字編輯器'
       }
     } as const;
     const htmlLang = { ja: 'ja', 'zh-hans': 'zh-Hans', 'zh-hant': 'zh-Hant' } as const;

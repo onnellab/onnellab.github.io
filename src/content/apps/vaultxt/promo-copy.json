@@ -3,11 +3,11 @@
     "appName": "VaultXT",
     "subtitle": "TXT text editor with autosave",
     "promotionalText": "Import TXT files, edit in a local workspace, and keep moving with autosave. Use snapshots to review and restore earlier versions.",
-    "shortDescription": "Edit text with autosave, find/replace, snapshots, and local settings.",
+    "shortDescription": "Edit TXT and other plain-text files locally with autosave, find and replace, snapshots, imports, exports, and document tools.",
     "keywords": "text,txt,editor,notes,autosave,find and replace,snapshots,library,files",
     "description": "VaultXT is a local text workspace for TXT files. Imported files are copied into the Library, so you can separate your working copy from your original source.\n\n• Edit text with autosave\n• Use find and replace on one document\n• Keep older states in snapshots and revisit them\n• Split and merge documents when you need a new draft\n• Tune font size and display settings\n\nEditing and autosave are available for free. The free workspace keeps 2 open documents, 3 Library documents, and the 5 latest snapshots. Pro is a one-time purchase for a larger workspace. There are no subscriptions or ads.\n\nDocuments stay on your device. No cloud sync is provided. Format checks do not block saving, and exports go to your selected path.",
-    "landingSubtitle": "Edit TXT drafts locally, with autosave and organized snapshots.",
-    "landingBody": "Open TXT files in a local workspace, edit with autosave, and use find and replace. Review or restore snapshots, keep drafts in the Library, and work offline on your device.",
+    "landingSubtitle": "Text editor",
+    "landingBody": "Open TXT files and other plain-text documents in a local workspace while keeping the original source untouched. VaultXT copies imported files into the Library as working documents, so you can edit drafts while keeping the source file separate.\n\nEdit long notes, logs, drafts, and other plain-text documents with autosave after a short pause. Find and replace text in a document, review or restore earlier snapshots, and manage documents in the Library. Import TXT files, export to a path you choose, and split or merge documents when you need a new draft.\n\nText editing works offline on your device. Adjust font size and display settings for comfortable reading, and document switching attempts to save current edits before opening another document.",
     "faq": [
       {
         "question": "Is my data stored locally?",
@@ -59,11 +59,11 @@
     "appName": "VaultXT",
     "subtitle": "TXT 편집기와 자동저장",
     "promotionalText": "TXT 파일을 가져와 바로 읽고 편집하세요. 변경 사항은 자동저장되고, 스냅샷에서 이전 버전을 확인할 수 있어요.",
-    "shortDescription": "텍스트 파일 편집, 자동저장, 찾기/바꾸기, 스냅샷을 한 곳에서 사용하세요.",
+    "shortDescription": "TXT와 일반 텍스트 파일을 기기에서 편집하며 자동저장, 찾기/바꾸기, 스냅샷, 가져오기와 내보내기를 지원합니다.",
     "keywords": "텍스트,메모,편집기,자동저장,TXT,찾기,바꾸기,스냅샷,라이브러리,문서",
     "description": "VaultXT는 기기 내부에서 TXT 파일을 읽고 편집하는 텍스트 워크스페이스입니다. 가져온 파일은 라이브러리에 복사되어 외부 원본과 작업본을 분리해 관리할 수 있습니다.\n\n• 텍스트 편집과 자동저장\n• 문서 내 찾기와 바꾸기\n• 스냅샷에서 이전 내용 확인 및 복원\n• 문서 분할/병합으로 새 초안 만들기\n• 글꼴 크기 및 화면 표시 설정\n\n편집과 자동저장 기능은 무료로 사용할 수 있습니다. 무료 워크스페이스는 동시에 열린 문서 2개, 라이브러리 3개, 최근 스냅샷 5개를 지원합니다. Pro는 일회성 구매로 더 많은 문서와 스냅샷을 사용할 수 있습니다. 구독이나 광고는 없습니다.\n\n모든 문서는 기기에 보관되며 클라우드 동기화는 제공되지 않습니다. 형식 검사가 저장 동작을 막지 않습니다. 내보내기는 사용자가 선택한 경로로 진행됩니다.",
-    "landingSubtitle": "TXT 초안을 빠르게 열고, 자동저장과 스냅샷으로 정리하세요.",
-    "landingBody": "TXT 파일을 기기 안에서 열고 자동저장으로 편집하세요. 찾기/바꾸기로 문구를 정리하고, 스냅샷을 확인하거나 복원하며 문서함에서 초안을 관리할 수 있습니다.",
+    "landingSubtitle": "텍스트 편집기",
+    "landingBody": "VaultXT는 TXT를 비롯한 일반 텍스트 파일을 기기의 로컬 작업 공간에서 읽고 편집하는 앱입니다. 파일을 가져오면 라이브러리에 작업본으로 복사하므로 외부 원본은 그대로 두고 초안을 따로 관리할 수 있습니다.\n\n긴 메모, 로그, 초안 같은 일반 텍스트 문서를 잠시 멈춘 뒤 자동저장하는 흐름으로 편집할 수 있습니다. 문서 안에서 찾기와 바꾸기를 사용하고, 스냅샷에서 이전 상태를 확인하거나 복원할 수 있습니다. TXT를 가져오고 원하는 경로로 내보내며, 새 초안이 필요할 때 문서를 나누거나 합칠 수도 있습니다.\n\n텍스트 편집은 기기에서 오프라인으로 진행됩니다. 라이브러리에서 문서를 정리하고 글꼴 크기와 화면 표시를 조절할 수 있습니다. 다른 문서를 열기 전에는 현재 편집 내용의 저장을 시도합니다.",
     "faq": [
       {
         "question": "인터넷 없이도 사용할 수 있나요?",
@@ -80,28 +80,28 @@
     ],
     "screenshots": [
       {
-        "title": "초안 읽기와 편집",
-        "subtitle": "가져온 파일을 열고 바로 편집을 시작합니다",
+        "title": "초안을 열고 바로 편집해요",
+        "subtitle": "가져온 파일을 열고 바로 편집을 시작해요.",
         "alt": "VaultXT — 텍스트 초안 편집 화면"
       },
       {
-        "title": "작업 중 자동 저장",
-        "subtitle": "입력을 잠시 멈추면 변경 사항을 자동 저장해요",
+        "title": "작업 중에도 자동 저장해요",
+        "subtitle": "입력을 잠시 멈추면 변경 사항을 자동 저장해요.",
         "alt": "VaultXT — 편집 화면의 자동저장 상태 표시"
       },
       {
-        "title": "반복 문구 정리",
-        "subtitle": "문서 전체에서 원하는 단어를 찾아 바꿉니다",
+        "title": "텍스트를 찾아 바꿔요",
+        "subtitle": "문서 전체에서 원하는 단어를 찾아 바꿔요.",
         "alt": "VaultXT — 찾기와 바꾸기 결과가 강조된 편집 화면"
       },
       {
-        "title": "이전 버전 확인",
-        "subtitle": "이전 초안을 확인하고 필요한 상태로 돌아갑니다",
+        "title": "스냅샷으로 이전 내용을 복원해요",
+        "subtitle": "이전 초안을 확인하고 필요한 상태로 복원해요.",
         "alt": "VaultXT — 스냅샷 목록에서 이전 버전 선택 화면"
       },
       {
-        "title": "문서 정돈",
-        "subtitle": "가져온 파일과 편집본을 라이브러리에서 관리합니다",
+        "title": "문서를 깔끔하게 정리해요",
+        "subtitle": "가져온 파일의 작업 사본을 라이브러리에서 관리해요.",
         "alt": "VaultXT — 라이브러리에서 정렬된 문서 목록"
       }
     ],
@@ -115,11 +115,11 @@
     "appName": "VaultXT",
     "subtitle": "自動保存付きテキスト編集",
     "promotionalText": "TXTファイルを取り込んで、すぐに編集できます。変更は自動保存され、スナップショットで以前の状態を確認できます。",
-    "shortDescription": "TXTを読み書きし、検索/置換やスナップショットを一画面で管理。",
+    "shortDescription": "TXTとその他のプレーンテキストを端末で編集し、自動保存、検索と置換、スナップショット、読み込みと書き出しを使えます。",
     "keywords": "テキスト,エディタ,TXT,自動保存,検索,置換,スナップショット,ライブラリ,ファイル",
     "description": "VaultXTはTXTをローカルで読む・編集できるワークスペースです。取り込んだファイルはライブラリにコピーされ、元ファイルと作業コピーを分けて管理できます。\n\n• テキスト編集と自動保存\n• 文書内の検索と置換\n• スナップショットで履歴確認と復元\n• 分割・統合で新しいドラフト作成\n• 文字サイズと表示設定\n\n編集と自動保存は無料です。無料版は同時に2ドキュメント、ライブラリ3ドキュメント、最新5スナップショットを保持します。Proは一度の購入で上限が広がります。サブスクや広告はありません。\n\nデータはデバイス内に保存され、クラウド同期はありません。形式チェックは保存を妨げません。エクスポートは選択先に従って行われます。",
-    "landingSubtitle": "TXT下書きを自動保存しながら編集します。",
-    "landingBody": "TXTをデバイス内で開き、自動保存しながら編集できます。検索と置換で文言を整え、スナップショットを確認・復元し、ライブラリで草稿を管理します。",
+    "landingSubtitle": "テキストエディタ",
+    "landingBody": "VaultXTはTXTファイルとその他のプレーンテキスト文書を端末内のローカルワークスペースで読む・編集するアプリです。取り込んだファイルはライブラリに作業用コピーとして保存されるため、元のファイルを残したまま草稿を編集できます。\n\n長いメモ、ログ、草稿などを、入力を少し止めた後の自動保存で編集できます。文書内の検索と置換、スナップショットの確認と復元、ライブラリでの文書整理に対応しています。TXTの取り込みと選択先への書き出し、必要に応じた文書の分割と結合も行えます。\n\nテキスト編集は端末上でオフラインで行えます。文字サイズと表示設定を調整でき、別の文書を開く前には現在の編集内容の保存を試みます。",
     "faq": [
       {
         "question": "オフラインでも使えますか？",
@@ -136,13 +136,13 @@
     ],
     "screenshots": [
       {
-        "title": "テキストと草稿を読む",
-        "subtitle": "取り込んだファイルをすぐ編集できます",
+        "title": "草稿を開いてすぐ編集",
+        "subtitle": "取り込んだファイルを開いて、すぐに編集できます。",
         "alt": "VaultXT — ワークスペースでドラフト編集中の画面"
       },
       {
-        "title": "変更内容を自動保存",
-        "subtitle": "入力を止めると変更を自動保存します",
+        "title": "入力を止めると自動保存",
+        "subtitle": "入力を止めると変更を自動保存します。",
         "alt": "VaultXT — 編集中の自動保存ステータス"
       },
       {
@@ -152,7 +152,7 @@
       },
       {
         "title": "以前の版を確認",
-        "subtitle": "スナップショットから以前の内容を確認・復元",
+        "subtitle": "スナップショットから以前の内容を確認・復元します。",
         "alt": "VaultXT — スナップショットの一覧画面"
       },
       {
@@ -171,11 +171,11 @@
     "appName": "VaultXT",
     "subtitle": "支援自動存檔的文字編輯器",
     "promotionalText": "匯入 TXT 檔後即可閱讀與編輯。變更會自動存檔，可透過快照回看歷史版本。",
-    "shortDescription": "在本機編輯 TXT，並提供搜尋取代及快照管理。",
+    "shortDescription": "在本機編輯 TXT 與其他純文字文件，使用自動存檔、搜尋取代、快照，以及匯入與輸出工具。",
     "keywords": "文字,編輯器,TXT,自動存檔,搜尋,取代,快照,文件庫,檔案",
     "description": "VaultXT 是在本機使用的 TXT 文字工作區。匯入的檔案會先複製到文件庫，讓外部原始檔與工作副本分開管理。\n\n• 文字編輯與自動存檔\n• 全文件搜尋與取代\n• 從快照查看並回復先前內容\n• 文件分割與合併建立新草稿\n• 字型大小與顯示設定\n\n編輯與自動存檔免費提供。免費版可同時開啟2份文件、文件庫3份文件與最新5張快照。Pro 為一次性付費方案，提升可用配額。無訂閱、無廣告。\n\n文件保存在裝置上，不提供雲端同步。格式檢查不會阻斷儲存。輸出將依使用者指定路徑進行。",
-    "landingSubtitle": "快速開啟 TXT 草稿，以自動存檔維持編輯節奏。",
-    "landingBody": "在裝置內開啟 TXT 並自動存檔編輯。用搜尋取代整理文字，查看或還原快照，再於文件庫管理草稿。",
+    "landingSubtitle": "文字編輯器",
+    "landingBody": "VaultXT 是在裝置內本機使用的 TXT 與其他純文字文件工作區。匯入的檔案會複製到文件庫作為工作副本，讓你保留外部原始檔，同時編輯自己的草稿。\n\n長篇筆記、記錄、草稿與其他純文字文件都能搭配短暫停頓後的自動存檔進行編輯。你可以在文件內搜尋與取代文字、查看或還原快照、在文件庫整理文件，也能匯入 TXT、輸出到指定路徑，並在需要新草稿時分割或合併文件。\n\n文字編輯可在裝置上離線進行。你可以調整字型大小與顯示設定，開啟其他文件前也會嘗試儲存目前的編輯內容。",
     "faq": [
       {
         "question": "需要網路嗎？",
@@ -197,13 +197,13 @@
         "alt": "VaultXT — 顯示草稿編輯的文字編輯介面"
       },
       {
-        "title": "自動存檔不中斷",
+        "title": "停止輸入後自動存檔",
         "subtitle": "停止輸入後會自動儲存變更",
         "alt": "VaultXT — 自動存檔狀態提示畫面"
       },
       {
-        "title": "快速更新重複用語",
-        "subtitle": "全文搜尋並替換指定詞彙",
+        "title": "尋找並取代文字",
+        "subtitle": "全文搜尋並取代指定詞彙",
         "alt": "VaultXT — 搜尋取代結果標註畫面"
       },
       {
@@ -213,7 +213,7 @@
       },
       {
         "title": "整理文件",
-        "subtitle": "在文件庫管理匯入檔案與編輯版本",
+        "subtitle": "在文件庫管理匯入的工作副本",
         "alt": "VaultXT — 整理後的文件列表"
       }
     ],
@@ -227,11 +227,11 @@
     "appName": "VaultXT",
     "subtitle": "支持自动保存的文本编辑器",
     "promotionalText": "导入 TXT 文件后即可阅读和编辑。变更会自动保存，快照可帮助回看历史版本。",
-    "shortDescription": "在本地编辑 TXT 文件，包含查找替换与快照管理。",
+    "shortDescription": "在本地编辑 TXT 和其他纯文本文件，使用自动保存、查找替换、快照，以及导入和导出工具。",
     "keywords": "文本,编辑器,TXT,自动保存,查找,替换,快照,文档库,文件",
     "description": "VaultXT 是一款在本机使用的 TXT 文本工作区。导入文件会先复制到文档库，便于将外部原始文件与工作副本分开管理。\n\n• 文本编辑与自动保存\n• 全文查找与替换\n• 通过快照查看并恢复历史内容\n• 文档分割和合并创建新草稿\n• 字体大小与显示设置\n\n编辑和自动保存功能免费提供。免费工作区可同时打开2个文档、文档库3个文档和最近5条快照。Pro 为一次性付费，可提高可用配额。无订阅，无广告。\n\n文件保存在设备内，不提供云同步。格式检查不会阻止保存。导出时使用用户选择的路径。",
-    "landingSubtitle": "快速打开 TXT 草稿，自动保存保持编辑连贯性。",
-    "landingBody": "在设备内打开 TXT 并自动保存编辑。用查找替换整理文本，查看或恢复快照，再在文档库管理草稿。",
+    "landingSubtitle": "文本编辑器",
+    "landingBody": "VaultXT 是在设备上本地使用的 TXT 和其他纯文本文件工作区。导入的文件会复制到文档库作为工作副本，让你保留外部原始文件，同时编辑自己的草稿。\n\n长篇笔记、日志、草稿和其他纯文本文件都可以配合短暂停顿后的自动保存进行编辑。你可以在文档中查找和替换文本，查看或恢复快照，在文档库整理文档，也可以导入 TXT、导出到指定路径，并在需要新草稿时分割或合并文档。\n\n文本编辑可在设备上离线进行。你可以调整字体大小和显示设置，打开其他文档前也会尝试保存当前编辑内容。",
     "faq": [
       {
         "question": "是否可以离线使用？",
@@ -253,23 +253,23 @@
         "alt": "VaultXT — 显示草稿编辑的文本编辑画面"
       },
       {
-        "title": "自动保存不中断",
+        "title": "停止输入后自动保存",
         "subtitle": "停止输入后会自动保存更改",
         "alt": "VaultXT — 自动保存状态可见的编辑页面"
       },
       {
-        "title": "一次处理重复项",
-        "subtitle": "全文搜索并替换目标短语",
+        "title": "查找并替换文本",
+        "subtitle": "在文档中查找并替换目标短语",
         "alt": "VaultXT — 查找替换结果高亮界面"
       },
       {
-        "title": "快速查看旧版本",
+        "title": "查看旧版本",
         "subtitle": "在快照列表中选择并恢复历史内容",
         "alt": "VaultXT — 快照记录列表"
       },
       {
         "title": "整理文档",
-        "subtitle": "在文档库集中管理原件和编辑件",
+        "subtitle": "在文档库管理导入的工作副本",
         "alt": "VaultXT — 文档库中的文件列表"
       }
     ],
@@ -283,11 +283,11 @@
     "appName": "VaultXT",
     "subtitle": "Editor de texto TXT",
     "promotionalText": "Importe arquivos TXT e comece a editar. As alterações são salvas automaticamente, e os instantâneos ajudam a rever versões anteriores.",
-    "shortDescription": "Edite TXT com salvamento, localizar/substituir e instantâneos.",
+    "shortDescription": "Edite TXT e outros textos simples no dispositivo com salvamento automático, localizar e substituir, instantâneos, importação e exportação.",
     "keywords": "texto,editor,TXT,salvamento automático,localizar,substituir,instantâneos,biblioteca,arquivos",
     "description": "VaultXT é uma área de trabalho de texto local para arquivos TXT. Os arquivos importados são copiados para a Biblioteca para separar o original do seu rascunho de trabalho.\n\n• Edição de texto com salvamento automático\n• Localizar e substituir no mesmo documento\n• Conferir e restaurar versões anteriores por instantâneos\n• Dividir e unir documentos para criar novos rascunhos\n• Ajustes de fonte e aparência\n\nEdição e salvamento automático estão disponíveis gratuitamente. A versão gratuita permite 2 documentos abertos, 3 documentos na Biblioteca e os 5 instantâneos mais recentes. Pro é uma compra única para mais capacidade de uso. Não há assinatura nem anúncios.\n\nOs arquivos ficam no dispositivo. Não há sincronização em nuvem. A validação de formato não bloqueia salvar, e a exportação segue o caminho escolhido pelo usuário.",
-    "landingSubtitle": "Abra um TXT e edite com salvamento automático e instantâneos.",
-    "landingBody": "Abra TXT no dispositivo e edite com salvamento automático. Use localizar e substituir, consulte ou restaure instantâneos e organize seus rascunhos na Biblioteca.",
+    "landingSubtitle": "Editor de texto",
+    "landingBody": "VaultXT é uma área de trabalho de texto local para arquivos TXT e outros documentos de texto simples. Os arquivos importados são copiados para a Biblioteca como documentos de trabalho, para que você mantenha o original externo separado enquanto edita seus rascunhos.\n\nEdite notas longas, logs, rascunhos e outros documentos de texto simples com salvamento automático após uma breve pausa. Use localizar e substituir no documento, consulte ou restaure instantâneos, organize documentos na Biblioteca, importe TXT, exporte para o caminho escolhido e divida ou una documentos quando precisar criar um novo rascunho.\n\nA edição de texto funciona offline no dispositivo. Ajuste o tamanho da fonte e a aparência para ler com conforto, e a troca de documentos tenta salvar as edições atuais antes de abrir outro documento.",
     "faq": [
       {
         "question": "Precisa de internet?",
@@ -304,8 +304,8 @@
     ],
     "screenshots": [
       {
-        "title": "Abrir e editar rascunho",
-        "subtitle": "Importar arquivo e continuar escrevendo",
+        "title": "Abra o rascunho e comece a editar",
+        "subtitle": "Abra o arquivo importado e continue escrevendo.",
         "alt": "VaultXT — Tela do editor com um rascunho aberto"
       },
       {
@@ -314,13 +314,13 @@
         "alt": "VaultXT — Tela de edição com status de salvamento automático"
       },
       {
-        "title": "Ajuste rápido de repetições",
+        "title": "Localizar e substituir texto",
         "subtitle": "Buscar e substituir trechos no documento",
         "alt": "VaultXT — Janela de localizar e substituir com destaque"
       },
       {
-        "title": "Voltar para versão anterior",
-        "subtitle": "Conferir históricos na lista de instantâneos",
+        "title": "Confira uma versão anterior",
+        "subtitle": "Veja e restaure versões anteriores na lista de instantâneos.",
         "alt": "VaultXT — Lista de instantâneos com opção de restauração"
       },
       {
@@ -339,11 +339,11 @@
     "appName": "VaultXT",
     "subtitle": "Texteditor für TXT-Dateien",
     "promotionalText": "Importieren Sie TXT-Dateien und arbeiten direkt weiter. Änderungen werden automatisch gespeichert, frühere Versionen finden Sie in Snapshots wieder.",
-    "shortDescription": "TXT bearbeiten: automatisches Speichern, Suchen/Ersetzen und Snapshots.",
+    "shortDescription": "TXT-Dateien und andere reine Textdokumente lokal bearbeiten mit automatischem Speichern, Suchen und Ersetzen, Snapshots sowie Import und Export.",
     "keywords": "text,editor,TXT,automatisches Speichern,suchen,ersetzen,Snapshots,bibliothek,dateien",
     "description": "VaultXT ist ein lokaler Text-Workspace für TXT-Dateien. Importierte Dateien werden in die Bibliothek kopiert, sodass Originaldateien und Arbeitsversionen getrennt bleiben.\n\n• Textbearbeitung mit automatischem Speichern\n• Suchen und Ersetzen im Dokument\n• Vorherige Zustände aus Snapshots prüfen und wiederherstellen\n• Dokumente aufteilen und zusammenführen\n• Schriftgröße und Anzeigeeinstellungen\n\nBearbeitung und automatisches Speichern sind kostenlos nutzbar. Die kostenlose Nutzung erlaubt 2 geöffnete Dokumente, 3 Bibliotheksdokumente und die letzten 5 Snapshots. Pro ist ein einmaliger Kauf für mehr Kapazität. Keine Abonnements, keine Werbung.\n\nDaten bleiben auf dem Gerät. Cloud-Synchronisierung ist nicht enthalten. Die Formatprüfung blockiert kein Speichern. Exporte erfolgen zum vom Nutzer gewählten Ziel.",
-    "landingSubtitle": "TXT-Dokumente direkt bearbeiten, mit automatischem Speichern.",
-    "landingBody": "Öffnen Sie TXT-Dateien lokal und bearbeiten Sie sie mit automatischem Speichern. Suchen und Ersetzen, Snapshots prüfen oder wiederherstellen und Entwürfe in der Bibliothek ordnen.",
+    "landingSubtitle": "Texteditor",
+    "landingBody": "VaultXT ist ein lokaler Text-Workspace für TXT-Dateien und andere reine Textdokumente. Importierte Dateien werden als Arbeitsdokumente in die Bibliothek kopiert. So bleiben Originaldatei und bearbeiteter Entwurf getrennt.\n\nBearbeiten Sie lange Notizen, Logs, Entwürfe und andere reine Textdokumente mit automatischem Speichern nach einer kurzen Pause. Suchen und Ersetzen Sie Text im Dokument, prüfen oder stellen Sie Snapshots wieder her und ordnen Sie Dokumente in der Bibliothek. Importieren Sie TXT-Dateien, exportieren Sie sie an ein Ziel Ihrer Wahl und teilen Sie Dokumente auf oder führen Sie sie zusammen, wenn Sie einen neuen Entwurf brauchen.\n\nDie Textbearbeitung funktioniert offline auf Ihrem Gerät. Passen Sie Schriftgröße und Anzeige an, und beim Dokumentwechsel wird versucht, aktuelle Änderungen vor dem Öffnen eines anderen Dokuments zu speichern.",
     "faq": [
       {
         "question": "Funktioniert die App offline?",
@@ -360,7 +360,7 @@
     ],
     "screenshots": [
       {
-        "title": "Entwurf laden und bearbeiten",
+        "title": "Entwurf öffnen und bearbeiten",
         "subtitle": "Importierte Texte öffnen und direkt bearbeiten",
         "alt": "VaultXT — Screenshot eines geöffneten TXT-Editors"
       },
@@ -370,12 +370,12 @@
         "alt": "VaultXT — Bearbeitungsbildschirm mit Status zum automatischen Speichern"
       },
       {
-        "title": "Inhalte gezielt anpassen",
+        "title": "Suchen und Ersetzen",
         "subtitle": "Begriffe im Dokument finden und ersetzen",
-        "alt": "VaultXT — Hervorgehobene Suchergebnisse im Editor"
+        "alt": "VaultXT — Dialog zum Suchen und Ersetzen mit hervorgehobenen Ergebnissen"
       },
       {
-        "title": "Versionen prüfen",
+        "title": "Frühere Versionen prüfen",
         "subtitle": "Frühere Inhalte in Snapshots öffnen",
         "alt": "VaultXT — Snapshot-Liste mit älteren Versionen"
       },
@@ -395,11 +395,11 @@
     "appName": "VaultXT",
     "subtitle": "Éditeur de fichiers TXT",
     "promotionalText": "Importez des fichiers TXT et éditez-les immédiatement. Les changements sont automatiquement sauvegardés, et les instantanés gardent un historique visible.",
-    "shortDescription": "Éditeur TXT avec enregistrement auto, recherche et instantanés.",
+    "shortDescription": "Éditez localement vos fichiers TXT et autres documents en texte brut avec enregistrement automatique, recherche, remplacement, instantanés, import et export.",
     "keywords": "texte,éditeur,TXT,enregistrement automatique,recherche,remplacer,instantanés,bibliothèque,fichiers",
     "description": "VaultXT est un espace de travail texte local pour vos fichiers TXT. Les fichiers importés sont copiés dans la Bibliothèque pour séparer l’original externe du document de travail.\n\n• Édition avec enregistrement automatique\n• Recherche et remplacement\n• Revue et restauration via instantanés\n• Division et fusion de documents\n• Taille de police et réglages d’affichage\n\nL’édition et l’enregistrement automatique sont inclus gratuitement. La version gratuite autorise 2 documents ouverts, 3 documents en Bibliothèque et 5 derniers instantanés. Pro est un achat unique pour une capacité élargie. Pas d’abonnement, pas de publicité.\n\nLes fichiers restent sur votre appareil. Aucune synchronisation cloud n’est proposée. Les vérifications de format n’arrêtent pas la sauvegarde. L’export se fait au dossier choisi par l’utilisateur.",
-    "landingSubtitle": "Ouvrez un TXT, éditez localement avec enregistrement automatique.",
-    "landingBody": "Ouvrez vos TXT localement et éditez-les avec enregistrement automatique. Recherchez et remplacez, consultez ou restaurez des instantanés et organisez vos brouillons dans la Bibliothèque.",
+    "landingSubtitle": "Éditeur de texte",
+    "landingBody": "VaultXT est un espace de travail texte local pour vos fichiers TXT et autres documents en texte brut. Les fichiers importés sont copiés dans la Bibliothèque comme documents de travail : l’original externe reste séparé de votre brouillon.\n\nModifiez de longues notes, des journaux, des brouillons et d’autres documents en texte brut avec enregistrement automatique après une courte pause. Recherchez et remplacez du texte dans le document, consultez ou restaurez des instantanés, organisez vos documents dans la Bibliothèque, importez des TXT, exportez-les vers l’emplacement choisi et divisez ou fusionnez des documents pour créer un nouveau brouillon.\n\nLa modification de texte fonctionne hors connexion sur votre appareil. Réglez la taille du texte et l’affichage pour lire confortablement, et le changement de document essaie d’enregistrer les modifications en cours avant d’en ouvrir un autre.",
     "faq": [
       {
         "question": "L’app fonctionne-t-elle hors ligne ?",
@@ -417,7 +417,7 @@
     "screenshots": [
       {
         "title": "Lire et écrire un brouillon",
-        "subtitle": "Importer puis éditer sans étape intermédiaire",
+        "subtitle": "Ouvrez le texte importé et poursuivez la rédaction.",
         "alt": "VaultXT — Éditeur texte avec un brouillon ouvert"
       },
       {
@@ -426,9 +426,9 @@
         "alt": "VaultXT — Écran d’édition avec statut d’enregistrement automatique"
       },
       {
-        "title": "Corriger les répétitions",
+        "title": "Rechercher et remplacer du texte",
         "subtitle": "Rechercher puis remplacer dans le document",
-        "alt": "VaultXT — Résultats de recherche en surbrillance"
+        "alt": "VaultXT — Fenêtre de recherche et remplacement avec résultats en surbrillance"
       },
       {
         "title": "Revenir à une version antérieure",
@@ -451,11 +451,11 @@
     "appName": "VaultXT",
     "subtitle": "Editor de archivos TXT",
     "promotionalText": "Importa archivos TXT y empieza a editar. Los cambios se guardan automáticamente, y las capturas te ayudan a revisar versiones anteriores.",
-    "shortDescription": "Edita TXT con guardado automático, búsqueda y capturas.",
+    "shortDescription": "Edita archivos TXT y otros documentos de texto sin formato en el dispositivo con guardado automático, buscar y reemplazar, versiones guardadas, importación y exportación.",
     "keywords": "texto,editor,TXT,guardado automático,buscar,reemplazar,capturas,biblioteca,archivos",
     "description": "VaultXT es un espacio de trabajo de texto local para archivos TXT. Los archivos importados se copian a la Biblioteca para mantener separados el original y el trabajo en curso.\n\n• Edición con guardado automático\n• Buscar y reemplazar en el documento\n• Revisar y restaurar estados anteriores desde capturas\n• Dividir y fusionar documentos para crear nuevos borradores\n• Tamaño de letra y ajustes de vista\n\nLa edición y el guardado automático están disponibles gratis. La versión gratuita permite 2 documentos abiertos, 3 en la Biblioteca y las últimas 5 capturas. Pro es una compra única para más capacidad. Sin suscripción ni anuncios.\n\nLos archivos permanecen en el dispositivo. No se ofrece sincronización en la nube. Las validaciones de formato no bloquean el guardado. La exportación usa la ruta que elijas.",
-    "landingSubtitle": "Abre un TXT y continúa editando con guardado automático.",
-    "landingBody": "Abre TXT en el dispositivo y edita con guardado automático. Busca y reemplaza, revisa o restaura capturas y organiza tus borradores en la Biblioteca.",
+    "landingSubtitle": "Editor de texto",
+    "landingBody": "VaultXT es un espacio de trabajo de texto local para archivos TXT y otros documentos de texto sin formato. Los archivos importados se copian a la Biblioteca como documentos de trabajo, para que conserves separado el original externo mientras editas tus borradores.\n\nEdita notas largas, registros, borradores y otros documentos de texto sin formato con guardado automático tras una breve pausa. Busca y reemplaza texto en el documento, revisa o restaura versiones guardadas, organiza documentos en la Biblioteca, importa TXT, exporta a la ruta que elijas y divide o fusiona documentos cuando necesites crear un borrador nuevo.\n\nLa edición de texto funciona sin conexión en tu dispositivo. Ajusta el tamaño de letra y la vista para leer cómodamente, y el cambio de documento intenta guardar las ediciones actuales antes de abrir otro documento.",
     "faq": [
       {
         "question": "¿Funciona sin conexión?",
@@ -482,17 +482,17 @@
         "alt": "VaultXT — Vista de edición con estado de guardado automático"
       },
       {
-        "title": "Ajustes rápidos",
+        "title": "Buscar y reemplazar texto",
         "subtitle": "Encuentra y reemplaza texto en el documento",
         "alt": "VaultXT — Resultado de búsqueda y reemplazo resaltado"
       },
       {
         "title": "Volver a una versión anterior",
-        "subtitle": "Revisa el historial desde la lista de capturas",
-        "alt": "VaultXT — Lista de capturas con vista de historial"
+        "subtitle": "Revisa el historial desde la lista de instantáneas",
+        "alt": "VaultXT — Lista de instantáneas con vista previa de versiones anteriores"
       },
       {
-        "title": "Mantener orden",
+        "title": "Organizar documentos",
         "subtitle": "Gestiona tus archivos en la Biblioteca",
         "alt": "VaultXT — Lista ordenada de documentos en biblioteca"
       }
