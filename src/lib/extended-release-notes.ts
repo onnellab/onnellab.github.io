@@ -20,6 +20,13 @@ type ReleaseLabels = {
 
 const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
   ja: {
+    'vaultxt/2.0.0': {
+      summary: 'VaultXT 2.0.0（iOS / Android）の変更内容です。',
+      changes: [
+        'テキスト編集体験を更新し、9言語で利用できるようになりました。',
+        '別のドキュメントを開く前に編集中の内容を保存するよう、ドキュメント切り替えを改善しました。'
+      ]
+    },
     'tagweaver/2.5': {
       "summary": "TagWeaver 2.5（iOS / Android）の変更内容です。",
       "changes": [
@@ -68,6 +75,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   'zh-Hans': {
+    'vaultxt/2.0.0': {
+      summary: 'VaultXT 2.0.0（iOS 和 Android）的变更内容。',
+      changes: [
+        '更新文本编辑体验，现已支持 9 种语言。',
+        '改进文档切换流程，在打开其他文档前保存当前编辑内容。'
+      ]
+    },
     'tagweaver/2.5': {
       "summary": "TagWeaver 2.5（iOS 和 Android）的变更内容。",
       "changes": [
@@ -116,6 +130,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   'zh-Hant': {
+    'vaultxt/2.0.0': {
+      summary: 'VaultXT 2.0.0（iOS 與 Android）的變更內容。',
+      changes: [
+        '更新文字編輯體驗，現已支援 9 種語言。',
+        '改善文件切換流程，在開啟其他文件前儲存目前的編輯內容。'
+      ]
+    },
     'tagweaver/2.5': {
       "summary": "TagWeaver 2.5（iOS 與 Android）的變更內容。",
       "changes": [
@@ -164,6 +185,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   'pt-BR': {
+    'vaultxt/2.0.0': {
+      summary: 'Alterações do VaultXT 2.0.0 para iOS e Android.',
+      changes: [
+        'Experiência de edição de texto atualizada, agora disponível em nove idiomas.',
+        'Melhoramos a troca de documentos para salvar suas edições atuais antes de abrir outro documento.'
+      ]
+    },
     'tagweaver/2.5': {
       "summary": "Novidades do TagWeaver 2.5 para iOS e Android.",
       "changes": [
@@ -212,6 +240,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   de: {
+    'vaultxt/2.0.0': {
+      summary: 'Änderungen in VaultXT 2.0.0 für iOS und Android.',
+      changes: [
+        'Überarbeitete Textbearbeitung, jetzt in neun Sprachen verfügbar.',
+        'Der Dokumentwechsel speichert aktuelle Bearbeitungen jetzt, bevor ein anderes Dokument geöffnet wird.'
+      ]
+    },
     'tagweaver/2.5': {
       "summary": "Änderungen in TagWeaver 2.5 für iOS und Android.",
       "changes": [
@@ -260,6 +295,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   fr: {
+    'vaultxt/2.0.0': {
+      summary: 'Modifications de VaultXT 2.0.0 pour iOS et Android.',
+      changes: [
+        'Expérience d’édition de texte mise à jour, désormais disponible en neuf langues.',
+        'Amélioration du changement de document pour enregistrer les modifications en cours avant d’en ouvrir un autre.'
+      ]
+    },
     'tagweaver/2.5': {
       "summary": "Nouveautés de TagWeaver 2.5 pour iOS et Android.",
       "changes": [
@@ -308,6 +350,13 @@ const copy: Record<ReleaseLocale, Record<string, ReleaseCopy>> = {
     }
   },
   es: {
+    'vaultxt/2.0.0': {
+      summary: 'Cambios de VaultXT 2.0.0 para iOS y Android.',
+      changes: [
+        'Experiencia de edición de texto actualizada, ahora disponible en nueve idiomas.',
+        'Mejoramos el cambio de documentos para guardar las ediciones actuales antes de abrir otro documento.'
+      ]
+    },
     'tagweaver/2.5': {
       "summary": "Novedades de TagWeaver 2.5 para iOS y Android.",
       "changes": [
