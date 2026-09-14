@@ -21,17 +21,19 @@ export const releaseNotes: ReleaseNote[] = [
     tag: 'v2.0.0',
     platform: 'iOS · Android',
     releasedDate: '2026-09-14',
-    title: 'VaultXT v2.0.0 (Build 60)',
+    title: 'VaultXT v2.0.0 (Build 61)',
     summary: 'Changes in VaultXT 2.0.0 for iOS and Android.',
     summaryKo: 'VaultXT 2.0.0 iOS·Android 버전의 변경 사항이에요.',
     internalGitHubUrl: 'https://github.com/onnellab/onnellab-text/releases/tag/v2.0.0',
     changes: [
       'Updated text editing experience, now available in nine languages.',
-      'Improved document switching to save your current edits before opening another document.'
+      'Improved document switching to save your current edits before opening another document.',
+      'Open the privacy policy in your app language from Settings.'
     ],
     changesKo: [
       '텍스트 편집 경험을 개선하고, 이제 9개 언어로 사용할 수 있어요.',
-      '다른 문서를 열기 전에 편집 중인 내용을 저장하도록 문서 전환 흐름을 개선했어요.'
+      '다른 문서를 열기 전에 편집 중인 내용을 저장하도록 문서 전환 흐름을 개선했어요.',
+      '설정에서 앱 언어에 맞는 개인정보처리방침을 열 수 있습니다.'
     ]
   },
   {
