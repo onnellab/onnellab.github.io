@@ -7,6 +7,7 @@ import {
   type ExtendedSiteLocale
 } from './extended-site-i18n';
 import { getExtendedProductCopy } from './extended-product-localizations';
+import { getPapiraDescription } from './papira-description';
 import { renderBlocks, type ProductCopy, type ProductPageData } from './products';
 
 export type PapiraFaq = {
@@ -84,11 +85,12 @@ const extendedPapiraScreenshotAlts: Record<
 export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData {
   if (isExtendedSiteLocale(locale)) {
     const text = getExtendedProductCopy('papira', locale);
+    const description = getPapiraDescription(locale);
     const platformCopy = {
       name: text.subtitle,
       landingSubtitle: text.subtitle,
-      landingDescription: text.body,
-      description: text.body,
+      landingDescription: description,
+      description,
       faq: { title: text.faqTitle, items: text.faq }
     };
     const copy: ProductCopy = { locale, android: platformCopy, ios: platformCopy };
@@ -114,7 +116,7 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
       iconPath: '/app-assets/papira/icon.png',
       socialImagePath: '/app-assets/papira/social-card.png',
       screenshotPaths: ['01', '02', '03', '04', '05'].map(
-        (name) => `/app-assets/papira/assets/screenshots/${locale}/${name}.png`
+        (name) => `/app-assets/papira/assets/screenshots/${locale}/${name}.png?v=5da5eeb`
       ),
       screenshotAlts: extendedPapiraScreenshotAlts[locale],
       screenshotDimensions: { width: 1080, height: 2168 },
@@ -125,20 +127,7 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
 
   const baseLocale = locale as SiteLocale;
   const text = papiraCopy[baseLocale];
-  const description = [
-    text.lead,
-    '',
-    `## ${text.modesTitle}`,
-    '',
-    ...text.modes.flatMap((mode, index) => [`### ${index + 1}. ${mode.title}`, '', mode.body, '']),
-    `## ${text.featuresTitle}`,
-    '',
-    ...text.features.map((feature) => `- ${feature}`),
-    '',
-    `## ${text.privacyTitle}`,
-    '',
-    ...text.privacyItems.map((item) => `- ${item}`)
-  ].join('\n');
+  const description = getPapiraDescription(baseLocale);
   const platformCopy = {
     name: text.tagline,
     landingSubtitle: text.tagline,
@@ -169,7 +158,7 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
     eyebrow: text.eyebrow,
     heroSignals: text.heroSignals,
     screenshotPaths: ['01', '02', '03', '04', '05'].map(
-      (name) => `/app-assets/papira/assets/screenshots/${baseLocale}/${name}.png`
+      (name) => `/app-assets/papira/assets/screenshots/${baseLocale}/${name}.png?v=5da5eeb`
     ),
     screenshotAlts: text.screenshotAlts,
     screenshotDimensions: { width: 1080, height: 2168 },

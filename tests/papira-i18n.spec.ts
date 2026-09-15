@@ -225,46 +225,19 @@ test.describe('Papira nine-language launch surface', () => {
     }
   });
 
-  test('English and Korean product copy renders Markdown structure as semantic HTML', async ({ page }) => {
-    const expectations = [
-      {
-        path: '/apps/papira/',
-        h2: 'Two focused ways to create',
-        h3: '1. Quick EPUB',
-        item:
-          'Dedicated presets for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, with support for other TXT content'
-      },
-      {
-        path: '/apps/papira/ko/',
-        h2: '두 가지 제작 흐름',
-        h3: '1. 빠르게 만들기',
-        item:
-          '팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 작품 유형과 그 밖의 TXT 콘텐츠 지원'
+  test('all nine Papira descriptions use readable prose paragraphs', async ({ page }, testInfo) => {
+    for (const locale of locales) {
+      await page.goto(`/apps/papira/${locale.path}`);
+      const copy = page.locator('.copy-column');
+      await expect(copy.locator('h2, h3, ul, ol')).toHaveCount(0);
+      const paragraphs = copy.locator(':scope > p');
+      expect(await paragraphs.count()).toBeGreaterThanOrEqual(4);
+      expect(await paragraphs.count()).toBeLessThanOrEqual(6);
+      await expect(paragraphs.first()).toContainText('Papira');
+      if (locale.hreflang === 'ko') {
+        await copy.screenshot({ path: testInfo.outputPath('papira-ko-prose.png') });
       }
-    ];
-
-    for (const expected of expectations) {
-      await page.goto(expected.path);
-      await expect(page.getByRole('heading', { level: 2, name: expected.h2 })).toHaveCount(1);
-      await expect(page.getByRole('heading', { level: 3, name: expected.h3 })).toHaveCount(1);
-      await expect(page.getByRole('listitem').filter({ hasText: expected.item })).toHaveCount(1);
-      const leakedMarkers = await page.locator('h2, h3').allTextContents();
-      expect(leakedMarkers.filter((text) => /^(?:##|###|- )/.test(text.trim()))).toEqual([]);
-    }
-  });
-
-  test('every locale numbers the two Papira creation flows in order', async ({ page }) => {
-    const expectations = [
-      { path: '/apps/papira/', headings: ['1. Quick EPUB', '2. Book project'] },
-      { path: '/apps/papira/ko/', headings: ['1. 빠르게 만들기', '2. 책 프로젝트'] },
-      { path: '/apps/papira/ja/', headings: ['1. すぐにEPUB化', '2. 作品EPUBを作成'] },
-      { path: '/apps/papira/zh-hans/', headings: ['1. 快速制作', '2. 制作作品 EPUB'] },
-      { path: '/apps/papira/zh-hant/', headings: ['1. 快速製作', '2. 製作作品 EPUB'] }
-    ];
-
-    for (const expected of expectations) {
-      await page.goto(expected.path);
-      await expect(page.locator('.copy-column h3')).toHaveText(expected.headings);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     }
   });
 
@@ -282,7 +255,7 @@ test.describe('Papira nine-language launch surface', () => {
       {
         path: '/apps/papira/ko/',
         lead:
-          'Papira는 완성된 TXT 원고를 정돈된 EPUB 파일로 만들어요. 팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 제작 흐름을 제공하지만, 그 밖의 TXT 콘텐츠도 EPUB으로 변환할 수 있어요.',
+          'Papira는 완성된 TXT 원고를 정돈된 책 파일(EPUB)로 만들어요. 팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 제작 흐름을 제공하지만, 그 밖의 TXT 콘텐츠도 EPUB으로 변환할 수 있어요.',
         feature:
           '팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 작품 유형과 그 밖의 TXT 콘텐츠 지원',
         faq:
@@ -321,7 +294,7 @@ test.describe('Papira nine-language launch surface', () => {
       await page.goto(expected.path);
       const main = page.locator('main');
       await expect(main).toContainText(expected.lead);
-      await expect(page.getByRole('listitem').filter({ hasText: expected.feature })).toHaveCount(1);
+      await expect(page.locator('.copy-column')).toContainText('TXT');
       await expect(main).toContainText(expected.faq);
     }
   });
@@ -472,11 +445,11 @@ test.describe('Papira nine-language launch surface', () => {
         images.map((image) => image.getAttribute('alt'))
       )).toEqual(['', '', '', '', '']);
       for (let index = 0; index < 5; index += 1) {
-        const source = `/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png`;
+        const source = `/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png?v=5da5eeb`;
         await expect(screenshots.nth(index)).toHaveAttribute('src', source);
         await expect(screenshots.nth(index)).toHaveAttribute('width', '1080');
         await expect(screenshots.nth(index)).toHaveAttribute('height', '2168');
-        expect(fs.existsSync(path.resolve(process.cwd(), 'public', source.replace(/^\//, '')))).toBe(true);
+        expect(fs.existsSync(path.resolve(process.cwd(), 'public', new URL(source, 'https://onnellab.github.io').pathname.replace(/^\//, '')))).toBe(true);
         await expect
           .poll(() =>
             screenshots.nth(index).evaluate((image: HTMLImageElement) => ({
@@ -493,7 +466,7 @@ test.describe('Papira nine-language launch surface', () => {
         Array.from(
           { length: 5 },
           (_, index) =>
-            `https://onnellab.github.io/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png`
+            `https://onnellab.github.io/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png?v=5da5eeb`
         )
       );
     }
@@ -568,11 +541,11 @@ test.describe('Papira nine-language launch surface', () => {
       },
       {
         path: '/apps/papira/zh-hans/',
-        includes: ['面向创作者', '两种简洁的制作方式', '原创小说', '数字小册子', '联系我们']
+        includes: ['面向创作者', '原创小说', '数字小册子', '联系我们']
       },
       {
         path: '/apps/papira/zh-hant/',
-        includes: ['面向創作者', '兩種簡潔的製作方式', '原創小說', '數位小冊子', '聯絡我們']
+        includes: ['面向創作者', '原創小說', '數位小冊子', '聯絡我們']
       }
     ];
 
