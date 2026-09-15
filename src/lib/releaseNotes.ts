@@ -21,7 +21,7 @@ export const releaseNotes: ReleaseNote[] = [
     tag: 'v2.0.0',
     platform: 'iOS · Android',
     releasedDate: '2026-09-15',
-    title: 'VaultXT v2.0.0 (Android 65 · iOS 64)',
+    title: 'VaultXT v2.0.0 (Android 65 · iOS 65)',
     summary: 'Changes in VaultXT 2.0.0 for iOS and Android.',
     summaryKo: 'VaultXT 2.0.0 iOS·Android 버전의 변경 사항이에요.',
     internalGitHubUrl: 'https://github.com/onnellab/onnellab-text/releases/tag/v2.0.0',
