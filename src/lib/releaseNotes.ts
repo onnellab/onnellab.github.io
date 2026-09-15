@@ -26,22 +26,22 @@ export const releaseNotes: ReleaseNote[] = [
     summaryKo: 'VaultXT 2.0.0 iOS·Android 버전의 변경 사항이에요.',
     internalGitHubUrl: 'https://github.com/onnellab/onnellab-text/releases/tag/v2.0.0',
     changes: [
-      "Reduced the Android app download size.",
-      "Free limits are now 10 Library documents, 10 open documents, 10 snapshots per document, 10 parts per split, and 10 documents per merge.",
-      "Updated Google Play billing support for Pro purchases on Android.",
-      'Updated text editing experience, now available in nine languages.',
-      'Improved document switching to save your current edits before opening another document.',
-      'Open the privacy policy in your app language from Settings.',
-      "The minimum supported iOS version is now 15.0."
+      "Added folders, subfolders and folder colors.",
+      "Added tools to split and merge documents.",
+      "Now supports nine languages, with easier-to-use Settings.",
+      "Fixed some cursor and typing issues in large files, and improved saving when switching documents.",
+      "Free: 10 Library documents, 10 open documents, 10 snapshots per document, splits into up to 10 parts and merges of up to 10 documents.",
+      "Smaller Android app download.",
+      "Requires iOS 15 or later."
     ],
     changesKo: [
+      "폴더와 하위 폴더를 만들고 폴더 색상으로 문서를 구분해요.",
+      "문서를 나누거나 하나로 합치는 기능을 추가했어요.",
+      "9개 언어를 지원하고, 작은 화면이나 큰 글씨에서도 설정을 쓰기 편하게 다듬었어요.",
+      "큰 파일에서 커서와 글자 입력에 생기던 일부 문제를 고치고, 문서를 바꿀 때 더 안정적으로 저장하도록 개선했어요.",
+      "무료로 문서함 문서와 열린 문서를 각각 10개, 문서별 스냅샷 10개, 최대 10조각 나누기와 문서 10개 합치기를 지원해요.",
       "Android 앱의 다운로드 크기를 줄였어요.",
-      "무료 한도를 문서함 문서 10개, 열린 문서 10개, 문서별 스냅샷 10개, 분할 10조각, 병합 10개 문서로 늘렸어요.",
-      "Android에서 Pro 구매가 최신 Google Play 결제 환경에 맞게 동작하도록 업데이트했어요.",
-      '텍스트 편집 경험을 개선하고, 이제 9개 언어로 사용할 수 있어요.',
-      '다른 문서를 열기 전에 편집 중인 내용을 저장하도록 문서 전환 흐름을 개선했어요.',
-      '설정에서 앱 언어에 맞는 개인정보처리방침을 열 수 있습니다.',
-      "iOS 최소 지원 버전을 15.0으로 변경했어요."
+      "iOS 15 이상에서 사용할 수 있어요."
     ]
   },
   {
