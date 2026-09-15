@@ -21,11 +21,12 @@ export const releaseNotes: ReleaseNote[] = [
     tag: 'v2.0.0',
     platform: 'iOS · Android',
     releasedDate: '2026-09-15',
-    title: 'VaultXT v2.0.0 (Build 64)',
+    title: 'VaultXT v2.0.0 (Android 65 · iOS 64)',
     summary: 'Changes in VaultXT 2.0.0 for iOS and Android.',
     summaryKo: 'VaultXT 2.0.0 iOS·Android 버전의 변경 사항이에요.',
     internalGitHubUrl: 'https://github.com/onnellab/onnellab-text/releases/tag/v2.0.0',
     changes: [
+      "Reduced the Android app download size.",
       "Free limits are now 10 Library documents, 10 open documents, 10 snapshots per document, 10 parts per split, and 10 documents per merge.",
       "Updated Google Play billing support for Pro purchases on Android.",
       'Updated text editing experience, now available in nine languages.',
@@ -34,6 +35,7 @@ export const releaseNotes: ReleaseNote[] = [
       "The minimum supported iOS version is now 15.0."
     ],
     changesKo: [
+      "Android 앱의 다운로드 크기를 줄였어요.",
       "무료 한도를 문서함 문서 10개, 열린 문서 10개, 문서별 스냅샷 10개, 분할 10조각, 병합 10개 문서로 늘렸어요.",
       "Android에서 Pro 구매가 최신 Google Play 결제 환경에 맞게 동작하도록 업데이트했어요.",
       '텍스트 편집 경험을 개선하고, 이제 9개 언어로 사용할 수 있어요.',

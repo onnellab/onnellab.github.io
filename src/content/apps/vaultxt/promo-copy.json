@@ -1,6 +1,6 @@
 {
   "en": {
-    "appName": "VaultXT",
+    "appName": "VaultXT - Text File Editor",
     "subtitle": "Large text editor",
     "promotionalText": "Edit large text locally, from long documents to logs and config files. Includes autosave, search, snapshots, folders, split and merge, and optional format checks.",
     "shortDescription": "Edit large text files locally with autosave, search, snapshots, and folders.",
@@ -56,7 +56,7 @@
     }
   },
   "ko": {
-    "appName": "VaultXT",
+    "appName": "VaultXT - 대용량 텍스트 편집기",
     "subtitle": "대용량 텍스트 편집기",
     "promotionalText": "긴 문서부터 로그와 설정 파일까지 대용량 텍스트를 로컬에서 편집하세요. 자동저장, 찾기/바꾸기, 스냅샷, 폴더, 분할·병합과 선택형 형식 검사를 지원해요.",
     "shortDescription": "대용량 텍스트를 로컬에서 편집하고 자동저장, 검색, 스냅샷으로 관리해요.",
@@ -112,7 +112,7 @@
     }
   },
   "ja": {
-    "appName": "VaultXT",
+    "appName": "VaultXT - 大容量テキストエディタ",
     "subtitle": "大容量テキスト編集と自動保存",
     "promotionalText": "長い文書からログや設定ファイルまで、大容量テキストを端末内で編集。自動保存、検索と置換、スナップショット、フォルダ、分割・結合、任意の形式チェックに対応。",
     "shortDescription": "大容量テキストを端末内で編集。自動保存、検索、スナップショット、フォルダに対応。",
@@ -168,7 +168,7 @@
     }
   },
   "zh-Hant": {
-    "appName": "VaultXT",
+    "appName": "VaultXT - 大型文字檔案編輯器",
     "subtitle": "大型文字檔案編輯器",
     "promotionalText": "在本機編輯大型文字檔案，從長篇文件到記錄與設定檔都適用。支援自動儲存、搜尋取代、快照、資料夾、分割合併及選用的格式檢查。",
     "shortDescription": "在本機編輯大型文字檔案，並以自動儲存、搜尋、快照和資料夾管理。",
@@ -224,7 +224,7 @@
     }
   },
   "zh-Hans": {
-    "appName": "VaultXT",
+    "appName": "VaultXT - 大型文本文件编辑器",
     "subtitle": "大型文本文件编辑器",
     "promotionalText": "在本地编辑大型文本文件，从长文档到日志和配置文件都适用。支持自动保存、查找替换、快照、文件夹、分割合并和可选格式检查。",
     "shortDescription": "在本地编辑大型文本文件，并用自动保存、搜索、快照和文件夹管理。",
@@ -280,7 +280,7 @@
     }
   },
   "pt-BR": {
-    "appName": "VaultXT",
+    "appName": "VaultXT - Editor de texto",
     "subtitle": "Editor de arquivos grandes",
     "promotionalText": "Edite textos grandes no dispositivo, de documentos a logs e configurações. Inclui salvamento automático, busca, instantâneos, pastas, divisão, união e validação opcional.",
     "shortDescription": "Edite arquivos grandes com salvamento automático, busca e instantâneos.",
@@ -336,7 +336,7 @@
     }
   },
   "de": {
-    "appName": "VaultXT",
+    "appName": "VaultXT - Texteditor",
     "subtitle": "Editor für große Texte",
     "promotionalText": "Große Texte lokal bearbeiten. Mit automatischem Speichern, Suche, Snapshots, Ordnern, Aufteilen, Zusammenführen und optionalen Formatchecks für Dokumente und Logs.",
     "shortDescription": "Große Texte lokal bearbeiten: automatisch speichern, suchen und organisieren.",
@@ -392,7 +392,7 @@
     }
   },
   "fr": {
-    "appName": "VaultXT",
+    "appName": "VaultXT - Éditeur de texte",
     "subtitle": "Éditeur de gros fichiers texte",
     "promotionalText": "Modifiez de grands textes : documents, journaux et configurations. Avec enregistrement auto, recherche, instantanés, dossiers, division, fusion et vérification.",
     "shortDescription": "Modifiez de gros fichiers texte avec enregistrement automatique et recherche.",
@@ -448,7 +448,7 @@
     }
   },
   "es": {
-    "appName": "VaultXT",
+    "appName": "VaultXT - Editor de texto",
     "subtitle": "Editor de archivos grandes",
     "promotionalText": "Edita textos grandes: documentos, registros y configuraciones. Incluye guardado automático, búsqueda, versiones, carpetas, división, fusión y validación.",
     "shortDescription": "Edita archivos grandes con guardado automático, búsqueda y versiones.",
