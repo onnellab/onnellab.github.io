@@ -1,0 +1,106 @@
+name: Repair and verify dependencies
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/repair-dependencies.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check starting dependency contract and raise Astro security floor
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const lock = JSON.parse(fs.readFileSync('package-lock.json', 'utf8'));
+          assert.equal(pkg.dependencies.astro, '^7.0.4');
+          assert.equal(lock.packages['node_modules/astro'].version, '7.0.4');
+          fs.writeFileSync('/tmp/dependency-lock-before.json', JSON.stringify(lock));
+          pkg.dependencies.astro = '^7.2.8';
+          pkg.scripts['audit:security'] = 'npm audit --package-lock-only --include=dev --audit-level=high';
+          fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+          NODE
+          npm install --package-lock-only --ignore-scripts
+          npm update astro js-yaml nanoid postcss sharp smol-toml svgo --package-lock-only --ignore-scripts
+      - name: Require a clean complete dependency audit before installing
+        run: npm audit --package-lock-only --include=dev --audit-level=low --json > /tmp/dependency-audit-after.json
+      - name: Install verified locked dependencies
+        run: npm ci
+      - name: Report locked versions and dependency callers
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const before = JSON.parse(fs.readFileSync('/tmp/dependency-lock-before.json', 'utf8'));
+          const after = JSON.parse(fs.readFileSync('package-lock.json', 'utf8'));
+          for (const name of ['astro','js-yaml','nanoid','postcss','sharp','smol-toml','svgo','@playwright/test']) {
+            console.log(JSON.stringify({ package: name, before: before.packages['node_modules/'+name]?.version, after: after.packages['node_modules/'+name]?.version }));
+          }
+          console.log(fs.readFileSync('/tmp/dependency-audit-after.json','utf8'));
+          NODE
+          npm ls astro js-yaml nanoid postcss sharp smol-toml svgo @playwright/test
+          echo '=== Repository call-site evidence ==='
+          git grep -n -E 'astro/assets|astro/hono|astro:transitions|transition:animate|renderHTMLElement|removeScripts|nanoid|smol-toml|js-yaml|postcss|sharp|sourceMappingURL|prerender.*false|output:|\.\.\.' -- src scripts astro.config.mjs playwright.config.ts || test "$?" -eq 1
+          echo '=== Tracked high-risk input formats ==='
+          git ls-files '*.avif' '*.heif' '*.heic' '*.gif' '*.tiff' '*.vips' '*.toml' '*.svg'
+      - name: Build the complete static site
+        run: npm run build
+      - name: Verify content and localized metadata contracts
+        run: |
+          npm run test:blog-template
+          npm run check:i18n-quality
+          npx playwright test tests/meriq-copy.spec.ts --project=desktop --reporter=line
+      - name: Verify browser routing and page rendering
+        run: |
+          npx playwright install --with-deps chromium
+          npx playwright test tests/i18n-product-routing.spec.ts --project=mobile --reporter=line
+      - name: Check static output and change scope
+        run: |
+          test -f dist/apps/meriq/index.html
+          test ! -d dist/server
+          git diff --check
+          node --input-type=module <<'NODE'
+          import { execFileSync } from 'node:child_process';
+          import assert from 'node:assert/strict';
+          const paths = execFileSync('git', ['diff','--name-only'], {encoding:'utf8'}).trim().split('\n');
+          assert.deepEqual(paths.sort(), ['package-lock.json','package.json']);
+          console.log('Scope verified: only package.json and package-lock.json changed.');
+          NODE
+      - name: Commit and push verified dependency patch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add package.json package-lock.json
+          git commit -m 'fix(security): upgrade Astro and vulnerable transitive dependencies'
+          header="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+          echo "::add-mask::$header"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $header"
+          trap 'git config --local --unset-all http.https://github.com/.extraheader' EXIT
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Retain remediation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-remediation-${{ github.run_id }}
+          path: |
+            /tmp/dependency-audit-after.json
+            test-results
+          retention-days: 14
+          if-no-files-found: ignore
