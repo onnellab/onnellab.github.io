@@ -34,7 +34,7 @@ PDF exports combine the production content; they do not contain independently ed
 
 ## Your artwork stays on your device
 
-Projects and imported images are stored on your device. Preview and export also happen locally. No account, login, ads or cloud sync are required. You choose the files to import, and export, sharing and project transfer begin only when you start them. Image and project content is not written to diagnostic logs.
+Projects and imported images are stored on your device. Preview and export also happen locally. No account or login is needed. There are no ads or cloud sync. You choose the files to import, and export, sharing and project transfer begin only when you start them. Image and project content is not written to diagnostic logs.
 
 FAQ:
 Q: Does Meriq upload my projects or images to a server?
