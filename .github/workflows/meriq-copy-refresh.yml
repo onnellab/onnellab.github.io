@@ -1,0 +1,266 @@
+name: Apply and verify Meriq copy
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/meriq-copy-refresh.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Apply only Meriq copy
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import re
+          import subprocess
+          from pathlib import Path
+
+          base = '831e007c36b4c3f978f9da8e8cf7227ef4b74e23'
+          cjk_path = Path('src/lib/product-localizations.ts')
+          cjk = cjk_path.read_text()
+          corrections = {
+              '它可以为照片、音乐和文件应用一致的命名规则，包括添加日期或序号、整理空格、移除无效字符，以及根据曲目信息生成音乐文件名。': '它可为照片、音乐和文档应用统一的命名方式，包括添加日期或序号、整理空格、移除无效字符，以及根据曲目信息生成音乐文件名。',
+              "{ question: 'MP3 和 FLAC 都可以編輯嗎？', answer: '可以。TagWeaver 支援 MP3 ID3 標籤和 FLAC Vorbis Comment 標籤。' }": "{ question: 'MP3 與 FLAC 都可以編輯嗎？', answer: '可以。TagWeaver 支援 MP3 ID3 標籤與 FLAC Vorbis Comment 標籤。' }",
+          }
+          for old, new in corrections.items():
+              assert cjk.count(old) == 1, 'Unexpected source for scope correction'
+              cjk = cjk.replace(old, new, 1)
+          original = subprocess.check_output(['git', 'show', f'{base}:{cjk_path}'], text=True)
+          cjk_pattern = re.compile(r'^    meriq: \{\n.*?^    \}\n', re.M | re.S)
+          assert len(cjk_pattern.findall(cjk)) == 3
+          assert cjk_pattern.sub('', cjk).rstrip() == cjk_pattern.sub('', original).rstrip(), 'Non-Meriq CJK copy changed'
+          cjk_path.write_text(cjk)
+
+          en_path = Path('src/content/apps/meriq/description-en.md')
+          en = en_path.read_text()
+          old = 'No account, login, ads or cloud sync are required.'
+          assert en.count(old) == 1
+          en = en.replace(old, 'No account or login is needed. There are no ads or cloud sync.', 1)
+          en_path.write_text(en)
+
+          entries = [
+              {
+                  'locale': 'pt-BR',
+                  'subtitle': 'Crie adesivos e chaveiros de acrílico',
+                  'body': '''O Meriq ajuda você a preparar arquivos para imprimir adesivos, chaveiros de acrílico e photocards. Escolha as medidas recomendadas para o produto ou informe o tamanho final desejado e posicione sua arte na frente ou no verso, tudo em um só projeto.
+
+          ## Confira a remoção de fundo antes de aplicar
+
+          Nos projetos de chaveiros de acrílico transparente e adesivos com corte especial, o Meriq gera no dispositivo uma sugestão de remoção de fundo para imagens opacas que atendam aos critérios. Confira o resultado, aplique, ajuste a seleção ou mantenha a imagem original.
+
+          ## Prepare o corte, a tinta branca e a exportação no mesmo projeto
+
+          - Escolha medidas recomendadas por produto ou defina o tamanho final
+          - Posicione imagens e edite as camadas de produção da frente e do verso
+          - Prepare linhas de corte vetoriais e uma camada de tinta branca sob a arte
+          - Prepare e edite camadas de acabamento compatíveis; os recursos de acabamento exigem Meriq Pro
+          - Confira as dimensões reais e a resolução da imagem com uma verificação básica de produção
+          - Exporte PNG transparente e PDF com o conteúdo de produção combinado
+          - Transfira projetos editáveis em pacotes ZIP padrão
+
+          ## Confira os requisitos da gráfica antes de enviar
+
+          O PDF combina o conteúdo de produção e não mantém camadas de produção editáveis separadamente. Antes de enviar à gráfica, confirme os formatos de arquivo e as medidas exigidos.
+
+          ## Sua arte fica no seu dispositivo
+
+          Os projetos e as imagens importadas ficam armazenados no dispositivo. As prévias e exportações também são processadas localmente. Não é preciso criar conta nem fazer login, e não há anúncios ou sincronização em nuvem. Você escolhe os arquivos a importar; exportar, compartilhar e transferir projetos só acontece quando você inicia essas ações. O conteúdo de imagens e projetos não é gravado em logs de diagnóstico.''',
+                  'faqTitle': 'Perguntas frequentes',
+                  'faq': [
+                      {'question': 'O Meriq envia projetos ou imagens para servidores?', 'answer': 'Não. Os projetos e as imagens importadas ficam no dispositivo, e as prévias e exportações são processadas localmente. Sua arte não é enviada aos servidores da ONNELLAB.'},
+                      {'question': 'Quais formatos posso exportar?', 'answer': 'Você pode exportar PNG transparente e PDF com o conteúdo de produção combinado. O PDF não mantém camadas de produção editáveis separadamente. Para transferir um projeto editável, use um pacote ZIP padrão.'},
+                      {'question': 'Os recursos de acabamento exigem Pro?', 'answer': 'Sim. Preparar e editar as camadas de acabamento compatíveis exige Meriq Pro.'},
+                      {'question': 'Comprar ou restaurar uma compra envia o conteúdo do projeto?', 'answer': 'Não. A App Store ou o Google Play processa compras e restaurações. O conteúdo do projeto não é enviado nesse processo.'},
+                      {'question': 'O compartilhamento ou a exportação acontece automaticamente?', 'answer': 'Não. Exportar, compartilhar e transferir um pacote ZIP de projeto só acontece quando você inicia a ação.'},
+                  ],
+              },
+              {
+                  'locale': 'de',
+                  'subtitle': 'Sticker & Acrylanhänger gestalten',
+                  'body': '''Mit Meriq bereitest du Druckdaten für Aufkleber, Acryl-Schlüsselanhänger und Fotokarten vor. Wähle empfohlene Produktmaße oder gib eigene Endmaße ein und platziere dein Motiv auf der Vorder- oder Rückseite – alles in einem Projekt.
+
+          ## Hintergrundentfernung erst prüfen, dann übernehmen
+
+          Bei Projekten für transparente Acryl-Schlüsselanhänger und formgeschnittene Aufkleber erstellt Meriq auf deinem Gerät einen Vorschlag zur Hintergrundentfernung für geeignete Bilder ohne Transparenz. Prüfe das Ergebnis, übernimm es, passe die Auswahl an oder behalte das Original.
+
+          ## Schnittkontur, Weißdruck und Export in einem Projekt
+
+          - Produktspezifische Maßempfehlungen nutzen oder eigene Endmaße festlegen
+          - Bilder auf Vorder- und Rückseite platzieren und Produktionsebenen bearbeiten
+          - Vektor-Schnittkonturen und eine weiße Druckschicht unter dem Motiv vorbereiten
+          - Unterstützte Veredelungsebenen vorbereiten und bearbeiten; Veredelungsfunktionen erfordern Meriq Pro
+          - Tatsächliche Abmessungen und Bildauflösung mit einer grundlegenden Produktionsprüfung kontrollieren
+          - Transparente PNG-Dateien und PDF-Dateien mit zusammengeführten Produktionsinhalten exportieren
+          - Bearbeitbare Projekte in Standard-ZIP-Paketen übertragen
+
+          ## Vor der Abgabe die Vorgaben der Druckerei prüfen
+
+          Der PDF-Export führt Produktionsinhalte zusammen und enthält keine einzeln bearbeitbaren Produktionsebenen. Prüfe vor der Abgabe die Datei- und Größenvorgaben deiner Druckerei.
+
+          ## Deine Motive bleiben auf deinem Gerät
+
+          Projekte und importierte Bilder werden lokal auf deinem Gerät gespeichert. Auch Vorschau und Export werden dort verarbeitet. Du brauchst weder ein Konto noch eine Anmeldung; Werbung und Cloud-Synchronisierung gibt es nicht. Du wählst die Dateien zum Importieren selbst aus. Export, Teilen und Projektübertragung starten nur auf deine Anweisung. Bild- und Projektinhalte werden nicht in Diagnoseprotokolle geschrieben.''',
+                  'faqTitle': 'Häufige Fragen',
+                  'faq': [
+                      {'question': 'Lädt Meriq Projekte oder Bilder auf einen Server hoch?', 'answer': 'Nein. Projekte und importierte Bilder bleiben auf deinem Gerät. Auch Vorschau und Export werden lokal verarbeitet. Deine Motive werden nicht auf ONNELLAB-Server hochgeladen.'},
+                      {'question': 'Welche Dateiformate kann ich exportieren?', 'answer': 'Du kannst transparente PNG-Dateien und PDF-Dateien mit zusammengeführten Produktionsinhalten exportieren. Die Produktionsebenen der PDF-Datei sind nicht einzeln bearbeitbar. Bearbeitbare Projekte kannst du als Standard-ZIP-Paket übertragen.'},
+                      {'question': 'Brauche ich Pro für Veredelungsfunktionen?', 'answer': 'Ja. Zum Vorbereiten und Bearbeiten der unterstützten Veredelungsebenen ist Meriq Pro erforderlich.'},
+                      {'question': 'Werden bei einem Kauf oder dessen Wiederherstellung Projektinhalte übertragen?', 'answer': 'Nein. Käufe und deren Wiederherstellung werden vom App Store oder von Google Play verarbeitet. Dabei werden keine Projektinhalte hochgeladen.'},
+                      {'question': 'Werden Dateien automatisch exportiert oder geteilt?', 'answer': 'Nein. Export, Teilen und die Übertragung von ZIP-Projektpaketen starten nur auf deine Anweisung.'},
+                  ],
+              },
+              {
+                  'locale': 'fr',
+                  'subtitle': 'Créez vos stickers et porte-clés',
+                  'body': '''Meriq vous aide à préparer les fichiers d’impression de vos autocollants, porte-clés en acrylique et cartes photo. Choisissez les dimensions recommandées pour le produit ou saisissez le format fini souhaité, puis placez votre visuel au recto ou au verso dans un même projet.
+
+          ## Vérifiez le détourage avant de le valider
+
+          Pour les projets de porte-clés en acrylique transparent et d’autocollants découpés à la forme, Meriq propose un détourage sur votre appareil lorsque l’image opaque remplit les conditions. Vérifiez le résultat, appliquez-le, ajustez la sélection ou conservez l’image d’origine.
+
+          ## Découpe, encre blanche et export dans un même projet
+
+          - Choisir les dimensions recommandées par produit ou définir un format fini personnalisé
+          - Placer des images au recto et au verso et modifier les calques de production
+          - Préparer des tracés de découpe vectoriels et une couche d’encre blanche sous le visuel
+          - Préparer et modifier les calques de finition pris en charge ; les fonctions de finition nécessitent Meriq Pro
+          - Vérifier les dimensions réelles et la résolution de l’image grâce à un contrôle de production de base
+          - Exporter un PNG transparent ou un PDF regroupant les éléments de production
+          - Transférer des projets modifiables dans des archives ZIP standard
+
+          ## Vérifiez les consignes de votre imprimeur avant l’envoi
+
+          Le PDF regroupe les éléments de production et ne conserve pas de calques de production modifiables séparément. Avant l’envoi, vérifiez les formats de fichier et les dimensions exigés par votre imprimeur.
+
+          ## Vos créations restent sur votre appareil
+
+          Les projets et les images importées sont stockés sur votre appareil. Les aperçus et les exports y sont aussi traités. Aucun compte ni connexion ne sont nécessaires, et il n’y a ni publicité ni synchronisation cloud. Vous choisissez les fichiers à importer. L’exportation, le partage et le transfert de projets ne démarrent qu’à votre demande. Le contenu des images et des projets n’est pas écrit dans les journaux de diagnostic.''',
+                  'faqTitle': 'Questions fréquentes',
+                  'faq': [
+                      {'question': 'Meriq envoie-t-il mes projets ou images à un serveur ?', 'answer': 'Non. Les projets et les images importées restent sur votre appareil. Les aperçus et les exports sont traités localement. Vos créations ne sont pas envoyées aux serveurs ONNELLAB.'},
+                      {'question': 'Quels formats de fichier puis-je exporter ?', 'answer': 'Vous pouvez exporter un PNG transparent ou un PDF regroupant les éléments de production. Les calques de production du PDF ne sont pas modifiables séparément. Pour transférer un projet modifiable, utilisez une archive ZIP standard.'},
+                      {'question': 'Les fonctions de finition nécessitent-elles Pro ?', 'answer': 'Oui. La préparation et la modification des calques de finition pris en charge nécessitent Meriq Pro.'},
+                      {'question': 'Un achat ou sa restauration transmet-il le contenu du projet ?', 'answer': 'Non. Les achats et leurs restaurations sont traités par l’App Store ou Google Play. Le contenu du projet n’est pas envoyé pendant cette opération.'},
+                      {'question': 'Le partage ou l’exportation se lance-t-il automatiquement ?', 'answer': 'Non. L’exportation, le partage et le transfert d’un projet en ZIP ne démarrent qu’à votre demande.'},
+                  ],
+              },
+              {
+                  'locale': 'es',
+                  'subtitle': 'Crea pegatinas y llaveros acrílicos',
+                  'body': '''Meriq te ayuda a preparar archivos para imprimir pegatinas, llaveros acrílicos y tarjetas fotográficas. Elige las medidas recomendadas para el producto o introduce el tamaño final que necesitas y coloca tu diseño en la cara delantera o trasera, todo en un solo proyecto.
+
+          ## Revisa el fondo transparente antes de aplicar el resultado
+
+          En los proyectos de llaveros de acrílico transparente y pegatinas troqueladas, Meriq genera en tu dispositivo una propuesta para quitar el fondo de las imágenes opacas que cumplan los criterios. Revisa el resultado, aplícalo, ajusta la selección o conserva la imagen original.
+
+          ## Prepara el corte, la tinta blanca y la exportación en un proyecto
+
+          - Elegir medidas recomendadas por producto o definir un tamaño final personalizado
+          - Colocar imágenes y editar las capas de producción de ambas caras
+          - Preparar líneas de corte vectoriales y una capa de tinta blanca bajo el diseño
+          - Preparar y editar las capas de acabado compatibles; las funciones de acabado requieren Meriq Pro
+          - Comprobar las dimensiones reales y la resolución de la imagen con una revisión básica de producción
+          - Exportar PNG transparente y PDF con el contenido de producción combinado
+          - Transferir proyectos editables en paquetes ZIP estándar
+
+          ## Confirma los requisitos de tu imprenta antes del envío
+
+          El PDF combina el contenido de producción y no conserva capas de producción editables por separado. Antes de enviarlo a imprimir, confirma los formatos de archivo y las medidas que exige tu imprenta.
+
+          ## Tus diseños se quedan en tu dispositivo
+
+          Los proyectos y las imágenes importadas se guardan en el dispositivo. Las vistas previas y las exportaciones también se procesan localmente. No necesitas una cuenta ni iniciar sesión, y no hay anuncios ni sincronización en la nube. Tú eliges qué archivos importar. La exportación, el uso compartido y la transferencia de proyectos solo empiezan cuando eliges esas acciones. El contenido de imágenes y proyectos no se escribe en los registros de diagnóstico.''',
+                  'faqTitle': 'Preguntas frecuentes',
+                  'faq': [
+                      {'question': '¿Meriq sube mis proyectos o imágenes a un servidor?', 'answer': 'No. Los proyectos y las imágenes importadas se quedan en tu dispositivo. Las vistas previas y las exportaciones se procesan localmente. Tus diseños no se suben a los servidores de ONNELLAB.'},
+                      {'question': '¿Qué formatos de archivo puedo exportar?', 'answer': 'Puedes exportar PNG transparente y PDF con el contenido de producción combinado. Las capas de producción del PDF no se pueden editar por separado. Para transferir un proyecto editable, utiliza un paquete ZIP estándar.'},
+                      {'question': '¿Las funciones de acabado requieren Pro?', 'answer': 'Sí. Preparar y editar las capas de acabado compatibles requiere Meriq Pro.'},
+                      {'question': '¿Comprar o restaurar una compra envía el contenido del proyecto?', 'answer': 'No. App Store o Google Play procesan las compras y sus restauraciones. El contenido del proyecto no se sube durante ese proceso.'},
+                      {'question': '¿La exportación o el uso compartido se inicia automáticamente?', 'answer': 'No. La exportación, el uso compartido y la transferencia de paquetes ZIP de proyecto solo empiezan cuando tú lo decides.'},
+                  ],
+              },
+          ]
+          extended_path = Path('src/lib/extended-product-localizations.ts')
+          extended = extended_path.read_text()
+          assert subprocess.check_output(['git', 'hash-object', str(extended_path)], text=True).strip() == '442e535c3c9a535b711629628cd0848e470c88fd', 'Extended copy changed concurrently'
+          locale_order = re.findall(r"^  (?:'([^']+)'|([a-z-]+)): \{$", extended, re.M)
+          assert [a or b for a, b in locale_order] == [entry['locale'] for entry in entries]
+          pattern = re.compile(r'^    meriq: make\(.*?(?=^    quivra: make\()', re.M | re.S)
+          assert len(pattern.findall(extended)) == 4
+          updated = iter(entries)
+          def replace_entry(match):
+              entry = next(updated)
+              values = [entry['subtitle'], entry['body'], entry['faqTitle'], entry['faq']]
+              return '    meriq: make(' + ', '.join(json.dumps(value, ensure_ascii=False) for value in values) + '),\n'
+          result = pattern.sub(replace_entry, extended)
+          assert pattern.sub('', result) == pattern.sub('', extended), 'Non-Meriq extended copy changed'
+          extended_path.write_text(result)
+          print('Meriq-only scope verified; all other app copy preserved.')
+          PY
+      - name: Check whitespace
+        run: git diff --check
+      - name: Install dependencies
+        run: npm ci
+      - name: Build all localized pages
+        run: npm run build
+      - name: Verify nine rendered Meriq pages
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          class PageText(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.skip = 0
+                  self.parts = []
+              def handle_starttag(self, tag, attrs):
+                  if tag in ('script', 'style'):
+                      self.skip += 1
+              def handle_endtag(self, tag):
+                  if tag in ('script', 'style'):
+                      self.skip -= 1
+              def handle_data(self, text):
+                  if not self.skip:
+                      self.parts.append(text)
+
+          locales = ['', 'ko', 'ja', 'zh-hans', 'zh-hant', 'pt-br', 'de', 'fr', 'es']
+          for locale in locales:
+              path = Path('dist/apps/meriq') / locale / 'index.html'
+              html = path.read_text()
+              page = PageText()
+              page.feed(html)
+              text = ' '.join(page.parts)
+              assert len(text) > 700, f'Truncated landing page: {locale}'
+              for term in ('PNG', 'PDF', 'ZIP', 'Pro'):
+                  assert term in text, f'Missing {term}: {locale}'
+              assert '\\n' not in text, f'Unrendered newlines: {locale}'
+              assert 'Meriq - ' in html, f'Missing descriptive title: {locale}'
+              print(f'PASS {locale or "en"}: full body, title, exports and Pro rendered')
+          PY
+      - name: Commit verified copy and remove this one-time workflow
+        shell: bash
+        run: |
+          rm .github/workflows/meriq-copy-refresh.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/lib/product-localizations.ts src/lib/extended-product-localizations.ts src/content/apps/meriq/description-en.md .github/workflows/meriq-copy-refresh.yml
+          git commit -m 'docs(meriq): complete nine-locale landing copy and verify scope'
+          git pull --rebase origin main
+          git push origin HEAD:main
