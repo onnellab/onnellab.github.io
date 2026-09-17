@@ -7,6 +7,9 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/dependency-security.yml'
+  schedule:
+    # New advisories can affect an unchanged lockfile. Monday, UTC.
+    - cron: '27 3 * * 1'
   workflow_dispatch:
 
 permissions:
