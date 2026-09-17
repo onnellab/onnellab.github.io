@@ -1,0 +1,55 @@
+name: Audit dependency security
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/dependency-security.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dependency-security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Audit all locked dependencies, including build and test tools
+        run: npm audit --package-lock-only --include=dev --audit-level=high --json > dependency-audit.json
+      - name: Report advisory evidence and locked versions
+        if: always()
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const audit = JSON.parse(fs.readFileSync('dependency-audit.json', 'utf8'));
+          const lock = JSON.parse(fs.readFileSync('package-lock.json', 'utf8'));
+          console.log(JSON.stringify(audit, null, 2));
+          for (const finding of Object.values(audit.vulnerabilities ?? {})) {
+            for (const node of finding.nodes) {
+              console.log(JSON.stringify({ package: finding.name, path: node, version: lock.packages[node]?.version, dependencies: lock.packages[node]?.dependencies }));
+            }
+          }
+          NODE
+      - name: Retain audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-audit-${{ github.sha }}
+          path: dependency-audit.json
+          if-no-files-found: error
+          retention-days: 14
