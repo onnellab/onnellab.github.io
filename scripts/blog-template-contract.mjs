@@ -5,23 +5,32 @@ import path from 'node:path';
 import { after, test } from 'node:test';
 
 const root = path.resolve(import.meta.dirname, '..');
-const fixtureDir = path.join(root, 'src/content/blog/en');
-const fixturePath = path.join(fixtureDir, 'template-contract.md');
-const relatedFixturePath = path.join(fixtureDir, 'template-contract-related.md');
+const fixtureLocales = ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de', 'fr', 'es'];
+const createdFixturePaths = new Set();
+const fixturePath = path.join(root, 'src/content/blog/en/template-contract.md');
+const relatedFixturePath = path.join(root, 'src/content/blog/en/template-contract-related.md');
 const outputPath = path.join(root, 'dist/blog/en/template-contract/index.html');
 const relatedOutputPath = path.join(root, 'dist/blog/en/template-contract-related/index.html');
 const indexPath = path.join(root, 'dist/blog/en/index.html');
 
+function writeLocalizedFixture(slug, source) {
+  for (const locale of fixtureLocales) {
+    const filePath = path.join(root, 'src/content/blog', locale, `${slug}.md`);
+    const localizedSource = source.replace(/^language:\s*"[^"]*"/m, `language: "${locale}"`);
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.writeFileSync(filePath, localizedSource, 'utf-8');
+    createdFixturePaths.add(filePath);
+  }
+}
+
 after(() => {
-  fs.rmSync(fixturePath, { force: true });
-  fs.rmSync(relatedFixturePath, { force: true });
+  for (const filePath of createdFixturePaths) fs.rmSync(filePath, { force: true });
   execFileSync('npm', ['run', 'build'], { cwd: root, stdio: 'pipe' });
 });
 
 test('blog article template renders publishing metadata without committing sample posts', () => {
-  fs.mkdirSync(fixtureDir, { recursive: true });
-  fs.writeFileSync(
-    fixturePath,
+  writeLocalizedFixture(
+    'template-contract',
     `---
 title: "How to Keep a Very Long ONNELLAB Workflow Article Title Readable on Mobile and Desktop"
 card_title: "Readable Workflow Article Title"
@@ -78,7 +87,6 @@ No. FAQ questions should become collapsible details so long articles stay easy t
 
 Yes. The template should render recommendation metadata as links when a URL is provided.
 `,
-    'utf-8'
   );
 
   execFileSync('npm', ['run', 'build'], { cwd: root, stdio: 'pipe' });
@@ -115,9 +123,8 @@ Yes. The template should render recommendation metadata as links when a URL is p
 });
 
 test('blog article template renders next-reading cards when a public related post exists', () => {
-  fs.mkdirSync(fixtureDir, { recursive: true });
-  fs.writeFileSync(
-    relatedFixturePath,
+  writeLocalizedFixture(
+    'template-contract-related',
     `---
 title: "Offline Text Workflow Guide"
 card_title: "Offline Text Workflow Guide"
@@ -141,10 +148,9 @@ How should a second public article behave?
 
 It should be available as a link target for the next-reading card test.
 `,
-    'utf-8'
   );
-  fs.writeFileSync(
-    fixturePath,
+  writeLocalizedFixture(
+    'template-contract',
     `---
 title: "Readable Public Article"
 card_title: "Readable Public Article"
@@ -169,7 +175,6 @@ How should related articles appear?
 
 They should appear as linked cards after the article body.
 `,
-    'utf-8'
   );
 
   execFileSync('npm', ['run', 'build'], { cwd: root, stdio: 'pipe' });
