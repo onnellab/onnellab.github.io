@@ -27,7 +27,6 @@ on:
 
 permissions:
   contents: read
-  statuses: write
 
 concurrency:
   group: i18n-smoke-${{ github.ref }}
@@ -37,9 +36,13 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: read
     steps:
       - name: Checkout site
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -47,6 +50,9 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: package-lock.json
+
+      - name: Audit all locked dependencies before executing package scripts
+        run: npm audit --package-lock-only --include=dev --audit-level=high
 
       - name: Install dependencies
         run: npm ci
@@ -95,19 +101,27 @@ jobs:
           if-no-files-found: ignore
           retention-days: 3
 
+  report:
+    name: Report localization result
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: verify
+    if: always() && github.event_name != 'pull_request'
+    permissions:
+      statuses: write
+    steps:
       - name: Publish commit status
-        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
-          JOB_RESULT: ${{ job.status }}
+          JOB_RESULT: ${{ needs.verify.result }}
           TARGET_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           if [ "$JOB_RESULT" = "success" ]; then
             state=success
-            description="Nine-language localization regression tests passed"
+            description="Dependency audit and nine-language regression tests passed"
           else
             state=failure
-            description="Nine-language localization regression tests failed"
+            description="Dependency audit or nine-language regression tests failed"
           fi
 
           gh api \
