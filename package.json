@@ -11,10 +11,11 @@
     "preview": "astro preview",
     "test:blog-template": "node --test scripts/blog-template-contract.mjs",
     "test:visual": "playwright test",
-    "check:i18n-quality": "node scripts/check-localization-quality.mjs"
+    "check:i18n-quality": "node scripts/check-localization-quality.mjs",
+    "audit:security": "npm audit --package-lock-only --include=dev --audit-level=high"
   },
   "dependencies": {
-    "astro": "^7.0.4"
+    "astro": "^7.3.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1"
