@@ -1,4 +1,7 @@
 Android
+SEO description:
+Convert WAV and M4A to MP3, extract MP3 audio from MP4, or turn MOV into MP4 with Quivra. The app picks the conversion and saves a new file, keeping the original.
+
 앱 이름:
 Quivra – WAV to MP3 Converter
 
@@ -81,6 +84,9 @@ Q: Does Quivra remember where I save files?
 A: Yes. It remembers your chosen save location and handles duplicate file names automatically.
 
 ios
+SEO description:
+Convert WAV and M4A to MP3, extract MP3 audio from MP4, or turn MOV into MP4 with Quivra. The app picks the conversion and saves a new file, keeping the original.
+
 앱 이름:
 Quivra – WAV to MP3 Converter
 

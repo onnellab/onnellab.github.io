@@ -1,4 +1,7 @@
 Android
+SEO description:
+Trim MP3 and WAV audio, merge recordings, or create MP4 videos from audio and an image with Segra. Files are processed offline and originals are preserved.
+
 앱 이름:
 Segra - Audio Cutter & Merger
 
@@ -82,6 +85,9 @@ Q: Are files uploaded to a server?
 A: No. Processing happens on your device without login, account creation, or file uploads.
 
 ios
+SEO description:
+Trim MP3 and WAV audio, merge recordings, or create MP4 videos from audio and an image with Segra. Files are processed offline and originals are preserved.
+
 앱 이름:
 Segra - Audio Cutter & Merger
 

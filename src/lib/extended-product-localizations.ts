@@ -1,8 +1,11 @@
+import { getPapiraDescription } from './papira-description';
 import type { ExtendedSiteLocale } from './extended-site-i18n';
 
 export type ExtendedProductCopy = {
   subtitle: string;
   body: string;
+  seoTitle?: string;
+  seoDescription?: string;
   faqTitle: string;
   faq: Array<{ question: string; answer: string }>;
 };
@@ -32,7 +35,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "question": "Meus arquivos são enviados para um servidor?",
           "answer": "Não. O processamento é local e não exige conta nem armazenamento em nuvem."
         }
-      ]
+      ],
+      "seoDescription": "Renomeie arquivos em lote com o Aligna. Adicione datas e números, use dados de fotos e músicas e confira os novos nomes antes de aplicar as alterações."
     },
     clipnest: {
       "subtitle": "Área de transferência e textos reutilizáveis",
@@ -55,7 +59,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "question": "Posso fixar textos que uso sempre?",
           "answer": "Sim. Itens importantes podem ser fixados para acesso rápido pelo teclado."
         }
-      ]
+      ],
+      "seoDescription": "Salve textos ao abrir o teclado ClipNest, fixe frases frequentes e cole em outros apps. Os textos ficam no seu iPhone ou iPad, sem envio a servidores."
     },
     meriq: {
       "subtitle": "Crie adesivos e chaveiros de acrílico",
@@ -78,7 +83,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "question": "Os recursos de acabamento exigem Pro?",
           "answer": "Sim. Preparar e editar as camadas de acabamento compatíveis exige Meriq Pro."
         }
-      ]
+      ],
+      "seoDescription": "Prepare arquivos de adesivos, chaveiros de acrílico e photocards com Meriq. Ajuste corte, tinta branca e tamanho, depois exporte em PNG ou PDF."
     },
     quivra: {
       "subtitle": "Conversor de mídia",
@@ -101,7 +107,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "question": "Preciso escolher o destino a cada conversão?",
           "answer": "Não. O Quivra lembra o local escolhido e trata nomes de arquivo duplicados automaticamente."
         }
-      ]
+      ],
+      "seoDescription": "Converta WAV e M4A para MP3, extraia MP3 de MP4 ou transforme MOV em MP4 com Quivra. A conversão é escolhida automaticamente e o original é preservado."
     },
     segra: {
       "subtitle": "Cortar e combinar áudio",
@@ -124,7 +131,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "question": "Os arquivos são enviados para um servidor?",
           "answer": "Não. O processamento ocorre no dispositivo."
         }
-      ]
+      ],
+      "seoDescription": "Recorte MP3 e WAV, junte gravações ou crie vídeos MP4 com áudio e imagem no Segra. Tudo é processado offline, sem alterar os arquivos originais."
     },
     tagweaver: {
       "subtitle": "Editor offline de tags MP3 e FLAC",
@@ -147,39 +155,15 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "question": "Posso salvar alterações em vários arquivos de uma vez?",
           "answer": "Sim. Seleção e edição em lote são suportadas; o salvamento em lote de vários arquivos está disponível no Pro."
         }
-      ]
+      ],
+      "seoDescription": "Edite tags, avaliações, capas e letras de MP3 e FLAC com TagWeaver. Confira as alterações antes de salvar e trabalhe no dispositivo, sem enviar arquivos."
     },
     vaultxt: make('Editor para arquivos TXT grandes', `VaultXT é um editor de texto rápido e leve, projetado para arquivos grandes.\n\nAbra e edite documentos longos, logs, rascunhos e dados de texto que podem ficar pesados em apps de notas comuns. Os arquivos são abertos diretamente do dispositivo e salvos sem envio para serviços em nuvem.\n\n## Principais recursos\n\n- Abrir rapidamente arquivos TXT grandes\n- Ler e editar documentos longos\n- Salvamento automático\n- Recuperação com desfazer e snapshots\n- Armazenamento local e funcionamento offline\n\nNão há conta, anúncios nem rastreamento, e o conteúdo do arquivo não é enviado a servidores externos.`, 'Perguntas frequentes', [
       { question: 'Posso abrir arquivos TXT muito grandes?', answer: 'Sim. O VaultXT é voltado para TXT grandes, documentos longos, logs, rascunhos e dados exportados.' },
       { question: 'Como posso recuperar alterações?', answer: 'O design usa salvamento automático, desfazer e snapshots para oferecer caminhos de recuperação.' },
       { question: 'O conteúdo do arquivo é enviado para um servidor?', answer: 'Não. O processamento e o salvamento permanecem no dispositivo.' }
     ]),
-    papira: make('Criador offline de EPUB a partir de TXT', `Papira transforma manuscritos TXT finalizados em livros EPUB estruturados. O app oferece fluxos próprios para fanfics, ficção seriada, romances autorais, zines digitais e cenários de TRPG, além de aceitar outros conteúdos em TXT.
-
-## Duas formas objetivas de criar
-
-### 1. EPUB rápido
-
-Selecione arquivos TXT e crie EPUBs imediatamente, sem capa nem metadados de publicação.
-
-### 2. Projeto de livro
-
-Adicione capa, título, autor, editora, informações de série, regras de capítulos e sumário antes de exportar.
-
-## Feito para manuscritos finalizados
-
-- Predefinições para fanfics, ficção seriada, romances autorais, zines digitais e cenários de TRPG, com suporte a outros conteúdos TXT
-- Detecção automática de capítulos, modo de títulos com # ou opção de capítulo único
-- Imagem de capa, metadados do livro, informações de série, navegação e empacotamento EPUB
-- Os arquivos existentes são preservados; conflitos de nome recebem numeração automática
-- A criação do EPUB e o armazenamento dos projetos permanecem no dispositivo
-
-## Seu manuscrito continua com você
-
-- Sem conta nem login
-- Sem publicidade, análise comportamental ou SDKs de rastreamento
-- Manuscritos TXT e imagens de capa são processados localmente
-- Projetos e EPUBs gerados não são enviados para servidores da ONNELLAB`, 'Perguntas frequentes', [
+    papira: make('Criador offline de EPUB a partir de TXT', getPapiraDescription('pt-BR'), 'Perguntas frequentes', [
       {
         "question": "Que tipos de obra posso preparar?",
         "answer": "Qualquer conteúdo TXT finalizado pode ser convertido em EPUB. As predefinições apenas agilizam fluxos criativos comuns."
@@ -220,7 +204,8 @@ Adicione capa, título, autor, editora, informações de série, regras de capí
           "question": "Werden Dateien an einen Server gesendet?",
           "answer": "Nein. Die Verarbeitung erfolgt lokal auf dem Gerät."
         }
-      ]
+      ],
+      "seoDescription": "Mit Aligna Dateien stapelweise umbenennen: Datum, Nummern, Foto- und Musikmetadaten nutzen und neue Dateinamen vor dem Anwenden in der Vorschau prüfen."
     },
     clipnest: {
       "subtitle": "Lokale Zwischenablage und Textbausteine",
@@ -243,7 +228,8 @@ Adicione capa, título, autor, editora, informações de série, regras de capí
           "question": "Kann ich häufige Texte anheften?",
           "answer": "Ja. Wichtige Texte können für schnellen Zugriff über die Tastatur angeheftet werden."
         }
-      ]
+      ],
+      "seoDescription": "ClipNest speichert kopierten Text beim Öffnen der Tastatur. Textbausteine anheften und in andere Apps einfügen – lokal auf deinem iPhone oder iPad."
     },
     meriq: {
       "subtitle": "Sticker & Acrylanhänger gestalten",
@@ -266,7 +252,8 @@ Adicione capa, título, autor, editora, informações de série, regras de capí
           "question": "Brauche ich Pro für Veredelungsfunktionen?",
           "answer": "Ja. Zum Vorbereiten und Bearbeiten der unterstützten Veredelungsebenen ist Meriq Pro erforderlich."
         }
-      ]
+      ],
+      "seoDescription": "Mit Meriq Druckdaten für Aufkleber, Acrylanhänger und Fotokarten vorbereiten. Schnittkonturen, Weißdruck und Maße festlegen und als PNG oder PDF exportieren."
     },
     quivra: {
       "subtitle": "Medienkonverter",
@@ -289,7 +276,8 @@ Adicione capa, título, autor, editora, informações de série, regras de capí
           "question": "Muss ich den Speicherort jedes Mal neu auswählen?",
           "answer": "Nein. Quivra merkt sich den gewählten Speicherort und löst Konflikte mit vorhandenen Dateinamen automatisch."
         }
-      ]
+      ],
+      "seoDescription": "Quivra wandelt WAV und M4A in MP3 um, extrahiert MP3-Audio aus MP4 und konvertiert MOV in MP4. Die Konvertierung wird automatisch gewählt; das Original bleibt erhalten."
     },
     segra: {
       "subtitle": "Audio schneiden und zusammenfügen",
@@ -312,7 +300,8 @@ Adicione capa, título, autor, editora, informações de série, regras de capí
           "question": "Werden Dateien an einen Server gesendet?",
           "answer": "Nein. Die Verarbeitung erfolgt auf dem Gerät."
         }
-      ]
+      ],
+      "seoDescription": "Mit Segra MP3 und WAV schneiden, Aufnahmen zusammenfügen oder MP4-Videos aus Audio und Bild erstellen. Alles offline, ohne die Originaldateien zu verändern."
     },
     tagweaver: {
       "subtitle": "Offline-Editor für MP3- und FLAC-Tags",
@@ -335,35 +324,11 @@ Adicione capa, título, autor, editora, informações de série, regras de capí
           "question": "Kann ich mehrere Dateien gemeinsam speichern?",
           "answer": "Mehrfachauswahl und Stapelbearbeitung werden unterstützt; das Stapelspeichern mehrerer Dateien ist in Pro verfügbar."
         }
-      ]
+      ],
+      "seoDescription": "Mit TagWeaver MP3- und FLAC-Tags, Bewertungen, Cover und Liedtexte bearbeiten. Änderungen vor dem Speichern prüfen – lokal auf dem Gerät, ohne Datei-Upload."
     },
     vaultxt: make('Editor für große TXT-Dateien', `VaultXT ist ein schneller, leichter Texteditor für große Dateien.\n\nÖffne und bearbeite lange Dokumente, Logs, Entwürfe und exportierte Textdaten, die in gewöhnlichen Notiz-Apps schwerfällig werden können. Dateien werden direkt vom Gerät geöffnet und ohne Cloud-Upload gespeichert.\n\n## Hauptfunktionen\n\n- Große TXT-Dateien schnell öffnen\n- Lange Dokumente lesen und bearbeiten\n- Automatisch speichern\n- Wiederherstellung mit Rückgängig und Snapshots\n- Lokal und offline arbeiten\n\nKein Konto, keine Werbung, kein Tracking; Dateiinhalte werden nicht an externe Server gesendet.`, 'Häufige Fragen', [{ question: 'Kann VaultXT sehr große TXT-Dateien öffnen?', answer: 'Ja. Es ist für große TXT-Dateien, lange Dokumente, Logs, Entwürfe und exportierte Textdaten ausgelegt.' }, { question: 'Wie kann ich Änderungen wiederherstellen?', answer: 'Automatisches Speichern, Rückgängig und Snapshots bieten Wiederherstellungsmöglichkeiten.' }, { question: 'Werden Dateiinhalte an einen Server gesendet?', answer: 'Nein. Verarbeitung und Speicherung bleiben lokal.' }]),
-    papira: make('Offline-TXT-zu-EPUB-Ersteller', `Papira setzt fertige TXT-Manuskripte zu strukturierten EPUB-Büchern zusammen. Es gibt eigene Abläufe für Fanfiction, Fortsetzungsromane, eigene Romane, digitale Zines und TRPG-Szenarien; andere TXT-Inhalte lassen sich ebenfalls in EPUB umwandeln.
-
-## Zwei gezielte Wege zum EPUB
-
-### 1. Schnell-EPUB
-
-Wähle TXT-Dateien aus und erstelle sofort EPUB-Dateien – ohne Cover oder Veröffentlichungsmetadaten.
-
-### 2. Buchprojekt
-
-Füge vor dem Export Cover, Titel, Autor, Verlag, Serieninformationen, Kapitelregeln und ein Inhaltsverzeichnis hinzu.
-
-## Für fertige Manuskripte ausgelegt
-
-- Voreinstellungen für Fanfiction, Fortsetzungsromane, eigene Romane, digitale Zines und TRPG-Szenarien sowie Unterstützung für andere TXT-Inhalte
-- Automatische Kapitelerkennung, #-Überschriftenmodus oder Einzelkapitel-Option
-- Coverbild, Buchmetadaten, Serieninformationen, Navigation und EPUB-Paketierung
-- Vorhandene Dateien bleiben erhalten; bei Namenskonflikten wird automatisch eine Nummer ergänzt
-- EPUB-Erstellung und Projektspeicherung bleiben auf dem Gerät
-
-## Dein Manuskript bleibt bei dir
-
-- Kein Konto und keine Anmeldung
-- Keine Werbung, Verhaltensanalyse oder Tracking-SDKs
-- TXT-Manuskripte und Coverbilder werden lokal verarbeitet
-- Buchprojekte und erzeugte EPUB-Dateien werden nicht auf ONNELLAB-Server hochgeladen`, 'Häufige Fragen', [
+    papira: make('Offline-TXT-zu-EPUB-Ersteller', getPapiraDescription('de'), 'Häufige Fragen', [
       {
         "question": "Welche Arten von Werken kann ich vorbereiten?",
         "answer": "Jeder fertige TXT-Inhalt kann in EPUB umgewandelt werden. Die Voreinstellungen beschleunigen lediglich häufige kreative Abläufe."
@@ -404,7 +369,8 @@ Füge vor dem Export Cover, Titel, Autor, Verlag, Serieninformationen, Kapitelre
           "question": "Les fichiers sont-ils envoyés vers un serveur ?",
           "answer": "Non. Le traitement reste local."
         }
-      ]
+      ],
+      "seoDescription": "Renommez vos fichiers par lot avec Aligna : dates, numéros, données des photos et tags musicaux. Vérifiez les nouveaux noms avant toute modification."
     },
     clipnest: {
       "subtitle": "Presse-papiers local et textes réutilisables",
@@ -427,7 +393,8 @@ Füge vor dem Export Cover, Titel, Autor, Verlag, Serieninformationen, Kapitelre
           "question": "Puis-je épingler les textes souvent utilisés ?",
           "answer": "Oui. Les éléments importants peuvent être épinglés pour un accès rapide."
         }
-      ]
+      ],
+      "seoDescription": "ClipNest enregistre le texte copié à l’ouverture du clavier. Épinglez vos phrases et collez-les dans d’autres apps. Les textes restent sur votre appareil."
     },
     meriq: {
       "subtitle": "Créez vos stickers et porte-clés",
@@ -450,7 +417,8 @@ Füge vor dem Export Cover, Titel, Autor, Verlag, Serieninformationen, Kapitelre
           "question": "Les fonctions de finition nécessitent-elles Pro ?",
           "answer": "Oui. La préparation et la modification des calques de finition pris en charge nécessitent Meriq Pro."
         }
-      ]
+      ],
+      "seoDescription": "Préparez vos fichiers d’autocollants, porte-clés en acrylique et cartes photo avec Meriq. Réglez découpe, encre blanche et dimensions, puis exportez en PNG ou PDF."
     },
     quivra: {
       "subtitle": "Convertisseur multimédia",
@@ -473,7 +441,8 @@ Füge vor dem Export Cover, Titel, Autor, Verlag, Serieninformationen, Kapitelre
           "question": "Dois-je choisir le dossier de sortie à chaque conversion ?",
           "answer": "Non. Quivra mémorise le dossier choisi et gère automatiquement les noms de fichiers en double."
         }
-      ]
+      ],
+      "seoDescription": "Convertissez WAV et M4A en MP3, extrayez le son MP3 d’un MP4 ou passez de MOV à MP4 avec Quivra. La conversion est automatique et l’original est conservé."
     },
     segra: {
       "subtitle": "Découper et assembler de l’audio",
@@ -496,7 +465,8 @@ Füge vor dem Export Cover, Titel, Autor, Verlag, Serieninformationen, Kapitelre
           "question": "Les fichiers sont-ils envoyés à un serveur ?",
           "answer": "Non."
         }
-      ]
+      ],
+      "seoDescription": "Découpez des MP3 et WAV, assemblez des enregistrements ou créez des MP4 avec un fichier audio et une image dans Segra. Traitement local, originaux préservés."
     },
     tagweaver: {
       "subtitle": "Éditeur hors ligne de tags MP3/FLAC",
@@ -519,35 +489,11 @@ Füge vor dem Export Cover, Titel, Autor, Verlag, Serieninformationen, Kapitelre
           "question": "Puis-je enregistrer plusieurs fichiers ensemble ?",
           "answer": "Oui. La sélection et l’édition en lot sont prises en charge ; l’enregistrement multiple est disponible avec Pro."
         }
-      ]
+      ],
+      "seoDescription": "Modifiez les tags, notes, pochettes et paroles des MP3 et FLAC avec TagWeaver. Vérifiez vos modifications avant de les enregistrer, sans envoyer vos fichiers."
     },
     vaultxt: make('Éditeur de gros fichiers TXT', `VaultXT est un éditeur de texte rapide et léger conçu pour les gros fichiers.\n\nOuvrez et modifiez longs documents, journaux, brouillons et données texte exportées sans les envoyer vers un service cloud.\n\n## Fonctions principales\n\n- Ouvrir rapidement de gros TXT\n- Lire et modifier de longs documents\n- Sauvegarde automatique\n- Récupération avec annulation et snapshots\n- Travail local et hors ligne\n\nAucun compte, aucune publicité ni suivi ; le contenu n’est pas envoyé à un serveur externe.`, 'Questions fréquentes', [{ question: 'Puis-je ouvrir de très gros fichiers TXT ?', answer: 'Oui. VaultXT est conçu pour les gros TXT, longs documents, logs, brouillons et données exportées.' }, { question: 'Comment récupérer mes modifications ?', answer: 'Sauvegarde automatique, annulation et snapshots offrent des voies de récupération.' }, { question: 'Le contenu est-il envoyé à un serveur ?', answer: 'Non.' }]),
-    papira: make('Créateur EPUB hors ligne à partir de TXT', `Papira assemble des manuscrits TXT finalisés en livres EPUB structurés. L’application propose des parcours dédiés aux fanfictions, romans-feuilletons, romans personnels, zines numériques et scénarios de JDR sur table, tout en acceptant d’autres contenus TXT.
-
-## Deux façons ciblées de créer
-
-### 1. EPUB rapide
-
-Sélectionnez des fichiers TXT et créez immédiatement des EPUB, sans couverture ni métadonnées de publication.
-
-### 2. Projet de livre
-
-Ajoutez une couverture, un titre, un auteur, un éditeur, des informations de série, des règles de chapitrage et une table des matières avant l’exportation.
-
-## Pensé pour les manuscrits finalisés
-
-- Préréglages pour fanfictions, romans-feuilletons, romans personnels, zines numériques et scénarios de JDR sur table, avec prise en charge d’autres contenus TXT
-- Détection automatique des chapitres, mode de titres avec # ou option de chapitre unique
-- Image de couverture, métadonnées du livre, informations de série, navigation et empaquetage EPUB
-- Les fichiers existants sont conservés ; un numéro est ajouté automatiquement en cas de conflit de nom
-- La création des EPUB et le stockage des projets restent sur l’appareil
-
-## Votre manuscrit reste avec vous
-
-- Aucun compte ni connexion
-- Aucune publicité, analyse comportementale ou SDK de suivi
-- Les manuscrits TXT et images de couverture sont traités localement
-- Les projets et EPUB générés ne sont pas envoyés vers un serveur ONNELLAB`, 'Questions fréquentes', [
+    papira: make('Créateur EPUB hors ligne à partir de TXT', getPapiraDescription('fr'), 'Questions fréquentes', [
       {
         "question": "Quels types d’œuvres puis-je préparer ?",
         "answer": "Tout contenu TXT finalisé peut être converti en EPUB. Les préréglages servent seulement à accélérer les flux créatifs courants."
@@ -588,7 +534,8 @@ Ajoutez une couverture, un titre, un auteur, un éditeur, des informations de s�
           "question": "¿Se envían archivos a un servidor?",
           "answer": "No. El procesamiento es local."
         }
-      ]
+      ],
+      "seoDescription": "Renombra archivos por lotes con Aligna. Añade fechas y números, usa datos de fotos y música y revisa los nuevos nombres antes de aplicar los cambios."
     },
     clipnest: {
       "subtitle": "Portapapeles local y textos reutilizables",
@@ -611,7 +558,8 @@ Ajoutez une couverture, un titre, un auteur, un éditeur, des informations de s�
           "question": "¿Puedo fijar textos de uso frecuente?",
           "answer": "Sí. Puedes fijarlos para acceder rápidamente desde el teclado."
         }
-      ]
+      ],
+      "seoDescription": "ClipNest guarda el texto copiado al abrir su teclado. Fija frases y pégalas en otras apps. Los textos se guardan en tu iPhone o iPad, sin subirlos a servidores."
     },
     meriq: {
       "subtitle": "Crea pegatinas y llaveros acrílicos",
@@ -634,7 +582,8 @@ Ajoutez une couverture, un titre, un auteur, un éditeur, des informations de s�
           "question": "¿Las funciones de acabado requieren Pro?",
           "answer": "Sí. Preparar y editar las capas de acabado compatibles requiere Meriq Pro."
         }
-      ]
+      ],
+      "seoDescription": "Prepara archivos de pegatinas, llaveros acrílicos y tarjetas fotográficas con Meriq. Ajusta corte, tinta blanca y tamaño y exporta en PNG o PDF."
     },
     quivra: {
       "subtitle": "Conversor multimedia",
@@ -657,7 +606,8 @@ Ajoutez une couverture, un titre, un auteur, un éditeur, des informations de s�
           "question": "¿Tengo que elegir el destino en cada conversión?",
           "answer": "No. Quivra recuerda la ubicación elegida y resuelve automáticamente los nombres de archivo repetidos."
         }
-      ]
+      ],
+      "seoDescription": "Convierte WAV y M4A a MP3, extrae MP3 de MP4 o pasa de MOV a MP4 con Quivra. La conversión se elige automáticamente y el archivo original se conserva."
     },
     segra: {
       "subtitle": "Cortar y unir audio",
@@ -680,7 +630,8 @@ Ajoutez une couverture, un titre, un auteur, un éditeur, des informations de s�
           "question": "¿Se envían los archivos a un servidor?",
           "answer": "No."
         }
-      ]
+      ],
+      "seoDescription": "Recorta MP3 y WAV, une grabaciones o crea vídeos MP4 con audio e imagen en Segra. Todo se procesa sin conexión y los archivos originales se conservan."
     },
     tagweaver: {
       "subtitle": "Editor sin conexión de etiquetas MP3/FLAC",
@@ -703,35 +654,11 @@ Ajoutez une couverture, un titre, un auteur, un éditeur, des informations de s�
           "question": "¿Puedo guardar varios archivos a la vez?",
           "answer": "Sí. Hay selección y edición por lotes; el guardado múltiple forma parte de Pro."
         }
-      ]
+      ],
+      "seoDescription": "Edita etiquetas, puntuaciones, carátulas y letras de MP3 y FLAC con TagWeaver. Revisa los cambios antes de guardarlos, sin subir tus archivos a servidores."
     },
     vaultxt: make('Editor de archivos TXT grandes', `VaultXT es un editor de texto rápido y ligero diseñado para archivos grandes.\n\nAbre y edita documentos largos, registros, borradores y datos exportados sin enviarlos a servicios en la nube.\n\n## Funciones principales\n\n- Abrir rápidamente TXT grandes\n- Leer y editar documentos largos\n- Guardado automático\n- Recuperación con deshacer y snapshots\n- Trabajo local y sin conexión\n\nNo hay cuenta, anuncios ni seguimiento; el contenido no se envía a servidores externos.`, 'Preguntas frecuentes', [{ question: '¿Puedo abrir archivos TXT muy grandes?', answer: 'Sí. VaultXT está diseñado para TXT grandes, documentos largos, logs, borradores y datos exportados.' }, { question: '¿Cómo puedo recuperar cambios?', answer: 'Guardado automático, deshacer y snapshots ofrecen opciones de recuperación.' }, { question: '¿Se envía el contenido a un servidor?', answer: 'No.' }]),
-    papira: make('Creador de EPUB sin conexión a partir de TXT', `Papira convierte manuscritos TXT terminados en libros EPUB estructurados. Incluye flujos específicos para fanfiction, ficción por entregas, novelas personales, zines digitales y escenarios de TRPG, y también admite otros contenidos TXT.
-
-## Dos formas directas de crear
-
-### 1. EPUB rápido
-
-Selecciona archivos TXT y crea EPUB de inmediato, sin portada ni metadatos de publicación.
-
-### 2. Proyecto de libro
-
-Añade portada, título, autor, editorial, información de serie, reglas de capítulos y tabla de contenidos antes de exportar.
-
-## Pensado para manuscritos terminados
-
-- Ajustes para fanfiction, ficción por entregas, novelas personales, zines digitales y escenarios de TRPG, además de otros contenidos TXT
-- Detección automática de capítulos, modo de encabezados con # u opción de capítulo único
-- Imagen de portada, metadatos del libro, información de serie, navegación y empaquetado EPUB
-- Los archivos existentes se conservan; si hay conflicto de nombres se añade un número automáticamente
-- La creación del EPUB y el almacenamiento de proyectos permanecen en el dispositivo
-
-## Tu manuscrito se queda contigo
-
-- Sin cuenta ni inicio de sesión
-- Sin publicidad, analítica de comportamiento ni SDK de seguimiento
-- Los manuscritos TXT y las imágenes de portada se procesan localmente
-- Los proyectos y EPUB generados no se suben a servidores de ONNELLAB`, 'Preguntas frecuentes', [
+    papira: make('Creador de EPUB sin conexión a partir de TXT', getPapiraDescription('es'), 'Preguntas frecuentes', [
       {
         "question": "¿Qué tipos de obras puedo preparar?",
         "answer": "Cualquier contenido TXT terminado puede convertirse en EPUB. Los ajustes específicos solo agilizan flujos creativos habituales."

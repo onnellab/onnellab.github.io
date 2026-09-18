@@ -1,4 +1,7 @@
 Android
+SEO description:
+Prepare sticker, acrylic keyring and photo card print files with Meriq. Set cut lines and white underprint, then export transparent PNG or combined PDF files.
+
 앱 이름:
 Meriq - Make Your Merch
 

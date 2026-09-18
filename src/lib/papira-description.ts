@@ -16,3 +16,20 @@ export const papiraDescription: Record<AllSiteLocale, string> = {
 export function getPapiraDescription(locale: AllSiteLocale): string {
   return papiraDescription[locale];
 }
+
+/** Search summary reviewed with the web body; not copied from legacy store prose. */
+export const papiraSeoDescriptions: Record<AllSiteLocale, string> = {
+  "en": "Turn finished TXT manuscripts into EPUB books with Papira. Add a cover, book details, chapters and a table of contents, entirely on your device.",
+  "ko": "Papira로 완성된 TXT 원고를 EPUB 전자책으로 만들어요. 표지, 책 정보, 챕터와 목차를 구성하고 기기 안에서 내보내요. 원고를 서버에 업로드하지 않아요.",
+  "ja": "Papiraで完成したTXT原稿をEPUBに。表紙・書誌情報・章・目次を整え、端末内で書き出せます。原稿をサーバーにアップロードする必要はありません。",
+  "zh-Hans": "用 Papira 将完成的 TXT 文稿制作成 EPUB 电子书。设置封面、书籍信息、章节和目录，在设备上导出，无需将稿件上传到服务器。",
+  "zh-Hant": "用 Papira 將完成的 TXT 文稿製作成 EPUB 電子書。設定封面、書籍資訊、章節與目錄，在裝置上匯出，不必將稿件上傳到伺服器。",
+  "pt-BR": "Transforme manuscritos TXT em livros EPUB com Papira. Adicione capa, dados do livro, capítulos e sumário. Todo o processo acontece no seu dispositivo.",
+  "de": "Mit Papira fertige TXT-Manuskripte in EPUB-Bücher umwandeln. Cover, Buchdaten, Kapitel und Inhaltsverzeichnis ergänzen – alles lokal auf deinem Gerät.",
+  "fr": "Créez des livres EPUB à partir de manuscrits TXT avec Papira. Ajoutez couverture, informations du livre, chapitres et table des matières, sans envoi au serveur.",
+  "es": "Crea libros EPUB a partir de manuscritos TXT con Papira. Añade portada, datos del libro, capítulos e índice. Todo se procesa en tu dispositivo."
+};
+
+export function getPapiraSeoDescription(locale: AllSiteLocale): string {
+  return papiraSeoDescriptions[locale];
+}

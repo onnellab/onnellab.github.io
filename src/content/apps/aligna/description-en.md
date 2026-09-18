@@ -1,4 +1,7 @@
 Android
+SEO description:
+Rename files in batches with Aligna. Add dates or sequence numbers, use photo and music metadata, and preview new file names before applying changes.
+
 앱 이름:
 Aligna - File Renamer
 
@@ -64,6 +67,9 @@ Q: Are files uploaded to a server?
 A: No. Aligna works on your device without accounts, ads, or cloud storage.
 
 ios
+SEO description:
+Rename files in batches with Aligna. Add dates or sequence numbers, use photo and music metadata, and preview new file names before applying changes.
+
 앱 이름:
 Aligna - File Renamer
 

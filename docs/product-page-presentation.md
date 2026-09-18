@@ -2,7 +2,7 @@
 
 All public product details use the same editorial structure in all nine locales:
 
-1. Keep the existing hero, product identity, SEO metadata and release state.
+1. Keep the product identity, common hero layout and release state. Web SEO copy is reviewed separately from store copy.
 2. Introduce the app in one or two paragraphs.
 3. Use the shared localized “Key features” heading and one list of five to eight features.
 4. Follow with one to three short paragraphs for important processing details, constraints and purchase disclosures.
@@ -22,3 +22,24 @@ FAQ count and feature-count ranges are editorial choices, not search-engine rank
 The shared template validates the structure at build time. `tests/product-presentation.spec.ts` checks all products and languages, visible features against structured data, FAQ behavior, locale links, and layout overflow. Existing product-specific tests still protect semantic boundaries.
 
 Run `npm run build`, `npm run check:i18n-quality`, and `npx playwright test` before final delivery. Do not bypass failures by deleting product-safety assertions. Keep meaningful independent edits committed and pushed on `main`.
+
+## Web search metadata
+
+Keep an explicit, human-written web summary next to each locale's active product copy.
+For Markdown sources use `SEO description:` and optional `SEO title:` inside each
+platform block. TypeScript records and VaultXT web fields use `seoDescription`
+and optional `seoTitle`. Keep VaultXT store fields and promotional screenshots unchanged.
+Papira's web summaries live beside its web body in `papira-description.ts`; the
+extended registry references that body instead of keeping another translation.
+
+Do not build metadata by concatenating the app name, subtitle, platform label and
+whole introduction. The generic fallback uses the first descriptive paragraph,
+not an iOS subtitle, but every published product must have an explicit summary.
+The regression suite checks all apps/locales, including newly added products.
+HTML description, Open Graph, Twitter and SoftwareApplication descriptions must
+match the same reviewed summary. Do not hard-truncate sentences or pad CJK text.
+
+Google does not prescribe a fixed title or meta-description character limit.
+Keep titles concise and summaries useful; numeric counts are editorial diagnostics,
+not ranking rules. See https://developers.google.com/search/docs/appearance/snippet
+and https://developers.google.com/search/docs/appearance/title-link.

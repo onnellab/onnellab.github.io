@@ -57,7 +57,8 @@
       "title": "Weekend Trip Plan",
       "body": "Saturday · a day in the city\n09:00 Meet at the station\n09:30 Coffee near the river\n10:30 Walk to the museum\n12:00 Lunch in the old town\n14:00 Visit the museum garden\n16:00 Browse the bookshop\n17:30 Take the train home\nBring: water, an umbrella, a notebook\nIf it rains: stay longer at the museum\nCheck opening hours on Friday\nLeave time for an unplanned stop",
       "searchTerm": "museum"
-    }
+    },
+    "seoDescription": "Edit large text files, logs and configurations with VaultXT. Find and replace text, autosave, restore snapshots and organize local working copies in folders."
   },
   "ko": {
     "appName": "VaultXT - 대용량 텍스트 편집기",
@@ -117,7 +118,8 @@
       "title": "주말 여행 일정",
       "body": "토요일 · 도심 산책\n09:00 역 앞에서 만나기\n09:30 강변 카페에서 아침 먹기\n10:30 미술관까지 걸어가기\n12:00 구시가지에서 점심 먹기\n14:00 미술관 정원 둘러보기\n16:00 작은 서점 구경하기\n17:30 기차 타고 집으로\n준비물: 물, 우산, 수첩\n비가 오면 카페에서 더 쉬기\n금요일에 운영 시간 확인하기\n마음에 드는 곳에서는 천천히 머물기",
       "searchTerm": "카페"
-    }
+    },
+    "seoDescription": "VaultXT로 대용량 텍스트·로그·설정 파일을 편집해요. 찾기·바꾸기, 자동저장, 스냅샷 복원과 폴더 정리를 지원하며, 가져온 파일은 외부 원본과 분리된 작업본으로 관리해요."
   },
   "ja": {
     "appName": "VaultXT - 大容量テキストエディタ",
@@ -177,7 +179,8 @@
       "title": "週末旅行の予定",
       "body": "土曜日・街歩き\n09:00 駅前で待ち合わせ\n09:30 川沿いのカフェで朝食\n10:30 美術館まで歩く\n12:00 旧市街で昼食\n14:00 美術館の庭を散策\n16:00 小さな書店に立ち寄る\n17:30 電車で帰宅\n持ち物：水、傘、ノート\n雨なら美術館でゆっくり過ごす\n金曜日に開館時間を確認する\n気になる場所に寄れる余裕を残す",
       "searchTerm": "美術館"
-    }
+    },
+    "seoDescription": "VaultXTで大容量テキスト・ログ・設定ファイルを編集。検索と置換、自動保存、スナップショットからの復元、フォルダ整理に対応。取り込んだファイルは原本と別の作業用コピーで管理します。"
   },
   "zh-Hant": {
     "appName": "VaultXT - 大型文字檔案編輯器",
@@ -237,7 +240,8 @@
       "title": "週末旅行行程",
       "body": "星期六・市區散步\n09:00 在車站前集合\n09:30 到河邊咖啡店吃早餐\n10:30 步行前往美術館\n12:00 在老街吃午餐\n14:00 逛逛美術館的花園\n16:00 到小書店看看\n17:30 回車站搭車返家\n攜帶物品：水、雨傘、筆記本\n下雨備案：在美術館多待一會兒\n星期五先確認開放時間\n留點時間探索沿途的小店",
       "searchTerm": "車站"
-    }
+    },
+    "seoDescription": "用 VaultXT 編輯大型文字檔、記錄檔與設定檔，支援搜尋取代、自動儲存、快照還原與資料夾整理。匯入檔案以本機工作副本儲存，與外部原始檔案分開。"
   },
   "zh-Hans": {
     "appName": "VaultXT - 大型文本文件编辑器",
@@ -297,7 +301,8 @@
       "title": "周末旅行计划",
       "body": "星期六·市区漫步\n09:00 在车站前集合\n09:30 到河边咖啡店吃早餐\n10:30 步行前往美术馆\n12:00 在老街吃午饭\n14:00 逛逛美术馆的花园\n16:00 到小书店看看\n17:30 回车站乘车返家\n携带物品：水、雨伞、笔记本\n下雨备选：在美术馆多待一会儿\n星期五先确认开放时间\n留点时间探索沿途的小店",
       "searchTerm": "车站"
-    }
+    },
+    "seoDescription": "用 VaultXT 编辑大型文本、日志和配置文件，支持查找替换、自动保存、快照恢复和文件夹整理。导入文件作为本地工作副本保存，与外部原文件分开。"
   },
   "pt-BR": {
     "appName": "VaultXT - Editor de texto",
@@ -357,7 +362,8 @@
       "title": "Roteiro de fim de semana",
       "body": "Sábado · um dia na cidade\n09:00 Encontro na estação\n09:30 Café da manhã perto do rio\n10:30 Caminhada até o museu\n12:00 Almoço no centro histórico\n14:00 Passeio pelo jardim do museu\n16:00 Visita à livraria\n17:30 Trem de volta para casa\nLevar: água, guarda-chuva e caderno\nSe chover: ficar mais tempo no museu\nConferir os horários na sexta-feira\nDeixar tempo para uma parada surpresa",
       "searchTerm": "museu"
-    }
+    },
+    "seoDescription": "Edite arquivos de texto grandes, logs e configurações com VaultXT. Use busca e substituição, salvamento automático, instantâneos e pastas, tudo no dispositivo."
   },
   "de": {
     "appName": "VaultXT - Texteditor",
@@ -417,7 +423,8 @@
       "title": "Wochenend-Reiseplan",
       "body": "Samstag · ein Tag in der Stadt\n09:00 Treffen am Bahnhof\n09:30 Frühstück am Fluss\n10:30 Spaziergang zum Museum\n12:00 Mittagessen in der Altstadt\n14:00 Den Garten am Museum besuchen\n16:00 In der Buchhandlung stöbern\n17:30 Mit dem Zug nach Hause\nMitnehmen: Wasser, Schirm, Notizbuch\nBei Regen: länger im Museum bleiben\nAm Freitag die Öffnungszeiten prüfen\nZeit für spontane Entdeckungen lassen",
       "searchTerm": "Museum"
-    }
+    },
+    "seoDescription": "Mit VaultXT große Text-, Log- und Konfigurationsdateien bearbeiten. Suchen und ersetzen, automatisch speichern und Snapshots wiederherstellen – lokal und offline."
   },
   "fr": {
     "appName": "VaultXT - Éditeur de texte",
@@ -477,7 +484,8 @@
       "title": "Itinéraire du week-end",
       "body": "Samedi · une journée en ville\n09:00 Rendez-vous à la gare\n09:30 Petit-déjeuner près de la rivière\n10:30 Marche jusqu’au musée\n12:00 Déjeuner dans la vieille ville\n14:00 Promenade dans le jardin du musée\n16:00 Visite de la librairie\n17:30 Retour en train\nÀ emporter : eau, parapluie, carnet\nS’il pleut : rester plus longtemps au musée\nVérifier les horaires vendredi\nGarder du temps pour une découverte",
       "searchTerm": "musée"
-    }
+    },
+    "seoDescription": "Modifiez de gros fichiers texte, journaux et configurations avec VaultXT. Recherche et remplacement, enregistrement automatique, instantanés et dossiers en local."
   },
   "es": {
     "appName": "VaultXT - Editor de texto",
@@ -537,6 +545,7 @@
       "title": "Plan para el fin de semana",
       "body": "Sábado · un día en la ciudad\n09:00 Encuentro en la estación\n09:30 Desayuno junto al río\n10:30 Paseo hasta el museo\n12:00 Almuerzo en el casco antiguo\n14:00 Visita al jardín del museo\n16:00 Parada en la librería\n17:30 Tren de vuelta a casa\nLlevar: agua, paraguas y cuaderno\nSi llueve: quedarse más tiempo en el museo\nComprobar los horarios el viernes\nDejar tiempo para una parada inesperada",
       "searchTerm": "museo"
-    }
+    },
+    "seoDescription": "Edita archivos de texto grandes, registros y configuraciones con VaultXT. Busca y reemplaza, guarda automáticamente y recupera versiones, todo en tu dispositivo."
   }
 }

@@ -1,3 +1,5 @@
+import { getProductPageData } from '../src/lib/products';
+import { getPapiraProductPageData } from '../src/lib/papira';
 import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -22,17 +24,7 @@ const locales = [
   { code: 'fr', segment: 'fr' },
   { code: 'es', segment: 'es' }
 ] as const;
-const metaPlatformMarkers = {
-  en: 'Platforms:',
-  ko: '지원 플랫폼:',
-  ja: '対応プラットフォーム:',
-  'zh-Hans': '支持平台：',
-  'zh-Hant': '支援平台：',
-  'pt-BR': 'Plataformas:',
-  de: 'Plattformen:',
-  fr: 'Plateformes\u00A0:',
-  es: 'Plataformas:'
-} as const;
+
 
 // Keep schema descriptive and verifiable: no commerce/review claims, only real application semantics.
 const schemaClassifications: Record<string, { applicationCategory: string; applicationSubCategory: string }> = {
@@ -86,17 +78,14 @@ for (const app of apps) {
 
       const metaDescription = await page.locator('meta[name="description"]').getAttribute('content');
       expect(metaDescription).toBeTruthy();
-      if (app !== 'papira' && app !== 'melivra') {
-        expect(metaDescription).toContain(' — ');
-        expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
-        if (locale.code === 'ja' || locale.code === 'zh-Hans' || locale.code === 'zh-Hant') {
-          expect(metaDescription).not.toMatch(/。[ \t]/u);
-        }
-        if (locale.code === 'fr') {
-          expect(metaDescription).toContain('Plateformes\u00A0:');
-          expect(metaDescription).not.toContain('Plateformes :');
-        }
-      }
+      const data = app === 'papira'
+        ? getPapiraProductPageData(locale.code)
+        : getProductPageData(app, locale.code);
+      expect(data.copy.android.seoDescription ?? data.copy.ios.seoDescription).toBeTruthy();
+      expect(metaDescription).toBe(data.seoDescription);
+      expect(metaDescription).not.toMatch(/Platforms:|지원 플랫폼:|対応プラットフォーム:|支持平台：|支援平台：|Plataformas:|Plattformen:|Plateformes\s*:/u);
+      await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content', data.seoDescription);
+      await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute('content', data.seoDescription);
 
       const allSchemas = await schemas(page);
       const software = allSchemas.find((entry) => entry?.['@type'] === 'SoftwareApplication');
@@ -109,6 +98,7 @@ for (const app of apps) {
       expect(software.url).toBe(canonical(route));
       expect(software.mainEntityOfPage).toBe(canonical(route));
       expect(software.publisher?.name).toBe('ONNELLAB');
+      expect(software.description).toBe(metaDescription);
       expect(software.featureList?.length ?? 0).toBeGreaterThan(0);
       expect(schemaClassifications[app]).toBeTruthy();
       expect(software.applicationCategory).toBe(schemaClassifications[app].applicationCategory);

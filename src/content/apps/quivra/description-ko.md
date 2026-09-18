@@ -1,4 +1,7 @@
 Android
+SEO description:
+Quivra로 WAV·M4A를 MP3로 바꾸고, MP4에서 MP3 음원을 추출하거나 MOV를 MP4로 변환해요. 파일 형식에 맞춰 자동으로 처리하고 원본은 보존해요.
+
 앱 이름:
 Quivra – WAV to MP3 변환기
 
@@ -82,6 +85,9 @@ Quivra는 WAV, M4A, MP4, MOV 파일을 정해진 규칙으로 변환하는 미�
 답변: 아니요. 한 번 선택한 저장 위치를 기억하고, 같은 이름의 파일이 있으면 자동으로 구분해 저장해요.
 
 ios
+SEO description:
+Quivra로 WAV·M4A를 MP3로 바꾸고, MP4에서 MP3 음원을 추출하거나 MOV를 MP4로 변환해요. 파일 형식에 맞춰 자동으로 처리하고 원본은 보존해요.
+
 앱 이름:
 Quivra – WAV to MP3 변환기
 

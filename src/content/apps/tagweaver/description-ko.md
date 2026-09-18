@@ -1,4 +1,7 @@
 Android
+SEO description:
+TagWeaver로 MP3·FLAC의 태그, 평점, 앨범 아트와 가사를 편집해요. 여러 파일을 선택해 정보를 맞추고 저장 전에 변경 내용을 확인해요. 파일을 서버에 올리지 않아요.
+
 앱 이름:
 TagWeaver MP3/FLAC 태그 편집기
 
@@ -62,6 +65,9 @@ TagWeaver는 MP3·FLAC 파일의 태그, 평점, 앨범 아트와 가사를 직�
 여러 파일을 한 번에 저장하는 기능은 Pro에서 이용할 수 있어요.
 
 ios
+SEO description:
+TagWeaver로 MP3·FLAC의 태그, 평점, 앨범 아트와 가사를 편집해요. 여러 파일을 선택해 정보를 맞추고 저장 전에 변경 내용을 확인해요. 파일을 서버에 올리지 않아요.
+
 앱 이름:
 TagWeaver MP3/FLAC 태그 편집기
 

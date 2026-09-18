@@ -1,4 +1,7 @@
 Android
+SEO description:
+Edit MP3 and FLAC tags, ratings, album artwork and lyrics with TagWeaver. Review changes before saving, with local editing and no file uploads.
+
 앱 이름:
 TagWeaver MP3 FLAC Tagger
 
@@ -62,6 +65,9 @@ Edits are made on your device, with no login, file upload, advertising or tracki
 Batch saving for multiple files is available with Pro.
 
 ios
+SEO description:
+Edit MP3 and FLAC tags, ratings, album artwork and lyrics with TagWeaver. Review changes before saving, with local editing and no file uploads.
+
 앱 이름:
 TagWeaver MP3 FLAC Tagger
 

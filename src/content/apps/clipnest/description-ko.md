@@ -1,4 +1,7 @@
 ios
+SEO description:
+ClipNest 키보드를 열 때 복사한 텍스트를 저장하고, 자주 쓰는 문구를 고정해 다른 앱에 바로 붙여넣어요. 저장한 문구는 iPhone이나 iPad 안에 보관해요.
+
 앱 이름:
 ClipNest - 클립보드 도구
 

@@ -7,7 +7,7 @@ import {
   type ExtendedSiteLocale
 } from './extended-site-i18n';
 import { getExtendedProductCopy } from './extended-product-localizations';
-import { getPapiraDescription } from './papira-description';
+import { getPapiraDescription, getPapiraSeoDescription } from './papira-description';
 import { renderBlocks, type ProductCopy, type ProductPageData } from './products';
 
 export type PapiraFaq = {
@@ -89,6 +89,7 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
     const platformCopy = {
       name: text.subtitle,
       landingSubtitle: text.subtitle,
+      seoDescription: getPapiraSeoDescription(locale),
       landingDescription: description,
       description,
       faq: { title: text.faqTitle, items: text.faq }
@@ -112,7 +113,7 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
       canonicalPath: allRouteFor('papira', locale),
       alternates: allProductLocaleAlternates('papira'),
       seoTitle: `Papira - ${text.subtitle}`,
-      seoDescription: text.body.split(/\n\s*\n/)[0]?.replace(/\s+/g, ' ').trim() ?? text.subtitle,
+      seoDescription: getPapiraSeoDescription(locale),
       iconPath: '/app-assets/papira/icon.png',
       socialImagePath: '/app-assets/papira/social-card.png',
       screenshotPaths: ['01', '02', '03', '04', '05'].map(
@@ -131,6 +132,7 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
   const platformCopy = {
     name: text.tagline,
     landingSubtitle: text.tagline,
+    seoDescription: getPapiraSeoDescription(baseLocale),
     landingDescription: description,
     description,
     faq: { title: text.faqTitle, items: text.faqs }
@@ -170,8 +172,7 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
 export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
   en: {
     seoTitle: 'Papira - Offline TXT to EPUB Maker',
-    seoDescription:
-      'Turn finished TXT manuscripts into structured EPUB books with a cover, metadata, chapters, and a table of contents. Papira works entirely on your device.',
+    seoDescription: getPapiraSeoDescription('en'),
     eyebrow: 'Offline EPUB maker for writers',
     tagline: 'Turn your manuscript into a book.',
     heroSignals: ['Finished TXT → EPUB', 'Cover, chapters, and TOC', 'Entirely on device'],
@@ -240,8 +241,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
   },
   ko: {
     seoTitle: 'Papira - 오프라인 TXT EPUB 제작 도구',
-    seoDescription:
-      '완성된 TXT 원고를 표지, 책 정보, 챕터와 목차가 있는 EPUB 전자책으로 만들어요. Papira의 모든 작업은 기기 안에서 이루어져요.',
+    seoDescription: getPapiraSeoDescription('ko'),
     eyebrow: '작가를 위한 오프라인 EPUB 제작 도구',
     tagline: '원고를 한 권의 책으로 만들어요.',
     heroSignals: ['완성된 TXT → EPUB', '표지·챕터·목차 구성', '모든 작업은 기기 안에서'],
@@ -310,8 +310,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
   },
   ja: {
     seoTitle: 'Papira - オフラインTXT・EPUB作成ツール',
-    seoDescription:
-      '完成したTXT原稿を、表紙・書誌情報・章・目次を備えたEPUBにまとめます。処理はすべて端末内で完結します。',
+    seoDescription: getPapiraSeoDescription('ja'),
     eyebrow: '創作者のためのオフラインEPUB作成ツール',
     tagline: '原稿を、一冊の本へ。',
     heroSignals: ['完成したTXT → EPUB', '表紙・章・目次を整理', 'すべて端末内で処理'],
@@ -380,8 +379,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
   },
   'zh-Hans': {
     seoTitle: 'Papira - 离线 TXT 转 EPUB 制作工具',
-    seoDescription:
-      '把完成的 TXT 文稿整理成带封面、书籍信息、章节与目录的 EPUB。所有处理都在设备本地完成。',
+    seoDescription: getPapiraSeoDescription('zh-Hans'),
     eyebrow: '面向创作者的离线 EPUB 制作工具',
     tagline: '把文稿做成一本书。',
     heroSignals: ['完成的 TXT → EPUB', '整理封面、章节与目录', '全程在设备本地处理'],
@@ -450,8 +448,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
   },
   'zh-Hant': {
     seoTitle: 'Papira - 離線 TXT 轉 EPUB 製作工具',
-    seoDescription:
-      '把完成的 TXT 文稿整理成含封面、書籍資訊、章節與目錄的 EPUB。所有處理都在裝置本機完成。',
+    seoDescription: getPapiraSeoDescription('zh-Hant'),
     eyebrow: '面向創作者的離線 EPUB 製作工具',
     tagline: '把文稿做成一本書。',
     heroSignals: ['完成的 TXT → EPUB', '整理封面、章節與目錄', '全程在裝置本機處理'],

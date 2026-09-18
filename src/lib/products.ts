@@ -75,6 +75,8 @@ type VaultxtPromoCopy = {
   description: string;
   landingSubtitle: string;
   landingBody: string;
+  seoTitle?: string;
+  seoDescription?: string;
   faq: ProductFaqItem[];
   screenshots: Array<{ title: string; subtitle: string; alt: string }>;
 };
@@ -143,6 +145,8 @@ const appAccentOverrides: Record<string, ProductAccent> = {
 
 const fieldLabels = {
   name: '앱 이름:',
+  seoTitle: 'SEO title:',
+  seoDescription: 'SEO description:',
   landingSubtitle: '랜딩 부제:',
   landingSubtitleEn: 'Landing subtitle:',
   shortDescription: '간단한 설명:',
@@ -419,6 +423,8 @@ function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
       promo: promo.promotionalText,
       landingSubtitle: promo.landingSubtitle,
       landingDescription: promo.landingBody,
+      seoTitle: promo.seoTitle,
+      seoDescription: promo.seoDescription,
       description: promo.description,
       keywords: promo.keywords,
       faq: {
@@ -443,6 +449,8 @@ function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
     const platform = {
       name: localized.subtitle,
       landingSubtitle: localized.subtitle,
+      seoTitle: localized.seoTitle,
+      seoDescription: localized.seoDescription,
       landingDescription: localized.body,
       description: localized.body,
       faq: {
@@ -457,6 +465,8 @@ function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
     const platform = {
       name: localized.subtitle,
       landingSubtitle: localized.subtitle,
+      seoTitle: localized.seoTitle,
+      seoDescription: localized.seoDescription,
       landingDescription: localized.body,
       description: localized.body,
       faq: {
@@ -502,6 +512,8 @@ function getProductScreenshotAltsFromCopy(
 function parsePlatformCopy(text: string): PlatformCopy {
   return {
     name: field(text, fieldLabels.name),
+    seoTitle: field(text, fieldLabels.seoTitle),
+    seoDescription: field(text, fieldLabels.seoDescription),
     landingSubtitle:
       field(text, fieldLabels.landingSubtitle) ?? field(text, fieldLabels.landingSubtitleEn),
     shortDescription: field(text, fieldLabels.shortDescription),
@@ -527,46 +539,11 @@ function pageDescription(copy: ProductCopy): string {
 
 function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
   const explicit = copy.android.seoDescription ?? copy.ios.seoDescription;
-  if (explicit) return explicit;
-
-  const summary = pageDescription(copy).replace(/\s+/g, ' ').trim();
-  const platforms = copy.locale === 'en'
-    ? source.meta.platforms.join(' and ')
-    : source.meta.platforms.join('/');
-  const category = landingSubtitle(copy)
-    .replace(/\s+/g, ' ')
-    .trim()
-    .replace(/[.!?。！？]+$/u, '');
-  const normalize = (value: string) =>
-    value.replace(/[.!?。！？]+$/u, '').trim().toLocaleLowerCase();
-  const detail = normalize(summary) === normalize(category) ? '' : summary;
-  const spacedDetail = detail ? ` ${detail}` : '';
-
-  if (copy.locale === 'ko') {
-    return `${source.meta.title} — ${category}. 지원 플랫폼: ${platforms}.${spacedDetail}`;
-  }
-  if (copy.locale === 'ja') {
-    return `${source.meta.title} — ${category}。対応プラットフォーム: ${platforms}。${detail}`;
-  }
-  if (copy.locale === 'zh-Hans') {
-    return `${source.meta.title} — ${category}。支持平台：${platforms}。${detail}`;
-  }
-  if (copy.locale === 'zh-Hant') {
-    return `${source.meta.title} — ${category}。支援平台：${platforms}。${detail}`;
-  }
-  if (copy.locale === 'pt-BR') {
-    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${spacedDetail}`;
-  }
-  if (copy.locale === 'de') {
-    return `${source.meta.title} — ${category}. Plattformen: ${platforms}.${spacedDetail}`;
-  }
-  if (copy.locale === 'fr') {
-    return `${source.meta.title} — ${category}. Plateformes\u00A0: ${platforms}.${spacedDetail}`;
-  }
-  if (copy.locale === 'es') {
-    return `${source.meta.title} — ${category}. Plataformas: ${platforms}.${spacedDetail}`;
-  }
-  return `${source.meta.title} — ${category}. Platforms: ${platforms}.${spacedDetail}`;
+  // Fallback is descriptive prose, never a subtitle or a platform-label scaffold.
+  // Published products have explicit summaries enforced by the SEO regression tests.
+  const description = (explicit ?? firstParagraph(pageBodyDescription(copy))).replace(/\s+/g, ' ').trim();
+  if (!description) throw new Error(`Missing product description: ${source.slug}/${copy.locale}`);
+  return description;
 }
 
 function productSeoTitle(source: ProductSource, copy: ProductCopy): string {

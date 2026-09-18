@@ -5,6 +5,8 @@ type TranslationLocale = Exclude<SiteLocale, 'en' | 'ko'>;
 export type LocalizedProductContent = {
   subtitle: string;
   body: string;
+  seoTitle?: string;
+  seoDescription?: string;
   faq: Array<{ question: string; answer: string }>;
 };
 
@@ -30,7 +32,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "question": "ファイルはサーバーへ送信されますか？",
           "answer": "いいえ。アカウントやクラウドストレージを使わず、端末内で処理します。"
         }
-      ]
+      ],
+      "seoDescription": "Alignaで写真・音楽・書類のファイル名を一括変更。日付や連番、写真の撮影日、楽曲情報を使って名前を整え、適用前に変更後の名前を確認できます。"
     },
     clipnest: {
       "subtitle": "キーボード貼り付け・定型文",
@@ -52,7 +55,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "question": "よく使う定型文をピン留めできますか？",
           "answer": "はい。重要なテキストをピン留めし、キーボードからすばやく貼り付けられます。"
         }
-      ]
+      ],
+      "seoDescription": "ClipNestキーボードを開くとコピーしたテキストを保存。よく使う定型文をピン留めして別のアプリへ貼り付けられます。保存先はiPhone・iPadの端末内です。"
     },
     quivra: {
       "subtitle": "メディア変換ツール",
@@ -74,7 +78,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "question": "保存先は毎回選び直す必要がありますか？",
           "answer": "いいえ。選んだ保存先を記憶します。同じ名前のファイルがある場合も自動で処理します。"
         }
-      ]
+      ],
+      "seoDescription": "QuivraでWAV・M4AをMP3に変換、MP4からMP3音声を抽出、MOVをMP4に変換。入力形式に応じて変換方法を自動で選び、元のファイルを残して保存します。"
     },
     segra: {
       "subtitle": "音声カット・結合ツール",
@@ -96,7 +101,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "question": "ファイルはサーバーへ送信されますか？",
           "answer": "いいえ。ログインやアップロードを行わず、端末内で処理します。"
         }
-      ]
+      ],
+      "seoDescription": "SegraでMP3・WAVを切り出し、録音を結合。音声と画像からMP4動画も作れます。処理は端末内で行い、元のファイルを残して結果を新しいファイルに保存します。"
     },
     tagweaver: {
       "subtitle": "オフラインMP3/FLACタグエディター",
@@ -118,7 +124,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "question": "複数ファイルの編集内容をまとめて保存できますか？",
           "answer": "複数ファイルの選択と一括編集に対応しています。複数ファイルへの一括保存はProで利用できます。"
         }
-      ]
+      ],
+      "seoDescription": "TagWeaverでMP3・FLACのタグ、レーティング、アルバムアート、歌詞を編集。保存前に変更内容を確認でき、ファイルをサーバーへアップロードせず端末内で作業できます。"
     },
     vaultxt: {
       subtitle: '大容量TXTエディター',
@@ -161,7 +168,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "question": "後加工機能にはProが必要ですか？",
           "answer": "はい。対応する後加工レイヤーの準備・編集にはMeriq Proが必要です。"
         }
-      ]
+      ],
+      "seoDescription": "Meriqでステッカー・アクリルキーホルダー・フォトカードの入稿データを準備。仕上がりサイズ、背景透過、カットライン、白版を整え、透過PNGや制作内容を統合したPDFで書き出せます。"
     },
   },
   'zh-Hans': {
@@ -185,7 +193,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "question": "文件会上传到服务器吗？",
           "answer": "不会。Aligna 无需账号或云存储，所有处理都在设备本地完成。"
         }
-      ]
+      ],
+      "seoDescription": "使用 Aligna 批量重命名照片、音乐和文档。添加日期或序号，根据拍摄日期和曲目信息生成文件名，并在应用更改前预览新名称。"
     },
     clipnest: {
       "subtitle": "键盘粘贴与常用文本",
@@ -207,7 +216,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "question": "可以置顶常用文本吗？",
           "answer": "可以。你可以置顶重要文本，并从键盘快速再次粘贴。"
         }
-      ]
+      ],
+      "seoDescription": "打开 ClipNest 键盘时保存复制的文本，置顶常用内容，并直接粘贴到其他应用。保存的文本留在 iPhone 或 iPad 上，不会发送到外部服务器。"
     },
     quivra: {
       "subtitle": "媒体转换器",
@@ -229,7 +239,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "question": "每次都需要重新选择保存位置吗？",
           "answer": "不需要。Quivra 会记住你选择的保存位置，并自动处理重名文件。"
         }
-      ]
+      ],
+      "seoDescription": "Quivra 将 WAV、M4A 转为 MP3，从 MP4 提取 MP3 音频，或将 MOV 转为 MP4。根据输入格式自动选择转换方式，保留原文件并另存结果。"
     },
     segra: {
       "subtitle": "音频剪切与合并工具",
@@ -251,7 +262,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "question": "文件会上传到服务器吗？",
           "answer": "不会。所有处理都在设备本地完成，无需登录、创建账号或上传文件。"
         }
-      ]
+      ],
+      "seoDescription": "用 Segra 剪切 MP3、WAV，合并录音，或将音频和图片制作成 MP4 视频。所有处理在设备上离线完成，原文件不变，结果另存为新文件。"
     },
     tagweaver: {
       "subtitle": "离线 MP3/FLAC 标签编辑器",
@@ -273,7 +285,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "question": "可以批量保存多个文件的修改吗？",
           "answer": "支持多文件选择与批量编辑。多文件批量保存由 Pro 提供。"
         }
-      ]
+      ],
+      "seoDescription": "用 TagWeaver 编辑 MP3、FLAC 的标签、评分、专辑封面和歌词。可选择多个文件并在保存前检查更改，所有编辑在设备上完成，无需上传文件。"
     },
     vaultxt: {
       subtitle: '大文件 TXT 编辑器',
@@ -316,7 +329,8 @@ VaultXT 无需账号、不含广告或追踪，也不会把文件内容发送到
           "question": "后加工功能需要 Pro 吗？",
           "answer": "需要。准备和编辑支持的后加工图层需要 Meriq Pro。"
         }
-      ]
+      ],
+      "seoDescription": "用 Meriq 准备贴纸、亚克力钥匙扣和小卡的印刷文件。设置成品尺寸，检查透明背景，制作刀模线与白墨图层，再导出透明 PNG 或合成 PDF。"
     },
   },
   'zh-Hant': {
@@ -340,7 +354,8 @@ VaultXT 无需账号、不含广告或追踪，也不会把文件内容发送到
           "question": "檔案會上傳到伺服器嗎？",
           "answer": "不會。Aligna 不需帳號或雲端儲存，所有處理都在裝置本機完成。"
         }
-      ]
+      ],
+      "seoDescription": "使用 Aligna 批次重新命名照片、音樂與文件。加入日期或序號，依拍攝日期與曲目資訊建立檔名，並在套用變更前預覽新名稱。"
     },
     clipnest: {
       "subtitle": "鍵盤貼上與常用文字",
@@ -362,7 +377,8 @@ VaultXT 无需账号、不含广告或追踪，也不会把文件内容发送到
           "question": "可以釘選常用文字嗎？",
           "answer": "可以。你可以釘選重要文字，並從鍵盤快速再次貼上。"
         }
-      ]
+      ],
+      "seoDescription": "開啟 ClipNest 鍵盤時儲存複製的文字，釘選常用內容，並直接貼到其他應用程式。儲存的文字留在 iPhone 或 iPad 上，不會傳送到外部伺服器。"
     },
     quivra: {
       "subtitle": "媒體轉換工具",
@@ -384,7 +400,8 @@ VaultXT 无需账号、不含广告或追踪，也不会把文件内容发送到
           "question": "每次都需要重新選擇儲存位置嗎？",
           "answer": "不需要。Quivra 會記住你選擇的儲存位置，並自動處理同名檔案。"
         }
-      ]
+      ],
+      "seoDescription": "Quivra 將 WAV、M4A 轉為 MP3，從 MP4 擷取 MP3 音訊，或將 MOV 轉為 MP4。依輸入格式自動選擇轉換方式，保留原始檔案並另存結果。"
     },
     segra: {
       "subtitle": "音訊剪輯與合併工具",
@@ -406,7 +423,8 @@ VaultXT 无需账号、不含广告或追踪，也不会把文件内容发送到
           "question": "檔案會上傳到伺服器嗎？",
           "answer": "不會。所有處理都在裝置本機完成，不需登入、建立帳號或上傳檔案。"
         }
-      ]
+      ],
+      "seoDescription": "用 Segra 剪輯 MP3、WAV、合併錄音，或將音訊與圖片製作成 MP4 影片。所有處理在裝置上離線完成，原始檔案不變，結果另存為新檔案。"
     },
     tagweaver: {
       "subtitle": "離線 MP3/FLAC 標籤編輯器",
@@ -428,7 +446,8 @@ VaultXT 无需账号、不含广告或追踪，也不会把文件内容发送到
           "question": "可以批次儲存多個檔案的修改嗎？",
           "answer": "支援多檔案選取與批次編輯。多檔案批次儲存由 Pro 提供。"
         }
-      ]
+      ],
+      "seoDescription": "用 TagWeaver 編輯 MP3、FLAC 的標籤、評分、專輯封面與歌詞。可選取多個檔案並在儲存前確認變更，所有編輯在裝置上完成，不必上傳檔案。"
     },
     vaultxt: {
       subtitle: '大型 TXT 編輯器',
@@ -471,7 +490,8 @@ VaultXT 不需帳號、沒有廣告或追蹤，也不會把檔案內容傳送到
           "question": "後加工功能需要 Pro 嗎？",
           "answer": "需要。準備與編輯支援的後加工圖層需使用 Meriq Pro。"
         }
-      ]
+      ],
+      "seoDescription": "用 Meriq 準備貼紙、壓克力鑰匙圈與小卡的印刷檔案。設定成品尺寸、確認去背效果、製作刀模線與白墨圖層，再匯出透明 PNG 或合成 PDF。"
     },
   }
 };

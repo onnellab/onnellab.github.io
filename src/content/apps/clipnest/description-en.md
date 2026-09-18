@@ -1,4 +1,7 @@
 ios
+SEO description:
+Save copied text when the ClipNest keyboard opens, pin reusable snippets, and paste them into other apps. Stored text stays on your iPhone or iPad.
+
 앱 이름:
 ClipNest - Clipboard Tool
 
