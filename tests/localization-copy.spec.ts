@@ -81,3 +81,12 @@ test('French and Spanish FAQs explain file preservation and local processing', a
     await expect(page.locator('.faq-band details')).toHaveCount(4);
   }
 });
+
+test('Papira English describes original fiction consistently', async ({ page }) => {
+  await page.goto('/apps/papira/');
+  const copy = page.locator('.copy-column');
+  await expect(copy.locator('p').first()).toContainText('original novels');
+  await expect(copy.locator('li').filter({ hasText: 'original novels' })).toHaveCount(1);
+  await expect(copy).not.toContainText('personal novels');
+  await expect(copy).toContainText('other TXT content can also be converted to EPUB');
+});

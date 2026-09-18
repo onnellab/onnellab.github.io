@@ -184,7 +184,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
       'Papira EPUB export screen for saving to the device'
     ],
     lead:
-      'Papira assembles any finished TXT manuscript into a well-structured EPUB. It includes dedicated flows for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, while other TXT content can also be converted to EPUB.',
+      'Papira assembles any finished TXT manuscript into a well-structured EPUB. It includes dedicated flows for fanfiction, serialized fiction, original novels, digital zines, and TRPG scenarios, while other TXT content can also be converted to EPUB.',
     statusLabel: 'Status',
     statusValue: 'Preparing for release',
     platformsLabel: 'Platforms',
@@ -202,7 +202,7 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     ],
     featuresTitle: 'Built for finished manuscripts',
     features: [
-      'Dedicated presets for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, with support for other TXT content',
+      'Dedicated presets for fanfiction, serialized fiction, original novels, digital zines, and TRPG scenarios, with support for other TXT content',
       'Automatic chapter detection, # heading mode, or a single-chapter option',
       'Cover image, book metadata, series information, navigation, and EPUB packaging',
       'Existing files are preserved; name conflicts receive an automatic number',

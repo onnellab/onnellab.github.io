@@ -249,9 +249,9 @@ test.describe('Papira nine-language launch surface', () => {
       {
         path: '/apps/papira/',
         lead:
-          'Papira assembles any finished TXT manuscript into a well-structured EPUB. It includes dedicated flows for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, while other TXT content can also be converted to EPUB.',
+          'Papira assembles any finished TXT manuscript into a well-structured EPUB. It includes dedicated flows for fanfiction, serialized fiction, original novels, digital zines, and TRPG scenarios, while other TXT content can also be converted to EPUB.',
         feature:
-          'Dedicated presets for fanfiction, serialized fiction, personal novels, digital zines, and TRPG scenarios, with support for other TXT content',
+          'Dedicated presets for fanfiction, serialized fiction, original novels, digital zines, and TRPG scenarios, with support for other TXT content',
         faq:
           'Any finished TXT content can be converted to EPUB. The dedicated presets simply make common creative workflows faster.'
       },
