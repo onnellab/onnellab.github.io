@@ -1,5 +1,5 @@
 title: Melivra
-status: Released
+status: Preparing for release
 
 platforms:
   - iOS

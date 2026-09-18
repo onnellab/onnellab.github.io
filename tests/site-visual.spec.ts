@@ -1004,7 +1004,7 @@ test.describe('app and privacy collections', () => {
     const papiraBadge = page.locator('[data-app-row]').filter({ hasText: 'Papira' }).locator('.status-badge');
     const releasedBadge = page.locator('[data-app-row]').filter({ hasText: 'TagWeaver' }).locator('.status-badge');
 
-    await expect(melivraBadge).toHaveText('출시됨');
+    await expect(melivraBadge).toHaveText('출시 준비 중');
     await expect(papiraBadge).toHaveText('출시 준비 중');
     await expect(releasedBadge).toHaveText('출시됨');
     await expect(page.locator('[data-apps-page]')).not.toContainText('Released');
