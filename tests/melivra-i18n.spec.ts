@@ -37,14 +37,14 @@ for (const locale of locales) {
     expect(body).toContain('SRT');
     expect(body).toContain('LRC');
     expect(body).toContain('JSON');
-    expect(body).toContain('CSV');
     expect(body.toLocaleLowerCase()).toContain(locale.credit.toLocaleLowerCase());
     expect(body).not.toContain('AI Tokens');
     expect(body).not.toContain('AI Token');
     expect(body).not.toContain('AI 대본');
 
-    await expect(page.locator('.copy-column h2')).toHaveCount(2);
-    await expect(page.locator('.copy-column li')).toHaveCount(12);
+    await expect(page.locator('.copy-column h2')).toHaveCount(1);
+    await expect(page.locator('.copy-column h2')).not.toContainText('Pro');
+    await expect(page.locator('.copy-column li')).toHaveCount(7);
     await expect(page.locator('.faq-band details')).toHaveCount(4);
 
     const schemas = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
