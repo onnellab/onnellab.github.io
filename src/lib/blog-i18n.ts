@@ -1,3 +1,6 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
 import {
   allLocaleDefinitions,
   allSiteLocales,
@@ -24,12 +27,19 @@ export function blogIndexAlternates() {
   ];
 }
 
+export function availableBlogLocales(slug: string): AllSiteLocale[] {
+  const root = path.resolve(process.cwd(), 'src/content/blog');
+  return allSiteLocales.filter((locale) => fs.existsSync(path.join(root, locale, `${slug}.md`)));
+}
+
 export function blogPostAlternates(slug: string) {
+  const locales = availableBlogLocales(slug);
+  const defaultLocale = locales.includes('en') ? 'en' : locales[0];
   return [
-    ...allSiteLocales.map((locale) => ({
+    ...locales.map((locale) => ({
       lang: allLocaleDefinitions[locale].hreflang,
       path: blogPostPathFor(locale, slug)
     })),
-    { lang: 'x-default', path: blogPostPathFor('en', slug) }
+    ...(defaultLocale ? [{ lang: 'x-default', path: blogPostPathFor(defaultLocale, slug) }] : [])
   ];
 }

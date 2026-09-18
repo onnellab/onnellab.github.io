@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { getBlogPosts } from '../lib/blog';
+import { availableBlogLocales, blogPostAlternates } from '../lib/blog-i18n';
 import { getExtendedBlogPosts } from '../lib/extended-blog';
 import {
   allAppPrivacyRouteFor,
@@ -95,14 +96,10 @@ function blogEntries(): SitemapEntry[] {
   const englishPosts = getBlogPosts('en');
   const articleEntries = englishPosts.flatMap((englishPost) => {
     const alternates = blogPostAlternates(englishPost.meta.slug);
-    return allSiteLocales.map((locale) => {
-      const sourcePath = blogSourcePath(locale, englishPost.meta.slug);
-      assertExists(sourcePath);
-      return {
-        path: blogPostPath(locale, englishPost.meta.slug),
-        alternates
-      };
-    });
+    return availableBlogLocales(englishPost.meta.slug).map((locale) => ({
+      path: blogPostPath(locale, englishPost.meta.slug),
+      alternates
+    }));
   });
 
   for (const locale of translatedPrivacyLocales) getExtendedBlogPosts(locale);
@@ -141,10 +138,6 @@ function blogIndexAlternates() {
   return allAlternates(blogIndexPath);
 }
 
-function blogPostAlternates(slug: string) {
-  return allAlternates((locale) => blogPostPath(locale, slug));
-}
-
 function allAlternates(pathFor: (locale: AllSiteLocale) => string) {
   return [
     ...allSiteLocales.map((locale) => ({
@@ -163,10 +156,6 @@ function blogIndexPath(locale: AllSiteLocale): string {
 function blogPostPath(locale: AllSiteLocale, slug: string): string {
   if (locale === 'en') return `/blog/en/${slug}/`;
   return `/blog/${allLocaleDefinitions[locale].pathSegment}/${slug}/`;
-}
-
-function blogSourcePath(locale: AllSiteLocale, slug: string): string {
-  return `src/content/blog/${locale}/${slug}.md`;
 }
 
 function oauthPath(locale: AllSiteLocale): string {
