@@ -41,22 +41,21 @@ ClipNest keeps copied text ready when you need to paste it again.
 
 When the ClipNest keyboard opens, it checks your current clipboard once and saves new text locally on your device. Frequently used messages, addresses, emails, links, and snippets stay ready for fast reuse.
 
-Pinned items stay easy to reach from the keyboard. Recent copied text stays easy to browse and reuse instead of being copied again.
+## Key features
 
-Core features
+- Save copied text when the keyboard opens
+- Paste from the keyboard
+- Pin frequent text
+- Recent clip browsing and reuse
+- Duplicate handling
+- Local storage on your device
 
-• Save copied text when the keyboard opens
-• Paste from the keyboard
-• Pin frequent text
-• Recent clip browsing and reuse
-• Duplicate handling
-• Local storage on your device
-
-ClipNest does not constantly monitor your clipboard. It checks for new clipboard content when the keyboard is opened.
-
-Your saved text is not sent to external servers. There are no accounts, ads, or subscriptions.
+ClipNest checks the clipboard when its keyboard opens, not continuously. Saved text stays on your device and is not sent to external servers. No account, ads or subscription is required.
 
 FAQ:
+Q: Can I paste saved text from the keyboard?
+A: Yes. Open the ClipNest keyboard and choose saved text to paste it into the app you are typing in.
+
 Q: Does ClipNest monitor the clipboard all the time?
 A: No. ClipNest checks the current clipboard once when the keyboard opens and saves new text locally.
 
