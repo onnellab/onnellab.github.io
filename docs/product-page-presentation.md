@@ -43,3 +43,7 @@ Google does not prescribe a fixed title or meta-description character limit.
 Keep titles concise and summaries useful; numeric counts are editorial diagnostics,
 not ranking rules. See https://developers.google.com/search/docs/appearance/snippet
 and https://developers.google.com/search/docs/appearance/title-link.
+
+FAQ answers must preserve the explanation in every language, not only a yes/no
+verdict. A short decision plus the real file-handling or processing behavior is
+enough. The build rejects bare decisions but does not require a minimum word count.

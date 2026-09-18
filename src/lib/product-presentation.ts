@@ -57,4 +57,11 @@ export function validateProductPresentation(
     fail('FAQ questions must be nonempty and distinct');
   }
   if (faq!.items.some((item) => !item.answer.trim())) fail('every FAQ needs a complete answer');
+  // A decision alone loses the file-handling/privacy explanation when localized.
+  // This is not a minimum word-count rule; concise CJK answers remain valid.
+  const bareDecision = /^(?:yes|no|oui|non|ja|nein|sim|não|sí|네|예|아니요|はい|いいえ|是|否|可以|不会|不會|需要|不需要)[.!。！]?$/iu;
+  if (faq!.items.some((item) => bareDecision.test(item.answer.trim()))) {
+    fail('FAQ answers must explain the behavior, not only yes or no');
+  }
+
 }

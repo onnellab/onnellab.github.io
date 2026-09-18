@@ -61,3 +61,18 @@ test('presentation validator rejects missing lists, duplicate questions, and Pro
   const empty = { ...faq, items: faq.items.map((item, index) => index === 0 ? { ...item, answer: '' } : item) };
   expect(() => validateProductPresentation('fixture', 'en', blocks, empty)).toThrow(/complete answer/);
 });
+
+test('FAQ validation rejects bare decisions without padding concise explanations', () => {
+  const data = dataFor('melivra', 'en');
+  const blocks = renderBlocks(pageBodyDescription(data.copy));
+  const faq = data.copy.android.faq!;
+  const replaceAnswer = (answer: string) => ({
+    ...faq, items: faq.items.map((item, index) => index === 0 ? { ...item, answer } : item)
+  });
+  for (const answer of ['No.', 'Non.', 'Nein.', 'Não.', '아니요.', 'いいえ。', '不会。', '不會。']) {
+    expect(() => validateProductPresentation('fixture', 'en', blocks, replaceAnswer(answer))).toThrow(/not only yes or no/);
+  }
+  for (const answer of ['不会。原文件不变。', 'No. The original file stays unchanged.']) {
+    expect(() => validateProductPresentation('fixture', 'en', blocks, replaceAnswer(answer))).not.toThrow();
+  }
+});

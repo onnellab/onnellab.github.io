@@ -63,3 +63,21 @@ test('audited product wording keeps clear subjects and natural terminology', asy
   await page.goto('/apps/meriq/ja/');
   await expect(page.locator('.copy-column')).toContainText('後加工レイヤーの準備・編集にはMeriq Proが必要です。');
 });
+
+test('French and Spanish FAQs explain file preservation and local processing', async ({ page }) => {
+  const cases = [
+    ['/apps/quivra/fr/', 'Le fichier original est-il modifié ?', 'le résultat est enregistré dans un nouveau fichier'],
+    ['/apps/quivra/es/', '¿Se modifica el original?', 'el resultado se guarda en un archivo nuevo'],
+    ['/apps/segra/fr/', 'Les fichiers sont-ils envoyés à un serveur ?', 'traités sur votre appareil'],
+    ['/apps/segra/es/', '¿Se envían los archivos a un servidor?', 'se procesan en tu dispositivo']
+  ];
+  for (const [route, question, explanation] of cases) {
+    await page.goto(route);
+    const item = page.locator('.faq-band details').filter({ has: page.locator('summary', { hasText: question }) });
+    await expect(item).toHaveCount(1);
+    await item.locator('summary').click();
+    await expect(item.locator('p')).toBeVisible();
+    await expect(item.locator('p')).toContainText(explanation);
+    await expect(page.locator('.faq-band details')).toHaveCount(4);
+  }
+});

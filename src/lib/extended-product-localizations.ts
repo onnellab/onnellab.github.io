@@ -438,7 +438,7 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
         },
         {
           "question": "Le fichier original est-il modifié ?",
-          "answer": "Non."
+          "answer": "Non. Le fichier d’origine est conservé et le résultat est enregistré dans un nouveau fichier."
         },
         {
           "question": "Dois-je choisir le dossier de sortie à chaque conversion ?",
@@ -466,7 +466,7 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
         },
         {
           "question": "Les fichiers sont-ils envoyés à un serveur ?",
-          "answer": "Non."
+          "answer": "Non. Les fichiers sont traités sur votre appareil et ne sont pas envoyés à un serveur."
         }
       ],
       "seoDescription": "Découpez des MP3 et WAV, assemblez des enregistrements ou créez des MP4 avec un fichier audio et une image dans Segra. Traitement local, originaux préservés."
@@ -604,7 +604,7 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
         },
         {
           "question": "¿Se modifica el original?",
-          "answer": "No."
+          "answer": "No. El archivo original se conserva y el resultado se guarda en un archivo nuevo."
         },
         {
           "question": "¿Tengo que elegir el destino en cada conversión?",
@@ -632,7 +632,7 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
         },
         {
           "question": "¿Se envían los archivos a un servidor?",
-          "answer": "No."
+          "answer": "No. Los archivos se procesan en tu dispositivo y no se suben a un servidor."
         }
       ],
       "seoDescription": "Recorta MP3 y WAV, une grabaciones o crea vídeos MP4 con audio e imagen en Segra. Todo se procesa sin conexión y los archivos originales se conservan."
