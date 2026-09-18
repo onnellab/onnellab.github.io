@@ -181,6 +181,10 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
   const screenshotPaths = getScreenshotRoutePaths(source, locale);
   const promo = readVaultxtPromoCopy(source.contentDir, locale);
   const promoFeatures = promo?.screenshots.map((screenshot) => screenshot.title);
+  const bodyFeatures = renderBlocks(pageBodyDescription(copy)).find((block) => block.type === 'ul')?.value as
+    | string[]
+    | undefined;
+  const schemaFeatureList = source.slug === 'melivra' ? bodyFeatures : promoFeatures;
   return {
     locale,
     source,
@@ -190,7 +194,7 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     alternates: allProductLocaleAlternates(source.slug),
     seoTitle: productSeoTitle(source, copy),
     seoDescription,
-    schemaFeatureList: promoFeatures,
+    schemaFeatureList,
     iconPath: getIconRoutePath(source),
     screenshotPaths,
     screenshotAlts: getProductScreenshotAltsFromCopy(source, locale, screenshotPaths.length),

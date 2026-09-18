@@ -51,7 +51,20 @@ const banned = [
   'Kaufberechtigung',
   'Kept the notes scoped to App Store-visible stability fixes.',
   'Excluded private-test-only and local build metadata changes from the public notes.',
-  'App Store에 공개된 안정성 수정 범위로 릴리즈 노트를 한정했습니다.'
+  'App Store에 공개된 안정성 수정 범위로 릴리즈 노트를 한정했습니다.',
+  'AI Tokens',
+  'AI Token',
+  'AI 대본',
+  'AI script',
+  'Local Audio Library Player',
+  '로컬 오디오 라이브러리 플레이어',
+  'ローカル音源ライブラリプレーヤー',
+  '本地音频库播放器',
+  '本機音訊資料庫播放器',
+  'Player para biblioteca de áudio local',
+  'Player für lokale Audiosammlungen',
+  'Lecteur pour bibliothèque audio locale',
+  'Reproductor para biblioteca de audio local'
 ];
 
 const violations = [];

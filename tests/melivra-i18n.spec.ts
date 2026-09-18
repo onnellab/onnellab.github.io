@@ -56,6 +56,9 @@ for (const locale of locales) {
     const software = schemas.find((entry) => entry?.['@type'] === 'SoftwareApplication');
     expect(software?.description).toBe(metaDescription);
     expect(software?.applicationSubCategory).toBe('Offline Music Player');
+    expect(software?.featureList).toHaveLength(7);
+    expect(software?.featureList.join(' ')).toContain('ReplayGain');
+    expect(software?.featureList.join(' ')).toContain('M3U/M3U8');
   });
 }
 
