@@ -52,30 +52,31 @@ All processing happens directly on your device.
 Segra is a quiet audio tool focused on trimming and organizing audio files without the complexity of a full audio editor.
 
 Landing page:
-Segra keeps common audio edits simple.
-
-Trim MP3 and WAV files, merge multiple recordings, or combine audio with an image to create an MP4 video. It is built for focused editing tasks rather than full music production.
+Segra keeps common audio edits simple. Trim MP3 and WAV files, merge multiple recordings, or combine audio with an image to create an MP4 video. It is built for focused editing tasks rather than full music production.
 
 You can cut a long recording down to the part you need, join voice files in order, or create a simple video for narration, podcasts, audiobooks, or TTS audio.
 
-Core tasks
+## Key features
 
-• Trim the needed section
-• Merge audio files
-• Create MP4 from audio
-• Preserve original files
-• Process everything offline
+- Trim MP3 or WAV audio by choosing start and end points
+- Merge audio files in the order you choose
+- Create an MP4 video from audio and an image
+- Save results as new files, preserving the originals
+- Process files offline on your device
 
 When you choose a start and end point, Segra saves the selected section as a new file. Original files are not modified.
 
 All processing happens on your device. There is no login, account creation, file upload, advertising, or tracking.
 
 FAQ:
+Q: What audio tasks are supported?
+A: Segra supports trimming MP3 and WAV files, merging audio files, and creating MP4 videos from audio and images.
+
 Q: Are original audio files modified?
 A: No. Segra saves trimmed sections and merged results as new files, leaving originals untouched.
 
-Q: What audio tasks are supported?
-A: Segra supports trimming MP3 and WAV files, merging audio files, and creating MP4 videos from audio and images.
+Q: Can I turn a recording into an MP4 video?
+A: Yes. Combine an audio file with an image to create a simple MP4 video, for example for narration, podcasts or TTS audio.
 
 Q: Are files uploaded to a server?
 A: No. Processing happens on your device without login, account creation, or file uploads.
