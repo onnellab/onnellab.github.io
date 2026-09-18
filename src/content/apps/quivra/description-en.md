@@ -56,34 +56,29 @@ Quivra converts WAV, M4A, MP4, and MOV files with fixed rules, no ads, and no su
 
 Choose a WAV, M4A, MP4, or MOV file and Quivra picks the right conversion path automatically. You do not need to choose an output format before starting.
 
-Audio files can be converted to MP3. MP4 videos can be saved as MP3 audio. MOV videos can be converted to MP4.
+## Key features
 
-Core tasks
+- Convert WAV to MP3
+- Convert M4A to MP3
+- Extract MP3 audio from MP4 video
+- Convert MOV video to MP4
+- Select the conversion automatically from the input format
+- Remember your save location and handle duplicate names automatically
 
-• Choose a media file
-• Convert automatically
-• Save without extra steps
-
-Supported conversions
-
-• Convert WAV to MP3
-• Convert M4A to MP3
-• Extract audio from MP4
-• MOV to MP4 video conversion
-
-Quivra is a paid converter with no ads and no subscriptions. It remembers the save location you choose and handles duplicate file names automatically.
-
-Original files are left untouched. Quivra creates a new converted file so common media cleanup tasks stay simple and predictable.
+Original files are left untouched; each conversion creates a new file. Quivra is a one-time purchase, with no ads or subscription.
 
 FAQ:
-Q: Do I need to choose an output format?
-A: No. Quivra automatically chooses the conversion path based on the input file type.
-
 Q: Which conversions are supported?
 A: WAV and M4A convert to MP3, MP4 can be saved as MP3 audio, and MOV can be converted to MP4 video.
 
+Q: Do I need to choose an output format?
+A: No. Quivra automatically chooses the conversion path based on the input file type.
+
 Q: Are original files changed?
 A: No. Quivra leaves original files untouched and creates a new converted file.
+
+Q: Does Quivra remember where I save files?
+A: Yes. It remembers your chosen save location and handles duplicate file names automatically.
 
 ios
 앱 이름:
