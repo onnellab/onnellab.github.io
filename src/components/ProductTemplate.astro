@@ -52,6 +52,8 @@ const localizedLabels: Record<AllSiteLocale, {
   es: { platforms:'Plataformas', appStore:'App Store', googlePlay:'Google Play', privacy:'Política de privacidad', releaseNotes:'Notas de la versión', latestRelease:'Versión más reciente', support:'Contacto', apps:'Aplicaciones', allApps:'Todas las aplicaciones', download:'Descargar', screens:'Capturas de pantalla', stores:'Tiendas', released:'Disponible', preparing:'En preparación', icon:'icono de la aplicación', previousScreenshot:'Captura anterior', nextScreenshot:'Captura siguiente', close:'Cerrar', previous:'Anterior', next:'Siguiente' }
 };
 const labels = localizedLabels[data.locale];
+// A reserved store URL is not release evidence. Keep unpublished apps non-installable.
+const isReleased = meta.status === 'Released' || meta.status === labels.released;
 const localizedStatus =
   meta.status === 'Released'
     ? labels.released
@@ -134,10 +136,10 @@ const privacyPath =
     ? allRouteFor('papiraPrivacy', data.locale)
     : allAppPrivacyRouteFor(data.source.slug, data.locale);
 const privacyUrl = new URL(privacyPath, Astro.site).toString();
-const appStoreUrl = localizedAppStoreUrl(meta.appstore, data.locale);
-const googlePlayUrl = localizedGooglePlayUrl(meta.googleplay, data.locale);
+const appStoreUrl = isReleased ? localizedAppStoreUrl(meta.appstore, data.locale) : undefined;
+const googlePlayUrl = isReleased ? localizedGooglePlayUrl(meta.googleplay, data.locale) : undefined;
 const storeUrls = [appStoreUrl, googlePlayUrl].filter(Boolean);
-const latestReleaseNote = latestReleaseNoteForApp(data.source.slug);
+const latestReleaseNote = isReleased ? latestReleaseNoteForApp(data.source.slug) : undefined;
 const releaseNotesUrl = latestReleaseNote
   ? data.locale === 'en'
     ? releaseNotePath(latestReleaseNote)
@@ -257,6 +259,7 @@ const breadcrumbJsonLd = {
       </div>
 
       <div class="hero-actions">
+        {!isReleased && <p class="release-note-inline" data-release-status>{localizedStatus}</p>}
         <div class="actions store-actions" aria-label={labels.stores}>
           {appStoreUrl && <a class="button primary" href={appStoreUrl} data-store-link data-store="app_store" data-store-position="hero">{labels.appStore}</a>}
           {googlePlayUrl && <a class="button primary" href={googlePlayUrl} data-store-link data-store="google_play" data-store-position="hero">{labels.googlePlay}</a>}

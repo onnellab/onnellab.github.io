@@ -47,3 +47,8 @@ and https://developers.google.com/search/docs/appearance/title-link.
 FAQ answers must preserve the explanation in every language, not only a yes/no
 verdict. A short decision plus the real file-handling or processing behavior is
 enough. The build rejects bare decisions but does not require a minimum word count.
+
+Release state also controls store actions, installUrl and latest-release links.
+Reserved store URLs stay in source metadata but must not make a prerelease app
+look downloadable. Show the localized preparation status in the hero and download
+area until release is confirmed. Never infer release from a store URL alone.

@@ -67,3 +67,40 @@ test('VaultXT has concise authored web titles without changing its hero or store
     expect(data.copy.android.landingSubtitle).not.toBe(expected[locale].slice(10));
   }
 });
+
+for (const app of ['melivra', 'meriq', 'papira']) {
+  test(`${app}: prerelease pages show their status and never claim installation availability`, async ({ page }) => {
+    const preparing = {
+      en: 'Preparing for release', ko: '출시 준비 중', ja: 'リリース準備中',
+      'zh-Hans': '准备发布', 'zh-Hant': '準備發布', 'pt-BR': 'Em preparação',
+      de: 'In Vorbereitung', fr: 'En préparation', es: 'En preparación'
+    };
+    for (const locale of allSiteLocales) {
+      const data = dataFor(app, locale);
+      await page.goto(data.canonicalPath);
+      await expect(page.locator('[data-release-status]')).toHaveText(preparing[locale]);
+      await expect(page.locator('[data-release-status]')).toBeVisible();
+      await expect(page.locator('.download-band')).toContainText(preparing[locale]);
+      await expect(page.locator('[data-store-link]')).toHaveCount(0);
+      const software = await page.locator('script[type="application/ld+json"]').evaluateAll(scripts =>
+        scripts.flatMap(script => JSON.parse(script.textContent ?? 'null')).find(item => item?.['@type'] === 'SoftwareApplication')
+      );
+      expect(software).not.toHaveProperty('installUrl');
+      expect(software).not.toHaveProperty('sameAs');
+    }
+  });
+}
+
+test('released apps keep localized store links and never display the prerelease notice', async ({ page }) => {
+  for (const source of getProductSources().filter(source => source.meta.status === 'Released')) {
+    const data = getProductPageData(source.slug, 'ko');
+    await page.goto(data.canonicalPath);
+    await expect(page.locator('[data-release-status]')).toHaveCount(0);
+    const links = await page.locator('[data-store-link]').count();
+    expect(links).toBeGreaterThan(0);
+    const software = await page.locator('script[type="application/ld+json"]').evaluateAll(scripts =>
+      scripts.flatMap(script => JSON.parse(script.textContent ?? 'null')).find(item => item?.['@type'] === 'SoftwareApplication')
+    );
+    expect(software.installUrl.length).toBeGreaterThan(0);
+  }
+});
