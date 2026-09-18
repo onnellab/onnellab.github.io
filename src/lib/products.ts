@@ -179,12 +179,10 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
   const seoDescription = seoPageDescription(source, copy);
   const canonicalPath = allProductRouteFor(source.slug, locale);
   const screenshotPaths = getScreenshotRoutePaths(source, locale);
-  const promo = readVaultxtPromoCopy(source.contentDir, locale);
-  const promoFeatures = promo?.screenshots.map((screenshot) => screenshot.title);
   const bodyFeatures = renderBlocks(pageBodyDescription(copy)).find((block) => block.type === 'ul')?.value as
     | string[]
     | undefined;
-  const schemaFeatureList = source.slug === 'melivra' ? bodyFeatures : promoFeatures;
+  const schemaFeatureList = bodyFeatures;
   return {
     locale,
     source,

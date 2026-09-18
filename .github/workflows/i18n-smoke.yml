@@ -86,6 +86,9 @@ jobs:
       - name: Run Meriq copy regression tests
         run: npx playwright test tests/meriq-copy.spec.ts --project=desktop --reporter=line,html
 
+      - name: Run product presentation regression tests
+        run: npx playwright test tests/product-presentation.spec.ts tests/melivra-i18n.spec.ts --project=desktop --reporter=line,html
+
       - name: Run product contract regression tests
         run: npx playwright test tests/product-contract.spec.ts --project=desktop --reporter=line,html
 

@@ -1248,9 +1248,9 @@ test.describe('existing product pages', () => {
       await page.goto(path);
       const isKo = path.endsWith('/ko/');
       const faqTitle = isKo ? '자주 묻는 질문'
-        : path === '/apps/vaultxt/' ? 'Frequently asked questions' : 'FAQ';
+        : 'Frequently asked questions';
       await expect(page.locator('#faq-title')).toHaveText(faqTitle);
-      await expect(page.locator('.faq-list details')).toHaveCount(3);
+      await expect(page.locator('.faq-list details')).toHaveCount(4);
 
       const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
       const parsed = schemas.map((schema) => JSON.parse(schema));
