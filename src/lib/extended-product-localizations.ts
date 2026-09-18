@@ -39,7 +39,7 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
       "seoDescription": "Renomeie arquivos em lote com o Aligna. Adicione datas e números, use dados de fotos e músicas e confira os novos nomes antes de aplicar as alterações."
     },
     clipnest: {
-      "subtitle": "Área de transferência e textos reutilizáveis",
+      "subtitle": "Teclado com área de transferência",
       "body": "ClipNest é uma ferramenta local de área de transferência para iPhone e iPad.\n\nQuando o teclado ClipNest é aberto, ele verifica a área de transferência naquele momento e salva novos textos no dispositivo. Assim você pode reutilizar mensagens, endereços, e-mails, links e trechos frequentes sem procurar novamente em outros apps ou notas.\n\n## Principais recursos\n\n- Salvar o texto copiado ao abrir o teclado\n- Colar diretamente pelo teclado\n- Fixar itens usados com frequência\n- Reutilizar o histórico recente\n- Tratar entradas duplicadas\n- Armazenamento local no dispositivo\n\nClipNest não monitora a área de transferência continuamente. Os textos salvos não são enviados para servidores externos. Não há conta, anúncios nem assinatura.",
       "faqTitle": "Perguntas frequentes",
       "faq": [
@@ -60,7 +60,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "answer": "Sim. Itens importantes podem ser fixados para acesso rápido pelo teclado."
         }
       ],
-      "seoDescription": "Salve textos ao abrir o teclado ClipNest, fixe frases frequentes e cole em outros apps. Os textos ficam no seu iPhone ou iPad, sem envio a servidores."
+      "seoDescription": "Salve textos ao abrir o teclado ClipNest, fixe frases frequentes e cole em outros apps. Os textos ficam no seu iPhone ou iPad, sem envio a servidores.",
+      "seoTitle": "ClipNest - Teclado com área de transferência"
     },
     meriq: {
       "subtitle": "Crie adesivos e chaveiros de acrílico",
@@ -208,7 +209,7 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
       "seoDescription": "Mit Aligna Dateien stapelweise umbenennen: Datum, Nummern, Foto- und Musikmetadaten nutzen und neue Dateinamen vor dem Anwenden in der Vorschau prüfen."
     },
     clipnest: {
-      "subtitle": "Lokale Zwischenablage und Textbausteine",
+      "subtitle": "Zwischenablage & Textbaustein-Tastatur",
       "body": "ClipNest ist ein lokal arbeitendes Zwischenablage-Werkzeug für iPhone und iPad.\n\nBeim Öffnen der ClipNest-Tastatur wird die aktuelle Zwischenablage einmal geprüft und neuer Text auf dem Gerät gespeichert. So lassen sich Nachrichten, Adressen, E-Mail-Adressen, Links und häufige Textbausteine schnell wiederverwenden.\n\n## Hauptfunktionen\n\n- Kopierten Text beim Öffnen der Tastatur speichern\n- Direkt über die Tastatur einfügen\n- Häufige Einträge anheften\n- Letzte Kopien wiederverwenden\n- Doppelte Einträge verwalten\n- Lokale Speicherung auf dem Gerät\n\nDie Zwischenablage wird nicht dauerhaft überwacht. Gespeicherte Texte werden nicht an externe Server gesendet. Es gibt kein Konto, keine Werbung und kein Abonnement.",
       "faqTitle": "Häufige Fragen",
       "faq": [
@@ -229,7 +230,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "answer": "Ja. Wichtige Texte können für schnellen Zugriff über die Tastatur angeheftet werden."
         }
       ],
-      "seoDescription": "ClipNest speichert kopierten Text beim Öffnen der Tastatur. Textbausteine anheften und in andere Apps einfügen – lokal auf deinem iPhone oder iPad."
+      "seoDescription": "ClipNest speichert kopierten Text beim Öffnen der Tastatur. Textbausteine anheften und in andere Apps einfügen – lokal auf deinem iPhone oder iPad.",
+      "seoTitle": "ClipNest - Zwischenablage & Textbaustein-Tastatur"
     },
     meriq: {
       "subtitle": "Sticker & Acrylanhänger gestalten",
@@ -373,7 +375,7 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
       "seoDescription": "Renommez vos fichiers par lot avec Aligna : dates, numéros, données des photos et tags musicaux. Vérifiez les nouveaux noms avant toute modification."
     },
     clipnest: {
-      "subtitle": "Presse-papiers local et textes réutilisables",
+      "subtitle": "Clavier avec presse-papiers",
       "body": "ClipNest est un outil de presse-papiers local pour iPhone et iPad.\n\nÀ l’ouverture du clavier ClipNest, le presse-papiers courant est vérifié une fois et les nouveaux textes sont enregistrés sur l’appareil. Messages, adresses, e-mails, liens et phrases fréquentes peuvent ainsi être réutilisés rapidement.\n\n## Fonctions principales\n\n- Enregistrer le texte copié à l’ouverture du clavier\n- Coller directement depuis le clavier\n- Épingler les éléments fréquents\n- Réutiliser l’historique récent\n- Gérer les doublons\n- Stockage local sur l’appareil\n\nLe presse-papiers n’est pas surveillé en permanence. Les textes enregistrés ne sont pas envoyés à un serveur externe. Aucun compte, aucune publicité ni abonnement.",
       "faqTitle": "Questions fréquentes",
       "faq": [
@@ -394,7 +396,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "answer": "Oui. Les éléments importants peuvent être épinglés pour un accès rapide."
         }
       ],
-      "seoDescription": "ClipNest enregistre le texte copié à l’ouverture du clavier. Épinglez vos phrases et collez-les dans d’autres apps. Les textes restent sur votre appareil."
+      "seoDescription": "ClipNest enregistre le texte copié à l’ouverture du clavier. Épinglez vos phrases et collez-les dans d’autres apps. Les textes restent sur votre appareil.",
+      "seoTitle": "ClipNest - Clavier avec presse-papiers"
     },
     meriq: {
       "subtitle": "Créez vos stickers et porte-clés",
@@ -538,7 +541,7 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
       "seoDescription": "Renombra archivos por lotes con Aligna. Añade fechas y números, usa datos de fotos y música y revisa los nuevos nombres antes de aplicar los cambios."
     },
     clipnest: {
-      "subtitle": "Portapapeles local y textos reutilizables",
+      "subtitle": "Teclado con portapapeles",
       "body": "ClipNest es una herramienta local de portapapeles para iPhone y iPad.\n\nAl abrir el teclado de ClipNest se revisa una vez el contenido actual del portapapeles y se guarda el texto nuevo en el dispositivo. Así puedes reutilizar mensajes, direcciones, correos, enlaces y frases frecuentes sin volver a buscarlos.\n\n## Funciones principales\n\n- Guardar texto copiado al abrir el teclado\n- Pegar directamente desde el teclado\n- Fijar elementos frecuentes\n- Reutilizar el historial reciente\n- Gestionar duplicados\n- Almacenamiento local\n\nClipNest no vigila el portapapeles continuamente. Los textos guardados no se envían a servidores externos. No hay cuenta, anuncios ni suscripción.",
       "faqTitle": "Preguntas frecuentes",
       "faq": [
@@ -559,7 +562,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "answer": "Sí. Puedes fijarlos para acceder rápidamente desde el teclado."
         }
       ],
-      "seoDescription": "ClipNest guarda el texto copiado al abrir su teclado. Fija frases y pégalas en otras apps. Los textos se guardan en tu iPhone o iPad, sin subirlos a servidores."
+      "seoDescription": "ClipNest guarda el texto copiado al abrir su teclado. Fija frases y pégalas en otras apps. Los textos se guardan en tu iPhone o iPad, sin subirlos a servidores.",
+      "seoTitle": "ClipNest - Teclado con portapapeles"
     },
     meriq: {
       "subtitle": "Crea pegatinas y llaveros acrílicos",

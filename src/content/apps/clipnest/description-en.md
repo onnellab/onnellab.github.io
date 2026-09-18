@@ -1,4 +1,7 @@
 ios
+SEO title:
+ClipNest - Clipboard & Snippet Keyboard
+
 SEO description:
 Save copied text when the ClipNest keyboard opens, pin reusable snippets, and paste them into other apps. Stored text stays on your iPhone or iPad.
 
@@ -9,7 +12,7 @@ ClipNest - Clipboard Tool
 Keyboard Paste & Snippets
 
 Landing subtitle:
-Keyboard Paste & Snippets
+Clipboard & Snippet Keyboard
 
 프로모션 텍스트:
 Save copied text when the keyboard opens, pin important snippets, and paste again fast. Clipboard history stays local on your iPhone and iPad.

@@ -36,7 +36,7 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
       "seoDescription": "Alignaで写真・音楽・書類のファイル名を一括変更。日付や連番、写真の撮影日、楽曲情報を使って名前を整え、適用前に変更後の名前を確認できます。"
     },
     clipnest: {
-      "subtitle": "キーボード貼り付け・定型文",
+      "subtitle": "クリップボード・定型文キーボード",
       "body": "ClipNestは、iPhoneとiPadで使えるローカル保存型のクリップボードツールです。\n\nClipNestキーボードを開いたときに現在のクリップボードを一度確認し、新しいテキストを端末内に保存します。メッセージ、住所、メールアドレス、リンク、短い定型文を、以前のアプリやメモから探し直さずに再利用できます。\n\n## 主な機能\n\n- キーボードを開いたときにコピーしたテキストを保存\n- キーボードから直接貼り付け\n- よく使う項目をピン留め\n- 最近のコピー履歴を閲覧・再利用\n- 重複項目を自動処理\n- 端末内にローカル保存\n\nクリップボードを常時監視することはありません。保存したテキストを外部サーバーへ送信せず、アカウント、広告、サブスクリプションもありません。",
       "faq": [
         {
@@ -56,7 +56,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "answer": "はい。重要なテキストをピン留めし、キーボードからすばやく貼り付けられます。"
         }
       ],
-      "seoDescription": "ClipNestキーボードを開くとコピーしたテキストを保存。よく使う定型文をピン留めして別のアプリへ貼り付けられます。保存先はiPhone・iPadの端末内です。"
+      "seoDescription": "ClipNestキーボードを開くとコピーしたテキストを保存。よく使う定型文をピン留めして別のアプリへ貼り付けられます。保存先はiPhone・iPadの端末内です。",
+      "seoTitle": "ClipNest - クリップボード・定型文キーボード"
     },
     quivra: {
       "subtitle": "メディア変換ツール",
@@ -197,7 +198,7 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
       "seoDescription": "使用 Aligna 批量重命名照片、音乐和文档。添加日期或序号，根据拍摄日期和曲目信息生成文件名，并在应用更改前预览新名称。"
     },
     clipnest: {
-      "subtitle": "键盘粘贴与常用文本",
+      "subtitle": "剪贴板与常用文本键盘",
       "body": "ClipNest 是一款适用于 iPhone 和 iPad 的本地剪贴板工具。\n\n打开 ClipNest 键盘时，它会检查一次当前剪贴板，并把新文本保存在设备本地。消息、地址、电子邮件、链接和短文本无需再从旧应用或备忘录中查找，即可快速复用。\n\n## 主要功能\n\n- 打开键盘时保存复制的文本\n- 直接从键盘粘贴\n- 置顶常用文本\n- 浏览并复用最近的剪贴内容\n- 自动处理重复内容\n- 数据保存在设备本地\n\nClipNest 不会持续监控剪贴板。保存的文本不会发送到外部服务器，也没有账号、广告或订阅。",
       "faq": [
         {
@@ -217,7 +218,8 @@ const translations: Record<TranslationLocale, Record<string, LocalizedProductCon
           "answer": "可以。你可以置顶重要文本，并从键盘快速再次粘贴。"
         }
       ],
-      "seoDescription": "打开 ClipNest 键盘时保存复制的文本，置顶常用内容，并直接粘贴到其他应用。保存的文本留在 iPhone 或 iPad 上，不会发送到外部服务器。"
+      "seoDescription": "打开 ClipNest 键盘时保存复制的文本，置顶常用内容，并直接粘贴到其他应用。保存的文本留在 iPhone 或 iPad 上，不会发送到外部服务器。",
+      "seoTitle": "ClipNest - 剪贴板与常用文本键盘"
     },
     quivra: {
       "subtitle": "媒体转换器",
@@ -358,7 +360,7 @@ VaultXT 无需账号、不含广告或追踪，也不会把文件内容发送到
       "seoDescription": "使用 Aligna 批次重新命名照片、音樂與文件。加入日期或序號，依拍攝日期與曲目資訊建立檔名，並在套用變更前預覽新名稱。"
     },
     clipnest: {
-      "subtitle": "鍵盤貼上與常用文字",
+      "subtitle": "剪貼簿與常用文字鍵盤",
       "body": "ClipNest 是一款適用於 iPhone 與 iPad 的本機剪貼簿工具。\n\n開啟 ClipNest 鍵盤時，它會檢查一次目前的剪貼簿，並把新文字儲存在裝置本機。訊息、地址、電子郵件、連結與短文字不必再從舊應用程式或備忘錄中尋找，就能快速重複使用。\n\n## 主要功能\n\n- 開啟鍵盤時儲存複製的文字\n- 直接從鍵盤貼上\n- 釘選常用文字\n- 瀏覽並重複使用最近的剪貼內容\n- 自動處理重複內容\n- 資料儲存在裝置本機\n\nClipNest 不會持續監控剪貼簿。儲存的文字不會傳送到外部伺服器，也沒有帳號、廣告或訂閱。",
       "faq": [
         {
@@ -378,7 +380,8 @@ VaultXT 无需账号、不含广告或追踪，也不会把文件内容发送到
           "answer": "可以。你可以釘選重要文字，並從鍵盤快速再次貼上。"
         }
       ],
-      "seoDescription": "開啟 ClipNest 鍵盤時儲存複製的文字，釘選常用內容，並直接貼到其他應用程式。儲存的文字留在 iPhone 或 iPad 上，不會傳送到外部伺服器。"
+      "seoDescription": "開啟 ClipNest 鍵盤時儲存複製的文字，釘選常用內容，並直接貼到其他應用程式。儲存的文字留在 iPhone 或 iPad 上，不會傳送到外部伺服器。",
+      "seoTitle": "ClipNest - 剪貼簿與常用文字鍵盤"
     },
     quivra: {
       "subtitle": "媒體轉換工具",

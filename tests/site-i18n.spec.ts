@@ -411,7 +411,7 @@ test.describe('nine-language site core regression', () => {
     const localizedSubtitles = {
       ja: {
         aligna: 'ファイル名一括変更ツール',
-        clipnest: 'キーボード貼り付け・定型文',
+        clipnest: 'クリップボード・定型文キーボード',
         melivra: 'オフライン音楽プレーヤー',
         quivra: 'メディア変換ツール',
         segra: '音声カット・結合ツール',
@@ -420,7 +420,7 @@ test.describe('nine-language site core regression', () => {
       },
       'zh-hans': {
         aligna: '批量文件重命名工具',
-        clipnest: '键盘粘贴与常用文本',
+        clipnest: '剪贴板与常用文本键盘',
         melivra: '离线音乐播放器',
         quivra: '媒体转换器',
         segra: '音频剪切与合并工具',
@@ -429,7 +429,7 @@ test.describe('nine-language site core regression', () => {
       },
       'zh-hant': {
         aligna: '批次檔案重新命名工具',
-        clipnest: '鍵盤貼上與常用文字',
+        clipnest: '剪貼簿與常用文字鍵盤',
         melivra: '離線音樂播放器',
         quivra: '媒體轉換工具',
         segra: '音訊剪輯與合併工具',
