@@ -412,7 +412,7 @@ test.describe('nine-language site core regression', () => {
       ja: {
         aligna: 'ファイル名一括変更ツール',
         clipnest: 'キーボード貼り付け・定型文',
-        melivra: 'ローカル音源ライブラリプレーヤー',
+        melivra: 'オフライン音楽プレーヤー',
         quivra: 'メディア変換ツール',
         segra: '音声カット・結合ツール',
         tagweaver: 'オフラインMP3/FLACタグエディター',
@@ -421,7 +421,7 @@ test.describe('nine-language site core regression', () => {
       'zh-hans': {
         aligna: '批量文件重命名工具',
         clipnest: '键盘粘贴与常用文本',
-        melivra: '本地音频库播放器',
+        melivra: '离线音乐播放器',
         quivra: '媒体转换器',
         segra: '音频剪切与合并工具',
         tagweaver: '离线 MP3/FLAC 标签编辑器',
@@ -430,7 +430,7 @@ test.describe('nine-language site core regression', () => {
       'zh-hant': {
         aligna: '批次檔案重新命名工具',
         clipnest: '鍵盤貼上與常用文字',
-        melivra: '本機音訊資料庫播放器',
+        melivra: '離線音樂播放器',
         quivra: '媒體轉換工具',
         segra: '音訊剪輯與合併工具',
         tagweaver: '離線 MP3/FLAC 標籤編輯器',

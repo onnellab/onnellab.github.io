@@ -11,6 +11,7 @@ import {
 } from './extended-site-i18n';
 import { getLocalizedProductContent } from './product-localizations';
 import { getExtendedProductCopy } from './extended-product-localizations';
+import { getMelivraProductCopy } from './melivra-product';
 import { getProductScreenshotAlts } from './product-screenshot-alts';
 
 const appsContentDir = path.resolve(process.cwd(), 'src/content/apps');
@@ -39,6 +40,8 @@ export type PlatformCopy = {
   description: string;
   keywords?: string;
   faq?: ProductFaq;
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export type ProductCopy = {
@@ -390,6 +393,21 @@ function readProductMeta(contentDir: string): ProductMeta {
 }
 
 function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
+  const slug = path.basename(contentDir);
+  if (slug === 'melivra') {
+    const localized = getMelivraProductCopy(locale);
+    const platform: PlatformCopy = {
+      name: localized.landingSubtitle,
+      landingSubtitle: localized.landingSubtitle,
+      landingDescription: localized.body,
+      description: localized.body,
+      seoTitle: localized.seoTitle,
+      seoDescription: localized.seoDescription,
+      faq: { title: localized.faqTitle, items: localized.faq }
+    };
+    return { locale, android: platform, ios: platform };
+  }
+
   const promo = readVaultxtPromoCopy(contentDir, locale);
   if (promo) {
     const platform = {
@@ -419,7 +437,6 @@ function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
     return { locale, android: platform, ios: platform };
   }
   if (isExtendedSiteLocale(locale)) {
-    const slug = path.basename(contentDir);
     const localized = getExtendedProductCopy(slug, locale);
     const platform = {
       name: localized.subtitle,
@@ -434,7 +451,6 @@ function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
     return { locale, android: platform, ios: platform };
   }
   if (locale !== 'en' && locale !== 'ko') {
-    const slug = path.basename(contentDir);
     const localized = getLocalizedProductContent(slug, locale);
     const platform = {
       name: localized.subtitle,
@@ -508,6 +524,9 @@ function pageDescription(copy: ProductCopy): string {
 }
 
 function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
+  const explicit = copy.android.seoDescription ?? copy.ios.seoDescription;
+  if (explicit) return explicit;
+
   const summary = pageDescription(copy).replace(/\s+/g, ' ').trim();
   const platforms = copy.locale === 'en'
     ? source.meta.platforms.join(' and ')
@@ -549,6 +568,9 @@ function seoPageDescription(source: ProductSource, copy: ProductCopy): string {
 }
 
 function productSeoTitle(source: ProductSource, copy: ProductCopy): string {
+  const explicit = copy.android.seoTitle ?? copy.ios.seoTitle;
+  if (explicit) return explicit;
+
   const subtitle = landingSubtitle(copy).replace(/\s+/g, ' ').trim();
   if (!subtitle || subtitle.toLowerCase() === source.meta.title.toLowerCase()) {
     return source.meta.title;

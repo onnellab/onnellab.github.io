@@ -86,7 +86,7 @@ for (const app of apps) {
 
       const metaDescription = await page.locator('meta[name="description"]').getAttribute('content');
       expect(metaDescription).toBeTruthy();
-      if (app !== 'papira') {
+      if (app !== 'papira' && app !== 'melivra') {
         expect(metaDescription).toContain(' — ');
         expect(metaDescription).toContain(metaPlatformMarkers[locale.code]);
         if (locale.code === 'ja' || locale.code === 'zh-Hans' || locale.code === 'zh-Hant') {
