@@ -33,3 +33,33 @@ test('confirmed language-quality corrections remain visible', async ({ page }) =
   await page.goto('/release-notes/tagweaver/2.2/ko/');
   await expect(page.locator('main')).toContainText('일상적인 태그 편집이 더 안정적으로 동작하도록 다듬었습니다.');
 });
+
+test('audited product wording keeps clear subjects and natural terminology', async ({ page }) => {
+  const cases = [
+    { path: '/apps/clipnest/', has: 'No account is needed. There are no ads or subscriptions.', absent: 'No account, ads or subscription is required.' },
+    { path: '/apps/clipnest/ja/', has: 'ほかのアプリやメモ', absent: '以前のアプリ' },
+    { path: '/apps/clipnest/zh-hans/', has: '其他应用', absent: '旧应用' },
+    { path: '/apps/clipnest/zh-hant/', has: '其他應用程式', absent: '舊應用程式' },
+    { path: '/apps/aligna/fr/', has: 'noms de fichiers audio', absent: 'noms musicaux' },
+    { path: '/apps/aligna/es/', has: 'nombres de archivos de música', absent: 'nombres musicales' },
+    { path: '/apps/vaultxt/de/', has: 'bei großen Dateien kann die Prüfung entfallen', absent: 'große Dateien können die Prüfung überspringen' },
+    { path: '/apps/vaultxt/pt-br/', has: 'a verificação pode ser dispensada', absent: 'arquivos grandes podem pular' },
+    { path: '/apps/vaultxt/es/', has: 'la validación puede omitirse', absent: 'los archivos grandes pueden omitir' },
+    { path: '/apps/segra/zh-hans/', has: 'Segra 让常用音频编辑更简单。', absent: '保持简单' },
+    { path: '/apps/segra/zh-hant/', has: 'Segra 讓常用音訊編輯更簡單。', absent: '保持簡單' }
+  ];
+  for (const expected of cases) {
+    await page.goto(expected.path);
+    await expect(page.locator('.copy-column')).toContainText(expected.has);
+    await expect(page.locator('.copy-column')).not.toContainText(expected.absent);
+  }
+  await page.goto('/apps/meriq/ko/');
+  const features = await page.locator('.copy-column li').allTextContents();
+  expect(features).toHaveLength(8);
+  expect(features.every(value => value.trim().endsWith('요'))).toBe(true);
+  await page.goto('/apps/meriq/pt-br/');
+  await expect(page.locator('.copy-column')).toContainText('Confira a remoção de fundo');
+  await expect(page.locator('.copy-column')).toContainText('Prepare e edite as camadas');
+  await page.goto('/apps/meriq/ja/');
+  await expect(page.locator('.copy-column')).toContainText('後加工レイヤーの準備・編集にはMeriq Proが必要です。');
+});

@@ -6,7 +6,7 @@ Trim MP3 and WAV audio, merge recordings, or create MP4 videos from audio and an
 Segra - Audio Cutter & Merger
 
 간단한 설명:
-Trim, merge, and turn audio into video in seconds.
+Trim and merge MP3/WAV audio, or create MP4 videos from audio and an image.
 
 Landing subtitle:
 Audio Cutter and Merger

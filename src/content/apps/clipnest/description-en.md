@@ -56,7 +56,7 @@ When the ClipNest keyboard opens, it checks your current clipboard once and save
 - Duplicate handling
 - Local storage on your device
 
-ClipNest checks the clipboard when its keyboard opens, not continuously. Saved text stays on your device and is not sent to external servers. No account, ads or subscription is required.
+ClipNest checks the clipboard when its keyboard opens, not continuously. Saved text stays on your device and is not sent to external servers. No account is needed. There are no ads or subscriptions.
 
 FAQ:
 Q: Can I paste saved text from the keyboard?
