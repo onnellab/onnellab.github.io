@@ -28,6 +28,25 @@ after(() => {
   execFileSync('npm', ['run', 'build'], { cwd: root, stdio: 'pipe' });
 });
 
+test('published blog image references have deployable source assets', () => {
+  let references = 0;
+  for (const locale of fixtureLocales) {
+    const directory = path.join(root, 'src/content/blog', locale);
+    for (const name of fs.readdirSync(directory).filter((entry) => entry.endsWith('.md'))) {
+      const sourcePath = path.join(directory, name);
+      if (createdFixturePaths.has(sourcePath)) continue;
+      const markdown = fs.readFileSync(sourcePath, 'utf8');
+      for (const match of markdown.matchAll(/!\[[^\]]*\]\((\/blog-assets\/[^\s)"']+)/g)) {
+        const assetPath = path.join(root, 'public', match[1].split(/[?#]/)[0]);
+        assert.ok(fs.existsSync(assetPath), `${sourcePath}: missing ${match[1]}`);
+        assert.ok(fs.statSync(assetPath).isFile(), `Not a file: ${assetPath}`);
+        references += 1;
+      }
+    }
+  }
+  assert.ok(references > 0, 'Expected published articles to reference blog images');
+});
+
 test('blog article template renders publishing metadata without committing sample posts', () => {
   writeLocalizedFixture(
     'template-contract',
