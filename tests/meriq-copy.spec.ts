@@ -28,15 +28,15 @@ for (const { locale, terms } of cases) {
     const blocks = renderBlocks(body);
     const faq = data.copy.android.faq ?? data.copy.ios.faq;
     expect(data.seoTitle).toMatch(/^Meriq - .+/);
-    expect(blocks.filter((block) => block.type === 'h2')).toHaveLength(4);
+    expect(blocks.filter((block) => block.type === 'h2')).toHaveLength(1);
     const features = blocks.find((block) => block.type === 'ul');
-    expect(features?.value).toHaveLength(7);
+    expect(features?.value).toHaveLength(8);
     expect(body).not.toContain('\\n');
     for (const term of [...terms, 'PNG', 'PDF', 'ZIP', 'Pro']) {
       expect(body, `${locale}: ${term}`).toContain(term);
     }
-    expect(faq?.items).toHaveLength(5);
-    expect(new Set(faq?.items.map((item) => item.question)).size).toBe(5);
+    expect(faq?.items).toHaveLength(4);
+    expect(new Set(faq?.items.map((item) => item.question)).size).toBe(4);
     const exportAnswer = faq?.items.find((item) =>
       ['PNG', 'PDF', 'ZIP'].every((format) => item.answer.includes(format))
     );
@@ -57,7 +57,7 @@ for (const { locale, terms } of cases) {
     for (const term of [...terms, 'PNG', 'PDF', 'ZIP', 'Pro']) {
       expect(html, `${locale}: rendered ${term}`).toContain(term);
     }
-    expect((html.match(/<h2(?:\s|>)/g) ?? []).length).toBeGreaterThanOrEqual(4);
+    expect((html.match(/<h2(?:\s|>)/g) ?? []).length).toBe(2);
   });
 }
 
