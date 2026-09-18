@@ -100,3 +100,12 @@ test('Papira German title explains the TXT-to-EPUB conversion naturally', async 
   await expect(page.locator('.hero .intro')).toHaveText('TXT offline in EPUB umwandeln');
   await expect(page.locator('[data-release-status]')).toHaveText('In Vorbereitung');
 });
+
+test('TagWeaver French introduction uses complete natural prose', async ({ page }) => {
+  await page.goto('/apps/tagweaver/fr/');
+  const copy = page.locator('.copy-column');
+  await expect(copy.locator('p').first()).toHaveText('TagWeaver permet de consulter et de modifier hors ligne les métadonnées, les notes, les pochettes et les paroles des fichiers MP3 et FLAC.');
+  await expect(copy.locator('p').nth(1)).toContainText('les numéros de piste et de disque');
+  await expect(copy.locator('p').nth(1)).toContainText('Vous pouvez aussi y gérer les pochettes et les paroles.');
+  await expect(copy).toContainText('L’enregistrement de plusieurs fichiers à la fois est disponible avec Pro.');
+});
