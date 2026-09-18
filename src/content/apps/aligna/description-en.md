@@ -34,27 +34,26 @@ No cloud services.
 Everything stays on your device.
 
 Landing page:
-Aligna renames groups of files with consistent rules.
+Aligna renames multiple files with consistent rules. Organize photos, music and documents without changing names one at a time.
 
-Use it when photos, music files, or documents need the same naming pattern. Add dates, add sequence numbers, clean spaces, remove invalid characters, or format music file names from track information.
+Preview the new names before applying your rules. Aligna focuses on renaming, not file browsing or cloud management.
 
-Every change can be previewed before it is applied, so file names stay predictable.
+## Key features
 
-Core tasks
+- Add dates
+- Add sequence numbers
+- Replace spaces with underscores
+- Remove invalid characters
+- Organize photos by capture date
+- Build music file names from artist, track number and title
+- Preview new names before applying changes
 
-• Add dates
-• Add sequence numbers
-• Preview renamed files
-• Clean spaces and invalid characters
-• Organize photos by capture date
-• Rename music files from artist, track, or title fields
-• Rename multiple files in one batch
-
-Aligna is not a file explorer or cloud manager. It focuses on one task: making file names clean and consistent.
-
-There are no accounts, ads, or cloud services. On iOS, files may be saved with new names instead of directly changing the original file.
+Files are processed on your device, without accounts, ads or cloud storage. Android can rename selected files; on iOS, a new copy with the chosen name is saved instead of renaming the original directly.
 
 FAQ:
+Q: Which naming rules can I use?
+A: Add dates or sequence numbers, clean spaces and invalid characters, organize photos by capture date, or create music file names from track metadata.
+
 Q: Are original files changed directly?
 A: On Android, selected files can be renamed with your rules. On iOS, files are saved with new names because of system limitations.
 
