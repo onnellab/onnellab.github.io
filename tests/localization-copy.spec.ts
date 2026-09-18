@@ -109,3 +109,14 @@ test('TagWeaver French introduction uses complete natural prose', async ({ page 
   await expect(copy.locator('p').nth(1)).toContainText('Vous pouvez aussi y gérer les pochettes et les paroles.');
   await expect(copy).toContainText('L’enregistrement de plusieurs fichiers à la fois est disponible avec Pro.');
 });
+
+test('Melivra Japanese distinguishes unique tracks from play counts', async ({ page }) => {
+  await page.goto('/apps/melivra/ja/');
+  const summary = '累計再生回数、再生時間、重複を除いた再生曲数の基本サマリー';
+  await expect(page.locator('.copy-column li').filter({ hasText: '重複を除いた再生曲数' })).toHaveText(summary);
+  const software = await page.locator('script[type="application/ld+json"]').evaluateAll(scripts =>
+    scripts.flatMap(script => JSON.parse(script.textContent ?? 'null')).find(item => item?.['@type'] === 'SoftwareApplication')
+  );
+  expect(software.featureList).toContain(summary);
+  await expect(page.locator('.copy-column')).toContainText('AIクレジットは別売りの消費型アイテムで、Proには含まれません。');
+});
