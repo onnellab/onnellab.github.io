@@ -103,7 +103,7 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
       icon: 'assets/icon/Papira.png'
     };
     const featureList =
-      (renderBlocks(text.body).find((block) => block.type === 'ul')?.value as string[] | undefined) ?? [];
+      (renderBlocks(description).find((block) => block.type === 'ul')?.value as string[] | undefined) ?? [];
     return {
       locale,
       source: { slug: 'papira', contentDir: '', meta },
@@ -162,7 +162,7 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
     ),
     screenshotAlts: text.screenshotAlts,
     screenshotDimensions: { width: 1080, height: 2168 },
-    schemaFeatureList: text.features,
+    schemaFeatureList: renderBlocks(description).find((block) => block.type === 'ul')?.value as string[] | undefined,
     accent: { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' }
   };
 }
@@ -217,16 +217,20 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     faqTitle: 'FAQ',
     faqs: [
       {
-        question: 'Are manuscripts uploaded to a server?',
-        answer: 'No. TXT files, cover images, projects, previews, and generated EPUB files are handled on the device.'
+        "question": "What kinds of works can I prepare?",
+        "answer": "Any finished TXT content can be converted to EPUB. The dedicated presets simply make common creative workflows faster."
       },
       {
-        question: 'Can I edit the manuscript in Papira?',
-        answer: 'Papira is for assembling a finished manuscript into EPUB. Edit the source TXT in your preferred writing tool first.'
+        "question": "Can I edit the manuscript in Papira?",
+        "answer": "Papira is for assembling a finished manuscript into EPUB. Edit the source TXT in your preferred writing tool first."
       },
       {
-        question: 'What kinds of works can I prepare?',
-        answer: 'Any finished TXT content can be converted to EPUB. The dedicated presets simply make common creative workflows faster.'
+        "question": "Will exporting overwrite an existing file?",
+        "answer": "No. If the output name is already in use, Papira adds a number automatically and saves a separate file."
+      },
+      {
+        "question": "Are manuscripts uploaded to a server?",
+        "answer": "No. TXT files, cover images, projects, previews, and generated EPUB files are handled on the device."
       }
     ],
     privacyLabel: 'Privacy Policy',
@@ -283,16 +287,20 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     faqTitle: '자주 묻는 질문',
     faqs: [
       {
-        question: '원고가 서버로 올라가나요?',
-        answer: '아니요. TXT, 표지, 책 프로젝트, 미리보기와 생성한 EPUB은 기기 안에서 처리해요.'
+        "question": "어떤 작품을 만들 수 있나요?",
+        "answer": "완성된 TXT 콘텐츠라면 EPUB으로 변환할 수 있어요. 특화된 작품 유형은 자주 쓰는 창작 흐름을 더 빠르게 시작하도록 도와줘요."
       },
       {
-        question: 'Papira에서 원고를 수정할 수 있나요?',
-        answer: 'Papira는 완성된 원고를 EPUB으로 조립하는 도구예요. 원문 수정은 평소 쓰는 편집기에서 먼저 해요.'
+        "question": "Papira에서 원고를 수정할 수 있나요?",
+        "answer": "Papira는 완성된 원고를 EPUB으로 조립하는 도구예요. 원문 수정은 평소 쓰는 편집기에서 먼저 해요."
       },
       {
-        question: '어떤 작품을 만들 수 있나요?',
-        answer: '완성된 TXT 콘텐츠라면 EPUB으로 변환할 수 있어요. 특화된 작품 유형은 자주 쓰는 창작 흐름을 더 빠르게 시작하도록 도와줘요.'
+        "question": "내보낼 때 기존 파일을 덮어쓰나요?",
+        "answer": "아니요. 같은 이름의 파일이 있으면 번호를 자동으로 붙여 별도 파일로 저장해요."
+      },
+      {
+        "question": "원고가 서버로 올라가나요?",
+        "answer": "아니요. TXT, 표지, 책 프로젝트, 미리보기와 생성한 EPUB은 기기 안에서 처리해요."
       }
     ],
     privacyLabel: '개인정보 처리방침',
@@ -349,16 +357,20 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     faqTitle: 'よくある質問',
     faqs: [
       {
-        question: '原稿はサーバーへアップロードされますか？',
-        answer: 'いいえ。TXT、表紙、プロジェクト、プレビュー、生成したEPUBは端末内で扱います。'
+        "question": "どのような作品に使えますか？",
+        "answer": "完成したTXTコンテンツであればEPUBに変換できます。専用プリセットは、よく使う創作フローをすばやく始めるためのものです。"
       },
       {
-        question: 'Papiraで原稿を編集できますか？',
-        answer: 'Papiraは完成原稿をEPUBにまとめるためのツールです。本文の編集は使い慣れた執筆ツールで先に行ってください。'
+        "question": "Papiraで原稿を編集できますか？",
+        "answer": "Papiraは完成原稿をEPUBにまとめるためのツールです。本文の編集は使い慣れた執筆ツールで先に行ってください。"
       },
       {
-        question: 'どのような作品に使えますか？',
-        answer: '完成したTXTコンテンツであればEPUBに変換できます。専用プリセットは、よく使う創作フローをすばやく始めるためのものです。'
+        "question": "書き出すと既存のファイルは上書きされますか？",
+        "answer": "いいえ。同じ名前のファイルがある場合は、自動で番号を付けて別のファイルとして保存します。"
+      },
+      {
+        "question": "原稿はサーバーへアップロードされますか？",
+        "answer": "いいえ。TXT、表紙、プロジェクト、プレビュー、生成したEPUBは端末内で扱います。"
       }
     ],
     privacyLabel: 'プライバシーポリシー',
@@ -415,16 +427,20 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     faqTitle: '常见问题',
     faqs: [
       {
-        question: '稿件会上传到服务器吗？',
-        answer: '不会。TXT、封面、项目、预览与生成的 EPUB 都在设备本地处理。'
+        "question": "适合制作哪些作品？",
+        "answer": "任何完成的 TXT 内容都可以转换为 EPUB。专用预设只是帮助你更快开始常见的创作流程。"
       },
       {
-        question: '可以在 Papira 里编辑文稿吗？',
-        answer: 'Papira 用于把完成稿整理成 EPUB。请先在常用写作工具中完成正文编辑。'
+        "question": "可以在 Papira 里编辑文稿吗？",
+        "answer": "Papira 用于把完成稿整理成 EPUB。请先在常用写作工具中完成正文编辑。"
       },
       {
-        question: '适合制作哪些作品？',
-        answer: '任何完成的 TXT 内容都可以转换为 EPUB。专用预设只是帮助你更快开始常见的创作流程。'
+        "question": "导出时会覆盖已有文件吗？",
+        "answer": "不会。输出文件名已存在时，Papira 会自动添加编号，另存为新文件。"
+      },
+      {
+        "question": "稿件会上传到服务器吗？",
+        "answer": "不会。TXT、封面、项目、预览与生成的 EPUB 都在设备本地处理。"
       }
     ],
     privacyLabel: '隐私政策',
@@ -481,16 +497,20 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     faqTitle: '常見問題',
     faqs: [
       {
-        question: '稿件會上傳到伺服器嗎？',
-        answer: '不會。TXT、封面、專案、預覽與產生的 EPUB 都在裝置本機處理。'
+        "question": "適合製作哪些作品？",
+        "answer": "任何完成的 TXT 內容都可以轉換為 EPUB。專用預設只是協助你更快開始常見的創作流程。"
       },
       {
-        question: '可以在 Papira 裡編輯文稿嗎？',
-        answer: 'Papira 用來把完成稿整理成 EPUB。請先在慣用的寫作工具中完成正文編輯。'
+        "question": "可以在 Papira 裡編輯文稿嗎？",
+        "answer": "Papira 用來把完成稿整理成 EPUB。請先在慣用的寫作工具中完成正文編輯。"
       },
       {
-        question: '適合製作哪些作品？',
-        answer: '任何完成的 TXT 內容都可以轉換為 EPUB。專用預設只是協助你更快開始常見的創作流程。'
+        "question": "匯出時會覆寫現有檔案嗎？",
+        "answer": "不會。輸出檔名已經存在時，Papira 會自動加上編號，另存為新檔案。"
+      },
+      {
+        "question": "稿件會上傳到伺服器嗎？",
+        "answer": "不會。TXT、封面、專案、預覽與產生的 EPUB 都在裝置本機處理。"
       }
     ],
     privacyLabel: '隱私權政策',

@@ -225,14 +225,17 @@ test.describe('Papira nine-language launch surface', () => {
     }
   });
 
-  test('all nine Papira descriptions use readable prose paragraphs', async ({ page }, testInfo) => {
+  test('all nine Papira descriptions use an introduction and a scannable feature list', async ({ page }, testInfo) => {
     for (const locale of locales) {
       await page.goto(`/apps/papira/${locale.path}`);
       const copy = page.locator('.copy-column');
-      await expect(copy.locator('h2, h3, ul, ol')).toHaveCount(0);
+      await expect(copy.locator('h2')).toHaveCount(1);
+      await expect(copy.locator('ul')).toHaveCount(1);
+      await expect(copy.locator('ul > li')).toHaveCount(7);
+      await expect(page.locator('.faq-band details')).toHaveCount(4);
       const paragraphs = copy.locator(':scope > p');
-      expect(await paragraphs.count()).toBeGreaterThanOrEqual(4);
-      expect(await paragraphs.count()).toBeLessThanOrEqual(6);
+      expect(await paragraphs.count()).toBeGreaterThanOrEqual(2);
+      expect(await paragraphs.count()).toBeLessThanOrEqual(3);
       await expect(paragraphs.first()).toContainText('Papira');
       if (locale.hreflang === 'ko') {
         await copy.screenshot({ path: testInfo.outputPath('papira-ko-prose.png') });
@@ -364,14 +367,14 @@ test.describe('Papira nine-language launch surface', () => {
     }
   });
 
-  test('legacy product copy keeps its established section and list rendering', async ({ page }) => {
+  test('other product copy uses the shared section and list rendering', async ({ page }) => {
     await page.goto('/apps/tagweaver/');
-    await expect(page.getByRole('heading', { level: 2, name: 'Supported editing' })).toHaveCount(1);
-    await expect(page.getByRole('listitem').filter({ hasText: 'Edit tag fields' })).toHaveCount(1);
+    await expect(page.getByRole('heading', { level: 2, name: 'Key features' })).toHaveCount(1);
+    await expect(page.getByRole('listitem').filter({ hasText: 'Edit music tag fields' })).toHaveCount(1);
     await expect(page.locator('.hero .task-row strong')).toHaveText([
-      'Edit tag fields',
-      'Manage album artwork',
-      'Add or edit lyrics'
+      'Edit music tag fields such as title, artist and album',
+      'Edit rating metadata',
+      'Manage album artwork'
     ]);
   });
 
@@ -515,13 +518,13 @@ test.describe('Papira nine-language launch surface', () => {
           url: 'https://onnellab.github.io/'
         }
       });
-      expect(software?.featureList).toHaveLength(5);
+      expect(software?.featureList).toHaveLength(7);
       expect(software).not.toHaveProperty('downloadUrl');
       expect(software).not.toHaveProperty('softwareHelp');
       expect(software).not.toHaveProperty('privacyPolicy');
       expect(schemas.some((item) => item['@type'] === 'BreadcrumbList')).toBe(true);
       expect(schemas.some((item) => item['@type'] === 'FAQPage')).toBe(false);
-      await expect(page.locator('.faq-band details')).toHaveCount(3);
+      await expect(page.locator('.faq-band details')).toHaveCount(4);
     }
   });
 

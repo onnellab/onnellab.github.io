@@ -180,9 +180,22 @@ Adicione capa, título, autor, editora, informações de série, regras de capí
 - Sem publicidade, análise comportamental ou SDKs de rastreamento
 - Manuscritos TXT e imagens de capa são processados localmente
 - Projetos e EPUBs gerados não são enviados para servidores da ONNELLAB`, 'Perguntas frequentes', [
-      { question: 'Os manuscritos são enviados para um servidor?', answer: 'Não. Arquivos TXT, capas, projetos, prévias e EPUBs gerados são processados no dispositivo.' },
-      { question: 'Posso editar o manuscrito no Papira?', answer: 'O Papira serve para montar um manuscrito finalizado em EPUB. Faça as alterações no TXT primeiro no editor de sua preferência.' },
-      { question: 'Que tipos de obra posso preparar?', answer: 'Qualquer conteúdo TXT finalizado pode ser convertido em EPUB. As predefinições apenas agilizam fluxos criativos comuns.' }
+      {
+        "question": "Que tipos de obra posso preparar?",
+        "answer": "Qualquer conteúdo TXT finalizado pode ser convertido em EPUB. As predefinições apenas agilizam fluxos criativos comuns."
+      },
+      {
+        "question": "Posso editar o manuscrito no Papira?",
+        "answer": "O Papira serve para montar um manuscrito finalizado em EPUB. Faça as alterações no TXT primeiro no editor de sua preferência."
+      },
+      {
+        "question": "A exportação substitui arquivos existentes?",
+        "answer": "Não. Se o nome de saída já estiver em uso, o Papira acrescenta um número automaticamente e salva outro arquivo."
+      },
+      {
+        "question": "Os manuscritos são enviados para um servidor?",
+        "answer": "Não. Arquivos TXT, capas, projetos, prévias e EPUBs gerados são processados no dispositivo."
+      }
     ])
   },
   de: {
@@ -351,9 +364,22 @@ Füge vor dem Export Cover, Titel, Autor, Verlag, Serieninformationen, Kapitelre
 - Keine Werbung, Verhaltensanalyse oder Tracking-SDKs
 - TXT-Manuskripte und Coverbilder werden lokal verarbeitet
 - Buchprojekte und erzeugte EPUB-Dateien werden nicht auf ONNELLAB-Server hochgeladen`, 'Häufige Fragen', [
-      { question: 'Werden Manuskripte auf einen Server hochgeladen?', answer: 'Nein. TXT-Dateien, Coverbilder, Projekte, Vorschauen und erzeugte EPUB-Dateien werden auf dem Gerät verarbeitet.' },
-      { question: 'Kann ich das Manuskript in Papira bearbeiten?', answer: 'Papira ist dafür gedacht, ein fertiges Manuskript als EPUB zusammenzusetzen. Bearbeite den TXT-Quelltext vorher in deinem bevorzugten Schreibprogramm.' },
-      { question: 'Welche Arten von Werken kann ich vorbereiten?', answer: 'Jeder fertige TXT-Inhalt kann in EPUB umgewandelt werden. Die Voreinstellungen beschleunigen lediglich häufige kreative Abläufe.' }
+      {
+        "question": "Welche Arten von Werken kann ich vorbereiten?",
+        "answer": "Jeder fertige TXT-Inhalt kann in EPUB umgewandelt werden. Die Voreinstellungen beschleunigen lediglich häufige kreative Abläufe."
+      },
+      {
+        "question": "Kann ich das Manuskript in Papira bearbeiten?",
+        "answer": "Papira ist dafür gedacht, ein fertiges Manuskript als EPUB zusammenzusetzen. Bearbeite den TXT-Quelltext vorher in deinem bevorzugten Schreibprogramm."
+      },
+      {
+        "question": "Werden beim Export vorhandene Dateien überschrieben?",
+        "answer": "Nein. Ist der Ausgabename schon vergeben, ergänzt Papira automatisch eine Nummer und speichert eine neue Datei."
+      },
+      {
+        "question": "Werden Manuskripte auf einen Server hochgeladen?",
+        "answer": "Nein. TXT-Dateien, Coverbilder, Projekte, Vorschauen und erzeugte EPUB-Dateien werden auf dem Gerät verarbeitet."
+      }
     ])
   },
   fr: {
@@ -522,9 +548,22 @@ Ajoutez une couverture, un titre, un auteur, un éditeur, des informations de s�
 - Aucune publicité, analyse comportementale ou SDK de suivi
 - Les manuscrits TXT et images de couverture sont traités localement
 - Les projets et EPUB générés ne sont pas envoyés vers un serveur ONNELLAB`, 'Questions fréquentes', [
-      { question: 'Les manuscrits sont-ils envoyés vers un serveur ?', answer: 'Non. Les fichiers TXT, couvertures, projets, aperçus et EPUB générés sont traités sur l’appareil.' },
-      { question: 'Puis-je modifier le manuscrit dans Papira ?', answer: 'Papira sert à assembler un manuscrit finalisé en EPUB. Modifiez d’abord le TXT source dans votre outil d’écriture habituel.' },
-      { question: 'Quels types d’œuvres puis-je préparer ?', answer: 'Tout contenu TXT finalisé peut être converti en EPUB. Les préréglages servent seulement à accélérer les flux créatifs courants.' }
+      {
+        "question": "Quels types d’œuvres puis-je préparer ?",
+        "answer": "Tout contenu TXT finalisé peut être converti en EPUB. Les préréglages servent seulement à accélérer les flux créatifs courants."
+      },
+      {
+        "question": "Puis-je modifier le manuscrit dans Papira ?",
+        "answer": "Papira sert à assembler un manuscrit finalisé en EPUB. Modifiez d’abord le TXT source dans votre outil d’écriture habituel."
+      },
+      {
+        "question": "L’exportation écrase-t-elle les fichiers existants ?",
+        "answer": "Non. Si le nom de sortie est déjà utilisé, Papira ajoute automatiquement un numéro et enregistre un autre fichier."
+      },
+      {
+        "question": "Les manuscrits sont-ils envoyés vers un serveur ?",
+        "answer": "Non. Les fichiers TXT, couvertures, projets, aperçus et EPUB générés sont traités sur l’appareil."
+      }
     ])
   },
   es: {
@@ -693,9 +732,22 @@ Añade portada, título, autor, editorial, información de serie, reglas de cap�
 - Sin publicidad, analítica de comportamiento ni SDK de seguimiento
 - Los manuscritos TXT y las imágenes de portada se procesan localmente
 - Los proyectos y EPUB generados no se suben a servidores de ONNELLAB`, 'Preguntas frecuentes', [
-      { question: '¿Los manuscritos se suben a un servidor?', answer: 'No. Los archivos TXT, portadas, proyectos, vistas previas y EPUB generados se procesan en el dispositivo.' },
-      { question: '¿Puedo editar el manuscrito en Papira?', answer: 'Papira está pensado para montar un manuscrito terminado como EPUB. Edita primero el TXT original en tu herramienta de escritura habitual.' },
-      { question: '¿Qué tipos de obras puedo preparar?', answer: 'Cualquier contenido TXT terminado puede convertirse en EPUB. Los ajustes específicos solo agilizan flujos creativos habituales.' }
+      {
+        "question": "¿Qué tipos de obras puedo preparar?",
+        "answer": "Cualquier contenido TXT terminado puede convertirse en EPUB. Los ajustes específicos solo agilizan flujos creativos habituales."
+      },
+      {
+        "question": "¿Puedo editar el manuscrito en Papira?",
+        "answer": "Papira está pensado para montar un manuscrito terminado como EPUB. Edita primero el TXT original en tu herramienta de escritura habitual."
+      },
+      {
+        "question": "¿La exportación sobrescribe archivos existentes?",
+        "answer": "No. Si el nombre de salida ya está en uso, Papira añade un número automáticamente y guarda otro archivo."
+      },
+      {
+        "question": "¿Los manuscritos se suben a un servidor?",
+        "answer": "No. Los archivos TXT, portadas, proyectos, vistas previas y EPUB generados se procesan en el dispositivo."
+      }
     ])
   }
 };
