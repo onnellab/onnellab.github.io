@@ -71,6 +71,9 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Verify privacy route ownership
+        run: npx playwright test tests/privacy-route-ownership.spec.ts --project=desktop --reporter=line,html
+
       - name: Run site i18n regression tests
         run: npx playwright test tests/site-i18n.spec.ts --project=desktop --reporter=line,html
 
