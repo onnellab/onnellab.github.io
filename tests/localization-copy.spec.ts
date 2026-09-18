@@ -90,3 +90,13 @@ test('Papira English describes original fiction consistently', async ({ page }) 
   await expect(copy).not.toContainText('personal novels');
   await expect(copy).toContainText('other TXT content can also be converted to EPUB');
 });
+
+test('Papira German title explains the TXT-to-EPUB conversion naturally', async ({ page }) => {
+  await page.goto('/apps/papira/de/');
+  const title = 'Papira - TXT offline in EPUB umwandeln';
+  await expect(page).toHaveTitle(title);
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', title);
+  await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute('content', title);
+  await expect(page.locator('.hero .intro')).toHaveText('TXT offline in EPUB umwandeln');
+  await expect(page.locator('[data-release-status]')).toHaveText('In Vorbereitung');
+});

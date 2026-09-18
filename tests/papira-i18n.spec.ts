@@ -9,7 +9,7 @@ const locales = [
   { path: 'zh-hans/', hreflang: 'zh-Hans', title: 'Papira - 离线 TXT 转 EPUB 制作工具' },
   { path: 'zh-hant/', hreflang: 'zh-Hant', title: 'Papira - 離線 TXT 轉 EPUB 製作工具' },
   { path: 'pt-br/', hreflang: 'pt-BR', title: 'Papira - Criador offline de EPUB a partir de TXT' },
-  { path: 'de/', hreflang: 'de', title: 'Papira - Offline-TXT-zu-EPUB-Ersteller' },
+  { path: 'de/', hreflang: 'de', title: 'Papira - TXT offline in EPUB umwandeln' },
   { path: 'fr/', hreflang: 'fr', title: 'Papira - Créateur EPUB hors ligne à partir de TXT' },
   { path: 'es/', hreflang: 'es', title: 'Papira - Creador de EPUB sin conexión a partir de TXT' }
 ] as const;
