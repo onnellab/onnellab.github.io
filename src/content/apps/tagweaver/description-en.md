@@ -47,22 +47,19 @@ TagWeaver lets you inspect and edit MP3/FLAC metadata, rating, artwork, and lyri
 
 Update the title, artist, album, track number, year, genre, rating, and other metadata stored inside your music files. Album artwork and lyrics can be managed from the same editing flow.
 
-Review your changes, then save the fields you edited.
+## Key features
 
-Supported editing
+- Edit music tag fields such as title, artist and album
+- Edit rating metadata
+- Manage album artwork
+- Add and edit lyrics
+- Read and write MP3 ID3 and FLAC Vorbis Comment tags
+- Select and edit multiple files together
+- Review your changes before saving
 
-• Edit tag fields
-• Manage album artwork
-• Add or edit lyrics
-• Edit rating metadata
-• MP3 ID3 support
-• FLAC Vorbis Comment support
-• Multiple-file selection
-• Batch editing
+Edits are made on your device, with no login, file upload, advertising or tracking.
 
-Use it to align tracks from the same album, clean up scattered MP3/FLAC files, or correct metadata before moving files into another music app. Batch saving for multiple files is available with Pro.
-
-All editing happens on your device. There is no login, account creation, file upload, advertising, or tracking.
+Batch saving for multiple files is available with Pro.
 
 ios
 앱 이름:
@@ -121,11 +118,14 @@ TagWeaver does not automatically organize your music.
 It lets you see what’s inside your files — and change only what you choose.
 
 FAQ:
-Q: Are files uploaded to a server?
-A: No. TagWeaver edits on your device without login, account creation, or file uploads.
-
 Q: Can it edit both MP3 and FLAC files?
 A: Yes. TagWeaver supports MP3 ID3 tags and FLAC Vorbis Comment tags.
+
+Q: Can I edit album artwork and lyrics as well as tags?
+A: Yes. You can manage album artwork and add or edit lyrics alongside the tag fields and ratings.
+
+Q: Are files uploaded to a server?
+A: No. TagWeaver edits on your device without login, account creation, or file uploads.
 
 Q: Can I save edits across multiple files?
 A: Multiple-file selection and batch editing are supported. Batch saving for multiple files is available with Pro.

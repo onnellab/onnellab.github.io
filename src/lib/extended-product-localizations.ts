@@ -104,11 +104,29 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
         }
       ]
     },
-    tagweaver: make('Editor offline de tags MP3 e FLAC', `TagWeaver é um editor offline para conferir e editar metadados, avaliações, capas e letras em arquivos MP3 e FLAC.\n\nEdite título, artista, álbum, artista do álbum, número da faixa e do disco, ano, gênero, compositor e avaliação. Capas e letras também fazem parte do mesmo fluxo de edição.\n\n## Edição compatível\n\n- ID3 para MP3 e Vorbis Comment para FLAC\n- Campos de tags, avaliações, capas e letras\n- Seleção e edição de vários arquivos\n\nO app salva apenas o que você conferiu e alterou. O salvamento em lote de vários arquivos faz parte do Pro. Todo o trabalho ocorre no dispositivo, sem login, upload, anúncios ou rastreamento.`, 'Perguntas frequentes', [
-      { question: 'Os arquivos são enviados para um servidor?', answer: 'Não. A edição acontece localmente, sem login nem upload de arquivos.' },
-      { question: 'Posso editar MP3 e FLAC?', answer: 'Sim. O TagWeaver suporta tags ID3 de MP3 e Vorbis Comment de FLAC.' },
-      { question: 'Posso salvar alterações em vários arquivos de uma vez?', answer: 'Sim. Seleção e edição em lote são suportadas; o salvamento em lote de vários arquivos está disponível no Pro.' }
-    ]),
+    tagweaver: {
+      "subtitle": "Editor offline de tags MP3 e FLAC",
+      "body": "TagWeaver é um editor offline para conferir e editar metadados, avaliações, capas e letras em arquivos MP3 e FLAC.\n\nEdite título, artista, álbum, artista do álbum, número da faixa e do disco, ano, gênero, compositor e avaliação. Capas e letras também fazem parte do mesmo fluxo de edição.\n\n## Principais recursos\n\n- Editar tags como título, artista e álbum\n- Editar a avaliação das faixas\n- Gerenciar capas de álbuns\n- Adicionar e editar letras\n- Ler e gravar tags ID3 em MP3 e Vorbis Comment em FLAC\n- Selecionar e editar vários arquivos juntos\n- Conferir as alterações antes de salvar\n\nA edição ocorre no dispositivo, sem login, envio de arquivos, anúncios ou rastreamento.\n\nO salvamento em lote de vários arquivos está disponível com o Pro.",
+      "faqTitle": "Perguntas frequentes",
+      "faq": [
+        {
+          "question": "Posso editar MP3 e FLAC?",
+          "answer": "Sim. O TagWeaver suporta tags ID3 de MP3 e Vorbis Comment de FLAC."
+        },
+        {
+          "question": "Também posso editar capas e letras?",
+          "answer": "Sim. Além de tags e avaliações, você pode gerenciar as capas dos álbuns e adicionar ou editar letras."
+        },
+        {
+          "question": "Os arquivos são enviados para um servidor?",
+          "answer": "Não. A edição acontece localmente, sem login nem upload de arquivos."
+        },
+        {
+          "question": "Posso salvar alterações em vários arquivos de uma vez?",
+          "answer": "Sim. Seleção e edição em lote são suportadas; o salvamento em lote de vários arquivos está disponível no Pro."
+        }
+      ]
+    },
     vaultxt: make('Editor para arquivos TXT grandes', `VaultXT é um editor de texto rápido e leve, projetado para arquivos grandes.\n\nAbra e edite documentos longos, logs, rascunhos e dados de texto que podem ficar pesados em apps de notas comuns. Os arquivos são abertos diretamente do dispositivo e salvos sem envio para serviços em nuvem.\n\n## Principais recursos\n\n- Abrir rapidamente arquivos TXT grandes\n- Ler e editar documentos longos\n- Salvamento automático\n- Recuperação com desfazer e snapshots\n- Armazenamento local e funcionamento offline\n\nNão há conta, anúncios nem rastreamento, e o conteúdo do arquivo não é enviado a servidores externos.`, 'Perguntas frequentes', [
       { question: 'Posso abrir arquivos TXT muito grandes?', answer: 'Sim. O VaultXT é voltado para TXT grandes, documentos longos, logs, rascunhos e dados exportados.' },
       { question: 'Como posso recuperar alterações?', answer: 'O design usa salvamento automático, desfazer e snapshots para oferecer caminhos de recuperação.' },
@@ -239,7 +257,29 @@ Adicione capa, título, autor, editora, informações de série, regras de capí
         }
       ]
     },
-    tagweaver: make('Offline-Editor für MP3- und FLAC-Tags', `TagWeaver ist ein Offline-Tag-Editor zum Prüfen und Bearbeiten von Metadaten, Bewertungen, Coverbildern und Liedtexten in MP3- und FLAC-Dateien.\n\nBearbeite Titel, Künstler, Album, Album-Künstler, Track- und Discnummer, Jahr, Genre, Komponist und Bewertung. Cover und Liedtexte gehören zum selben Bearbeitungsablauf.\n\n## Unterstützte Bearbeitung\n\n- MP3 ID3 und FLAC Vorbis Comment\n- Tag-Felder, Bewertung, Cover und Liedtexte\n- Mehrfachauswahl und Stapelbearbeitung\n\nGespeichert werden nur bestätigte Änderungen. Stapelspeichern für mehrere Dateien gehört zu Pro. Alles wird auf dem Gerät verarbeitet, ohne Login, Upload, Werbung oder Tracking.`, 'Häufige Fragen', [{ question: 'Werden Dateien auf einen Server hochgeladen?', answer: 'Nein. Die Bearbeitung erfolgt lokal ohne Login oder Datei-Upload.' }, { question: 'Kann ich MP3 und FLAC bearbeiten?', answer: 'Ja. Unterstützt werden MP3-ID3-Tags und FLAC-Vorbis-Comments.' }, { question: 'Kann ich mehrere Dateien gemeinsam speichern?', answer: 'Mehrfachauswahl und Stapelbearbeitung werden unterstützt; das Stapelspeichern mehrerer Dateien ist in Pro verfügbar.' }]),
+    tagweaver: {
+      "subtitle": "Offline-Editor für MP3- und FLAC-Tags",
+      "body": "TagWeaver ist ein Offline-Tag-Editor zum Prüfen und Bearbeiten von Metadaten, Bewertungen, Coverbildern und Liedtexten in MP3- und FLAC-Dateien.\n\nBearbeite Titel, Künstler, Album, Album-Künstler, Track- und Discnummer, Jahr, Genre, Komponist und Bewertung. Cover und Liedtexte gehören zum selben Bearbeitungsablauf.\n\n## Hauptfunktionen\n\n- Tag-Felder wie Titel, Künstler und Album bearbeiten\n- Bewertungen bearbeiten\n- Albumcover verwalten\n- Liedtexte hinzufügen und bearbeiten\n- MP3-ID3- und FLAC-Vorbis-Comment-Tags lesen und schreiben\n- Mehrere Dateien auswählen und gemeinsam bearbeiten\n- Änderungen vor dem Speichern prüfen\n\nDie Bearbeitung erfolgt auf deinem Gerät, ohne Anmeldung, Datei-Upload, Werbung oder Tracking.\n\nDas gemeinsame Speichern mehrerer Dateien ist mit Pro verfügbar.",
+      "faqTitle": "Häufige Fragen",
+      "faq": [
+        {
+          "question": "Kann ich MP3 und FLAC bearbeiten?",
+          "answer": "Ja. Unterstützt werden MP3-ID3-Tags und FLAC-Vorbis-Comments."
+        },
+        {
+          "question": "Kann ich auch Albumcover und Liedtexte bearbeiten?",
+          "answer": "Ja. Neben Tag-Feldern und Bewertungen kannst du Albumcover verwalten und Liedtexte hinzufügen oder bearbeiten."
+        },
+        {
+          "question": "Werden Dateien auf einen Server hochgeladen?",
+          "answer": "Nein. Die Bearbeitung erfolgt lokal ohne Login oder Datei-Upload."
+        },
+        {
+          "question": "Kann ich mehrere Dateien gemeinsam speichern?",
+          "answer": "Mehrfachauswahl und Stapelbearbeitung werden unterstützt; das Stapelspeichern mehrerer Dateien ist in Pro verfügbar."
+        }
+      ]
+    },
     vaultxt: make('Editor für große TXT-Dateien', `VaultXT ist ein schneller, leichter Texteditor für große Dateien.\n\nÖffne und bearbeite lange Dokumente, Logs, Entwürfe und exportierte Textdaten, die in gewöhnlichen Notiz-Apps schwerfällig werden können. Dateien werden direkt vom Gerät geöffnet und ohne Cloud-Upload gespeichert.\n\n## Hauptfunktionen\n\n- Große TXT-Dateien schnell öffnen\n- Lange Dokumente lesen und bearbeiten\n- Automatisch speichern\n- Wiederherstellung mit Rückgängig und Snapshots\n- Lokal und offline arbeiten\n\nKein Konto, keine Werbung, kein Tracking; Dateiinhalte werden nicht an externe Server gesendet.`, 'Häufige Fragen', [{ question: 'Kann VaultXT sehr große TXT-Dateien öffnen?', answer: 'Ja. Es ist für große TXT-Dateien, lange Dokumente, Logs, Entwürfe und exportierte Textdaten ausgelegt.' }, { question: 'Wie kann ich Änderungen wiederherstellen?', answer: 'Automatisches Speichern, Rückgängig und Snapshots bieten Wiederherstellungsmöglichkeiten.' }, { question: 'Werden Dateiinhalte an einen Server gesendet?', answer: 'Nein. Verarbeitung und Speicherung bleiben lokal.' }]),
     papira: make('Offline-TXT-zu-EPUB-Ersteller', `Papira setzt fertige TXT-Manuskripte zu strukturierten EPUB-Büchern zusammen. Es gibt eigene Abläufe für Fanfiction, Fortsetzungsromane, eigene Romane, digitale Zines und TRPG-Szenarien; andere TXT-Inhalte lassen sich ebenfalls in EPUB umwandeln.
 
@@ -366,7 +406,29 @@ Füge vor dem Export Cover, Titel, Autor, Verlag, Serieninformationen, Kapitelre
         }
       ]
     },
-    tagweaver: make('Éditeur hors ligne de tags MP3/FLAC', `TagWeaver permet de vérifier et modifier hors ligne métadonnées, notes, pochettes et paroles des fichiers MP3 et FLAC.\n\nModifiez titre, artiste, album, artiste de l’album, numéros de piste et de disque, année, genre, compositeur et note. Pochettes et paroles sont gérées dans le même flux.\n\n## Modifications prises en charge\n\n- ID3 pour MP3 et Vorbis Comment pour FLAC\n- Champs de tags, notes, pochettes et paroles\n- Sélection et édition de plusieurs fichiers\n\nSeules les modifications vérifiées sont enregistrées. L’enregistrement en lot de plusieurs fichiers est disponible avec Pro. Tout reste sur l’appareil, sans connexion, envoi, publicité ni suivi.`, 'Questions fréquentes', [{ question: 'Les fichiers sont-ils envoyés à un serveur ?', answer: 'Non. La modification est locale.' }, { question: 'Puis-je modifier MP3 et FLAC ?', answer: 'Oui. ID3 MP3 et Vorbis Comment FLAC sont pris en charge.' }, { question: 'Puis-je enregistrer plusieurs fichiers ensemble ?', answer: 'Oui. La sélection et l’édition en lot sont prises en charge ; l’enregistrement multiple est disponible avec Pro.' }]),
+    tagweaver: {
+      "subtitle": "Éditeur hors ligne de tags MP3/FLAC",
+      "body": "TagWeaver permet de vérifier et modifier hors ligne métadonnées, notes, pochettes et paroles des fichiers MP3 et FLAC.\n\nModifiez titre, artiste, album, artiste de l’album, numéros de piste et de disque, année, genre, compositeur et note. Pochettes et paroles sont gérées dans le même flux.\n\n## Fonctions principales\n\n- Modifier les tags, dont le titre, l’artiste et l’album\n- Modifier les notes des morceaux\n- Gérer les pochettes d’album\n- Ajouter et modifier les paroles\n- Lire et enregistrer les tags ID3 des MP3 et Vorbis Comment des FLAC\n- Sélectionner et modifier plusieurs fichiers ensemble\n- Vérifier les modifications avant de les enregistrer\n\nLes modifications sont effectuées sur votre appareil, sans connexion à un compte, envoi de fichiers, publicité ni suivi.\n\nL’enregistrement de plusieurs fichiers à la fois est disponible avec Pro.",
+      "faqTitle": "Questions fréquentes",
+      "faq": [
+        {
+          "question": "Puis-je modifier MP3 et FLAC ?",
+          "answer": "Oui. ID3 MP3 et Vorbis Comment FLAC sont pris en charge."
+        },
+        {
+          "question": "Puis-je aussi modifier les pochettes et les paroles ?",
+          "answer": "Oui. En plus des tags et des notes, vous pouvez gérer les pochettes d’album et ajouter ou modifier les paroles."
+        },
+        {
+          "question": "Les fichiers sont-ils envoyés à un serveur ?",
+          "answer": "Non. La modification est locale."
+        },
+        {
+          "question": "Puis-je enregistrer plusieurs fichiers ensemble ?",
+          "answer": "Oui. La sélection et l’édition en lot sont prises en charge ; l’enregistrement multiple est disponible avec Pro."
+        }
+      ]
+    },
     vaultxt: make('Éditeur de gros fichiers TXT', `VaultXT est un éditeur de texte rapide et léger conçu pour les gros fichiers.\n\nOuvrez et modifiez longs documents, journaux, brouillons et données texte exportées sans les envoyer vers un service cloud.\n\n## Fonctions principales\n\n- Ouvrir rapidement de gros TXT\n- Lire et modifier de longs documents\n- Sauvegarde automatique\n- Récupération avec annulation et snapshots\n- Travail local et hors ligne\n\nAucun compte, aucune publicité ni suivi ; le contenu n’est pas envoyé à un serveur externe.`, 'Questions fréquentes', [{ question: 'Puis-je ouvrir de très gros fichiers TXT ?', answer: 'Oui. VaultXT est conçu pour les gros TXT, longs documents, logs, brouillons et données exportées.' }, { question: 'Comment récupérer mes modifications ?', answer: 'Sauvegarde automatique, annulation et snapshots offrent des voies de récupération.' }, { question: 'Le contenu est-il envoyé à un serveur ?', answer: 'Non.' }]),
     papira: make('Créateur EPUB hors ligne à partir de TXT', `Papira assemble des manuscrits TXT finalisés en livres EPUB structurés. L’application propose des parcours dédiés aux fanfictions, romans-feuilletons, romans personnels, zines numériques et scénarios de JDR sur table, tout en acceptant d’autres contenus TXT.
 
@@ -493,7 +555,29 @@ Ajoutez une couverture, un titre, un auteur, un éditeur, des informations de s�
         }
       ]
     },
-    tagweaver: make('Editor sin conexión de etiquetas MP3/FLAC', `TagWeaver permite revisar y editar sin conexión metadatos, puntuaciones, carátulas y letras en archivos MP3 y FLAC.\n\nEdita título, artista, álbum, artista del álbum, números de pista y disco, año, género, compositor y puntuación. Las carátulas y letras se gestionan en el mismo flujo.\n\n## Edición compatible\n\n- ID3 de MP3 y Vorbis Comment de FLAC\n- Campos, puntuaciones, carátulas y letras\n- Selección y edición de varios archivos\n\nSolo se guardan los cambios que revisas. El guardado por lotes de varios archivos está disponible con Pro. Todo ocurre en el dispositivo, sin login, subidas, anuncios ni seguimiento.`, 'Preguntas frecuentes', [{ question: '¿Se suben los archivos a un servidor?', answer: 'No. La edición es local.' }, { question: '¿Puedo editar MP3 y FLAC?', answer: 'Sí. Se admiten ID3 de MP3 y Vorbis Comment de FLAC.' }, { question: '¿Puedo guardar varios archivos a la vez?', answer: 'Sí. Hay selección y edición por lotes; el guardado múltiple forma parte de Pro.' }]),
+    tagweaver: {
+      "subtitle": "Editor sin conexión de etiquetas MP3/FLAC",
+      "body": "TagWeaver permite revisar y editar sin conexión metadatos, puntuaciones, carátulas y letras en archivos MP3 y FLAC.\n\nEdita título, artista, álbum, artista del álbum, números de pista y disco, año, género, compositor y puntuación. Las carátulas y letras se gestionan en el mismo flujo.\n\n## Funciones principales\n\n- Editar etiquetas como título, artista y álbum\n- Editar las puntuaciones de las pistas\n- Gestionar las carátulas de los álbumes\n- Añadir y editar letras\n- Leer y guardar etiquetas ID3 en MP3 y Vorbis Comment en FLAC\n- Seleccionar y editar varios archivos juntos\n- Revisar los cambios antes de guardarlos\n\nLa edición se realiza en tu dispositivo, sin inicio de sesión, subida de archivos, anuncios ni seguimiento.\n\nEl guardado por lotes de varios archivos está disponible con Pro.",
+      "faqTitle": "Preguntas frecuentes",
+      "faq": [
+        {
+          "question": "¿Puedo editar MP3 y FLAC?",
+          "answer": "Sí. Se admiten ID3 de MP3 y Vorbis Comment de FLAC."
+        },
+        {
+          "question": "¿También puedo editar carátulas y letras?",
+          "answer": "Sí. Además de las etiquetas y puntuaciones, puedes gestionar las carátulas y añadir o editar las letras."
+        },
+        {
+          "question": "¿Se suben los archivos a un servidor?",
+          "answer": "No. La edición es local."
+        },
+        {
+          "question": "¿Puedo guardar varios archivos a la vez?",
+          "answer": "Sí. Hay selección y edición por lotes; el guardado múltiple forma parte de Pro."
+        }
+      ]
+    },
     vaultxt: make('Editor de archivos TXT grandes', `VaultXT es un editor de texto rápido y ligero diseñado para archivos grandes.\n\nAbre y edita documentos largos, registros, borradores y datos exportados sin enviarlos a servicios en la nube.\n\n## Funciones principales\n\n- Abrir rápidamente TXT grandes\n- Leer y editar documentos largos\n- Guardado automático\n- Recuperación con deshacer y snapshots\n- Trabajo local y sin conexión\n\nNo hay cuenta, anuncios ni seguimiento; el contenido no se envía a servidores externos.`, 'Preguntas frecuentes', [{ question: '¿Puedo abrir archivos TXT muy grandes?', answer: 'Sí. VaultXT está diseñado para TXT grandes, documentos largos, logs, borradores y datos exportados.' }, { question: '¿Cómo puedo recuperar cambios?', answer: 'Guardado automático, deshacer y snapshots ofrecen opciones de recuperación.' }, { question: '¿Se envía el contenido a un servidor?', answer: 'No.' }]),
     papira: make('Creador de EPUB sin conexión a partir de TXT', `Papira convierte manuscritos TXT terminados en libros EPUB estructurados. Incluye flujos específicos para fanfiction, ficción por entregas, novelas personales, zines digitales y escenarios de TRPG, y también admite otros contenidos TXT.
 
