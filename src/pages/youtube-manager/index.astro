@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+const canonicalPath = '/youtube-manager/';
+---
+<BaseLayout
+  title="ONNELLAB YouTube Manager"
+  description="Local YouTube channel management for ONNELLAB and Aether Inn, including authorized uploads, channel analytics, and comment review."
+  canonicalPath={canonicalPath}
+  lang="en"
+>
+  <main class="shell">
+    <nav><a class="brand" href="/">ONNELLAB</a><a href="/privacy/youtube-manager/">Privacy Policy</a></nav>
+    <header>
+      <p class="eyebrow">ONNELLAB · LOCAL OPERATOR TOOL</p>
+      <h1>YouTube Manager</h1>
+      <p class="lede">A local channel-management tool used by ONNELLAB to operate the ONNELLAB and Aether Inn YouTube channels.</p>
+    </header>
+    <section>
+      <h2>What it does</h2>
+      <p>The manager connects only to YouTube channels explicitly authorized by the operator. It can verify the selected channel, upload approved videos, set thumbnails, read channel and video statistics, read YouTube Analytics reports, and show recent channel comments for review.</p>
+    </section>
+    <section>
+      <h2>How authorization works</h2>
+      <p>Google sign-in and consent are completed by the channel operator on the authorized Mac. OAuth refresh tokens are stored in that Mac's macOS Keychain. ONNELLAB and Aether Inn use separate credential profiles and expected YouTube channel IDs; the tool does not silently switch between them.</p>
+    </section>
+    <section>
+      <h2>Where data is kept</h2>
+      <p>Private YouTube analytics and recent-comment snapshots are kept locally on the authorized Mac and expire after 24 hours. They are not embedded in ONNELLAB's public website or committed to its public source repositories.</p>
+    </section>
+    <section class="links">
+      <h2>Policies and contact</h2>
+      <p><a href="/privacy/youtube-manager/">YouTube Manager Privacy Policy</a> · <a href="/terms/youtube-manager/">YouTube Manager Terms</a></p>
+      <p>Privacy or access questions: <a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a></p>
+    </section>
+    <SiteFooter locale="en" privacyHref="/privacy/youtube-manager/" />
+  </main>
+</BaseLayout>
+<style>
+.shell{width:min(860px,calc(100% - 36px));margin:0 auto;padding:28px 0 56px;line-height:1.75;color:#4d4942}.shell nav{display:flex;justify-content:space-between;align-items:center;gap:16px}.shell nav a{color:#68645c;text-decoration:none;min-height:40px;display:inline-flex;align-items:center}.brand{font-weight:700;letter-spacing:.04em}header{margin:62px 0 26px}.eyebrow{margin:0 0 12px;color:#777268;font-size:13px;font-weight:700}.shell h1{margin:0;color:#282723;font-size:clamp(40px,7vw,70px);line-height:1}.lede{max-width:720px;margin:20px 0 0;font-size:19px;color:#5b574f}.shell section{border-top:1px solid #e5ded4;padding-top:22px;margin-top:22px}.shell h2{margin:0 0 10px;color:#34322d;font-size:23px}.shell p{margin:10px 0 0}.shell section a{color:#514177;text-underline-offset:3px}@media(max-width:640px){.shell{width:min(100% - 28px,860px);padding-top:22px}header{margin-top:40px}}
+</style>

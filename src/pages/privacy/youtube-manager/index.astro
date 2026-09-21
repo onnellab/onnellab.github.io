@@ -1,0 +1,51 @@
+---
+import LegalPage from '../../../components/LegalPage.astro';
+
+const sections = [
+  { title: 'Scope', body: [
+    'This policy applies to ONNELLAB YouTube Manager, a local operator tool used to manage YouTube channels controlled by ONNELLAB, including the ONNELLAB and Aether Inn channels.',
+    'The public ONNELLAB website does not itself receive YouTube OAuth credentials, private YouTube analytics, or raw comment caches from this tool.'
+  ]},
+  { title: 'Google and YouTube data accessed', body: [
+    'After the operator grants access, the tool may access the authorized YouTube channel ID and title, channel statistics such as subscriber and view counts, video IDs and titles, YouTube Analytics metrics such as views, estimated watch time, average view duration, average viewed percentage, subscribers gained and subscribers lost, and recent top-level channel comments with their like and reply counts.',
+    'The tool may also upload operator-approved videos to the authorized channel and set thumbnails for those videos. It does not use Google data to build advertising profiles, sell personal data, or monitor unrelated Google accounts.'
+  ]},
+  { title: 'OAuth permissions', body: [
+    'The manager requests YouTube upload permission, YouTube read-only permission, and YouTube Analytics read-only permission only for the channel-management features described above. A channel is accepted only when its verified channel ID matches the operator-configured expected channel ID for that brand.',
+    'Google sign-in and consent are completed interactively by the operator. The tool does not ask the operator to send passwords, passkeys, two-factor authentication codes, or OAuth tokens to the public ONNELLAB website.'
+  ]},
+  { title: 'Storage and retention', body: [
+    'OAuth client credentials and refresh tokens are stored locally in the authorized Mac’s macOS Keychain under separate ONNELLAB and Aether Inn profiles. They are not stored in Git, the public dashboard, or browser local storage.',
+    'Private analytics and recent-comment report snapshots are stored in an owner-only local application directory on the authorized Mac and expire after 24 hours. The local manager clears the corresponding report when that profile is disconnected. If authorization later becomes invalid, a failed refresh does not preserve a successful private report as if it were current.'
+  ]},
+  { title: 'Sharing and use', body: [
+    'ONNELLAB does not sell Google user data. The YouTube data accessed by this tool is used only to operate, verify, publish to, and review performance of channels controlled by ONNELLAB. Private analytics and comments are not published to the public dashboard.',
+    'Use and transfer of information received from Google APIs by ONNELLAB YouTube Manager adheres to the Google API Services User Data Policy, including the Limited Use requirements.'
+  ]},
+  { title: 'Revoking access and deleting local data', body: [
+    'The operator can disconnect a brand profile in the local YouTube Manager to remove that profile’s local OAuth credential bundle and cached private report. Google-side authorization can also be revoked from the Google Account connections page.',
+    'For privacy questions or deletion assistance, contact onnellab.app@gmail.com.'
+  ]},
+  { title: 'Third-party policies', body: [
+    'The manager uses YouTube API Services and Google OAuth. YouTube and Google process information under their own terms and privacy policies. See the YouTube Terms of Service at https://www.youtube.com/t/terms, the Google Privacy Policy at https://policies.google.com/privacy, and the Google API Services User Data Policy at https://developers.google.com/terms/api-services-user-data-policy.'
+  ]},
+  { title: 'Changes', body: [
+    'If the manager begins accessing additional Google or YouTube data, changes retention, or adds a new external data-sharing purpose, this policy will be updated before that expanded use is enabled.'
+  ]}
+];
+---
+<LegalPage
+  title="ONNELLAB YouTube Manager Privacy Policy"
+  description="Privacy policy for ONNELLAB YouTube Manager and its use of Google OAuth, YouTube Data API, and YouTube Analytics API."
+  canonicalPath="/privacy/youtube-manager/"
+  lang="en"
+  heading="YouTube Manager Privacy Policy"
+  updatedAt="2026-09-21"
+  homeHref="/youtube-manager/"
+  languageLabel="ONNELLAB"
+  languageHref="/"
+  languageCode="en"
+  summary="YouTube credentials and private reporting data stay on the authorized operator Mac. ONNELLAB and Aether Inn are isolated profiles, and private analytics are not published to the public website."
+  alternates={[{ lang: 'en', path: '/privacy/youtube-manager/' }, { lang: 'x-default', path: '/privacy/youtube-manager/' }]}
+  sections={sections}
+/>

@@ -1,0 +1,25 @@
+---
+import LegalPage from '../../../components/LegalPage.astro';
+
+const sections = [
+  { title: 'Purpose', body: ['ONNELLAB YouTube Manager is an operator tool for managing YouTube channels controlled by ONNELLAB. It is not a public social network, analytics resale service, or general-purpose YouTube client.']},
+  { title: 'Authorized channels only', body: ['The tool may be used only with channels that the operator is authorized to manage. Each brand profile is bound to an expected YouTube channel ID, and cross-brand credential fallback is not permitted.']},
+  { title: 'Publication controls', body: ['Uploading or publishing requires the configured channel authorization and the tool’s applicable content, provenance, quality, and rendering checks. A local render, an accepted upload, or a private processing state is not treated as a verified public publication.']},
+  { title: 'Google and YouTube terms', body: ['Use of YouTube API Services is subject to the YouTube Terms of Service and applicable Google API policies. The operator may revoke Google authorization at any time.']},
+  { title: 'Contact', body: ['Questions about this operator tool can be sent to onnellab.app@gmail.com.']}
+];
+---
+<LegalPage
+  title="ONNELLAB YouTube Manager Terms"
+  description="Terms for the ONNELLAB YouTube Manager operator tool."
+  canonicalPath="/terms/youtube-manager/"
+  lang="en"
+  heading="YouTube Manager Terms"
+  updatedAt="2026-09-21"
+  homeHref="/youtube-manager/"
+  languageLabel="ONNELLAB"
+  languageHref="/"
+  languageCode="en"
+  alternates={[{ lang: 'en', path: '/terms/youtube-manager/' }, { lang: 'x-default', path: '/terms/youtube-manager/' }]}
+  sections={sections}
+/>
