@@ -12,7 +12,7 @@ primary_keyword: "MP3メタデータエディタ"
 secondary_keywords: "ID3タグ|音楽ライブラリ整理|アルバムアートワーク|TagWeaver"
 related_apps: "TagWeaver"
 tags: "MP3メタデータエディタ|ID3タグ|音楽ライブラリ整理|アルバムアートワーク"
-canonical_url: "https://onnellab.github.io/blog/ja/clean-up-mp3-metadata-before-organizing-music/"
+canonical_url: "https://onnellab.com/blog/ja/clean-up-mp3-metadata-before-organizing-music/"
 published_at: "2026-07-20T14:56:51+09:00"
 updated_at: "2026-07-20T14:56:51+09:00"
 ---

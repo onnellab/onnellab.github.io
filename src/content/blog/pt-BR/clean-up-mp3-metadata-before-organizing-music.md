@@ -12,7 +12,7 @@ primary_keyword: "editor de metadados MP3"
 secondary_keywords: "tags ID3|organizar biblioteca de música|capa de álbum|TagWeaver"
 related_apps: "TagWeaver"
 tags: "editor de metadados MP3|tags ID3|biblioteca de música|capa de álbum"
-canonical_url: "https://onnellab.github.io/blog/pt-br/clean-up-mp3-metadata-before-organizing-music/"
+canonical_url: "https://onnellab.com/blog/pt-br/clean-up-mp3-metadata-before-organizing-music/"
 published_at: "2026-07-20T14:56:51+09:00"
 updated_at: "2026-07-20T14:56:51+09:00"
 ---

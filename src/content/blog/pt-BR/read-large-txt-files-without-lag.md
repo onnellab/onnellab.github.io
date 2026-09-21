@@ -12,7 +12,7 @@ primary_keyword: "leitor de TXT grande"
 secondary_keywords: "arquivo de texto gigante|visualizador TXT|desempenho de arquivo grande|renderização virtual"
 related_apps: "VaultXT"
 tags: "leitor de TXT grande|visualizador TXT|texto simples|fluxo de leitura|VaultXT"
-canonical_url: "https://onnellab.github.io/blog/pt-br/read-large-txt-files-without-lag/"
+canonical_url: "https://onnellab.com/blog/pt-br/read-large-txt-files-without-lag/"
 published_at: "2026-07-11T00:00:00+09:00"
 updated_at: "2026-07-11T00:00:00+09:00"
 ---

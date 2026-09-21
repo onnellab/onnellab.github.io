@@ -81,7 +81,7 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://onnellab.github.io/sitemap.xml
+Sitemap: https://onnellab.com/sitemap.xml
 `,
     { headers: { 'Content-Type': 'text/plain; charset=utf-8' } }
   );

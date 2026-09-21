@@ -12,7 +12,7 @@ primary_keyword: "本地媒体转换器"
 secondary_keywords: "私密文件转换|离线媒体转换|文件格式|Quivra"
 related_apps: "Quivra"
 tags: "本地媒体转换器|私密文件转换|离线媒体转换|Quivra"
-canonical_url: "https://onnellab.github.io/blog/zh-hans/convert-local-media-files-privately/"
+canonical_url: "https://onnellab.com/blog/zh-hans/convert-local-media-files-privately/"
 published_at: "2026-07-14T09:00:00+09:00"
 updated_at: "2026-07-14T09:00:00+09:00"
 ---

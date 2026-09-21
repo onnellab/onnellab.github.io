@@ -12,7 +12,7 @@ primary_keyword: "app para recortar áudio"
 secondary_keywords: "trecho de áudio|organizar gravações|fluxo simples de áudio|Segra"
 related_apps: "Segra"
 tags: "recortar áudio|trecho de áudio|organizar gravações|juntar áudio|Segra"
-canonical_url: "https://onnellab.github.io/blog/pt-br/trim-audio-recordings-without-full-editor/"
+canonical_url: "https://onnellab.com/blog/pt-br/trim-audio-recordings-without-full-editor/"
 published_at: "2026-08-17T09:00:00+09:00"
 updated_at: "2026-08-17T09:00:00+09:00"
 ---

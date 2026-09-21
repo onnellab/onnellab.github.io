@@ -12,7 +12,7 @@ primary_keyword: "pré-visualização de renomeação"
 secondary_keywords: "renomear em lote|regra de renomeação|prévia antes de aplicar|Aligna"
 related_apps: "Aligna"
 tags: "pré-visualização de renomeação|renomear em lote|regras de nome|organização de arquivos"
-canonical_url: "https://onnellab.github.io/blog/pt-br/rename-files-safely-preview-workflow/"
+canonical_url: "https://onnellab.com/blog/pt-br/rename-files-safely-preview-workflow/"
 published_at: "2026-08-20T09:00:00+09:00"
 updated_at: "2026-08-20T09:00:00+09:00"
 ---

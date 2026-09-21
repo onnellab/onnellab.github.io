@@ -17,7 +17,7 @@ import {
   type ReleaseNote
 } from '../src/lib/releaseNotes';
 
-const canonical = (path: string) => `https://onnellab.github.io${path}`;
+const canonical = (path: string) => `https://onnellab.com${path}`;
 
 const deploymentStatusTerms: Record<AllSiteLocale, RegExp> = {
   en: /\b(?:submitted|review|approval|store availability|distributed through)\b/i,

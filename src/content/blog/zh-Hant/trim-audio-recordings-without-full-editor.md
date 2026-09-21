@@ -12,7 +12,7 @@ primary_keyword: "音訊裁切工具"
 secondary_keywords: "音訊區間|錄音整理|簡單音訊流程|Segra"
 related_apps: "Segra"
 tags: "音訊裁切工具|音訊區間|錄音整理|音訊合併|Segra"
-canonical_url: "https://onnellab.github.io/blog/zh-hant/trim-audio-recordings-without-full-editor/"
+canonical_url: "https://onnellab.com/blog/zh-hant/trim-audio-recordings-without-full-editor/"
 published_at: "2026-08-17T09:00:00+09:00"
 updated_at: "2026-08-17T09:00:00+09:00"
 ---

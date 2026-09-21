@@ -12,7 +12,7 @@ primary_keyword: "ファイル名変更 プレビュー"
 secondary_keywords: "一括リネーム|リネームルール|適用前プレビュー|Aligna"
 related_apps: "Aligna"
 tags: "ファイル名変更 プレビュー|一括リネーム|リネームルール|ファイル整理"
-canonical_url: "https://onnellab.github.io/blog/ja/rename-files-safely-preview-workflow/"
+canonical_url: "https://onnellab.com/blog/ja/rename-files-safely-preview-workflow/"
 published_at: "2026-08-20T09:00:00+09:00"
 updated_at: "2026-08-20T09:00:00+09:00"
 ---

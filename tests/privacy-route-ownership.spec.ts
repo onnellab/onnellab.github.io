@@ -41,13 +41,13 @@ for (const locale of ['en', 'ko'] as const) {
     await expect(page.locator('html')).toHaveAttribute('lang', locale);
     await expect(page.locator('h1')).toContainText('Segra');
     await expect(page.locator('main')).toContainText('2026-07-30');
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://onnellab.github.io${canonical}`);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://onnellab.com${canonical}`);
     const languages = await page.locator('link[rel="alternate"][hreflang]').evaluateAll(nodes =>
       nodes.map(node => node.getAttribute('hreflang')).sort()
     );
     expect(languages).toEqual(['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de', 'fr', 'es', 'x-default'].sort());
     await expect(page.locator('[data-locale-choice]')).toHaveCount(9);
     const sitemap = await (await request.get('/sitemap.xml')).text();
-    expect(sitemap.split(`<loc>https://onnellab.github.io${canonical}</loc>`)).toHaveLength(2);
+    expect(sitemap.split(`<loc>https://onnellab.com${canonical}</loc>`)).toHaveLength(2);
   });
 }

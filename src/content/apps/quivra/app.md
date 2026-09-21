@@ -8,7 +8,7 @@ platforms:
 appstore: https://apps.apple.com/app/id6759565093
 googleplay: https://play.google.com/store/apps/details?id=com.onnellab.quivra2
 
-privacy: https://onnellab.github.io/privacy/quivra/
+privacy: https://onnellab.com/privacy/quivra/
 supportEmail: onnellab.app@gmail.com
 
 icon: assets\icon\quivra.png

@@ -39,7 +39,7 @@ const schemaClassifications: Record<string, { applicationCategory: string; appli
   vaultxt: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Large Text File Editor' }
 };
 
-const canonical = (route: string) => `https://onnellab.github.io${route}`;
+const canonical = (route: string) => `https://onnellab.com${route}`;
 const routeFor = (app: string, segment: string) =>
   segment ? `/apps/${app}/${segment}/` : `/apps/${app}/`;
 
@@ -74,7 +74,7 @@ for (const app of apps) {
       await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
       await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical(route));
-      await expect(page.locator('link[rel="describedby"]')).toHaveAttribute('href', 'https://onnellab.github.io/llms.txt');
+      await expect(page.locator('link[rel="describedby"]')).toHaveAttribute('href', 'https://onnellab.com/llms.txt');
 
       const metaDescription = await page.locator('meta[name="description"]').getAttribute('content');
       expect(metaDescription).toBeTruthy();
@@ -185,8 +185,8 @@ test('AI discovery policy separates search retrieval from training and keeps the
   expect(llms).toContain('nine languages');
   expect(llms).toContain('## Apps with nine-language product pages');
   expect(llms).toContain('## Blog Articles');
-  expect(llms).toContain('https://onnellab.github.io/apps/papira/es/');
-  expect(llms).toContain('https://onnellab.github.io/blog/de/');
+  expect(llms).toContain('https://onnellab.com/apps/papira/es/');
+  expect(llms).toContain('https://onnellab.com/blog/de/');
   expect(llms).not.toContain('five-language');
   expect(llms).not.toContain('- Pricing:');
   expect(llms).not.toContain('- 가격:');

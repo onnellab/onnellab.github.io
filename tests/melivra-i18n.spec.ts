@@ -21,7 +21,7 @@ for (const locale of locales) {
     await expect(page.locator('.hero .intro')).toHaveText(locale.subtitle);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
-      `https://onnellab.github.io/apps/melivra/${locale.path}`
+      `https://onnellab.com/apps/melivra/${locale.path}`
     );
     await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
 

@@ -12,7 +12,7 @@ primary_keyword: "大型文字檔案 開啟慢"
 secondary_keywords: "大檔案效能|超長單行|記憶體用量|虛擬渲染"
 related_apps: "VaultXT"
 tags: "大型文字檔案|大檔案效能|超長單行|記憶體用量|虛擬渲染"
-canonical_url: "https://onnellab.github.io/blog/zh-hant/large-text-file-slow-to-open/"
+canonical_url: "https://onnellab.com/blog/zh-hant/large-text-file-slow-to-open/"
 published_at: "2026-08-14T09:00:00+09:00"
 updated_at: "2026-08-14T09:00:00+09:00"
 ---

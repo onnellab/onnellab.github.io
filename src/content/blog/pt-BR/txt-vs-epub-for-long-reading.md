@@ -12,7 +12,7 @@ primary_keyword: "TXT vs EPUB"
 secondary_keywords: "leitura longa|texto simples|converter EPUB|fluxo de leitura"
 related_apps: "VaultXT"
 tags: "TXT vs EPUB|leitura longa|texto simples|EPUB|VaultXT"
-canonical_url: "https://onnellab.github.io/blog/pt-br/txt-vs-epub-for-long-reading/"
+canonical_url: "https://onnellab.com/blog/pt-br/txt-vs-epub-for-long-reading/"
 published_at: "2026-08-11T09:00:00+09:00"
 updated_at: "2026-08-11T09:00:00+09:00"
 ---

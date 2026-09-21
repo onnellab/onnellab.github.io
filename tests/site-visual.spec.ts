@@ -58,8 +58,8 @@ const allNineHreflangs = ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de',
 const productPages = productSlugs.flatMap((slug) => [`/apps/${slug}/`, `/apps/${slug}/ko/`]);
 const privacySlugs = ['aligna', 'clipnest', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const legacyPrivacySlugs = ['aligna', 'clipnest', 'melivra', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
-const privacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/`);
-const koreanPrivacyUrls = privacySlugs.map((slug) => `https://onnellab.github.io/privacy/${slug}/ko/`);
+const privacyUrls = privacySlugs.map((slug) => `https://onnellab.com/privacy/${slug}/`);
+const koreanPrivacyUrls = privacySlugs.map((slug) => `https://onnellab.com/privacy/${slug}/ko/`);
 
 type PublishedRouteContract = {
   path: string;
@@ -221,7 +221,7 @@ test.describe('site layout and navigation', () => {
         await expect(page.locator('html')).toHaveAttribute('lang', route.lang);
         await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
           'href',
-          new URL(route.path, 'https://onnellab.github.io').toString()
+          new URL(route.path, 'https://onnellab.com').toString()
         );
         const hreflangs = await page.locator('link[rel="alternate"][hreflang]').evaluateAll((links) =>
           links.map((link) => link.getAttribute('hreflang'))
@@ -386,7 +386,7 @@ test.describe('site layout and navigation', () => {
     await expect(page.locator('.identity img')).toHaveAttribute('src', sourceIcon);
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
       'content',
-      `https://onnellab.github.io${sourceIcon}`
+      `https://onnellab.com${sourceIcon}`
     );
   });
 
@@ -566,7 +566,7 @@ test.describe('site layout and navigation', () => {
     for (const slug of legacyPrivacySlugs) {
       for (const locale of ['en', 'ko'] as const) {
         const suffix = locale === 'ko' ? 'ko/' : '';
-        const canonical = `https://onnellab.github.io/privacy/${slug}/${suffix}`;
+        const canonical = `https://onnellab.com/privacy/${slug}/${suffix}`;
         for (const route of [`/${slug}/privacy/${suffix}`, `/apps/${slug}/privacy/${suffix}`]) {
           const response = await page.goto(route);
           expect(response?.ok()).toBe(true);
@@ -759,13 +759,13 @@ test.describe('site layout and navigation', () => {
       {
         path: '/apps/papira/ko/',
         locale: 'ko',
-        privacy: 'https://onnellab.github.io/privacy/papira/ko/',
+        privacy: 'https://onnellab.com/privacy/papira/ko/',
         terms: '/terms/ko/'
       },
       {
         path: '/apps/tagweaver/fr/',
         locale: 'fr',
-        privacy: 'https://onnellab.github.io/privacy/tagweaver/fr/',
+        privacy: 'https://onnellab.com/privacy/tagweaver/fr/',
         terms: '/terms/fr/'
       }
     ] as const;
@@ -907,7 +907,7 @@ test.describe('site layout and navigation', () => {
       await expect(page.locator('html')).toHaveAttribute('lang', route.lang);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        `https://onnellab.github.io/terms/${route.suffix}`
+        `https://onnellab.com/terms/${route.suffix}`
       );
       await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
       const main = page.locator('main.site-shell[data-core-page="terms"]');
@@ -1096,7 +1096,7 @@ test.describe('app and privacy collections', () => {
           const href = row.getAttribute('href') ?? '';
           return href.startsWith('http')
             ? href
-            : new URL(href, 'https://onnellab.github.io').toString();
+            : new URL(href, 'https://onnellab.com').toString();
         })
       )
     ).toEqual(privacyUrls);
@@ -1114,7 +1114,7 @@ test.describe('app and privacy collections', () => {
           const href = row.getAttribute('href') ?? '';
           return href.startsWith('http')
             ? href
-            : new URL(href, 'https://onnellab.github.io').toString();
+            : new URL(href, 'https://onnellab.com').toString();
         })
       )
     ).toEqual(koreanPrivacyUrls);
@@ -1129,7 +1129,7 @@ test.describe('app and privacy collections', () => {
       );
       await expect(page.locator('[data-policy-row]').filter({ hasText: 'TagWeaver' })).toHaveAttribute(
         'href',
-        `https://onnellab.github.io/privacy/tagweaver/${locale}/`
+        `https://onnellab.com/privacy/tagweaver/${locale}/`
       );
     }
   });
@@ -1219,7 +1219,7 @@ test.describe('existing product pages', () => {
         await expect(main.locator(':scope > .download-band')).toHaveCount(1);
         const footer = main.locator(':scope > footer.site-footer');
         await expect(footer).toHaveCount(1);
-        const privacyHref = `https://onnellab.github.io/privacy/${slug}/${locale.suffix}`;
+        const privacyHref = `https://onnellab.com/privacy/${slug}/${locale.suffix}`;
         expect(await footer.locator(':scope > a').evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual([
           privacyHref,
           `/terms/${locale.suffix}`,
@@ -1290,7 +1290,7 @@ test.describe('existing product pages', () => {
     );
     await expect(page.locator('.support-links a').first()).toHaveAttribute(
       'href',
-      'https://onnellab.github.io/privacy/tagweaver/'
+      'https://onnellab.com/privacy/tagweaver/'
     );
 
     await page.goto('/apps/tagweaver/ko/');
@@ -1300,7 +1300,7 @@ test.describe('existing product pages', () => {
     );
     await expect(page.locator('.support-links a').first()).toHaveAttribute(
       'href',
-      'https://onnellab.github.io/privacy/tagweaver/ko/'
+      'https://onnellab.com/privacy/tagweaver/ko/'
     );
   });
 
@@ -1309,11 +1309,11 @@ test.describe('existing product pages', () => {
     await expect(page).toHaveTitle('TagWeaver - Offline MP3/FLAC Tag Editor');
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
-      'https://onnellab.github.io/apps/tagweaver/'
+      'https://onnellab.com/apps/tagweaver/'
     );
     await expect(page.locator('link[rel="icon"]')).toHaveAttribute(
       'href',
-      'https://onnellab.github.io/app-assets/tagweaver/assets/icon/tagweaver.png'
+      'https://onnellab.com/app-assets/tagweaver/assets/icon/tagweaver.png'
     );
 
     const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
@@ -1375,7 +1375,7 @@ test.describe('blog and crawl endpoints', () => {
   test('robots, RSS, llms, and sitemap endpoints remain available', async ({ page }) => {
     const robots = await page.request.get('/robots.txt');
     expect(robots.ok()).toBe(true);
-    expect(await robots.text()).toContain('Sitemap: https://onnellab.github.io/sitemap.xml');
+    expect(await robots.text()).toContain('Sitemap: https://onnellab.com/sitemap.xml');
 
     const rss = await page.request.get('/rss.xml');
     expect(rss.ok()).toBe(true);
@@ -1386,18 +1386,18 @@ test.describe('blog and crawl endpoints', () => {
     const llmsText = await llms.text();
     expect(llmsText).toContain('## Blog Articles');
     expect(llmsText).toContain('## Papira');
-    expect(llmsText).toContain('https://onnellab.github.io/apps/papira/zh-hant/');
-    expect(llmsText).not.toContain('https://onnellab.github.io/undefined');
-    expect(llmsText).toContain('https://onnellab.github.io/apps/tagweaver/ja/');
-    expect(llmsText).toContain('https://onnellab.github.io/apps/tagweaver/zh-hant/');
+    expect(llmsText).toContain('https://onnellab.com/apps/papira/zh-hant/');
+    expect(llmsText).not.toContain('https://onnellab.com/undefined');
+    expect(llmsText).toContain('https://onnellab.com/apps/tagweaver/ja/');
+    expect(llmsText).toContain('https://onnellab.com/apps/tagweaver/zh-hant/');
 
     const sitemap = await page.request.get('/sitemap.xml');
     expect(sitemap.ok()).toBe(true);
     const text = await sitemap.text();
-    expect(text).toContain('https://onnellab.github.io/apps/papira/ja/');
-    expect(text).toContain('https://onnellab.github.io/privacy/papira/zh-hant/');
-    expect(text).toContain('https://onnellab.github.io/apps/tagweaver/');
-    expect(text).toContain('<loc>https://onnellab.github.io/apps/tagweaver/ja/</loc>');
-    expect(text).toContain('<loc>https://onnellab.github.io/apps/tagweaver/zh-hant/</loc>');
+    expect(text).toContain('https://onnellab.com/apps/papira/ja/');
+    expect(text).toContain('https://onnellab.com/privacy/papira/zh-hant/');
+    expect(text).toContain('https://onnellab.com/apps/tagweaver/');
+    expect(text).toContain('<loc>https://onnellab.com/apps/tagweaver/ja/</loc>');
+    expect(text).toContain('<loc>https://onnellab.com/apps/tagweaver/zh-hant/</loc>');
   });
 });

@@ -12,7 +12,7 @@ primary_keyword: "MP3 元数据编辑器"
 secondary_keywords: "ID3 标签|音乐资料库整理|专辑封面|TagWeaver"
 related_apps: "TagWeaver"
 tags: "MP3 元数据编辑器|ID3 标签|音乐资料库整理|专辑封面"
-canonical_url: "https://onnellab.github.io/blog/zh-hans/clean-up-mp3-metadata-before-organizing-music/"
+canonical_url: "https://onnellab.com/blog/zh-hans/clean-up-mp3-metadata-before-organizing-music/"
 published_at: "2026-07-20T14:56:51+09:00"
 updated_at: "2026-07-20T14:56:51+09:00"
 ---

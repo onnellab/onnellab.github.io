@@ -5,7 +5,7 @@ platforms:
   - iOS
   - Android
 
-privacy: https://onnellab.github.io/privacy/meriq/
+privacy: https://onnellab.com/privacy/meriq/
 supportEmail: onnellab.app@gmail.com
 
 icon: assets\icon\meriq.png

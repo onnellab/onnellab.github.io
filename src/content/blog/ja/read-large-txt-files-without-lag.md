@@ -12,7 +12,7 @@ primary_keyword: "大容量TXTファイルリーダー"
 secondary_keywords: "巨大テキストファイル|TXTビューアー|大容量ファイル性能|仮想レンダリング"
 related_apps: "VaultXT"
 tags: "大容量TXTファイルリーダー|TXTビューアー|プレーンテキスト|読書ワークフロー|VaultXT"
-canonical_url: "https://onnellab.github.io/blog/ja/read-large-txt-files-without-lag/"
+canonical_url: "https://onnellab.com/blog/ja/read-large-txt-files-without-lag/"
 published_at: "2026-07-11T00:00:00+09:00"
 updated_at: "2026-07-11T00:00:00+09:00"
 ---

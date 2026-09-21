@@ -23,7 +23,7 @@ type SitemapEntry = {
 };
 
 // Deliberately omit per-URL modification dates until they come from authoritative content metadata rather than build-time filesystem mtimes.
-const siteUrl = 'https://onnellab.github.io';
+const siteUrl = 'https://onnellab.com';
 const corePages: LocalizedPage[] = ['home', 'apps', 'about', 'privacy', 'terms'];
 
 export function GET() {

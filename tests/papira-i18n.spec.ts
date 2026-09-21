@@ -27,20 +27,20 @@ const privacyLocales = [
 ] as const;
 
 const alternateUrls = {
-  en: 'https://onnellab.github.io/apps/papira/',
-  ko: 'https://onnellab.github.io/apps/papira/ko/',
-  ja: 'https://onnellab.github.io/apps/papira/ja/',
-  'zh-Hans': 'https://onnellab.github.io/apps/papira/zh-hans/',
-  'zh-Hant': 'https://onnellab.github.io/apps/papira/zh-hant/',
-  'pt-BR': 'https://onnellab.github.io/apps/papira/pt-br/',
-  de: 'https://onnellab.github.io/apps/papira/de/',
-  fr: 'https://onnellab.github.io/apps/papira/fr/',
-  es: 'https://onnellab.github.io/apps/papira/es/',
-  'x-default': 'https://onnellab.github.io/apps/papira/'
+  en: 'https://onnellab.com/apps/papira/',
+  ko: 'https://onnellab.com/apps/papira/ko/',
+  ja: 'https://onnellab.com/apps/papira/ja/',
+  'zh-Hans': 'https://onnellab.com/apps/papira/zh-hans/',
+  'zh-Hant': 'https://onnellab.com/apps/papira/zh-hant/',
+  'pt-BR': 'https://onnellab.com/apps/papira/pt-br/',
+  de: 'https://onnellab.com/apps/papira/de/',
+  fr: 'https://onnellab.com/apps/papira/fr/',
+  es: 'https://onnellab.com/apps/papira/es/',
+  'x-default': 'https://onnellab.com/apps/papira/'
 } as const;
 
 const privacyAlternateUrls = Object.fromEntries(
-  privacyLocales.map((locale) => [locale.hreflang, `https://onnellab.github.io/privacy/papira/${locale.path}`])
+  privacyLocales.map((locale) => [locale.hreflang, `https://onnellab.com/privacy/papira/${locale.path}`])
 ) as Record<string, string>;
 privacyAlternateUrls['x-default'] = privacyAlternateUrls.en;
 
@@ -162,23 +162,23 @@ test.describe('Papira nine-language launch surface', () => {
       await expect(page.locator('h1')).toHaveText('Papira');
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        `https://onnellab.github.io/apps/papira/${locale.path}`
+        `https://onnellab.com/apps/papira/${locale.path}`
       );
       await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute(
         'href',
-        'https://onnellab.github.io/apps/papira/'
+        'https://onnellab.com/apps/papira/'
       );
       await expect(page.locator('link[rel="alternate"][hreflang="ja"]')).toHaveAttribute(
         'href',
-        'https://onnellab.github.io/apps/papira/ja/'
+        'https://onnellab.com/apps/papira/ja/'
       );
       await expect(page.locator('link[rel="alternate"][hreflang="zh-Hans"]')).toHaveAttribute(
         'href',
-        'https://onnellab.github.io/apps/papira/zh-hans/'
+        'https://onnellab.com/apps/papira/zh-hans/'
       );
       await expect(page.locator('link[rel="alternate"][hreflang="zh-Hant"]')).toHaveAttribute(
         'href',
-        'https://onnellab.github.io/apps/papira/zh-hant/'
+        'https://onnellab.com/apps/papira/zh-hant/'
       );
       for (const [hreflang, href] of Object.entries(alternateUrls)) {
         await expect(page.locator(`link[rel="alternate"][hreflang="${hreflang}"]`)).toHaveAttribute(
@@ -198,7 +198,7 @@ test.describe('Papira nine-language launch surface', () => {
       await expect(page.locator('html')).toHaveAttribute('lang', locale.htmlLang);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        `https://onnellab.github.io/privacy/papira/${locale.path}`
+        `https://onnellab.com/privacy/papira/${locale.path}`
       );
       for (const [hreflang, href] of Object.entries(privacyAlternateUrls)) {
         await expect(page.locator(`link[rel="alternate"][hreflang="${hreflang}"]`)).toHaveAttribute(
@@ -379,7 +379,7 @@ test.describe('Papira nine-language launch surface', () => {
   });
 
   test('Korean Papira links and schema use the canonical privacy URL exactly once', async ({ page }) => {
-    const privacyUrl = 'https://onnellab.github.io/privacy/papira/ko/';
+    const privacyUrl = 'https://onnellab.com/privacy/papira/ko/';
     await page.goto('/apps/papira/ko/');
     const privacyLinks = page.getByRole('link', { name: '개인정보 처리방침' });
     await expect(privacyLinks).toHaveCount(2);
@@ -411,8 +411,8 @@ test.describe('Papira nine-language launch surface', () => {
   });
 
   test('every Papira locale publishes the large PNG social card while schema keeps the square icon', async ({ page }) => {
-    const socialImageUrl = 'https://onnellab.github.io/app-assets/papira/social-card.png';
-    const iconUrl = 'https://onnellab.github.io/app-assets/papira/icon.png';
+    const socialImageUrl = 'https://onnellab.com/app-assets/papira/social-card.png';
+    const iconUrl = 'https://onnellab.com/app-assets/papira/icon.png';
 
     for (const locale of locales) {
       await page.goto(`/apps/papira/${locale.path}`);
@@ -452,7 +452,7 @@ test.describe('Papira nine-language launch surface', () => {
         await expect(screenshots.nth(index)).toHaveAttribute('src', source);
         await expect(screenshots.nth(index)).toHaveAttribute('width', '1080');
         await expect(screenshots.nth(index)).toHaveAttribute('height', '2168');
-        expect(fs.existsSync(path.resolve(process.cwd(), 'public', new URL(source, 'https://onnellab.github.io').pathname.replace(/^\//, '')))).toBe(true);
+        expect(fs.existsSync(path.resolve(process.cwd(), 'public', new URL(source, 'https://onnellab.com').pathname.replace(/^\//, '')))).toBe(true);
         await expect
           .poll(() =>
             screenshots.nth(index).evaluate((image: HTMLImageElement) => ({
@@ -469,7 +469,7 @@ test.describe('Papira nine-language launch surface', () => {
         Array.from(
           { length: 5 },
           (_, index) =>
-            `https://onnellab.github.io/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png?v=5da5eeb`
+            `https://onnellab.com/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png?v=5da5eeb`
         )
       );
     }
@@ -478,7 +478,7 @@ test.describe('Papira nine-language launch surface', () => {
   test('non-Papira products retain icon social metadata and semantic screenshot alt text', async ({ page }) => {
     await page.goto('/apps/tagweaver/');
 
-    const iconUrl = 'https://onnellab.github.io/app-assets/tagweaver/assets/icon/tagweaver.png';
+    const iconUrl = 'https://onnellab.com/app-assets/tagweaver/assets/icon/tagweaver.png';
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', iconUrl);
     await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', iconUrl);
     await expect(page.locator('.screenshot-link img').first()).toHaveAttribute(
@@ -504,7 +504,7 @@ test.describe('Papira nine-language launch surface', () => {
 
   test('Japanese and Chinese pages publish product and breadcrumb schema while keeping visible FAQ content', async ({ page }) => {
     for (const locale of locales.slice(2)) {
-      const canonical = `https://onnellab.github.io/apps/papira/${locale.path}`;
+      const canonical = `https://onnellab.com/apps/papira/${locale.path}`;
       await page.goto(`/apps/papira/${locale.path}`);
       const schemas = await jsonLd(page);
       const software = schemas.find((item) => item['@type'] === 'SoftwareApplication');
@@ -515,7 +515,7 @@ test.describe('Papira nine-language launch surface', () => {
         publisher: {
           '@type': 'Organization',
           name: 'ONNELLAB',
-          url: 'https://onnellab.github.io/'
+          url: 'https://onnellab.com/'
         }
       });
       expect(software?.featureList).toHaveLength(7);
@@ -577,8 +577,8 @@ test.describe('Papira nine-language launch surface', () => {
     expect(response.ok()).toBe(true);
     const sitemap = await response.text();
     for (const locale of locales) {
-      const productUrl = `https://onnellab.github.io/apps/papira/${locale.path}`;
-      const privacyUrl = `https://onnellab.github.io/privacy/papira/${locale.path}`;
+      const productUrl = `https://onnellab.com/apps/papira/${locale.path}`;
+      const privacyUrl = `https://onnellab.com/privacy/papira/${locale.path}`;
       expect(sitemap.split(`<loc>${productUrl}</loc>`).length - 1).toBe(1);
       expect(sitemap.split(`<loc>${privacyUrl}</loc>`).length - 1).toBe(1);
     }

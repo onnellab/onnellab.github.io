@@ -141,11 +141,11 @@ test.describe('nine-language site core regression', () => {
 
       await expect.soft(page.locator('meta[property="og:image"]')).toHaveAttribute(
         'content',
-        'https://onnellab.github.io/social-card.png'
+        'https://onnellab.com/social-card.png'
       );
       await expect.soft(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
         'content',
-        'https://onnellab.github.io/social-card.png'
+        'https://onnellab.com/social-card.png'
       );
       await expect.soft(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
         'content',
@@ -153,11 +153,11 @@ test.describe('nine-language site core regression', () => {
       );
       await expect.soft(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        `https://onnellab.github.io${path}`
+        `https://onnellab.com${path}`
       );
       await expect.soft(page.locator('link[rel="icon"][type="image/svg+xml"]')).toHaveAttribute(
         'href',
-        'https://onnellab.github.io/favicon.svg?v=20260713-ol-classic-v2'
+        'https://onnellab.com/favicon.svg?v=20260713-ol-classic-v2'
       );
     }
   });
@@ -175,7 +175,7 @@ test.describe('nine-language site core regression', () => {
 
   test('product pages keep their product-specific social preview metadata', async ({ page }) => {
     await page.goto('/apps/tagweaver/');
-    const productImage = 'https://onnellab.github.io/app-assets/tagweaver/assets/icon/tagweaver.png';
+    const productImage = 'https://onnellab.com/app-assets/tagweaver/assets/icon/tagweaver.png';
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', productImage);
     await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', productImage);
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
@@ -229,11 +229,11 @@ test.describe('nine-language site core regression', () => {
       await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        `https://onnellab.github.io${path}`
+        `https://onnellab.com${path}`
       );
       await expect(page.locator('link[rel="alternate"][hreflang="zh-Hant"]')).toHaveAttribute(
         'href',
-        'https://onnellab.github.io/zh-hant/'
+        'https://onnellab.com/zh-hant/'
       );
     });
 
@@ -245,7 +245,7 @@ test.describe('nine-language site core regression', () => {
         await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
         await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
           'href',
-          `https://onnellab.github.io${path}`
+          `https://onnellab.com${path}`
         );
         await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
       });
@@ -379,11 +379,11 @@ test.describe('nine-language site core regression', () => {
       await expect(page.locator('.intro')).toHaveText(item.subtitle);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        `https://onnellab.github.io${path}`
+        `https://onnellab.com${path}`
       );
       await expect(page.locator('link[rel="alternate"][hreflang="zh-Hant"]')).toHaveAttribute(
         'href',
-        'https://onnellab.github.io/apps/tagweaver/zh-hant/'
+        'https://onnellab.com/apps/tagweaver/zh-hant/'
       );
     }
   });
@@ -449,11 +449,11 @@ test.describe('nine-language site core regression', () => {
         await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
         await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
           'href',
-          `https://onnellab.github.io${path}`
+          `https://onnellab.com${path}`
         );
         await expect(page.locator('.support-links a').first()).toHaveAttribute(
           'href',
-          `https://onnellab.github.io/privacy/${slug}/${segment}/`
+          `https://onnellab.com/privacy/${slug}/${segment}/`
         );
         const screenshot = page.locator('.screenshot-link img').first();
         if (await screenshot.count()) {
@@ -500,10 +500,10 @@ test.describe('nine-language site core regression', () => {
     expect(response.ok()).toBe(true);
     const sitemap = await response.text();
     for (const locale of locales) {
-      const homeUrl = `https://onnellab.github.io/${locale.segment}`;
+      const homeUrl = `https://onnellab.com/${locale.segment}`;
       expect(sitemap.split(`<loc>${homeUrl}</loc>`).length - 1).toBe(1);
       for (const section of ['apps', 'about', 'privacy', 'terms']) {
-        const url = `https://onnellab.github.io/${section}/${locale.segment}`;
+        const url = `https://onnellab.com/${section}/${locale.segment}`;
         expect(sitemap.split(`<loc>${url}</loc>`).length - 1).toBe(1);
       }
     }

@@ -43,7 +43,7 @@ for (const [app, count] of Object.entries(featureCounts)) {
         scripts.flatMap(script => JSON.parse(script.textContent ?? 'null')).find(item => item?.['@type'] === 'SoftwareApplication')
       );
       expect(software.featureList).toEqual(features);
-      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://onnellab.github.io${data.canonicalPath}`);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://onnellab.com${data.canonicalPath}`);
       await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
     }

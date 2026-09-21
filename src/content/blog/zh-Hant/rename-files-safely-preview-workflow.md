@@ -12,7 +12,7 @@ primary_keyword: "檔案重新命名預覽"
 secondary_keywords: "批次重新命名|重新命名規則|套用前預覽|Aligna"
 related_apps: "Aligna"
 tags: "檔案重新命名預覽|批次重新命名|重新命名規則|檔案整理"
-canonical_url: "https://onnellab.github.io/blog/zh-hant/rename-files-safely-preview-workflow/"
+canonical_url: "https://onnellab.com/blog/zh-hant/rename-files-safely-preview-workflow/"
 published_at: "2026-08-20T09:00:00+09:00"
 updated_at: "2026-08-20T09:00:00+09:00"
 ---

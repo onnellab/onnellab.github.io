@@ -12,7 +12,7 @@ primary_keyword: "剪贴板文本片段"
 secondary_keywords: "保存文本|iPhone 剪贴板|本地剪贴板|ClipNest"
 related_apps: "ClipNest"
 tags: "剪贴板文本片段|保存文本|iPhone 剪贴板|本地剪贴板"
-canonical_url: "https://onnellab.github.io/blog/zh-hans/reuse-copied-text-snippets-iphone/"
+canonical_url: "https://onnellab.com/blog/zh-hans/reuse-copied-text-snippets-iphone/"
 published_at: "2026-07-24T08:24:05+09:00"
 updated_at: "2026-07-24T08:24:05+09:00"
 ---

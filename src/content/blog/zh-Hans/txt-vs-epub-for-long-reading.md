@@ -12,7 +12,7 @@ primary_keyword: "TXT EPUB 比较"
 secondary_keywords: "长篇阅读|纯文本|EPUB 转换|阅读工作流"
 related_apps: "VaultXT"
 tags: "TXT EPUB 比较|长篇阅读|纯文本|EPUB 转换|VaultXT"
-canonical_url: "https://onnellab.github.io/blog/zh-hans/txt-vs-epub-for-long-reading/"
+canonical_url: "https://onnellab.com/blog/zh-hans/txt-vs-epub-for-long-reading/"
 published_at: "2026-08-11T09:00:00+09:00"
 updated_at: "2026-08-11T09:00:00+09:00"
 ---

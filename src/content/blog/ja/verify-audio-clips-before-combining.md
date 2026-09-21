@@ -12,7 +12,7 @@ primary_keyword: "音声クリップ 結合前 確認"
 secondary_keywords: "音声結合順|クリップ境界|音量の一貫性|Segra"
 related_apps: "Segra"
 tags: "音声クリップ検証|音声結合順|クリップ境界|ラウドネス|Segra"
-canonical_url: "https://onnellab.github.io/blog/ja/verify-audio-clips-before-combining/"
+canonical_url: "https://onnellab.com/blog/ja/verify-audio-clips-before-combining/"
 published_at: "2026-08-23T09:00:00+09:00"
 updated_at: "2026-08-23T09:00:00+09:00"
 ---

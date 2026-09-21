@@ -12,7 +12,7 @@ primary_keyword: "大型 TXT 檔案閱讀器"
 secondary_keywords: "超大型文字檔|TXT 檢視器|大型檔案效能|虛擬渲染"
 related_apps: "VaultXT"
 tags: "大型 TXT 檔案閱讀器|TXT 檢視器|純文字|閱讀流程|VaultXT"
-canonical_url: "https://onnellab.github.io/blog/zh-hant/read-large-txt-files-without-lag/"
+canonical_url: "https://onnellab.com/blog/zh-hant/read-large-txt-files-without-lag/"
 published_at: "2026-07-11T00:00:00+09:00"
 updated_at: "2026-07-11T00:00:00+09:00"
 ---

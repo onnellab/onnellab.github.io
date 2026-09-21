@@ -12,7 +12,7 @@ primary_keyword: "trechos da área de transferência"
 secondary_keywords: "texto salvo|área de transferência iPhone|área de transferência local|ClipNest"
 related_apps: "ClipNest"
 tags: "trechos da área de transferência|texto salvo|iPhone|área de transferência local"
-canonical_url: "https://onnellab.github.io/blog/pt-br/reuse-copied-text-snippets-iphone/"
+canonical_url: "https://onnellab.com/blog/pt-br/reuse-copied-text-snippets-iphone/"
 published_at: "2026-07-24T08:24:05+09:00"
 updated_at: "2026-07-24T08:24:05+09:00"
 ---

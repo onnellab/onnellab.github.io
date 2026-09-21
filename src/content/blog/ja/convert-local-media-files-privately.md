@@ -12,7 +12,7 @@ primary_keyword: "ローカルメディアコンバーター"
 secondary_keywords: "プライベートなファイル変換|オフラインメディア変換|ファイル形式|Quivra"
 related_apps: "Quivra"
 tags: "ローカルメディアコンバーター|プライベートなファイル変換|オフラインメディア変換|Quivra"
-canonical_url: "https://onnellab.github.io/blog/ja/convert-local-media-files-privately/"
+canonical_url: "https://onnellab.com/blog/ja/convert-local-media-files-privately/"
 published_at: "2026-07-14T09:00:00+09:00"
 updated_at: "2026-07-14T09:00:00+09:00"
 ---

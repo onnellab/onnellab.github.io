@@ -11,7 +11,7 @@ const locales = [
 const latestTagWeaver = latestReleaseNoteForApp('tagweaver');
 if (!latestTagWeaver) throw new Error('TagWeaver release notes are required');
 const latestTagWeaverVersion = latestTagWeaver.version;
-const canonical = (path: string) => `https://onnellab.github.io${path}`;
+const canonical = (path: string) => `https://onnellab.com${path}`;
 
 for (const locale of locales) {
   test.describe(locale.code, () => {

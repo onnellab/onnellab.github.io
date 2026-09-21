@@ -12,7 +12,7 @@ primary_keyword: "arquivo de texto grande lento para abrir"
 secondary_keywords: "desempenho de arquivo grande|linha muito longa|uso de memória|renderização virtual"
 related_apps: "VaultXT"
 tags: "arquivo de texto grande|desempenho|linha longa|memória|renderização virtual"
-canonical_url: "https://onnellab.github.io/blog/pt-br/large-text-file-slow-to-open/"
+canonical_url: "https://onnellab.com/blog/pt-br/large-text-file-slow-to-open/"
 published_at: "2026-08-14T09:00:00+09:00"
 updated_at: "2026-08-14T09:00:00+09:00"
 ---

@@ -12,7 +12,7 @@ primary_keyword: "クリップボード定型文管理"
 secondary_keywords: "保存テキスト|iPhoneクリップボード|ローカルクリップボード|ClipNest"
 related_apps: "ClipNest"
 tags: "クリップボード定型文管理|保存テキスト|iPhoneクリップボード|ローカルクリップボード"
-canonical_url: "https://onnellab.github.io/blog/ja/reuse-copied-text-snippets-iphone/"
+canonical_url: "https://onnellab.com/blog/ja/reuse-copied-text-snippets-iphone/"
 published_at: "2026-07-24T08:24:05+09:00"
 updated_at: "2026-07-24T08:24:05+09:00"
 ---

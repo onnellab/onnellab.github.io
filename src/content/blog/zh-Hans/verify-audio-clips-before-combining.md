@@ -12,7 +12,7 @@ primary_keyword: "音频片段 合并前 检查"
 secondary_keywords: "音频合并顺序|片段接缝|响度一致性|Segra"
 related_apps: "Segra"
 tags: "音频片段验证|音频合并顺序|片段接缝|响度|Segra"
-canonical_url: "https://onnellab.github.io/blog/zh-hans/verify-audio-clips-before-combining/"
+canonical_url: "https://onnellab.com/blog/zh-hans/verify-audio-clips-before-combining/"
 published_at: "2026-08-23T09:00:00+09:00"
 updated_at: "2026-08-23T09:00:00+09:00"
 ---
