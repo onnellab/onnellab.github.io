@@ -11,34 +11,42 @@ User-agent: Bingbot
 Allow: /
 
 User-agent: OAI-SearchBot
+Disallow: /ops/
 Disallow: /manual-publish/
 Allow: /
 
 User-agent: ChatGPT-User
+Disallow: /ops/
 Disallow: /manual-publish/
 Allow: /
 
 User-agent: Claude-SearchBot
+Disallow: /ops/
 Disallow: /manual-publish/
 Allow: /
 
 User-agent: Claude-User
+Disallow: /ops/
 Disallow: /manual-publish/
 Allow: /
 
 User-agent: PerplexityBot
+Disallow: /ops/
 Disallow: /manual-publish/
 Allow: /
 
 User-agent: Perplexity-User
+Disallow: /ops/
 Disallow: /manual-publish/
 Allow: /
 
 User-agent: YouBot
+Disallow: /ops/
 Disallow: /manual-publish/
 Allow: /
 
 User-agent: Meta-ExternalFetcher
+Disallow: /ops/
 Disallow: /manual-publish/
 Allow: /
 
