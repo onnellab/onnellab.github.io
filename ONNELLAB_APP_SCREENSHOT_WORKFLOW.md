@@ -21,7 +21,7 @@
 | --- | --- | --- | --- |
 | Aligna | `aligna` | `aligna` | `src/content/apps/aligna/assets/screenshots/{en,ko}` |
 | ClipNest | `clipnest` | `clipnest` | `src/content/apps/clipnest/assets/screenshots/{en,ko}` |
-| Melivra | `melivra` | `melivra` | `src/content/apps/melivra/assets/screenshots/{en,ko}` |
+| Melivra | `melivra` | `melivra` | `src/content/apps/melivra/assets/screenshots/{en,ko,ja,zh-Hans,zh-Hant,pt-BR,de,fr,es}` |
 | Quivra | `quivra` | `quivra` | `src/content/apps/quivra/assets/screenshots/{en,ko}` |
 | Segra | `segra` | `segra` | `src/content/apps/segra/assets/screenshots/{en,ko}` |
 | TagWeaver | `tagweaver` | `tagweaver` | `src/content/apps/tagweaver/assets/screenshots/{en,ko}` |
@@ -44,7 +44,7 @@ OnnelLab Text 저장소는 `onnellab-text` 이다.
 ## 교체 절차
 
 1. 앱 저장소에서 최신 편집본을 생성한다.
-2. 편집본을 이 저장소의 `src/content/apps/{slug}/assets/screenshots/{en,ko}`로 복사한다.
+2. 편집본을 이 저장소의 `src/content/apps/{slug}/assets/screenshots/{locale}`로 복사한다.
 3. `npm run build`를 실행한다.
 4. 앱 저장소와 이 저장소를 각각 커밋/푸시한다.
 
