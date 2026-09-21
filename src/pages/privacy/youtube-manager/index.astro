@@ -11,7 +11,7 @@ const sections = [
     'The tool may also upload operator-approved videos to the authorized channel and set thumbnails for those videos. It does not use Google data to build advertising profiles, sell personal data, or monitor unrelated Google accounts.'
   ]},
   { title: 'OAuth permissions', body: [
-    'The manager requests YouTube upload permission, YouTube read-only permission, and YouTube Analytics read-only permission only for the channel-management features described above. A channel is accepted only when its verified channel ID matches the operator-configured expected channel ID for that brand.',
+    'The manager requests YouTube upload permission, YouTube read-only permission, YouTube Analytics read-only permission, and Google’s youtube.force-ssl scope for retrieving YouTube comments. Google defines youtube.force-ssl broadly enough to allow comment changes and deletion, but ONNELLAB Media Console uses comment endpoints only for read-only retrieval and does not provide comment creation, editing, deletion, moderation-status changes, rating changes, or caption-management actions. A channel is accepted only when its verified channel ID matches the operator-configured expected channel ID for that brand.',
     'Google sign-in and consent are completed interactively by the operator. The tool does not ask the operator to send passwords, passkeys, two-factor authentication codes, or OAuth tokens to the public ONNELLAB website.'
   ]},
   { title: 'Storage and retention', body: [
