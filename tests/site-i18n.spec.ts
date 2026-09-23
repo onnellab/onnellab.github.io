@@ -457,7 +457,7 @@ test.describe('nine-language site core regression', () => {
         );
         const screenshot = page.locator('.screenshot-link img').first();
         if (await screenshot.count()) {
-          const screenshotLocale = slug === 'tagweaver' || slug === 'vaultxt'
+          const screenshotLocale = ['tagweaver', 'vaultxt', 'melivra'].includes(slug)
             ? htmlLang[segment as keyof typeof htmlLang]
             : 'en';
           await expect(screenshot).toHaveAttribute(
