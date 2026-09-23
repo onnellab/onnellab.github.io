@@ -45,8 +45,22 @@ for (const locale of ['en', 'ko'] as const) {
     const languages = await page.locator('link[rel="alternate"][hreflang]').evaluateAll(nodes =>
       nodes.map(node => node.getAttribute('hreflang')).sort()
     );
-    expect(languages).toEqual(['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de', 'fr', 'es', 'x-default'].sort());
-    await expect(page.locator('[data-locale-choice]')).toHaveCount(9);
+    // The preserved static policy publishes English and Korean, independently
+    // of the nine-language product landing pages.
+    expect(languages).toEqual(['en', 'ko', 'x-default'].sort());
+    for (const [language, route] of [
+      ['en', '/privacy/segra/'],
+      ['ko', '/privacy/segra/ko/'],
+      ['x-default', '/privacy/segra/'],
+    ]) {
+      await expect(page.locator(`link[rel="alternate"][hreflang="${language}"]`))
+        .toHaveAttribute('href', `https://onnellab.com${route}`);
+    }
+    const languageLink = page.locator('a.language-link');
+    await expect(languageLink).toHaveCount(1);
+    await expect(languageLink).toHaveText(locale === 'en' ? '한국어' : 'English');
+    await expect(languageLink).toHaveAttribute('href',
+      `https://onnellab.com/privacy/segra/${locale === 'en' ? 'ko/' : ''}`);
     const sitemap = await (await request.get('/sitemap.xml')).text();
     expect(sitemap.split(`<loc>https://onnellab.com${canonical}</loc>`)).toHaveLength(2);
   });
