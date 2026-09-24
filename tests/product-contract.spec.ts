@@ -30,6 +30,7 @@ const locales = [
 const schemaClassifications: Record<string, { applicationCategory: string; applicationSubCategory: string }> = {
   aligna: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'File Renaming Utility' },
   clipnest: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Clipboard Utility' },
+  lunary: { applicationCategory: 'LifestyleApplication', applicationSubCategory: 'Monthly Calendar' },
   melivra: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Offline Music Player' },
   meriq: { applicationCategory: 'DesignApplication', applicationSubCategory: 'Merchandise Production Tool' },
   papira: { applicationCategory: 'DesignApplication', applicationSubCategory: 'EPUB Authoring Tool' },

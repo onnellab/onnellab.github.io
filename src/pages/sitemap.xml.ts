@@ -31,6 +31,7 @@ export function GET() {
     ...corePages.flatMap((page) => allLocalizedEntries(page)),
     ...allLocalizedEntries('papira'),
     ...papiraPrivacyEntries(),
+    ...lunaryPrivacyEntries(),
     ...productPrivacyEntries(),
     ...blogEntries(),
     ...oauthEntries(),
@@ -59,6 +60,14 @@ function papiraPrivacyEntries(): SitemapEntry[] {
   const alternates = pageAlternates('papiraPrivacy');
   return allSiteLocales.map((locale) => ({
     path: allRouteFor('papiraPrivacy', locale),
+    alternates
+  }));
+}
+
+function lunaryPrivacyEntries(): SitemapEntry[] {
+  const alternates = appPrivacyAlternates('lunary');
+  return allSiteLocales.map((locale) => ({
+    path: allAppPrivacyRouteFor('lunary', locale),
     alternates
   }));
 }

@@ -1,0 +1,18 @@
+---
+import LunaryPrivacyPage from '../../../../components/LunaryPrivacyPage.astro';
+import {
+  allLocaleDefinitions,
+  allSiteLocales,
+  type AllSiteLocale
+} from '../../../../lib/extended-site-i18n';
+
+export function getStaticPaths() {
+  return allSiteLocales.filter((locale) => locale !== 'en').map((locale) => ({
+    params: { locale: allLocaleDefinitions[locale].pathSegment },
+    props: { locale }
+  }));
+}
+
+const { locale } = Astro.props as { locale: AllSiteLocale };
+---
+<LunaryPrivacyPage locale={locale} />

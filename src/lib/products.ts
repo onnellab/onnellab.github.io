@@ -12,6 +12,7 @@ import {
 import { getLocalizedProductContent } from './product-localizations';
 import { getExtendedProductCopy } from './extended-product-localizations';
 import { getMelivraProductCopy } from './melivra-product';
+import { getLunaryProductCopy } from './lunary-product';
 import { getProductScreenshotAlts } from './product-screenshot-alts';
 
 const appsContentDir = path.resolve(process.cwd(), 'src/content/apps');
@@ -405,6 +406,21 @@ function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
     const platform: PlatformCopy = {
       name: localized.landingSubtitle,
       landingSubtitle: localized.landingSubtitle,
+      landingDescription: localized.body,
+      description: localized.body,
+      seoTitle: localized.seoTitle,
+      seoDescription: localized.seoDescription,
+      faq: { title: localized.faqTitle, items: localized.faq }
+    };
+    return { locale, android: platform, ios: platform };
+  }
+
+  if (slug === 'lunary') {
+    const localized = getLunaryProductCopy(locale);
+    const platform: PlatformCopy = {
+      name: localized.subtitle,
+      shortDescription: localized.subtitle,
+      landingSubtitle: localized.subtitle,
       landingDescription: localized.body,
       description: localized.body,
       seoTitle: localized.seoTitle,

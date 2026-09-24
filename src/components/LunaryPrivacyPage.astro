@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteFooter from './SiteFooter.astro';
+import {
+  allAppPrivacyRouteFor,
+  allLocaleDefinitions,
+  allRouteFor,
+  allSiteLocales,
+  type AllSiteLocale
+} from '../lib/extended-site-i18n';
+import { getLunaryPrivacyCopy } from '../lib/lunary-privacy';
+
+type Props = { locale: AllSiteLocale };
+const { locale } = Astro.props;
+const copy = getLunaryPrivacyCopy(locale);
+const definition = allLocaleDefinitions[locale];
+const canonicalPath = allAppPrivacyRouteFor('lunary', locale);
+const alternates = [
+  ...allSiteLocales.map((item) => ({
+    lang: allLocaleDefinitions[item].hreflang,
+    path: allAppPrivacyRouteFor('lunary', item)
+  })),
+  { lang: 'x-default', path: allAppPrivacyRouteFor('lunary', 'en') }
+];
+const email = 'onnellab.app@gmail.com';
+---
+
+<BaseLayout
+  title={copy.title}
+  description={copy.description}
+  canonicalPath={canonicalPath}
+  lang={definition.htmlLang}
+  alternates={alternates}
+  ogType="article"
+>
+  <main class="privacy-shell">
+    <nav class="topbar" aria-label={definition.label}>
+      <a class="home-link" href={allRouteFor('home', locale)}>ONNELLAB</a>
+      <details class="locale-menu">
+        <summary>{definition.label}</summary>
+        <ul>
+          {allSiteLocales.map((item) => {
+            const itemDefinition = allLocaleDefinitions[item];
+            return (
+              <li>
+                <a
+                  href={allAppPrivacyRouteFor('lunary', item)}
+                  lang={itemDefinition.htmlLang}
+                  hreflang={itemDefinition.hreflang}
+                  aria-current={item === locale ? 'page' : undefined}
+                >
+                  {itemDefinition.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </details>
+    </nav>
+
+    <header>
+      <h1>{copy.title}</h1>
+      <p>{copy.intro}</p>
+      <p><strong>{copy.updatedLabel}:</strong> <time datetime={copy.updatedValue}>{copy.updatedValue}</time></p>
+    </header>
+
+    <hr />
+    <h2>{copy.heading}</h2>
+    <p>{copy.opening}</p>
+
+    {copy.sections.map((section) => (
+      <section>
+        <h3>{section.title}</h3>
+        {section.items && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}
+        {section.paragraphs?.map((paragraph) =>
+          paragraph.includes(email) ? (
+            <p>{paragraph.replace(email, '')}<a href={'mailto:' + email}>{email}</a></p>
+          ) : (
+            <p>{paragraph}</p>
+          )
+        )}
+      </section>
+    ))}
+
+    <p class="google-policy-note">
+      <a href="https://developers.google.com/terms/api-services-user-data-policy">
+        Google API Services User Data Policy
+      </a>
+    </p>
+    <SiteFooter locale={locale} />
+  </main>
+</BaseLayout>
+
+<style>
+  .privacy-shell{width:min(860px,calc(100% - 36px));margin:0 auto;padding:28px 0 56px;color:#4d4942;line-height:1.75}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .home-link{color:#68645c;text-decoration:none;font-size:14px;font-weight:620}
+  .locale-menu{position:relative}.locale-menu summary{min-height:40px;display:inline-flex;align-items:center;border:1px solid #ded6ca;border-radius:999px;padding:7px 13px;background:rgba(255,253,248,.82);color:#5f5a50;cursor:pointer;font-size:13px;font-weight:620;list-style:none}
+  .locale-menu summary::-webkit-details-marker{display:none}
+  .locale-menu ul{position:absolute;z-index:20;right:0;top:calc(100% + 7px);width:max-content;min-width:170px;display:grid;gap:2px;margin:0;border:1px solid #ded6ca;border-radius:12px;padding:6px;background:#fffdf8;box-shadow:0 14px 34px rgba(57,48,39,.11);list-style:none}
+  .locale-menu a{display:block;border-radius:8px;padding:8px 10px;color:#5f5a50;text-decoration:none;font-size:13px}
+  .locale-menu a:hover,.locale-menu a[aria-current='page']{background:#f4efe7;color:#383631}
+  header{margin:58px 0 22px}h1{margin:0;color:#282723;font-size:clamp(38px,6vw,64px);line-height:1.04}
+  h2{margin:30px 0 8px;color:#34322d;font-size:26px}h3{margin:0 0 10px;color:#34322d;font-size:21px;line-height:1.3}
+  p{margin:10px 0 0;font-size:16px}ul{padding-left:24px}li{margin:6px 0}
+  section{border-top:1px solid #e5ded4;margin-top:22px;padding-top:22px}hr{border:0;border-top:1px solid #e5ded4;margin:24px 0}
+  .google-policy-note{margin-top:28px;font-size:13px}.google-policy-note a{color:#3d5f82;text-underline-offset:4px}
+  @media(max-width:640px){.privacy-shell{width:min(100% - 28px,860px);padding-top:22px}header{margin-top:38px}.locale-menu ul{right:0}}
+</style>

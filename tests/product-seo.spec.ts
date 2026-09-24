@@ -68,7 +68,7 @@ test('VaultXT has concise authored web titles without changing its hero or store
   }
 });
 
-for (const app of ['melivra', 'meriq', 'papira']) {
+for (const app of ['lunary', 'melivra', 'meriq', 'papira']) {
   test(`${app}: prerelease pages show their status and never claim installation availability`, async ({ page }) => {
     const preparing = {
       en: 'Preparing for release', ko: '출시 준비 중', ja: 'リリース準備中',
