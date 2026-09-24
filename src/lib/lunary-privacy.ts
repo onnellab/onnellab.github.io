@@ -32,7 +32,7 @@ const policies = {
       {
         "title": "1. Accounts and direct identifiers",
         "paragraphs": [
-          "Lunary’s local calendar and monthly cover features require no account. If you explicitly connect Google Calendar, Google Sign-In provides the account identity needed to show and identify the connected account. Lunary stores the selected Google account ID and calendar ID needed for synchronization, but it does not persist Google OAuth access or refresh tokens in its SQLite database, preferences, logs, or app-owned files."
+          "Lunary’s local calendar and monthly cover features require no account. If you explicitly connect Google Calendar, Google Sign-In provides the basic account information needed to show which Google account is connected. Lunary stores the selected Google account ID and calendar ID needed for synchronization, but it does not store Google OAuth access or refresh tokens in its own app data or logs."
         ]
       },
       {
@@ -40,7 +40,7 @@ const policies = {
         "items": [
           "Local event data such as title, date, optional start and end time, note, edit state, and deletion state",
           "Monthly cover data such as selected background files, generated previews and widget posters, sticker files, positions, sizes, rotations, opacity, and layer order",
-          "When Google Calendar is connected: synchronization metadata such as Google account, calendar and event identifiers, ETags, update timestamps, synchronization state, and last-pull time"
+          "When Google Calendar is connected: synchronization metadata such as Google account, calendar and event identifiers, ETags, update timestamps, synchronization state, and the time of the last synchronization check"
         ],
         "paragraphs": [
           "Local events and monthly covers remain on the device. Cover images, stickers, and local event notes are not sent to Google Calendar or to an ONNELLAB server."
@@ -49,7 +49,7 @@ const policies = {
       {
         "title": "3. Optional Google Calendar data transfer",
         "paragraphs": [
-          "Only after you connect Google Calendar, Lunary communicates directly with Google Calendar APIs. It reads writable calendar identifiers and names plus event identifiers, titles, start/end values, update state, and synchronization metadata needed for two-way sync. Lunary may create, update, or delete event titles and date/time values in the selected calendar and uses private mapping properties to avoid duplicate events. Monthly cover images, stickers, and local event notes are not transmitted to Google. ONNELLAB does not operate an intermediary server for this synchronization."
+          "Only after you connect Google Calendar, Lunary communicates directly with Google Calendar APIs. It reads writable calendar identifiers and names plus event identifiers, titles, start/end values, update state, and synchronization metadata needed for two-way sync. Lunary may create, update, or delete event titles and date/time values in the selected calendar and uses private event identifiers to avoid duplicate events. Monthly cover images, stickers, and local event notes are not transmitted to Google. ONNELLAB does not operate an intermediary server for this synchronization."
         ]
       },
       {
@@ -73,7 +73,7 @@ const policies = {
       {
         "title": "7. Security and children's privacy",
         "paragraphs": [
-          "Google authorization credentials are handled through the Google Sign-In platform boundary rather than stored by Lunary. Network requests to Google Calendar use HTTPS, and ONNELLAB applies reasonable technical and organizational safeguards to data the app must handle. Lunary is not directed to children under 13 and does not knowingly collect personal information from children."
+          "Google authorization credentials are managed by Google Sign-In and are not stored directly by Lunary. Network requests to Google Calendar use HTTPS, and ONNELLAB applies reasonable technical and organizational safeguards to data the app must handle. Lunary is not directed to children under 13 and does not knowingly collect personal information from children."
         ]
       },
       {
@@ -87,7 +87,7 @@ const policies = {
   },
   "ko": {
     "title": "Lunary 개인정보 처리방침",
-    "description": "Lunary 캘린더 앱과 선택형 Google Calendar 연동에 관한 개인정보 처리방침입니다.",
+    "description": "Lunary 캘린더 앱과 선택적인 Google Calendar 연동에 관한 개인정보 처리방침입니다.",
     "intro": "이 개인정보 처리방침은 ONNELLAB이 제공하는 Lunary 앱에 적용됩니다.",
     "updatedLabel": "최종 업데이트",
     "updatedValue": "2026-09-24",
@@ -98,7 +98,7 @@ const policies = {
       {
         "title": "1. 계정 및 개인 식별 정보",
         "paragraphs": [
-          "Lunary의 로컬 캘린더와 월별 표지 기능에는 계정이 필요하지 않습니다. 사용자가 Google Calendar를 직접 연결하면 Google Sign-In이 연결된 계정을 표시하고 식별하는 데 필요한 계정 정보를 제공합니다. Lunary는 동기화에 필요한 선택된 Google 계정 ID와 캘린더 ID를 기기에 저장하지만, Google OAuth access token 또는 refresh token을 SQLite 데이터베이스, 설정 저장소, 로그, 앱 소유 파일에 저장하지 않습니다."
+          "Lunary의 로컬 캘린더와 월별 표지 기능에는 계정이 필요하지 않습니다. 사용자가 Google Calendar를 직접 연결하면 Google Sign-In이 연결된 계정을 표시하고 식별하는 데 필요한 계정 정보를 제공합니다. Lunary는 동기화에 필요한 선택된 Google 계정 ID와 캘린더 ID를 기기에 저장하지만, Google OAuth 액세스 토큰 또는 리프레시 토큰을 Lunary가 관리하는 앱 데이터나 로그에 저장하지 않습니다."
         ]
       },
       {
@@ -106,16 +106,16 @@ const policies = {
         "items": [
           "제목, 날짜, 선택적인 시작·종료 시각, 메모, 수정 상태, 삭제 상태 등 로컬 일정 데이터",
           "선택한 배경 파일, 생성된 미리보기와 위젯 포스터, 스티커 파일, 위치·크기·회전·투명도·레이어 순서 등 월별 표지 데이터",
-          "Google Calendar 연결 시 Google 계정·캘린더·일정 ID, ETag, 업데이트 시각, 동기화 상태, 마지막 가져오기 시각 등 동기화 메타데이터"
+          "Google Calendar 연결 시 Google 계정·캘린더·일정 ID, ETag, 업데이트 시각, 동기화 상태, 마지막 동기화 확인 시각 등 동기화 메타데이터"
         ],
         "paragraphs": [
           "로컬 일정과 월별 표지는 기기에 저장됩니다. 표지 이미지, 스티커, 로컬 일정 메모는 Google Calendar나 ONNELLAB 서버로 전송하지 않습니다."
         ]
       },
       {
-        "title": "3. 선택형 Google Calendar 데이터 전송",
+        "title": "3. 선택적인 Google Calendar 데이터 전송",
         "paragraphs": [
-          "사용자가 Google Calendar를 연결한 뒤에만 Lunary가 Google Calendar API와 직접 통신합니다. 양방향 동기화에 필요한 편집 가능한 캘린더의 ID와 이름, 일정 ID·제목·시작/종료 값·업데이트 상태·동기화 메타데이터를 읽습니다. 선택한 캘린더에서 동기화 일정의 제목과 날짜·시간을 생성·수정·삭제할 수 있고, 중복 생성을 막기 위한 비공개 매핑 속성을 사용합니다. 월별 표지 이미지, 스티커, 로컬 일정 메모는 Google로 전송하지 않습니다. 이 동기화를 중계하는 ONNELLAB 서버는 없습니다."
+          "사용자가 Google Calendar를 연결한 뒤에만 Lunary가 Google Calendar API와 직접 통신합니다. 양방향 동기화에 필요한 편집 가능한 캘린더의 ID와 이름, 일정 ID·제목·시작/종료 값·업데이트 상태·동기화 메타데이터를 읽습니다. 선택한 캘린더에서 동기화 일정의 제목과 날짜·시간을 생성·수정·삭제할 수 있고, 중복 생성을 막기 위한 비공개 일정 식별 정보를 사용합니다. 월별 표지 이미지, 스티커, 로컬 일정 메모는 Google로 전송하지 않습니다. 이 동기화를 중계하는 ONNELLAB 서버는 없습니다."
         ]
       },
       {
@@ -139,7 +139,7 @@ const policies = {
       {
         "title": "7. 보안 및 아동의 개인정보",
         "paragraphs": [
-          "Google 인증 자격정보는 Lunary가 직접 저장하지 않고 Google Sign-In 플랫폼 경계에서 처리합니다. Google Calendar 네트워크 요청은 HTTPS를 사용하며 ONNELLAB은 앱이 처리해야 하는 데이터에 합리적인 기술적·관리적 보호조치를 적용합니다. Lunary는 만 13세 미만 아동을 대상으로 설계되지 않았으며 아동의 개인정보를 고의로 수집하지 않습니다."
+          "Google 인증 정보는 Google Sign-In에서 관리하며 Lunary가 직접 저장하지 않습니다. Google Calendar 네트워크 요청은 HTTPS를 사용하며 ONNELLAB은 앱이 처리해야 하는 데이터에 합리적인 기술적·관리적 보호조치를 적용합니다. Lunary는 만 13세 미만 아동을 대상으로 설계되지 않았으며 아동의 개인정보를 고의로 수집하지 않습니다."
         ]
       },
       {
@@ -162,9 +162,9 @@ const policies = {
     "privacyHubLabel": "すべてのプライバシーポリシー",
     "sections": [
       {
-        "title": "1. アカウントと直接識別情報",
+        "title": "1. アカウントと直接識別できる情報",
         "paragraphs": [
-          "Lunaryのローカルカレンダーと月ごとの表紙にはアカウントは必要ありません。Googleカレンダーを明示的に接続した場合、Google Sign-Inが接続中のアカウントを表示・識別するための情報を提供します。Lunaryは同期に必要なGoogleアカウントIDと選択したカレンダーIDを端末に保存しますが、Google OAuthのアクセストークンやリフレッシュトークンをSQLite、設定、ログ、アプリ所有ファイルへ保存しません。"
+          "Lunaryのローカルカレンダーと月ごとの表紙にはアカウントは必要ありません。Googleカレンダーを明示的に接続した場合、Google Sign-Inが接続中のアカウントを表示・識別するための情報を提供します。Lunaryは同期に必要なGoogleアカウントIDと選択したカレンダーIDを端末に保存しますが、Google OAuthのアクセストークンやリフレッシュトークンをLunary自身のデータやログに保存しません。"
         ]
       },
       {
@@ -172,7 +172,7 @@ const policies = {
         "items": [
           "タイトル、日付、任意の開始・終了時刻、メモ、編集状態、削除状態などのローカル予定データ",
           "選択した背景、生成したプレビューとウィジェット用ポスター、ステッカー、位置・サイズ・回転・透明度・重なり順などの月別表紙データ",
-          "Googleカレンダー接続時のアカウント・カレンダー・予定ID、ETag、更新時刻、同期状態、最終取得時刻などの同期メタデータ"
+          "Googleカレンダー接続時のアカウント・カレンダー・予定ID、ETag、更新時刻、同期状態、最終同期確認時刻などの同期メタデータ"
         ],
         "paragraphs": [
           "ローカル予定と月ごとの表紙は端末に保存されます。表紙画像、ステッカー、ローカル予定のメモはGoogleカレンダーやONNELLABサーバーへ送信しません。"
@@ -181,7 +181,7 @@ const policies = {
       {
         "title": "3. 任意のGoogleカレンダーデータ転送",
         "paragraphs": [
-          "Googleカレンダーを接続した場合にのみ、LunaryはGoogle Calendar APIと直接通信します。双方向同期に必要な編集可能カレンダーのIDと名前、予定ID・タイトル・開始/終了値・更新状態・同期メタデータを読み取ります。選択したカレンダーで同期予定のタイトルと日付・時刻を作成・更新・削除し、重複防止用の非公開マッピング属性を使用することがあります。月別の表紙画像、ステッカー、ローカル予定のメモはGoogleへ送信しません。ONNELLABはこの同期を中継するサーバーを運用しません。"
+          "Googleカレンダーを接続した場合にのみ、LunaryはGoogle Calendar APIと直接通信します。双方向同期に必要な編集可能カレンダーのIDと名前、予定ID・タイトル・開始/終了値・更新状態・同期メタデータを読み取ります。選択したカレンダーで同期予定のタイトルと日付・時刻を作成・更新・削除し、重複を防ぐための非公開の予定識別情報を使用することがあります。月別の表紙画像、ステッカー、ローカル予定のメモはGoogleへ送信しません。ONNELLABはこの同期を中継するサーバーを運用しません。"
         ]
       },
       {
@@ -205,7 +205,7 @@ const policies = {
       {
         "title": "7. セキュリティと子どものプライバシー",
         "paragraphs": [
-          "Google認証情報はLunaryが直接保存せず、Google Sign-Inのプラットフォーム境界で処理されます。Googleカレンダーへの通信にはHTTPSを使用し、ONNELLABは必要なデータに合理的な技術上・組織上の保護措置を適用します。Lunaryは13歳未満の子どもを対象としておらず、子どもの個人情報を意図的に収集しません。"
+          "Googleの認証情報はGoogle Sign-Inが管理し、Lunary自身は保存しません。Googleカレンダーへの通信にはHTTPSを使用し、ONNELLABは必要なデータに合理的な技術上・組織上の保護措置を適用します。Lunaryは13歳未満の子どもを対象としておらず、子どもの個人情報を意図的に収集しません。"
         ]
       },
       {
@@ -224,13 +224,13 @@ const policies = {
     "updatedLabel": "最后更新",
     "updatedValue": "2026-09-24",
     "heading": "隐私政策",
-    "opening": "Lunary 重视你的隐私。本地日历和封面无需登录即可使用，只有在用户主动连接时才会访问 Google 日历。",
+    "opening": "Lunary 重视用户的隐私。本地日历和封面无需登录即可使用，只有在用户主动连接时才会访问 Google 日历。",
     "privacyHubLabel": "全部隐私政策",
     "sections": [
       {
         "title": "1. 账号与直接身份信息",
         "paragraphs": [
-          "Lunary 的本地日历和每月封面无需账号。只有当你明确连接 Google 日历时，Google Sign-In 才会提供用于显示和识别已连接账号的信息。Lunary 会在设备上保存同步所需的 Google 账号 ID 和所选日历 ID，但不会把 Google OAuth 访问令牌或刷新令牌保存到 SQLite、应用设置、日志或应用自有文件中。"
+          "Lunary 的本地日历和每月封面无需账号。仅当用户主动连接 Google 日历时，Google Sign-In 才会提供用于显示和识别已连接账号的信息。Lunary 会在设备上保存同步所需的 Google 账号 ID 和所选日历 ID，但不会把 Google OAuth 访问令牌或刷新令牌保存到 Lunary 自身的应用数据或日志中。"
         ]
       },
       {
@@ -238,7 +238,7 @@ const policies = {
         "items": [
           "标题、日期、可选开始与结束时间、备注、编辑状态和删除状态等本地日程数据",
           "所选背景、生成的预览和小组件海报、贴纸以及位置、大小、旋转、透明度和图层顺序等每月封面数据",
-          "连接 Google 日历时使用的账号、日历和日程 ID、ETag、更新时间、同步状态和最后拉取时间等同步元数据"
+          "连接 Google 日历时使用的账号、日历和日程 ID、ETag、更新时间、同步状态和最后同步检查时间等同步元数据"
         ],
         "paragraphs": [
           "本地日程和每月封面保存在设备上。封面图片、贴纸和本地日程备注不会发送到 Google 日历或 ONNELLAB 服务器。"
@@ -247,7 +247,7 @@ const policies = {
       {
         "title": "3. 可选的 Google 日历数据传输",
         "paragraphs": [
-          "只有在你连接 Google 日历后，Lunary 才会直接与 Google Calendar API 通信。它会读取双向同步所需的可编辑日历 ID 与名称，以及日程 ID、标题、开始/结束值、更新状态和同步元数据；也可以在所选日历中创建、更新或删除同步日程的标题和日期时间，并使用私有映射属性避免重复。每月封面图片、贴纸和本地日程备注不会发送给 Google。ONNELLAB 不运行用于中转该同步的服务器。"
+          "只有在用户连接 Google 日历后，Lunary 才会直接与 Google Calendar API 通信。它会读取双向同步所需的可编辑日历 ID 与名称，以及日程 ID、标题、开始/结束值、更新状态和同步元数据；也可以在所选日历中创建、更新或删除同步日程的标题和日期时间，并使用用于防止重复的私有事件标识。每月封面图片、贴纸和本地日程备注不会发送给 Google。ONNELLAB 不运行用于中转该同步的服务器。"
         ]
       },
       {
@@ -265,13 +265,13 @@ const policies = {
       {
         "title": "6. 保留、断开连接与删除",
         "paragraphs": [
-          "应用管理的本地日程、封面、贴纸、预览和同步元数据会保留在设备上，直到通过相应功能删除或卸载应用。断开 Google 日历后，Lunary 会停止后续日历访问并清除连接启用状态和所选日历设置，但已保存在 Lunary 本地的日程仍留在设备上。已存入 Google 日历的数据受你的 Google 账号设置和 Google 保留规则约束。ONNELLAB 服务器不保存已同步 Google 日历内容的副本。"
+          "应用管理的本地日程、封面、贴纸、预览和同步元数据会保留在设备上，直到通过相应功能删除或卸载应用。断开 Google 日历后，Lunary 会停止后续日历访问并清除连接启用状态和所选日历设置，但已保存在 Lunary 本地的日程仍留在设备上。已存入 Google 日历的数据受用户的 Google 账号设置和 Google 保留规则约束。ONNELLAB 服务器不保存已同步 Google 日历内容的副本。"
         ]
       },
       {
         "title": "7. 安全与儿童隐私",
         "paragraphs": [
-          "Google 授权凭据由 Google Sign-In 平台边界处理，而不是由 Lunary 直接存储。访问 Google 日历的网络请求使用 HTTPS，ONNELLAB 对应用必须处理的数据采取合理的技术和组织保护措施。Lunary 并非面向 13 岁以下儿童，也不会故意收集儿童个人信息。"
+          "Google 授权凭据由 Google Sign-In 管理，Lunary 本身不保存这些凭据。访问 Google 日历的网络请求使用 HTTPS，ONNELLAB 对应用必须处理的数据采取合理的技术和组织保护措施。Lunary 并非面向 13 岁以下儿童，也不会故意收集儿童个人信息。"
         ]
       },
       {
@@ -290,13 +290,13 @@ const policies = {
     "updatedLabel": "最後更新",
     "updatedValue": "2026-09-24",
     "heading": "隱私權政策",
-    "opening": "Lunary 重視你的隱私。本機月曆與封面不需登入即可使用，只有在使用者主動連接時才會存取 Google 日曆。",
+    "opening": "Lunary 重視使用者的隱私。本機月曆與封面不需登入即可使用，只有在使用者主動連接時才會存取 Google 日曆。",
     "privacyHubLabel": "全部隱私權政策",
     "sections": [
       {
         "title": "1. 帳號與直接識別資訊",
         "paragraphs": [
-          "Lunary 的本機月曆與每月封面不需要帳號。只有在你明確連接 Google 日曆時，Google Sign-In 才會提供顯示與識別已連接帳號所需的資訊。Lunary 會在裝置上儲存同步所需的 Google 帳號 ID 與選取的日曆 ID，但不會把 Google OAuth 存取權杖或重新整理權杖儲存在 SQLite、應用程式設定、記錄或應用程式自有檔案中。"
+          "Lunary 的本機月曆與每月封面不需要帳號。只有在使用者主動連接 Google 日曆時，Google Sign-In 才會提供顯示與識別已連接帳號所需的資訊。Lunary 會在裝置上儲存同步所需的 Google 帳號 ID 與選取的日曆 ID，但不會把 Google OAuth 存取權杖或重新整理權杖儲存在 Lunary 自身的應用程式資料或記錄中。"
         ]
       },
       {
@@ -304,7 +304,7 @@ const policies = {
         "items": [
           "標題、日期、選用的開始與結束時間、備註、編輯狀態與刪除狀態等本機行程資料",
           "選取的背景、產生的預覽與小工具海報、貼紙，以及位置、大小、旋轉、透明度與圖層順序等每月封面資料",
-          "連接 Google 日曆時使用的帳號、日曆與行程 ID、ETag、更新時間、同步狀態與最後擷取時間等同步中繼資料"
+          "連接 Google 日曆時使用的帳號、日曆與行程 ID、ETag、更新時間、同步狀態與最後同步檢查時間等同步中繼資料"
         ],
         "paragraphs": [
           "本機行程與每月封面儲存在裝置上。封面圖片、貼紙與本機行程備註不會傳送到 Google 日曆或 ONNELLAB 伺服器。"
@@ -313,7 +313,7 @@ const policies = {
       {
         "title": "3. 選用的 Google 日曆資料傳輸",
         "paragraphs": [
-          "只有在你連接 Google 日曆後，Lunary 才會直接與 Google Calendar API 通訊。它會讀取雙向同步所需的可編輯日曆 ID 與名稱，以及行程 ID、標題、開始/結束值、更新狀態與同步中繼資料；也能在選取的日曆中建立、更新或刪除同步行程的標題與日期時間，並使用私有對應屬性避免重複。每月封面圖片、貼紙與本機行程備註不會傳送給 Google。ONNELLAB 不運作中轉此同步的伺服器。"
+          "只有在使用者連接 Google 日曆後，Lunary 才會直接與 Google Calendar API 通訊。它會讀取雙向同步所需的可編輯日曆 ID 與名稱，以及行程 ID、標題、開始/結束值、更新狀態與同步中繼資料；也能在選取的日曆中建立、更新或刪除同步行程的標題與日期時間，並使用防止重複的私有行程識別資訊。每月封面圖片、貼紙與本機行程備註不會傳送給 Google。ONNELLAB 不設置用來中介這項同步的伺服器。"
         ]
       },
       {
@@ -331,13 +331,13 @@ const policies = {
       {
         "title": "6. 保留、斷開連接與刪除",
         "paragraphs": [
-          "應用程式管理的本機行程、封面、貼紙、預覽與同步中繼資料會保留在裝置上，直到透過相應功能刪除或解除安裝。斷開 Google 日曆後，Lunary 會停止後續日曆存取並清除連接啟用狀態與選取日曆設定，但已在 Lunary 本機儲存的行程仍留在裝置上。已存入 Google 日曆的資料受你的 Google 帳號設定與 Google 保留規則約束。ONNELLAB 伺服器不保存已同步 Google 日曆內容的副本。"
+          "應用程式管理的本機行程、封面、貼紙、預覽與同步中繼資料會保留在裝置上，直到透過相應功能刪除或解除安裝。斷開 Google 日曆後，Lunary 會停止後續日曆存取並清除連接啟用狀態與選取日曆設定，但已在 Lunary 本機儲存的行程仍留在裝置上。已存入 Google 日曆的資料受使用者的 Google 帳號設定與 Google 保留規則約束。ONNELLAB 伺服器不保存已同步 Google 日曆內容的副本。"
         ]
       },
       {
         "title": "7. 安全與兒童隱私",
         "paragraphs": [
-          "Google 授權憑證由 Google Sign-In 平台邊界處理，而不是由 Lunary 直接儲存。存取 Google 日曆的網路要求使用 HTTPS，ONNELLAB 對應用程式必須處理的資料採取合理的技術與組織保護措施。Lunary 並非針對 13 歲以下兒童，也不會刻意蒐集兒童個人資訊。"
+          "Google 授權憑證由 Google Sign-In 管理，Lunary 本身不會儲存這些憑證。存取 Google 日曆的網路要求使用 HTTPS，ONNELLAB 對應用程式必須處理的資料採取合理的技術與組織保護措施。Lunary 並非針對 13 歲以下兒童，也不會刻意蒐集兒童個人資訊。"
         ]
       },
       {
@@ -356,13 +356,13 @@ const policies = {
     "updatedLabel": "Última atualização",
     "updatedValue": "2026-09-24",
     "heading": "Política de Privacidade",
-    "opening": "O Lunary respeita sua privacidade. O calendário local e as capas funcionam sem login; o acesso ao Google Agenda é opcional e iniciado pelo usuário.",
+    "opening": "O Lunary respeita a privacidade dos usuários. O calendário local e as capas funcionam sem login; o acesso ao Google Agenda é opcional e iniciado pelo usuário.",
     "privacyHubLabel": "Todas as políticas de privacidade",
     "sections": [
       {
         "title": "1. Contas e identificadores diretos",
         "paragraphs": [
-          "O calendário local e as capas mensais do Lunary não exigem conta. Se você conectar explicitamente o Google Agenda, o Google Sign-In fornece as informações necessárias para exibir e identificar a conta conectada. O Lunary armazena no dispositivo o ID da conta Google e o ID da agenda selecionada necessários à sincronização, mas não persiste tokens de acesso ou atualização do Google OAuth no SQLite, nas preferências, nos logs ou em arquivos próprios do app."
+          "O calendário local e as capas mensais do Lunary não exigem conta. Se o usuário conectar explicitamente o Google Agenda, o Google Sign-In fornece as informações necessárias para exibir e identificar a conta conectada. O Lunary armazena no dispositivo o ID da conta Google e o ID da agenda selecionada necessários à sincronização, mas não persiste tokens de acesso ou atualização do Google OAuth no SQLite, nas preferências, nos logs ou em arquivos próprios do app."
         ]
       },
       {
@@ -370,7 +370,7 @@ const policies = {
         "items": [
           "Eventos locais: título, data, horários opcionais de início e fim, nota, estado de edição e exclusão",
           "Dados mensais de capa: fundo escolhido, prévias e pôsteres de widget, adesivos, posição, tamanho, rotação, opacidade e ordem de camadas",
-          "Com Google Agenda conectado: IDs de conta, agenda e evento, ETags, datas de atualização, estado de sincronização e horário da última busca"
+          "Com Google Agenda conectado: IDs de conta, agenda e evento, ETags, datas de atualização, estado de sincronização e horário da última verificação de sincronização"
         ],
         "paragraphs": [
           "Eventos locais e capas mensais permanecem no dispositivo. Imagens de capa, adesivos e notas locais não são enviados ao Google Agenda nem a servidores da ONNELLAB."
@@ -379,7 +379,7 @@ const policies = {
       {
         "title": "3. Transferência opcional de dados do Google Agenda",
         "paragraphs": [
-          "Somente após a conexão, o Lunary se comunica diretamente com as APIs do Google Agenda. Ele lê IDs e nomes de agendas editáveis, além de IDs, títulos, início/fim, estado de atualização e metadados necessários à sincronização bidirecional. Pode criar, atualizar ou excluir títulos e datas/horários dos eventos sincronizados na agenda escolhida e usar propriedades privadas de mapeamento para evitar duplicatas. Capas, adesivos e notas locais não são enviados ao Google. A ONNELLAB não opera servidor intermediário para essa sincronização."
+          "Somente após a conexão, o Lunary se comunica diretamente com as APIs do Google Agenda. Ele lê IDs e nomes de agendas editáveis, além de IDs, títulos, início/fim, estado de atualização e metadados necessários à sincronização bidirecional. Pode criar, atualizar ou excluir títulos e datas/horários dos eventos sincronizados na agenda escolhida e usar identificadores privados de evento para evitar duplicatas. Capas, adesivos e notas locais não são enviados ao Google. A ONNELLAB não opera servidor intermediário para essa sincronização."
         ]
       },
       {
@@ -403,7 +403,7 @@ const policies = {
       {
         "title": "7. Segurança e privacidade de crianças",
         "paragraphs": [
-          "Credenciais de autorização do Google são tratadas pelo limite da plataforma Google Sign-In, e não armazenadas diretamente pelo Lunary. Requisições ao Google Agenda usam HTTPS, e a ONNELLAB aplica salvaguardas técnicas e organizacionais razoáveis aos dados necessários. O Lunary não é direcionado a menores de 13 anos e não coleta intencionalmente informações pessoais de crianças."
+          "As credenciais de autorização do Google são gerenciadas pelo Google Sign-In e não são armazenadas diretamente pelo Lunary. Requisições ao Google Agenda usam HTTPS, e a ONNELLAB aplica salvaguardas técnicas e organizacionais razoáveis aos dados necessários. O Lunary não é direcionado a menores de 13 anos e não coleta intencionalmente informações pessoais de crianças."
         ]
       },
       {
@@ -422,13 +422,13 @@ const policies = {
     "updatedLabel": "Zuletzt aktualisiert",
     "updatedValue": "2026-09-24",
     "heading": "Datenschutzerklärung",
-    "opening": "Lunary respektiert deine Privatsphäre. Lokaler Kalender und Cover funktionieren ohne Anmeldung; der Zugriff auf Google Kalender ist optional und wird vom Nutzer gestartet.",
+    "opening": "Lunary legt Wert auf Datenschutz. Der lokale Kalender und die Monatscover funktionieren ohne Anmeldung; der Zugriff auf Google Kalender ist optional und wird nur nach ausdrücklicher Verbindung aktiviert.",
     "privacyHubLabel": "Alle Datenschutzerklärungen",
     "sections": [
       {
         "title": "1. Konten und direkte Identifikatoren",
         "paragraphs": [
-          "Der lokale Kalender und die Monatscover benötigen kein Konto. Wenn du Google Kalender ausdrücklich verbindest, stellt Google Sign-In die zur Anzeige und Identifikation des verbundenen Kontos nötigen Informationen bereit. Lunary speichert die für die Synchronisierung benötigte Google-Konto-ID und die ausgewählte Kalender-ID auf dem Gerät, speichert jedoch keine OAuth-Zugriffs- oder Refresh-Tokens in SQLite, Einstellungen, Logs oder app-eigenen Dateien."
+          "Der lokale Kalender und die Monatscover benötigen kein Konto. Wird Google Kalender ausdrücklich verbunden, stellt Google Sign-In die zur Anzeige und Identifikation des verbundenen Kontos erforderlichen Informationen bereit. Lunary speichert die für die Synchronisierung benötigte Google-Konto-ID und die ausgewählte Kalender-ID auf dem Gerät, speichert jedoch keine OAuth-Zugriffs- oder Refresh-Tokens in SQLite, Einstellungen, Logs oder app-eigenen Dateien."
         ]
       },
       {
@@ -436,7 +436,7 @@ const policies = {
         "items": [
           "Lokale Termine mit Titel, Datum, optionaler Start- und Endzeit, Notiz sowie Bearbeitungs- und Löschstatus",
           "Monatscover mit ausgewähltem Hintergrund, Vorschauen und Widget-Postern, Stickern, Position, Größe, Drehung, Deckkraft und Ebenenreihenfolge",
-          "Bei verbundener Google-Kalender-Funktion: Konto-, Kalender- und Termin-IDs, ETags, Aktualisierungszeiten, Synchronisierungsstatus und Zeitpunkt des letzten Abrufs"
+          "Bei verbundener Google-Kalender-Funktion: Konto-, Kalender- und Termin-IDs, ETags, Aktualisierungszeiten, Synchronisierungsstatus und Zeitpunkt der letzten Synchronisierungsprüfung"
         ],
         "paragraphs": [
           "Lokale Termine und Monatscover bleiben auf dem Gerät. Coverbilder, Sticker und lokale Terminnotizen werden weder an Google Kalender noch an ONNELLAB-Server übertragen."
@@ -445,7 +445,7 @@ const policies = {
       {
         "title": "3. Optionale Übertragung von Google-Kalender-Daten",
         "paragraphs": [
-          "Erst nach dem Verbinden kommuniziert Lunary direkt mit den Google-Calendar-APIs. Es liest IDs und Namen bearbeitbarer Kalender sowie Termin-ID, Titel, Start/Ende, Aktualisierungsstatus und Synchronisierungsmetadaten, die für den bidirektionalen Abgleich nötig sind. Lunary kann Titel und Datum/Uhrzeit synchronisierter Termine im ausgewählten Kalender erstellen, ändern oder löschen und private Zuordnungseigenschaften zur Duplikatvermeidung verwenden. Coverbilder, Sticker und lokale Notizen werden nicht an Google gesendet. ONNELLAB betreibt keinen Zwischenserver für diese Synchronisierung."
+          "Erst nach dem Verbinden kommuniziert Lunary direkt mit den Google-Calendar-APIs. Es liest IDs und Namen bearbeitbarer Kalender sowie Termin-ID, Titel, Start/Ende, Aktualisierungsstatus und Synchronisierungsmetadaten, die für den bidirektionalen Abgleich nötig sind. Lunary kann Titel und Datum/Uhrzeit synchronisierter Termine im ausgewählten Kalender erstellen, ändern oder löschen und private Termin-IDs verwenden, um Duplikate zu vermeiden. Coverbilder, Sticker und lokale Notizen werden nicht an Google gesendet. ONNELLAB betreibt keinen Zwischenserver für diese Synchronisierung."
         ]
       },
       {
@@ -469,7 +469,7 @@ const policies = {
       {
         "title": "7. Sicherheit und Datenschutz von Kindern",
         "paragraphs": [
-          "Google-Autorisierungsdaten werden über die Plattformgrenze von Google Sign-In verarbeitet und nicht direkt von Lunary gespeichert. Anfragen an Google Kalender verwenden HTTPS; ONNELLAB setzt angemessene technische und organisatorische Schutzmaßnahmen ein. Lunary richtet sich nicht an Kinder unter 13 Jahren und sammelt wissentlich keine personenbezogenen Daten von Kindern."
+          "Google-Autorisierungsdaten werden von Google Sign-In verwaltet und nicht direkt von Lunary gespeichert. Anfragen an Google Kalender verwenden HTTPS; ONNELLAB setzt angemessene technische und organisatorische Schutzmaßnahmen ein. Lunary richtet sich nicht an Kinder unter 13 Jahren und sammelt wissentlich keine personenbezogenen Daten von Kindern."
         ]
       },
       {
@@ -502,7 +502,7 @@ const policies = {
         "items": [
           "Événements locaux : titre, date, heures facultatives de début et de fin, note, état de modification et de suppression",
           "Couvertures mensuelles : fond choisi, aperçus et affiches du widget, autocollants, position, taille, rotation, opacité et ordre des calques",
-          "Avec Google Agenda connecté : identifiants de compte, d’agenda et d’événement, ETags, dates de mise à jour, état de synchronisation et heure de dernière récupération"
+          "Avec Google Agenda connecté : identifiants de compte, d’agenda et d’événement, ETags, dates de mise à jour, état de synchronisation et date de la dernière vérification de synchronisation"
         ],
         "paragraphs": [
           "Les événements locaux et couvertures mensuelles restent sur l’appareil. Images de couverture, autocollants et notes locales ne sont envoyés ni à Google Agenda ni aux serveurs ONNELLAB."
@@ -511,7 +511,7 @@ const policies = {
       {
         "title": "3. Transfert facultatif de données Google Agenda",
         "paragraphs": [
-          "Après connexion uniquement, Lunary communique directement avec les API Google Agenda. L’app lit les identifiants et noms des agendas modifiables ainsi que les identifiants, titres, valeurs de début/fin, états de mise à jour et métadonnées nécessaires à la synchronisation bidirectionnelle. Elle peut créer, modifier ou supprimer le titre et la date ou l’heure des événements synchronisés dans l’agenda choisi, et utiliser des propriétés privées de correspondance pour éviter les doublons. Couvertures, autocollants et notes locales ne sont pas envoyés à Google. ONNELLAB n’exploite aucun serveur intermédiaire pour cette synchronisation."
+          "Après connexion uniquement, Lunary communique directement avec les API Google Agenda. L’app lit les identifiants et noms des agendas modifiables ainsi que les identifiants, titres, valeurs de début/fin, états de mise à jour et métadonnées nécessaires à la synchronisation bidirectionnelle. Elle peut créer, modifier ou supprimer le titre et la date ou l’heure des événements synchronisés dans l’agenda choisi, et utiliser des identifiants privés d’événement pour éviter les doublons. Couvertures, autocollants et notes locales ne sont pas envoyés à Google. ONNELLAB n’exploite aucun serveur intermédiaire pour cette synchronisation."
         ]
       },
       {
@@ -535,13 +535,13 @@ const policies = {
       {
         "title": "7. Sécurité et confidentialité des enfants",
         "paragraphs": [
-          "Les identifiants d’autorisation Google sont gérés dans la limite de la plateforme Google Sign-In et ne sont pas stockés directement par Lunary. Les requêtes Google Agenda utilisent HTTPS et ONNELLAB applique des mesures techniques et organisationnelles raisonnables. Lunary ne s’adresse pas aux enfants de moins de 13 ans et ne collecte pas sciemment leurs informations personnelles."
+          "Les identifiants d’autorisation Google sont gérés par Google Sign-In et ne sont pas stockés directement par Lunary. Les requêtes Google Agenda utilisent HTTPS et ONNELLAB applique des mesures techniques et organisationnelles raisonnables. Lunary ne s’adresse pas aux enfants de moins de 13 ans et ne collecte pas sciemment leurs informations personnelles."
         ]
       },
       {
         "title": "8. Modifications et contact",
         "paragraphs": [
-          "Si les fonctions de Lunary, l’intégration Google ou les exigences légales ou des stores évoluent, cette politique et sa date de mise à jour seront révisées.",
+          "Si les fonctions de Lunary, l’intégration Google ou les exigences légales ou celles des boutiques d’applications évoluent, cette politique et sa date de mise à jour seront révisées.",
           "Questions de confidentialité ou demandes de suppression : onnellab.app@gmail.com"
         ]
       }
@@ -554,13 +554,13 @@ const policies = {
     "updatedLabel": "Última actualización",
     "updatedValue": "2026-09-24",
     "heading": "Política de privacidad",
-    "opening": "Lunary respeta tu privacidad. El calendario local y las portadas funcionan sin iniciar sesión; el acceso a Google Calendar es opcional y lo inicia el usuario.",
+    "opening": "Lunary respeta la privacidad de sus usuarios. El calendario local y las portadas funcionan sin iniciar sesión; el acceso a Google Calendar es opcional y solo se activa cuando el usuario decide conectarlo.",
     "privacyHubLabel": "Todas las políticas de privacidad",
     "sections": [
       {
         "title": "1. Cuentas e identificadores directos",
         "paragraphs": [
-          "El calendario local y las portadas mensuales no requieren una cuenta. Si conectas expresamente Google Calendar, Google Sign-In proporciona la información necesaria para mostrar e identificar la cuenta conectada. Lunary guarda en el dispositivo el ID de la cuenta de Google y el ID del calendario elegido necesarios para sincronizar, pero no conserva tokens OAuth de acceso o actualización en SQLite, preferencias, registros ni archivos propios de la app."
+          "El calendario local y las portadas mensuales no requieren una cuenta. Cuando el usuario conecta Google Calendar de forma explícita, Google Sign-In proporciona la información necesaria para mostrar e identificar la cuenta conectada. Lunary guarda en el dispositivo el ID de la cuenta de Google y el ID del calendario elegido necesarios para sincronizar, pero no conserva tokens OAuth de acceso o actualización en SQLite, preferencias, registros ni archivos propios de la app."
         ]
       },
       {
@@ -568,7 +568,7 @@ const policies = {
         "items": [
           "Eventos locales: título, fecha, horas opcionales de inicio y fin, nota, estado de edición y eliminación",
           "Portadas mensuales: fondo elegido, vistas previas y pósteres del widget, pegatinas, posición, tamaño, rotación, opacidad y orden de capas",
-          "Con Google Calendar conectado: IDs de cuenta, calendario y evento, ETags, fechas de actualización, estado de sincronización y hora de la última descarga"
+          "Con Google Calendar conectado: IDs de cuenta, calendario y evento, ETags, fechas de actualización, estado de sincronización y momento de la última comprobación de sincronización"
         ],
         "paragraphs": [
           "Los eventos locales y las portadas mensuales permanecen en el dispositivo. Las imágenes de portada, pegatinas y notas locales no se envían a Google Calendar ni a servidores de ONNELLAB."
@@ -577,7 +577,7 @@ const policies = {
       {
         "title": "3. Transferencia opcional de datos de Google Calendar",
         "paragraphs": [
-          "Solo después de conectarlo, Lunary se comunica directamente con las API de Google Calendar. Lee IDs y nombres de calendarios editables, además de IDs, títulos, valores de inicio/fin, estado de actualización y metadatos necesarios para la sincronización bidireccional. Puede crear, actualizar o eliminar el título y la fecha u hora de eventos sincronizados en el calendario elegido y usar propiedades privadas de asignación para evitar duplicados. Las portadas, pegatinas y notas locales no se envían a Google. ONNELLAB no opera un servidor intermediario para esta sincronización."
+          "Solo después de conectarlo, Lunary se comunica directamente con las API de Google Calendar. Lee IDs y nombres de calendarios editables, además de IDs, títulos, valores de inicio/fin, estado de actualización y metadatos necesarios para la sincronización bidireccional. Puede crear, actualizar o eliminar el título y la fecha u hora de eventos sincronizados en el calendario elegido y usar identificadores privados de eventos para evitar duplicados. Las portadas, pegatinas y notas locales no se envían a Google. ONNELLAB no opera un servidor intermediario para esta sincronización."
         ]
       },
       {
@@ -601,7 +601,7 @@ const policies = {
       {
         "title": "7. Seguridad y privacidad infantil",
         "paragraphs": [
-          "Las credenciales de autorización de Google se gestionan dentro del límite de la plataforma Google Sign-In y Lunary no las almacena directamente. Las solicitudes a Google Calendar usan HTTPS y ONNELLAB aplica medidas técnicas y organizativas razonables. Lunary no está dirigida a menores de 13 años y no recopila intencionadamente información personal de niños."
+          "Las credenciales de autorización de Google las gestiona Google Sign-In y Lunary no las almacena directamente. Las solicitudes a Google Calendar usan HTTPS y ONNELLAB aplica medidas técnicas y organizativas razonables. Lunary no está dirigida a menores de 13 años y no recopila intencionadamente información personal de niños."
         ]
       },
       {
