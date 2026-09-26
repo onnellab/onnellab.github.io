@@ -24,7 +24,7 @@ const policies = {
     "description": "Privacy Policy for the Lunary calendar app and its optional Google Calendar connection.",
     "intro": "This Privacy Policy applies to the Lunary app provided by ONNELLAB.",
     "updatedLabel": "Last updated",
-    "updatedValue": "2026-09-24",
+    "updatedValue": "2026-09-27",
     "heading": "Privacy Policy",
     "opening": "Lunary values your privacy. Local calendar and cover features work without sign-in; Google Calendar access is optional and user-initiated.",
     "privacyHubLabel": "All privacy policies",
@@ -55,7 +55,7 @@ const policies = {
       {
         "title": "4. App store services and payment information",
         "paragraphs": [
-          "Downloads, purchases, refunds, and related store-account information are handled by Apple App Store or Google Play under their own policies. Lunary and ONNELLAB do not access or store payment-card or bank-account details."
+          "Lunary Pro is an optional one-time, non-consumable purchase handled by Apple App Store or Google Play under their own policies. Downloads, purchases, refunds, restores, and related store-account information are processed by the platform store. Lunary keeps only the last store-verified Pro entitlement locally so verified Pro can remain available offline. Lunary and ONNELLAB do not access or store payment-card or bank-account details."
         ]
       },
       {
@@ -90,7 +90,7 @@ const policies = {
     "description": "Lunary 캘린더 앱과 선택적인 Google Calendar 연동에 관한 개인정보 처리방침입니다.",
     "intro": "이 개인정보 처리방침은 ONNELLAB이 제공하는 Lunary 앱에 적용됩니다.",
     "updatedLabel": "최종 업데이트",
-    "updatedValue": "2026-09-24",
+    "updatedValue": "2026-09-27",
     "heading": "개인정보 처리방침",
     "opening": "Lunary는 사용자의 개인정보를 중요하게 생각합니다. 로컬 캘린더와 표지 기능은 로그인 없이 사용할 수 있고 Google Calendar 접근은 사용자가 직접 선택한 경우에만 활성화됩니다.",
     "privacyHubLabel": "모든 개인정보 처리방침",
@@ -121,7 +121,7 @@ const policies = {
       {
         "title": "4. 앱 스토어 서비스 및 결제 정보",
         "paragraphs": [
-          "다운로드, 구매, 환불 및 관련 스토어 계정 정보는 Apple App Store 또는 Google Play가 자체 정책에 따라 처리합니다. Lunary와 ONNELLAB은 결제 카드 정보나 은행계좌 정보에 접근하거나 저장하지 않습니다."
+          "Lunary Pro는 Apple App Store 또는 Google Play가 자체 정책에 따라 처리하는 선택형 1회성 비소모성 구매입니다. 다운로드, 구매, 환불, 복원 및 관련 스토어 계정 정보는 플랫폼 스토어가 처리합니다. Lunary는 스토어에서 확인된 마지막 Pro 권리 상태만 기기에 저장해, 확인된 Pro를 오프라인에서도 사용할 수 있게 합니다. Lunary와 ONNELLAB은 결제 카드 정보나 은행계좌 정보에 접근하거나 저장하지 않습니다."
         ]
       },
       {
@@ -156,7 +156,7 @@ const policies = {
     "description": "Lunaryカレンダーと任意のGoogleカレンダー連携に関するプライバシーポリシーです。",
     "intro": "本プライバシーポリシーは、ONNELLABが提供するLunaryアプリに適用されます。",
     "updatedLabel": "最終更新日",
-    "updatedValue": "2026-09-24",
+    "updatedValue": "2026-09-27",
     "heading": "プライバシーポリシー",
     "opening": "Lunaryはプライバシーを大切にしています。ローカルカレンダーと表紙はログイン不要で、Googleカレンダーへのアクセスは利用者が接続した場合にだけ有効になります。",
     "privacyHubLabel": "すべてのプライバシーポリシー",
@@ -187,7 +187,7 @@ const policies = {
       {
         "title": "4. App Storeサービスと支払い情報",
         "paragraphs": [
-          "ダウンロード、購入、返金、関連するストアアカウント情報はApple App StoreまたはGoogle Playが各社のポリシーに従って処理します。LunaryとONNELLABは決済カード情報や銀行口座情報へアクセスせず、保存もしません。"
+          "Lunary Pro は、Apple App Store または Google Play が各社のポリシーに従って処理する任意の買い切り型・非消耗型購入です。ダウンロード、購入、返金、復元、関連するストアアカウント情報はプラットフォームのストアが処理します。Lunary はストアで確認済みの最新の Pro 権利状態だけを端末に保存し、確認済みの Pro をオフラインでも利用できるようにします。Lunary と ONNELLAB は決済カード情報や銀行口座情報へアクセスせず、保存もしません。"
         ]
       },
       {
@@ -222,7 +222,7 @@ const policies = {
     "description": "Lunary 月度日历及可选 Google 日历连接的隐私政策。",
     "intro": "本隐私政策适用于 ONNELLAB 提供的 Lunary 应用。",
     "updatedLabel": "最后更新",
-    "updatedValue": "2026-09-24",
+    "updatedValue": "2026-09-27",
     "heading": "隐私政策",
     "opening": "Lunary 重视用户的隐私。本地日历和封面无需登录即可使用，只有在用户主动连接时才会访问 Google 日历。",
     "privacyHubLabel": "全部隐私政策",
@@ -253,7 +253,7 @@ const policies = {
       {
         "title": "4. 应用商店服务与支付信息",
         "paragraphs": [
-          "下载、购买、退款以及相关商店账号信息由 Apple App Store 或 Google Play 按其政策处理。Lunary 与 ONNELLAB 不会访问或保存支付卡或银行账户信息。"
+          "Lunary Pro 是由 Apple App Store 或 Google Play 按其政策处理的可选一次性非消耗型购买。下载、购买、退款、恢复购买以及相关商店账号信息均由平台商店处理。Lunary 只在设备上保存最近一次经商店验证的 Pro 权限状态，以便已验证的 Pro 在离线时仍可使用。Lunary 与 ONNELLAB 不会访问或保存支付卡或银行账户信息。"
         ]
       },
       {
@@ -288,7 +288,7 @@ const policies = {
     "description": "Lunary 月曆與選用 Google 日曆連接的隱私權政策。",
     "intro": "本隱私權政策適用於 ONNELLAB 提供的 Lunary 應用程式。",
     "updatedLabel": "最後更新",
-    "updatedValue": "2026-09-24",
+    "updatedValue": "2026-09-27",
     "heading": "隱私權政策",
     "opening": "Lunary 重視使用者的隱私。本機月曆與封面不需登入即可使用，只有在使用者主動連接時才會存取 Google 日曆。",
     "privacyHubLabel": "全部隱私權政策",
@@ -319,7 +319,7 @@ const policies = {
       {
         "title": "4. 應用程式商店服務與付款資訊",
         "paragraphs": [
-          "下載、購買、退款及相關商店帳號資訊由 Apple App Store 或 Google Play 依其政策處理。Lunary 與 ONNELLAB 不會存取或儲存支付卡或銀行帳戶資訊。"
+          "Lunary Pro 是由 Apple App Store 或 Google Play 依其政策處理的選用一次性非消耗型購買。下載、購買、退款、恢復購買及相關商店帳戶資訊均由平台商店處理。Lunary 只會在裝置上保留最近一次經商店驗證的 Pro 權利狀態，讓已驗證的 Pro 在離線時仍可使用。Lunary 與 ONNELLAB 不會存取或儲存支付卡或銀行帳戶資訊。"
         ]
       },
       {
@@ -354,7 +354,7 @@ const policies = {
     "description": "Política de Privacidade do calendário Lunary e da conexão opcional com o Google Agenda.",
     "intro": "Esta Política de Privacidade se aplica ao app Lunary, fornecido pela ONNELLAB.",
     "updatedLabel": "Última atualização",
-    "updatedValue": "2026-09-24",
+    "updatedValue": "2026-09-27",
     "heading": "Política de Privacidade",
     "opening": "O Lunary respeita a privacidade dos usuários. O calendário local e as capas funcionam sem login; o acesso ao Google Agenda é opcional e iniciado pelo usuário.",
     "privacyHubLabel": "Todas as políticas de privacidade",
@@ -385,7 +385,7 @@ const policies = {
       {
         "title": "4. Serviços das lojas e informações de pagamento",
         "paragraphs": [
-          "Downloads, compras, reembolsos e informações relacionadas à conta da loja são processados pela Apple App Store ou Google Play segundo suas próprias políticas. Lunary e ONNELLAB não acessam nem armazenam dados de cartão ou conta bancária."
+          "O Lunary Pro é uma compra opcional, única e não consumível, processada pela Apple App Store ou pelo Google Play segundo as políticas de cada loja. Downloads, compras, reembolsos, restaurações e informações relacionadas à conta da loja são processados pela plataforma. O Lunary mantém no dispositivo apenas o último direito Pro verificado pela loja, para que um Pro já verificado continue disponível offline. Lunary e ONNELLAB não acessam nem armazenam dados de cartão ou conta bancária."
         ]
       },
       {
@@ -420,7 +420,7 @@ const policies = {
     "description": "Datenschutzerklärung für den Lunary-Monatskalender und die optionale Google-Kalender-Verbindung.",
     "intro": "Diese Datenschutzerklärung gilt für die von ONNELLAB bereitgestellte App Lunary.",
     "updatedLabel": "Zuletzt aktualisiert",
-    "updatedValue": "2026-09-24",
+    "updatedValue": "2026-09-27",
     "heading": "Datenschutzerklärung",
     "opening": "Lunary legt Wert auf Datenschutz. Der lokale Kalender und die Monatscover funktionieren ohne Anmeldung; der Zugriff auf Google Kalender ist optional und wird nur nach ausdrücklicher Verbindung aktiviert.",
     "privacyHubLabel": "Alle Datenschutzerklärungen",
@@ -451,7 +451,7 @@ const policies = {
       {
         "title": "4. App-Store-Dienste und Zahlungsinformationen",
         "paragraphs": [
-          "Downloads, Käufe, Erstattungen und zugehörige Store-Kontodaten werden von Apple App Store oder Google Play nach deren Richtlinien verarbeitet. Lunary und ONNELLAB greifen nicht auf Karten- oder Bankdaten zu und speichern sie nicht."
+          "Lunary Pro ist ein optionaler einmaliger, nicht verbrauchbarer Kauf, der vom Apple App Store oder von Google Play nach deren jeweiligen Richtlinien verarbeitet wird. Downloads, Käufe, Erstattungen, Wiederherstellungen und zugehörige Store-Kontodaten verarbeitet der Plattform-Store. Lunary speichert auf dem Gerät nur den zuletzt vom Store bestätigten Pro-Anspruch, damit bestätigtes Pro auch offline verfügbar bleibt. Lunary und ONNELLAB greifen nicht auf Karten- oder Bankdaten zu und speichern sie nicht."
         ]
       },
       {
@@ -486,7 +486,7 @@ const policies = {
     "description": "Politique de confidentialité du calendrier Lunary et de sa connexion facultative à Google Agenda.",
     "intro": "La présente Politique de confidentialité s’applique à l’app Lunary fournie par ONNELLAB.",
     "updatedLabel": "Dernière mise à jour",
-    "updatedValue": "2026-09-24",
+    "updatedValue": "2026-09-27",
     "heading": "Politique de confidentialité",
     "opening": "Lunary respecte votre vie privée. Le calendrier local et les couvertures fonctionnent sans connexion ; l’accès à Google Agenda est facultatif et déclenché par l’utilisateur.",
     "privacyHubLabel": "Toutes les politiques de confidentialité",
@@ -517,7 +517,7 @@ const policies = {
       {
         "title": "4. Services des boutiques et informations de paiement",
         "paragraphs": [
-          "Téléchargements, achats, remboursements et informations de compte associées sont traités par l’Apple App Store ou Google Play selon leurs propres politiques. Lunary et ONNELLAB n’accèdent pas aux données de carte ou de compte bancaire et ne les stockent pas."
+          "Lunary Pro est un achat facultatif, unique et non consommable, traité par l’Apple App Store ou Google Play selon leurs propres règles. Les téléchargements, achats, remboursements, restaurations et informations associées au compte de la boutique sont traités par la boutique de la plateforme. Lunary conserve uniquement sur l’appareil le dernier droit Pro vérifié par la boutique afin qu’un accès Pro déjà vérifié reste disponible hors ligne. Lunary et ONNELLAB n’accèdent pas aux données de carte ou de compte bancaire et ne les stockent pas."
         ]
       },
       {
@@ -552,7 +552,7 @@ const policies = {
     "description": "Política de privacidad del calendario Lunary y su conexión opcional con Google Calendar.",
     "intro": "Esta Política de privacidad se aplica a la app Lunary, proporcionada por ONNELLAB.",
     "updatedLabel": "Última actualización",
-    "updatedValue": "2026-09-24",
+    "updatedValue": "2026-09-27",
     "heading": "Política de privacidad",
     "opening": "Lunary respeta la privacidad de sus usuarios. El calendario local y las portadas funcionan sin iniciar sesión; el acceso a Google Calendar es opcional y solo se activa cuando el usuario decide conectarlo.",
     "privacyHubLabel": "Todas las políticas de privacidad",
@@ -583,7 +583,7 @@ const policies = {
       {
         "title": "4. Servicios de las tiendas e información de pago",
         "paragraphs": [
-          "Las descargas, compras, reembolsos y datos relacionados con la cuenta de la tienda los procesa Apple App Store o Google Play según sus propias políticas. Lunary y ONNELLAB no acceden ni almacenan datos de tarjetas o cuentas bancarias."
+          "Lunary Pro es una compra opcional, única y no consumible, procesada por Apple App Store o Google Play según las políticas de cada tienda. Las descargas, compras, reembolsos, restauraciones y datos relacionados con la cuenta de la tienda los procesa la tienda de la plataforma. Lunary conserva en el dispositivo únicamente el último derecho Pro verificado por la tienda para que un Pro ya verificado siga disponible sin conexión. Lunary y ONNELLAB no acceden ni almacenan datos de tarjetas o cuentas bancarias."
         ]
       },
       {
