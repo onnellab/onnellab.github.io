@@ -23,7 +23,7 @@
 | ClipNest | `clipnest` | `clipnest` | `src/content/apps/clipnest/assets/screenshots/{en,ko}` |
 | Melivra | `melivra` | `melivra` | `src/content/apps/melivra/assets/screenshots/{en,ko,ja,zh-Hans,zh-Hant,pt-BR,de,fr,es}` |
 | Quivra | `quivra` | `quivra` | `src/content/apps/quivra/assets/screenshots/{en,ko}` |
-| Segra | `segra` | `segra` | `src/content/apps/segra/assets/screenshots/{en,ko}` |
+| Segra | `segra` | `segra` | `src/content/apps/segra/assets/screenshots/{en,ko,ja,zh-Hans,zh-Hant,pt-BR,de,fr,es}` (Android 1080×2168) |
 | TagWeaver | `tagweaver` | `tagweaver` | `src/content/apps/tagweaver/assets/screenshots/{en,ko}` |
 | VaultXT | `onnellab-text/vaultxt` | `vaultxt` | `src/content/apps/vaultxt/assets/screenshots/{en,ko}` |
 
