@@ -236,58 +236,67 @@ const screenshotAltCopy = {
   },
   quivra: {
     en: [
-      'Quivra media conversion start screen after selecting a source file',
-      'Quivra conversion settings screen showing the selected conversion path',
-      'Quivra conversion progress screen while processing the media file',
-      'Quivra converted-file result screen for saving the finished output'
+      'Quivra start screen for choosing a WAV, M4A, MP4, or MOV file',
+      'Quivra library showing selected files ready for automatic conversion',
+      'Quivra conversion screen showing the current processing status',
+      'Quivra result screen showing a completed MOV to MP4 conversion',
+      'Quivra promotional screenshot highlighting no ads and no subscriptions'
     ],
     ko: [
-      '원본 파일을 선택한 뒤 변환을 시작하는 Quivra 미디어 변환 화면',
-      '선택된 변환 방식을 확인하는 Quivra 변환 설정 화면',
-      '미디어 파일 처리 상태를 보여주는 Quivra 변환 진행 화면',
-      '완성된 변환 파일을 저장하는 Quivra 결과 화면'
+      'WAV·M4A·MP4·MOV 파일 선택을 안내하는 Quivra 시작 화면',
+      '자동 변환을 위해 선택한 파일 목록을 보여주는 Quivra 라이브러리 화면',
+      '현재 파일 변환 상태를 보여주는 Quivra 진행 화면',
+      'MOV를 MP4로 변환해 저장한 결과를 보여주는 Quivra 완료 화면',
+      '광고와 구독 없이 사용할 수 있음을 안내하는 Quivra 홍보 스크린샷'
     ],
     ja: [
-      '元ファイルを選択して変換を開始するQuivraメディア変換画面',
-      '選択された変換方法を確認するQuivra変換設定画面',
-      'メディア処理の進行状況を表示するQuivra変換画面',
-      '完成した変換ファイルを保存するQuivra結果画面'
+      'WAV・M4A・MP4・MOVファイルの選択を案内するQuivra開始画面',
+      '自動変換するために選択したファイルを表示するQuivraライブラリ画面',
+      'ファイル変換の現在の進行状況を表示するQuivra画面',
+      'MOVからMP4への変換と保存が完了したQuivra結果画面',
+      '広告もサブスクリプションもないことを案内するQuivraプロモーション画面'
     ],
     'zh-Hans': [
-      '选择源文件后开始处理的 Quivra 媒体转换界面',
-      '显示已选转换方式的 Quivra 转换设置界面',
-      '显示媒体文件处理进度的 Quivra 转换界面',
-      '保存已完成转换文件的 Quivra 结果界面'
+      '用于选择 WAV、M4A、MP4 或 MOV 文件的 Quivra 起始界面',
+      '显示已选择并等待自动转换文件的 Quivra 文件库界面',
+      '显示当前文件转换状态的 Quivra 进度界面',
+      '显示 MOV 转 MP4 已完成并保存的 Quivra 结果界面',
+      '突出无广告、无订阅体验的 Quivra 宣传截图'
     ],
     'zh-Hant': [
-      '選擇來源檔案後開始處理的 Quivra 媒體轉換畫面',
-      '顯示已選轉換方式的 Quivra 轉換設定畫面',
-      '顯示媒體檔案處理進度的 Quivra 轉換畫面',
-      '儲存已完成轉換檔案的 Quivra 結果畫面'
+      '用來選擇 WAV、M4A、MP4 或 MOV 檔案的 Quivra 起始畫面',
+      '顯示已選取並等待自動轉換檔案的 Quivra 檔案庫畫面',
+      '顯示目前檔案轉換狀態的 Quivra 進度畫面',
+      '顯示 MOV 轉 MP4 已完成並儲存的 Quivra 結果畫面',
+      '強調無廣告、免訂閱體驗的 Quivra 宣傳截圖'
     ],
     'pt-BR': [
-      'Tela do Quivra para iniciar a conversão após escolher o arquivo de origem',
-      'Tela de configurações do Quivra com o caminho de conversão selecionado',
-      'Tela do Quivra mostrando o progresso do processamento do arquivo',
-      'Tela de resultado do Quivra para salvar o arquivo convertido'
+      'Tela inicial do Quivra para escolher um arquivo WAV, M4A, MP4 ou MOV',
+      'Biblioteca do Quivra com arquivos selecionados prontos para conversão automática',
+      'Tela do Quivra mostrando o status atual da conversão',
+      'Tela de resultado do Quivra com uma conversão de MOV para MP4 concluída',
+      'Captura promocional do Quivra destacando a ausência de anúncios e assinaturas'
     ],
     de: [
-      'Quivra-Startansicht der Medienkonvertierung nach Auswahl der Quelldatei',
-      'Quivra-Konvertierungseinstellungen mit dem ausgewählten Konvertierungsweg',
-      'Quivra-Fortschrittsanzeige während der Verarbeitung der Mediendatei',
-      'Quivra-Ergebnisansicht zum Speichern der fertig konvertierten Datei'
+      'Quivra-Startansicht zum Auswählen einer WAV-, M4A-, MP4- oder MOV-Datei',
+      'Quivra-Bibliothek mit ausgewählten Dateien für die automatische Konvertierung',
+      'Quivra-Fortschrittsansicht mit dem aktuellen Konvertierungsstatus',
+      'Quivra-Ergebnisansicht einer abgeschlossenen MOV-zu-MP4-Konvertierung',
+      'Quivra-Werbescreenshot mit dem Hinweis auf werbe- und abonnementfreie Nutzung'
     ],
     fr: [
-      'Écran Quivra de démarrage de la conversion après sélection du fichier source',
-      'Écran des réglages Quivra indiquant le type de conversion sélectionné',
-      'Écran Quivra montrant la progression du traitement du fichier multimédia',
-      'Écran de résultat Quivra pour enregistrer le fichier converti'
+      'Écran de démarrage Quivra pour choisir un fichier WAV, M4A, MP4 ou MOV',
+      'Bibliothèque Quivra avec les fichiers sélectionnés prêts pour la conversion automatique',
+      'Écran Quivra indiquant l’état actuel de la conversion',
+      'Écran de résultat Quivra après une conversion MOV vers MP4 terminée',
+      'Capture promotionnelle Quivra mettant en avant l’absence de publicité et d’abonnement'
     ],
     es: [
-      'Pantalla de Quivra para iniciar la conversión tras seleccionar el archivo de origen',
-      'Pantalla de ajustes de Quivra con la ruta de conversión seleccionada',
-      'Pantalla de Quivra con el progreso del procesamiento del archivo multimedia',
-      'Pantalla de resultado de Quivra para guardar el archivo convertido'
+      'Pantalla inicial de Quivra para elegir un archivo WAV, M4A, MP4 o MOV',
+      'Biblioteca de Quivra con archivos seleccionados listos para la conversión automática',
+      'Pantalla de Quivra con el estado actual de la conversión',
+      'Pantalla de resultado de Quivra tras completar una conversión de MOV a MP4',
+      'Captura promocional de Quivra que destaca el uso sin anuncios ni suscripciones'
     ]
   },
   segra: {
