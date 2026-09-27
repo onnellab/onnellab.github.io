@@ -63,7 +63,7 @@
     a:hover { text-decoration-color: currentColor; }
     main > p:first-of-type { max-width: 620px; margin-bottom: 28px; color: var(--muted); font-size: 1.05rem; }
     strong { font-weight: 720; }
-    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 34px; }
+    .topbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 34px; }
     .topbar a { text-decoration: none; }
     .home-link { color: #737067; font-family: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif; font-size: 14px; font-weight: 560; letter-spacing: 0; }
     .language-link { min-height: 34px; display: inline-flex; align-items: center; border: 1px solid #ded6ca; border-radius: 999px; padding: 6px 12px; background: rgba(255, 253, 248, 0.72); color: #5f5a50; font-size: 13px; font-weight: 650; line-height: 1.35; }
@@ -82,7 +82,14 @@
   <main>
 <nav class="topbar" aria-label="Navigation">
   <a class="home-link" href="https://onnellab.com/">ONNELLAB</a>
-  <a class="language-link" href="https://onnellab.com/privacy/segra/ko/">한국어</a>
+  <a class="language-link" lang="ko" hreflang="ko" href="https://onnellab.com/privacy/segra/ko/">한국어</a>
+  <a class="language-link" lang="ja" hreflang="ja" href="https://onnellab.com/privacy/segra/ja/">日本語</a>
+  <a class="language-link" lang="zh-Hans" hreflang="zh-Hans" href="https://onnellab.com/privacy/segra/zh-hans/">简体中文</a>
+  <a class="language-link" lang="zh-Hant" hreflang="zh-Hant" href="https://onnellab.com/privacy/segra/zh-hant/">繁體中文</a>
+  <a class="language-link" lang="pt-BR" hreflang="pt-BR" href="https://onnellab.com/privacy/segra/pt-br/">Português (Brasil)</a>
+  <a class="language-link" lang="de" hreflang="de" href="https://onnellab.com/privacy/segra/de/">Deutsch</a>
+  <a class="language-link" lang="fr" hreflang="fr" href="https://onnellab.com/privacy/segra/fr/">Français</a>
+  <a class="language-link" lang="es" hreflang="es" href="https://onnellab.com/privacy/segra/es/">Español</a>
 </nav>
 <h1>Segra Privacy Policy</h1>
 <p>This Privacy Policy applies to the Segra app provided by ONNELLAB.</p>
