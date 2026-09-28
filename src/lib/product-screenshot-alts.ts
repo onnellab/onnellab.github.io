@@ -2,59 +2,59 @@ import type { AllSiteLocale } from './extended-site-i18n';
 
 const screenshotAltCopy = {
   aligna: {
-    en: [
-      'Aligna batch rename rule setup with a preview of new file names',
-      'Aligna local file selection screen for batch renaming',
-      'Aligna renamed-file preview before any changes are applied',
-      'Aligna batch rename confirmation screen before applying changes'
+    "ko": [
+      "Aligna: 파일명을 한 번에 정리해요 — 8개 프리셋으로 여러 파일의 이름을 맞춰요.",
+      "Aligna: 날짜를 붙여 정리해요 — 파일명 앞이나 뒤에 날짜를 더하고 형식을 골라요.",
+      "Aligna: 여러 규칙을 함께 써요 — 날짜와 연번을 함께 더해 파일명을 정리해요.",
+      "Aligna: 새 이름을 확인하고 저장해요 — 원래 이름과 새 이름을 비교한 뒤 적용해요."
     ],
-    ko: [
-      'Aligna 새 파일명을 미리보는 일괄 이름 변경 규칙 설정 화면',
-      'Aligna 일괄 이름 변경을 위한 로컬 파일 선택 화면',
-      'Aligna 변경을 적용하기 전에 새 파일명을 확인하는 미리보기 화면',
-      'Aligna 파일명 변경을 적용하기 전 일괄 변경 확인 화면'
+    "en": [
+      "Aligna: Rename files in one go — Choose from 8 presets to keep file names consistent.",
+      "Aligna: Add a date to file names — Put today’s date at the start or end, in your preferred format.",
+      "Aligna: Combine naming rules — Use dates and sequence numbers together to keep names in order.",
+      "Aligna: Preview first. Then save. — Compare the current and new names before applying changes."
     ],
-    ja: [
-      'Alignaで新しいファイル名をプレビューする一括リネーム設定画面',
-      'Alignaで一括リネームするローカルファイルを選択する画面',
-      'Alignaで変更前に新しいファイル名を確認するプレビュー画面',
-      'Alignaで一括リネームを適用する前の確認画面'
+    "ja": [
+      "Aligna: ファイル名をまとめて整える — 8種類のプリセットで、ファイル名をすっきり統一。",
+      "Aligna: 日付を付けてわかりやすく — ファイル名の先頭や末尾に、好きな形式で今日の日付を追加。",
+      "Aligna: 複数のルールを組み合わせる — 日付と連番を組み合わせて、ファイル名を整理できます。",
+      "Aligna: 新しい名前を確認して保存 — 元の名前と新しい名前を見比べてから適用できます。"
     ],
-    'zh-Hans': [
-      'Aligna 批量重命名规则设置与新文件名预览界面',
-      'Aligna 批量重命名的本地文件选择界面',
-      'Aligna 应用更改前查看新文件名的预览界面',
-      'Aligna 应用批量重命名前的确认界面'
+    "zh-Hans": [
+      "Aligna: 批量整理文件名 — 使用 8 种预设，轻松统一多个文件的名称。",
+      "Aligna: 给文件名加上日期 — 在文件名开头或末尾添加当天日期，并选择日期格式。",
+      "Aligna: 组合使用多种规则 — 同时添加日期和序号，让文件名更有条理。",
+      "Aligna: 先确认新名称，再保存 — 对比原文件名和新文件名，确认后再应用。"
     ],
-    'zh-Hant': [
-      'Aligna 批次重新命名規則設定與新檔名預覽畫面',
-      'Aligna 批次重新命名的本機檔案選擇畫面',
-      'Aligna 套用變更前查看新檔名的預覽畫面',
-      'Aligna 套用批次重新命名前的確認畫面'
+    "zh-Hant": [
+      "Aligna: 批次整理檔名 — 使用 8 種預設，輕鬆統一多個檔案的名稱。",
+      "Aligna: 在檔名加上日期 — 在檔名開頭或結尾加入當天日期，並選擇日期格式。",
+      "Aligna: 組合使用多種規則 — 同時加入日期與編號，讓檔名更有條理。",
+      "Aligna: 先確認新檔名，再儲存 — 比較原檔名與新檔名，確認後再套用。"
     ],
-    'pt-BR': [
-      'Tela do Aligna para configurar a renomeação em lote e pré-visualizar os novos nomes',
-      'Tela do Aligna para selecionar arquivos locais para renomeação em lote',
-      'Prévia do Aligna com os novos nomes antes de aplicar qualquer alteração',
-      'Tela de confirmação do Aligna antes de aplicar a renomeação em lote'
+    "pt-BR": [
+      "Aligna: Renomeie vários arquivos — Use 8 predefinições para padronizar os nomes dos arquivos.",
+      "Aligna: Adicione datas aos nomes — Insira a data de hoje no início ou no final, no formato que preferir.",
+      "Aligna: Combine regras de nomes — Use datas e números em sequência para organizar os nomes.",
+      "Aligna: Confira antes de salvar — Compare os nomes atuais e os novos antes de aplicar as mudanças."
     ],
-    de: [
-      'Aligna-Einstellungen für Stapelumbenennung mit Vorschau der neuen Dateinamen',
-      'Aligna-Dateiauswahl für die Stapelumbenennung lokaler Dateien',
-      'Aligna-Vorschau der neuen Dateinamen vor dem Anwenden von Änderungen',
-      'Aligna-Bestätigung vor dem Anwenden der Stapelumbenennung'
+    "de": [
+      "Aligna: Dateien gemeinsam umbenennen — Mit 8 Vorlagen bringst du Ordnung in deine Dateinamen.",
+      "Aligna: Dateinamen mit Datum ergänzen — Setze das heutige Datum an den Anfang oder ans Ende – im passenden Format.",
+      "Aligna: Mehrere Regeln kombinieren — Verbinde Datum und laufende Nummern für übersichtliche Dateinamen.",
+      "Aligna: Erst prüfen, dann speichern — Vergleiche die bisherigen und neuen Namen, bevor du Änderungen anwendest."
     ],
-    fr: [
-      'Écran Aligna de réglage du renommage par lot avec aperçu des nouveaux noms',
-      'Écran Aligna de sélection des fichiers locaux à renommer par lot',
-      'Aperçu Aligna des nouveaux noms avant toute modification',
-      'Écran de confirmation Aligna avant d’appliquer le renommage par lot'
+    "fr": [
+      "Aligna: Renommez plusieurs fichiers — Choisissez parmi 8 préréglages pour harmoniser les noms.",
+      "Aligna: Ajoutez une date aux noms — Ajoutez la date du jour au début ou à la fin, au format de votre choix.",
+      "Aligna: Combinez plusieurs règles — Associez une date et une numérotation pour mieux organiser les noms.",
+      "Aligna: Vérifiez avant d’enregistrer — Comparez les noms actuels et les nouveaux avant de les appliquer."
     ],
-    es: [
-      'Pantalla de Aligna para configurar el renombrado por lotes y previsualizar los nuevos nombres',
-      'Pantalla de Aligna para seleccionar archivos locales para renombrarlos por lotes',
-      'Vista previa de Aligna con los nuevos nombres antes de aplicar cambios',
-      'Pantalla de confirmación de Aligna antes de aplicar el renombrado por lotes'
+    "es": [
+      "Aligna: Renombra varios archivos a la vez — Usa 8 ajustes predefinidos para unificar los nombres de tus archivos.",
+      "Aligna: Añade fechas a los nombres — Añade la fecha de hoy al principio o al final, con el formato que prefieras.",
+      "Aligna: Combina varias reglas — Combina fechas y números consecutivos para organizar los nombres.",
+      "Aligna: Revisa primero. Luego guarda. — Compara los nombres actuales y los nuevos antes de aplicar los cambios."
     ]
   },
   clipnest: {

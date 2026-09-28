@@ -201,7 +201,9 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     iconPath: getIconRoutePath(source),
     screenshotPaths,
     screenshotAlts: getProductScreenshotAltsFromCopy(source, locale, screenshotPaths.length),
-    screenshotDimensions: ['quivra', 'segra'].includes(source.slug) ? { width: 1080, height: 2168 } : undefined,
+    screenshotDimensions: source.slug === 'aligna'
+      ? { width: 1080, height: 2160 }
+      : ['quivra', 'segra'].includes(source.slug) ? { width: 1080, height: 2168 } : undefined,
     accent: productAccent(source)
   };
 }
