@@ -1,11 +1,9 @@
 title: Melivra
-status: Preparing for release
+status: Released
 
 platforms:
-  - iOS
   - Android
 
-appstore: https://apps.apple.com/app/id6783644955
 googleplay: https://play.google.com/store/apps/details?id=com.onnellab.melivra
 
 privacy: https://onnellab.com/privacy/melivra/

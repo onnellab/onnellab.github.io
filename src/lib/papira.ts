@@ -42,10 +42,10 @@ export type PapiraCopy = {
 };
 
 const extendedPapiraStatus: Record<ExtendedSiteLocale, string> = {
-  'pt-BR': 'Em preparação',
-  de: 'In Vorbereitung',
-  fr: 'En préparation',
-  es: 'En preparación'
+  'pt-BR': 'Disponível',
+  de: 'Veröffentlicht',
+  fr: 'Disponible',
+  es: 'Disponible'
 };
 
 const extendedPapiraScreenshotAlts: Record<
@@ -98,7 +98,8 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
     const meta = {
       title: 'Papira',
       status: extendedPapiraStatus[locale],
-      platforms: ['iOS', 'Android'],
+      platforms: ['iOS'],
+      appstore: 'https://apps.apple.com/app/id6803919552',
       privacy: allRouteFor('papiraPrivacy', locale),
       supportEmail: 'onnellab.app@gmail.com',
       icon: 'assets/icon/Papira.png'
@@ -141,7 +142,8 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
   const meta = {
     title: 'Papira',
     status: text.statusValue,
-    platforms: ['iOS', 'Android'],
+    platforms: ['iOS'],
+    appstore: 'https://apps.apple.com/app/id6803919552',
     privacy: allRouteFor('papiraPrivacy', baseLocale),
     supportEmail: 'onnellab.app@gmail.com',
     icon: 'assets/icon/Papira.png'
@@ -186,9 +188,9 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     lead:
       'Papira assembles any finished TXT manuscript into a well-structured EPUB. It includes dedicated flows for fanfiction, serialized fiction, original novels, digital zines, and TRPG scenarios, while other TXT content can also be converted to EPUB.',
     statusLabel: 'Status',
-    statusValue: 'Preparing for release',
+    statusValue: 'Released',
     platformsLabel: 'Platforms',
-    platformsValue: 'iOS and Android',
+    platformsValue: 'iOS',
     modesTitle: 'Two focused ways to create',
     modes: [
       {
@@ -255,9 +257,9 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     lead:
       'Papira는 완성된 TXT 원고를 정돈된 EPUB 파일로 만들어요. 팬픽·연재소설·개인 창작 소설·디지털 소책자·TRPG 시나리오에 특화된 제작 흐름을 제공하지만, 그 밖의 TXT 콘텐츠도 EPUB으로 변환할 수 있어요.',
     statusLabel: '상태',
-    statusValue: '출시 준비 중',
+    statusValue: '출시됨',
     platformsLabel: '지원 기기',
-    platformsValue: 'iOS · Android',
+    platformsValue: 'iOS',
     modesTitle: '두 가지 제작 흐름',
     modes: [
       {
@@ -324,9 +326,9 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     lead:
       'Papiraは完成したTXT原稿を整ったEPUBにまとめます。二次創作・連載小説・オリジナル小説・デジタル小冊子・TRPGシナリオに特化した作成フローを備えていますが、そのほかのTXTコンテンツもEPUBに変換できます。',
     statusLabel: 'ステータス',
-    statusValue: 'リリース準備中',
+    statusValue: '公開中',
     platformsLabel: '対応端末',
-    platformsValue: 'iOS・Android',
+    platformsValue: 'iOS',
     modesTitle: '目的に合わせた二つの作成方法',
     modes: [
       {
@@ -393,9 +395,9 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     lead:
       'Papira 可将完成的 TXT 文稿整理成结构清晰的 EPUB。它特别适合同人文、连载小说、原创小说、数字小册子与 TRPG 剧本，也能将其他 TXT 内容转换为 EPUB。',
     statusLabel: '状态',
-    statusValue: '准备发布',
+    statusValue: '已发布',
     platformsLabel: '支持平台',
-    platformsValue: 'iOS 与 Android',
+    platformsValue: 'iOS',
     modesTitle: '两种简洁的制作方式',
     modes: [
       {
@@ -462,9 +464,9 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     lead:
       'Papira 可將完成的 TXT 文稿整理成結構清楚的 EPUB。它特別適合同人文、連載小說、原創小說、數位小冊子與 TRPG 劇本，也能將其他 TXT 內容轉換為 EPUB。',
     statusLabel: '狀態',
-    statusValue: '準備發布',
+    statusValue: '已發布',
     platformsLabel: '支援平台',
-    platformsValue: 'iOS 與 Android',
+    platformsValue: 'iOS',
     modesTitle: '兩種簡潔的製作方式',
     modes: [
       {
