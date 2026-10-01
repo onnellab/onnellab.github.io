@@ -1,3 +1,5 @@
+import generatedStoreReleaseNotes from '../data/store-release-notes.json';
+
 export type ReleaseNote = {
   appSlug: string;
   appName: string;
@@ -13,7 +15,7 @@ export type ReleaseNote = {
   internalGitHubUrl: string;
 };
 
-export const releaseNotes: ReleaseNote[] = [
+const authoredReleaseNotes: ReleaseNote[] = [
   {
     appSlug: 'vaultxt',
     appName: 'VaultXT',
@@ -172,6 +174,18 @@ export const releaseNotes: ReleaseNote[] = [
       '반복 사용 흐름이 더 명확하게 보이도록 간격을 조정했습니다.'
     ]
   }
+];
+
+const generatedReleaseNotes = generatedStoreReleaseNotes as ReleaseNote[];
+const authoredKeys = new Set(
+  authoredReleaseNotes.map((note) => `${note.appSlug}/${note.version}`)
+);
+
+export const releaseNotes: ReleaseNote[] = [
+  ...authoredReleaseNotes,
+  ...generatedReleaseNotes.filter(
+    (note) => !authoredKeys.has(`${note.appSlug}/${note.version}`)
+  )
 ];
 
 export function releaseNotePath(note: ReleaseNote): string {

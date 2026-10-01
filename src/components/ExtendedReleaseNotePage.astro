@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ReleaseNoteLocaleMenu from './ReleaseNoteLocaleMenu.astro';
 import { getProductSource, getIconRoutePath } from '../lib/products';
+import { getPapiraProductPageData } from '../lib/papira';
 import {
   releaseNoteKoPath,
   releaseNotePath,
@@ -30,8 +31,10 @@ const text = getExtendedReleaseCopy(note, locale);
 const labels = releaseLabels[locale];
 const definition = allLocaleDefinitions[locale];
 const canonicalPath = releaseNoteLocalePath(note, locale);
-const source = getProductSource(note.appSlug);
-const iconPath = getIconRoutePath(source);
+const source = note.appSlug === 'papira' ? undefined : getProductSource(note.appSlug);
+const iconPath = note.appSlug === 'papira'
+  ? getPapiraProductPageData(locale).iconPath
+  : getIconRoutePath(source!);
 const appPath = allProductRouteFor(note.appSlug, locale);
 const alternatePath = (item: typeof allSiteLocales[number]): string => {
   if (item === 'en') return releaseNotePath(note);

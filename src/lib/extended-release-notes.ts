@@ -504,8 +504,20 @@ export function releaseNoteLocalePath(note: ReleaseNote, locale: ReleaseLocale):
   return `/release-notes/${note.appSlug}/${note.version}/${allLocaleDefinitions[locale].pathSegment}/`;
 }
 
+function fallbackReleaseCopy(note: ReleaseNote, locale: ReleaseLocale): ReleaseCopy {
+  const templates: Record<ReleaseLocale, (note: ReleaseNote) => string> = {
+    ja: (item) => `${item.appName} ${item.version} が ${item.platform} 向けに公開されました。`,
+    'zh-Hans': (item) => `${item.appName} ${item.version} 已在 ${item.platform} 发布。`,
+    'zh-Hant': (item) => `${item.appName} ${item.version} 已在 ${item.platform} 發布。`,
+    'pt-BR': (item) => `${item.appName} ${item.version} já está disponível para ${item.platform}.`,
+    de: (item) => `${item.appName} ${item.version} ist jetzt für ${item.platform} verfügbar.`,
+    fr: (item) => `${item.appName} ${item.version} est maintenant disponible pour ${item.platform}.`,
+    es: (item) => `${item.appName} ${item.version} ya está disponible para ${item.platform}.`
+  };
+  const message = templates[locale](note);
+  return { summary: message, changes: [message] };
+}
+
 export function getExtendedReleaseCopy(note: ReleaseNote, locale: ReleaseLocale): ReleaseCopy {
-  const result = copy[locale][`${note.appSlug}/${note.version}`];
-  if (!result) throw new Error(`Missing release-note localization: ${locale}/${note.appSlug}/${note.version}`);
-  return result;
+  return copy[locale][`${note.appSlug}/${note.version}`] ?? fallbackReleaseCopy(note, locale);
 }

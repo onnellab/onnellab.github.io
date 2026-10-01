@@ -1,0 +1,148 @@
+[
+  {
+    "appSlug": "aligna",
+    "appName": "Aligna",
+    "version": "1.0.7",
+    "tag": "v1.0.7",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-09-29",
+    "title": "Aligna v1.0.7 (iOS · Android)",
+    "summary": "Latest public store release of Aligna 1.0.7 for iOS · Android.",
+    "summaryKo": "Aligna 1.0.7 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "Aligna 1.0.7 is now available on iOS · Android."
+    ],
+    "changesKo": [
+      "파일명 미리보기와 적용 과정을 더 쉽게 확인할 수 있도록 스토어 안내와 화면 이미지를 새로 정리했어요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
+    "appSlug": "clipnest",
+    "appName": "ClipNest",
+    "version": "1.0.2",
+    "tag": "v1.0.2",
+    "platform": "iOS",
+    "releasedDate": "2026-07-13",
+    "title": "ClipNest v1.0.2 (iOS)",
+    "summary": "Latest public store release of ClipNest 1.0.2 for iOS.",
+    "summaryKo": "ClipNest 1.0.2 iOS 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "ClipNest 1.0.2 is now available on iOS."
+    ],
+    "changesKo": [
+      "사소한 버그를 수정하고 안정성을 개선했어요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
+    "appSlug": "melivra",
+    "appName": "Melivra",
+    "version": "1.0.4",
+    "tag": "v1.0.4",
+    "platform": "Android",
+    "releasedDate": "2026-09-29",
+    "title": "Melivra v1.0.4 (Android)",
+    "summary": "Latest public store release of Melivra 1.0.4 for Android.",
+    "summaryKo": "Melivra 1.0.4 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "Melivra 1.0.4 is now available on Android."
+    ],
+    "changesKo": [
+      "Melivra 1.0.4 버전이 Android에 공개됐어요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
+    "appSlug": "papira",
+    "appName": "Papira",
+    "version": "1.0",
+    "tag": "v1.0",
+    "platform": "iOS",
+    "releasedDate": "2026-09-24",
+    "title": "Papira v1.0 (iOS)",
+    "summary": "Latest public store release of Papira 1.0 for iOS.",
+    "summaryKo": "Papira 1.0 iOS 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "Papira 1.0 is now available on iOS."
+    ],
+    "changesKo": [
+      "Papira 1.0 버전이 iOS에 공개됐어요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
+    "appSlug": "quivra",
+    "appName": "Quivra",
+    "version": "1.0.9",
+    "tag": "v1.0.9",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-09-28",
+    "title": "Quivra v1.0.9 (iOS · Android)",
+    "summary": "Latest public store release of Quivra 1.0.9 for iOS · Android.",
+    "summaryKo": "Quivra 1.0.9 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "Quivra 1.0.9 is now available on iOS · Android."
+    ],
+    "changesKo": [
+      "Melivra에서 보낸 오디오 파일을 받아 변환하는 흐름을 개선했어요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
+    "appSlug": "segra",
+    "appName": "Segra",
+    "version": "1.0.6",
+    "tag": "v1.0.6",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-09-28",
+    "title": "Segra v1.0.6 (iOS · Android)",
+    "summary": "Latest public store release of Segra 1.0.6 for iOS · Android.",
+    "summaryKo": "Segra 1.0.6 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "Segra 1.0.6 is now available on iOS · Android."
+    ],
+    "changesKo": [
+      "최신 기능 흐름에 맞춰 앱 소개와 스크린샷을 업데이트했어요.",
+      "Android 태블릿, 폴더블, 멀티 윈도우에서도 화면 크기와 방향에 맞춰 사용할 수 있도록 개선했어요.",
+      "고해상도 이미지로 영상을 만들 때 필요한 크기로 이미지를 처리해 메모리 사용 안정성을 높였어요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
+    "appSlug": "tagweaver",
+    "appName": "TagWeaver",
+    "version": "2.5.2",
+    "tag": "v2.5.2",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-09-28",
+    "title": "TagWeaver v2.5.2 (iOS · Android)",
+    "summary": "Latest public store release of TagWeaver 2.5.2 for iOS · Android.",
+    "summaryKo": "TagWeaver 2.5.2 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "TagWeaver 2.5.2 is now available on iOS · Android."
+    ],
+    "changesKo": [
+      "Melivra에서 보낸 음악 파일을 열어 태그를 편집하는 흐름을 개선했어요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
+    "appSlug": "vaultxt",
+    "appName": "VaultXT",
+    "version": "2.0.1",
+    "tag": "v2.0.1",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-09-28",
+    "title": "VaultXT v2.0.1 (iOS · Android)",
+    "summary": "Latest public store release of VaultXT 2.0.1 for iOS · Android.",
+    "summaryKo": "VaultXT 2.0.1 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "VaultXT 2.0.1 is now available on iOS · Android."
+    ],
+    "changesKo": [
+      "Melivra에서 받은 가사 파일의 이름을 더 알아보기 쉽게 표시해요."
+    ],
+    "internalGitHubUrl": ""
+  }
+]

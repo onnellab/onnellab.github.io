@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteFooter from './SiteFooter.astro';
 import ReleaseNoteLocaleMenu from './ReleaseNoteLocaleMenu.astro';
 import { getProductPageData } from '../lib/products';
+import { getPapiraProductPageData } from '../lib/papira';
 import {
   releaseNoteKoPath,
   releaseNotePath,
@@ -25,7 +26,9 @@ type Props = {
 
 const { note, locale } = Astro.props;
 const isKo = locale === 'ko';
-const product = getProductPageData(note.appSlug, locale);
+const product = note.appSlug === 'papira'
+  ? getPapiraProductPageData(locale)
+  : getProductPageData(note.appSlug, locale);
 const canonicalPath = isKo ? releaseNoteKoPath(note) : releaseNotePath(note);
 const appPath = isKo ? `/apps/${note.appSlug}/ko/` : `/apps/${note.appSlug}/`;
 const summary = isKo ? note.summaryKo : note.summary;
