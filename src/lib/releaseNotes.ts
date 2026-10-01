@@ -1,4 +1,4 @@
-import generatedStoreReleaseNotes from '../data/store-release-notes.json';
+import generatedStoreReleaseNotes from '../data/store-release-notes.json' with { type: 'json' };
 
 export type ReleaseNote = {
   appSlug: string;
