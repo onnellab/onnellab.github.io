@@ -31,7 +31,7 @@ const corePages = [
 ];
 
 const productSlugs = ['aligna', 'clipnest', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
-const allProductSlugs = ['aligna', 'clipnest', 'lunary', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+const allProductSlugs = ['aligna', 'clipnest', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const productLocales = [
   { code: 'en', suffix: '' },
   { code: 'ko', suffix: 'ko/' },
