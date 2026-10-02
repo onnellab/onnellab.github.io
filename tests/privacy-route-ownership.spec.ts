@@ -56,24 +56,13 @@ for (const locale of ['en', 'ko'] as const) {
       await expect(page.locator(`link[rel="alternate"][hreflang="${language}"]`))
         .toHaveAttribute('href', `https://onnellab.com${route}`);
     }
-    const languageLinks = page.locator('a.language-link');
-    await expect(languageLinks).toHaveCount(8);
-    const expectedLanguageHrefs = [
-      locale === 'en'
-        ? 'https://onnellab.com/privacy/segra/ko/'
-        : 'https://onnellab.com/privacy/segra/',
-      'https://onnellab.com/privacy/segra/ja/',
-      'https://onnellab.com/privacy/segra/zh-hans/',
-      'https://onnellab.com/privacy/segra/zh-hant/',
-      'https://onnellab.com/privacy/segra/pt-br/',
-      'https://onnellab.com/privacy/segra/de/',
-      'https://onnellab.com/privacy/segra/fr/',
-      'https://onnellab.com/privacy/segra/es/',
-    ].sort();
-    const languageHrefs = await languageLinks.evaluateAll(nodes =>
-      nodes.map(node => (node as HTMLAnchorElement).href).sort()
+    const languageLink = page.locator('a.language-link');
+    await expect(languageLink).toHaveCount(1);
+    await expect(languageLink).toHaveText(locale === 'en' ? '한국어' : 'English');
+    await expect(languageLink).toHaveAttribute(
+      'href',
+      `https://onnellab.com/privacy/segra/${locale === 'en' ? 'ko/' : ''}`
     );
-    expect(languageHrefs).toEqual(expectedLanguageHrefs);
     const sitemap = await (await request.get('/sitemap.xml')).text();
     expect(sitemap.split(`<loc>https://onnellab.com${canonical}</loc>`)).toHaveLength(2);
   });
