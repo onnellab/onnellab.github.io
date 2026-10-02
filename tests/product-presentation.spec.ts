@@ -11,8 +11,9 @@ const dataFor = (app: string, locale: typeof allSiteLocales[number]) =>
 // Do not let a newly added product silently escape this regression suite.
 test('all active products are covered by the presentation contract', () => {
   expect([...getProductSources().map(source => source.slug), 'papira'].sort()).toEqual(Object.keys(featureCounts).sort());
-  for (const app of ['lunary', 'melivra', 'papira']) {
-    expect(dataFor(app, 'en').meta.status).toBe('Preparing for release');
+  expect(dataFor('lunary', 'en').meta.status).toBe('Preparing for release');
+  for (const app of ['melivra', 'papira']) {
+    expect(dataFor(app, 'en').meta.status).toBe('Released');
   }
 });
 
