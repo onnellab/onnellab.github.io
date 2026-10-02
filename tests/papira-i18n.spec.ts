@@ -393,12 +393,14 @@ test.describe('Papira nine-language launch surface', () => {
     expect(JSON.stringify(schemas)).not.toContain('/ko/ko/');
   });
 
-  test('unknown Papira commerce data is omitted from SoftwareApplication schema', async ({ page }) => {
+  test('released Papira exposes the verified App Store URL without inventing pricing data', async ({ page }) => {
     await page.goto('/apps/papira/');
     const schemas = await jsonLd(page);
     const software = schemas.find((item) => item['@type'] === 'SoftwareApplication');
     expect(software).toBeTruthy();
-    for (const key of ['isAccessibleForFree', 'downloadUrl', 'installUrl', 'sameAs', 'offers']) {
+    expect(software.installUrl).toEqual(['https://apps.apple.com/us/app/id6803919552?l=en-US']);
+    expect(software.sameAs).toEqual(['https://apps.apple.com/us/app/id6803919552?l=en-US']);
+    for (const key of ['isAccessibleForFree', 'downloadUrl', 'offers']) {
       expect(software).not.toHaveProperty(key);
     }
   });
