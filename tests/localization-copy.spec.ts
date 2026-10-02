@@ -98,7 +98,8 @@ test('Papira German title explains the TXT-to-EPUB conversion naturally', async 
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', title);
   await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute('content', title);
   await expect(page.locator('.hero .intro')).toHaveText('TXT offline in EPUB umwandeln');
-  await expect(page.locator('[data-release-status]')).toHaveText('In Vorbereitung');
+  await expect(page.locator('[data-release-status]')).toHaveCount(0);
+  await expect(page.locator('[data-store-link][data-store="app_store"]')).toHaveCount(2);
 });
 
 test('TagWeaver French introduction uses complete natural prose', async ({ page }) => {
