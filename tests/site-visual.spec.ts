@@ -1001,15 +1001,17 @@ test.describe('app and privacy collections', () => {
     ]);
 
     const melivraBadge = page.locator('[data-app-row]').filter({ hasText: 'Melivra' }).locator('.status-badge');
+    const meriqBadge = page.locator('[data-app-row]').filter({ hasText: 'Meriq' }).locator('.status-badge');
     const papiraBadge = page.locator('[data-app-row]').filter({ hasText: 'Papira' }).locator('.status-badge');
     const releasedBadge = page.locator('[data-app-row]').filter({ hasText: 'TagWeaver' }).locator('.status-badge');
 
-    await expect(melivraBadge).toHaveText('출시 준비 중');
-    await expect(papiraBadge).toHaveText('출시 준비 중');
+    await expect(melivraBadge).toHaveText('출시됨');
+    await expect(meriqBadge).toHaveText('출시 준비 중');
+    await expect(papiraBadge).toHaveText('출시됨');
     await expect(releasedBadge).toHaveText('출시됨');
     await expect(page.locator('[data-apps-page]')).not.toContainText('Released');
 
-    const preparingStyle = await papiraBadge.evaluate((node) => {
+    const preparingStyle = await meriqBadge.evaluate((node) => {
       const style = getComputedStyle(node);
       return `${style.backgroundColor}|${style.borderColor}`;
     });
@@ -1271,7 +1273,9 @@ test.describe('existing product pages', () => {
     await expect(page.locator('.download-band')).toBeVisible();
     await expect(page.locator('.identity img')).toHaveAttribute('src', '/app-assets/papira/icon.png');
     await expect(page.locator('.content-band')).toHaveCount(1);
-    await expect(page.locator('.download-band')).toContainText('출시 준비 중');
+    await expect(page.locator('.download-band')).not.toContainText('출시 준비 중');
+    await expect(page.locator('.download-band [data-store="app_store"]')).toHaveCount(1);
+    await expect(page.locator('.download-band [data-store="app_store"]')).toHaveText('App Store');
 
     await page.goto('/privacy/papira/ko/');
     const policyText = await page.locator('main').innerText();
