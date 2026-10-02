@@ -54,30 +54,30 @@ const extendedPapiraScreenshotAlts: Record<
 > = {
   'pt-BR': [
     'Tela inicial do Papira para converter TXT em EPUB',
-    'Tela do Papira para escolher o tipo de obra, a capa e a estrutura do texto',
-    'Prévia do Papira com capa, sumário e dados do livro',
-    'Tela do Papira com detecção de capítulos e prévia do sumário',
+    'Tela do Papira para escolher entre doze estilos de capa',
+    'Prévia da aparência de leitura no Papira com opções de clima do livro, tamanho do texto e espaçamento entre linhas',
+    'Lista de capítulos e prévia do sumário no Papira com a opção de títulos com #',
     'Tela do Papira para exportar o EPUB e salvá-lo no dispositivo'
   ],
   de: [
     'Papira-Startseite zur Umwandlung von TXT in EPUB',
-    'Papira-Auswahl des Werktyps mit Cover- und Textaufbau',
-    'Papira-Buchvorschau mit Cover, Inhaltsverzeichnis und Buchdaten',
-    'Papira-Kapitelerkennung mit Vorschau des Inhaltsverzeichnisses',
+    'Papira-Auswahl aus zwölf Coverdesigns',
+    'Papira-Vorschau des Leselayouts mit Buchstimmung, Schriftgröße und Zeilenabstand',
+    'Papira-Kapitelliste und Inhaltsverzeichnis-Vorschau mit der Option für #-Überschriften',
     'Papira-EPUB-Export zum Speichern auf dem Gerät'
   ],
   fr: [
     'Écran d’accueil de Papira pour convertir un TXT en EPUB',
-    'Écran Papira pour choisir le type de texte, la couverture et la structure',
-    'Aperçu Papira du livre avec couverture, sommaire et informations',
-    'Écran Papira de détection des chapitres et d’aperçu du sommaire',
+    'Écran Papira pour choisir parmi douze styles de couverture',
+    'Aperçu de la mise en page de lecture dans Papira avec ambiance du livre, taille du texte et interligne',
+    'Liste des chapitres et aperçu du sommaire dans Papira avec l’option des titres précédés de #',
     'Écran Papira d’exportation de l’EPUB vers l’appareil'
   ],
   es: [
     'Pantalla de inicio de Papira para convertir TXT a EPUB',
-    'Pantalla de Papira para elegir el tipo de obra, la portada y la estructura del texto',
-    'Vista previa de Papira con portada, índice y datos del libro',
-    'Pantalla de Papira para detectar capítulos y previsualizar el índice',
+    'Pantalla de Papira para elegir entre doce estilos de portada',
+    'Vista previa del diseño de lectura en Papira con ambiente del libro, tamaño del texto e interlineado',
+    'Lista de capítulos y vista previa del índice en Papira con la opción de títulos con #',
     'Pantalla de Papira para exportar el EPUB y guardarlo en el dispositivo'
   ]
 };
@@ -118,10 +118,10 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
       iconPath: '/app-assets/papira/icon.png',
       socialImagePath: '/app-assets/papira/social-card.png',
       screenshotPaths: ['01', '02', '03', '04', '05'].map(
-        (name) => `/app-assets/papira/assets/screenshots/${locale}/${name}.png?v=5da5eeb`
+        (name) => `/app-assets/papira/assets/screenshots/${locale}/${name}.png?v=200587433576`
       ),
       screenshotAlts: extendedPapiraScreenshotAlts[locale],
-      screenshotDimensions: { width: 1080, height: 2168 },
+      screenshotDimensions: { width: 1080, height: 1920 },
       schemaFeatureList: featureList,
       accent: { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' }
     };
@@ -162,10 +162,10 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
     eyebrow: text.eyebrow,
     heroSignals: text.heroSignals,
     screenshotPaths: ['01', '02', '03', '04', '05'].map(
-      (name) => `/app-assets/papira/assets/screenshots/${baseLocale}/${name}.png?v=5da5eeb`
+      (name) => `/app-assets/papira/assets/screenshots/${baseLocale}/${name}.png?v=200587433576`
     ),
     screenshotAlts: text.screenshotAlts,
-    screenshotDimensions: { width: 1080, height: 2168 },
+    screenshotDimensions: { width: 1080, height: 1920 },
     schemaFeatureList: renderBlocks(description).find((block) => block.type === 'ul')?.value as string[] | undefined,
     accent: { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' }
   };
@@ -180,9 +180,9 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     heroSignals: ['Finished TXT → EPUB', 'Cover, chapters, and TOC', 'Entirely on device'],
     screenshotAlts: [
       'Papira home screen for converting TXT to EPUB',
-      'Papira work type screen with cover and body setup',
-      'Papira book preview with cover, table of contents, and book details',
-      'Papira chapter detection and table of contents preview',
+      'Papira cover style picker with twelve cover designs',
+      'Papira reading appearance preview with book mood, text size, and line spacing options',
+      'Papira chapter list and table of contents preview with the # heading option',
       'Papira EPUB export screen for saving to the device'
     ],
     lead:
@@ -249,9 +249,9 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     heroSignals: ['완성된 TXT → EPUB', '표지·챕터·목차 구성', '모든 작업은 기기 안에서'],
     screenshotAlts: [
       'Papira 홈 화면, TXT 원고를 EPUB으로 변환',
-      'Papira 작품 종류 화면, 표지와 본문 구성 선택',
-      'Papira 책 미리보기, 표지·목차·책 정보 확인',
-      'Papira 챕터 감지와 목차 미리보기 화면',
+      'Papira 표지 스타일 선택 화면, 12가지 표지 디자인',
+      'Papira 읽는 모습 미리보기, 책 분위기·글자 크기·줄 간격 설정',
+      'Papira 챕터 목록과 목차 미리보기, # 제목 옵션',
       'Papira EPUB 내보내기 화면, 기기에 저장'
     ],
     lead:
@@ -318,9 +318,9 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     heroSignals: ['完成したTXT → EPUB', '表紙・章・目次を整理', 'すべて端末内で処理'],
     screenshotAlts: [
       'Papiraのホーム画面、TXT原稿をEPUBに変換',
-      'Papiraの作品種類選択画面で、表紙と本文を設定',
-      'Papiraで表紙・目次・本の情報を確認するプレビュー画面',
-      'Papiraの章タイトル検出と目次プレビュー画面',
+      'Papiraで12種類の表紙デザインから選ぶ画面',
+      'Papiraの本の雰囲気・文字サイズ・行間を選ぶプレビュー画面',
+      'Papiraの章一覧と目次プレビュー画面、#見出しの設定',
       'PapiraでEPUBを書き出して端末に保存する画面'
     ],
     lead:
@@ -387,9 +387,9 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     heroSignals: ['完成的 TXT → EPUB', '整理封面、章节与目录', '全程在设备本地处理'],
     screenshotAlts: [
       'Papira 首页，将 TXT 原稿转换为 EPUB',
-      'Papira 作品类型选择界面，用于设置封面与正文',
-      'Papira 电子书预览界面，用于查看封面、目录和书籍信息',
-      'Papira 章节识别与目录预览界面',
+      'Papira 封面样式选择界面，提供 12 种封面设计',
+      'Papira 阅读外观预览界面，可选择书籍氛围、字号和行距',
+      'Papira 章节列表与目录预览界面，包含 # 标题选项',
       'Papira EPUB 导出界面，用于保存到设备'
     ],
     lead:
@@ -456,9 +456,9 @@ export const papiraCopy: Record<SiteLocale, PapiraCopy> = {
     heroSignals: ['完成的 TXT → EPUB', '整理封面、章節與目錄', '全程在裝置本機處理'],
     screenshotAlts: [
       'Papira 首頁，將 TXT 原稿轉換為 EPUB',
-      'Papira 作品類型選擇畫面，用於設定封面與內文',
-      'Papira 電子書預覽畫面，用於查看封面、目錄與書籍資訊',
-      'Papira 章節辨識與目錄預覽畫面',
+      'Papira 封面樣式選擇畫面，提供 12 種封面設計',
+      'Papira 閱讀外觀預覽畫面，可選擇書籍氛圍、字級與行距',
+      'Papira 章節列表與目錄預覽畫面，包含 # 標題選項',
       'Papira EPUB 匯出畫面，用於儲存到裝置'
     ],
     lead:
