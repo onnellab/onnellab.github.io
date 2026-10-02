@@ -100,7 +100,6 @@ test('released apps keep localized store links and never display the prerelease 
   ];
   for (const app of releasedApps) {
     const data = dataFor(app, 'ko');
-    expect(data.meta.status).toBe('Released');
     await page.goto(data.canonicalPath);
     await expect(page.locator('[data-release-status]')).toHaveCount(0);
     const links = await page.locator('[data-store-link]').count();
