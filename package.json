@@ -12,12 +12,17 @@
     "test:blog-template": "node --test scripts/blog-template-contract.mjs",
     "test:visual": "playwright test",
     "check:i18n-quality": "node scripts/check-localization-quality.mjs",
-    "audit:security": "npm audit --package-lock-only --include=dev --audit-level=high"
+    "audit:security": "npm audit --package-lock-only --include=dev --audit-level=high",
+    "test:image-boundary": "node --test --test-concurrency=1 scripts/image-boundary-contract.mjs scripts/image-boundary-build-contract.mjs"
   },
   "dependencies": {
-    "astro": "^7.3.3"
+    "astro": "7.3.3",
+    "http-cache-semantics": "file:vendor/disabled-http-cache"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1"
+  },
+  "overrides": {
+    "http-cache-semantics": "$http-cache-semantics"
   }
 }

@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - 'vendor/**'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/dependency-security.yml'

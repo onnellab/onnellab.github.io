@@ -1,0 +1,8 @@
+{
+  "name": "@onnellab/disabled-http-cache",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": "./index.js",
+  "description": "Fail-closed sentinel for ONNELLAB's disabled Astro image-cache feature"
+}
