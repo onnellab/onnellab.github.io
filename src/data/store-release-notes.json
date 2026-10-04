@@ -90,6 +90,24 @@
     "internalGitHubUrl": ""
   },
   {
+    "appSlug": "papira",
+    "appName": "Papira",
+    "version": "2.0.1",
+    "tag": "v2.0.1",
+    "platform": "iOS",
+    "releasedDate": "2026-10-03",
+    "title": "Papira v2.0.1 (iOS)",
+    "summary": "Latest public store release of Papira 2.0.1 for iOS.",
+    "summaryKo": "Papira 2.0.1 iOS 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "Papira 2.0.1 is now available on iOS."
+    ],
+    "changesKo": [
+      "긴 TXT 원고를 변환할 때 텍스트 처리 성능을 개선했습니다."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
     "appSlug": "quivra",
     "appName": "Quivra",
     "version": "1.0.9",
