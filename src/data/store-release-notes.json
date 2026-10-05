@@ -72,6 +72,24 @@
     "internalGitHubUrl": ""
   },
   {
+    "appSlug": "melivra",
+    "appName": "Melivra",
+    "version": "1.0.6",
+    "tag": "v1.0.6",
+    "platform": "Android",
+    "releasedDate": "2026-10-05",
+    "title": "Melivra v1.0.6 (Android)",
+    "summary": "Latest public store release of Melivra 1.0.6 for Android.",
+    "summaryKo": "Melivra 1.0.6 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "Melivra 1.0.6 is now available on Android."
+    ],
+    "changesKo": [
+      "Melivra 1.0.6 버전이 Android에 공개됐어요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
     "appSlug": "papira",
     "appName": "Papira",
     "version": "1.0",
