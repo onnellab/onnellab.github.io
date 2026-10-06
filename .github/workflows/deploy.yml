@@ -31,6 +31,9 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
+      - name: Verify deployment workflow contract
+        run: npm run test:deploy-contract
+
       - name: Audit all locked dependencies before executing package scripts
         run: npm audit --package-lock-only --include=dev --audit-level=high
 
@@ -63,34 +66,92 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+  verify_ops:
+    name: Verify live ops
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: deploy
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Checkout canonical ops verifier
+        uses: actions/checkout@v4
+        with:
+          repository: onnellab/onnel-content-engine
+          path: .content-engine
+          persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Verify deployed /ops/
+        run: |
+          python3 .content-engine/scripts/verify_live_ops.py \
+            --expected public/ops/index.html \
+            --output /tmp/ops-live-verification.json \
+            --deployment-sha "$GITHUB_SHA"
+
+      - name: Retain sanitized verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ops-live-verification-${{ github.sha }}
+          path: /tmp/ops-live-verification.json
+          if-no-files-found: warn
+          retention-days: 14
+
   report:
     name: Report Pages result
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: [build, deploy]
+    needs: [build, deploy, verify_ops]
     if: always()
     permissions:
       statuses: write
     steps:
-      - name: Publish commit status
+      - name: Publish commit statuses
         env:
           GH_TOKEN: ${{ github.token }}
           BUILD_RESULT: ${{ needs.build.result }}
           DEPLOY_RESULT: ${{ needs.deploy.result }}
+          VERIFY_RESULT: ${{ needs.verify_ops.result }}
           TARGET_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           if [ "$BUILD_RESULT" = "success" ] && [ "$DEPLOY_RESULT" = "success" ]; then
-            state=success
-            description="Dependency audit, Astro build and Pages deployment passed"
+            pages_state=success
+            pages_description="Dependency audit, Astro build and Pages deployment passed"
           else
-            state=failure
-            description="Dependency audit, Astro build or Pages deployment failed"
+            pages_state=failure
+            pages_description="Dependency audit, Astro build or Pages deployment failed"
+          fi
+
+          if [ "$VERIFY_RESULT" = "success" ]; then
+            ops_state=success
+            ops_description="Live /ops/ bytes, robots, sitemap, navigation and legacy route verified"
+          else
+            ops_state=failure
+            ops_description="Live /ops/ verification failed or was skipped"
           fi
 
           gh api \
             --method POST \
             "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
-            -f state="$state" \
+            -f state="$pages_state" \
             -f context="onnellab/pages-deploy" \
-            -f description="$description" \
+            -f description="$pages_description" \
+            -f target_url="$TARGET_URL"
+
+          gh api \
+            --method POST \
+            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -f state="$ops_state" \
+            -f context="onnellab/ops-live-verify" \
+            -f description="$ops_description" \
             -f target_url="$TARGET_URL"

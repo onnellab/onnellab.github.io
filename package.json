@@ -8,6 +8,7 @@
     "check:blog-social-cards": "node scripts/generate-blog-social-cards.mjs --check",
     "dev": "astro dev",
     "generate:blog-social-cards": "node scripts/generate-blog-social-cards.mjs",
+    "test:deploy-contract": "node --test scripts/deploy-workflow-contract.mjs",
     "preview": "astro preview",
     "test:blog-template": "node --test scripts/blog-template-contract.mjs",
     "test:visual": "playwright test",
