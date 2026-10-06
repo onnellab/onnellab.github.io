@@ -14,6 +14,18 @@ const locales = [
   { path: 'es/', hreflang: 'es', title: 'Papira - Creador de EPUB sin conexión a partir de TXT' }
 ] as const;
 
+const releaseContract = {
+  en: ['us', 'en-US', 'en', 'US', 'Released'],
+  ko: ['kr', 'ko', 'ko', 'KR', '출시됨'],
+  ja: ['jp', 'ja', 'ja', 'JP', '公開済み'],
+  'zh-Hans': ['cn', 'zh-Hans-CN', 'zh-CN', 'CN', '已发布'],
+  'zh-Hant': ['tw', 'zh-Hant-TW', 'zh-TW', 'TW', '已發布'],
+  'pt-BR': ['br', 'pt-BR', 'pt-BR', 'BR', 'Disponível'],
+  de: ['de', 'de-DE', 'de', 'DE', 'Veröffentlicht'],
+  fr: ['fr', 'fr-FR', 'fr', 'FR', 'Disponible'],
+  es: ['es', 'es-ES', 'es', 'ES', 'Disponible']
+} as const;
+
 const privacyLocales = [
   { path: '', hreflang: 'en', htmlLang: 'en', keyPhrases: ['Papira values your privacy.', 'App store services and payment information', 'Privacy questions or deletion requests:'] },
   { path: 'ko/', hreflang: 'ko', htmlLang: 'ko', keyPhrases: ['Papira는 사용자의 개인정보를 중요하게 생각하며', '앱 스토어 서비스 및 결제 정보', '개인정보 관련 문의 또는 삭제 요청:'] },
@@ -187,6 +199,29 @@ test.describe('Papira nine-language launch surface', () => {
         );
       }
       await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
+    });
+
+    test(`Papira release status and both stores ${locale.hreflang}`, async ({ page }) => {
+      const [appCountry, appLanguage, playLanguage, playCountry, releasedLabel] = releaseContract[locale.hreflang];
+      const appStore = `https://apps.apple.com/${appCountry}/app/id6803919552?l=${appLanguage}`;
+      const googlePlay = `https://play.google.com/store/apps/details?id=com.onnellab.papira&hl=${playLanguage}&gl=${playCountry}`;
+      await page.goto(`/apps/papira/${locale.path}`);
+
+      for (const position of ['hero', 'download']) {
+        await expect(page.locator(`[data-store="app_store"][data-store-position="${position}"]`)).toHaveAttribute('href', appStore);
+        await expect(page.locator(`[data-store="google_play"][data-store-position="${position}"]`)).toHaveAttribute('href', googlePlay);
+      }
+      const software = (await jsonLd(page)).find((item) => item['@type'] === 'SoftwareApplication');
+      expect(software.installUrl).toEqual([appStore, googlePlay]);
+      expect(software.sameAs).toEqual([appStore, googlePlay]);
+      expect(software.operatingSystem).toBe('iOS, Android');
+
+      await page.goto(`/apps/${locale.path}`);
+      const card = page.locator('a[data-app-title="papira"], a[data-title="papira"]');
+      await expect(card).toHaveCount(1);
+      await expect(card).toHaveAttribute('href', `/apps/papira/${locale.path}`);
+      await expect(card.locator('.title-row > span')).toHaveText(releasedLabel);
+      await expect(card.locator('.platform-badges')).toHaveText(/^iOS\s*(?:·\s*)?Android$/);
     });
 
   }
@@ -393,13 +428,17 @@ test.describe('Papira nine-language launch surface', () => {
     expect(JSON.stringify(schemas)).not.toContain('/ko/ko/');
   });
 
-  test('released Papira exposes the verified App Store URL without inventing pricing data', async ({ page }) => {
+  test('released Papira exposes both verified store URLs without inventing pricing data', async ({ page }) => {
     await page.goto('/apps/papira/');
     const schemas = await jsonLd(page);
     const software = schemas.find((item) => item['@type'] === 'SoftwareApplication');
     expect(software).toBeTruthy();
-    expect(software.installUrl).toEqual(['https://apps.apple.com/us/app/id6803919552?l=en-US']);
-    expect(software.sameAs).toEqual(['https://apps.apple.com/us/app/id6803919552?l=en-US']);
+    const stores = [
+      'https://apps.apple.com/us/app/id6803919552?l=en-US',
+      'https://play.google.com/store/apps/details?id=com.onnellab.papira&hl=en&gl=US'
+    ];
+    expect(software.installUrl).toEqual(stores);
+    expect(software.sameAs).toEqual(stores);
     for (const key of ['isAccessibleForFree', 'downloadUrl', 'offers']) {
       expect(software).not.toHaveProperty(key);
     }
