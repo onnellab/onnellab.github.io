@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { uiLabels } from '../lib/ui-labels';
 import LocaleMenu from './LocaleMenu.astro';
 import { getIconRoutePath, getProductSources } from '../lib/products';
+import { getPapiraProductPageData } from '../lib/papira';
 import {
   allAppPrivacyRouteFor,
   allLocaleAlternates,
@@ -190,6 +191,7 @@ const definition = allLocaleDefinitions[locale];
 const canonicalPath = allRouteFor(page, locale);
 const productSources = getProductSources();
 const statusKind = (status: string) => /prepar|coming|soon/i.test(status) ? 'preparing' : 'released';
+const papiraData = getPapiraProductPageData(locale);
 const appItems = [
   ...productSources.map((source) => ({
     slug: source.slug,
@@ -202,9 +204,14 @@ const appItems = [
     privacy: allAppPrivacyRouteFor(source.slug, locale)
   })),
   {
-    slug: 'papira', title: 'Papira', status: copy.apps.preparing, platforms: ['iOS', 'Android'],
-    description: copy.appSummaries.papira, icon: '/app-assets/papira/icon.png',
-    href: allRouteFor('papira', locale), privacy: allRouteFor('papiraPrivacy', locale)
+    slug: 'papira',
+    title: papiraData.meta.title,
+    status: statusKind(papiraData.meta.status) === 'preparing' ? copy.apps.preparing : copy.apps.released,
+    platforms: papiraData.meta.platforms,
+    description: copy.appSummaries.papira,
+    icon: papiraData.iconPath,
+    href: allRouteFor('papira', locale),
+    privacy: allRouteFor('papiraPrivacy', locale)
   }
 ].sort((a, b) => a.title.localeCompare(b.title, 'en', { sensitivity: 'base' }));
 const featured = appItems.find((item) => item.slug === 'tagweaver');

@@ -98,8 +98,9 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
     const meta = {
       title: 'Papira',
       status: extendedPapiraStatus[locale],
-      platforms: ['iOS'],
+      platforms: ['iOS', 'Android'],
       appstore: 'https://apps.apple.com/app/id6803919552',
+      googleplay: 'https://play.google.com/store/apps/details?id=com.onnellab.papira',
       privacy: allRouteFor('papiraPrivacy', locale),
       supportEmail: 'onnellab.app@gmail.com',
       icon: 'assets/icon/Papira.png'
@@ -142,8 +143,9 @@ export function getPapiraProductPageData(locale: AllSiteLocale): ProductPageData
   const meta = {
     title: 'Papira',
     status: text.statusValue,
-    platforms: ['iOS'],
+    platforms: ['iOS', 'Android'],
     appstore: 'https://apps.apple.com/app/id6803919552',
+    googleplay: 'https://play.google.com/store/apps/details?id=com.onnellab.papira',
     privacy: allRouteFor('papiraPrivacy', baseLocale),
     supportEmail: 'onnellab.app@gmail.com',
     icon: 'assets/icon/Papira.png'
