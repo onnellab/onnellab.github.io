@@ -170,20 +170,12 @@ const existingPolicyHref = (href: string) => {
   const segment = localeDefinitions[locale].pathSegment;
   return segment ? href.replace(/\/?$/, `/${segment}/`) : href;
 };
-const policies = [
-  ...existingApps.map((app) => ({
-    title: app.title,
-    href: existingPolicyHref(app.privacy),
-    date: privacyUpdatedAtByTitle[app.title] ?? '2026-01-01',
-    platforms: app.platforms
-  })),
-  {
-    title: 'Papira',
-    href: routeFor('papiraPrivacy', locale),
-    date: privacyUpdatedAtByTitle.Papira,
-    platforms: ['iOS', 'Android']
-  }
-].sort((a, b) => a.title.localeCompare(b.title, 'en', { sensitivity: 'base' }));
+const policies = existingApps.map((app) => ({
+  title: app.title,
+  href: existingPolicyHref(app.privacy),
+  date: privacyUpdatedAtByTitle[app.title] ?? '2026-01-01',
+  platforms: app.platforms
+})).sort((a, b) => a.title.localeCompare(b.title, 'en', { sensitivity: 'base' }));
 const email = 'onnellab.app@gmail.com';
 const emailIndex = copy.contactBody.indexOf(email);
 const contactBefore = emailIndex >= 0 ? copy.contactBody.slice(0, emailIndex) : copy.contactBody;

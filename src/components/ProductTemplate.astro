@@ -132,10 +132,7 @@ const localizedGooglePlayUrl = (url: string | undefined, locale: ProductPageData
   playStoreUrl.searchParams.set('gl', storeLocale.country);
   return playStoreUrl.toString();
 };
-const privacyPath =
-  data.source.slug === 'papira'
-    ? allRouteFor('papiraPrivacy', data.locale)
-    : allAppPrivacyRouteFor(data.source.slug, data.locale);
+const privacyPath = allAppPrivacyRouteFor(data.source.slug, data.locale);
 const privacyUrl = new URL(privacyPath, Astro.site).toString();
 const appStoreUrl = isReleased ? localizedAppStoreUrl(meta.appstore, data.locale) : undefined;
 const googlePlayUrl = isReleased ? localizedGooglePlayUrl(meta.googleplay, data.locale) : undefined;
@@ -228,11 +225,7 @@ const breadcrumbJsonLd = {
       <a class="brand" href={homePath}>ONNELLAB</a>
       <div class="nav-actions">
         <a class="apps-link" href={appsPath}>{labels.allApps}</a>
-        {data.source.slug === 'papira' ? (
-          <LocaleMenu locale={data.locale} page="papira" />
-        ) : (
-          <LocaleMenu locale={data.locale} productSlug={data.source.slug} />
-        )}
+        <LocaleMenu locale={data.locale} productSlug={data.source.slug} />
       </div>
     </header>
 

@@ -28,12 +28,15 @@ export type ProductMeta = {
   privacy: string;
   supportEmail: string;
   icon: string;
+  socialImage?: string;
   accent?: ProductAccent;
 };
 
 export type PlatformCopy = {
   name?: string;
+  eyebrow?: string;
   shortDescription?: string;
+  indexSummary?: string;
   subtitle?: string;
   promo?: string;
   landingSubtitle?: string;
@@ -146,11 +149,13 @@ const appAccentOverrides: Record<string, ProductAccent> = {
 
 const fieldLabels = {
   name: '앱 이름:',
+  eyebrow: 'Eyebrow:',
   seoTitle: 'SEO title:',
   seoDescription: 'SEO description:',
   landingSubtitle: '랜딩 부제:',
   landingSubtitleEn: 'Landing subtitle:',
   shortDescription: '간단한 설명:',
+  indexSummary: 'Index summary:',
   detailedDescription: '자세한 설명:',
   landingDescription: '랜딩 페이지:',
   landingDescriptionEn: 'Landing page:',
@@ -199,11 +204,15 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     seoDescription,
     schemaFeatureList,
     iconPath: getIconRoutePath(source),
+    socialImagePath: getSocialImageRoutePath(source),
+    eyebrow: copy.android.eyebrow ?? copy.ios.eyebrow,
     screenshotPaths,
     screenshotAlts: getProductScreenshotAltsFromCopy(source, locale, screenshotPaths.length),
     screenshotDimensions: source.slug === 'aligna'
       ? { width: 1080, height: 2160 }
-      : ['quivra', 'segra'].includes(source.slug) ? { width: 1080, height: 2168 } : undefined,
+      : source.slug === 'papira'
+        ? { width: 1080, height: 1920 }
+        : ['quivra', 'segra'].includes(source.slug) ? { width: 1080, height: 2168 } : undefined,
     accent: productAccent(source)
   };
 }
@@ -216,7 +225,7 @@ export function getProductIndexItems(locale: Locale): ProductIndexItem[] {
       title: source.meta.title,
       status: source.meta.status,
       platforms: source.meta.platforms,
-      description: landingSubtitle(copy),
+      description: copy.android.indexSummary ?? copy.ios.indexSummary ?? landingSubtitle(copy),
       iconPath: getIconRoutePath(source),
       screenshotPath: getScreenshotRoutePaths(source, locale)[0],
       href: allProductRouteFor(source.slug, locale),
@@ -271,8 +280,26 @@ export function getIconAssets(): Array<{ routePath: string; filePath: string }> 
   }));
 }
 
+export function getSocialImageRoutePath(source: ProductSource): string | undefined {
+  if (!source.meta.socialImage) return undefined;
+  return `/app-assets/${source.slug}/${normalizeDocPath(source.meta.socialImage)}`;
+}
+
+export function getSocialImageFilePath(source: ProductSource): string | undefined {
+  if (!source.meta.socialImage) return undefined;
+  return path.resolve(source.contentDir, normalizeDocPath(source.meta.socialImage));
+}
+
+function getSocialImageAssets(): Array<{ routePath: string; filePath: string }> {
+  return getProductSources().flatMap((source) => {
+    const routePath = getSocialImageRoutePath(source);
+    const filePath = getSocialImageFilePath(source);
+    return routePath && filePath ? [{ routePath: routePath.replace(/^\/+/, ''), filePath }] : [];
+  });
+}
+
 export function getAppAssets(): Array<{ routePath: string; filePath: string }> {
-  return [...getIconAssets(), ...getScreenshotAssets()];
+  return [...getIconAssets(), ...getSocialImageAssets(), ...getScreenshotAssets()];
 }
 
 export function getScreenshotRoutePaths(source: ProductSource, locale: Locale): string[] {
@@ -398,6 +425,7 @@ function readProductMeta(contentDir: string): ProductMeta {
     privacy: required(values, 'privacy'),
     supportEmail: required(values, 'supportEmail'),
     icon: required(values, 'icon'),
+    socialImage: values.get('socialImage'),
     accent: optionalAccent(values.get('accent'))
   };
 }
@@ -462,6 +490,15 @@ function readProductCopy(contentDir: string, locale: Locale): ProductCopy {
       }
     };
     return { locale, android: platform, ios: platform };
+  }
+  const localizedFilePath = path.join(contentDir, `description-${locale.toLowerCase()}.md`);
+  if (fs.existsSync(localizedFilePath)) {
+    const raw = fs.readFileSync(localizedFilePath, 'utf8');
+    return {
+      locale,
+      android: parsePlatformCopy(section(raw, 'Android')),
+      ios: parsePlatformCopy(section(raw, 'ios'))
+    };
   }
   if (isExtendedSiteLocale(locale)) {
     const localized = getExtendedProductCopy(slug, locale);
@@ -531,11 +568,13 @@ function getProductScreenshotAltsFromCopy(
 function parsePlatformCopy(text: string): PlatformCopy {
   return {
     name: field(text, fieldLabels.name),
+    eyebrow: field(text, fieldLabels.eyebrow),
     seoTitle: field(text, fieldLabels.seoTitle),
     seoDescription: field(text, fieldLabels.seoDescription),
     landingSubtitle:
       field(text, fieldLabels.landingSubtitle) ?? field(text, fieldLabels.landingSubtitleEn),
     shortDescription: field(text, fieldLabels.shortDescription),
+    indexSummary: field(text, fieldLabels.indexSummary),
     subtitle: field(text, fieldLabels.subtitle),
     promo: field(text, fieldLabels.promo),
     landingDescription:

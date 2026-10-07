@@ -1,4 +1,3 @@
-import { getPapiraDescription } from './papira-description';
 import type { ExtendedSiteLocale } from './extended-site-i18n';
 
 export type ExtendedProductCopy = {
@@ -164,24 +163,6 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
       { question: 'Como posso recuperar alterações?', answer: 'O design usa salvamento automático, desfazer e snapshots para oferecer caminhos de recuperação.' },
       { question: 'O conteúdo do arquivo é enviado para um servidor?', answer: 'Não. O processamento e o salvamento permanecem no dispositivo.' }
     ]),
-    papira: make('Criador offline de EPUB a partir de TXT', getPapiraDescription('pt-BR'), 'Perguntas frequentes', [
-      {
-        "question": "Que tipos de obra posso preparar?",
-        "answer": "Qualquer conteúdo TXT finalizado pode ser convertido em EPUB. As predefinições apenas agilizam fluxos criativos comuns."
-      },
-      {
-        "question": "Posso editar o manuscrito no Papira?",
-        "answer": "O Papira serve para montar um manuscrito finalizado em EPUB. Faça as alterações no TXT primeiro no editor de sua preferência."
-      },
-      {
-        "question": "A exportação substitui arquivos existentes?",
-        "answer": "Não. Se o nome de saída já estiver em uso, o Papira acrescenta um número automaticamente e salva outro arquivo."
-      },
-      {
-        "question": "Os manuscritos são enviados para um servidor?",
-        "answer": "Não. Arquivos TXT, capas, projetos, prévias e EPUBs gerados são processados no dispositivo."
-      }
-    ])
   },
   de: {
     aligna: {
@@ -330,24 +311,6 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
       "seoDescription": "Mit TagWeaver MP3- und FLAC-Tags, Bewertungen, Cover und Liedtexte bearbeiten. Änderungen vor dem Speichern prüfen – lokal auf dem Gerät, ohne Datei-Upload."
     },
     vaultxt: make('Editor für große TXT-Dateien', `VaultXT ist ein schneller, leichter Texteditor für große Dateien.\n\nÖffne und bearbeite lange Dokumente, Logs, Entwürfe und exportierte Textdaten, die in gewöhnlichen Notiz-Apps schwerfällig werden können. Dateien werden direkt vom Gerät geöffnet und ohne Cloud-Upload gespeichert.\n\n## Hauptfunktionen\n\n- Große TXT-Dateien schnell öffnen\n- Lange Dokumente lesen und bearbeiten\n- Automatisch speichern\n- Wiederherstellung mit Rückgängig und Snapshots\n- Lokal und offline arbeiten\n\nKein Konto, keine Werbung, kein Tracking; Dateiinhalte werden nicht an externe Server gesendet.`, 'Häufige Fragen', [{ question: 'Kann VaultXT sehr große TXT-Dateien öffnen?', answer: 'Ja. Es ist für große TXT-Dateien, lange Dokumente, Logs, Entwürfe und exportierte Textdaten ausgelegt.' }, { question: 'Wie kann ich Änderungen wiederherstellen?', answer: 'Automatisches Speichern, Rückgängig und Snapshots bieten Wiederherstellungsmöglichkeiten.' }, { question: 'Werden Dateiinhalte an einen Server gesendet?', answer: 'Nein. Verarbeitung und Speicherung bleiben lokal.' }]),
-    papira: make('TXT offline in EPUB umwandeln', getPapiraDescription('de'), 'Häufige Fragen', [
-      {
-        "question": "Welche Arten von Werken kann ich vorbereiten?",
-        "answer": "Jeder fertige TXT-Inhalt kann in EPUB umgewandelt werden. Die Voreinstellungen beschleunigen lediglich häufige kreative Abläufe."
-      },
-      {
-        "question": "Kann ich das Manuskript in Papira bearbeiten?",
-        "answer": "Papira ist dafür gedacht, ein fertiges Manuskript als EPUB zusammenzusetzen. Bearbeite den TXT-Quelltext vorher in deinem bevorzugten Schreibprogramm."
-      },
-      {
-        "question": "Werden beim Export vorhandene Dateien überschrieben?",
-        "answer": "Nein. Ist der Ausgabename schon vergeben, ergänzt Papira automatisch eine Nummer und speichert eine neue Datei."
-      },
-      {
-        "question": "Werden Manuskripte auf einen Server hochgeladen?",
-        "answer": "Nein. TXT-Dateien, Coverbilder, Projekte, Vorschauen und erzeugte EPUB-Dateien werden auf dem Gerät verarbeitet."
-      }
-    ])
   },
   fr: {
     aligna: {
@@ -496,24 +459,6 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
       "seoDescription": "Modifiez les tags, notes, pochettes et paroles des MP3 et FLAC avec TagWeaver. Vérifiez vos modifications avant de les enregistrer, sans envoyer vos fichiers."
     },
     vaultxt: make('Éditeur de gros fichiers TXT', `VaultXT est un éditeur de texte rapide et léger conçu pour les gros fichiers.\n\nOuvrez et modifiez longs documents, journaux, brouillons et données texte exportées sans les envoyer vers un service cloud.\n\n## Fonctions principales\n\n- Ouvrir rapidement de gros TXT\n- Lire et modifier de longs documents\n- Sauvegarde automatique\n- Récupération avec annulation et snapshots\n- Travail local et hors ligne\n\nAucun compte, aucune publicité ni suivi ; le contenu n’est pas envoyé à un serveur externe.`, 'Questions fréquentes', [{ question: 'Puis-je ouvrir de très gros fichiers TXT ?', answer: 'Oui. VaultXT est conçu pour les gros TXT, longs documents, logs, brouillons et données exportées.' }, { question: 'Comment récupérer mes modifications ?', answer: 'Sauvegarde automatique, annulation et snapshots offrent des voies de récupération.' }, { question: 'Le contenu est-il envoyé à un serveur ?', answer: 'Non.' }]),
-    papira: make('Créateur EPUB hors ligne à partir de TXT', getPapiraDescription('fr'), 'Questions fréquentes', [
-      {
-        "question": "Quels types d’œuvres puis-je préparer ?",
-        "answer": "Tout contenu TXT finalisé peut être converti en EPUB. Les préréglages servent seulement à accélérer les flux créatifs courants."
-      },
-      {
-        "question": "Puis-je modifier le manuscrit dans Papira ?",
-        "answer": "Papira sert à assembler un manuscrit finalisé en EPUB. Modifiez d’abord le TXT source dans votre outil d’écriture habituel."
-      },
-      {
-        "question": "L’exportation écrase-t-elle les fichiers existants ?",
-        "answer": "Non. Si le nom de sortie est déjà utilisé, Papira ajoute automatiquement un numéro et enregistre un autre fichier."
-      },
-      {
-        "question": "Les manuscrits sont-ils envoyés vers un serveur ?",
-        "answer": "Non. Les fichiers TXT, couvertures, projets, aperçus et EPUB générés sont traités sur l’appareil."
-      }
-    ])
   },
   es: {
     aligna: {
@@ -662,24 +607,6 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
       "seoDescription": "Edita etiquetas, puntuaciones, carátulas y letras de MP3 y FLAC con TagWeaver. Revisa los cambios antes de guardarlos, sin subir tus archivos a servidores."
     },
     vaultxt: make('Editor de archivos TXT grandes', `VaultXT es un editor de texto rápido y ligero diseñado para archivos grandes.\n\nAbre y edita documentos largos, registros, borradores y datos exportados sin enviarlos a servicios en la nube.\n\n## Funciones principales\n\n- Abrir rápidamente TXT grandes\n- Leer y editar documentos largos\n- Guardado automático\n- Recuperación con deshacer y snapshots\n- Trabajo local y sin conexión\n\nNo hay cuenta, anuncios ni seguimiento; el contenido no se envía a servidores externos.`, 'Preguntas frecuentes', [{ question: '¿Puedo abrir archivos TXT muy grandes?', answer: 'Sí. VaultXT está diseñado para TXT grandes, documentos largos, logs, borradores y datos exportados.' }, { question: '¿Cómo puedo recuperar cambios?', answer: 'Guardado automático, deshacer y snapshots ofrecen opciones de recuperación.' }, { question: '¿Se envía el contenido a un servidor?', answer: 'No.' }]),
-    papira: make('Creador de EPUB sin conexión a partir de TXT', getPapiraDescription('es'), 'Preguntas frecuentes', [
-      {
-        "question": "¿Qué tipos de obras puedo preparar?",
-        "answer": "Cualquier contenido TXT terminado puede convertirse en EPUB. Los ajustes específicos solo agilizan flujos creativos habituales."
-      },
-      {
-        "question": "¿Puedo editar el manuscrito en Papira?",
-        "answer": "Papira está pensado para montar un manuscrito terminado como EPUB. Edita primero el TXT original en tu herramienta de escritura habitual."
-      },
-      {
-        "question": "¿La exportación sobrescribe archivos existentes?",
-        "answer": "No. Si el nombre de salida ya está en uso, Papira añade un número automáticamente y guarda otro archivo."
-      },
-      {
-        "question": "¿Los manuscritos se suben a un servidor?",
-        "answer": "No. Los archivos TXT, portadas, proyectos, vistas previas y EPUB generados se procesan en el dispositivo."
-      }
-    ])
   }
 };
 

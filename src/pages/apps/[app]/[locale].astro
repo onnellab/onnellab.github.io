@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ProductTemplate from '../../../components/ProductTemplate.astro';
-import { getPapiraProductPageData } from '../../../lib/papira';
 import { getProductPageData, getProductSources } from '../../../lib/products';
 import { localeDefinitions, siteLocales, type SiteLocale } from '../../../lib/site-i18n';
 import {
@@ -18,7 +17,7 @@ export function getStaticPaths() {
       props: { locale }
     }))
   );
-  const extended = [...getProductSources().map((source) => source.slug), 'papira'].flatMap((app) =>
+  const extended = getProductSources().map((source) => source.slug).flatMap((app) =>
     extendedSiteLocales.map((locale) => ({
       params: { app, locale: allLocaleDefinitions[locale].pathSegment },
       props: { locale }
@@ -37,9 +36,7 @@ const targetPath = '/apps/ko/';
 const data =
   app === 'ko'
     ? undefined
-    : app === 'papira'
-      ? getPapiraProductPageData(locale)
-      : getProductPageData(app, locale);
+    : getProductPageData(app, locale);
 ---
 
 {

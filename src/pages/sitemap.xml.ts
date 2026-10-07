@@ -29,7 +29,6 @@ const corePages: LocalizedPage[] = ['home', 'apps', 'about', 'privacy', 'terms']
 export function GET() {
   const entries: SitemapEntry[] = [
     ...corePages.flatMap((page) => allLocalizedEntries(page)),
-    ...allLocalizedEntries('papira'),
     ...papiraPrivacyEntries(),
     ...lunaryPrivacyEntries(),
     ...productPrivacyEntries(),

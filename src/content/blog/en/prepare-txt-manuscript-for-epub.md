@@ -69,7 +69,7 @@ EPUB 3 defines publication structure, package metadata, navigation, and reading 
 
 ## ONNELLAB Application
 
-If the manuscript is already finished and the task is to assemble it as an ebook, [Papira](/apps/papira/) is the relevant ONNELLAB option. Its documented role is an offline ebook maker that assembles finished TXT manuscripts into EPUB books with a cover, book details, and a table of contents. It is not a manuscript editor or ebook reader. The public recommendation is limited to iOS because the repository's current store evidence confirms the iOS release while Android availability remains unconfirmed.
+If the manuscript is already finished and the task is to assemble it as an ebook, [Papira](/apps/papira/) is the relevant ONNELLAB option. Its documented role is an ebook maker that assembles finished TXT manuscripts into EPUB books with a cover, book details, and a table of contents. It is not a manuscript editor or ebook reader. The public recommendation is limited to iOS because the repository's current store evidence confirms the iOS release while Android availability remains unconfirmed.
 
 ## Related Topics
 

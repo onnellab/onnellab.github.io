@@ -302,27 +302,24 @@ test.describe('site layout and navigation', () => {
     await expect.poll(() => new URL(page.url()).pathname).toBe('/apps/tagweaver/');
   });
 
-  test('home uses the full TagWeaver card as the link and keeps Papira off the homepage', async ({ page }) => {
+  test('home uses TagWeaver as featured and the requested four other apps', async ({ page }) => {
     for (const segment of ['', 'ko/', 'ja/', 'zh-hans/', 'zh-hant/']) {
       await page.goto(`/${segment}`);
       const featured = page.locator('a.featured');
       await expect(featured).toHaveAttribute('href', `/apps/tagweaver/${segment}`);
       await expect(featured.locator('h2')).toContainText('TagWeaver');
       await expect(featured.locator('a')).toHaveCount(0);
-      await expect(page.locator('main')).not.toContainText('Papira');
       await expect(page.locator('.product-card')).toHaveCount(4);
+      await expect(page.locator('.product-card h3')).toHaveText(['Melivra', 'Papira', 'Quivra', 'VaultXT']);
     }
-
-    await page.goto('/apps/ko/');
-    await expect(page.locator('[data-app-row]').filter({ hasText: 'Papira' })).toHaveCount(1);
   });
 
   test('home delivers responsive WebP derivatives while product identity keeps its source icon', async ({ page, request }, testInfo) => {
     const homeIcons = [
-      { slug: 'aligna', width: 44, sizes: '44px', source: '/app-assets/aligna/assets/icon/aligna.png' },
-      { slug: 'clipnest', width: 44, sizes: '44px', source: '/app-assets/clipnest/assets/icon/clipnest.png' },
+      { slug: 'melivra', width: 44, sizes: '44px', source: '/app-assets/melivra/assets/icon/melivra.png' },
+      { slug: 'papira', width: 44, sizes: '44px', source: '/app-assets/papira/icon.png' },
       { slug: 'quivra', width: 44, sizes: '44px', source: '/app-assets/quivra/assets/icon/quivra.png' },
-      { slug: 'segra', width: 44, sizes: '44px', source: '/app-assets/segra/assets/icon/segra.png' },
+      { slug: 'vaultxt', width: 44, sizes: '44px', source: '/app-assets/vaultxt/assets/icon/vaultxt.png' },
       {
         slug: 'tagweaver',
         width: 92,
@@ -959,23 +956,23 @@ test.describe('app and privacy collections', () => {
     const summaries = [
       {
         path: '/apps/',
-        text: 'Offline TXT-to-EPUB maker'
+        text: 'TXT-to-EPUB maker'
       },
       {
         path: '/apps/ko/',
-        text: '오프라인 TXT→EPUB 제작 도구'
+        text: 'TXT→EPUB 제작 도구'
       },
       {
         path: '/apps/ja/',
-        text: 'オフラインTXT→EPUB作成ツール'
+        text: 'TXT→EPUB作成ツール'
       },
       {
         path: '/apps/zh-hans/',
-        text: '离线 TXT 转 EPUB 制作工具'
+        text: 'TXT 转 EPUB 制作工具'
       },
       {
         path: '/apps/zh-hant/',
-        text: '離線 TXT 轉 EPUB 製作工具'
+        text: 'TXT 轉 EPUB 製作工具'
       }
     ];
 
@@ -1130,7 +1127,7 @@ test.describe('app and privacy collections', () => {
       await page.goto(`/privacy/${locale}/`);
       await expect(page.locator('[data-policy-row]').filter({ hasText: 'Papira' })).toHaveAttribute(
         'href',
-        `/privacy/papira/${locale}/`
+        `https://onnellab.com/privacy/papira/${locale}/`
       );
       await expect(page.locator('[data-policy-row]').filter({ hasText: 'TagWeaver' })).toHaveAttribute(
         'href',
@@ -1392,7 +1389,7 @@ test.describe('blog and crawl endpoints', () => {
     expect(llms.ok()).toBe(true);
     const llmsText = await llms.text();
     expect(llmsText).toContain('## Blog Articles');
-    expect(llmsText).toContain('## Papira');
+    expect(llmsText).toContain('- [Papira](https://onnellab.com/apps/papira/)');
     expect(llmsText).toContain('https://onnellab.com/apps/papira/zh-hant/');
     expect(llmsText).not.toContain('https://onnellab.com/undefined');
     expect(llmsText).toContain('https://onnellab.com/apps/tagweaver/ja/');

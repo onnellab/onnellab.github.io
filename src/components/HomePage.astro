@@ -169,20 +169,16 @@ const copy = copies[locale];
 const definition = localeDefinitions[locale];
 const canonicalPath = routeFor('home', locale);
 const existingApps = getProductIndexItems(contentLocale(locale));
-const releasedAppOrder = ['Aligna', 'ClipNest', 'Quivra', 'Segra', 'TagWeaver', 'VaultXT'];
-const releasedAppNames = new Set(releasedAppOrder);
-const releasedApps = existingApps
-  .filter(
-    (app): app is ProductIndexItem =>
-      app.status === 'Released' && app.hasStoreListing && releasedAppNames.has(app.title)
-  )
-  .sort((a, b) => releasedAppOrder.indexOf(a.title) - releasedAppOrder.indexOf(b.title));
+const releasedApps = existingApps.filter(
+  (app): app is ProductIndexItem => app.status === 'Released' && app.hasStoreListing
+);
 const featuredApp = releasedApps.find((app) => app.title === 'TagWeaver') ?? releasedApps[0];
+const featuredOtherOrder = ['Melivra', 'Papira', 'Quivra', 'VaultXT'];
 const appHref = (slug: string) => productRouteFor(slug, locale);
 const featuredHref = featuredApp ? appHref(featuredApp.slug) : routeFor('apps', locale);
 const featuredOthers = releasedApps
-  .filter((app) => app.title !== featuredApp?.title)
-  .slice(0, 4)
+  .filter((app) => featuredOtherOrder.includes(app.title))
+  .sort((a, b) => featuredOtherOrder.indexOf(a.title) - featuredOtherOrder.indexOf(b.title))
   .map((app) => ({ ...app, href: appHref(app.slug) }));
 const appCardStyle = (app: ProductIndexItem) =>
   `--accent-border: ${app.accent.border}; --accent-bg: ${app.accent.background}; --accent-text: ${app.accent.text};`;

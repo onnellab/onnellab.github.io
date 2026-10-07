@@ -5,7 +5,6 @@ import {
   allSiteLocales
 } from '../lib/extended-site-i18n';
 import { getProductPageData, getProductSources } from '../lib/products';
-import { getPapiraProductPageData } from '../lib/papira';
 
 // llms.txt v2 stays concise and link-oriented; detailed product facts live on destination pages.
 const siteUrl = 'https://onnellab.com';
@@ -33,12 +32,8 @@ export function GET() {
     }),
     `- [TagWeaver — Japanese](${absolute(allProductRouteFor('tagweaver', 'ja'))}): Representative Japanese localized product page.`,
     `- [TagWeaver — Traditional Chinese](${absolute(allProductRouteFor('tagweaver', 'zh-Hant'))}): Representative Traditional Chinese localized product page.`,
-    '',
-    '## Papira',
-    '',
-    `- [Papira](${absolute(allRouteFor('papira', 'en'))}): ${getPapiraProductPageData('en').seoDescription}`,
-    `- [Papira — Spanish](${absolute(allRouteFor('papira', 'es'))}): Spanish localized product page.`,
-    `- [Papira — Traditional Chinese](${absolute(allRouteFor('papira', 'zh-Hant'))}): Traditional Chinese localized product page.`,
+    `- [Papira — Spanish](${absolute(allProductRouteFor('papira', 'es'))}): Spanish localized product page.`,
+    `- [Papira — Traditional Chinese](${absolute(allProductRouteFor('papira', 'zh-Hant'))}): Traditional Chinese localized product page.`,
     '',
     '## Localized app indexes',
     '',

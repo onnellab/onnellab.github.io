@@ -1,13 +1,9 @@
 import { expect, test } from '@playwright/test';
 import { getProductPageData, getProductSources } from '../src/lib/products';
-import { getPapiraProductPageData } from '../src/lib/papira';
-import { getPapiraDescription, getPapiraSeoDescription } from '../src/lib/papira-description';
-import { getExtendedProductCopy } from '../src/lib/extended-product-localizations';
 import { allSiteLocales } from '../src/lib/extended-site-i18n';
 
-const apps = [...getProductSources().map(source => source.slug), 'papira'];
-const dataFor = (app: string, locale: typeof allSiteLocales[number]) =>
-  app === 'papira' ? getPapiraProductPageData(locale) : getProductPageData(app, locale);
+const apps = getProductSources().map(source => source.slug);
+const dataFor = (app: string, locale: typeof allSiteLocales[number]) => getProductPageData(app, locale);
 
 for (const locale of allSiteLocales) {
   test(`${locale}: every product has an authored, unique web summary`, () => {
@@ -33,11 +29,14 @@ test('ClipNest summaries retain clipboard saving, pinning and keyboard reuse', (
   for (const term of ['키보드', '저장', '고정', '붙여넣']) expect(ko).toContain(term);
 });
 
-test('Papira extended copy and metadata no longer read a stale duplicate body', () => {
-  for (const locale of ['pt-BR', 'de', 'fr', 'es'] as const) {
-    expect(getExtendedProductCopy('papira', locale).body).toBe(getPapiraDescription(locale));
-    expect(getPapiraProductPageData(locale).seoDescription).toBe(getPapiraSeoDescription(locale));
-    expect(getPapiraProductPageData(locale).seoDescription).not.toMatch(/romans personnels|novelas personales/u);
+test('Papira uses the regular product source and omits offline from its product descriptor', () => {
+  expect(getProductSources().some(source => source.slug === 'papira')).toBe(true);
+  for (const locale of allSiteLocales) {
+    const data = getProductPageData('papira', locale);
+    const summary = data.copy.android.indexSummary ?? data.copy.ios.indexSummary ?? '';
+    expect(summary).toBeTruthy();
+    expect(summary).not.toMatch(/offline|오프라인|オフライン|离线|離線|hors ligne|sin conexión/i);
+    expect(data.seoTitle).not.toMatch(/offline|오프라인|オフライン|离线|離線|hors ligne|sin conexión/i);
   }
 });
 
@@ -92,12 +91,9 @@ for (const app of ['lunary', 'meriq']) {
 }
 
 test('released apps keep localized store links and never display the prerelease notice', async ({ page }) => {
-  const releasedApps = [
-    ...getProductSources()
-      .filter(source => source.meta.status === 'Released')
-      .map(source => source.slug),
-    'papira',
-  ];
+  const releasedApps = getProductSources()
+    .filter(source => source.meta.status === 'Released')
+    .map(source => source.slug);
   for (const app of releasedApps) {
     const data = dataFor(app, 'ko');
     await page.goto(data.canonicalPath);

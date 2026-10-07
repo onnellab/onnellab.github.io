@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
 import { getProductIndexItems, type ProductIndexItem } from '../lib/products';
-import { getPapiraProductPageData } from '../lib/papira';
 import {
   contentLocale,
   localeAlternates,
@@ -121,29 +120,7 @@ const existingApps: AppCard[] = getProductIndexItems(contentLocale(locale)).map(
     statusKind: kind
   };
 });
-const papiraSummary: Record<SiteLocale, string> = {
-  en: 'Offline TXT-to-EPUB maker',
-  ko: '오프라인 TXT→EPUB 제작 도구',
-  ja: 'オフラインTXT→EPUB作成ツール',
-  'zh-Hans': '离线 TXT 转 EPUB 制作工具',
-  'zh-Hant': '離線 TXT 轉 EPUB 製作工具'
-};
-const papiraData = getPapiraProductPageData(contentLocale(locale));
-const papiraKind = statusKind(papiraData.meta.status);
-const papiraCard: AppCard = {
-  slug: 'papira',
-  title: papiraData.meta.title,
-  status: copy.status[papiraKind],
-  statusKind: papiraKind,
-  platforms: papiraData.meta.platforms,
-  description: papiraSummary[locale],
-  iconPath: papiraData.iconPath,
-  href: routeFor('papira', locale),
-  privacy: routeFor('papiraPrivacy', locale),
-  hasStoreListing: Boolean(papiraData.meta.appstore || papiraData.meta.googleplay),
-  accent: papiraData.accent
-};
-const apps = [papiraCard, ...existingApps].sort((a, b) =>
+const apps = existingApps.sort((a, b) =>
   a.title.localeCompare(b.title, 'en', { sensitivity: 'base' })
 );
 const appCardStyle = (app: AppCard) =>

@@ -1,18 +1,15 @@
 import { getProductPageData } from '../src/lib/products';
-import { getPapiraProductPageData } from '../src/lib/papira';
 import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 
 const appsDir = path.resolve(process.cwd(), 'src/content/apps');
 // Discover product directories so every future app automatically inherits the nine-language contract.
-const apps = [
-  ...fs
-    .readdirSync(appsDir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name),
-  'papira'
-].sort();
+const apps = fs
+  .readdirSync(appsDir, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => entry.name)
+  .sort();
 const locales = [
   { code: 'en', segment: '' },
   { code: 'ko', segment: 'ko' },
@@ -79,9 +76,7 @@ for (const app of apps) {
 
       const metaDescription = await page.locator('meta[name="description"]').getAttribute('content');
       expect(metaDescription).toBeTruthy();
-      const data = app === 'papira'
-        ? getPapiraProductPageData(locale.code)
-        : getProductPageData(app, locale.code);
+      const data = getProductPageData(app, locale.code);
       expect(data.copy.android.seoDescription ?? data.copy.ios.seoDescription).toBeTruthy();
       expect(metaDescription).toBe(data.seoDescription);
       expect(metaDescription).not.toMatch(/Platforms:|지원 플랫폼:|対応プラットフォーム:|支持平台：|支援平台：|Plataformas:|Plattformen:|Plateformes\s*:/u);

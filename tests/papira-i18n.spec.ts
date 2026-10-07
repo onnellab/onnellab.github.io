@@ -3,15 +3,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const locales = [
-  { path: '', hreflang: 'en', title: 'Papira - Offline TXT to EPUB Maker' },
-  { path: 'ko/', hreflang: 'ko', title: 'Papira - 오프라인 TXT EPUB 제작 도구' },
-  { path: 'ja/', hreflang: 'ja', title: 'Papira - オフラインTXT・EPUB作成ツール' },
-  { path: 'zh-hans/', hreflang: 'zh-Hans', title: 'Papira - 离线 TXT 转 EPUB 制作工具' },
-  { path: 'zh-hant/', hreflang: 'zh-Hant', title: 'Papira - 離線 TXT 轉 EPUB 製作工具' },
-  { path: 'pt-br/', hreflang: 'pt-BR', title: 'Papira - Criador offline de EPUB a partir de TXT' },
-  { path: 'de/', hreflang: 'de', title: 'Papira - TXT offline in EPUB umwandeln' },
-  { path: 'fr/', hreflang: 'fr', title: 'Papira - Créateur EPUB hors ligne à partir de TXT' },
-  { path: 'es/', hreflang: 'es', title: 'Papira - Creador de EPUB sin conexión a partir de TXT' }
+  { path: '', hreflang: 'en', title: 'Papira - TXT to EPUB Maker' },
+  { path: 'ko/', hreflang: 'ko', title: 'Papira - TXT EPUB 제작 도구' },
+  { path: 'ja/', hreflang: 'ja', title: 'Papira - TXT→EPUB作成ツール' },
+  { path: 'zh-hans/', hreflang: 'zh-Hans', title: 'Papira - TXT 转 EPUB 制作工具' },
+  { path: 'zh-hant/', hreflang: 'zh-Hant', title: 'Papira - TXT 轉 EPUB 製作工具' },
+  { path: 'pt-br/', hreflang: 'pt-BR', title: 'Papira - Criador de EPUB a partir de TXT' },
+  { path: 'de/', hreflang: 'de', title: 'Papira - TXT-zu-EPUB-Ersteller' },
+  { path: 'fr/', hreflang: 'fr', title: 'Papira - Créateur EPUB à partir de TXT' },
+  { path: 'es/', hreflang: 'es', title: 'Papira - Creador de EPUB a partir de TXT' }
 ] as const;
 
 const releaseContract = {
@@ -129,42 +129,38 @@ async function jsonLd(page: Page) {
 }
 
 test.describe('Papira nine-language launch surface', () => {
-  test('Papira routes and sitemap depend only on active shared page sources', () => {
-    const obsoleteComponent = ['Papira', 'Page.astro'].join('');
-    const obsoletePage = path.resolve(process.cwd(), 'src/components', obsoleteComponent);
-    expect(fs.existsSync(obsoletePage)).toBe(false);
+  test('Papira routes and sitemap use the shared product pipeline', () => {
+    const contentDir = path.resolve(process.cwd(), 'src/content/apps/papira');
+    expect(fs.existsSync(path.join(contentDir, 'app.md'))).toBe(true);
+    for (const locale of locales) {
+      const fileName = `description-${locale.hreflang.toLowerCase()}.md`;
+      expect(fs.existsSync(path.join(contentDir, fileName))).toBe(true);
+    }
 
-    const sitemapSource = fs.readFileSync(
-      path.resolve(process.cwd(), 'src/pages/sitemap.xml.ts'),
-      'utf8'
-    );
-    const workflowSource = fs.readFileSync(
-      path.resolve(process.cwd(), '.github/workflows/i18n-smoke.yml'),
-      'utf8'
-    );
-    expect(sitemapSource).not.toContain(obsoleteComponent);
-    expect(workflowSource).not.toContain(obsoleteComponent);
-    expect(sitemapSource).toContain("allLocalizedEntries('papira')");
-  expect(sitemapSource).toContain('...productEntries()');
-  expect(sitemapSource).toContain("{ lang: 'x-default', path: pathFor('en') }");
-  expect(sitemapSource).not.toContain('lastmod');
-  expect(sitemapSource).not.toContain('sourceFileLastmod');
-  expect(sitemapSource).not.toContain('latestLastmod');
-  expect(sitemapSource).not.toContain('corePageSources');
-
-    const papiraRoutes = [
+    for (const legacyPath of [
+      'src/lib/papira.ts',
+      'src/lib/papira-description.ts',
       'src/pages/apps/papira/index.astro',
       'src/pages/apps/papira/ko/index.astro',
       'src/pages/apps/papira/ja/index.astro',
       'src/pages/apps/papira/zh-hans/index.astro',
-      'src/pages/apps/papira/zh-hant/index.astro',
-      'src/pages/apps/[app]/[locale].astro'
-    ];
-    for (const route of papiraRoutes) {
-      const source = fs.readFileSync(path.resolve(process.cwd(), route), 'utf8');
-      expect(source).toContain('ProductTemplate');
-      expect(source).not.toContain(obsoleteComponent.replace('.astro', ''));
+      'src/pages/apps/papira/zh-hant/index.astro'
+    ]) {
+      expect(fs.existsSync(path.resolve(process.cwd(), legacyPath))).toBe(false);
     }
+
+    const englishRoute = fs.readFileSync(path.resolve(process.cwd(), 'src/pages/apps/[app].astro'), 'utf8');
+    const localizedRoute = fs.readFileSync(path.resolve(process.cwd(), 'src/pages/apps/[app]/[locale].astro'), 'utf8');
+    expect(englishRoute).toContain('getProductSources');
+    expect(englishRoute).toContain('getProductPageData');
+    expect(localizedRoute).toContain('getProductSources');
+    expect(localizedRoute).toContain('getProductPageData');
+
+    const sitemapSource = fs.readFileSync(path.resolve(process.cwd(), 'src/pages/sitemap.xml.ts'), 'utf8');
+    expect(sitemapSource).toContain('...productEntries()');
+    expect(sitemapSource).not.toContain("allLocalizedEntries('papira')");
+    expect(sitemapSource).toContain("{ lang: 'x-default', path: pathFor('en') }");
+    expect(sitemapSource).not.toContain('lastmod');
   });
 
   for (const locale of locales) {
@@ -337,22 +333,14 @@ test.describe('Papira nine-language launch surface', () => {
     }
   });
 
-  test('every Papira hero leads with a concise localized TXT-to-EPUB signal', async ({ page }) => {
-    const expectations = [
-      { path: '/apps/papira/', first: 'Finished TXT → EPUB', category: 'fanfiction' },
-      { path: '/apps/papira/ko/', first: '완성된 TXT → EPUB', category: '팬픽' },
-      { path: '/apps/papira/ja/', first: '完成したTXT → EPUB', category: '二次創作' },
-      { path: '/apps/papira/zh-hans/', first: '完成的 TXT → EPUB', category: '同人文' },
-      { path: '/apps/papira/zh-hant/', first: '完成的 TXT → EPUB', category: '同人文' }
-    ];
-
-    for (const expected of expectations) {
-      await page.goto(expected.path);
+  test('every Papira hero uses the shared product feature source', async ({ page }) => {
+    for (const locale of locales) {
+      await page.goto(`/apps/papira/${locale.path}`);
       const signals = page.locator('.hero .task-preview .task-row strong');
+      const features = page.locator('.copy-column ul > li');
       await expect(signals).toHaveCount(3);
-      await expect(signals.first()).toHaveText(expected.first);
-      await expect(page.locator('.hero .task-preview')).not.toContainText(expected.category);
-      expect((await signals.first().innerText()).length).toBeLessThanOrEqual(20);
+      await expect(features).toHaveCount(7);
+      expect(await signals.allTextContents()).toEqual((await features.allTextContents()).slice(0, 3));
     }
   });
 
@@ -448,7 +436,7 @@ test.describe('Papira nine-language launch surface', () => {
     const iconPath = '/app-assets/papira/icon.png';
     await page.goto('/apps/papira/');
     await expect(page.locator('.identity img')).toHaveAttribute('src', iconPath);
-    expect(fs.existsSync(path.resolve(process.cwd(), 'public', iconPath.replace(/^\//, '')))).toBe(true);
+    expect(fs.existsSync(path.resolve(process.cwd(), 'src/content/apps/papira/icon.png'))).toBe(true);
   });
 
   test('every Papira locale publishes the large PNG social card while schema keeps the square icon', async ({ page }) => {
@@ -489,11 +477,11 @@ test.describe('Papira nine-language launch surface', () => {
         images.map((image) => image.getAttribute('alt'))
       )).toEqual(['', '', '', '', '']);
       for (let index = 0; index < 5; index += 1) {
-        const source = `/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png?v=200587433576`;
+        const source = `/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png`;
         await expect(screenshots.nth(index)).toHaveAttribute('src', source);
         await expect(screenshots.nth(index)).toHaveAttribute('width', '1080');
         await expect(screenshots.nth(index)).toHaveAttribute('height', '1920');
-        expect(fs.existsSync(path.resolve(process.cwd(), 'public', new URL(source, 'https://onnellab.com').pathname.replace(/^\//, '')))).toBe(true);
+        expect(fs.existsSync(path.resolve(process.cwd(), 'src/content/apps/papira/assets/screenshots', screenshotLocale, `0${index + 1}.png`))).toBe(true);
         // Bring each lazy-loaded image into view, including offscreen mobile carousel items.
         await screenshots.nth(index).scrollIntoViewIfNeeded();
         await expect
@@ -512,7 +500,7 @@ test.describe('Papira nine-language launch surface', () => {
         Array.from(
           { length: 5 },
           (_, index) =>
-            `https://onnellab.com/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png?v=200587433576`
+            `https://onnellab.com/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png`
         )
       );
     }

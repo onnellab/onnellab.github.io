@@ -1,16 +1,15 @@
 import { expect, test } from '@playwright/test';
 import { getProductPageData, getProductSources, pageBodyDescription, renderBlocks } from '../src/lib/products';
-import { getPapiraProductPageData } from '../src/lib/papira';
 import { allSiteLocales } from '../src/lib/extended-site-i18n';
 import { productPresentationLabels, validateProductPresentation } from '../src/lib/product-presentation';
 
 const featureCounts = { aligna: 7, clipnest: 6, lunary: 8, melivra: 7, meriq: 8, papira: 7, quivra: 6, segra: 5, tagweaver: 7, vaultxt: 8 };
 const dataFor = (app: string, locale: typeof allSiteLocales[number]) =>
-  app === 'papira' ? getPapiraProductPageData(locale) : getProductPageData(app, locale);
+  getProductPageData(app, locale);
 
 // Do not let a newly added product silently escape this regression suite.
 test('all active products are covered by the presentation contract', () => {
-  expect([...getProductSources().map(source => source.slug), 'papira'].sort()).toEqual(Object.keys(featureCounts).sort());
+  expect(getProductSources().map(source => source.slug).sort()).toEqual(Object.keys(featureCounts).sort());
   expect(dataFor('lunary', 'en').meta.status).toBe('Preparing for release');
   for (const app of ['melivra', 'papira']) {
     expect(dataFor(app, 'en').meta.status).toBe('Released');
