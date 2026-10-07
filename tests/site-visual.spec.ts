@@ -1056,9 +1056,11 @@ test.describe('app and privacy collections', () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto('/about/ko/');
     await expect(page.locator('#timeline-title')).toHaveText('연표');
-    await expect(page.locator('.timeline li')).toHaveCount(6);
+    await expect(page.locator('.timeline li')).toHaveCount(8);
     await expect(page.locator('.timeline')).toContainText('TagWeaver 출시');
     await expect(page.locator('.timeline')).toContainText('Segra 출시');
+    await expect(page.locator('.timeline')).toContainText('Papira 출시');
+    await expect(page.locator('.timeline')).toContainText('Melivra 출시');
 
     const introBox = await page.locator('.intro-copy').boundingBox();
     const principlesBox = await page.locator('.principles-grid').boundingBox();
