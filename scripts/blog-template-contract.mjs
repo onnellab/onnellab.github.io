@@ -199,7 +199,7 @@ short_answer: "Show a concrete next-reading card when related article metadata p
 published_at: "2026-07-11"
 updated_at: "2026-07-11"
 tags: "reading|workflow"
-related_articles: "Offline Text Workflow Guide => /blog/en/template-contract-related/"
+related_articles: "Offline Text Workflow Guide => https://onnellab.com/blog/en/template-contract-related/"
 ---
 
 # Readable Public Article
@@ -221,6 +221,18 @@ They should appear as linked cards after the article body.
   assert.match(relatedHtml, /Offline Text Workflow Guide/);
   assert.match(html, /Next reading/);
   assert.match(html, /recommendation-card/);
-  assert.match(html, /href="\/blog\/en\/template-contract-related\/"/);
   assert.match(html, /Offline Text Workflow Guide/);
+  assert.match(html, /<a class="recommendation-card" href="https:\/\/onnellab\.com\/blog\/en\/template-contract-related\/"/);
+  assert.doesNotMatch(html, /<small>https?:\/\//);
+  assert.doesNotMatch(html, /Offline Text Workflow Guide\s*=&gt;\s*https?:\/\//);
+
+  const commaTitleHtml = fs.readFileSync(
+    path.join(root, 'dist/blog/en/turn-rough-notes-into-structured-first-draft/index.html'),
+    'utf8'
+  );
+  assert.match(
+    commaTitleHtml,
+    /<a class="recommendation-card" href="https:\/\/onnellab\.com\/blog\/en\/organize-downloads-small-folder-system\/".*?<strong[^>]*>How to Organize Downloads With a Small, Durable Folder System<\/strong>/,
+  );
+  assert.doesNotMatch(commaTitleHtml, /<span class="recommendation-card"/);
 });

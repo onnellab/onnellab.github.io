@@ -132,7 +132,7 @@ const appHref = (appName: string) => {
 };
 const recommendation = (item: string) => {
   const markdown = item.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-  const pair = item.match(/^(.+?)\s*=>\s*(\/\S+)$/);
+  const pair = item.match(/^(.+?)\s*=>\s*(https?:\/\/\S+|\/(?!\/)\S+)$/i);
   if (markdown) return { label: markdown[1], href: markdown[2] };
   if (pair) return { label: pair[1].trim(), href: pair[2] };
   return { label: item, href: '' };
@@ -420,7 +420,6 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
                     <>
                       <span>{copy.relatedArticleLabel}</span>
                       <strong>{item.label}</strong>
-                      {item.href && <small>{item.href}</small>}
                     </>
                   );
                   return item.href ? <a class="recommendation-card" href={item.href}>{content}</a> : <span class="recommendation-card">{content}</span>;
@@ -1024,13 +1023,6 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
     font-size: 16px;
     line-height: 1.32;
     font-weight: 760;
-  }
-  .recommendation-card small {
-    align-self: end;
-    color: #756f65;
-    font-size: 12px;
-    line-height: 1.35;
-    overflow-wrap: anywhere;
   }
   .recommendation-card:hover,
   .recommendation-card:focus-visible {

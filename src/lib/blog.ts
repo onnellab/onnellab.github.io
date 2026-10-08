@@ -187,8 +187,8 @@ function readPost(filePath: string, fallbackLanguage: Locale): BlogPost {
     updatedAt: frontmatter.updated_at || frontmatter.updatedAt || undefined,
     tags: splitList(frontmatter.tags),
     relatedApps: splitList(frontmatter.related_apps || frontmatter.relatedApps),
-    relatedArticles: splitList(frontmatter.related_articles || frontmatter.relatedArticles),
-    relatedGuides: splitList(frontmatter.related_guides || frontmatter.relatedGuides),
+    relatedArticles: splitRelatedItems(frontmatter.related_articles || frontmatter.relatedArticles),
+    relatedGuides: splitRelatedItems(frontmatter.related_guides || frontmatter.relatedGuides),
     imageSpecs: splitList(frontmatter.image_specs || frontmatter.imageSpecs)
   };
   return {
@@ -220,6 +220,12 @@ function splitList(value?: string): string[] {
     .split(/[|,]/)
     .map((item) => item.trim())
     .filter(Boolean);
+}
+
+// Related-article titles can contain commas. Items are delimited by pipes.
+function splitRelatedItems(value?: string): string[] {
+  if (!value) return [];
+  return value.split('|').map((item) => item.trim()).filter(Boolean);
 }
 
 function isTableStart(lines: string[], index: number): boolean {
