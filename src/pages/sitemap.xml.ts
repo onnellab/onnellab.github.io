@@ -1,6 +1,3 @@
-import fs from 'node:fs';
-import path from 'node:path';
-
 import { getBlogPosts } from '../lib/blog';
 import { availableBlogLocales, blogPostAlternates } from '../lib/blog-i18n';
 import {
@@ -11,7 +8,8 @@ import {
   allSiteLocales,
   type AllSiteLocale
 } from '../lib/extended-site-i18n';
-import { privacyAppSlugs, translatedPrivacyLocales } from '../lib/app-privacy-localizations';
+import { translatedPrivacyLocales } from '../lib/app-privacy-localizations';
+import { allPrivacyAppSlugs } from '../lib/privacy-policy-documents';
 import { getProductSources } from '../lib/products';
 import { releaseNotes } from '../lib/releaseNotes';
 import type { LocalizedPage } from '../lib/site-i18n';
@@ -28,8 +26,6 @@ const corePages: LocalizedPage[] = ['home', 'apps', 'about', 'privacy', 'terms']
 export function GET() {
   const entries: SitemapEntry[] = [
     ...corePages.flatMap((page) => allLocalizedEntries(page)),
-    ...papiraPrivacyEntries(),
-    ...lunaryPrivacyEntries(),
     ...productPrivacyEntries(),
     ...blogEntries(),
     ...oauthEntries(),
@@ -54,22 +50,6 @@ function allLocalizedEntries(page: LocalizedPage): SitemapEntry[] {
   }));
 }
 
-function papiraPrivacyEntries(): SitemapEntry[] {
-  const alternates = pageAlternates('papiraPrivacy');
-  return allSiteLocales.map((locale) => ({
-    path: allRouteFor('papiraPrivacy', locale),
-    alternates
-  }));
-}
-
-function lunaryPrivacyEntries(): SitemapEntry[] {
-  const alternates = appPrivacyAlternates('lunary');
-  return allSiteLocales.map((locale) => ({
-    path: allAppPrivacyRouteFor('lunary', locale),
-    alternates
-  }));
-}
-
 function productEntries(): SitemapEntry[] {
   return getProductSources().flatMap((source) => {
     const alternates = productAlternates(source.slug);
@@ -81,10 +61,7 @@ function productEntries(): SitemapEntry[] {
 }
 
 function productPrivacyEntries(): SitemapEntry[] {
-  return privacyAppSlugs.flatMap((slug) => {
-    const enSourcePath = `public/privacy/${slug}/index.html`;
-    const koSourcePath = `public/privacy/${slug}/ko/index.html`;
-    for (const sourcePath of [enSourcePath, koSourcePath]) assertExists(sourcePath);
+  return allPrivacyAppSlugs.flatMap((slug) => {
     const alternates = appPrivacyAlternates(slug);
     return allSiteLocales.map((locale) => ({
       path: allAppPrivacyRouteFor(slug, locale),
@@ -174,12 +151,6 @@ function releaseNotePathFor(appSlug: string, version: string, locale: AllSiteLoc
   const base = `/release-notes/${appSlug}/${version}/`;
   if (locale === 'en') return base;
   return `${base}${allLocaleDefinitions[locale].pathSegment}/`;
-}
-
-function assertExists(sourcePath: string) {
-  if (!fs.existsSync(path.resolve(process.cwd(), sourcePath))) {
-    throw new Error(`Missing localized source: ${sourcePath}`);
-  }
 }
 
 function renderEntry(entry: SitemapEntry): string {

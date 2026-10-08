@@ -1,0 +1,13 @@
+---
+import LocalizedAppPrivacyPage from '../../../components/LocalizedAppPrivacyPage.astro';
+import {
+  allPrivacyAppSlugs,
+  type AllPrivacyAppSlug
+} from '../../../lib/privacy-policy-documents';
+
+export function getStaticPaths() {
+  return allPrivacyAppSlugs.map((app) => ({ params: { app }, props: { app } }));
+}
+const { app } = Astro.props as { app: AllPrivacyAppSlug };
+---
+<LocalizedAppPrivacyPage slug={app} locale="en" />

@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
 import { getProductIndexItems } from '../lib/products';
+import { allPrivacyAppSlugs, getPrivacyPolicyDocument, type AllPrivacyAppSlug } from '../lib/privacy-policy-documents';
 import {
   contentLocale,
   localeAlternates,
@@ -154,28 +155,23 @@ const { locale } = Astro.props;
 const copy = copies[locale];
 const definition = localeDefinitions[locale];
 const canonicalPath = routeFor('privacy', locale);
-const privacyUpdatedAtByTitle: Record<string, string> = {
-  Aligna: '2026-06-24',
-  ClipNest: '2026-06-13',
-  Melivra: '2026-07-09',
-  Meriq: '2026-08-23',
-  Papira: '2026-08-21',
-  Quivra: '2026-02-10',
-  Segra: '2026-06-12',
-  TagWeaver: '2026-02-14',
-  VaultXT: '2026-03-11'
-};
 const existingApps = getProductIndexItems(contentLocale(locale));
 const existingPolicyHref = (href: string) => {
   const segment = localeDefinitions[locale].pathSegment;
   return segment ? href.replace(/\/?$/, `/${segment}/`) : href;
 };
-const policies = existingApps.map((app) => ({
-  title: app.title,
-  href: existingPolicyHref(app.privacy),
-  date: privacyUpdatedAtByTitle[app.title] ?? '2026-01-01',
-  platforms: app.platforms
-})).sort((a, b) => a.title.localeCompare(b.title, 'en', { sensitivity: 'base' }));
+const policies = existingApps.map((app) => {
+  const slug = app.privacy.match(/\/privacy\/([^/?#]+)\/?$/)?.[1];
+  if (!slug || !(allPrivacyAppSlugs as readonly string[]).includes(slug)) {
+    throw new Error(`Missing canonical privacy source for ${app.title}`);
+  }
+  return {
+    title: app.title,
+    href: existingPolicyHref(app.privacy),
+    date: getPrivacyPolicyDocument(slug as AllPrivacyAppSlug, locale).updatedAt,
+    platforms: app.platforms
+  };
+}).sort((a, b) => a.title.localeCompare(b.title, 'en', { sensitivity: 'base' }));
 const email = 'onnellab.app@gmail.com';
 const emailIndex = copy.contactBody.indexOf(email);
 const contactBefore = emailIndex >= 0 ? copy.contactBody.slice(0, emailIndex) : copy.contactBody;

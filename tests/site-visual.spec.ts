@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { getAllBlogPages, getBlogAlternatePost } from '../src/lib/blog';
+import { getAllBlogPages, getBlogPosts } from '../src/lib/blog';
 import { releaseNoteKoPath, releaseNotePath, releaseNotes } from '../src/lib/releaseNotes';
 
 const corePages = [
@@ -72,7 +72,8 @@ type PublishedRouteContract = {
 };
 
 const blogArticleContracts: PublishedRouteContract[] = getAllBlogPages().map((post) => {
-  const alternate = getBlogAlternatePost(post);
+  const alternate = getBlogPosts(post.meta.language === 'en' ? 'ko' : 'en')
+    .find((entry) => entry.meta.slug === post.meta.slug);
   return {
     path: post.href,
     lang: post.meta.language,
@@ -143,22 +144,22 @@ const remainingGeneratedPageContracts: PublishedRouteContract[] = [
     standardizedChrome: true
   },
   {
-    path: '/melivra-privacy-policy/',
+    path: '/privacy/melivra/',
     lang: 'en',
-    h1: 'Privacy Policy',
-    alternatePath: '/melivra-privacy-policy/ko/',
+    h1: 'Melivra Privacy Policy',
+    alternatePath: '/privacy/melivra/ko/',
     alternateLocale: 'ko',
-    mainSelector: 'main.policy-page',
-    standardizedChrome: false
+    mainSelector: 'main.privacy-shell',
+    standardizedChrome: true
   },
   {
-    path: '/melivra-privacy-policy/ko/',
+    path: '/privacy/melivra/ko/',
     lang: 'ko',
-    h1: '개인정보 처리방침',
-    alternatePath: '/melivra-privacy-policy/',
+    h1: 'Melivra 개인정보 처리방침',
+    alternatePath: '/privacy/melivra/',
     alternateLocale: 'en',
-    mainSelector: 'main.policy-page',
-    standardizedChrome: false
+    mainSelector: 'main.privacy-shell',
+    standardizedChrome: true
   }
 ];
 

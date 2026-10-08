@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { allAppPrivacyRouteFor, allLocaleDefinitions, allSiteLocales, type AllSiteLocale } from '../lib/extended-site-i18n';
+
+export function getStaticPaths() {
+  return allSiteLocales.map((locale) => ({
+    params: {
+      privacyLegacy: locale === 'en'
+        ? 'melivra-privacy-policy'
+        : `melivra-privacy-policy/${allLocaleDefinitions[locale].pathSegment}`
+    },
+    props: { locale }
+  }));
+}
+const { locale } = Astro.props as { locale: AllSiteLocale };
+const targetPath = allAppPrivacyRouteFor('melivra', locale);
+const definition = allLocaleDefinitions[locale];
+---
+
+<BaseLayout
+  title="Melivra Privacy Policy"
+  description="This address has moved to the unified Melivra privacy policy."
+  canonicalPath={targetPath}
+  lang={definition.htmlLang}
+>
+  <meta http-equiv="refresh" content={`0;url=${targetPath}`} slot="head" />
+  <script is:inline define:vars={{ targetPath }}>window.location.replace(targetPath);</script>
+  <main class="privacy-legacy-redirect">
+    <p><a href={targetPath}>Melivra · {definition.label}</a></p>
+  </main>
+</BaseLayout>

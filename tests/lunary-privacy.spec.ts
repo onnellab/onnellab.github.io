@@ -43,7 +43,7 @@ test('Lunary privacy policy is authored for all public locales', () => {
     expect(body).toContain('Google');
     expect(body).toContain('Google API Services User Data Policy');
     expect(body).toContain('Limited Use');
-    expect(copy.updatedValue).toBe('2026-09-24');
+    expect(copy.updatedValue).toBe('2026-09-27');
   }
 });
 
