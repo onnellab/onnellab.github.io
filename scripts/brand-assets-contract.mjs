@@ -90,22 +90,23 @@ test('all blog SVGs use the current mark and published social PNGs have correct 
   assert.equal(count, 32);
 });
 
-test('static privacy documents link to the new brand cache version', async () => {
-  let checked = 0;
+test('all remaining static HTML pages use the approved brand cache version', async () => {
+  let pages = 0;
   async function inspect(dir) {
     for (const e of await fs.readdir(path.join(root, dir), { withFileTypes: true })) {
       const p = path.join(dir, e.name);
       if (e.isDirectory()) await inspect(p);
       else if (e.isFile() && p.endsWith('.html')) {
+        pages++;
         const html = await read(p);
-        if (html.includes('rel="icon"') && html.includes('favicon.svg')) {
-          assert.ok(html.includes('20261008-open-monogram-v1'), p);
-          assert.ok(!html.includes('20260712-ol-transparent-v2'), p);
-          checked++;
-        }
+        // EN/KO app privacy pages are now generated via BaseLayout instead of
+        // duplicated public HTML, so verify the actual remaining files.
+        assert.ok(html.includes('rel="icon"') && html.includes('favicon.svg'), p);
+        assert.ok(html.includes('20261008-open-monogram-v1'), p);
+        assert.ok(!html.includes('20260712-ol-transparent-v2'), p);
       }
     }
   }
   await inspect('public');
-  assert.ok(checked >= 59);
+  assert.ok(pages > 0, 'Expected public static HTML documents to validate');
 });
