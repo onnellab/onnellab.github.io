@@ -5,6 +5,8 @@ import path from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { uiLabels } from '../lib/ui-labels';
 import BlogLocaleMenu from './BlogLocaleMenu.astro';
+import BlogInline from './BlogInline.astro';
+import { plainBlogInline } from '../lib/blog-inline';
 import SiteFooter from './SiteFooter.astro';
 import { blogPostAlternates } from '../lib/blog-i18n';
 import { getBlogAlternatePost, renderMarkdownBlocks, type BlogPost } from '../lib/blog';
@@ -135,20 +137,8 @@ const recommendation = (item: string) => {
   if (pair) return { label: pair[1].trim(), href: pair[2] };
   return { label: item, href: '' };
 };
-const inlineParts = (value: string) => {
-  const parts: Array<{ text: string; href?: string }> = [];
-  const pattern = /\[([^\]]+)\]\(([^)]+)\)/g;
-  let lastIndex = 0;
-  for (const match of value.matchAll(pattern)) {
-    if (match.index > lastIndex) parts.push({ text: value.slice(lastIndex, match.index) });
-    parts.push({ text: match[1], href: match[2] });
-    lastIndex = match.index + match[0].length;
-  }
-  if (lastIndex < value.length) parts.push({ text: value.slice(lastIndex) });
-  return parts.length > 0 ? parts : [{ text: value }];
-};
 const tableCellClass = (value: string) => {
-  const plain = value.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1').trim();
+  const plain = plainBlogInline(value).trim();
   return plain.length > 28 || /[.!?。！？]/.test(plain) ? 'cell-long' : 'cell-short';
 };
 const slugifyHeading = (value: string) =>
@@ -327,7 +317,7 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
 
       <aside class="summary-box" aria-label={copy.summary}>
         <p>{copy.summary}</p>
-        <span>{summaryText}</span>
+        <span><BlogInline value={summaryText} /></span>
       </aside>
 
       {tocItems.length > 3 && (
@@ -336,7 +326,7 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
           <nav aria-label={copy.contents}>
             <ol>
               {tocItems.map((item) => (
-                <li><a href={`#${item.id}`}>{item.label}</a></li>
+                <li><a href={`#${item.id}`}>{plainBlogInline(item.label)}</a></li>
               ))}
             </ol>
           </nav>
@@ -350,20 +340,20 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
             const headingId = headingIds.get(index) || `faq-${index}`;
             return (
               <section class="faq-section" aria-labelledby={headingId}>
-                <h2 id={headingId}>{block.value}</h2>
+                <h2 id={headingId}><BlogInline value={String(block.value)} /></h2>
                 <div class="faq-list">
                   {faqBlocks.get(index)?.map((item) => (
                     <details>
-                      <summary>{item.question}</summary>
-                      <p>{item.answer}</p>
+                      <summary><BlogInline value={item.question} /></summary>
+                      <p><BlogInline value={item.answer} /></p>
                     </details>
                   ))}
                 </div>
               </section>
             );
           }
-          if (block.type === 'h2') return <h2 id={headingIds.get(index)}>{block.value}</h2>;
-          if (block.type === 'h3') return <h3>{block.value}</h3>;
+          if (block.type === 'h2') return <h2 id={headingIds.get(index)}><BlogInline value={String(block.value)} /></h2>;
+          if (block.type === 'h3') return <h3><BlogInline value={String(block.value)} /></h3>;
           if (block.type === 'ul') {
             const previousBlock = articleBlocks[index - 1];
             const isRelatedTopicList =
@@ -375,7 +365,7 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
                   const topicHref = isRelatedTopicList ? relatedTopicHref(item) : '';
                   return (
                     <li>
-                      {topicHref ? <a href={topicHref}>{item}</a> : inlineParts(item).map((part) => part.href ? <a href={part.href}>{part.text}</a> : part.text)}
+                      {topicHref ? <a href={topicHref}><BlogInline value={item} /></a> : <BlogInline value={item} />}
                     </li>
                   );
                 })}
@@ -383,9 +373,9 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
             );
           }
           if (block.type === 'ol') {
-            return <ol>{(block.value as string[]).map((item) => <li>{inlineParts(item).map((part) => part.href ? <a href={part.href}>{part.text}</a> : part.text)}</li>)}</ol>;
+            return <ol>{(block.value as string[]).map((item) => <li><BlogInline value={item} /></li>)}</ol>;
           }
-          if (block.type === 'blockquote') return <blockquote>{inlineParts(block.value).map((part) => part.href ? <a href={part.href}>{part.text}</a> : part.text)}</blockquote>;
+          if (block.type === 'blockquote') return <blockquote><BlogInline value={String(block.value)} /></blockquote>;
           if (block.type === 'code') return <pre><code>{block.value}</code></pre>;
           if (block.type === 'image') {
             const imageIndex = articleImages.indexOf(block);
@@ -403,18 +393,18 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
               <div class="table-scroll">
                 <table>
                   <thead>
-                    <tr>{block.value.headers.map((header) => <th class={tableCellClass(header)}>{header}</th>)}</tr>
+                    <tr>{block.value.headers.map((header) => <th class={tableCellClass(header)}><BlogInline value={header} /></th>)}</tr>
                   </thead>
                   <tbody>
                     {block.value.rows.map((row) => (
-                      <tr>{row.map((cell, cellIndex) => <td class={tableCellClass(cell)} data-label={block.value.headers[cellIndex]}>{inlineParts(cell).map((part) => part.href ? <a href={part.href}>{part.text}</a> : part.text)}</td>)}</tr>
+                      <tr>{row.map((cell, cellIndex) => <td class={tableCellClass(cell)} data-label={plainBlogInline(block.value.headers[cellIndex])}><BlogInline value={cell} /></td>)}</tr>
                     ))}
                   </tbody>
                 </table>
               </div>
             );
           }
-          return <p>{inlineParts(String(block.value)).map((part) => part.href ? <a href={part.href}>{part.text}</a> : part.text)}</p>;
+          return <p><BlogInline value={String(block.value)} /></p>;
         })}
       </div>
 

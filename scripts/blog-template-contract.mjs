@@ -79,15 +79,17 @@ This section should feed the summary box and should not appear again in the body
 
 ## Recommended Workflow
 
-- Start with the reader problem.
+Make **bold words** bold, include [**linked bold**](/apps/vaultxt/), and keep <script>alert(1)</script> inert.
+
+- Start with the **reader problem**.
 - Show the lowest-risk workflow.
 - Link to the matching [ONNELLAB application](/apps/vaultxt/).
 
-> Keep the callout short enough to scan before the reader reaches the detailed workflow.
+> Keep the **callout** short enough to scan before the reader reaches the detailed workflow.
 
-| Element | Purpose |
+| **Element** | Purpose |
 | --- | --- |
-| Summary | Answers the core question quickly |
+| **Summary** | Answers the core question quickly |
 | Related apps | Connects the workflow to a concrete ONNELLAB utility |
 
 \`\`\`
@@ -100,7 +102,7 @@ topics.csv -> markdown draft -> image_spec.json -> published page
 
 ### Should FAQ answers be rendered as normal paragraphs?
 
-No. FAQ questions should become collapsible details so long articles stay easy to scan.
+No. FAQ questions should become **collapsible details** so long articles stay easy to scan.
 
 ### Can related recommendations include URLs?
 
@@ -139,6 +141,22 @@ Yes. The template should render recommendation metadata as links when a URL is p
   assert.match(html, /topics.csv -&gt; markdown draft/);
   assert.match(html, /Caption text for a future generated workflow image/);
   assert.doesNotMatch(html, />Short Answer</);
+  for (const locale of fixtureLocales) {
+    const segment = { 'zh-Hans': 'zh-hans', 'zh-Hant': 'zh-hant', 'pt-BR': 'pt-br' }[locale] ?? locale;
+    const rendered = fs.readFileSync(path.join(root, 'dist/blog', segment, 'template-contract/index.html'), 'utf8');
+    assert.match(rendered, /<strong>bold words<\/strong>/, locale);
+    assert.match(rendered, /<strong>reader problem<\/strong>/, locale);
+    assert.match(rendered, /<strong>callout<\/strong>/, locale);
+    assert.match(rendered, /<strong>Summary<\/strong>/, locale);
+    if (locale === 'en' || locale === 'ko') {
+      assert.match(rendered, /data-label="Element"/, locale);
+      assert.doesNotMatch(rendered, /data-label="\*\*/, locale);
+    }
+    assert.match(rendered, /<strong>collapsible details<\/strong>/, locale);
+    assert.match(rendered, /<a href="\/apps\/vaultxt\/"><strong>linked bold<\/strong><\/a>/, locale);
+    assert.match(rendered, /&lt;script&gt;alert\(1\)&lt;\/script&gt;/, locale);
+    assert.doesNotMatch(rendered, /\*\*bold words\*\*/, locale);
+  }
 });
 
 test('blog article template renders next-reading cards when a public related post exists', () => {

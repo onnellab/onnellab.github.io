@@ -1,0 +1,15 @@
+---
+import { parseBlogInline } from '../lib/blog-inline';
+
+type Props = { value: string };
+const { value } = Astro.props;
+const parts = parseBlogInline(value);
+---
+
+{parts.map((part) => {
+  if (part.kind === 'strong') return <strong><Astro.self value={part.value} /></strong>;
+  if (part.kind === 'em') return <em><Astro.self value={part.value} /></em>;
+  if (part.kind === 'code') return <code>{part.value}</code>;
+  if (part.kind === 'link') return <a href={part.href}><Astro.self value={part.value} /></a>;
+  return part.value;
+})}

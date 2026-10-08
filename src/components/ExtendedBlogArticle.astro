@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { uiLabels } from '../lib/ui-labels';
 import { renderMarkdownBlocks } from '../lib/blog';
+import BlogInline from './BlogInline.astro';
 import { type ExtendedBlogPost } from '../lib/extended-blog';
 import {
   allLocaleDefinitions,
@@ -74,15 +75,6 @@ const alternates = [
   ...allSiteLocales.map((item) => ({ lang: allLocaleDefinitions[item].hreflang, path: postPath(item) })),
   { lang: 'x-default', path: `/blog/en/${post.slug}/` }
 ];
-const escapeHtml = (value: string) =>
-  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const inlineHtml = (value: string) => {
-  let output = escapeHtml(value);
-  output = output.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  output = output.replace(/`([^`]+)`/g, '<code>$1</code>');
-  output = output.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-  return output;
-};
 const categoryLabel = copy.categories[post.category as Category] ?? post.category;
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -165,15 +157,15 @@ const jsonLd = {
 
       <div class="article-body">
         {blocks.map((block) => {
-          if (block.type === 'h2') return <h2 set:html={inlineHtml(String(block.value))} />;
-          if (block.type === 'h3') return <h3 set:html={inlineHtml(String(block.value))} />;
-          if (block.type === 'p') return <p set:html={inlineHtml(String(block.value))} />;
-          if (block.type === 'blockquote') return <blockquote set:html={inlineHtml(String(block.value))} />;
-          if (block.type === 'ul') return <ul>{block.value.map((item) => <li set:html={inlineHtml(item)} />)}</ul>;
-          if (block.type === 'ol') return <ol>{block.value.map((item) => <li set:html={inlineHtml(item)} />)}</ol>;
+          if (block.type === 'h2') return <h2><BlogInline value={String(block.value)} /></h2>;
+          if (block.type === 'h3') return <h3><BlogInline value={String(block.value)} /></h3>;
+          if (block.type === 'p') return <p><BlogInline value={String(block.value)} /></p>;
+          if (block.type === 'blockquote') return <blockquote><BlogInline value={String(block.value)} /></blockquote>;
+          if (block.type === 'ul') return <ul>{block.value.map((item) => <li><BlogInline value={item} /></li>)}</ul>;
+          if (block.type === 'ol') return <ol>{block.value.map((item) => <li><BlogInline value={item} /></li>)}</ol>;
           if (block.type === 'image') return <figure><img src={block.src} alt={block.alt || ''} loading="lazy" /><figcaption>{block.caption}</figcaption></figure>;
           if (block.type === 'code') return <pre><code>{block.value}</code></pre>;
-          if (block.type === 'table') return <div class="table-wrap"><table><thead><tr>{block.value.headers.map((cell) => <th set:html={inlineHtml(cell)} />)}</tr></thead><tbody>{block.value.rows.map((row) => <tr>{row.map((cell) => <td set:html={inlineHtml(cell)} />)}</tr>)}</tbody></table></div>;
+          if (block.type === 'table') return <div class="table-wrap"><table><thead><tr>{block.value.headers.map((cell) => <th><BlogInline value={cell} /></th>)}</tr></thead><tbody>{block.value.rows.map((row) => <tr>{row.map((cell) => <td><BlogInline value={cell} /></td>)}</tr>)}</tbody></table></div>;
           return null;
         })}
       </div>
