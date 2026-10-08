@@ -1,0 +1,99 @@
+{
+  "appName": "Segra",
+  "title": "Segra Privacy Policy",
+  "description": "Privacy Policy for the Segra app.",
+  "intro": "This Privacy Policy applies to the Segra app provided by ONNELLAB.",
+  "updatedLabel": "Last updated",
+  "updatedAt": "2026-07-30",
+  "heading": "Privacy Policy",
+  "opening": "Segra values your privacy. This app operates as described below.",
+  "sections": [
+    {
+      "title": "1. Accounts and direct identifiers",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Segra does not require registration or sign-in with a name, email address, or phone number. Except for an optional server feature described below, app content and usage history are not transmitted to ONNELLAB."
+        }
+      ]
+    },
+    {
+      "title": "2. Data accessed or stored on the device",
+      "blocks": [
+        {
+          "kind": "list",
+          "items": [
+            "Audio and image files that the user explicitly selects",
+            "Generated audio or video files and app preferences stored on the device",
+            "Purchase entitlement stored on the device"
+          ]
+        },
+        {
+          "kind": "list",
+          "items": [
+            "Audio trimming and media generation occur on the device.",
+            "Selected files are not uploaded to an ONNELLAB server unless the user later shares an output through another app."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3. Server transmission",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "The app features described above do not transmit file contents or usage history to an ONNELLAB server."
+        }
+      ]
+    },
+    {
+      "title": "4. Payment information",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "In-app purchases are processed by Apple App Store or Google Play. Neither Segra nor ONNELLAB accesses or stores card or bank-account details. Product, transaction, and entitlement information supplied by the store may be used to verify and restore purchases."
+        }
+      ]
+    },
+    {
+      "title": "5. Advertising, analytics, and sharing",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Segra does not use advertising SDKs, behavioral analytics SDKs, or third-party tracking tools. Data is not sold or shared outside the purposes described above. If the user deliberately hands content to another app or service through the operating-system share features, that service's policy applies."
+        }
+      ]
+    },
+    {
+      "title": "6. Retention and deletion",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "App-managed local data can be removed through the applicable delete controls or by uninstalling the app. Source and output files controlled by the user remain under the user's control. ONNELLAB retains no app content on its servers."
+        }
+      ]
+    },
+    {
+      "title": "7. Security and children's privacy",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "ONNELLAB applies reasonable technical and organizational safeguards to data that must be transmitted. Segra is not directed to children under 13 and does not knowingly collect personal information from children."
+        }
+      ]
+    },
+    {
+      "title": "8. Changes and contact",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "If app functionality or legal or store requirements change, this document will be updated and its last-updated date will change."
+        },
+        {
+          "kind": "paragraph",
+          "value": "Privacy questions or deletion requests: onnellab.app@gmail.com"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "appName": "Melivra",
+  "title": "Melivra Privacy Policy",
+  "description": "Privacy Policy for the Melivra app.",
+  "intro": "This Privacy Policy applies to the Melivra app provided by ONNELLAB.",
+  "updatedLabel": "Last updated",
+  "updatedAt": "2026-07-30",
+  "heading": "Privacy Policy",
+  "opening": "Melivra values your privacy. This app operates as described below.",
+  "sections": [
+    {
+      "title": "1. Accounts and direct identifiers",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Melivra does not require registration or sign-in with a name, email address, or phone number. Except for an optional server feature described below, app content and usage history are not transmitted to ONNELLAB."
+        }
+      ]
+    },
+    {
+      "title": "2. Data accessed or stored on the device",
+      "blocks": [
+        {
+          "kind": "list",
+          "items": [
+            "Local audio files and their media metadata",
+            "Library entries, playback history, bookmarks, playlists, search history, AI results, and app preferences stored on the device",
+            "Purchase entitlement and AI credit balance information"
+          ]
+        },
+        {
+          "kind": "list",
+          "items": [
+            "Library browsing and ordinary audio playback occur on the device without uploading the audio.",
+            "AI transcript or translation processing starts only after the user selects audio and approves the disclosed credit estimate and upload."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3. Optional server processing",
+      "blocks": [
+        {
+          "kind": "list",
+          "items": [
+            "An anonymous server-issued subject identifier",
+            "The selected audio file for an approved AI job",
+            "Store product and transaction identifiers used to verify AI credit purchases",
+            "AI job status, credit ledger entries, transcripts, translations, and generated result metadata"
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "value": "This data is used only to verify purchases, maintain the AI credit balance, process the requested transcript or translation, return the result, prevent duplicate grants, and handle operational support."
+        }
+      ]
+    },
+    {
+      "title": "4. Payment information",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "In-app purchases are processed by Apple App Store or Google Play. Neither Melivra nor ONNELLAB accesses or stores card or bank-account details. Product, transaction, and entitlement information supplied by the store may be used to verify and restore purchases."
+        }
+      ]
+    },
+    {
+      "title": "5. Advertising, analytics, and sharing",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Melivra does not use advertising SDKs, behavioral analytics SDKs, or third-party tracking tools. Data is not sold or shared outside the purposes described above. If the user deliberately hands content to another app or service through the operating-system share features, that service's policy applies."
+        }
+      ]
+    },
+    {
+      "title": "6. Retention and deletion",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Uploaded source audio is not retained long-term after result generation. Job, result, transaction-verification, and credit-ledger records may be retained for service delivery, duplicate-payment prevention, accounting, dispute handling, and legal obligations. Deletion questions or requests can be sent to the contact address below."
+        }
+      ]
+    },
+    {
+      "title": "7. Security and children's privacy",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "ONNELLAB applies reasonable technical and organizational safeguards to data that must be transmitted. Melivra is not directed to children under 13 and does not knowingly collect personal information from children."
+        }
+      ]
+    },
+    {
+      "title": "8. Changes and contact",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "If app functionality or legal or store requirements change, this document will be updated and its last-updated date will change."
+        },
+        {
+          "kind": "paragraph",
+          "value": "Privacy questions or deletion requests: onnellab.app@gmail.com"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "appName": "Meriq",
+  "title": "Meriq Privacy Policy",
+  "description": "Privacy Policy for the Meriq app.",
+  "intro": "This Privacy Policy applies to the Meriq app provided by ONNELLAB.",
+  "updatedLabel": "Last updated",
+  "updatedAt": "2026-08-23",
+  "heading": "Privacy Policy",
+  "opening": "Meriq values your privacy. This app operates as described below.",
+  "sections": [
+    {
+      "title": "1. Accounts and direct identifiers",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Meriq does not require registration or sign-in with a name, email address, or phone number."
+        }
+      ]
+    },
+    {
+      "title": "2. Data accessed or stored on the device",
+      "blocks": [
+        {
+          "kind": "list",
+          "items": [
+            "Project files, imported resources, and metadata you explicitly select",
+            "Project preferences, purchase entitlement status, and local app settings"
+          ]
+        },
+        {
+          "kind": "list",
+          "items": [
+            "Project, preview, export, and image content processing occurs on the device.",
+            "Selected files are not uploaded to an ONNELLAB server.",
+            "Only files you explicitly choose via the system file picker are used."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3. Server transmission",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "App content (projects, images, usage data) is not sent to ONNELLAB servers. Diagnostic logs do not include file contents."
+        }
+      ]
+    },
+    {
+      "title": "4. Payment information",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "In-app purchases are processed by Apple App Store or Google Play. Neither Meriq nor ONNELLAB stores or collects card or bank-account details. Store-supplied product, transaction, and entitlement status is used only to verify and restore entitlements."
+        }
+      ]
+    },
+    {
+      "title": "5. Advertising, analytics, and sharing",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Meriq does not use advertising SDKs, behavioral analytics SDKs, or third-party tracking tools. Data is not sold or shared outside the purposes described above."
+        },
+        {
+          "kind": "paragraph",
+          "value": "If content is handed to another app or service through the operating-system share sheet, that service's privacy and usage policy applies."
+        }
+      ]
+    },
+    {
+      "title": "6. Retention and deletion",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Local app-managed data can be removed through in-app delete actions or by uninstalling the app. Source and output files selected by the user remain under user control."
+        }
+      ]
+    },
+    {
+      "title": "7. Security and children's privacy",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "ONNELLAB applies reasonable technical and organizational safeguards to necessary transmitted data. Meriq is not directed to children under 13 and does not knowingly collect personal information from children."
+        }
+      ]
+    },
+    {
+      "title": "8. Changes and contact",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "If app functionality or legal/store requirements change, this document will be updated and its last-updated date will change."
+        },
+        {
+          "kind": "paragraph",
+          "value": "Privacy questions or deletion requests: onnellab.app@gmail.com"
+        }
+      ]
+    }
+  ]
+}
