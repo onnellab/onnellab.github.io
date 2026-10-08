@@ -8,6 +8,8 @@ on:
       - '.github/workflows/i18n-smoke.yml'
       - 'src/**'
       - 'public/privacy/**'
+      - 'public/apps/*/privacy/**'
+      - 'public/*/privacy/**'
       - 'tests/**'
       - 'scripts/blog-template-contract.mjs'
       - 'scripts/check-localization-quality.mjs'
@@ -24,6 +26,8 @@ on:
       - '.github/workflows/i18n-smoke.yml'
       - 'src/**'
       - 'public/privacy/**'
+      - 'public/apps/*/privacy/**'
+      - 'public/*/privacy/**'
       - 'tests/**'
       - 'scripts/blog-template-contract.mjs'
       - 'scripts/check-localization-quality.mjs'
@@ -89,6 +93,9 @@ jobs:
 
       - name: Verify privacy route ownership
         run: npx playwright test tests/privacy-route-ownership.spec.ts --project=desktop --reporter=line,html
+
+      - name: Verify shared app privacy templates and preserved policy copy
+        run: npx playwright test tests/privacy-shared-template.spec.ts --project=desktop --project=mobile --reporter=line,html
 
       - name: Run site i18n regression tests
         run: npx playwright test tests/site-i18n.spec.ts --project=desktop --reporter=line,html
