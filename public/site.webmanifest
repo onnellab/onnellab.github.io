@@ -4,7 +4,7 @@
   "icons": [
     {
       "src": "/favicon.svg?v=20261008-open-monogram-v1",
-      "sizes": "64x64",
+      "sizes": "any",
       "type": "image/svg+xml"
     },
     {

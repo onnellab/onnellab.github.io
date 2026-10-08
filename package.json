@@ -7,10 +7,11 @@
     "build": "astro build",
     "check:blog-social-cards": "node scripts/generate-blog-social-cards.mjs --check",
     "dev": "astro dev",
-    "generate:blog-social-cards": "node scripts/generate-blog-social-cards.mjs",
+    "generate:blog-social-cards": "node scripts/apply-blog-brand.mjs && node scripts/generate-blog-social-cards.mjs",
     "test:deploy-contract": "node --test scripts/deploy-workflow-contract.mjs",
     "preview": "astro preview",
     "test:blog-template": "node --test scripts/blog-template-contract.mjs",
+    "test:brand": "node --test scripts/brand-assets-contract.mjs",
     "test:visual": "playwright test",
     "check:i18n-quality": "node scripts/check-localization-quality.mjs",
     "audit:security": "npm audit --package-lock-only --include=dev --audit-level=high",
@@ -21,7 +22,8 @@
     "http-cache-semantics": "file:vendor/disabled-http-cache"
   },
   "devDependencies": {
-    "@playwright/test": "^1.61.1"
+    "@playwright/test": "^1.61.1",
+    "sharp": "0.35.5"
   },
   "overrides": {
     "http-cache-semantics": "$http-cache-semantics"

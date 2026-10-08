@@ -31,19 +31,18 @@ for (const [name, fill] of Object.entries(colors)) {
     await svgAndPng('mark-' + name, svgFor({ fill }));
   }
 }
-for (const name of ['white', 'ivory', 'lilac', 'soft-peach', 'baby-blue']) {
-  await svgAndPng('icon-' + name, svgFor({ background: colors[name] }));
-}
-await fs.writeFile(path.join(root, 'public', 'favicon.svg'), svgFor({ fill: charcoal }));
-const defaultIcon = svgFor({ background: colors.ivory });
+const transparentMark = svgFor({ fill: charcoal });
+const ivoryIcon = svgFor({ fill: charcoal, background: colors.ivory });
+await fs.writeFile(path.join(root, 'public', 'favicon.svg'), transparentMark);
+await sharp(Buffer.from(transparentMark)).resize(32, 32).png().toFile(path.join(root, 'public/favicon-32x32.png'));
+// iOS home-screen and the internal Ops app intentionally retain an ivory tile.
 for (const [filepath, size] of [
-  ['public/favicon-32x32.png', 32],
   ['public/apple-touch-icon.png', 180],
   ['public/ops/icon-180.png', 180],
   ['public/ops/icon-192.png', 192],
   ['public/ops/icon-512.png', 512]
 ]) {
-  await sharp(Buffer.from(defaultIcon)).resize(size, size).png().toFile(path.join(root, filepath));
+  await sharp(Buffer.from(ivoryIcon)).resize(size, size).png().toFile(path.join(root, filepath));
 }
 
 const socialPath = path.join(root, 'public', 'social-card.svg');
@@ -67,4 +66,22 @@ if (end <= start) throw new Error('Invalid social-card logo boundary');
 social = social.slice(0, start) + replacement + social.slice(end);
 await fs.writeFile(socialPath, social);
 await sharp(Buffer.from(social)).png().toFile(path.join(root, 'public', 'social-card.png'));
-console.log('ONNELLAB approved logo: color variants, favicon, touch, Ops and social-card generated');
+let legacyPages = 0;
+async function updateStaticFaviconVersion(dir) {
+  for (const item of await fs.readdir(dir, { withFileTypes: true })) {
+    const filename = path.join(dir, item.name);
+    if (item.isDirectory()) {
+      await updateStaticFaviconVersion(filename);
+    } else if (item.isFile() && filename.endsWith('.html')) {
+      const before = await fs.readFile(filename, 'utf8');
+      const after = before.replaceAll('20260712-ol-transparent-v2', '20261008-open-monogram-v1');
+      if (after !== before) {
+        await fs.writeFile(filename, after);
+        legacyPages++;
+      }
+    }
+  }
+}
+await updateStaticFaviconVersion(path.join(root, 'public'));
+
+console.log(`ONNELLAB approved logo: variants, favicon, touch, Ops, social-card; ${legacyPages} legacy static pages refreshed`);

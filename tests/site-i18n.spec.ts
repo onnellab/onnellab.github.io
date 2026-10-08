@@ -157,7 +157,7 @@ test.describe('nine-language site core regression', () => {
       );
       await expect.soft(page.locator('link[rel="icon"][type="image/svg+xml"]')).toHaveAttribute(
         'href',
-        'https://onnellab.com/favicon.svg?v=20260713-ol-classic-v2'
+        'https://onnellab.com/favicon.svg?v=20261008-open-monogram-v1'
       );
     }
   });
