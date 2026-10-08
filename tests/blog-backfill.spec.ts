@@ -15,6 +15,7 @@ for (const article of [
   { slug: 'keep-durable-research-reading-log', published: '2026-08-26T09:00:00+09:00', papira: false },
   { slug: 'choose-media-output-format-before-conversion', published: '2026-08-29T09:00:00+09:00', papira: false },
   { slug: 'number-tracks-multi-disc-mp3-album', published: '2026-09-04T09:00:00+09:00', papira: false },
+  { slug: 'inspect-large-log-file-without-altering-original', published: '2026-09-07T09:00:00+09:00', papira: false },
 ]) for (const locale of locales) {
   test(`${article.slug}: ${locale.hreflang} metadata, assets and responsive layout`, async ({ page }) => {
     const segment = locale.hreflang.toLowerCase();

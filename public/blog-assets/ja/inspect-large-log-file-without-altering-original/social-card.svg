@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">原本を変えずに大容量ログファイルを調べる方法</title>
+  <desc id="desc">原本を保管して作業コピーで大容量ログを調べる方法。時間帯とIDで検索し、前後の文脈、機密情報、文字コード、派生ファイルの記録を確認します。</desc>
+  <rect width="1200" height="630" fill="#f8f4ec"/>
+  <rect x="58" y="54" width="1084" height="522" rx="30" fill="#fffdf8" stroke="#d8d0c3" stroke-width="2"/>
+  <rect x="92" y="92" width="210" height="44" rx="22" fill="#e7f2fb" stroke="#b9d7ea" stroke-width="1.4"/>
+  <text x="118" y="121" fill="#24465c" font-family="Noto Sans CJK JP, system-ui, sans-serif" font-size="18" font-weight="700">読書</text>
+  <text x="92" y="218" fill="#282723" font-family="Noto Sans CJK JP, system-ui, sans-serif" font-size="54" font-weight="760"><tspan x="92" y="218">原本を変えずに大容量ログファイルを</tspan><tspan x="92" y="282">調べる方法</tspan></text>
+  <text fill="#5f5b54" font-family="Noto Sans CJK JP, system-ui, sans-serif" font-size="24"><tspan x="92" y="410">原本を保管して作業コピーで大容量ログを調べる方法。時間帯とIDで検索し、前後の</tspan><tspan x="92" y="444">文脈、機密情報、文字コード、派生ファイルの記録を確認します。</tspan></text>
+  <path d="M92 518H1108" stroke="#ded7ca" stroke-width="2"/>
+  <text x="92" y="552" fill="#817c73" font-family="Noto Sans CJK JP, system-ui, sans-serif" font-size="19">読書 · JA</text>
+  <!-- ONNELLAB approved monogram -->
+  <svg x="908" y="512" width="66" height="66" viewBox="0 0 1254 1254"><path fill="#282723" d="M 271 475 L 259 501 L 250 527 L 243 556 L 239 584 L 238 611 L 239 612 L 240 642 L 244 667 L 251 694 L 260 719 L 272 745 L 281 761 L 306 796 L 343 833 L 364 849 L 388 864 L 427 882 L 468 894 L 500 899 L 541 900 L 542 899 L 556 899 L 583 895 L 622 885 L 653 873 L 677 861 L 691 852 L 691 729 L 668 751 L 649 766 L 628 779 L 599 792 L 575 799 L 552 803 L 520 804 L 519 803 L 509 803 L 496 801 L 475 796 L 456 789 L 431 776 L 403 755 L 386 738 L 366 711 L 354 689 L 344 663 L 338 639 L 336 625 L 336 612 L 335 611 L 336 587 L 339 569 L 343 553 L 351 531 L 363 508 L 380 484 L 400 463 L 413 452 L 430 440 L 456 426 L 480 417 L 505 411 L 519 409 L 531 409 L 532 408 L 549 408 L 550 409 L 561 409 L 575 411 L 596 416 L 620 425 L 648 441 L 669 458 L 688 479 L 701 498 L 715 527 L 722 549 L 727 582 L 727 872 L 730 880 L 738 889 L 746 893 L 751 894 L 1048 894 L 1058 890 L 1065 882 L 1067 877 L 1067 817 L 1062 807 L 1054 801 L 1047 799 L 824 799 L 823 798 L 823 574 L 822 573 L 820 547 L 812 513 L 803 487 L 790 459 L 779 440 L 759 412 L 744 395 L 727 379 L 708 364 L 683 348 L 652 333 L 626 324 L 591 316 L 568 314 L 567 313 L 552 313 L 551 312 L 550 313 L 549 312 L 514 313 L 513 314 L 504 314 L 484 317 L 454 324 L 423 335 L 394 349 L 364 368 L 346 382 L 307 421 L 293 439 Z"/></svg>
+  <text x="1080" y="552" fill="#30302c" font-family="Noto Sans CJK JP, system-ui, sans-serif" font-size="19" font-weight="800" text-anchor="end">ONNELLAB</text>
+</svg>
