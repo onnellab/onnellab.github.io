@@ -1,4 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const locales = [
   {
@@ -162,15 +164,21 @@ test.describe('nine-language site core regression', () => {
     }
   });
 
-  test('home social preview asset is a 1200 by 675 PNG', async ({ request }) => {
+  test('home social preview matches the approved 1200 by 630 source canvas', async ({ request }) => {
     const response = await request.get('/social-card.png');
     expect(response.status()).toBe(200);
     expect(response.headers()['content-type']).toBe('image/png');
 
+    // 18ba64c4 intentionally replaced the old 16:9 artwork with this canvas.
+    // Keep the approved SVG/PNG assets unchanged and verify their shared contract.
+    const svg = fs.readFileSync(path.join(process.cwd(), 'public/social-card.svg'), 'utf8');
+    expect(svg).toMatch(/<svg\b[^>]*\bwidth="1200"[^>]*\bheight="630"[^>]*\bviewBox="0 0 1200 630"/);
+    expect(svg).toContain('ONNELLAB approved monogram');
     const png = await response.body();
+    expect(png).toEqual(fs.readFileSync(path.join(process.cwd(), 'public/social-card.png')));
     expect(png.subarray(0, 8)).toEqual(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
     expect(png.readUInt32BE(16)).toBe(1200);
-    expect(png.readUInt32BE(20)).toBe(675);
+    expect(png.readUInt32BE(20)).toBe(630);
   });
 
   test('product pages keep their product-specific social preview metadata', async ({ page }) => {
