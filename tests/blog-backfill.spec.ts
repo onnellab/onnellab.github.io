@@ -17,6 +17,7 @@ for (const article of [
   { slug: 'number-tracks-multi-disc-mp3-album', published: '2026-09-04T09:00:00+09:00', papira: false },
   { slug: 'inspect-large-log-file-without-altering-original', published: '2026-09-07T09:00:00+09:00', papira: false },
   { slug: 'organize-downloads-small-folder-system', published: '2026-09-01T09:00:00+09:00', papira: false },
+  { slug: 'turn-rough-notes-into-structured-first-draft', published: '2026-09-19T12:24:43+09:00', papira: false },
 ]) for (const locale of locales) {
   test(`${article.slug}: ${locale.hreflang} metadata, assets and responsive layout`, async ({ page }) => {
     const segment = locale.hreflang.toLowerCase();
