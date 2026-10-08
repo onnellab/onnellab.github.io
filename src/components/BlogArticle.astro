@@ -158,7 +158,7 @@ const socialImageCandidate = articleImage?.endsWith('.svg')
   : articleImage;
 const articleSocialImage = socialImageCandidate && publicAssetExists(socialImageCandidate)
   ? socialImageCandidate
-  : articleImage;
+  : articleImage || '/social-card.png';
 const articleTitle = `${post.meta.title} - ONNELLAB Blog`;
 const absoluteUrl = (path: string) => new URL(path, Astro.site).toString();
 const allFaqItems = Array.from(faqBlocks.values()).flat();
