@@ -28,8 +28,13 @@ for (const locale of locales) {
       expect(schemas.find(item => item['@type'] === 'BlogPosting')?.datePublished).toBe('2026-10-04T11:34:40+09:00');
       expect(schemas.find(item => item['@type'] === 'FAQPage')?.mainEntity.length).toBeGreaterThan(0);
       await expect(page.locator('article a[href*="play.google.com/store/apps/details?id=com.onnellab.papira"]').first()).toBeVisible();
+      await page.locator('article img[src*="workflow-diagram"]').scrollIntoViewIfNeeded();
       await expect(page.locator('article img[src*="workflow-diagram"]')).toBeVisible();
       await expect.poll(() => page.locator('article img').evaluateAll(images => images.every(image => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0))).toBe(true);
+      if (['ja', 'zh-Hans', 'zh-Hant'].includes(locale.hreflang)) {
+        await expect(page.locator('.article-body')).toHaveCSS('word-break', 'normal');
+        await expect(page.locator('.article-body td').first()).toHaveCSS('word-break', 'normal');
+      }
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
       expect(overflow, `${locale.hreflang} article overflows at ${width}px`).toBe(false);
     }

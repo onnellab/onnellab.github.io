@@ -781,6 +781,16 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
     word-break: keep-all;
     overflow-wrap: normal;
   }
+  /* CJK text without spaces needs its normal inter-character wrap points. */
+  :global(html:lang(ja)) .article-body,
+  :global(html:lang(zh-Hans)) .article-body,
+  :global(html:lang(zh-Hant)) .article-body,
+  :global(html:lang(ja)) .article-body :is(th, td),
+  :global(html:lang(zh-Hans)) .article-body :is(th, td),
+  :global(html:lang(zh-Hant)) .article-body :is(th, td) {
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
   .article-body th.cell-short,
   .article-body td.cell-short {
     text-align: center;
