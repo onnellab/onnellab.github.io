@@ -35,7 +35,9 @@ for (const locale of allSiteLocales) {
 
     await page.goto(blogPostPathFor(locale, 'txt-vs-epub-for-long-reading'));
     await expect(page.locator('nav.site-header')).toHaveAttribute('aria-label', uiLabels[locale].articleNavigation);
-    const metadata = locale === 'en' || locale === 'ko' ? page.locator('.meta-grid') : page.locator('.meta');
+    // Every locale now uses the shared BlogArticle template.
+    const metadata = page.locator('.meta-grid');
+    await expect(metadata).toHaveCount(1);
     await expect(metadata).toHaveAttribute('aria-label', uiLabels[locale].articleMetadata);
 
     const viewer = page.locator('.article-image-viewer');
