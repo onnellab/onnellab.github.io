@@ -13,6 +13,7 @@ const approvedMark = approvedSvg.match(/<path\b[^>]*\sd="([^"]+)"/)?.[1];
 for (const article of [
   { slug: 'prepare-txt-manuscript-for-epub', published: '2026-10-04T11:34:40+09:00', papira: true },
   { slug: 'keep-durable-research-reading-log', published: '2026-08-26T09:00:00+09:00', papira: false },
+  { slug: 'choose-media-output-format-before-conversion', published: '2026-08-29T09:00:00+09:00', papira: false },
 ]) for (const locale of locales) {
   test(`${article.slug}: ${locale.hreflang} metadata, assets and responsive layout`, async ({ page }) => {
     const segment = locale.hreflang.toLowerCase();
