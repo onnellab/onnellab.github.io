@@ -1,7 +1,7 @@
 ---
-import ExtendedBlogIndex from '../../../components/ExtendedBlogIndex.astro';
-import { translatedPrivacyLocales, type TranslatedPrivacyLocale } from '../../../lib/app-privacy-localizations';
-import { allLocaleDefinitions } from '../../../lib/extended-site-i18n';
+import BlogIndex from '../../../components/BlogIndex.astro';
+import { translatedPrivacyLocales } from '../../../lib/app-privacy-localizations';
+import { allLocaleDefinitions, type AllSiteLocale } from '../../../lib/extended-site-i18n';
 
 export function getStaticPaths() {
   return translatedPrivacyLocales.map((locale) => ({
@@ -9,6 +9,6 @@ export function getStaticPaths() {
     props: { locale }
   }));
 }
-const { locale } = Astro.props as { locale: TranslatedPrivacyLocale };
+const { locale } = Astro.props as { locale: AllSiteLocale };
 ---
-<ExtendedBlogIndex locale={locale} />
+<BlogIndex locale={locale} />

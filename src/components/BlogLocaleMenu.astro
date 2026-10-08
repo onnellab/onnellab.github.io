@@ -4,6 +4,7 @@ import {
   allSiteLocales,
   type AllSiteLocale
 } from '../lib/extended-site-i18n';
+import { availableBlogLocales, blogIndexPathFor, blogPostPathFor } from '../lib/blog-i18n';
 
 type Props = {
   locale: AllSiteLocale;
@@ -12,14 +13,11 @@ type Props = {
 
 const { locale, slug } = Astro.props;
 const definition = allLocaleDefinitions[locale];
+const availableArticleLocales = slug ? new Set(availableBlogLocales(slug)) : null;
 const hrefFor = (item: AllSiteLocale) => {
-  const segment = allLocaleDefinitions[item].pathSegment;
-  if (slug) {
-    if (item === 'en') return `/blog/en/${slug}/`;
-    return `/blog/${segment}/${slug}/`;
-  }
-  if (item === 'en') return '/blog/';
-  return `/blog/${segment}/`;
+  // Keep the nine-language menu usable when this article is not translated.
+  if (slug && availableArticleLocales?.has(item)) return blogPostPathFor(item, slug);
+  return blogIndexPathFor(item);
 };
 const ariaLabel = {
   en: `Language: ${definition.label}`,

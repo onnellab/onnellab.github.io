@@ -3,7 +3,6 @@ import path from 'node:path';
 
 import { getBlogPosts } from '../lib/blog';
 import { availableBlogLocales, blogPostAlternates } from '../lib/blog-i18n';
-import { getExtendedBlogPosts } from '../lib/extended-blog';
 import {
   allAppPrivacyRouteFor,
   allLocaleDefinitions,
@@ -110,7 +109,7 @@ function blogEntries(): SitemapEntry[] {
     }));
   });
 
-  for (const locale of translatedPrivacyLocales) getExtendedBlogPosts(locale);
+  for (const locale of translatedPrivacyLocales) getBlogPosts(locale);
 
   return [...indexEntries, ...articleEntries];
 }

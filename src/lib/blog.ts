@@ -2,6 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import type { Locale } from './products';
+import { allSiteLocales } from './extended-site-i18n';
+import { blogPostPathFor } from './blog-i18n';
+import { blogCopy } from './blog-copy';
 
 const blogContentDir = path.resolve(process.cwd(), 'src/content/blog');
 
@@ -36,7 +39,7 @@ export type MarkdownBlock =
 
 export function getBlogPosts(locale?: Locale): BlogPost[] {
   if (!fs.existsSync(blogContentDir)) return [];
-  const locales = locale ? [locale] : (['en', 'ko'] as const);
+  const locales: Locale[] = locale ? [locale] : ['en', 'ko'];
   return locales
     .flatMap((language) => readLocalePosts(language))
     .sort((a, b) => postDateValue(b).localeCompare(postDateValue(a)) || a.meta.title.localeCompare(b.meta.title));
@@ -46,11 +49,6 @@ export function getBlogPost(slug: string, locale: Locale): BlogPost {
   const post = getBlogPosts(locale).find((item) => item.meta.slug === slug);
   if (!post) throw new Error(`Unknown blog post: ${locale}/${slug}`);
   return post;
-}
-
-export function getBlogAlternatePost(post: BlogPost): BlogPost | undefined {
-  const alternateLocale = post.meta.language === 'ko' ? 'en' : 'ko';
-  return getBlogPosts(alternateLocale).find((item) => item.meta.slug === post.meta.slug);
 }
 
 export function getAllBlogPages(): BlogPost[] {
@@ -174,7 +172,8 @@ function readPost(filePath: string, fallbackLanguage: Locale): BlogPost {
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { frontmatter, body } = parseFrontmatter(raw);
   const slug = frontmatter.slug || path.basename(filePath, '.md');
-  const language = frontmatter.language === 'ko' ? 'ko' : frontmatter.language === 'en' ? 'en' : fallbackLanguage;
+  const language: Locale = (allSiteLocales as readonly string[]).includes(frontmatter.language)
+    ? (frontmatter.language as Locale) : fallbackLanguage;
   const meta: BlogPostMeta = {
     title: frontmatter.title || slug,
     cardTitle: frontmatter.card_title || frontmatter.cardTitle || frontmatter.title || slug,
@@ -182,7 +181,7 @@ function readPost(filePath: string, fallbackLanguage: Locale): BlogPost {
     category: frontmatter.category || 'general',
     language,
     description: frontmatter.description || firstParagraph(body) || frontmatter.title || slug,
-    shortAnswer: frontmatter.short_answer || frontmatter.shortAnswer || extractFirstSection(body, ['Short Answer', '짧은 답변', '요약 답변', '핵심 답변', '요약']) || undefined,
+    shortAnswer: frontmatter.short_answer || frontmatter.shortAnswer || extractFirstSection(body, blogCopy[language].shortAnswerHeadings) || undefined,
     publishedAt: frontmatter.published_at || frontmatter.publishedAt || undefined,
     updatedAt: frontmatter.updated_at || frontmatter.updatedAt || undefined,
     tags: splitList(frontmatter.tags),
@@ -195,7 +194,7 @@ function readPost(filePath: string, fallbackLanguage: Locale): BlogPost {
     meta,
     sourcePath: filePath,
     body,
-    href: language === 'ko' ? `/blog/ko/${slug}/` : `/blog/en/${slug}/`
+    href: blogPostPathFor(language, slug)
   };
 }
 
@@ -272,7 +271,7 @@ function extractSection(markdown: string, heading: string): string {
   return extractFirstSection(markdown, [heading]);
 }
 
-function extractFirstSection(markdown: string, headings: string[]): string {
+function extractFirstSection(markdown: string, headings: readonly string[]): string {
   const lines = markdown.split(/\r?\n/);
   const normalizedHeadings = new Set(headings.map((heading) => `## ${heading}`.toLowerCase()));
   const start = lines.findIndex((line) => normalizedHeadings.has(line.trim().toLowerCase()));

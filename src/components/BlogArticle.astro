@@ -9,19 +9,22 @@ import BlogInline from './BlogInline.astro';
 import { plainBlogInline } from '../lib/blog-inline';
 import SiteFooter from './SiteFooter.astro';
 import { blogPostAlternates } from '../lib/blog-i18n';
-import { getBlogAlternatePost, renderMarkdownBlocks, type BlogPost } from '../lib/blog';
-import type { Locale } from '../lib/products';
+import { renderMarkdownBlocks, type BlogPost } from '../lib/blog';
+import { blogCopy } from '../lib/blog-copy';
+import { blogIndexPathFor } from '../lib/blog-i18n';
+import { allLocaleDefinitions, allProductRouteFor, allRouteFor, type AllSiteLocale } from '../lib/extended-site-i18n';
 
 type Props = {
-  locale: Locale;
+  locale: AllSiteLocale;
   post: BlogPost;
 };
 
 const { locale, post } = Astro.props;
 const isKo = locale === 'ko';
+const copy = blogCopy[locale];
 const blocks = renderMarkdownBlocks(post.body);
-const shortAnswerHeadings = new Set(['short answer', '짧은 답변', '요약 답변', '핵심 답변', '요약']);
-const faqHeadings = new Set(['faq', '자주 묻는 질문']);
+const shortAnswerHeadings = new Set(copy.shortAnswerHeadings);
+const faqHeadings = new Set(copy.faqHeadings);
 const articleBlocks: typeof blocks = [];
 let skippingShortAnswer = false;
 for (const block of blocks) {
@@ -62,61 +65,10 @@ for (let index = 0; index < articleBlocks.length; index += 1) {
   if (items.length > 0) faqBlocks.set(index, items);
 }
 const articleImages = articleBlocks.filter((block) => block.type === 'image');
-const homeHref = isKo ? '/ko/' : '/';
-const blogHref = isKo ? '/blog/ko/' : '/blog/';
-const appsHref = isKo ? '/apps/ko/' : '/apps/';
-const alternatePost = getBlogAlternatePost(post);
-const switchLabel = isKo ? 'English' : '한국어';
-const switchAria = isKo ? 'Switch to English' : '한국어로 보기';
-const categoryLabels: Record<string, string> = isKo
-  ? {
-      reading: '읽기',
-      music: '음악',
-      productivity: '생산성',
-      media: '미디어',
-      craft: '창작',
-      games: '게임',
-      research: '리서치'
-    }
-  : {
-      reading: 'Reading',
-      music: 'Music',
-      productivity: 'Productivity',
-      media: 'Media',
-      craft: 'Craft',
-      games: 'Games',
-      research: 'Research'
-    };
-const categoryLabel = categoryLabels[post.meta.category] || post.meta.category;
-const copy = isKo
-  ? {
-      blog: '블로그',
-      apps: '앱',
-      summary: '요약',
-      relatedApps: '관련 앱',
-      relatedArticles: '다음에 읽을 글',
-      relatedArticleLabel: '관련 글',
-      relatedGuides: '관련 가이드',
-      contents: '목차',
-      visualPlan: '이미지 계획',
-      tags: '태그',
-      published: '게시',
-      updated: '수정'
-    }
-  : {
-      blog: 'Blog',
-      apps: 'Apps',
-      summary: 'Summary',
-      relatedApps: 'Related apps',
-      relatedArticles: 'Next reading',
-      relatedArticleLabel: 'Related article',
-      relatedGuides: 'Related guides',
-      contents: 'Contents',
-      visualPlan: 'Image plan',
-      tags: 'Tags',
-      published: 'Published',
-      updated: 'Updated'
-    };
+const homeHref = allRouteFor('home', locale);
+const blogHref = blogIndexPathFor(locale);
+const appsHref = allRouteFor('apps', locale);
+const categoryLabel = copy.categoryLabels[post.meta.category] || post.meta.category;
 const summaryText = post.meta.shortAnswer || post.meta.description;
 const dateLabel = (value?: string) => {
   if (!value) return '';
@@ -128,7 +80,7 @@ const dateLabel = (value?: string) => {
 };
 const appHref = (appName: string) => {
   const slug = appName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  return isKo ? `/apps/${slug}/ko/` : `/apps/${slug}/`;
+  return allProductRouteFor(slug, locale);
 };
 const recommendation = (item: string) => {
   const markdown = item.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
@@ -165,11 +117,12 @@ const tocItems = Array.from(headingIds.entries()).map(([index, id]) => ({
   id,
   label: String(articleBlocks[index].value)
 }));
-const relatedTopicHeadings = new Set(['related topics', '관련 주제']);
+const relatedTopicHeadings = new Set(copy.relatedTopicHeadings);
 const relatedTopicHref = (value: string) => {
   const label = value.trim().toLowerCase();
   const direct = headingLabels.get(label);
   if (direct) return `#${direct}`;
+  if (locale !== 'ko' && locale !== 'en') return '';
   const pairs: Array<[RegExp, string[]]> = isKo
     ? [
         [/성능|performance/i, ['대용량 txt 파일이 느려지는 이유', '먼저 확인할 항목']],
@@ -279,7 +232,7 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
   title={articleTitle}
   description={post.meta.description}
   canonicalPath={post.href}
-  lang={locale}
+  lang={allLocaleDefinitions[locale].htmlLang}
   socialImage={articleSocialImage}
   ogType="article"
   articleMeta={{

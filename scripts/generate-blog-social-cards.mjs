@@ -20,7 +20,10 @@ async function exists(filePath) {
 
 async function findWorkflowDiagrams() {
   const entries = [];
-  for (const locale of ['en', 'ko']) {
+  const contentLocales = (await fs.readdir(path.join(root, 'src', 'content', 'blog'), { withFileTypes: true }))
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
+  for (const locale of contentLocales) {
     const localeDir = path.join(assetsRoot, locale);
     if (!(await exists(localeDir))) continue;
     for (const slugEntry of await fs.readdir(localeDir, { withFileTypes: true })) {

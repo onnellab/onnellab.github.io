@@ -2,90 +2,26 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogLocaleMenu from './BlogLocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
-import { blogIndexAlternates } from '../lib/blog-i18n';
-import { getBlogPosts, type BlogPost } from '../lib/blog';
-import type { Locale } from '../lib/products';
+import { blogIndexAlternates, blogIndexPathFor } from '../lib/blog-i18n';
+import { blogCopy } from '../lib/blog-copy';
+import { allLocaleDefinitions, allRouteFor, type AllSiteLocale } from '../lib/extended-site-i18n';
+import { uiLabels } from '../lib/ui-labels';
+import { getBlogPosts } from '../lib/blog';
 
-type Props = {
-  locale: Locale;
-};
+type Props = { locale: AllSiteLocale };
 
 const { locale } = Astro.props;
-const posts: BlogPost[] = getBlogPosts(locale);
-const isKo = locale === 'ko';
-const copy = isKo
-  ? {
-      title: 'ONNELLAB 블로그 - 차분한 디지털 워크플로 가이드',
-      description: '읽기, 음악, 생산성, 미디어, 창작, 게임, 리서치 워크플로를 다루는 ONNELLAB 교육형 글입니다.',
-      canonicalPath: '/blog/ko/',
-      switchHref: '/blog/',
-      switchLabel: 'English',
-      appsHref: '/apps/ko/',
-      appsLabel: '앱',
-      navLabel: '블로그 탐색',
-      eyebrow: 'ONNELLAB Blog',
-      heading: '워크플로 가이드',
-      intro: '읽기, 음악, 생산성, 미디어 작업을 차분하게 정리하는 실전 글입니다.',
-      emptyTitle: '첫 글을 준비하고 있습니다',
-      emptyText: '읽기, 음악, 생산성, 미디어 작업을 더 차분하게 정리하는 실전 가이드를 곧 게시합니다.',
-      categoriesLabel: '다룰 주제',
-      emptyLabel: '상태',
-      postsLabel: '게시된 글',
-      allCategories: '전체'
-    }
-  : {
-      title: 'ONNELLAB Blog - Practical guides for calm digital workflows',
-      description: 'Educational ONNELLAB articles about reading, music, productivity, media, craft, games, and research workflows.',
-      canonicalPath: '/blog/',
-      switchHref: '/blog/ko/',
-      switchLabel: '한국어',
-      appsHref: '/apps/',
-      appsLabel: 'Apps',
-      navLabel: 'Blog navigation',
-      eyebrow: 'ONNELLAB Blog',
-      heading: 'Practical Workflow Guides',
-      intro: 'Focused articles for calmer reading, music, productivity, and media workflows.',
-      emptyTitle: 'Articles are being prepared',
-      emptyText: 'Practical guides for reading, music, productivity, and media workflows will appear here as they are published.',
-      categoriesLabel: 'Planned topics',
-      emptyLabel: 'Status',
-      postsLabel: 'Published articles',
-      allCategories: 'All'
-    };
-const categories = isKo
-  ? [
-      ['읽기', '큰 텍스트와 긴 문서를 읽기 쉽게 다루는 방법'],
-      ['음악', '오디오 파일과 음악 메타데이터를 정리하는 방법'],
-      ['생산성', '반복 작업을 줄이고 파일 흐름을 정돈하는 방법'],
-      ['미디어', '스크린샷, 클립, 자료를 잃어버리지 않게 관리하는 방법']
-    ]
-  : [
-      ['Reading', 'Ways to handle large text and long-form documents calmly'],
-      ['Music', 'Workflows for audio files and music metadata'],
-      ['Productivity', 'Methods for reducing repeated file and text work'],
-      ['Media', 'Practical organization for screenshots, clips, and references']
-    ];
-const postCategories = Array.from(new Set(posts.map((post) => post.meta.category))).sort((a, b) => a.localeCompare(b));
-const categoryLabels: Record<string, string> = isKo
-  ? {
-      reading: '읽기',
-      music: '음악',
-      productivity: '생산성',
-      media: '미디어',
-      craft: '창작',
-      games: '게임',
-      research: '리서치'
-    }
-  : {
-      reading: 'Reading',
-      music: 'Music',
-      productivity: 'Productivity',
-      media: 'Media',
-      craft: 'Craft',
-      games: 'Games',
-      research: 'Research'
-    };
-const categoryLabel = (category: string) => categoryLabels[category] || category;
+const posts = getBlogPosts(locale);
+const copy = blogCopy[locale];
+const definition = allLocaleDefinitions[locale];
+const canonicalPath = blogIndexPathFor(locale);
+const homeHref = allRouteFor('home', locale);
+const appsHref = allRouteFor('apps', locale);
+const postCategories = Array.from(new Set(posts.map((post) => post.meta.category))).sort((a,b) => a.localeCompare(b));
+const categories = (['reading', 'music', 'productivity', 'media'] as const).map((category) =>
+  [copy.categoryLabels[category], copy.categoryDescriptions[category]] as const
+);
+const categoryLabel = (category: string) => copy.categoryLabels[category] || category;
 const absoluteUrl = (path: string) => new URL(path, Astro.site).toString();
 const blogJsonLd = [
   {
@@ -94,7 +30,7 @@ const blogJsonLd = [
     name: 'ONNELLAB Blog',
     description: copy.description,
     inLanguage: locale,
-    url: absoluteUrl(copy.canonicalPath),
+    url: absoluteUrl(canonicalPath),
     publisher: {
       '@type': 'Organization',
       name: 'ONNELLAB',
@@ -117,7 +53,7 @@ const blogJsonLd = [
     name: copy.title,
     description: copy.description,
     inLanguage: locale,
-    url: absoluteUrl(copy.canonicalPath),
+    url: absoluteUrl(canonicalPath),
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: posts.map((post, index) => ({
@@ -134,28 +70,28 @@ const blogJsonLd = [
 <BaseLayout
   title={copy.title}
   description={copy.description}
-  canonicalPath={copy.canonicalPath}
-  lang={locale}
+  canonicalPath={canonicalPath}
+  lang={definition.htmlLang}
   jsonLd={blogJsonLd}
   alternates={blogIndexAlternates()}
 >
   <main class="blog-shell">
-    <nav class="top-nav site-header" aria-label={copy.navLabel}>
-      <a class="brand" href={isKo ? '/ko/' : '/'}>ONNELLAB</a>
+    <nav class="top-nav site-header" aria-label={uiLabels[locale].blogNavigation}>
+      <a class="brand" href={homeHref}>ONNELLAB</a>
       <div class="nav-actions">
-        <a href={copy.appsHref}>{copy.appsLabel}</a>
+        <a href={appsHref}>{copy.apps}</a>
         <BlogLocaleMenu locale={locale} />
       </div>
     </nav>
 
     <header class="blog-header">
-      <p class="eyebrow">{copy.eyebrow}</p>
+      <p class="eyebrow">ONNELLAB Blog</p>
       <h1>{copy.heading}</h1>
       <p>{copy.intro}</p>
     </header>
 
     {posts.length === 0 && (
-      <section class="empty-state" aria-label={copy.emptyLabel}>
+      <section class="empty-state" aria-label={copy.emptyTitle}>
         <h2>{copy.emptyTitle}</h2>
         <p>{copy.emptyText}</p>
       </section>
