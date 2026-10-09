@@ -32,7 +32,7 @@
           "items": [
             "Preview and rename operations occur on the device.",
             "Selected files are not uploaded to an ONNELLAB server.",
-            "On iOS, a newly named copy may be saved instead of changing the original file directly."
+            "On iOS, renamed results are saved as new files; the originals remain unchanged."
           ]
         }
       ]
