@@ -1,187 +1,90 @@
 <!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AI 운영 점검 · ONNELLAB Ops</title>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
-<link rel="icon" href="/favicon.svg?v=20260712-ol-transparent-v2" type="image/svg+xml">
+<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="naverbot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="yeti" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="referrer" content="no-referrer"><meta http-equiv="Cache-Control" content="no-store">
+<title>ONNELLAB Ops · 비공개</title>
 <style>
-:root{
-  --ink:#191714;--muted:#746f69;--line:#ded6ca;--surface:#fffaf5;--panel:#fff;
-  --blue:#2e6fbb;--blue-soft:#e8f1fb;--lilac:#d8cdf7;--lilac-soft:#f4f0ff;
-  --peach:#f4c3b4;--peach-soft:#fff0ea;--sky:#cfe6ff;--sky-soft:#eef7ff;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--surface);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;word-break:keep-all}
-a{color:inherit}
-.ops-topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid rgba(221,212,202,.85);background:rgba(255,250,245,.94);backdrop-filter:blur(14px)}
-.ops-bar{max-width:1180px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.ops-brand{display:flex;align-items:center;gap:10px;font-weight:800;color:inherit;text-decoration:none}
-.ops-mark{width:32px;height:32px;display:block;object-fit:contain}
-.ops-lang{min-height:31px;border:1px solid var(--ink);background:var(--ink);color:#fff;padding:6px 10px;border-radius:999px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
-.ops-lang:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-.ops-wrap{max-width:1180px;margin:0 auto;padding:22px 20px 56px}
-.ops-nav{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;margin-bottom:24px}.ops-nav::-webkit-scrollbar{display:none}
-.ops-nav a{display:inline-flex;flex:0 0 auto;align-items:center;min-height:42px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#fffdf9;color:#5d574f;text-decoration:none;font-size:13px;font-weight:750}
-.ops-nav a[aria-current="page"]{border-color:#b9cbe0;background:var(--blue-soft);color:#315f91}
-.ops-nav a:hover{border-color:#b9cbe0;background:var(--blue-soft)}
-.ops-head{margin:10px 0 28px}
-.ops-head .eyebrow{margin:0 0 10px;color:#827d72;font-size:12px;font-weight:680;letter-spacing:.08em;text-transform:uppercase}
-.ops-head h1{margin:0;color:#36332f;font-size:34px;line-height:1.12}
-.ops-head p{max-width:760px;margin:14px 0 0;color:#5b574f;font-size:16px;line-height:1.65}
-.ops-route-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.ops-route-card{display:block;min-height:140px;padding:20px;border:1px solid var(--line);border-radius:12px;background:#fff;text-decoration:none;transition:transform 140ms ease,border-color 140ms ease,box-shadow 140ms ease}
-.ops-route-card:hover{transform:translateY(-2px);border-color:#cfc5b7;box-shadow:0 10px 22px rgba(58,49,38,.055)}
-.ops-route-card b{display:block;font-size:20px;margin-bottom:8px;color:#3e3933}
-.ops-route-card span{display:block;color:#6f695f;font-size:14px;line-height:1.55}
-.ops-route-card small{display:block;margin-top:18px;color:#817b72;font-size:12px;font-weight:700}
-.ops-legacy-link{margin-top:22px;font-size:12px;color:#827d72}
-.ops-legacy-link a{font-weight:750}
-.app-search{display:grid;gap:8px;max-width:360px;margin-bottom:28px;color:#6f695f;font-size:13px;font-weight:620}
-.app-search input{min-height:44px;border:1px solid #ded6ca;border-radius:8px;padding:9px 12px;background:rgba(255,253,248,.78);color:#3f3b35;font:inherit;font-weight:500}
-.app-search input:focus{border-color:#cfc5b7;outline:2px solid #827d72;outline-offset:3px}
-.app-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.app-card{position:relative;display:grid;grid-template-columns:54px minmax(0,1fr);align-items:start;gap:16px;min-height:128px;border:1px solid var(--accent-border,#e0d8cb);border-radius:11px;padding:18px;background:linear-gradient(135deg,rgba(255,253,248,.96) 16%,var(--accent-bg,#fffdf8)),#fffdf8;color:inherit;text-decoration:none;transition:transform 140ms ease,border-color 140ms ease,background 140ms ease,box-shadow 140ms ease}
-.app-card[hidden]{display:none}
-.app-card:hover,.app-card:focus-visible{border-color:var(--accent-border,#d8cec0);background:linear-gradient(135deg,#fffdf8 10%,var(--accent-bg,#fffdf8) 92%),#fffdf8;box-shadow:0 10px 22px rgba(58,49,38,.055);transform:translateY(-2px)}
-.app-card:focus-visible{outline:2px solid #827d72;outline-offset:3px}
-.app-card>img{width:52px;height:52px;border-radius:13px;box-shadow:0 0 0 1px var(--accent-border,#ddd5c8);object-fit:cover}
-.app-copy{min-width:0}.title-row{display:flex;align-items:center;flex-wrap:wrap;gap:7px 10px}.title-row h2{margin:0;color:#3e3933;font-size:19px;line-height:1.25}
-.status-badge{border:1px solid transparent;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:650;line-height:1.35;white-space:nowrap}
-.status-badge[data-status-kind="released"]{border-color:#c9d8d2;background:#edf5f2;color:#49645a}
-.status-badge[data-status-kind="preparing"]{border-color:#e1cfc5;background:#f9eee8;color:#765849}
-.app-copy>p{margin:8px 0 0;color:#5f5a50;font-size:14px;line-height:1.55}
-.platform-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
-.platform-badges span{border:1px solid var(--accent-border,#ddd5c8);border-radius:999px;padding:2px 7px;background:color-mix(in srgb,var(--accent-bg,#faf8f5) 80%,#fffdf8);color:var(--accent-text,#737067);font-size:11px;line-height:1.4}
-.ops-meta{margin-top:10px;color:#827d72;font-size:11px;line-height:1.45}
-.detail-hero{display:grid;grid-template-columns:68px minmax(0,1fr);gap:18px;align-items:start;padding:22px;border:1px solid var(--accent-border,#e0d8cb);border-radius:13px;background:linear-gradient(135deg,rgba(255,253,248,.96) 16%,var(--accent-bg,#fffdf8)),#fffdf8}
-.detail-hero img{width:64px;height:64px;border-radius:15px;box-shadow:0 0 0 1px var(--accent-border,#ddd5c8)}
-.detail-hero h1{margin:0 0 8px;font-size:30px;color:#3e3933}.detail-hero p{margin:8px 0 0;color:#5f5a50;line-height:1.6}
-.detail-tabs{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;margin:18px 0 16px;scroll-margin-top:78px}.detail-tabs::-webkit-scrollbar{display:none}.detail-tabs a{min-height:44px;display:inline-flex;flex:0 0 auto;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;text-decoration:none;font-size:13px;font-weight:750;color:#6a645b}.detail-tabs a[aria-selected="true"]{background:var(--blue-soft);border-color:#b9cbe0;color:#315f91}.detail-tabs a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}.detail-section[hidden]{display:none!important}
-.detail-section{margin-top:18px;padding:20px;border:1px solid var(--line);border-radius:12px;background:#fff}.detail-section h2{margin:0 0 14px;font-size:19px}.detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.app-overview-metrics{margin:0 0 12px}.app-overview-note{margin:0 0 20px;color:#746f69;font-size:11px;line-height:1.5}
-.detail-stat{padding:14px;border:1px solid #e8e0d7;border-radius:9px;background:#fffdf9}.detail-stat span{display:block;color:#827d72;font-size:11px}.detail-stat b{display:block;margin-top:6px;font-size:18px;overflow-wrap:anywhere}
-.detail-list{display:grid;gap:8px}.detail-row{padding:12px;border:1px solid #e8e0d7;border-radius:9px;background:#fffdf9}.detail-row b{display:block;margin-bottom:5px;font-size:13px}.detail-row span{display:block;color:#6f695f;font-size:12px;line-height:1.55;overflow-wrap:anywhere}
-.empty-note{padding:15px;border:1px dashed #d9d0c6;border-radius:9px;background:#fffdf9;color:#746f69;font-size:13px;line-height:1.6}
-.funnel-controls{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}.funnel-controls button{min-height:34px;border:1px solid var(--line);border-radius:999px;padding:6px 11px;background:#fff;color:#625c54;font:inherit;font-size:12px;font-weight:750;cursor:pointer}.funnel-controls button.is-active{border-color:#b9cbe0;background:var(--blue-soft);color:#315f91}
-.funnel-window[hidden]{display:none}.funnel-platform-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.funnel-card{padding:15px;border:1px solid #e8e0d7;border-radius:10px;background:#fffdf9}.funnel-card h3{margin:0 0 12px;font-size:15px}.funnel-chain{display:flex;align-items:stretch;gap:7px}.funnel-step{flex:1;min-width:0;padding:10px;border:1px solid #e8e0d7;border-radius:8px;background:#fff}.funnel-step span{display:block;color:#827d72;font-size:10px;line-height:1.35}.funnel-step b{display:block;margin-top:5px;font-size:20px;line-height:1}.funnel-arrow{display:flex;align-items:center;color:#aaa196;font-size:15px}.funnel-purchase{margin-top:10px;padding-top:10px;border-top:1px solid #ece4dc;color:#6f695f;font-size:12px}.funnel-purchase b{color:#3e3933;font-size:15px}.funnel-freshness{margin-top:8px;color:#8a8379;font-size:10px}.funnel-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.funnel-summary .detail-stat{background:var(--lilac-soft)}.funnel-note{margin-top:12px;color:#746f69;font-size:11px;line-height:1.55}
-.diagnosis-panel{margin-top:14px;padding:15px;border:1px solid #dfd7e9;border-radius:10px;background:linear-gradient(135deg,#fbf9ff,#fffdf9)}.diagnosis-panel h3{margin:0 0 10px;font-size:15px}.diagnosis-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.diagnosis-card{padding:12px;border:1px solid #e8e0d7;border-radius:9px;background:#fff}.diagnosis-card[data-kind="good"]{background:#f1f8f4;border-color:#cfe0d5}.diagnosis-card[data-kind="warn"]{background:#fff8ef;border-color:#ead7bd}.diagnosis-card[data-kind="low"]{background:#fff2f0;border-color:#ebc8c3}.diagnosis-card[data-kind="wait"]{background:#f7f5f1}.diagnosis-card h4{margin:0 0 6px;font-size:13px}.diagnosis-card p{margin:5px 0 0;color:#686159;font-size:12px;line-height:1.55}.rate-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.rate-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border:1px solid #e5ddd4;border-radius:999px;background:#fffdf9;color:#696158;font-size:10px}.diagnosis-note{margin-top:10px;color:#8b8379;font-size:10px;line-height:1.5}
-.subsection-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:18px 0 10px}.subsection-head h3{margin:0;font-size:15px}.subsection-head p{margin:0;color:#827d72;font-size:11px}.ops-actions{display:flex;gap:7px;flex-wrap:wrap}.ops-button{min-height:34px;border:1px solid #cfc5b7;border-radius:8px;padding:7px 10px;background:#fff;color:#514b44;font:inherit;font-size:12px;font-weight:750;cursor:pointer}.ops-button.primary{border-color:#b9cbe0;background:var(--blue-soft);color:#315f91}.ops-button:disabled{opacity:.55;cursor:not-allowed}.ops-message{min-height:18px;margin-top:8px;color:#6f695f;font-size:11px;line-height:1.5}.ops-message.is-error{color:#9c3f36}.token-note{margin:10px 0;padding:10px 12px;border:1px solid #ded6ca;border-radius:8px;background:#fffaf2;color:#6f695f;font-size:11px;line-height:1.5}.token-note[hidden]{display:none}.token-note a{font-weight:750}
-.review-list,.release-list,.dependency-list,.pricing-list{display:grid;gap:10px}.pricing-product-card{padding:14px;border:1px solid #e8e0d7;border-radius:10px;background:#fffdf9}.pricing-product-card h4{margin:0 0 10px;font-size:15px}.pricing-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.pricing-option{display:grid;gap:5px;padding:11px;border:1px solid #e9e0d6;border-radius:8px;background:#fff}.pricing-option-head{display:flex;align-items:center;justify-content:space-between;gap:5px;flex-wrap:wrap}.pricing-option-head>b{font-size:13px}.pricing-option>strong{font-size:18px}.price-option-profit{color:#5f7465;font-size:12px}.price-evidence{margin-top:10px}.price-evidence>summary{cursor:pointer;color:#655f58;font-size:12px;padding:7px 0}.price-evidence>.pricing-list{margin-top:8px}.price-evidence .pricing-card{padding:10px}.price-evidence .pricing-card>p{font-size:12px}.review-card[hidden]{display:none!important}.review-filters{display:flex;flex-wrap:wrap;gap:7px;margin:13px 0}.review-filters button{min-height:40px;border:1px solid #dfd6ca;border-radius:999px;background:#fff;padding:8px 12px;color:#675f56;font:inherit;font-size:13px;font-weight:730;cursor:pointer}.review-filters button[aria-pressed="true"]{border-color:#b9cbe0;background:var(--blue-soft);color:#315f91}.review-filter-empty{padding:16px;border:1px dashed #d9d0c6;border-radius:9px;background:#fffdf9;font-size:13px;line-height:1.6}.review-filter-empty[hidden]{display:none!important}.review-filter-empty button{display:inline-block;min-height:38px;margin-top:10px;border:1px solid #b9cbe0;background:var(--blue-soft);border-radius:8px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer}.review-completed{padding:0!important}.review-completed-summary{display:grid;gap:7px;padding:12px 14px;cursor:pointer;list-style:none}.review-completed-summary::-webkit-details-marker{display:none}.review-completed-summary::after{content:"펼치기";color:#827d72;font-size:11px}.review-completed[open]>.review-completed-summary::after{content:"접기"}.review-completed-head{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.review-excerpt{color:#655f58;font-size:13px;line-height:1.5;overflow-wrap:anywhere}.review-expanded-content{padding:0 14px 14px;border-top:1px solid #e8e0d7}.review-card,.release-card,.dependency-card,.pricing-card{padding:14px;border:1px solid #e8e0d7;border-radius:10px;background:#fffdf9}.review-head,.release-head,.pricing-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.review-head strong,.release-head strong,.pricing-head strong{font-size:14px}.review-rating,.mini-badge{display:inline-flex;align-items:center;min-height:24px;padding:3px 7px;border:1px solid #ddd4ca;border-radius:999px;background:#fff;color:#655e55;font-size:10px;font-weight:750}.mini-badge.good{border-color:#c7ddd0;background:#eef7f2;color:#49675a}.mini-badge.warn{border-color:#e4d1b7;background:#fff7eb;color:#795d37}.mini-badge.bad{border-color:#e4c4bf;background:#fff1ef;color:#844d47}.review-meta,.release-meta,.pricing-meta,.dependency-meta{margin-top:5px;color:#827d72;font-size:10px;line-height:1.5}.review-body{margin:10px 0 0;white-space:pre-wrap;font-size:13px;line-height:1.6}.review-translation{margin-top:10px;padding:10px;border:1px solid #e5ddd4;border-radius:8px;background:#fff}.review-translation b{display:block;margin-bottom:5px;font-size:11px}.review-translation p{margin:0;font-size:12px;line-height:1.55}.review-card label{display:grid;gap:5px;margin-top:10px;color:#716a61;font-size:11px;font-weight:700}.review-card textarea{width:100%;min-height:92px;border:1px solid #dcd3c8;border-radius:8px;padding:9px;background:#fff;color:#302c28;font:inherit;font-size:12px;line-height:1.5;resize:vertical}.review-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.review-card details{margin-top:10px}.review-card details summary{cursor:pointer;color:#655e55;font-size:11px;font-weight:750}.triage-box{margin-top:7px;padding:9px;border:1px solid #e4dced;border-radius:8px;background:#faf7ff;color:#675d70;font-size:11px;line-height:1.55;white-space:pre-wrap}.release-card p,.pricing-card p,.dependency-card p{margin:7px 0 0;color:#696158;font-size:11px;line-height:1.55}.release-card a,.pricing-card a{font-weight:700}.economics-callout{margin-top:9px;padding:9px;border:1px solid #c8dfd1;border-radius:8px;background:#eff8f3;color:#4d6758;font-size:11px;line-height:1.5}.economics-callout.loss{border-color:#e5c5c0;background:#fff1ef;color:#824e48}.site-freshness{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.dependency-details{margin-top:10px;border:1px solid #e8e0d7;border-radius:9px;background:#fffdf9}.dependency-details>summary{padding:12px 14px;color:#58544d;font-size:13px;font-weight:730;cursor:pointer}.dependency-details>.dependency-list{padding:0 10px 10px}.dependency-details .dependency-card{background:#fff}
-.ops-meta,.ops-legacy-link,.app-overview-note{font-size:12px}.platform-badges span,.status-badge,.detail-stat span,.funnel-step span,.funnel-freshness,.funnel-note,.diagnosis-note,.rate-pill,.review-meta,.release-meta,.pricing-meta,.dependency-meta,.mini-badge,.review-translation b{font-size:12px}.ops-lang{min-height:36px}.ops-nav a{min-height:42px}.detail-tabs a{min-height:44px}
-.ai-home-preview{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:18px 0 20px;padding:20px;border:1px solid var(--line);border-radius:12px;background:#fff}
-.ai-home-preview h2{margin:0 0 7px;font-size:20px}
-.ai-home-preview p{margin:0 0 6px;color:#514d48;font-size:14px;line-height:1.55}
-.ai-home-preview small{color:#756f67;font-size:12px}
-.ai-home-preview>a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 14px;border:1px solid #c5b8dc;border-radius:9px;background:#f4f0ff;color:#4c3d68;font-size:13px;font-weight:750;text-decoration:none;white-space:nowrap}
-.ai-home-preview>a:hover,.ai-home-preview>a:focus-visible{border-color:#ad9aca;background:#ece5ff}
-.ai-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 22px}
-.ai-kpi{padding:18px;border:1px solid var(--line);border-radius:11px;background:#fff;min-width:0}
-.ai-kpi>span{display:block;color:#655f59;font-size:13px;line-height:1.5}
-.ai-kpi strong{display:block;margin-top:8px;font-size:32px;font-weight:750;line-height:1.1}
-.ai-source-line{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
-.ai-source-state{display:inline-flex;min-height:30px;align-items:center;padding:5px 10px;border-radius:999px;border:1px solid #d4cadf;background:#f8f5fc;color:#514164;font-size:12px;font-weight:700}
-.ai-source-state[data-collection="complete"]{border-color:#cedbd1;background:#f2f7f3;color:#426350}
-.ai-source-state[data-collection="partial"],.ai-source-state[data-collection="stale"],.ai-source-state[data-collection="missing"]{border-color:#e3c9b5;background:#fff7ef;color:#805736}
-.ai-updated{margin:0;color:#716b63;font-size:12px}
-.ai-health-note{margin:14px 0;padding:12px 14px;border:1px solid #e3d8c7;border-radius:9px;background:#fffdf8;color:#675b49;font-size:13px;line-height:1.6}
-.ai-monitor-section{margin:23px 0 0}
-.ai-monitor-section h2{margin:0 0 12px;font-size:18px;font-weight:750}
-.ai-alert-list{display:grid;gap:10px}
-.ai-alert-row{padding:15px 17px;border:1px solid var(--line);border-radius:10px;background:#fff;overflow-wrap:anywhere}
-.ai-alert-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.ai-alert-row strong{font-size:14px;line-height:1.5}
-.ai-state-label{flex:0 0 auto;border:1px solid #e8d1c2;border-radius:999px;background:#fff8f2;padding:4px 8px;color:#785d4b;font-size:11px;line-height:1.3}
-.ai-alert-row[data-alert-priority="deferred"] .ai-state-label{border-color:#d4cde0;background:#f9f6fd;color:#685676}
-.ai-alert-row p{margin:10px 0 0;color:#4e4942;font-size:13px;line-height:1.65}
-.ai-alert-row .ai-note{color:#666056}
-.ai-alert-more{margin-top:10px;padding-top:7px;border-top:1px solid #eee8e2}
-.ai-alert-more>summary{cursor:pointer;display:list-item;min-height:36px;padding:8px 0;color:#5f5274;font-size:12px;font-weight:730}
-.ai-alert-more>summary:focus-visible{outline:2px solid #9280bb;outline-offset:2px}
-.ai-alert-more p{margin:8px 0;color:#655f59}
-.ai-alert-row small{display:block;margin-top:10px;color:#777068;font-size:12px}
-.ai-link{display:inline-flex;align-items:center;min-height:40px;margin-top:6px;color:#51456d;font-size:13px;font-weight:700}
-.ai-row-list{border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden}
-.ai-count-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 15px;font-size:13px;line-height:1.5}
-.ai-count-row+.ai-count-row{border-top:1px solid #f0ebe5}
-.ai-count-row>strong{font-size:15px;white-space:nowrap}
-.ai-count-row code{overflow-wrap:anywhere;font-size:12px}
-.ai-meta{margin:9px 0 0;color:#777068;font-size:12px;line-height:1.5}
-.ai-groups{display:grid;gap:10px}
-.ai-details{border:1px solid var(--line);border-radius:10px;background:#fff}
-.ai-details>summary{list-style:none;cursor:pointer;padding:15px 16px;font-size:14px;font-weight:750;min-height:48px}
-.ai-details>summary::-webkit-details-marker{display:none}
-.ai-details>summary:focus-visible,.ai-zero-items>summary:focus-visible{outline:2px solid #9280bb;outline-offset:2px}
-.ai-chevron{float:right;color:#897a95;font-size:18px}
-.ai-details[open] .ai-chevron{transform:rotate(180deg)}
-.ai-details-body{padding:0 12px 12px}
-.ai-details-body>.ai-row-list{background:#fffdfb}
-.ai-zero-items{margin-top:10px}
-.ai-zero-items>summary{cursor:pointer;min-height:38px;padding:8px 10px;color:#777068;font-size:12px}
-.ai-zero-items>.ai-row-list{margin-top:5px}
-.ai-empty{margin:0;padding:15px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#6a645c;font-size:13px;line-height:1.6}
-@media(max-width:680px){.ai-home-preview{align-items:stretch;flex-direction:column;padding:16px}.ai-home-preview>a{width:100%}.ai-kpis{gap:8px}.ai-kpi{padding:12px}.ai-kpi>span{font-size:11px;min-height:34px}.ai-kpi strong{font-size:26px}.ai-alert-row{padding:13px}.ai-count-row{padding:11px 12px}.ai-updated{width:100%}}
-@media(max-width:370px){.ai-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.ai-kpi:last-child{grid-column:span 2}}
-@media(max-width:440px){.pricing-options{grid-template-columns:1fr}.review-completed-summary{padding:12px}}
-@media(max-width:680px){.ops-wrap{padding:18px 15px 42px}.ops-route-grid,.app-grid{grid-template-columns:1fr}.app-grid{gap:10px}.app-card{grid-template-columns:46px minmax(0,1fr);gap:13px;min-height:0;padding:15px}.app-card>img{width:44px;height:44px;border-radius:11px}.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-hero{grid-template-columns:54px minmax(0,1fr);padding:17px}.detail-hero img{width:52px;height:52px;border-radius:12px}.ops-head h1{font-size:29px}.funnel-platform-grid,.diagnosis-grid,.site-freshness{grid-template-columns:1fr}.funnel-chain{gap:5px}.funnel-step{padding:8px}.funnel-step b{font-size:17px}.review-head,.release-head,.pricing-head{align-items:flex-start}.review-card,.release-card,.dependency-card,.pricing-card{padding:12px}}
-</style>
-</head>
-<body>
-<header class="ops-topbar">
-  <div class="ops-bar">
-    <a class="ops-brand" href="/" aria-label="ONNELLAB home">
-      <img class="ops-mark" src="/favicon.svg?v=20260712-ol-transparent-v2" alt="" width="32" height="32">
-      <span>ONNELLAB Ops</span>
-    </a>
-    <button class="ops-lang" id="ops-lang-toggle" type="button">English</button>
-  </div>
-</header>
-<main class="ops-wrap">
-<nav class="ops-nav" aria-label="ONNELLAB Ops"><a href="/ops/"><span data-ko="홈" data-en="Home">홈</span></a><a href="/ops/apps/"><span data-ko="앱" data-en="Apps">앱</span></a><a href="/ops/sales/"><span data-ko="매출" data-en="Sales">매출</span></a><a href="/ops/publishing/"><span data-ko="게시" data-en="Publishing">게시</span></a><a href="/ops/media/"><span data-ko="미디어" data-en="Media">미디어</span></a><a href="/ops/monitoring/" aria-current="page"><span data-ko="운영 점검" data-en="Monitoring">운영 점검</span></a><a href="/ops/settings/"><span data-ko="설정" data-en="Settings">설정</span></a></nav>
-<header class="ops-head"><p class="eyebrow"><span data-ko="운영 모니터링" data-en="Operations monitoring">운영 모니터링</span></p><h1><span data-ko="AI 운영 점검" data-en="AI operations">AI 운영 점검</span></h1><p><span data-ko="먼저 확인할 항목을 보고, 나머지는 분야별로 펼쳐볼 수 있어요." data-en="See what needs attention first, then expand details by area.">먼저 확인할 항목을 보고, 나머지는 분야별로 펼쳐볼 수 있어요.</span></p></header><div class="ai-source-line" data-ai-generated-at="2026-10-08T21:22:23+00:00"><span class="ai-source-state" data-collection="complete"><span class="ai-collection-label" data-ko="자료 갱신 완료" data-en="Sources refreshed">자료 갱신 완료</span></span><p class="ai-updated"><span data-ko="보고서 시각" data-en="Report generated">보고서 시각</span> · 2026.10.09 06:22 KST</p></div><section class="ai-kpis" aria-label="Top AI operations counts"><div class="ai-kpi"><span><span data-ko="즉시 확인" data-en="Needs action">즉시 확인</span></span><strong>0</strong></div><div class="ai-kpi"><span><span data-ko="보류된 정책 알림" data-en="Deferred policy alerts">보류된 정책 알림</span></span><strong>0</strong></div><div class="ai-kpi"><span><span data-ko="신규 크래시" data-en="New crashes">신규 크래시</span></span><strong>0</strong></div></section><section class="ai-monitor-section"><h2><span data-ko="지금 확인할 항목" data-en="Items needing attention">지금 확인할 항목</span></h2><div class="ai-alert-list"><div class="ai-empty"><span data-ko="보고서에 즉시 조치 대상으로 분류된 항목이 없어요. 검증 통과를 뜻하지는 않아요." data-en="No immediate actions are listed. This does not mean all tests passed.">보고서에 즉시 조치 대상으로 분류된 항목이 없어요. 검증 통과를 뜻하지는 않아요.</span></div></div></section><section class="ai-monitor-section"><h2><span data-ko="보류된 정책 알림" data-en="Deferred policy alerts">보류된 정책 알림</span></h2><div class="ai-alert-list"><p class="ai-empty"><span data-ko="보류 중인 정책 알림이 없어요." data-en="No deferred policy alerts.">보류 중인 정책 알림이 없어요.</span></p></div></section><section class="ai-monitor-section"><h2><span data-ko="OS·스토어 정책 변경 모니터링" data-en="OS &amp; store policy monitoring">OS·스토어 정책 변경 모니터링</span></h2><div class="ai-row-list"><div class="ai-count-row"><span data-ko="검토할 OS 업데이트" data-en="OS updates to review">검토할 OS 업데이트</span><strong>1</strong></div><div class="ai-count-row"><span data-ko="OS 영향 분석 작업" data-en="OS impact tasks">OS 영향 분석 작업</span><strong>7</strong></div><div class="ai-count-row"><span data-ko="스토어 정책 분석 작업" data-en="Store policy tasks">스토어 정책 분석 작업</span><strong>22</strong></div></div><p class="ai-meta"><span data-ko="분석 작업 수는 실제 문제·조치 필요 건수와 달라요." data-en="Task counts do not equal actionable incidents.">분석 작업 수는 실제 문제·조치 필요 건수와 달라요.</span></p></section><section class="ai-monitor-section"><h2><span data-ko="세부 운영 지표" data-en="Detailed operations">세부 운영 지표</span></h2><p class="ai-health-note"><span data-ko="QA 보고서 기록이 없어요. 검증 통과로 표시하지 않아요." data-en="No QA reports recorded; verification is not marked as passed.">QA 보고서 기록이 없어요. 검증 통과로 표시하지 않아요.</span></p><div class="ai-groups"><details class="ai-details"><summary><span data-ko="리뷰·고객 대응" data-en="Reviews &amp; customer care">리뷰·고객 대응</span><span class="ai-chevron" aria-hidden="true">⌄</span></summary><div class="ai-details-body"><div class="ai-row-list"><div class="ai-count-row" title="reviews_triaged"><span data-ko="분석한 리뷰" data-en="Reviews triaged">분석한 리뷰</span><strong>11</strong></div><div class="ai-count-row" title="replies_published"><span data-ko="답변 게시됨" data-en="Replies published">답변 게시됨</span><strong>3</strong></div></div><details class="ai-zero-items"><summary><span data-ko="0건 항목 5개 표시" data-en="Show 5 zero-count items">0건 항목 5개 표시</span></summary><div class="ai-row-list"><div class="ai-count-row" title="high_risk_reports"><span data-ko="고위험 리뷰" data-en="High-risk reviews">고위험 리뷰</span><strong>0</strong></div><div class="ai-count-row" title="replies_queued"><span data-ko="답변 게시 대기" data-en="Replies queued">답변 게시 대기</span><strong>0</strong></div><div class="ai-count-row" title="pricing_patterns"><span data-ko="가격 관련 반복 문제" data-en="Pricing patterns">가격 관련 반복 문제</span><strong>0</strong></div><div class="ai-count-row" title="issues_created"><span data-ko="생성된 이슈" data-en="Issues created">생성된 이슈</span><strong>0</strong></div><div class="ai-count-row" title="open_app_github_issues"><span data-ko="열린 앱 이슈" data-en="Open app issues">열린 앱 이슈</span><strong>0</strong></div></div></details></div></details><details class="ai-details"><summary><span data-ko="품질·검증" data-en="Quality &amp; verification">품질·검증</span><span class="ai-chevron" aria-hidden="true">⌄</span></summary><div class="ai-details-body"><div class="ai-row-list"><p class="ai-empty"><span data-ko="별도 표시할 활동이 없어요." data-en="No additional activity to show.">별도 표시할 활동이 없어요.</span></p></div><details class="ai-zero-items"><summary><span data-ko="0건 항목 8개 표시" data-en="Show 8 zero-count items">0건 항목 8개 표시</span></summary><div class="ai-row-list"><div class="ai-count-row" title="new_crash_incidents"><span data-ko="신규 크래시" data-en="New crashes">신규 크래시</span><strong>0</strong></div><div class="ai-count-row" title="doctor_high_findings"><span data-ko="고위험 진단 결과" data-en="High-risk doctor findings">고위험 진단 결과</span><strong>0</strong></div><div class="ai-count-row" title="qa_reports_passed"><span data-ko="통과된 QA 보고서" data-en="QA reports passed">통과된 QA 보고서</span><strong>0</strong></div><div class="ai-count-row" title="qa_reports_blocked"><span data-ko="중단된 QA 보고서" data-en="QA reports blocked">중단된 QA 보고서</span><strong>0</strong></div><div class="ai-count-row" title="policy_assessments_pending"><span data-ko="정책 영향 검토 대기" data-en="Policy assessments pending">정책 영향 검토 대기</span><strong>0</strong></div><div class="ai-count-row" title="policy_assessment_failures"><span data-ko="실패한 정책 검토" data-en="Failed policy assessments">실패한 정책 검토</span><strong>0</strong></div><div class="ai-count-row" title="release_candidates_failed"><span data-ko="릴리즈 후보 실패" data-en="Failed release candidates">릴리즈 후보 실패</span><strong>0</strong></div><div class="ai-count-row" title="ios_device_qa_blocked"><span data-ko="차단된 iOS 검증" data-en="Blocked iOS QA">차단된 iOS 검증</span><strong>0</strong></div></div></details></div></details><details class="ai-details"><summary><span data-ko="OS·스토어 정책" data-en="OS &amp; store policies">OS·스토어 정책</span><span class="ai-chevron" aria-hidden="true">⌄</span></summary><div class="ai-details-body"><div class="ai-row-list"><div class="ai-count-row" title="os_updates_to_review"><span data-ko="검토할 OS 업데이트" data-en="OS updates to review">검토할 OS 업데이트</span><strong>1</strong></div><div class="ai-count-row" title="os_impact_tasks"><span data-ko="OS 영향 분석 작업" data-en="OS impact tasks">OS 영향 분석 작업</span><strong>7</strong></div><div class="ai-count-row" title="store_policy_tasks"><span data-ko="스토어 정책 분석 작업" data-en="Store policy tasks">스토어 정책 분석 작업</span><strong>22</strong></div><div class="ai-count-row" title="store_policy_mailboxes_connected"><span data-ko="연결된 정책 메일함" data-en="Connected policy mailboxes">연결된 정책 메일함</span><strong>2</strong></div></div></div></details><details class="ai-details"><summary><span data-ko="개발 작업" data-en="Development tasks">개발 작업</span><span class="ai-chevron" aria-hidden="true">⌄</span></summary><div class="ai-details-body"><div class="ai-row-list"><p class="ai-empty"><span data-ko="별도 표시할 활동이 없어요." data-en="No additional activity to show.">별도 표시할 활동이 없어요.</span></p></div><details class="ai-zero-items"><summary><span data-ko="0건 항목 3개 표시" data-en="Show 3 zero-count items">0건 항목 3개 표시</span></summary><div class="ai-row-list"><div class="ai-count-row" title="coder_tasks_proposed"><span data-ko="제안된 수정 작업" data-en="Proposed fixes">제안된 수정 작업</span><strong>0</strong></div><div class="ai-count-row" title="coder_tasks_approved_pending"><span data-ko="승인 후 실행 대기" data-en="Approved fixes awaiting execution">승인 후 실행 대기</span><strong>0</strong></div><div class="ai-count-row" title="coder_draft_prs"><span data-ko="작성된 초안 PR" data-en="Draft PRs created">작성된 초안 PR</span><strong>0</strong></div></div></details></div></details><details class="ai-details"><summary><span data-ko="내부 테스트·출시" data-en="Private tests &amp; release">내부 테스트·출시</span><span class="ai-chevron" aria-hidden="true">⌄</span></summary><div class="ai-details-body"><div class="ai-row-list"><p class="ai-empty"><span data-ko="별도 표시할 활동이 없어요." data-en="No additional activity to show.">별도 표시할 활동이 없어요.</span></p></div><details class="ai-zero-items"><summary><span data-ko="0건 항목 18개 표시" data-en="Show 18 zero-count items">0건 항목 18개 표시</span></summary><div class="ai-row-list"><div class="ai-count-row" title="store_submissions_blocked"><span data-ko="차단된 스토어 제출" data-en="Blocked store submissions">차단된 스토어 제출</span><strong>0</strong></div><div class="ai-count-row" title="internal_test_uploads"><span data-ko="내부 테스트 업로드" data-en="Internal test uploads">내부 테스트 업로드</span><strong>0</strong></div><div class="ai-count-row" title="internal_store_processing"><span data-ko="스토어 처리 중" data-en="Processing in stores">스토어 처리 중</span><strong>0</strong></div><div class="ai-count-row" title="internal_store_processed"><span data-ko="스토어 처리됨" data-en="Processed in stores">스토어 처리됨</span><strong>0</strong></div><div class="ai-count-row" title="internal_store_processing_failed"><span data-ko="스토어 처리 실패" data-en="Store processing failures">스토어 처리 실패</span><strong>0</strong></div><div class="ai-count-row" title="new_internal_test_feedback"><span data-ko="신규 테스트 의견" data-en="New tester feedback">신규 테스트 의견</span><strong>0</strong></div><div class="ai-count-row" title="internal_test_high_findings"><span data-ko="고위험 테스트 결과" data-en="High-risk test findings">고위험 테스트 결과</span><strong>0</strong></div><div class="ai-count-row" title="internal_test_passed"><span data-ko="통과된 내부 테스트" data-en="Internal tests passed">통과된 내부 테스트</span><strong>0</strong></div><div class="ai-count-row" title="internal_test_failed"><span data-ko="실패한 내부 테스트" data-en="Internal tests failed">실패한 내부 테스트</span><strong>0</strong></div><div class="ai-count-row" title="internal_test_ready_for_upload"><span data-ko="업로드 준비된 빌드" data-en="Builds ready to upload">업로드 준비된 빌드</span><strong>0</strong></div><div class="ai-count-row" title="internal_test_available_to_testers"><span data-ko="테스터 사용 가능" data-en="Available to testers">테스터 사용 가능</span><strong>0</strong></div><div class="ai-count-row" title="private_test_builds_dispatched"><span data-ko="빌드 요청됨" data-en="Builds dispatched">빌드 요청됨</span><strong>0</strong></div><div class="ai-count-row" title="private_test_builds_artifact_ready"><span data-ko="빌드 산출물 준비됨" data-en="Build artifacts ready">빌드 산출물 준비됨</span><strong>0</strong></div><div class="ai-count-row" title="private_test_builds_failed"><span data-ko="빌드 실패" data-en="Build failures">빌드 실패</span><strong>0</strong></div><div class="ai-count-row" title="private_test_orchestrations_active"><span data-ko="테스트 진행 중" data-en="Active test orchestrations">테스트 진행 중</span><strong>0</strong></div><div class="ai-count-row" title="private_test_orchestrations_failed"><span data-ko="테스트 자동화 실패" data-en="Failed test orchestrations">테스트 자동화 실패</span><strong>0</strong></div><div class="ai-count-row" title="android_aab_expiring"><span data-ko="만료 임박한 AAB" data-en="AABs expiring soon">만료 임박한 AAB</span><strong>0</strong></div><div class="ai-count-row" title="android_aab_expired"><span data-ko="만료된 AAB" data-en="Expired AABs">만료된 AAB</span><strong>0</strong></div></div></details></div></details></div></section><p class="ai-meta"><span data-ko="표시값은 마지막 보고서 스냅샷 기준이에요. 수집 결과와 품질 판정을 구분해요." data-en="Values reflect the last report snapshot. Collection and quality verification are separate.">표시값은 마지막 보고서 스냅샷 기준이에요. 수집 결과와 품질 판정을 구분해요.</span></p>
+:root{color-scheme:light;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:grid;place-items:center;background:#faf8f5;color:#302f35;padding:20px}
+section{width:min(440px,100%);background:#fff;border:1px solid #ddd6e6;border-radius:20px;padding:36px;box-shadow:0 12px 32px #4739580c}
+.mark{display:inline-block;padding:7px 12px;border-radius:30px;background:#f1eafb;color:#654e85;font-size:12px;font-weight:700}
+h1{font-size:26px;margin:22px 0 9px}p{color:#726c79;font-size:14px;line-height:1.65;margin:0 0 22px}
+label{display:block;font-size:13px;font-weight:720;margin-bottom:8px}
+input{width:100%;border:1px solid #cfc5d7;border-radius:10px;padding:14px 13px;font:inherit;font-size:16px}
+input:focus-visible{outline:2px solid #c1a3e5;outline-offset:2px}
+button{width:100%;border:0;border-radius:10px;background:#c6b2e5;color:#21192e;margin-top:14px;padding:15px;font-weight:750;font-size:15px;cursor:pointer;min-height:48px}
+button:disabled{opacity:.5}#message{min-height:23px;margin-top:14px;color:#a53535;font-size:13px}
+small{display:block;color:#8f8992;font-size:12px;line-height:1.6;margin-top:20px}
+@media(max-width:500px){section{padding:27px 20px}}
+</style></head>
+<body><section>
+<span class="mark">ONNELLAB / Private Ops</span>
+<h1>운영 대시보드 잠금</h1>
+<p>운영 데이터는 암호화되어 있어요. 비밀번호를 입력하면 이 브라우저 탭에서 열 수 있어요.</p>
+<form id="unlock">
+<label for="password">비밀번호</label>
+<input type="password" autocomplete="current-password" id="password" required autofocus>
+<button id="submit" type="submit">대시보드 열기</button>
+<div id="message" role="alert"></div>
+</form>
+<small>암호화된 정적 페이지예요. 비밀번호는 서버로 전송되지 않지만 웹서버에서 접근 자체를 차단하는 방식은 아니에요.</small>
+</section>
+<script type="application/json" id="ops-sealed-data">{"v":1,"it":600000,"salt":"lacXK5hvYZFQNa/619/OHg==","iv":"9NUNSY9CfncW/jXy","tag":"gmJ4wZumrkYoL+5XEoKIjw==","data":"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","path":"monitoring/index.html"}</script>
 <script>
-(() => {
-  const thresholdMs = 48 * 60 * 60 * 1000;
-  document.querySelectorAll('[data-ai-generated-at]').forEach((section) => {
-    const value = Date.parse(section.getAttribute('data-ai-generated-at') || '');
-    const sourceState = section.dataset.aiCollection || section.querySelector('[data-collection]')?.dataset.collection;
-    if (sourceState === 'partial') return; // Do not mask a recorded collection failure.
-    if (!Number.isFinite(value) || Date.now() - value <= thresholdMs) return;
-    const status = section.querySelector('.ai-collection-label');
-    if (!status) return;
-    status.dataset.ko = '자료 갱신 지연';
-    status.dataset.en = 'Snapshot is outdated';
-    status.textContent = document.documentElement.lang === 'en' ? status.dataset.en : status.dataset.ko;
-    const state = section.querySelector('[data-collection]');
-    if (state) state.dataset.collection = 'stale';
-  });
+(async()=>{
+ const record=JSON.parse(document.getElementById('ops-sealed-data').textContent);
+ const storageKey='onnellab-ops-session-'+record.salt;
+ const input=document.getElementById('password');
+ const button=document.getElementById('submit');
+ const message=document.getElementById('message');
+ const bytes=b64=>Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
+ const b64=buf=>btoa(String.fromCharCode(...new Uint8Array(buf)));
+ async function decode(raw) {
+   const key=await crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt']);
+   const combined=new Uint8Array(bytes(record.data).length+16);
+   combined.set(bytes(record.data));combined.set(bytes(record.tag),combined.length-16);
+   const plaintext=await crypto.subtle.decrypt({
+     name:'AES-GCM',iv:bytes(record.iv),
+     additionalData:new TextEncoder().encode(record.path)
+   },key,combined);
+   const zipped=new Blob([plaintext]).stream().pipeThrough(new DecompressionStream('gzip'));
+   return await new Response(zipped).text();
+ }
+ async function unlock(raw,remember) {
+   const body=await decode(raw);
+   if(remember)sessionStorage.setItem(storageKey,b64(raw));
+   // Prevent older, pre-encryption service workers from continuing to serve old dashboard HTML.
+   try{
+     if('serviceWorker' in navigator){
+       const regs=await navigator.serviceWorker.getRegistrations();
+       await Promise.all(regs.filter(r=>r.scope.includes('/ops/')).map(r=>r.unregister()));
+     }
+     if('caches' in window){
+       const keys=await caches.keys();
+       await Promise.all(keys.filter(k=>k.includes('ops')||k.includes('onnel')).map(k=>caches.delete(k)));
+     }
+   }catch{}
+   document.open();document.write(body);document.close();
+ }
+ try{
+   const cached=sessionStorage.getItem(storageKey);
+   if(cached){try{await unlock(bytes(cached),false);return;}catch{sessionStorage.removeItem(storageKey);}}
+ }catch{}
+ document.getElementById('unlock').addEventListener('submit',async event=>{
+   event.preventDefault();button.disabled=true;message.textContent='';
+   try{
+     const master=await crypto.subtle.importKey('raw',new TextEncoder().encode(input.value),'PBKDF2',false,['deriveBits']);
+     const key=await crypto.subtle.deriveBits(
+       {name:'PBKDF2',salt:bytes(record.salt),iterations:record.it,hash:'SHA-256'},master,256);
+     await unlock(new Uint8Array(key),true);
+   }catch{
+     input.value='';
+     message.textContent='비밀번호가 올바르지 않거나 데이터를 열 수 없어요.';
+   }finally{button.disabled=false;}
+ });
 })();
-</script>
-
-</main>
-<script>
-(() => {
-  const storageKey = 'onnellab-ops-language';
-  let language = localStorage.getItem(storageKey) === 'en' ? 'en' : 'ko';
-  const button = document.getElementById('ops-lang-toggle');
-  const applyLanguage = () => {
-    document.documentElement.lang = language === 'en' ? 'en' : 'ko';
-    document.querySelectorAll('[data-ko][data-en]').forEach((element) => {
-      element.textContent = language === 'en' ? element.dataset.en : element.dataset.ko;
-    });
-    document.querySelectorAll('[data-placeholder-ko][data-placeholder-en]').forEach((element) => {
-      element.setAttribute('placeholder', language === 'en' ? element.dataset.placeholderEn : element.dataset.placeholderKo);
-    });
-    if (button) button.textContent = language === 'en' ? '한국어' : 'English';
-  };
-  if (button) button.addEventListener('click', () => {
-    language = language === 'en' ? 'ko' : 'en';
-    localStorage.setItem(storageKey, language);
-    applyLanguage();
-  });
-  applyLanguage();
-})();
-</script>
-</body>
-</html>
+</script></body></html>

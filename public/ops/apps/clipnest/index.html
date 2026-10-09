@@ -1,584 +1,90 @@
 <!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClipNest · ONNELLAB Ops</title>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
-<link rel="icon" href="/favicon.svg?v=20260712-ol-transparent-v2" type="image/svg+xml">
+<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="naverbot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="yeti" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="referrer" content="no-referrer"><meta http-equiv="Cache-Control" content="no-store">
+<title>ONNELLAB Ops · 비공개</title>
 <style>
-:root{
-  --ink:#191714;--muted:#746f69;--line:#ded6ca;--surface:#fffaf5;--panel:#fff;
-  --blue:#2e6fbb;--blue-soft:#e8f1fb;--lilac:#d8cdf7;--lilac-soft:#f4f0ff;
-  --peach:#f4c3b4;--peach-soft:#fff0ea;--sky:#cfe6ff;--sky-soft:#eef7ff;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--surface);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;word-break:keep-all}
-a{color:inherit}
-.ops-topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid rgba(221,212,202,.85);background:rgba(255,250,245,.94);backdrop-filter:blur(14px)}
-.ops-bar{max-width:1180px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.ops-brand{display:flex;align-items:center;gap:10px;font-weight:800;color:inherit;text-decoration:none}
-.ops-mark{width:32px;height:32px;display:block;object-fit:contain}
-.ops-lang{min-height:31px;border:1px solid var(--ink);background:var(--ink);color:#fff;padding:6px 10px;border-radius:999px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
-.ops-lang:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-.ops-wrap{max-width:1180px;margin:0 auto;padding:22px 20px 56px}
-.ops-nav{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;margin-bottom:24px}.ops-nav::-webkit-scrollbar{display:none}
-.ops-nav a{display:inline-flex;flex:0 0 auto;align-items:center;min-height:42px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#fffdf9;color:#5d574f;text-decoration:none;font-size:13px;font-weight:750}
-.ops-nav a[aria-current="page"]{border-color:#b9cbe0;background:var(--blue-soft);color:#315f91}
-.ops-nav a:hover{border-color:#b9cbe0;background:var(--blue-soft)}
-.ops-head{margin:10px 0 28px}
-.ops-head .eyebrow{margin:0 0 10px;color:#827d72;font-size:12px;font-weight:680;letter-spacing:.08em;text-transform:uppercase}
-.ops-head h1{margin:0;color:#36332f;font-size:34px;line-height:1.12}
-.ops-head p{max-width:760px;margin:14px 0 0;color:#5b574f;font-size:16px;line-height:1.65}
-.ops-route-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.ops-route-card{display:block;min-height:140px;padding:20px;border:1px solid var(--line);border-radius:12px;background:#fff;text-decoration:none;transition:transform 140ms ease,border-color 140ms ease,box-shadow 140ms ease}
-.ops-route-card:hover{transform:translateY(-2px);border-color:#cfc5b7;box-shadow:0 10px 22px rgba(58,49,38,.055)}
-.ops-route-card b{display:block;font-size:20px;margin-bottom:8px;color:#3e3933}
-.ops-route-card span{display:block;color:#6f695f;font-size:14px;line-height:1.55}
-.ops-route-card small{display:block;margin-top:18px;color:#817b72;font-size:12px;font-weight:700}
-.ops-legacy-link{margin-top:22px;font-size:12px;color:#827d72}
-.ops-legacy-link a{font-weight:750}
-.app-search{display:grid;gap:8px;max-width:360px;margin-bottom:28px;color:#6f695f;font-size:13px;font-weight:620}
-.app-search input{min-height:44px;border:1px solid #ded6ca;border-radius:8px;padding:9px 12px;background:rgba(255,253,248,.78);color:#3f3b35;font:inherit;font-weight:500}
-.app-search input:focus{border-color:#cfc5b7;outline:2px solid #827d72;outline-offset:3px}
-.app-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.app-card{position:relative;display:grid;grid-template-columns:54px minmax(0,1fr);align-items:start;gap:16px;min-height:128px;border:1px solid var(--accent-border,#e0d8cb);border-radius:11px;padding:18px;background:linear-gradient(135deg,rgba(255,253,248,.96) 16%,var(--accent-bg,#fffdf8)),#fffdf8;color:inherit;text-decoration:none;transition:transform 140ms ease,border-color 140ms ease,background 140ms ease,box-shadow 140ms ease}
-.app-card[hidden]{display:none}
-.app-card:hover,.app-card:focus-visible{border-color:var(--accent-border,#d8cec0);background:linear-gradient(135deg,#fffdf8 10%,var(--accent-bg,#fffdf8) 92%),#fffdf8;box-shadow:0 10px 22px rgba(58,49,38,.055);transform:translateY(-2px)}
-.app-card:focus-visible{outline:2px solid #827d72;outline-offset:3px}
-.app-card>img{width:52px;height:52px;border-radius:13px;box-shadow:0 0 0 1px var(--accent-border,#ddd5c8);object-fit:cover}
-.app-copy{min-width:0}.title-row{display:flex;align-items:center;flex-wrap:wrap;gap:7px 10px}.title-row h2{margin:0;color:#3e3933;font-size:19px;line-height:1.25}
-.status-badge{border:1px solid transparent;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:650;line-height:1.35;white-space:nowrap}
-.status-badge[data-status-kind="released"]{border-color:#c9d8d2;background:#edf5f2;color:#49645a}
-.status-badge[data-status-kind="preparing"]{border-color:#e1cfc5;background:#f9eee8;color:#765849}
-.app-copy>p{margin:8px 0 0;color:#5f5a50;font-size:14px;line-height:1.55}
-.platform-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
-.platform-badges span{border:1px solid var(--accent-border,#ddd5c8);border-radius:999px;padding:2px 7px;background:color-mix(in srgb,var(--accent-bg,#faf8f5) 80%,#fffdf8);color:var(--accent-text,#737067);font-size:11px;line-height:1.4}
-.ops-meta{margin-top:10px;color:#827d72;font-size:11px;line-height:1.45}
-.detail-hero{display:grid;grid-template-columns:68px minmax(0,1fr);gap:18px;align-items:start;padding:22px;border:1px solid var(--accent-border,#e0d8cb);border-radius:13px;background:linear-gradient(135deg,rgba(255,253,248,.96) 16%,var(--accent-bg,#fffdf8)),#fffdf8}
-.detail-hero img{width:64px;height:64px;border-radius:15px;box-shadow:0 0 0 1px var(--accent-border,#ddd5c8)}
-.detail-hero h1{margin:0 0 8px;font-size:30px;color:#3e3933}.detail-hero p{margin:8px 0 0;color:#5f5a50;line-height:1.6}
-.detail-tabs{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;margin:18px 0 16px;scroll-margin-top:78px}.detail-tabs::-webkit-scrollbar{display:none}.detail-tabs a{min-height:44px;display:inline-flex;flex:0 0 auto;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;text-decoration:none;font-size:13px;font-weight:750;color:#6a645b}.detail-tabs a[aria-selected="true"]{background:var(--blue-soft);border-color:#b9cbe0;color:#315f91}.detail-tabs a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}.detail-section[hidden]{display:none!important}
-.detail-section{margin-top:18px;padding:20px;border:1px solid var(--line);border-radius:12px;background:#fff}.detail-section h2{margin:0 0 14px;font-size:19px}.detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.app-overview-metrics{margin:0 0 12px}.app-overview-note{margin:0 0 20px;color:#746f69;font-size:11px;line-height:1.5}
-.detail-stat{padding:14px;border:1px solid #e8e0d7;border-radius:9px;background:#fffdf9}.detail-stat span{display:block;color:#827d72;font-size:11px}.detail-stat b{display:block;margin-top:6px;font-size:18px;overflow-wrap:anywhere}
-.detail-list{display:grid;gap:8px}.detail-row{padding:12px;border:1px solid #e8e0d7;border-radius:9px;background:#fffdf9}.detail-row b{display:block;margin-bottom:5px;font-size:13px}.detail-row span{display:block;color:#6f695f;font-size:12px;line-height:1.55;overflow-wrap:anywhere}
-.empty-note{padding:15px;border:1px dashed #d9d0c6;border-radius:9px;background:#fffdf9;color:#746f69;font-size:13px;line-height:1.6}
-.funnel-controls{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}.funnel-controls button{min-height:34px;border:1px solid var(--line);border-radius:999px;padding:6px 11px;background:#fff;color:#625c54;font:inherit;font-size:12px;font-weight:750;cursor:pointer}.funnel-controls button.is-active{border-color:#b9cbe0;background:var(--blue-soft);color:#315f91}
-.funnel-window[hidden]{display:none}.funnel-platform-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.funnel-card{padding:15px;border:1px solid #e8e0d7;border-radius:10px;background:#fffdf9}.funnel-card h3{margin:0 0 12px;font-size:15px}.funnel-chain{display:flex;align-items:stretch;gap:7px}.funnel-step{flex:1;min-width:0;padding:10px;border:1px solid #e8e0d7;border-radius:8px;background:#fff}.funnel-step span{display:block;color:#827d72;font-size:10px;line-height:1.35}.funnel-step b{display:block;margin-top:5px;font-size:20px;line-height:1}.funnel-arrow{display:flex;align-items:center;color:#aaa196;font-size:15px}.funnel-purchase{margin-top:10px;padding-top:10px;border-top:1px solid #ece4dc;color:#6f695f;font-size:12px}.funnel-purchase b{color:#3e3933;font-size:15px}.funnel-freshness{margin-top:8px;color:#8a8379;font-size:10px}.funnel-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.funnel-summary .detail-stat{background:var(--lilac-soft)}.funnel-note{margin-top:12px;color:#746f69;font-size:11px;line-height:1.55}
-.diagnosis-panel{margin-top:14px;padding:15px;border:1px solid #dfd7e9;border-radius:10px;background:linear-gradient(135deg,#fbf9ff,#fffdf9)}.diagnosis-panel h3{margin:0 0 10px;font-size:15px}.diagnosis-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.diagnosis-card{padding:12px;border:1px solid #e8e0d7;border-radius:9px;background:#fff}.diagnosis-card[data-kind="good"]{background:#f1f8f4;border-color:#cfe0d5}.diagnosis-card[data-kind="warn"]{background:#fff8ef;border-color:#ead7bd}.diagnosis-card[data-kind="low"]{background:#fff2f0;border-color:#ebc8c3}.diagnosis-card[data-kind="wait"]{background:#f7f5f1}.diagnosis-card h4{margin:0 0 6px;font-size:13px}.diagnosis-card p{margin:5px 0 0;color:#686159;font-size:12px;line-height:1.55}.rate-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.rate-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border:1px solid #e5ddd4;border-radius:999px;background:#fffdf9;color:#696158;font-size:10px}.diagnosis-note{margin-top:10px;color:#8b8379;font-size:10px;line-height:1.5}
-.subsection-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:18px 0 10px}.subsection-head h3{margin:0;font-size:15px}.subsection-head p{margin:0;color:#827d72;font-size:11px}.ops-actions{display:flex;gap:7px;flex-wrap:wrap}.ops-button{min-height:34px;border:1px solid #cfc5b7;border-radius:8px;padding:7px 10px;background:#fff;color:#514b44;font:inherit;font-size:12px;font-weight:750;cursor:pointer}.ops-button.primary{border-color:#b9cbe0;background:var(--blue-soft);color:#315f91}.ops-button:disabled{opacity:.55;cursor:not-allowed}.ops-message{min-height:18px;margin-top:8px;color:#6f695f;font-size:11px;line-height:1.5}.ops-message.is-error{color:#9c3f36}.token-note{margin:10px 0;padding:10px 12px;border:1px solid #ded6ca;border-radius:8px;background:#fffaf2;color:#6f695f;font-size:11px;line-height:1.5}.token-note[hidden]{display:none}.token-note a{font-weight:750}
-.review-list,.release-list,.dependency-list,.pricing-list{display:grid;gap:10px}.pricing-product-card{padding:14px;border:1px solid #e8e0d7;border-radius:10px;background:#fffdf9}.pricing-product-card h4{margin:0 0 10px;font-size:15px}.pricing-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.pricing-option{display:grid;gap:5px;padding:11px;border:1px solid #e9e0d6;border-radius:8px;background:#fff}.pricing-option-head{display:flex;align-items:center;justify-content:space-between;gap:5px;flex-wrap:wrap}.pricing-option-head>b{font-size:13px}.pricing-option>strong{font-size:18px}.price-option-profit{color:#5f7465;font-size:12px}.price-evidence{margin-top:10px}.price-evidence>summary{cursor:pointer;color:#655f58;font-size:12px;padding:7px 0}.price-evidence>.pricing-list{margin-top:8px}.price-evidence .pricing-card{padding:10px}.price-evidence .pricing-card>p{font-size:12px}.review-card[hidden]{display:none!important}.review-filters{display:flex;flex-wrap:wrap;gap:7px;margin:13px 0}.review-filters button{min-height:40px;border:1px solid #dfd6ca;border-radius:999px;background:#fff;padding:8px 12px;color:#675f56;font:inherit;font-size:13px;font-weight:730;cursor:pointer}.review-filters button[aria-pressed="true"]{border-color:#b9cbe0;background:var(--blue-soft);color:#315f91}.review-filter-empty{padding:16px;border:1px dashed #d9d0c6;border-radius:9px;background:#fffdf9;font-size:13px;line-height:1.6}.review-filter-empty[hidden]{display:none!important}.review-filter-empty button{display:inline-block;min-height:38px;margin-top:10px;border:1px solid #b9cbe0;background:var(--blue-soft);border-radius:8px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer}.review-completed{padding:0!important}.review-completed-summary{display:grid;gap:7px;padding:12px 14px;cursor:pointer;list-style:none}.review-completed-summary::-webkit-details-marker{display:none}.review-completed-summary::after{content:"펼치기";color:#827d72;font-size:11px}.review-completed[open]>.review-completed-summary::after{content:"접기"}.review-completed-head{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.review-excerpt{color:#655f58;font-size:13px;line-height:1.5;overflow-wrap:anywhere}.review-expanded-content{padding:0 14px 14px;border-top:1px solid #e8e0d7}.review-card,.release-card,.dependency-card,.pricing-card{padding:14px;border:1px solid #e8e0d7;border-radius:10px;background:#fffdf9}.review-head,.release-head,.pricing-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.review-head strong,.release-head strong,.pricing-head strong{font-size:14px}.review-rating,.mini-badge{display:inline-flex;align-items:center;min-height:24px;padding:3px 7px;border:1px solid #ddd4ca;border-radius:999px;background:#fff;color:#655e55;font-size:10px;font-weight:750}.mini-badge.good{border-color:#c7ddd0;background:#eef7f2;color:#49675a}.mini-badge.warn{border-color:#e4d1b7;background:#fff7eb;color:#795d37}.mini-badge.bad{border-color:#e4c4bf;background:#fff1ef;color:#844d47}.review-meta,.release-meta,.pricing-meta,.dependency-meta{margin-top:5px;color:#827d72;font-size:10px;line-height:1.5}.review-body{margin:10px 0 0;white-space:pre-wrap;font-size:13px;line-height:1.6}.review-translation{margin-top:10px;padding:10px;border:1px solid #e5ddd4;border-radius:8px;background:#fff}.review-translation b{display:block;margin-bottom:5px;font-size:11px}.review-translation p{margin:0;font-size:12px;line-height:1.55}.review-card label{display:grid;gap:5px;margin-top:10px;color:#716a61;font-size:11px;font-weight:700}.review-card textarea{width:100%;min-height:92px;border:1px solid #dcd3c8;border-radius:8px;padding:9px;background:#fff;color:#302c28;font:inherit;font-size:12px;line-height:1.5;resize:vertical}.review-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.review-card details{margin-top:10px}.review-card details summary{cursor:pointer;color:#655e55;font-size:11px;font-weight:750}.triage-box{margin-top:7px;padding:9px;border:1px solid #e4dced;border-radius:8px;background:#faf7ff;color:#675d70;font-size:11px;line-height:1.55;white-space:pre-wrap}.release-card p,.pricing-card p,.dependency-card p{margin:7px 0 0;color:#696158;font-size:11px;line-height:1.55}.release-card a,.pricing-card a{font-weight:700}.economics-callout{margin-top:9px;padding:9px;border:1px solid #c8dfd1;border-radius:8px;background:#eff8f3;color:#4d6758;font-size:11px;line-height:1.5}.economics-callout.loss{border-color:#e5c5c0;background:#fff1ef;color:#824e48}.site-freshness{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.dependency-details{margin-top:10px;border:1px solid #e8e0d7;border-radius:9px;background:#fffdf9}.dependency-details>summary{padding:12px 14px;color:#58544d;font-size:13px;font-weight:730;cursor:pointer}.dependency-details>.dependency-list{padding:0 10px 10px}.dependency-details .dependency-card{background:#fff}
-.ops-meta,.ops-legacy-link,.app-overview-note{font-size:12px}.platform-badges span,.status-badge,.detail-stat span,.funnel-step span,.funnel-freshness,.funnel-note,.diagnosis-note,.rate-pill,.review-meta,.release-meta,.pricing-meta,.dependency-meta,.mini-badge,.review-translation b{font-size:12px}.ops-lang{min-height:36px}.ops-nav a{min-height:42px}.detail-tabs a{min-height:44px}
-.ai-home-preview{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:18px 0 20px;padding:20px;border:1px solid var(--line);border-radius:12px;background:#fff}
-.ai-home-preview h2{margin:0 0 7px;font-size:20px}
-.ai-home-preview p{margin:0 0 6px;color:#514d48;font-size:14px;line-height:1.55}
-.ai-home-preview small{color:#756f67;font-size:12px}
-.ai-home-preview>a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 14px;border:1px solid #c5b8dc;border-radius:9px;background:#f4f0ff;color:#4c3d68;font-size:13px;font-weight:750;text-decoration:none;white-space:nowrap}
-.ai-home-preview>a:hover,.ai-home-preview>a:focus-visible{border-color:#ad9aca;background:#ece5ff}
-.ai-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 22px}
-.ai-kpi{padding:18px;border:1px solid var(--line);border-radius:11px;background:#fff;min-width:0}
-.ai-kpi>span{display:block;color:#655f59;font-size:13px;line-height:1.5}
-.ai-kpi strong{display:block;margin-top:8px;font-size:32px;font-weight:750;line-height:1.1}
-.ai-source-line{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
-.ai-source-state{display:inline-flex;min-height:30px;align-items:center;padding:5px 10px;border-radius:999px;border:1px solid #d4cadf;background:#f8f5fc;color:#514164;font-size:12px;font-weight:700}
-.ai-source-state[data-collection="complete"]{border-color:#cedbd1;background:#f2f7f3;color:#426350}
-.ai-source-state[data-collection="partial"],.ai-source-state[data-collection="stale"],.ai-source-state[data-collection="missing"]{border-color:#e3c9b5;background:#fff7ef;color:#805736}
-.ai-updated{margin:0;color:#716b63;font-size:12px}
-.ai-health-note{margin:14px 0;padding:12px 14px;border:1px solid #e3d8c7;border-radius:9px;background:#fffdf8;color:#675b49;font-size:13px;line-height:1.6}
-.ai-monitor-section{margin:23px 0 0}
-.ai-monitor-section h2{margin:0 0 12px;font-size:18px;font-weight:750}
-.ai-alert-list{display:grid;gap:10px}
-.ai-alert-row{padding:15px 17px;border:1px solid var(--line);border-radius:10px;background:#fff;overflow-wrap:anywhere}
-.ai-alert-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.ai-alert-row strong{font-size:14px;line-height:1.5}
-.ai-state-label{flex:0 0 auto;border:1px solid #e8d1c2;border-radius:999px;background:#fff8f2;padding:4px 8px;color:#785d4b;font-size:11px;line-height:1.3}
-.ai-alert-row[data-alert-priority="deferred"] .ai-state-label{border-color:#d4cde0;background:#f9f6fd;color:#685676}
-.ai-alert-row p{margin:10px 0 0;color:#4e4942;font-size:13px;line-height:1.65}
-.ai-alert-row .ai-note{color:#666056}
-.ai-alert-more{margin-top:10px;padding-top:7px;border-top:1px solid #eee8e2}
-.ai-alert-more>summary{cursor:pointer;display:list-item;min-height:36px;padding:8px 0;color:#5f5274;font-size:12px;font-weight:730}
-.ai-alert-more>summary:focus-visible{outline:2px solid #9280bb;outline-offset:2px}
-.ai-alert-more p{margin:8px 0;color:#655f59}
-.ai-alert-row small{display:block;margin-top:10px;color:#777068;font-size:12px}
-.ai-link{display:inline-flex;align-items:center;min-height:40px;margin-top:6px;color:#51456d;font-size:13px;font-weight:700}
-.ai-row-list{border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden}
-.ai-count-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 15px;font-size:13px;line-height:1.5}
-.ai-count-row+.ai-count-row{border-top:1px solid #f0ebe5}
-.ai-count-row>strong{font-size:15px;white-space:nowrap}
-.ai-count-row code{overflow-wrap:anywhere;font-size:12px}
-.ai-meta{margin:9px 0 0;color:#777068;font-size:12px;line-height:1.5}
-.ai-groups{display:grid;gap:10px}
-.ai-details{border:1px solid var(--line);border-radius:10px;background:#fff}
-.ai-details>summary{list-style:none;cursor:pointer;padding:15px 16px;font-size:14px;font-weight:750;min-height:48px}
-.ai-details>summary::-webkit-details-marker{display:none}
-.ai-details>summary:focus-visible,.ai-zero-items>summary:focus-visible{outline:2px solid #9280bb;outline-offset:2px}
-.ai-chevron{float:right;color:#897a95;font-size:18px}
-.ai-details[open] .ai-chevron{transform:rotate(180deg)}
-.ai-details-body{padding:0 12px 12px}
-.ai-details-body>.ai-row-list{background:#fffdfb}
-.ai-zero-items{margin-top:10px}
-.ai-zero-items>summary{cursor:pointer;min-height:38px;padding:8px 10px;color:#777068;font-size:12px}
-.ai-zero-items>.ai-row-list{margin-top:5px}
-.ai-empty{margin:0;padding:15px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#6a645c;font-size:13px;line-height:1.6}
-@media(max-width:680px){.ai-home-preview{align-items:stretch;flex-direction:column;padding:16px}.ai-home-preview>a{width:100%}.ai-kpis{gap:8px}.ai-kpi{padding:12px}.ai-kpi>span{font-size:11px;min-height:34px}.ai-kpi strong{font-size:26px}.ai-alert-row{padding:13px}.ai-count-row{padding:11px 12px}.ai-updated{width:100%}}
-@media(max-width:370px){.ai-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.ai-kpi:last-child{grid-column:span 2}}
-@media(max-width:440px){.pricing-options{grid-template-columns:1fr}.review-completed-summary{padding:12px}}
-@media(max-width:680px){.ops-wrap{padding:18px 15px 42px}.ops-route-grid,.app-grid{grid-template-columns:1fr}.app-grid{gap:10px}.app-card{grid-template-columns:46px minmax(0,1fr);gap:13px;min-height:0;padding:15px}.app-card>img{width:44px;height:44px;border-radius:11px}.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-hero{grid-template-columns:54px minmax(0,1fr);padding:17px}.detail-hero img{width:52px;height:52px;border-radius:12px}.ops-head h1{font-size:29px}.funnel-platform-grid,.diagnosis-grid,.site-freshness{grid-template-columns:1fr}.funnel-chain{gap:5px}.funnel-step{padding:8px}.funnel-step b{font-size:17px}.review-head,.release-head,.pricing-head{align-items:flex-start}.review-card,.release-card,.dependency-card,.pricing-card{padding:12px}}
-</style>
-</head>
-<body>
-<header class="ops-topbar">
-  <div class="ops-bar">
-    <a class="ops-brand" href="/" aria-label="ONNELLAB home">
-      <img class="ops-mark" src="/favicon.svg?v=20260712-ol-transparent-v2" alt="" width="32" height="32">
-      <span>ONNELLAB Ops</span>
-    </a>
-    <button class="ops-lang" id="ops-lang-toggle" type="button">English</button>
-  </div>
-</header>
-<main class="ops-wrap">
-<nav class="ops-nav" aria-label="ONNELLAB Ops"><a href="/ops/"><span data-ko="홈" data-en="Home">홈</span></a><a href="/ops/apps/" aria-current="page"><span data-ko="앱" data-en="Apps">앱</span></a><a href="/ops/sales/"><span data-ko="매출" data-en="Sales">매출</span></a><a href="/ops/publishing/"><span data-ko="게시" data-en="Publishing">게시</span></a><a href="/ops/media/"><span data-ko="미디어" data-en="Media">미디어</span></a><a href="/ops/monitoring/"><span data-ko="운영 점검" data-en="Monitoring">운영 점검</span></a><a href="/ops/settings/"><span data-ko="설정" data-en="Settings">설정</span></a></nav>
-
-<header class="ops-head">
-  <p class="eyebrow" data-ko="앱 운영" data-en="App Operations">앱 운영</p>
-  <a href="/ops/apps/" style="font-size:13px;color:#746f69;text-decoration:none" data-ko="← 앱 목록" data-en="← Apps">← 앱 목록</a>
-</header>
-<section class="detail-hero" style="--accent-border:#d6c9c9;--accent-bg:#f7efef;--accent-text:#6b4f4f;">
-  <img src="/app-assets/clipnest/assets/icon/clipnest.png" alt="" width="64" height="64">
-  <div>
-    <div class="title-row"><h1>ClipNest</h1><span class="status-badge" data-status-kind="released" data-ko="출시됨" data-en="Released">출시됨</span></div>
-    <p data-ko="클립보드·문구 저장 키보드" data-en="A local iOS clipboard utility for saving and reusing copied text.">클립보드·문구 저장 키보드</p>
-    <div class="platform-badges"><span>iOS</span></div>
-  </div>
+:root{color-scheme:light;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:grid;place-items:center;background:#faf8f5;color:#302f35;padding:20px}
+section{width:min(440px,100%);background:#fff;border:1px solid #ddd6e6;border-radius:20px;padding:36px;box-shadow:0 12px 32px #4739580c}
+.mark{display:inline-block;padding:7px 12px;border-radius:30px;background:#f1eafb;color:#654e85;font-size:12px;font-weight:700}
+h1{font-size:26px;margin:22px 0 9px}p{color:#726c79;font-size:14px;line-height:1.65;margin:0 0 22px}
+label{display:block;font-size:13px;font-weight:720;margin-bottom:8px}
+input{width:100%;border:1px solid #cfc5d7;border-radius:10px;padding:14px 13px;font:inherit;font-size:16px}
+input:focus-visible{outline:2px solid #c1a3e5;outline-offset:2px}
+button{width:100%;border:0;border-radius:10px;background:#c6b2e5;color:#21192e;margin-top:14px;padding:15px;font-weight:750;font-size:15px;cursor:pointer;min-height:48px}
+button:disabled{opacity:.5}#message{min-height:23px;margin-top:14px;color:#a53535;font-size:13px}
+small{display:block;color:#8f8992;font-size:12px;line-height:1.6;margin-top:20px}
+@media(max-width:500px){section{padding:27px 20px}}
+</style></head>
+<body><section>
+<span class="mark">ONNELLAB / Private Ops</span>
+<h1>운영 대시보드 잠금</h1>
+<p>운영 데이터는 암호화되어 있어요. 비밀번호를 입력하면 이 브라우저 탭에서 열 수 있어요.</p>
+<form id="unlock">
+<label for="password">비밀번호</label>
+<input type="password" autocomplete="current-password" id="password" required autofocus>
+<button id="submit" type="submit">대시보드 열기</button>
+<div id="message" role="alert"></div>
+</form>
+<small>암호화된 정적 페이지예요. 비밀번호는 서버로 전송되지 않지만 웹서버에서 접근 자체를 차단하는 방식은 아니에요.</small>
 </section>
-<nav class="detail-tabs" role="tablist" aria-label="앱 세부">
-  <a id="tab-overview" role="tab" href="#overview" aria-controls="overview" aria-selected="true" tabindex="0" data-ko="개요" data-en="Overview">개요</a>
-  <a id="tab-funnel" role="tab" href="#funnel" aria-controls="funnel" aria-selected="false" tabindex="-1" data-ko="유입·전환" data-en="Acquisition">유입·전환</a>
-  <a id="tab-store" role="tab" href="#store" aria-controls="store" aria-selected="false" tabindex="-1" data-ko="스토어·수익" data-en="Store & revenue">스토어·수익</a>
-  <a id="tab-reviews" role="tab" href="#reviews" aria-controls="reviews" aria-selected="false" tabindex="-1" data-ko="리뷰" data-en="Reviews">리뷰</a>
-  <a id="tab-technical" role="tab" href="#technical" aria-controls="technical" aria-selected="false" tabindex="-1" data-ko="기술·운영" data-en="Technical">기술·운영</a>
-</nav>
-
-<section class="detail-section" id="overview" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
-  <h2 data-ko="개요" data-en="Overview">개요</h2>
-  <div class="detail-grid">
-    <div class="detail-stat"><span>App Store</span><b>1.0.2</b><span data-ko="변경 없음" data-en="unchanged">변경 없음</span></div>
-    <div class="detail-stat"><span>Play Store</span><b>—</b><span data-ko="수집 기록 없음" data-en="No data">수집 기록 없음</span></div>
-    <div class="detail-stat"><span>GitHub main</span><b>1.0.4</b><span data-ko="빌드 1.0.4+97" data-en="Build 1.0.4+97">빌드 1.0.4+97</span></div>
-    <div class="detail-stat"><span data-ko="최근 릴리즈" data-en="Latest release">최근 릴리즈</span><b>v1.0.4</b></div>
-  </div>
-</section>
-
-<section class="detail-section" id="funnel" role="tabpanel" aria-labelledby="tab-funnel" tabindex="0" hidden><h2 data-ko="유입·전환" data-en="Acquisition & conversion">유입·전환</h2><div class="funnel-controls" role="group" aria-label="기간"><button type="button" data-funnel-period="7" data-ko="7일" data-en="7 days">7일</button><button type="button" data-funnel-period="30" class="is-active" data-ko="30일" data-en="30 days">30일</button><button type="button" data-funnel-period="90" data-ko="90일" data-en="90 days">90일</button></div><div class="funnel-window" data-funnel-window="7" hidden><div class="funnel-platform-grid"><article class="funnel-card"><h3>App Store</h3><div class="empty-note" data-ko="Apple 과거 데이터 스냅샷을 생성하는 중이에요. 지난달을 포함한 사용 가능한 과거 데이터가 준비되면 자동으로 채워져요." data-en="Apple is generating the historical snapshot. Available past data, including last month, will populate automatically when ready.">Apple 과거 데이터 스냅샷을 생성하는 중이에요. 지난달을 포함한 사용 가능한 과거 데이터가 준비되면 자동으로 채워져요.</div></article><article class="funnel-card"><h3>Play Store</h3><div class="empty-note" data-ko="선택한 기간에 수집된 데이터가 아직 없어요." data-en="No data has been collected for this period yet.">선택한 기간에 수집된 데이터가 아직 없어요.</div></article></div><div class="funnel-note" data-ko="양 스토어 합계는 두 스토어의 해당 지표가 모두 수집된 경우에만 표시해요." data-en="Combined totals appear only when the required metric is available for every supported store.">양 스토어 합계는 두 스토어의 해당 지표가 모두 수집된 경우에만 표시해요.</div><div class="funnel-note" data-ko="스토어 방문·제품 페이지 조회의 정의가 달라 방문 수는 합산하지 않아요. Android에는 App Store의 노출과 동등한 공개 지표를 만들지 않아요." data-en="Store-visitor definitions differ, so visitor counts are not summed. Android does not invent an App-Store-equivalent impressions metric.">스토어 방문·제품 페이지 조회의 정의가 달라 방문 수는 합산하지 않아요. Android에는 App Store의 노출과 동등한 공개 지표를 만들지 않아요.</div><div class="diagnosis-panel"><h3 data-ko="진단·평가" data-en="Diagnosis & evaluation">진단·평가</h3><div class="diagnosis-grid"><article class="diagnosis-card" data-kind="wait"><h4 data-ko="App Store · 판단 대기" data-en="App Store · Waiting for data">App Store · 판단 대기</h4><p data-ko="아직 진단할 수 있는 퍼널 데이터가 없어요." data-en="There is not enough funnel data to diagnose yet.">아직 진단할 수 있는 퍼널 데이터가 없어요.</p><p><b data-ko="다음 행동" data-en="Next action">다음 행동</b> · <span data-ko="수집이 시작된 뒤 다시 확인해요." data-en="Check again after collection starts.">수집이 시작된 뒤 다시 확인해요.</span></p><div class="rate-row"></div></article></div><div class="diagnosis-note" data-ko="이 평가는 업계 평균이 아니라 ONNELLAB 운영용 내부 휴리스틱이에요. 표본이 작으면 결론을 보류하고, 실제 퍼널에서 먼저 새는 단계를 찾는 용도예요." data-en="This is an internal ONNELLAB operating heuristic, not an industry benchmark. It stays conservative on small samples and is meant to identify the first leaking step in the observed funnel.">이 평가는 업계 평균이 아니라 ONNELLAB 운영용 내부 휴리스틱이에요. 표본이 작으면 결론을 보류하고, 실제 퍼널에서 먼저 새는 단계를 찾는 용도예요.</div></div></div><div class="funnel-window" data-funnel-window="30"><div class="funnel-platform-grid"><article class="funnel-card"><h3>App Store</h3><div class="empty-note" data-ko="Apple 과거 데이터 스냅샷을 생성하는 중이에요. 지난달을 포함한 사용 가능한 과거 데이터가 준비되면 자동으로 채워져요." data-en="Apple is generating the historical snapshot. Available past data, including last month, will populate automatically when ready.">Apple 과거 데이터 스냅샷을 생성하는 중이에요. 지난달을 포함한 사용 가능한 과거 데이터가 준비되면 자동으로 채워져요.</div></article><article class="funnel-card"><h3>Play Store</h3><div class="empty-note" data-ko="선택한 기간에 수집된 데이터가 아직 없어요." data-en="No data has been collected for this period yet.">선택한 기간에 수집된 데이터가 아직 없어요.</div></article></div><div class="funnel-note" data-ko="양 스토어 합계는 두 스토어의 해당 지표가 모두 수집된 경우에만 표시해요." data-en="Combined totals appear only when the required metric is available for every supported store.">양 스토어 합계는 두 스토어의 해당 지표가 모두 수집된 경우에만 표시해요.</div><div class="funnel-note" data-ko="스토어 방문·제품 페이지 조회의 정의가 달라 방문 수는 합산하지 않아요. Android에는 App Store의 노출과 동등한 공개 지표를 만들지 않아요." data-en="Store-visitor definitions differ, so visitor counts are not summed. Android does not invent an App-Store-equivalent impressions metric.">스토어 방문·제품 페이지 조회의 정의가 달라 방문 수는 합산하지 않아요. Android에는 App Store의 노출과 동등한 공개 지표를 만들지 않아요.</div><div class="diagnosis-panel"><h3 data-ko="진단·평가" data-en="Diagnosis & evaluation">진단·평가</h3><div class="diagnosis-grid"><article class="diagnosis-card" data-kind="wait"><h4 data-ko="App Store · 판단 대기" data-en="App Store · Waiting for data">App Store · 판단 대기</h4><p data-ko="아직 진단할 수 있는 퍼널 데이터가 없어요." data-en="There is not enough funnel data to diagnose yet.">아직 진단할 수 있는 퍼널 데이터가 없어요.</p><p><b data-ko="다음 행동" data-en="Next action">다음 행동</b> · <span data-ko="수집이 시작된 뒤 다시 확인해요." data-en="Check again after collection starts.">수집이 시작된 뒤 다시 확인해요.</span></p><div class="rate-row"></div></article></div><div class="diagnosis-note" data-ko="이 평가는 업계 평균이 아니라 ONNELLAB 운영용 내부 휴리스틱이에요. 표본이 작으면 결론을 보류하고, 실제 퍼널에서 먼저 새는 단계를 찾는 용도예요." data-en="This is an internal ONNELLAB operating heuristic, not an industry benchmark. It stays conservative on small samples and is meant to identify the first leaking step in the observed funnel.">이 평가는 업계 평균이 아니라 ONNELLAB 운영용 내부 휴리스틱이에요. 표본이 작으면 결론을 보류하고, 실제 퍼널에서 먼저 새는 단계를 찾는 용도예요.</div></div></div><div class="funnel-window" data-funnel-window="90" hidden><div class="funnel-platform-grid"><article class="funnel-card"><h3>App Store</h3><div class="empty-note" data-ko="Apple 과거 데이터 스냅샷을 생성하는 중이에요. 지난달을 포함한 사용 가능한 과거 데이터가 준비되면 자동으로 채워져요." data-en="Apple is generating the historical snapshot. Available past data, including last month, will populate automatically when ready.">Apple 과거 데이터 스냅샷을 생성하는 중이에요. 지난달을 포함한 사용 가능한 과거 데이터가 준비되면 자동으로 채워져요.</div></article><article class="funnel-card"><h3>Play Store</h3><div class="empty-note" data-ko="선택한 기간에 수집된 데이터가 아직 없어요." data-en="No data has been collected for this period yet.">선택한 기간에 수집된 데이터가 아직 없어요.</div></article></div><div class="funnel-note" data-ko="양 스토어 합계는 두 스토어의 해당 지표가 모두 수집된 경우에만 표시해요." data-en="Combined totals appear only when the required metric is available for every supported store.">양 스토어 합계는 두 스토어의 해당 지표가 모두 수집된 경우에만 표시해요.</div><div class="funnel-note" data-ko="스토어 방문·제품 페이지 조회의 정의가 달라 방문 수는 합산하지 않아요. Android에는 App Store의 노출과 동등한 공개 지표를 만들지 않아요." data-en="Store-visitor definitions differ, so visitor counts are not summed. Android does not invent an App-Store-equivalent impressions metric.">스토어 방문·제품 페이지 조회의 정의가 달라 방문 수는 합산하지 않아요. Android에는 App Store의 노출과 동등한 공개 지표를 만들지 않아요.</div><div class="diagnosis-panel"><h3 data-ko="진단·평가" data-en="Diagnosis & evaluation">진단·평가</h3><div class="diagnosis-grid"><article class="diagnosis-card" data-kind="wait"><h4 data-ko="App Store · 판단 대기" data-en="App Store · Waiting for data">App Store · 판단 대기</h4><p data-ko="아직 진단할 수 있는 퍼널 데이터가 없어요." data-en="There is not enough funnel data to diagnose yet.">아직 진단할 수 있는 퍼널 데이터가 없어요.</p><p><b data-ko="다음 행동" data-en="Next action">다음 행동</b> · <span data-ko="수집이 시작된 뒤 다시 확인해요." data-en="Check again after collection starts.">수집이 시작된 뒤 다시 확인해요.</span></p><div class="rate-row"></div></article></div><div class="diagnosis-note" data-ko="이 평가는 업계 평균이 아니라 ONNELLAB 운영용 내부 휴리스틱이에요. 표본이 작으면 결론을 보류하고, 실제 퍼널에서 먼저 새는 단계를 찾는 용도예요." data-en="This is an internal ONNELLAB operating heuristic, not an industry benchmark. It stays conservative on small samples and is meant to identify the first leaking step in the observed funnel.">이 평가는 업계 평균이 아니라 ONNELLAB 운영용 내부 휴리스틱이에요. 표본이 작으면 결론을 보류하고, 실제 퍼널에서 먼저 새는 단계를 찾는 용도예요.</div></div></div><script>
-(() => {
-  const buttons = [...document.querySelectorAll('[data-funnel-period]')];
-  const windows = [...document.querySelectorAll('[data-funnel-window]')];
-  buttons.forEach((button) => button.addEventListener('click', () => {
-    const period = button.dataset.funnelPeriod;
-    buttons.forEach((item) => item.classList.toggle('is-active', item === button));
-    windows.forEach((item) => { item.hidden = item.dataset.funnelWindow !== period; });
-  }));
-})();
-</script></section>
-
-<section class="detail-section" id="store" role="tabpanel" aria-labelledby="tab-store" tabindex="0" hidden>
-  <h2 data-ko="스토어·수익" data-en="Store & revenue">스토어·수익</h2>
-  <div class="subsection-head"><h3 data-ko="스토어 버전·상태" data-en="Store versions & status">스토어 버전·상태</h3></div>
-  <div class="detail-list"><div class="detail-row"><b>App Store</b><span data-ko="버전 1.0.2 · 변경 없음 · 확인 2026.10.09 06:21" data-en="Version 1.0.2 · unchanged · checked 2026.10.09 06:21">버전 1.0.2 · 변경 없음 · 확인 2026.10.09 06:21</span><span data-ko="공개 2026.07.13 12:53" data-en="published 2026.07.13 12:53">공개 2026.07.13 12:53</span><span><b data-ko="릴리즈 노트" data-en="Release notes">릴리즈 노트</b> · 사소한 버그를 수정하고 안정성을 개선했어요.</span><span><a href="https://apps.apple.com/app/id6779928552" target="_blank" rel="noopener noreferrer" data-ko="스토어에서 보기" data-en="View in store">스토어에서 보기</a></span></div></div>
-  <div class="subsection-head">
-    <h3 data-ko="가격·수익 구조" data-en="Pricing & unit economics">가격·수익 구조</h3>
-    <p data-ko="구매 건수는 유입·전환에서 따로 보고, 여기서는 가격과 단위 경제성만 봐요." data-en="Purchase counts stay in Acquisition; this section focuses on pricing and unit economics.">구매 건수는 유입·전환에서 따로 보고, 여기서는 가격과 단위 경제성만 봐요.</p>
-  </div>
-  <div class="pricing-list"><article class="pricing-product-card"><h4>ClipNest Pro</h4><div class="pricing-options"><div class="pricing-option"><div class="pricing-option-head"><b>App Store</b><span class="mini-badge good" data-ko="스토어 확인" data-en="Verified">스토어 확인</span></div><strong>4,400 KRW</strong></div></div><details class="price-evidence"><summary data-ko="가격 출처·원가 검증 상세" data-en="Price source & cost verification">가격 출처·원가 검증 상세</summary><div class="pricing-list"><article class="pricing-card"><div class="pricing-head"><strong>ClipNest Pro</strong><span class="mini-badge good" data-ko="스토어 실가격 확인" data-en="Live store verified">스토어 실가격 확인</span></div><div class="pricing-meta"><span data-ko="App Store" data-en="App Store">App Store</span> · <span data-ko="Pro" data-en="pro">Pro</span></div><p><b data-ko="가격" data-en="Price">가격</b> · 4,400 KRW</p><p><b data-ko="과금 모델" data-en="Pricing model">과금 모델</b> · one_time_purchase</p><p><b data-ko="가격 출처" data-en="Price source">가격 출처</b> · app_store_connect_iap_price_schedule · <span data-ko="확인 2026.10.09 11:09" data-en="checked 2026.10.09 11:09">확인 2026.10.09 11:09</span></p><p>Live App Store price (Korea)</p></article></div></details></article></div>
-
-</section>
-
-<section class="detail-section" id="reviews" role="tabpanel" aria-labelledby="tab-reviews" tabindex="0" hidden>
-  <div class="subsection-head">
-    <h2 data-ko="리뷰" data-en="Reviews">리뷰</h2>
-    <div class="ops-actions">
-      <button class="ops-button primary" type="button" data-review-sync data-ko="리뷰 동기화" data-en="Sync reviews">리뷰 동기화</button>
-    </div>
-  </div>
-  <div class="detail-grid">
-    <div class="detail-stat"><span data-ko="수집 리뷰" data-en="Collected reviews">수집 리뷰</span><b>0</b></div>
-    <div class="detail-stat"><span data-ko="답변 대기" data-en="Awaiting reply">답변 대기</span><b>0</b></div>
-    <div class="detail-stat"><span data-ko="별점만" data-en="Rating only">별점만</span><b>0</b></div>
-    <div class="detail-stat"><span data-ko="동기화 범위" data-en="Sync scope">동기화 범위</span><b data-ko="전체 앱" data-en="All apps">전체 앱</b></div>
-  </div>
-  <div class="subsection-head"><h3 data-ko="스토어별 리뷰 수집 검증" data-en="Review collection verification by store">스토어별 리뷰 수집 검증</h3></div>
-  <div class="detail-list"><div class="detail-row"><b data-ko="App Store 리뷰" data-en="App Store reviews">App Store 리뷰</b><span class="mini-badge good" data-ko="최신 목록 검증됨 · 현재 0건" data-en="Current list verified · 0 current reviews">최신 목록 검증됨 · 현재 0건</span></div><p class="ops-meta" data-ko="마지막 리뷰 수집 검증: 2026.10.09 11:09" data-en="Last review sync verification: 2026.10.09 11:09">마지막 리뷰 수집 검증: 2026.10.09 11:09</p></div>
-  <div class="token-note" data-app-token-note hidden>
-    <span data-ko="답변 승인·게시와 리뷰 동기화에는 GitHub 연결이 필요해요." data-en="Review approval, publishing, and sync require a GitHub connection.">답변 승인·게시와 리뷰 동기화에는 GitHub 연결이 필요해요.</span>
-    <a href="/ops/settings/" data-ko="설정에서 연결" data-en="Connect in Settings">설정에서 연결</a>
-  </div>
-  <div class="ops-message" data-review-sync-message></div>
-  <div class="review-filters" role="group" aria-label="리뷰 표시 필터">
-    <button type="button" data-review-filter="pending" aria-pressed="true" data-ko="답변 필요 (0)" data-en="Needs reply (0)">답변 필요 (0)</button>
-    <button type="button" data-review-filter="low" aria-pressed="false" data-ko="낮은 평점 (0)" data-en="Low ratings (0)">낮은 평점 (0)</button>
-    <button type="button" data-review-filter="all" aria-pressed="false" data-ko="전체 (0)" data-en="All (0)">전체 (0)</button>
-  </div>
-  <div class="review-filter-empty" data-review-empty hidden>
-    <span data-ko="이 조건에 맞는 리뷰가 없어요. 다른 필터에서 이전 리뷰를 확인할 수 있어요." data-en="No reviews match this filter. Choose another filter to browse previous reviews.">이 조건에 맞는 리뷰가 없어요. 다른 필터에서 이전 리뷰를 확인할 수 있어요.</span>
-    <button type="button" data-review-open-all data-ko="전체 리뷰 보기" data-en="Show all reviews">전체 리뷰 보기</button>
-  </div>
-  <div class="review-list"><div class="empty-note" data-ko="수집된 리뷰가 없어요." data-en="No collected reviews.">수집된 리뷰가 없어요.</div></div>
-</section>
-
-<section class="detail-section" id="technical" role="tabpanel" aria-labelledby="tab-technical" tabindex="0" hidden>
-  <h2 data-ko="기술·운영" data-en="Technical & operations">기술·운영</h2>
-  <div class="detail-row">
-    <b data-ko="공개 제품 페이지" data-en="Public product page">공개 제품 페이지</b>
-    <span><a href="/apps/clipnest/">onnellab.com/apps/clipnest</a></span>
-  </div>
-  <div class="subsection-head"><h3 data-ko="사이트·자산 최신성" data-en="Site & asset freshness">사이트·자산 최신성</h3></div>
-  <p class="ops-meta" data-ko="시각은 한국시간(KST)으로 표시해요. 콘텐츠 갱신은 실제 Git 커밋을 기준으로 하며, 스토어 수집시각과 구분해요." data-en="Times use KST. Content freshness is based on the latest Git commit, separately from store collection timestamps.">시각은 한국시간(KST)으로 표시해요. 콘텐츠 갱신은 실제 Git 커밋을 기준으로 하며, 스토어 수집시각과 구분해요.</p>
-  <div class="site-freshness"><div class="detail-stat"><span data-ko="앱 페이지 갱신" data-en="App page updated">앱 페이지 갱신</span><b>2026.10.09 11:09</b></div><div class="detail-stat"><span data-ko="스크린샷 갱신" data-en="Screenshots updated">스크린샷 갱신</span><b>2026.10.09 11:09</b><span data-ko="10장" data-en="10 screenshots">10장</span></div><div class="detail-stat"><span data-ko="에셋 갱신" data-en="Assets updated">에셋 갱신</span><b>2026.10.09 11:09</b></div></div>
-  <div class="subsection-head"><h3 data-ko="정책·운영 경고" data-en="Policy & operations alerts">정책·운영 경고</h3></div>
-  <div class="release-list"><div class="empty-note" data-ko="현재 앱별 정책·운영 경고가 없어요." data-en="There are no current app-specific policy or operations alerts.">현재 앱별 정책·운영 경고가 없어요.</div></div>
-  <div class="subsection-head">
-    <h3 data-ko="릴리즈 운영" data-en="Release operations">릴리즈 운영</h3>
-    <p data-ko="자동 공개 대기 0건" data-en="0 awaiting automatic publication">자동 공개 대기 0건</p>
-  </div>
-  <div class="release-list"><article class="release-card" data-release-index="0"><div class="release-head"><strong>v1.0.4</strong><span class="mini-badge warn" data-ko="내부 테스트" data-en="Private test">내부 테스트</span></div><div class="release-meta">REL-0006 · ios · planned · private_test · binary · 2026.07.13</div><p><b data-ko="저장소" data-en="Repository">저장소</b> · onnellab/clipnest</p></article></div>
-  <div class="subsection-head"><h3 data-ko="릴리즈 동기화 검증" data-en="Release synchronization verification">릴리즈 동기화 검증</h3></div>
-  <div class="detail-list"><div class="detail-row"><b data-ko="전역 릴리즈 동기화" data-en="Global release synchronization">전역 릴리즈 동기화</b><span class="mini-badge good" data-ko="GitHub 릴리즈 동기화 완료" data-en="GitHub releases synchronized">GitHub 릴리즈 동기화 완료</span></div><p class="ops-meta" data-ko="마지막 릴리즈 확인: 2026.10.09 06:21" data-en="Last release check: 2026.10.09 06:21">마지막 릴리즈 확인: 2026.10.09 06:21</p></div>
-  <div class="subsection-head">
-    <h3 data-ko="Flutter·플러그인" data-en="Flutter & plugins">Flutter·플러그인</h3>
-    <p data-ko="표시 9개" data-en="9 visible items">표시 9개</p>
-  </div>
-  <div class="detail-row">
-    <b data-ko="저장소 빌드 메타데이터" data-en="Repository build metadata">저장소 빌드 메타데이터</b>
-    <span data-ko="앱 1.0.4 · 빌드 1.0.4+97 · 출처 github:onnellab/clipnest/pubspec.yaml" data-en="App 1.0.4 · build 1.0.4+97 · source github:onnellab/clipnest/pubspec.yaml">앱 1.0.4 · 빌드 1.0.4+97 · 출처 github:onnellab/clipnest/pubspec.yaml</span>
-  </div>
-  <div class="dependency-list"><details class="dependency-details"><summary data-ko="정상 항목 9개 펼쳐보기" data-en="Show 9 healthy dependencies">정상 항목 9개 펼쳐보기</summary><div class="dependency-list"><article class="dependency-card"><strong>cupertino_icons</strong> <span class="mini-badge good" data-ko="정상" data-en="OK">정상</span><div class="dependency-meta">dependency · <span data-ko="출처 github:onnellab/clipnest/pubspec.yaml" data-en="source github:onnellab/clipnest/pubspec.yaml">출처 github:onnellab/clipnest/pubspec.yaml</span></div><p><span data-ko="선언" data-en="Declared">선언</span> ^1.0.8 · <span data-ko="해결/현재" data-en="Resolved/current">해결/현재</span> 1.0.8</p></article><article class="dependency-card"><strong>in_app_review</strong> <span class="mini-badge good" data-ko="정상" data-en="OK">정상</span><div class="dependency-meta">dependency · <span data-ko="출처 github:onnellab/clipnest/pubspec.yaml" data-en="source github:onnellab/clipnest/pubspec.yaml">출처 github:onnellab/clipnest/pubspec.yaml</span></div><p><span data-ko="선언" data-en="Declared">선언</span> ^2.0.10 · <span data-ko="해결/현재" data-en="Resolved/current">해결/현재</span> 2.0.11</p></article><article class="dependency-card"><strong>package_info_plus</strong> <span class="mini-badge good" data-ko="정상" data-en="OK">정상</span><div class="dependency-meta">dependency · <span data-ko="출처 github:onnellab/clipnest/pubspec.yaml" data-en="source github:onnellab/clipnest/pubspec.yaml">출처 github:onnellab/clipnest/pubspec.yaml</span></div><p><span data-ko="선언" data-en="Declared">선언</span> ^8.3.0 · <span data-ko="해결/현재" data-en="Resolved/current">해결/현재</span> 8.3.1</p></article><article class="dependency-card"><strong>path</strong> <span class="mini-badge good" data-ko="정상" data-en="OK">정상</span><div class="dependency-meta">dependency · <span data-ko="출처 github:onnellab/clipnest/pubspec.yaml" data-en="source github:onnellab/clipnest/pubspec.yaml">출처 github:onnellab/clipnest/pubspec.yaml</span></div><p><span data-ko="선언" data-en="Declared">선언</span> ^1.9.1 · <span data-ko="해결/현재" data-en="Resolved/current">해결/현재</span> 1.9.1</p></article><article class="dependency-card"><strong>path_provider</strong> <span class="mini-badge good" data-ko="정상" data-en="OK">정상</span><div class="dependency-meta">dependency · <span data-ko="출처 github:onnellab/clipnest/pubspec.yaml" data-en="source github:onnellab/clipnest/pubspec.yaml">출처 github:onnellab/clipnest/pubspec.yaml</span></div><p><span data-ko="선언" data-en="Declared">선언</span> ^2.1.5 · <span data-ko="해결/현재" data-en="Resolved/current">해결/현재</span> 2.1.5</p></article><article class="dependency-card"><strong>shared_preferences</strong> <span class="mini-badge good" data-ko="정상" data-en="OK">정상</span><div class="dependency-meta">dependency · <span data-ko="출처 github:onnellab/clipnest/pubspec.yaml" data-en="source github:onnellab/clipnest/pubspec.yaml">출처 github:onnellab/clipnest/pubspec.yaml</span></div><p><span data-ko="선언" data-en="Declared">선언</span> ^2.5.3 · <span data-ko="해결/현재" data-en="Resolved/current">해결/현재</span> 2.5.4</p></article><article class="dependency-card"><strong>sqflite</strong> <span class="mini-badge good" data-ko="정상" data-en="OK">정상</span><div class="dependency-meta">dependency · <span data-ko="출처 github:onnellab/clipnest/pubspec.yaml" data-en="source github:onnellab/clipnest/pubspec.yaml">출처 github:onnellab/clipnest/pubspec.yaml</span></div><p><span data-ko="선언" data-en="Declared">선언</span> ^2.4.2 · <span data-ko="해결/현재" data-en="Resolved/current">해결/현재</span> 2.4.2</p></article><article class="dependency-card"><strong>url_launcher</strong> <span class="mini-badge good" data-ko="정상" data-en="OK">정상</span><div class="dependency-meta">dependency · <span data-ko="출처 github:onnellab/clipnest/pubspec.yaml" data-en="source github:onnellab/clipnest/pubspec.yaml">출처 github:onnellab/clipnest/pubspec.yaml</span></div><p><span data-ko="선언" data-en="Declared">선언</span> ^6.3.2 · <span data-ko="해결/현재" data-en="Resolved/current">해결/현재</span> 6.3.2</p></article><article class="dependency-card"><strong>flutter</strong> <span class="mini-badge good" data-ko="정상" data-en="OK">정상</span><div class="dependency-meta">flutter_sdk · <span data-ko="출처 github:onnellab/clipnest/pubspec.yaml" data-en="source github:onnellab/clipnest/pubspec.yaml">출처 github:onnellab/clipnest/pubspec.yaml</span></div><p><span data-ko="선언" data-en="Declared">선언</span> &gt;=3.38.4 · <span data-ko="해결/현재" data-en="Resolved/current">해결/현재</span> —</p></article></div></details></div>
-</section>
-
-
+<script type="application/json" id="ops-sealed-data">{"v":1,"it":600000,"salt":"lacXK5hvYZFQNa/619/OHg==","iv":"M3XmvgmJWcvk4JHI","tag":"AXTW1j7X6NwzKii7wRPacA==","data":"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","path":"apps/clipnest/index.html"}</script>
 <script>
-(() => {
-  const nav = document.querySelector('.detail-tabs[role="tablist"]');
-  if (!nav) return;
-  const tabs = [...nav.querySelectorAll('[role="tab"][aria-controls]')];
-  const byId = new Map(tabs.map(tab => [tab.getAttribute('aria-controls'), tab]));
-  const headerHeight = () => document.querySelector('.ops-topbar')?.getBoundingClientRect().height || 0;
-  function activate(id, {updateUrl = false, focus = false, keepNavVisible = false} = {}) {
-    const chosen = byId.get(id);
-    if (!chosen) return false;
-    for (const tab of tabs) {
-      const active = tab === chosen;
-      tab.setAttribute('aria-selected', String(active));
-      tab.tabIndex = active ? 0 : -1;
-      const panel = document.getElementById(tab.getAttribute('aria-controls'));
-      if (panel) panel.hidden = !active;
-    }
-    if (updateUrl && location.hash !== '#' + id) {
-      history.pushState(null, '', '#' + id);
-    }
-    if (focus) chosen.focus({preventScroll: true});
-    if (keepNavVisible && (nav.getBoundingClientRect().top < headerHeight() + 6 ||
-        nav.getBoundingClientRect().bottom > innerHeight - 24)) {
-      window.scrollTo({top: window.scrollY + nav.getBoundingClientRect().top - headerHeight() - 12, behavior: 'instant'});
-    }
-    return true;
-  }
-  tabs.forEach((tab, i) => {
-    tab.addEventListener('click', event => {
-      event.preventDefault();
-      activate(tab.getAttribute('aria-controls'), {updateUrl: true, keepNavVisible: true});
-    });
-    tab.addEventListener('keydown', event => {
-      let next = null;
-      if (event.key === 'ArrowRight') next = (i + 1) % tabs.length;
-      if (event.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
-      if (event.key === 'Home') next = 0;
-      if (event.key === 'End') next = tabs.length - 1;
-      if (next !== null) {
-        event.preventDefault();
-        activate(tabs[next].getAttribute('aria-controls'), {updateUrl: true, focus: true, keepNavVisible: true});
-      }
-      if (event.key === ' ') {
-        event.preventDefault();
-        activate(tab.getAttribute('aria-controls'), {updateUrl: true, focus: true, keepNavVisible: true});
-      }
-    });
-  });
-  function syncUrl() {
-    const requested = decodeURIComponent(location.hash.replace(/^#/, ''));
-    activate(byId.has(requested) ? requested : 'overview');
-  }
-  window.addEventListener('hashchange', syncUrl);
-  window.addEventListener('popstate', syncUrl);
-  syncUrl();
+(async()=>{
+ const record=JSON.parse(document.getElementById('ops-sealed-data').textContent);
+ const storageKey='onnellab-ops-session-'+record.salt;
+ const input=document.getElementById('password');
+ const button=document.getElementById('submit');
+ const message=document.getElementById('message');
+ const bytes=b64=>Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
+ const b64=buf=>btoa(String.fromCharCode(...new Uint8Array(buf)));
+ async function decode(raw) {
+   const key=await crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt']);
+   const combined=new Uint8Array(bytes(record.data).length+16);
+   combined.set(bytes(record.data));combined.set(bytes(record.tag),combined.length-16);
+   const plaintext=await crypto.subtle.decrypt({
+     name:'AES-GCM',iv:bytes(record.iv),
+     additionalData:new TextEncoder().encode(record.path)
+   },key,combined);
+   const zipped=new Blob([plaintext]).stream().pipeThrough(new DecompressionStream('gzip'));
+   return await new Response(zipped).text();
+ }
+ async function unlock(raw,remember) {
+   const body=await decode(raw);
+   if(remember)sessionStorage.setItem(storageKey,b64(raw));
+   // Prevent older, pre-encryption service workers from continuing to serve old dashboard HTML.
+   try{
+     if('serviceWorker' in navigator){
+       const regs=await navigator.serviceWorker.getRegistrations();
+       await Promise.all(regs.filter(r=>r.scope.includes('/ops/')).map(r=>r.unregister()));
+     }
+     if('caches' in window){
+       const keys=await caches.keys();
+       await Promise.all(keys.filter(k=>k.includes('ops')||k.includes('onnel')).map(k=>caches.delete(k)));
+     }
+   }catch{}
+   document.open();document.write(body);document.close();
+ }
+ try{
+   const cached=sessionStorage.getItem(storageKey);
+   if(cached){try{await unlock(bytes(cached),false);return;}catch{sessionStorage.removeItem(storageKey);}}
+ }catch{}
+ document.getElementById('unlock').addEventListener('submit',async event=>{
+   event.preventDefault();button.disabled=true;message.textContent='';
+   try{
+     const master=await crypto.subtle.importKey('raw',new TextEncoder().encode(input.value),'PBKDF2',false,['deriveBits']);
+     const key=await crypto.subtle.deriveBits(
+       {name:'PBKDF2',salt:bytes(record.salt),iterations:record.it,hash:'SHA-256'},master,256);
+     await unlock(new Uint8Array(key),true);
+   }catch{
+     input.value='';
+     message.textContent='비밀번호가 올바르지 않거나 데이터를 열 수 없어요.';
+   }finally{button.disabled=false;}
+ });
 })();
-</script>
-
-
-<script id="app-review-data" type="application/json">[]</script>
-<script>
-(() => {
-  const repo = 'onnellab/onnel-content-engine';
-  const branch = 'main';
-  const tokenKey = 'onnellab-manual-publish-token';
-  const approvalsPath = 'data/store_review_approvals.json';
-  const reviews = JSON.parse(document.getElementById('app-review-data').textContent || '[]');
-  const currentLang = () => localStorage.getItem('onnellab-ops-language') === 'en' ? 'en' : 'ko';
-  const label = (ko, en) => currentLang() === 'en' ? en : ko;
-  const token = () => (localStorage.getItem(tokenKey) || '').trim();
-
-  const updateTokenNotes = () => {
-    document.querySelectorAll('[data-app-token-note]').forEach((node) => {
-      node.hidden = Boolean(token());
-    });
-  };
-
-  async function githubRequest(path, options = {}) {
-    if (!token()) throw new Error(label('GitHub 연결이 필요해요. 설정에서 토큰을 연결해 주세요.', 'GitHub connection is required. Connect a token in Settings.'));
-    const headers = {
-      Accept: 'application/vnd.github+json',
-      Authorization: 'Bearer ' + token(),
-      'X-GitHub-Api-Version': '2022-11-28',
-      ...(options.headers || {}),
-    };
-    const response = await fetch('https://api.github.com' + path, {...options, headers});
-    const text = await response.text();
-    let data = {};
-    if (text) {
-      try { data = JSON.parse(text); } catch { data = {}; }
-    }
-    if (!response.ok) {
-      const safeMessage = String(data.message || 'GitHub request failed').slice(0, 240);
-      throw new Error('GitHub HTTP ' + response.status + ': ' + safeMessage);
-    }
-    return data;
-  }
-
-  function encodeBase64Unicode(value) {
-    const bytes = new TextEncoder().encode(value);
-    let binary = '';
-    bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
-    return btoa(binary);
-  }
-
-  function decodeBase64Unicode(value) {
-    const binary = atob(String(value || '').replace(/\n/g, ''));
-    const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
-    return new TextDecoder().decode(bytes);
-  }
-
-  function flash(button, text) {
-    if (!button) return;
-    const previous = button.textContent;
-    button.textContent = text;
-    window.setTimeout(() => { if (!button.disabled) button.textContent = previous; }, 1800);
-  }
-
-  function setMessage(node, text, isError = false) {
-    if (!node) return;
-    node.textContent = text;
-    node.classList.toggle('is-error', isError);
-  }
-
-  async function copyText(value, button) {
-    await navigator.clipboard.writeText(String(value || ''));
-    flash(button, label('복사됨', 'Copied'));
-  }
-
-  async function queueApprovedStoreReply(item, reply) {
-    const cleanReply = String(reply || '').replace(/\\s+/g, ' ').trim();
-    if (!cleanReply) throw new Error(label('답변을 입력해 주세요.', 'A reply is required.'));
-    if (cleanReply.length > 1000) throw new Error(label('답변은 1000자 이하여야 해요.', 'Reply must be 1000 characters or fewer.'));
-    if (/(will be fixed|next update|guaranteed|refund approved|다음 업데이트|고쳐드리|환불해드리)/i.test(cleanReply)) {
-      throw new Error(label('확정 약속 문구가 포함되어 승인할 수 없어요.', 'The reply contains a prohibited promise.'));
-    }
-    const data = await githubRequest('/repos/' + repo + '/contents/' + approvalsPath + '?ref=' + branch);
-    const approvals = JSON.parse(decodeBase64Unicode(data.content));
-    approvals.approvals ||= [];
-    const existing = approvals.approvals.find(
-      (entry) => entry.review_id === item.review_id && ['queued', 'published'].includes(entry.status)
-    );
-    if (existing) {
-      if (existing.status === 'queued' && existing.reply === cleanReply && existing.approval_id) {
-        return existing.approval_id;
-      }
-      throw new Error(label('이미 다른 답변으로 승인됐거나 게시된 리뷰예요.', 'This review already has a different active approval or has been published.'));
-    }
-    const approvedAt = new Date().toISOString();
-    const approvalId = 'review-' + item.review_id;
-    approvals.approvals.push({
-      approval_id: approvalId,
-      review_id: item.review_id,
-      app_id: item.app_id || '',
-      app_slug: item.app_slug || '',
-      platform: item.platform || '',
-      reply: cleanReply,
-      approved_at: approvedAt,
-      approved_by: 'dashboard_token_holder',
-      note: '',
-      status: 'queued',
-      publication: {attempts: 0, published_at: '', external_response_id: ''},
-    });
-    approvals.updated_at = approvedAt;
-    await githubRequest('/repos/' + repo + '/contents/' + approvalsPath, {
-      method: 'PUT',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        message: 'Queue approved reply for ' + item.review_id,
-        content: encodeBase64Unicode(JSON.stringify(approvals, null, 2) + '\n'),
-        branch,
-        sha: data.sha,
-      }),
-    });
-    return approvalId;
-  }
-
-  async function dispatchApprovedStoreReply(approvalId) {
-    await githubRequest('/repos/' + repo + '/actions/workflows/publish-store-review-reply.yml/dispatches', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        ref: branch,
-        inputs: {approval_id: approvalId, confirm_publish: 'PUBLISH'},
-      }),
-    });
-  }
-
-  async function dispatchReviewSync(button) {
-    const message = document.querySelector('[data-review-sync-message]');
-    try {
-      button.disabled = true;
-      setMessage(message, label('전체 앱 리뷰 동기화를 요청하는 중이에요…', 'Requesting review sync for all apps…'));
-      await githubRequest('/repos/' + repo + '/actions/workflows/sync-store-reviews.yml/dispatches', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ref: branch, inputs: {deploy_dashboard: 'true'}}),
-      });
-      setMessage(message, label('리뷰 동기화를 요청했어요. 완료 후 대시보드가 자동 갱신돼요.', 'Review sync requested. The dashboard will refresh after completion.'));
-      button.textContent = label('동기화 요청됨', 'Sync requested');
-    } catch (error) {
-      setMessage(message, String(error.message || error), true);
-      button.disabled = false;
-    }
-  }
-
-  function bindReviewCards() {
-    document.querySelectorAll('[data-review-index]').forEach((card) => {
-      const item = reviews[Number(card.dataset.reviewIndex)];
-      if (!item) return;
-      const reply = card.querySelector('[data-review-reply]');
-      const replyTranslation = card.querySelector('[data-review-translation]');
-      const draft = card.querySelector('[data-review-action="draft"]');
-      const copy = card.querySelector('[data-review-action="copy"]');
-      const approve = card.querySelector('[data-review-action="approve"]');
-      const message = card.querySelector('[data-review-message]');
-      const manualPlay = item.platform === 'android' && String(item.review_id || '').startsWith('report-');
-      const translationRequired = Boolean(item.approval_translation_required);
-      const translationsReady = () => !translationRequired || (
-        /[가-힣]/.test(String(item.review_translation_ko || '')) &&
-        /[가-힣]/.test(String(replyTranslation?.value || ''))
-      );
-      const updateApproval = () => {
-        if (approve) approve.disabled = manualPlay || !translationsReady();
-      };
-      if (draft && reply) draft.addEventListener('click', () => {
-        reply.value = item.suggested_reply || '';
-        if (replyTranslation) replyTranslation.value = item.reply_translation_ko || '';
-        updateApproval();
-        reply.focus();
-      });
-      if (copy && reply) copy.addEventListener('click', () => copyText(reply.value || item.suggested_reply || '', copy));
-      if (replyTranslation) replyTranslation.addEventListener('input', updateApproval);
-      if (reply) reply.addEventListener('input', () => {
-        if (replyTranslation && reply.value.trim() !== String(item.suggested_reply || '').trim()) {
-          replyTranslation.value = '';
-        }
-        updateApproval();
-      });
-      let queuedApprovalId = '';
-      if (approve && !manualPlay) approve.addEventListener('click', async () => {
-        if (!translationsReady()) {
-          setMessage(message, label('한국어 번역 확인이 필요해요.', 'Korean translation confirmation is required.'), true);
-          return;
-        }
-        try {
-          approve.disabled = true;
-          if (!queuedApprovalId) {
-            setMessage(message, label('승인을 저장하는 중이에요…', 'Saving approval…'));
-            queuedApprovalId = await queueApprovedStoreReply(item, reply?.value || item.suggested_reply || '');
-          }
-          if (reply) reply.readOnly = true;
-          if (replyTranslation) replyTranslation.readOnly = true;
-          if (draft) draft.disabled = true;
-          setMessage(message, label('게시를 요청하는 중이에요…', 'Requesting publication…'));
-          await dispatchApprovedStoreReply(queuedApprovalId);
-          approve.textContent = label('게시 요청됨', 'Publish requested');
-          setMessage(message, label('승인 저장과 게시 요청이 완료됐어요.', 'Approval saved and publication requested.'));
-        } catch (error) {
-          const retryNote = queuedApprovalId
-            ? label('승인은 저장됐어요. 게시 요청만 실패해 다시 누르면 재시도해요. ', 'Approval is saved. Publication dispatch failed; press again to retry. ')
-            : '';
-          setMessage(message, retryNote + String(error.message || error), true);
-          approve.disabled = false;
-        }
-      });
-      updateApproval();
-    });
-  }
-
-  function bindReviewFilters() {
-    const filters = [...document.querySelectorAll('[data-review-filter]')];
-    const cards = [...document.querySelectorAll('[data-review-index]')];
-    const empty = document.querySelector('[data-review-empty]');
-    const showAll = document.querySelector('[data-review-open-all]');
-    function applyFilter(value) {
-      let visible = 0;
-      for (const card of cards) {
-        const matching = value === 'all'
-          || (value === 'pending' && card.dataset.reviewState === 'pending')
-          || (value === 'low' && Number(card.dataset.reviewRating) <= 2 && Number(card.dataset.reviewRating) >= 1);
-        card.hidden = !matching;
-        if (matching) visible += 1;
-      }
-      filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.reviewFilter === value)));
-      if (empty) empty.hidden = visible !== 0;
-    }
-    filters.forEach(button => button.addEventListener('click', () => applyFilter(button.dataset.reviewFilter)));
-    if (showAll) showAll.addEventListener('click', () => applyFilter('all'));
-    applyFilter('pending');
-  }
-  const syncButton = document.querySelector('[data-review-sync]');
-  if (syncButton) syncButton.addEventListener('click', () => dispatchReviewSync(syncButton));
-  bindReviewCards();
-  bindReviewFilters();
-  updateTokenNotes();
-})();
-</script>
-
-
-</main>
-<script>
-(() => {
-  const storageKey = 'onnellab-ops-language';
-  let language = localStorage.getItem(storageKey) === 'en' ? 'en' : 'ko';
-  const button = document.getElementById('ops-lang-toggle');
-  const applyLanguage = () => {
-    document.documentElement.lang = language === 'en' ? 'en' : 'ko';
-    document.querySelectorAll('[data-ko][data-en]').forEach((element) => {
-      element.textContent = language === 'en' ? element.dataset.en : element.dataset.ko;
-    });
-    document.querySelectorAll('[data-placeholder-ko][data-placeholder-en]').forEach((element) => {
-      element.setAttribute('placeholder', language === 'en' ? element.dataset.placeholderEn : element.dataset.placeholderKo);
-    });
-    if (button) button.textContent = language === 'en' ? '한국어' : 'English';
-  };
-  if (button) button.addEventListener('click', () => {
-    language = language === 'en' ? 'ko' : 'en';
-    localStorage.setItem(storageKey, language);
-    applyLanguage();
-  });
-  applyLanguage();
-})();
-</script>
-</body>
-</html>
+</script></body></html>
