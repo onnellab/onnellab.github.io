@@ -4,16 +4,34 @@
     "appName": "Aligna",
     "version": "1.0.7",
     "tag": "v1.0.7",
-    "platform": "iOS · Android",
+    "platform": "iOS",
     "releasedDate": "2026-09-29",
-    "title": "Aligna v1.0.7 (iOS · Android)",
-    "summary": "Latest public store release of Aligna 1.0.7 for iOS · Android.",
-    "summaryKo": "Aligna 1.0.7 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "title": "Aligna v1.0.7 (iOS)",
+    "summary": "Latest public store release of Aligna 1.0.7 for iOS.",
+    "summaryKo": "Aligna 1.0.7 iOS 공개 스토어 릴리즈 변경 사항이에요.",
     "changes": [
-      "Aligna 1.0.7 is now available on iOS · Android."
+      "Aligna 1.0.7 is now available on iOS."
     ],
     "changesKo": [
       "파일명 미리보기와 적용 과정을 더 쉽게 확인할 수 있도록 스토어 안내와 화면 이미지를 새로 정리했어요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
+    "appSlug": "aligna",
+    "appName": "Aligna",
+    "version": "1.0.9",
+    "tag": "v1.0.9",
+    "platform": "Android",
+    "releasedDate": "2026-10-10",
+    "title": "Aligna v1.0.9 (Android)",
+    "summary": "Latest public store release of Aligna 1.0.9 for Android.",
+    "summaryKo": "Aligna 1.0.9 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "Aligna 1.0.9 is now available on Android."
+    ],
+    "changesKo": [
+      "Aligna 1.0.9 버전이 Android에 공개됐어요."
     ],
     "internalGitHubUrl": ""
   },
@@ -86,6 +104,24 @@
     ],
     "changesKo": [
       "Melivra 1.0.6 버전이 Android에 공개됐어요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
+    "appSlug": "melivra",
+    "appName": "Melivra",
+    "version": "1.0.7",
+    "tag": "v1.0.7",
+    "platform": "Android",
+    "releasedDate": "2026-10-10",
+    "title": "Melivra v1.0.7 (Android)",
+    "summary": "Latest public store release of Melivra 1.0.7 for Android.",
+    "summaryKo": "Melivra 1.0.7 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "Melivra 1.0.7 is now available on Android."
+    ],
+    "changesKo": [
+      "Melivra 1.0.7 버전이 Android에 공개됐어요."
     ],
     "internalGitHubUrl": ""
   },
