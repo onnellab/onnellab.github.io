@@ -10,7 +10,8 @@ Do not recreate, simplify or replace this outline from a text prompt.
 - No `public/brand/icon-*` full-color-background variants are maintained.
 - `public/favicon.svg` and `public/favicon-32x32.png`: charcoal logo on **transparent** background.
 - `public/apple-touch-icon.png`: charcoal logo on **ivory** background (180x180), retained as the sole public website touch-icon background exception for legibility.
-- `public/ops/icon-{180,192,512}.png`: ivory-backed operational app icons, separate from the transparent brand logo pack.
+- `public/brand/ops-mark-{180,192,512}.png`: durable, versioned **source** Ops icons outside the directory erased by encrypted dashboard publication.
+- `public/ops/icon-{180,192,512}.png`: release copies created by `onnel-content-engine/scripts/private_ops_publish.mjs seal-site`. Never keep the only source under `public/ops`.
 - `public/social-card.svg` and `public/social-card.png`: updated brand graphic.
 - `public/blog-assets/**/{social-card,workflow-diagram}.svg`: approved logo in the footer; corresponding blog social-card PNGs regenerated from workflow diagrams.
 

@@ -46,10 +46,14 @@ test('website favicon is transparent; Apple touch and Ops icons retain ivory bac
   assert.equal(await alphaAt('public/favicon-32x32.png'), 0);
   assert.deepEqual(await pngDimensions('public/apple-touch-icon.png'), [180, 180]);
   assert.equal(await alphaAt('public/apple-touch-icon.png'), 255);
+  // Ops icon sources live outside /ops, which the encrypted publisher wipes.
   for (const n of [180, 192, 512]) {
-    const p = `public/ops/icon-${n}.png`;
-    assert.deepEqual(await pngDimensions(p), [n, n]);
-    assert.equal(await alphaAt(p), 255);
+    const source = `public/brand/ops-mark-${n}.png`;
+    const published = `public/ops/icon-${n}.png`;
+    assert.deepEqual(await pngDimensions(source), [n, n]);
+    assert.equal(await alphaAt(source), 255);
+    assert.deepEqual(await fs.readFile(path.join(root, published)),
+                     await fs.readFile(path.join(root, source)), published);
   }
 });
 
@@ -76,18 +80,23 @@ test('all blog SVGs use the current mark and published social PNGs have correct 
   const files = await allSvgs('public/blog-assets');
   assert.ok(files.length >= 65);
   const logo = pathFrom(await read('public/brand/mark-charcoal.svg'));
-  let count = 0;
+  const pairedTopics = { en: new Set(), ko: new Set() };
   for (const file of files) {
     const text = await read(file);
     assert.ok(text.includes('ONNELLAB approved monogram'), file);
     assert.ok(text.includes(logo), file);
-    if (file.endsWith('workflow-diagram.svg') && (file.includes('/en/') || file.includes('/ko/'))) {
+    const match = file.match(/^public\/blog-assets\/(en|ko)\/([^/]+)\/workflow-diagram\.svg$/);
+    if (match) {
       const png = path.join(path.dirname(file), 'social-card.png');
       assert.deepEqual(await pngDimensions(png), [1200, 675], png);
-      count++;
+      pairedTopics[match[1]].add(match[2]);
     }
   }
-  assert.equal(count, 32);
+  // New posts increase the count. Protect the prior historical baseline and
+  // require the same diagram topics in both publication languages.
+  assert.ok(pairedTopics.en.size >= 16, 'Approved historical blog diagrams are missing');
+  assert.deepEqual([...pairedTopics.en].sort(), [...pairedTopics.ko].sort(),
+                   'EN/KO blog diagram topics diverged');
 });
 
 test('all remaining static HTML pages use the approved brand cache version', async () => {

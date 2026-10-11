@@ -35,37 +35,39 @@ const transparentMark = svgFor({ fill: charcoal });
 const ivoryIcon = svgFor({ fill: charcoal, background: colors.ivory });
 await fs.writeFile(path.join(root, 'public', 'favicon.svg'), transparentMark);
 await sharp(Buffer.from(transparentMark)).resize(32, 32).png().toFile(path.join(root, 'public/favicon-32x32.png'));
-// iOS home-screen and the internal Ops app intentionally retain an ivory tile.
+// Keep canonical Ops artwork outside /ops: the encrypted dashboard
+// publisher atomically rebuilds that entire directory and must copy its
+// three icons from these durable, versioned source assets.
 for (const [filepath, size] of [
   ['public/apple-touch-icon.png', 180],
-  ['public/ops/icon-180.png', 180],
-  ['public/ops/icon-192.png', 192],
-  ['public/ops/icon-512.png', 512]
+  ['public/brand/ops-mark-180.png', 180],
+  ['public/brand/ops-mark-192.png', 192],
+  ['public/brand/ops-mark-512.png', 512]
 ]) {
   await sharp(Buffer.from(ivoryIcon)).resize(size, size).png().toFile(path.join(root, filepath));
 }
 
+// Social artwork is approved composition, not a disposable generated logo.
+// Only verify the current master silhouette and render the existing artwork;
+// do not overwrite text or layout with a brittle old-format SVG replacement.
 const socialPath = path.join(root, 'public', 'social-card.svg');
-let social = await fs.readFile(socialPath, 'utf8');
-const comment = '    <!-- ONNELLAB approved monogram -->';
-const replacement = `${comment}\n    <svg x="0" y="0" width="352" height="352" viewBox="0 0 1254 1254">\n      <path d="${markPath}" fill="${charcoal}"/>\n    </svg>\n`;
-let start = social.indexOf(comment);
-let end = -1;
-if (start >= 0) {
-  const close = social.indexOf('    </svg>', start);
-  if (close < 0) throw new Error('No closing social-card logo SVG');
-  end = social.indexOf('\n', close) + 1;
-} else {
-  const old = social.indexOf('    <circle cx="172" cy="181"');
-  const last = social.indexOf('    <circle cx="259" cy="105"', old);
-  if (old < 0 || last < 0) throw new Error('Unknown legacy social-card artwork');
-  start = old;
-  end = social.indexOf('\n', last) + 1;
+const social = await fs.readFile(socialPath, 'utf8');
+if (!social.includes('<!-- ONNELLAB approved monogram -->') || !social.includes(markPath)) {
+  throw new Error('Approved social-card artwork does not match master brand logo; update its composition explicitly');
 }
-if (end <= start) throw new Error('Invalid social-card logo boundary');
-social = social.slice(0, start) + replacement + social.slice(end);
-await fs.writeFile(socialPath, social);
-await sharp(Buffer.from(social)).png().toFile(path.join(root, 'public', 'social-card.png'));
+const socialRasterPath = path.join(root, 'public', 'social-card.png');
+const candidateRaster = await sharp(Buffer.from(social)).png().toBuffer();
+let sameVisualPixels = false;
+try {
+  const [existing, generated] = await Promise.all([
+    sharp(socialRasterPath).ensureAlpha().raw().toBuffer(),
+    sharp(candidateRaster).ensureAlpha().raw().toBuffer()
+  ]);
+  sameVisualPixels = existing.equals(generated);
+} catch {
+  // A missing or invalid raster is rebuilt from the approved SVG.
+}
+if (!sameVisualPixels) await fs.writeFile(socialRasterPath, candidateRaster);
 let legacyPages = 0;
 async function updateStaticFaviconVersion(dir) {
   for (const item of await fs.readdir(dir, { withFileTypes: true })) {
