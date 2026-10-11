@@ -1,0 +1,94 @@
+{
+  "appName": "Sonary",
+  "title": "Termos do Sonary",
+  "description": "Estes termos complementam os termos comuns da ONNELLAB. Leia também a política de privacidade.",
+  "intro": "Estes termos complementam os termos comuns da ONNELLAB. Leia também a política de privacidade.",
+  "updatedLabel": "Última atualização",
+  "updatedAt": "2026-10-12",
+  "heading": "Aplicação dos termos",
+  "opening": "Estes termos complementam os termos comuns da ONNELLAB. Leia também a política de privacidade.",
+  "sections": [
+    {
+      "title": "Escopo do serviço",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Sonary oferece práticas curtas de voz com IA, não ligações para pessoas reais nem serviços de emergência. Respostas podem estar incorretas e não são orientação profissional nem garantia de aprendizado."
+        }
+      ]
+    },
+    {
+      "title": "Serviço pago e prévia",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Somente prévias locais de voz são gratuitas; não há chamadas gratuitas ou período de teste. Os planos mensais incluem 60 ou 120 minutos, com pacote avulso de 30 minutos. Preços de referência na Coreia: ₩9.900, ₩14.900 e ₩5.900, respectivamente. Moeda, preço, produto e período reais serão exibidos antes da compra; os produtos disponíveis são os exibidos na compra."
+        }
+      ]
+    },
+    {
+      "title": "Renovação e cancelamento",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "A assinatura se renova até ser cancelada pela App Store ou Google Play. Remover o app não cancela a renovação. Em geral, o período já pago continua disponível; a verificação da loja determina vencimento, reembolso, revogação e eventual carência."
+        }
+      ]
+    },
+    {
+      "title": "Minutos incluídos e créditos",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Minutos mensais são usados antes dos créditos comprados e vencem ao fim do período verificado, sem acumular. Créditos comprados não vencem e continuam utilizáveis após o fim da assinatura. Não há limite de chamadas dentro do tempo restante, mas os minutos totais são limitados. Não há recarga automática."
+        }
+      ]
+    },
+    {
+      "title": "Uso e devolução por falha",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "O uso é liquidado em unidades de 1 segundo, sem arredondar para minutos. Inclui fala do usuário, áudio audível da IA e silêncio normal após a chamada estar pronta. Conexão, carregamento, espera da geração e suspensão em segundo plano são excluídos. Encerrar manualmente cobra apenas trechos prestados normalmente. Falhas devolvem o intervalo de resposta malsucedida e a reserva não usada, mantendo o uso válido já prestado. Devolver tempo difere de reembolso em dinheiro, sujeito às regras da loja e à lei obrigatória."
+        }
+      ]
+    },
+    {
+      "title": "Restauração e troca de plano",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "A restauração verifica direitos da loja e o registro contábil correspondente; não restaura conversas, configurações ou progresso. Trocas, cobrança proporcional e transição de minutos restantes serão informadas separadamente antes de serem oferecidas."
+        }
+      ]
+    },
+    {
+      "title": "Uso responsável e disponibilidade",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Use legalmente e respeite direitos alheios. O serviço pode ser interrompido, inclusive ao acabar o saldo. A política de privacidade explica microfone, IA e dados contábeis mínimos. Direitos obrigatórios do consumidor são preservados."
+        }
+      ]
+    },
+    {
+      "title": "Termos comuns e contato",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Os termos comuns da ONNELLAB também se aplicam; as disposições específicas do Sonary prevalecem sobre o mesmo assunto em caso de diferença. Mudanças relevantes serão comunicadas antes de vigorar. Contato: onnellab.app@gmail.com"
+        }
+      ]
+    }
+  ],
+  "externalLinks": [
+    {
+      "label": "Política de Privacidade",
+      "href": "/privacy/sonary/pt-br/"
+    },
+    {
+      "label": "ONNELLAB — Termos comuns",
+      "href": "/terms/pt-br/"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "appName": "Sonary",
+  "title": "Sonary Política de privacidad",
+  "description": "Sonary es una app de práctica de voz con IA sin cuenta en la app. Esta política explica los datos locales, el procesamiento externo con IA y la información necesaria para pagos.",
+  "intro": "Sonary es una app de práctica de voz con IA sin cuenta en la app. Esta política explica los datos locales, el procesamiento externo con IA y la información necesaria para pagos.",
+  "updatedLabel": "Última actualización",
+  "updatedAt": "2026-10-12",
+  "heading": "Sobre esta política",
+  "opening": "Sonary es una app de práctica de voz con IA sin cuenta en la app. Esta política explica los datos locales, el procesamiento externo con IA y la información necesaria para pagos.",
+  "sections": [
+    {
+      "title": "Ajustes y micrófono",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Idioma, voz, favoritos, subtítulos y nombre opcional quedan en el dispositivo. Los resúmenes opcionales de progreso solo incluyen patrones agregados, no transcripciones. El permiso de micrófono se usa en llamadas; revocarlo impide su uso."
+        }
+      ]
+    },
+    {
+      "title": "Contenido de las conversaciones",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "El reconocimiento usa Whisper en el dispositivo. Audio, texto reconocido, respuestas y contexto solo se usan en la memoria de la llamada actual. Sonary no guarda permanentemente grabaciones, transcripciones, historial de llamadas ni Residue; libera referencias al finalizar o producirse un error."
+        }
+      ]
+    },
+    {
+      "title": "Procesamiento externo con IA",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Para generar respuestas, el texto necesario y el contexto pasan por el servidor Sonary a OpenAI con el almacenamiento de Responses desactivado. Los proveedores de voz seleccionados reciben texto para la síntesis. No guardar localmente es distinto: OpenAI puede conservar registros de control de abuso hasta 30 días. Si se usa Modal Functions para sintetizar voz, sus entradas y salidas pueden conservarse hasta 7 días."
+        }
+      ]
+    },
+    {
+      "title": "Alojamiento y autenticación",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "La pasarela usa DigitalOcean en Singapur. Sin iniciar sesión, puede autenticar la instalación mediante clave pública, identificador, identidad de la app, contadores y pruebas de integridad. Se informa sobre destinatarios, países y conservación del tratamiento externo y se obtiene el consentimiento requerido. Los cambios de proveedor o región que afecten al tratamiento se comunican antes del uso."
+        }
+      ]
+    },
+    {
+      "title": "Compras y contabilidad",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "App Store o Google Play trata los datos de pago. Sonary solo usa identificadores de transacción, pruebas de verificación, producto, período, saldos, reservas y segundos liquidados necesarios. Son registros contables, no historial de conversaciones. La app actual no usa SDK de publicidad o seguimiento."
+        }
+      ]
+    },
+    {
+      "title": "Conservación",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Los ajustes locales permanecen hasta borrarlos o desinstalar la app. Las claves siguen su propio vencimiento verificado, si existe, o su revocación/sustitución; los recibos verificados siguen su propio vencimiento. Saldos y pruebas necesarios se conservan para respetar créditos sin caducidad y obligaciones legales. Si aplica la ley coreana de comercio electrónico, contratos/pagos se guardan 5 años y reclamaciones/disputas 3 años."
+        }
+      ]
+    },
+    {
+      "title": "Elección, seguridad y menores",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Puede borrar ajustes, retirar el progreso opcional y revocar el micrófono. Solicite acceso, corrección o eliminación de datos del servidor por el contacto, considerando saldos y retención legal. La app no se dirige a niños; se requiere participación del tutor cuando lo exija la ley. No hay cuenta, copia en la nube ni sincronización de ajustes."
+        }
+      ]
+    },
+    {
+      "title": "Cambios y contacto",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Los cambios importantes se comunicarán antes del tratamiento. Los mensajes de soporte se usan para atender la solicitud y se guardan solo el tiempo necesario para ese fin o la ley. Contacto: onnellab.app@gmail.com"
+        }
+      ]
+    }
+  ],
+  "externalLinks": [
+    {
+      "label": "Condiciones de Sonary",
+      "href": "/terms/sonary/es/"
+    },
+    {
+      "label": "ONNELLAB — Condiciones comunes",
+      "href": "/terms/es/"
+    },
+    {
+      "label": "OpenAI — API data",
+      "href": "https://developers.openai.com/api/docs/guides/your-data"
+    },
+    {
+      "label": "Modal — Security",
+      "href": "https://modal.com/docs/guide/security"
+    }
+  ]
+}

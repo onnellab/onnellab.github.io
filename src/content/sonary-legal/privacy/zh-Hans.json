@@ -1,0 +1,102 @@
+{
+  "appName": "Sonary",
+  "title": "Sonary 隐私政策",
+  "description": "Sonary 是无需应用账号的 AI 语音练习应用。本政策说明本地数据、外部 AI 处理及支付所需信息。",
+  "intro": "Sonary 是无需应用账号的 AI 语音练习应用。本政策说明本地数据、外部 AI 处理及支付所需信息。",
+  "updatedLabel": "最后更新",
+  "updatedAt": "2026-10-12",
+  "heading": "隐私说明",
+  "opening": "Sonary 是无需应用账号的 AI 语音练习应用。本政策说明本地数据、外部 AI 处理及支付所需信息。",
+  "sections": [
+    {
+      "title": "本地设置与麦克风",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "语言、声音、收藏、字幕及可选姓名保存在设备上。自愿启用的进度摘要仅含汇总模式，不含发言原文。麦克风权限用于通话；撤销后无法使用麦克风。"
+        }
+      ]
+    },
+    {
+      "title": "对话内容",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "语音识别通过设备内 Whisper 处理。录音、识别文本、AI 回复及上下文仅在当前通话内存中使用。Sonary 不永久保存录音、原文、通话历史或 Residue，通话结束或出错时释放引用。"
+        }
+      ]
+    },
+    {
+      "title": "外部 AI 处理",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "生成 AI 回复时，必要的识别文本和上下文经 Sonary 服务器发送给 OpenAI，关闭 Responses 存储以生成回复。选定的语音供应商接收合成所需文本。本地不保存并不代表供应商不保留；OpenAI 的滥用监控日志可能保留最多 30 天。若使用 Modal Functions 合成语音，其输入输出可能保留最多 7 天。"
+        }
+      ]
+    },
+    {
+      "title": "托管与安装认证",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "网关使用新加坡 DigitalOcean。无需登录即可使用公钥、密钥标识、应用身份、计数器和平台完整性证据进行认证。外部处理的接收方、处理国家及保留期限将予以说明，并取得必要同意。影响处理的供应商或区域变更会在使用前告知。"
+        }
+      ]
+    },
+    {
+      "title": "购买与结算",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "App Store 或 Google Play 处理支付信息。Sonary 仅处理必要的交易标识、验证证据、商品、计费期间、余额、预留和结算秒数。这些是结算记录，不是对话历史。当前应用不含广告或追踪 SDK。"
+        }
+      ]
+    },
+    {
+      "title": "保留期限",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "本地设置保留至清除或卸载。安装密钥有经验证的自身有效期时按该期限保留，否则至撤销或更换；验证收据按自身有效期处理。为保障无到期日的积分及法律义务，保留必要余额和结算证据。适用韩国电子商务法规时，合同与支付记录保留 5 年，投诉与争议记录保留 3 年。"
+        }
+      ]
+    },
+    {
+      "title": "选择、安全与未成年人",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "可以清除本地设置、撤回自愿进度收集并撤销麦克风权限。可联系申请查阅、更正或删除服务器数据，并考虑剩余余额及法定保留义务。本应用不面向儿童，法律要求时须有监护人参与。不提供应用账号、云备份或设置同步。"
+        }
+      ]
+    },
+    {
+      "title": "变更与联系",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "重大变更在相关处理开始前告知。咨询内容仅用于处理请求，按该目的或法律所需期限保留。联系：onnellab.app@gmail.com"
+        }
+      ]
+    }
+  ],
+  "externalLinks": [
+    {
+      "label": "Sonary 使用条款",
+      "href": "/terms/sonary/zh-hans/"
+    },
+    {
+      "label": "ONNELLAB — 公共条款",
+      "href": "/terms/zh-hans/"
+    },
+    {
+      "label": "OpenAI — API data",
+      "href": "https://developers.openai.com/api/docs/guides/your-data"
+    },
+    {
+      "label": "Modal — Security",
+      "href": "https://modal.com/docs/guide/security"
+    }
+  ]
+}

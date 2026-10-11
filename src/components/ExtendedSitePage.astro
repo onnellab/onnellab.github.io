@@ -207,6 +207,7 @@ const appItems = productSources.map((source) => {
   privacyDate: getPrivacyPolicyDocument(source.slug as AllPrivacyAppSlug, locale).updatedAt
   };
 }).sort((a, b) => a.title.localeCompare(b.title, 'en', { sensitivity: 'base' }));
+const privacyItems = [...appItems, { title: 'Sonary', privacy: allAppPrivacyRouteFor('sonary', locale), privacyDate: getPrivacyPolicyDocument('sonary', locale).updatedAt, platforms: ['iOS', 'Android'] }].sort((a, b) => a.title.localeCompare(b.title, 'en'));
 const featured = appItems.find((item) => item.slug === 'tagweaver');
 const homeOtherAppOrder = ['melivra', 'papira', 'quivra', 'vaultxt'];
 const homeOtherApps = appItems
@@ -283,7 +284,7 @@ const email = 'onnellab.app@gmail.com';
         <div class="notice-grid"><section class="card"><h2>{copy.privacy.analyticsTitle}</h2><p>{copy.privacy.analyticsBody}</p></section><section class="card"><h2>{copy.privacy.siteTitle}</h2><p>{copy.privacy.siteBody}</p></section><section class="card"><h2>{copy.privacy.contactTitle}</h2><p>{copy.privacy.contactBody}</p></section></div>
         <label class="search"><span class="sr-only">{copy.privacy.search}</span><input type="search" placeholder={copy.privacy.search} data-search /></label>
         <p data-empty hidden>{copy.privacy.empty}</p>
-        <section class="policy-list">{appItems.map((item) => <a class="policy-row" href={item.privacy} data-row data-title={item.title.toLowerCase()}><div><h2>{item.title}</h2><p>{copy.privacy.updated} <time datetime={item.privacyDate}>{item.privacyDate}</time></p></div><small class="platform-badges" aria-label={copy.common.platforms}>{item.platforms.join(' · ')}</small></a>)}</section>
+        <section class="policy-list">{privacyItems.map((item) => <a class="policy-row" href={item.privacy} data-row data-title={item.title.toLowerCase()}><div><h2>{item.title}</h2><p>{copy.privacy.updated} <time datetime={item.privacyDate}>{item.privacyDate}</time></p></div><small class="platform-badges" aria-label={copy.common.platforms}>{item.platforms.join(' · ')}</small></a>)}</section>
         <script is:inline>{`(()=>{const i=document.querySelector('[data-search]');if(!(i instanceof HTMLInputElement))return;const r=[...document.querySelectorAll('[data-row]')];i.addEventListener('input',()=>{const q=i.value.trim().toLowerCase();let n=0;r.forEach(x=>{const h=q&&!(x.getAttribute('data-title')||'').includes(q);x.hidden=!!h;if(!h)n++});const e=document.querySelector('[data-empty]');if(e instanceof HTMLElement)e.hidden=n>0})})()`}</script>
       </>
     )}

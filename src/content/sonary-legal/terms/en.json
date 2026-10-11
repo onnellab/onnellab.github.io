@@ -1,0 +1,94 @@
+{
+  "appName": "Sonary",
+  "title": "Sonary-specific Terms",
+  "description": "These Sonary-specific terms supplement the common ONNELLAB terms. Please also read the privacy policy.",
+  "intro": "These Sonary-specific terms supplement the common ONNELLAB terms. Please also read the privacy policy.",
+  "updatedLabel": "Last updated",
+  "updatedAt": "2026-10-12",
+  "heading": "About these terms",
+  "opening": "These Sonary-specific terms supplement the common ONNELLAB terms. Please also read the privacy policy.",
+  "sections": [
+    {
+      "title": "Service scope",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Sonary provides short AI voice practice, not calls to real people or emergency services. Replies may be inaccurate and do not constitute professional advice or a guarantee of learning results."
+        }
+      ]
+    },
+    {
+      "title": "Paid service and preview",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Only local voice previews are free; there are no free calls or trials. Monthly tiers include 60 or 120 minutes, with an optional one-time 30-minute credit pack. Korean reference prices are ₩9,900, ₩14,900 and ₩5,900 respectively. Actual currency, price, product and billing period are shown before purchase; the purchase screen determines the available products."
+        }
+      ]
+    },
+    {
+      "title": "Renewal and cancellation",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "A recurring subscription renews until cancelled through App Store or Google Play. Deleting the app does not cancel renewal. Cancellation normally preserves the already-paid period; store verification determines expiry, refunds, revocation and any grace period."
+        }
+      ]
+    },
+    {
+      "title": "Included minutes and credits",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Monthly included time is used before purchased credits and expires at the verified billing-period end without rollover. Purchased credits do not expire and remain usable after a subscription ends. Call count is not limited within the remaining time, but total minutes are finite. No automatic top-up occurs."
+        }
+      ]
+    },
+    {
+      "title": "Usage and error refunds",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Usage is settled in 1-second units without rounding to whole minutes. Counted time includes user speech, audible AI speech and ordinary silence after the call is ready. Connection/loading, AI generation waits and background suspension are excluded. Manual ending charges only normally provided time. A system failure returns the failed-response interval and unused reservation, retaining charges for valid service already provided. Returned usage units are distinct from a cash refund, which follows store rules and mandatory law."
+        }
+      ]
+    },
+    {
+      "title": "Restore and plan changes",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Restore verifies store entitlements and the corresponding accounting ledger; it does not restore conversations, settings or progress. Subscription switching, proration and transition of remaining included time are disclosed before those options are offered."
+        }
+      ]
+    },
+    {
+      "title": "Responsible use and availability",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Use the service lawfully and do not infringe others’ rights. Availability can be interrupted, including when time runs out. The privacy policy describes microphone, AI processing and minimal accounting data. Nothing here removes mandatory consumer rights."
+        }
+      ]
+    },
+    {
+      "title": "Common terms and contact",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "The common ONNELLAB terms also apply; these Sonary-specific provisions govern this subject matter if they differ. Material changes will be disclosed before taking effect. Questions: onnellab.app@gmail.com"
+        }
+      ]
+    }
+  ],
+  "externalLinks": [
+    {
+      "label": "Privacy Policy",
+      "href": "/privacy/sonary/"
+    },
+    {
+      "label": "ONNELLAB — Common terms",
+      "href": "/terms/"
+    }
+  ]
+}

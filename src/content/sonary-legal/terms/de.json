@@ -1,0 +1,94 @@
+{
+  "appName": "Sonary",
+  "title": "Sonary Nutzungs­bedingungen",
+  "description": "Diese Bedingungen ergänzen die gemeinsamen ONNELLAB-Bedingungen. Bitte lesen Sie auch die Datenschutzerklärung.",
+  "intro": "Diese Bedingungen ergänzen die gemeinsamen ONNELLAB-Bedingungen. Bitte lesen Sie auch die Datenschutzerklärung.",
+  "updatedLabel": "Zuletzt aktualisiert",
+  "updatedAt": "2026-10-12",
+  "heading": "Geltung dieser Bedingungen",
+  "opening": "Diese Bedingungen ergänzen die gemeinsamen ONNELLAB-Bedingungen. Bitte lesen Sie auch die Datenschutzerklärung.",
+  "sections": [
+    {
+      "title": "Leistungsumfang",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Sonary bietet kurze KI-Sprachübungen, keine Anrufe bei realen Personen oder Notdiensten. Antworten können fehlerhaft sein und sind weder Fachberatung noch eine Erfolgsgarantie."
+        }
+      ]
+    },
+    {
+      "title": "Bezahlter Dienst und Hörprobe",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Nur lokale Stimmproben sind kostenlos; es gibt keine kostenlosen Gespräche oder Testphase. Die monatlichen Tarife enthalten 60 oder 120 Minuten und ein einzeln kaufbares Paket mit 30 Minuten. Koreanische Richtpreise sind ₩9.900, ₩14.900 bzw. ₩5.900. Tatsächliche Währung, Preis, Produkt und Zeitraum erscheinen vor dem Kauf; maßgeblich sind die beim Kauf angezeigten Produkte."
+        }
+      ]
+    },
+    {
+      "title": "Verlängerung und Kündigung",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Das Abonnement verlängert sich bis zur Kündigung im App Store oder bei Google Play. Das Entfernen der App kündigt es nicht. Der bezahlte Zeitraum bleibt normalerweise erhalten; Store-Prüfungen bestimmen Ablauf, Erstattung, Widerruf und mögliche Kulanzzeiträume."
+        }
+      ]
+    },
+    {
+      "title": "Inklusivzeit und Credits",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Monatliche Inklusivzeit wird zuerst genutzt und verfällt am Ende des geprüften Abrechnungszeitraums ohne Übertrag. Gekaufte Credits verfallen nicht und bleiben nach dem Abo nutzbar. Innerhalb der verbleibenden Zeit ist die Gesprächszahl unbegrenzt, die Gesamtzeit jedoch begrenzt. Es gibt keine automatische Aufladung."
+        }
+      ]
+    },
+    {
+      "title": "Nutzung und Rückgabe bei Fehlern",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Abgerechnet wird in Einheiten von 1 Sekunde ohne Minutenaufrundung. Nach Gesprächsbereitschaft zählen eigene Sprache, hörbare KI-Sprache und normale Stille; Verbindung, Laden, KI-Generierungswartezeit und Hintergrundpausen zählen nicht. Manuelles Beenden berechnet nur regulär erbrachte Abschnitte. Systemfehler geben den fehlgeschlagenen Antwortabschnitt und ungenutzte Reservierungen zurück; gültige Leistung bleibt berechnet. Zeitgutschriften unterscheiden sich von Geldrückerstattungen nach Store-Regeln und zwingendem Recht."
+        }
+      ]
+    },
+    {
+      "title": "Wiederherstellung und Tarifwechsel",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Wiederherstellung prüft Store-Rechte und zugehörige Abrechnungsdaten, nicht Gespräche, Einstellungen oder Fortschritt. Tarifwechsel, anteilige Abrechnung und Übergang verbleibender Inklusivzeit werden vor Bereitstellung dieser Optionen gesondert erläutert."
+        }
+      ]
+    },
+    {
+      "title": "Verantwortung und Verfügbarkeit",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Nutzen Sie den Dienst rechtmäßig und achten Sie Rechte Dritter. Unterbrechungen sind möglich, auch bei verbrauchtem Guthaben. Die Datenschutzerklärung erläutert Mikrofon, KI und minimale Abrechnungsdaten. Zwingende Verbraucherrechte bleiben unberührt."
+        }
+      ]
+    },
+    {
+      "title": "Gemeinsame Bedingungen und Kontakt",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Die gemeinsamen ONNELLAB-Bedingungen gelten ebenfalls; bei Abweichungen zum gleichen Thema haben die Sonary-Ergänzungen Vorrang. Wesentliche Änderungen werden vor Wirksamwerden mitgeteilt. Kontakt: onnellab.app@gmail.com"
+        }
+      ]
+    }
+  ],
+  "externalLinks": [
+    {
+      "label": "Datenschutzerklärung",
+      "href": "/privacy/sonary/de/"
+    },
+    {
+      "label": "ONNELLAB — Gemeinsame Bedingungen",
+      "href": "/terms/de/"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { getSonaryLegalDocument } from './sonary-legal-documents';
 import path from 'node:path';
 
 import { getAppPrivacyCopy, type PrivacyAppSlug, type TranslatedPrivacyLocale } from './app-privacy-localizations';
@@ -9,7 +10,7 @@ import type { AllSiteLocale } from './extended-site-i18n';
 // Routes, styling and chrome are shared; app-specific privacy statements remain independent.
 export const allPrivacyAppSlugs = [
   'aligna', 'clipnest', 'lunary', 'melivra', 'meriq',
-  'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'
+  'papira', 'quivra', 'segra', 'sonary', 'tagweaver', 'vaultxt'
 ] as const;
 export type AllPrivacyAppSlug = (typeof allPrivacyAppSlugs)[number];
 
@@ -34,6 +35,8 @@ const staticSource = path.resolve(process.cwd(), 'src/content/privacy-policies')
 const googlePolicyUrl = 'https://developers.google.com/terms/api-services-user-data-policy';
 
 export function getPrivacyPolicyDocument(slug: AllPrivacyAppSlug, locale: AllSiteLocale): PolicyDocument {
+  if (slug === 'sonary') return getSonaryLegalDocument('privacy', locale);
+
   if (slug === 'papira') {
     const source = papiraPrivacyCopies[locale];
     return {

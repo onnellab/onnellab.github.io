@@ -1,3 +1,4 @@
+import { sonaryTermsRouteFor } from '../lib/sonary-legal-documents';
 import { getBlogPosts } from '../lib/blog';
 import { availableBlogLocales, blogPostAlternates } from '../lib/blog-i18n';
 import {
@@ -27,6 +28,7 @@ export function GET() {
   const entries: SitemapEntry[] = [
     ...corePages.flatMap((page) => allLocalizedEntries(page)),
     ...productPrivacyEntries(),
+    ...allSiteLocales.map((locale) => ({ path: sonaryTermsRouteFor(locale), alternates: allAlternates(sonaryTermsRouteFor) })),
     ...blogEntries(),
     ...oauthEntries(),
     ...releaseNoteEntries(),

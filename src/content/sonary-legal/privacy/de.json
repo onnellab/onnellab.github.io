@@ -1,0 +1,102 @@
+{
+  "appName": "Sonary",
+  "title": "Sonary Datenschutzerklärung",
+  "description": "Sonary ist eine KI-App für Sprachübungen ohne App-Konto. Diese Erklärung beschreibt lokale Daten, externe KI-Verarbeitung und notwendige Zahlungsinformationen.",
+  "intro": "Sonary ist eine KI-App für Sprachübungen ohne App-Konto. Diese Erklärung beschreibt lokale Daten, externe KI-Verarbeitung und notwendige Zahlungsinformationen.",
+  "updatedLabel": "Zuletzt aktualisiert",
+  "updatedAt": "2026-10-12",
+  "heading": "Zu dieser Erklärung",
+  "opening": "Sonary ist eine KI-App für Sprachübungen ohne App-Konto. Diese Erklärung beschreibt lokale Daten, externe KI-Verarbeitung und notwendige Zahlungsinformationen.",
+  "sections": [
+    {
+      "title": "Geräteeinstellungen und Mikrofon",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Sprache, Stimme, Favoriten, Untertitel und ein optionaler Name bleiben auf dem Gerät. Freiwillige Fortschrittsübersichten enthalten zusammengefasste Muster, keine Transkripte. Die Mikrofonberechtigung gilt für Gespräche; ein Widerruf verhindert die Nutzung."
+        }
+      ]
+    },
+    {
+      "title": "Gesprächsinhalte",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Die Spracherkennung nutzt Whisper auf dem Gerät. Audio, erkannter Text, KI-Antworten und Kontext werden nur im Arbeitsspeicher des aktuellen Gesprächs verwendet. Sonary speichert keine Aufnahmen, Transkripte, Gesprächsverläufe oder Residue dauerhaft; Referenzen werden beim Ende oder bei Fehlern freigegeben."
+        }
+      ]
+    },
+    {
+      "title": "Externe KI-Verarbeitung",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Für KI-Antworten gelangen nötiger Text und aktueller Kontext über den Sonary-Server zu OpenAI; die Speicherung von Responses ist deaktiviert. Ausgewählte Sprachdienstleister erhalten Text zur Synthese. Lokale Nicht-Speicherung ist davon zu unterscheiden: OpenAI kann Protokolle zur Missbrauchskontrolle bis zu 30 Tage aufbewahren. Bei Sprachsynthese mit Modal Functions können Ein- und Ausgaben bis zu 7 Tage aufbewahrt werden."
+        }
+      ]
+    },
+    {
+      "title": "Hosting und Installationsprüfung",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Das Gateway nutzt DigitalOcean in Singapur. Ohne Anmeldung können öffentliche Schlüssel, Schlüsselkennung, App-Identität, Zähler und Integritätsnachweise verwendet werden. Empfänger, Länder und Aufbewahrungsfristen der externen Verarbeitung werden offengelegt; erforderliche Einwilligungen werden eingeholt. Relevante Anbieter- oder Regionsänderungen werden vor Nutzung mitgeteilt."
+        }
+      ]
+    },
+    {
+      "title": "Käufe und Abrechnung",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "App Store oder Google Play verarbeitet Zahlungsdaten. Sonary verwendet nur notwendige Transaktionskennungen, Prüfbelege, Produkte, Abrechnungszeiträume, Guthaben, Reservierungen und abgerechnete Sekunden. Dies sind Abrechnungsdaten, kein Gesprächsverlauf. Die aktuelle App nutzt keine Werbe- oder Tracking-SDKs."
+        }
+      ]
+    },
+    {
+      "title": "Aufbewahrung",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Lokale Einstellungen bleiben bis zum Löschen oder Entfernen der App. Installationsschlüssel gelten bis zu ihrem eigenen geprüften Ablauf, falls vorhanden, sonst bis Widerruf oder Ersatz; geprüfte Belege folgen ihrem eigenen Ablauf. Guthaben und nötige Belege bleiben zur Wahrung unbefristeter Credits und gesetzlicher Pflichten erhalten. Soweit koreanisches E-Commerce-Recht gilt, werden Vertrags-/Zahlungsnachweise 5 Jahre und Beschwerde-/Streitnachweise 3 Jahre aufbewahrt."
+        }
+      ]
+    },
+    {
+      "title": "Rechte, Sicherheit und Minderjährige",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Sie können lokale Einstellungen löschen, freiwillige Fortschrittserfassung abwählen und das Mikrofon widerrufen. Auskunft, Berichtigung oder Löschung von Serverdaten können Sie unter Berücksichtigung von Guthaben und gesetzlichen Fristen anfordern. Die App richtet sich nicht an Kinder; gesetzlich erforderliche Mitwirkung der Sorgeberechtigten gilt. Es gibt kein App-Konto, Cloud-Backup oder Einstellungsabgleich."
+        }
+      ]
+    },
+    {
+      "title": "Änderungen und Kontakt",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Wesentliche Änderungen werden vor Beginn der Verarbeitung mitgeteilt. Supportnachrichten dienen der Bearbeitung und bleiben nur für den Zweck oder gesetzlich nötige Dauer erhalten. Kontakt: onnellab.app@gmail.com"
+        }
+      ]
+    }
+  ],
+  "externalLinks": [
+    {
+      "label": "Sonary Nutzungsbedingungen",
+      "href": "/terms/sonary/de/"
+    },
+    {
+      "label": "ONNELLAB — Gemeinsame Bedingungen",
+      "href": "/terms/de/"
+    },
+    {
+      "label": "OpenAI — API data",
+      "href": "https://developers.openai.com/api/docs/guides/your-data"
+    },
+    {
+      "label": "Modal — Security",
+      "href": "https://modal.com/docs/guide/security"
+    }
+  ]
+}

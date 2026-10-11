@@ -1,0 +1,102 @@
+{
+  "appName": "Sonary",
+  "title": "Sonary 隱私權政策",
+  "description": "Sonary 是不需應用程式帳號的 AI 語音練習工具。本政策說明本機資料、外部 AI 處理及付款所需資訊。",
+  "intro": "Sonary 是不需應用程式帳號的 AI 語音練習工具。本政策說明本機資料、外部 AI 處理及付款所需資訊。",
+  "updatedLabel": "最後更新",
+  "updatedAt": "2026-10-12",
+  "heading": "隱私說明",
+  "opening": "Sonary 是不需應用程式帳號的 AI 語音練習工具。本政策說明本機資料、外部 AI 處理及付款所需資訊。",
+  "sections": [
+    {
+      "title": "本機設定與麥克風",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "語言、聲音、收藏、字幕與選填姓名儲存於裝置。自願啟用的進度摘要僅含彙總模式，不含發言原文。麥克風權限用於通話；撤銷後無法使用麥克風。"
+        }
+      ]
+    },
+    {
+      "title": "對話內容",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "語音辨識使用裝置內 Whisper。錄音、辨識文字、AI 回覆及情境僅用於目前通話的記憶體。Sonary 不永久儲存錄音、原文、通話歷史或 Residue，結束或發生錯誤時解除參照。"
+        }
+      ]
+    },
+    {
+      "title": "外部 AI 處理",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "產生 AI 回覆時，必要的辨識文字與情境經 Sonary 伺服器傳送至 OpenAI，關閉 Responses 儲存以產生回覆。選定語音供應商接收合成所需文字。本機不儲存不代表供應商不保留；OpenAI 的濫用監控紀錄可能保留最多 30 天。若使用 Modal Functions 合成語音，其輸入輸出可能保留最多 7 天。"
+        }
+      ]
+    },
+    {
+      "title": "託管與安裝驗證",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "閘道使用新加坡 DigitalOcean。可不經登入使用公開金鑰、金鑰識別碼、應用程式身分、計數器與平台完整性證據。外部處理的接收方、處理國家及保留期間會予以說明，並取得必要同意。影響處理的供應商或地區變更會於使用前告知。"
+        }
+      ]
+    },
+    {
+      "title": "購買與結算",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "App Store 或 Google Play 處理付款資訊。Sonary 僅使用必要的交易識別碼、驗證證據、商品、計費期間、餘額、預留與結算秒數。這些是結算紀錄，不是對話歷史。目前應用程式不含廣告或追蹤 SDK。"
+        }
+      ]
+    },
+    {
+      "title": "保留期間",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "本機設定保留至清除或移除應用程式。安裝金鑰有驗證過的自身效期時依其效期，否則保留至撤銷或更換；驗證收據依收據自身效期。為保障無到期日的點數與法律義務，保留必要餘額及結算證據。適用韓國電子商務法規時，契約與付款紀錄保留 5 年，申訴與爭議紀錄保留 3 年。"
+        }
+      ]
+    },
+    {
+      "title": "選擇、安全與未成年人",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "可清除本機設定、撤回自願進度蒐集及撤銷麥克風權限。可聯絡申請查閱、更正或刪除伺服器資料，並考量剩餘餘額及法定保留義務。本工具不以兒童為對象；法律要求時須有監護人參與。不提供應用程式帳號、雲端備份或設定同步。"
+        }
+      ]
+    },
+    {
+      "title": "變更與聯絡",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "重要變更於相關處理開始前告知。詢問內容用於處理請求，僅保留目的或法律所需期間。聯絡：onnellab.app@gmail.com"
+        }
+      ]
+    }
+  ],
+  "externalLinks": [
+    {
+      "label": "Sonary 使用條款",
+      "href": "/terms/sonary/zh-hant/"
+    },
+    {
+      "label": "ONNELLAB — 共用條款",
+      "href": "/terms/zh-hant/"
+    },
+    {
+      "label": "OpenAI — API data",
+      "href": "https://developers.openai.com/api/docs/guides/your-data"
+    },
+    {
+      "label": "Modal — Security",
+      "href": "https://modal.com/docs/guide/security"
+    }
+  ]
+}

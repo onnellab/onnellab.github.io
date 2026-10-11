@@ -1,4 +1,5 @@
 ---
+import { getSonaryLegalDocument, sonaryTermsRouteFor, type SonaryLegalKind } from '../lib/sonary-legal-documents';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteFooter from './SiteFooter.astro';
 import { uiLabels } from '../lib/ui-labels';
@@ -14,17 +15,19 @@ import {
   type AllSiteLocale
 } from '../lib/extended-site-i18n';
 
-type Props = { slug: AllPrivacyAppSlug; locale: AllSiteLocale };
-const { slug, locale } = Astro.props;
-const policy = getPrivacyPolicyDocument(slug, locale);
+type Props = { slug: AllPrivacyAppSlug; locale: AllSiteLocale; kind?: SonaryLegalKind };
+const { slug, locale, kind = 'privacy' } = Astro.props;
+if (kind === 'terms' && slug !== 'sonary') throw new Error('Unsupported app terms');
+const policy = kind === 'terms' ? getSonaryLegalDocument(kind, locale) : getPrivacyPolicyDocument(slug, locale);
+const routeFor = (item: AllSiteLocale) => kind === 'terms' ? sonaryTermsRouteFor(item) : allAppPrivacyRouteFor(slug, item);
 const definition = allLocaleDefinitions[locale];
-const canonicalPath = allAppPrivacyRouteFor(slug, locale);
+const canonicalPath = routeFor(locale);
 const alternates = [
   ...allSiteLocales.map((item) => ({
     lang: allLocaleDefinitions[item].hreflang,
-    path: allAppPrivacyRouteFor(slug, item)
+    path: routeFor(item)
   })),
-  { lang: 'x-default', path: allAppPrivacyRouteFor(slug, 'en') }
+  { lang: 'x-default', path: routeFor('en') }
 ];
 const email = 'onnellab.app@gmail.com';
 ---
@@ -37,7 +40,7 @@ const email = 'onnellab.app@gmail.com';
   alternates={alternates}
   ogType="article"
 >
-  <main class="privacy-shell" data-app-privacy={slug} data-policy-locale={locale}>
+  <main class="privacy-shell" data-app-privacy={kind === 'privacy' ? slug : undefined} data-app-terms={kind === 'terms' ? slug : undefined} data-policy-locale={locale}>
     <nav class="topbar site-header" aria-label={uiLabels[locale].navigation}>
       <a class="home-link brand" href={allRouteFor('home', locale)}>ONNELLAB</a>
       <details class="locale-menu">
@@ -48,7 +51,7 @@ const email = 'onnellab.app@gmail.com';
             return (
               <li>
                 <a
-                  href={allAppPrivacyRouteFor(slug, item)}
+                  href={routeFor(item)}
                   lang={localized.htmlLang}
                   hreflang={localized.hreflang}
                   data-locale-choice={item}
@@ -77,8 +80,8 @@ const email = 'onnellab.app@gmail.com';
     <p class="opening">{policy.opening}</p>
 
     {policy.sections.map((section, sectionIndex) => (
-      <section aria-labelledby={`privacy-section-${sectionIndex + 1}`}>
-        <h3 id={`privacy-section-${sectionIndex + 1}`}>{section.title}</h3>
+      <section aria-labelledby={`${kind}-section-${sectionIndex + 1}`}>
+        <h3 id={`${kind}-section-${sectionIndex + 1}`}>{section.title}</h3>
         {section.blocks.map((block) => (
           block.kind === 'list'
             ? <ul>{block.items.map((item) => <li>{item}</li>)}</ul>

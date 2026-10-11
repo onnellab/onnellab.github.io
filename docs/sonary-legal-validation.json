@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-12",
+  "scope": "Sonary public legal documents; no app or server runtime changes",
+  "locales": [
+    "en",
+    "ko",
+    "ja",
+    "zh-Hans",
+    "zh-Hant",
+    "pt-BR",
+    "de",
+    "fr",
+    "es"
+  ],
+  "documents": 18,
+  "publication": "User explicitly approved immediate publication, with launch-contract wording and no inactive-service notices.",
+  "checks": [
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "pages": 619
+    },
+    {
+      "command": "npm run check:i18n-quality",
+      "exitCode": 0,
+      "sourceFiles": 291
+    },
+    {
+      "command": "npx playwright test tests/sonary-legal.spec.ts tests/privacy-shared-template.spec.ts --project=desktop --project=mobile --workers=2",
+      "exitCode": 0,
+      "passed": 42,
+      "durationSeconds": 43.2,
+      "browser": "Playwright chromium-headless-shell v1228 / Chrome 149.0.7827.55"
+    }
+  ],
+  "earlierAttempts": [
+    {
+      "result": "Missing Playwright browser executable; interrupted, not a product PASS."
+    },
+    {
+      "result": "Installed Chrome exposed an ambiguous email test locator; restricted assertion to the body section. German title received a soft hyphen after mobile visual inspection."
+    },
+    {
+      "result": "Installed Chrome passed 21 desktop tests then stalled during worker shutdown; only the owned runner and workers were terminated. No mobile PASS claimed for that attempt."
+    }
+  ],
+  "visualInspection": [
+    "Korean privacy at 390×844",
+    "German terms at 390×844, final soft-hyphen title"
+  ],
+  "limitations": [
+    "No screen-reader certification or full legal compliance certification.",
+    "Public text is the launch service contract, not evidence of activated live calls, store products, operational auth/retention controls or final provider regions.",
+    "Subscription switching/proration/remaining included-time transitions require disclosure before those options are offered."
+  ],
+  "sourceSha256": {
+    "src/components/ExtendedSitePage.astro": "9e5f8c26f5735d34750309f7a56a69c062f439977deb89ab229d20a538f2ca23",
+    "src/components/LocalizedAppPrivacyPage.astro": "8f1e237b3444bc2f2754a9a853175cf8f2c12bac3e45808d555a7e9c39f2da73",
+    "src/components/PrivacyIndex.astro": "539f78d0c61316fcd83cdcf0a7c76c4b20a798b2ceb1225bfb8820d936ff8e16",
+    "src/content/sonary-legal/privacy/de.json": "f9080d7a17b4040c1409d39546bf7db6eb93dc0ccd1e19f215c0dcaffb73840d",
+    "src/content/sonary-legal/privacy/en.json": "9f985c54efdcf0a0b33259d384cf3bb101cb11d5edb9887c46621eda3d2ff44d",
+    "src/content/sonary-legal/privacy/es.json": "10ac1f4e91bab12ae278a18ce9329dd39c8701cf0bde2c2f62cb891dd557da30",
+    "src/content/sonary-legal/privacy/fr.json": "2061c03d0cf3386432f313c1cdfb06c4dcf542461964512e5efaaece6ed3c008",
+    "src/content/sonary-legal/privacy/ja.json": "93ee0f4e343810229a0862aad70a78ec941cdac5ef7f102277ee78827468e107",
+    "src/content/sonary-legal/privacy/ko.json": "5d82d2e40ecee6a88f52e18ecbd3dbb7da45565ca9d6f7cd6d418abd9e96bf14",
+    "src/content/sonary-legal/privacy/pt-BR.json": "ba7871c2e22fa0ea0a3ae8a241265d257033252e875a6c765c5f9a49d368af49",
+    "src/content/sonary-legal/privacy/zh-Hans.json": "d2bdee3ef8e6a0b9f92260132000e37eefff71d18761cb4fbbd0fd461d208368",
+    "src/content/sonary-legal/privacy/zh-Hant.json": "89a15f904b6de855cf49f8f73fbcd47c87d672af57c866bf4cd5813e67e4b414",
+    "src/content/sonary-legal/terms/de.json": "f78bc2351fd57d8358be9478decb3f64f603031cb6791841fa68e63744704441",
+    "src/content/sonary-legal/terms/en.json": "97472f8e8a21048ce8c94e13fe810a8b5a6a17eb5eddc298b0d27dff9a733256",
+    "src/content/sonary-legal/terms/es.json": "947d617714dc8314f15ec70bb31b427a94871c5e4c3e888660ac2408e715fe35",
+    "src/content/sonary-legal/terms/fr.json": "cab9d3408759da268a7f2978677997738c1055136bc88c963a52997fc206692d",
+    "src/content/sonary-legal/terms/ja.json": "961f21b41d1651c2687b5ec2b293c526ce90c19004668a54de50bab053f43ce5",
+    "src/content/sonary-legal/terms/ko.json": "2b2c58f3d94b1b4d6cdac8b9cbd443e7d30870e9b8b105dcc8b56e1d33d1a4a6",
+    "src/content/sonary-legal/terms/pt-BR.json": "f3984fa2c76a7fd2e6d9d807cf71bdc1953a7508de112a4e3d3bbd1ef3749b78",
+    "src/content/sonary-legal/terms/zh-Hans.json": "586e4a274410dee0de8e9b8fe4e2cfe3e1dcfc95dbe7e37a2321cde0ff5799e4",
+    "src/content/sonary-legal/terms/zh-Hant.json": "9da813a7d2f505b08b6c9994a0d5b1dbf6f46e7b1b8f95502588adc6fd0bc260",
+    "src/lib/privacy-policy-documents.ts": "a9423be71fa16750c4ec974fa1cb788f3e45c7166d385baba3144f8bf84242bf",
+    "src/lib/sonary-legal-documents.ts": "bb4175eff691cc6d2c5c436cc412b6c32648854f81818665ffb42d4006d83642",
+    "src/pages/sitemap.xml.ts": "6a69447ada6c3d007e7bd8f8507c5bcc42c617911b454423ea2067dec6146e3f",
+    "src/pages/terms/sonary/[locale]/index.astro": "cea7421492ceb60104cfee9e2a9620a34d2428275b217d2c4fbc8025df6ae328",
+    "src/pages/terms/sonary/index.astro": "9c7dcacefb8a1fc7bc6924df01a165fc6eb930e0ff26a8f11d26a920c599eae5",
+    "tests/sonary-legal.spec.ts": "e8c185a66f86c628584a542c2afc625cc93a2a843c863678a2bb449b6b96a13b"
+  }
+}

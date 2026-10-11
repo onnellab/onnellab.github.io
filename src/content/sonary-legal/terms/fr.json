@@ -1,0 +1,94 @@
+{
+  "appName": "Sonary",
+  "title": "Conditions de Sonary",
+  "description": "Ces conditions complètent les conditions communes ONNELLAB pour Sonary. Consultez aussi la politique de confidentialité.",
+  "intro": "Ces conditions complètent les conditions communes ONNELLAB pour Sonary. Consultez aussi la politique de confidentialité.",
+  "updatedLabel": "Dernière mise à jour",
+  "updatedAt": "2026-10-12",
+  "heading": "Application des conditions",
+  "opening": "Ces conditions complètent les conditions communes ONNELLAB pour Sonary. Consultez aussi la politique de confidentialité.",
+  "sections": [
+    {
+      "title": "Objet du service",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Sonary propose de courtes pratiques vocales avec IA, pas des appels à des personnes réelles ou aux urgences. Les réponses peuvent être inexactes et ne constituent ni conseil professionnel ni garantie de résultat."
+        }
+      ]
+    },
+    {
+      "title": "Service payant et aperçu",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Seuls les aperçus vocaux locaux sont gratuits ; il n’y a ni appels gratuits ni essai. Les forfaits mensuels comprennent 60 ou 120 minutes, avec un achat ponctuel de 30 minutes de crédits. Prix indicatifs en Corée : ₩9 900, ₩14 900 et ₩5 900 respectivement. Devise, prix, produit et période réels sont affichés avant achat ; les produits disponibles sont ceux affichés lors de l’achat."
+        }
+      ]
+    },
+    {
+      "title": "Renouvellement et résiliation",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "L’abonnement se renouvelle jusqu’à sa résiliation dans l’App Store ou Google Play. Supprimer l’application ne résilie pas le renouvellement. La période payée reste généralement accessible ; la vérification du magasin détermine échéance, remboursement, révocation et éventuel délai de grâce."
+        }
+      ]
+    },
+    {
+      "title": "Minutes incluses et crédits",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Le temps mensuel inclus est utilisé avant les crédits achetés et expire à la fin de la période vérifiée, sans report. Les crédits achetés n’expirent pas et restent utilisables après l’abonnement. Le nombre d’appels n’est pas limité dans le temps restant, mais la durée totale est limitée. Aucun rechargement automatique."
+        }
+      ]
+    },
+    {
+      "title": "Usage et restitution en cas d’erreur",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Le décompte se fait par unités de 1 seconde, sans arrondi à la minute. Il inclut parole de l’utilisateur, voix IA audible et silence normal après préparation ; connexion, chargement, attente de génération et suspension en arrière-plan sont exclus. L’arrêt manuel ne facture que les portions normalement fournies. Une panne restitue l’intervalle de réponse échouée et la réserve inutilisée, en maintenant les portions valides. Une restitution de temps diffère d’un remboursement monétaire, soumis aux règles du magasin et au droit impératif."
+        }
+      ]
+    },
+    {
+      "title": "Restauration et changement d’offre",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "La restauration vérifie les droits du magasin et le registre comptable associé, pas les conversations, réglages ou progrès. Changement d’offre, prorata et transfert du temps inclus restant seront expliqués séparément avant de proposer ces options."
+        }
+      ]
+    },
+    {
+      "title": "Usage responsable et disponibilité",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Respectez la loi et les droits d’autrui. Le service peut être interrompu, notamment à épuisement du solde. La politique de confidentialité décrit microphone, IA et données comptables minimales. Les droits impératifs des consommateurs sont préservés."
+        }
+      ]
+    },
+    {
+      "title": "Conditions communes et contact",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Les conditions communes ONNELLAB s’appliquent aussi ; les dispositions Sonary prévalent sur le même sujet en cas de différence. Les changements importants seront annoncés avant leur effet. Contact : onnellab.app@gmail.com"
+        }
+      ]
+    }
+  ],
+  "externalLinks": [
+    {
+      "label": "Politique de confidentialité",
+      "href": "/privacy/sonary/fr/"
+    },
+    {
+      "label": "ONNELLAB — Conditions communes",
+      "href": "/terms/fr/"
+    }
+  ]
+}
