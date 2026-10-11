@@ -22,16 +22,34 @@
     "appName": "Aligna",
     "version": "1.0.9",
     "tag": "v1.0.9",
-    "platform": "Android",
+    "platform": "iOS",
     "releasedDate": "2026-10-10",
-    "title": "Aligna v1.0.9 (Android)",
-    "summary": "Latest public store release of Aligna 1.0.9 for Android.",
-    "summaryKo": "Aligna 1.0.9 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "title": "Aligna v1.0.9 (iOS)",
+    "summary": "Latest public store release of Aligna 1.0.9 for iOS.",
+    "summaryKo": "Aligna 1.0.9 iOS 공개 스토어 릴리즈 변경 사항이에요.",
     "changes": [
-      "Aligna 1.0.9 is now available on Android."
+      "Aligna 1.0.9 is now available on iOS."
     ],
     "changesKo": [
-      "Aligna 1.0.9 버전이 Android에 공개됐어요."
+      "작은 화면과 큰 글자에서도 입력칸과 하단 버튼을 편하게 사용할 수 있도록 화면 구성을 개선했어요. iOS의 파일 앱에서 선택한 원본의 이름을 같은 위치에서 변경할 수 있어요. 가져온 복사본은 새 파일로 저장해요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
+    "appSlug": "aligna",
+    "appName": "Aligna",
+    "version": "1.1.0",
+    "tag": "v1.1.0",
+    "platform": "Android",
+    "releasedDate": "2026-10-10",
+    "title": "Aligna v1.1.0 (Android)",
+    "summary": "Latest public store release of Aligna 1.1.0 for Android.",
+    "summaryKo": "Aligna 1.1.0 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "Aligna 1.1.0 is now available on Android."
+    ],
+    "changesKo": [
+      "Aligna 1.1.0 버전이 Android에 공개됐어요."
     ],
     "internalGitHubUrl": ""
   },
