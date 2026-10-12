@@ -800,3 +800,13 @@ test('the Hero chooses distinctive original Android artwork without duplicating 
     await expect(page.locator('.hero-slide[href*="/apps/tagweaver/"] img')).not.toHaveAttribute('src', /library_selected|tagweaver-library/);
   }
 });
+
+test('cached older home pages keep access to the legacy TagWeaver screenshot path', async ({ request }) => {
+  const locales = ['en','ko','ja','zh-Hans','zh-Hant','pt-BR','de','fr','es'];
+  for (const locale of locales) {
+    const url = '/home-assets/screenshots/android-20261012/' + locale + '/tagweaver-library.png';
+    const response = await request.get(url);
+    expect(response.status(), 'legacy cached HTML asset ' + locale).toBe(200);
+    expect(response.headers()['content-type']).toContain('image/png');
+  }
+});
