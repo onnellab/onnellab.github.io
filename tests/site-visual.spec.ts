@@ -56,7 +56,7 @@ const footerLabels = {
 } as const;
 const allNineHreflangs = ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de', 'fr', 'es', 'x-default'];
 const productPages = productSlugs.flatMap((slug) => [`/apps/${slug}/`, `/apps/${slug}/ko/`]);
-const privacySlugs = ['aligna', 'clipnest', 'lunary', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+const privacySlugs = ['aligna', 'clipnest', 'lunary', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'sonary', 'tagweaver', 'vaultxt'];
 const legacyPrivacySlugs = ['aligna', 'clipnest', 'melivra', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const privacyUrls = privacySlugs.map((slug) => `https://onnellab.com/privacy/${slug}/`);
 const koreanPrivacyUrls = privacySlugs.map((slug) => `https://onnellab.com/privacy/${slug}/ko/`);
