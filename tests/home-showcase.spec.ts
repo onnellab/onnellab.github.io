@@ -408,7 +408,7 @@ test('hero screenshots stand alone and every product identity is below its image
   }
 });
 
-test('TagWeaver signature identity is a clear, prominent product name panel', async ({ page }) => {
+test('TagWeaver signature identity is prominent without a nested card', async ({ page }) => {
   for (const width of [320, 390, 820, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/ko/');
@@ -430,18 +430,41 @@ test('TagWeaver signature identity is a clear, prominent product name panel', as
         iconWidth: icon.getBoundingClientRect().width,
         titleFont: Number.parseFloat(getComputedStyle(title).fontSize),
         withinCard: outer.left >= card.left - 1 && outer.right <= card.right + 1,
-        hasOutline: getComputedStyle(el).borderTopStyle === 'solid'
+        hasOutline: getComputedStyle(el).borderTopStyle === 'solid',
+        hasBackground: getComputedStyle(el).backgroundImage !== 'none'
+          || getComputedStyle(el).backgroundColor !== 'rgba(0, 0, 0, 0)'
       };
     });
-    expect(metrics.width, String(width)).toBeGreaterThanOrEqual(235);
-    // The panel fills its available content width until its 330px desktop cap.
-    expect(Math.abs(metrics.width - Math.min(330, metrics.availableWidth)), String(width)).toBeLessThan(2);
-    expect(metrics.height, String(width)).toBeGreaterThanOrEqual(76);
+    expect(metrics.width, String(width)).toBeGreaterThanOrEqual(140);
+    expect(metrics.width, String(width)).toBeLessThanOrEqual(metrics.availableWidth + 2);
+    expect(metrics.height, String(width)).toBeGreaterThanOrEqual(54);
     expect(metrics.iconWidth, String(width)).toBeGreaterThanOrEqual(54);
     expect(metrics.titleFont, String(width)).toBeGreaterThanOrEqual(20);
     expect(metrics.withinCard).toBe(true);
-    expect(metrics.hasOutline).toBe(true);
+    expect(metrics.hasOutline).toBe(false);
+    expect(metrics.hasBackground).toBe(false);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth))
       .toBeLessThanOrEqual(1);
   }
+});
+
+test('signature has no stacked identity card or redundant 01 SIGNATURE ornament', async ({ page }) => {
+  await page.goto('/ko/');
+  await expect(page.locator('.featured .product-identity')).toHaveCount(1);
+  await expect(page.locator('.signature-section .screen-index')).toHaveCount(0);
+  const frame = await page.locator('.featured').evaluate((node) => {
+    const badge = node.querySelector('.product-identity') as HTMLElement;
+    const container = getComputedStyle(node);
+    const label = getComputedStyle(badge);
+    return {
+      outerHasBorder: container.borderTopStyle === 'solid',
+      nestedHasBorder: label.borderTopStyle === 'solid',
+      nestedBackground: label.backgroundImage,
+      nestedColor: label.backgroundColor
+    };
+  });
+  expect(frame.outerHasBorder).toBe(true);
+  expect(frame.nestedHasBorder).toBe(false);
+  expect(frame.nestedBackground).toBe('none');
+  expect(frame.nestedColor).toBe('rgba(0, 0, 0, 0)');
 });

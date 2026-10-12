@@ -600,15 +600,6 @@
   height: auto;
 }
 
-.homepage .screen-index {
-  position: absolute;
-  bottom: 24px;
-  left: 26px;
-  color: #7a6f83;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-}
-
 .homepage .featured-copy {
   display: flex;
   flex-direction: column;
@@ -622,13 +613,13 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  width: min(100%, 330px);
-  min-height: 84px;
-  padding: 12px 16px;
+  max-width: 100%;
+  min-height: 58px;
   margin-bottom: 24px;
-  border: 1px solid var(--accent-border, var(--home-border));
-  border-radius: 16px;
-  background: linear-gradient(125deg, var(--accent-bg, #fbf7ec), #fffdf8);
+  /* Identity is simple editorial text, not another card inside the main card. */
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .homepage .product-identity img {
@@ -983,12 +974,11 @@
   .homepage .featured { display: flex; flex-direction: column; }
   .homepage .featured-image-stage { min-height: 268px; height: 268px; padding: 18px 22px 0; }
   .homepage .featured-screen { width: min(57%, 178px); height: 248px; border-width: 5px; }
-  .homepage .screen-index { left: 17px; bottom: 16px; font-size: 10px; }
   .homepage .featured-copy { padding: 27px 24px 30px; }
   .homepage .featured-copy h2 { font-size: 30px; }
   .homepage .featured-copy > p { margin-top: 12px; font-size: 15px; }
   .homepage .featured-copy .text-arrow { margin-top: 22px; }
-  .homepage .product-identity { min-height: 78px; margin-bottom: 20px; padding: 11px 14px; }
+  .homepage .product-identity { min-height: 54px; margin-bottom: 20px; padding: 0; }
   .homepage .product-identity img { width: 54px; height: 54px; border-radius: 13px; }
   .homepage .product-name { font-size: 21px; }
   .homepage .collection-grid { grid-template-columns: 1fr; gap: 15px; }
