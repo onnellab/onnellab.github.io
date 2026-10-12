@@ -643,7 +643,7 @@ test.describe('site layout and navigation', () => {
       await expect(main.locator('.terms-prose h2').first()).toHaveText(route.first);
       await expect(main.locator('.terms-prose h2').last()).toHaveText(route.last);
       await expect(main.locator(':scope > footer.site-footer')).toHaveCount(1);
-      await expect(main).toContainText('2026-08-21');
+      await expect(main).toContainText(route.lang === 'ko' ? '2026-10-12' : '2026-08-21');
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
     }
   });
@@ -818,7 +818,7 @@ test.describe('app and privacy collections', () => {
   test('Korean privacy contact keeps the complete sentence around its mail link', async ({ page }) => {
     await page.goto('/privacy/ko/');
     const contact = page.locator('[data-contact-notice] p');
-    await expect(contact).toHaveText('개인정보 관련 문의는 onnellab.app@gmail.com으로 보내요.');
+    await expect(contact).toHaveText('개인정보 관련 문의는 onnellab.app@gmail.com으로 보내실 수 있습니다.');
     await expect(contact.locator('a')).toHaveAttribute('href', 'mailto:onnellab.app@gmail.com');
   });
 
