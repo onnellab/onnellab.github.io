@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
-import { getProductIndexItems, getProductPageData, type ProductIndexItem } from '../lib/products';
+import { getProductIndexItems, type ProductIndexItem } from '../lib/products';
 import { showcaseCopy } from '../lib/home-showcase-copy';
 import {
   allLocaleAlternates,
@@ -27,19 +27,21 @@ const featured = releasedApps.find((app) => app.slug === 'tagweaver');
 const selectedApps = (['quivra', 'melivra', 'papira'] as const)
   .map((slug) => releasedApps.find((app) => app.slug === slug))
   .filter((app): app is ProductIndexItem => Boolean(app));
-const screenshotFor = (slug: string, index = 0) => {
-  const screenshots = getProductPageData(slug, locale).screenshotPaths;
-  return screenshots[index] ?? screenshots[0];
+// Raw UI captures are copied byte-for-byte from each app's assets/store_promo/raw directory.
+const sourceShot = (name: string) => '/home-assets/screenshots/' + locale + '/' + name + '.png';
+const heroScreenshot = featured ? sourceShot('tagweaver-library') : undefined;
+const featuredScreenshot = featured ? sourceShot('tagweaver-editor') : undefined;
+const melivraScreenshot = selectedApps.some((app) => app.slug === 'melivra') ? sourceShot('melivra') : undefined;
+const papiraScreenshot = selectedApps.some((app) => app.slug === 'papira') ? sourceShot('papira') : undefined;
+const screenshotBySlug: Record<string, string> = {
+  quivra: sourceShot('quivra'),
+  melivra: sourceShot('melivra'),
+  papira: sourceShot('papira')
 };
-const heroScreenshot = featured ? screenshotFor(featured.slug, 1) : undefined;
-const featuredScreenshot = featured ? screenshotFor(featured.slug, 0) : undefined;
-const quivraScreenshot = selectedApps.find((app) => app.slug === 'quivra') ? screenshotFor('quivra') : undefined;
-const melivraScreenshot = selectedApps.find((app) => app.slug === 'melivra') ? screenshotFor('melivra') : undefined;
-const papiraScreenshot = selectedApps.find((app) => app.slug === 'papira') ? screenshotFor('papira') : undefined;
-const screenshotBySlug: Record<string, string | undefined> = {
-  quivra: quivraScreenshot,
-  melivra: melivraScreenshot,
-  papira: papiraScreenshot
+const shotDimensions: Record<string, { width: number; height: number }> = {
+  quivra: { width: 1080, height: 1920 },
+  melivra: { width: 2007, height: 2853 },
+  papira: { width: 1206, height: 2622 }
 };
 const iconPath = (slug: string, size: 96 | 192) => `/home-assets/app-icons/${slug}-${size}.webp`;
 const iconSrcset = (slug: string) => `${iconPath(slug, 96)} 96w, ${iconPath(slug, 192)} 192w`;
@@ -137,15 +139,15 @@ const jsonLd = [
           <div class="hero-stage" aria-label={copy.signatureLabel}>
             {melivraScreenshot && (
               <a class="stage-device stage-back" href={linkFor('melivra')} aria-label="Melivra">
-                <img src={melivraScreenshot} alt="" loading="lazy" decoding="async" width="270" height="540" />
+                <img src={melivraScreenshot} alt="" loading="lazy" decoding="async" width="2007" height="2853" />
               </a>
             )}
             <a class="stage-device stage-main" href={linkFor(featured.slug)} aria-label="TagWeaver">
-              <img src={heroScreenshot} alt="" loading="eager" fetchpriority="high" decoding="async" width="300" height="600" />
+              <img src={heroScreenshot} alt="" loading="eager" fetchpriority="high" decoding="async" width="1206" height="2622" />
             </a>
             {papiraScreenshot && (
               <a class="stage-device stage-front" href={linkFor('papira')} aria-label="Papira">
-                <img src={papiraScreenshot} alt="" loading="lazy" decoding="async" width="270" height="540" />
+                <img src={papiraScreenshot} alt="" loading="lazy" decoding="async" width="1206" height="2622" />
               </a>
             )}
           </div>
@@ -161,7 +163,7 @@ const jsonLd = [
           <a class="featured" href={linkFor(featured.slug)}>
             <div class="featured-image-stage">
               <div class="featured-screen">
-                <img src={featuredScreenshot} alt={`${featured.title}: ${copy.signatureTitle}`} loading="lazy" decoding="async" width="380" height="760" />
+                <img src={featuredScreenshot} alt={`${featured.title}: ${copy.signatureTitle}`} loading="lazy" decoding="async" width="1206" height="2622" />
               </div>
               <span class="screen-index" aria-hidden="true">01 / SIGNATURE</span>
             </div>
@@ -202,7 +204,7 @@ const jsonLd = [
                 <div class="product-picture">
                   {screenshot ? (
                     <div class="product-screen">
-                      <img src={screenshot} alt={`${app.title}: ${offer?.category ?? app.title}`} loading="lazy" decoding="async" width="240" height="480" />
+                      <img src={screenshot} alt={`${app.title}: ${offer?.category ?? app.title}`} loading="lazy" decoding="async" width={shotDimensions[app.slug]?.width} height={shotDimensions[app.slug]?.height} />
                     </div>
                   ) : (
                     <img class="fallback-icon" src={iconPath(app.slug, 192)} alt="" loading="lazy" width="96" height="96" />

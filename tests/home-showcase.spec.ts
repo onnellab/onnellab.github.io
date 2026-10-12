@@ -50,16 +50,20 @@ test('the logo is cropped from the existing favicon without replacing it', async
   expect(await logo.evaluate((img) => (img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
 });
 
-test('the home shows real localized app screenshots and valid product links', async ({ page, request }) => {
+test('the home uses original localized UI captures rather than store composites', async ({ page, request }) => {
   await page.goto('/ko/');
   const sources = await page.locator('.hero-stage img, .featured-screen img, .product-screen img')
     .evaluateAll((imgs) => imgs.map((img) => (img as HTMLImageElement).getAttribute('src')));
   expect(sources).toHaveLength(7);
   for (const src of sources) {
-    expect(src).toContain('/app-assets/');
-    expect(src).toContain('/screenshots/ko/');
+    expect(src).toContain('/home-assets/screenshots/ko/');
     const response = await request.get(src!);
     expect(response.status(), src!).toBe(200);
+    expect(response.headers()['content-type'], src!).toContain('image/png');
+    const bytes = await response.body();
+    expect(bytes.subarray(1, 4).toString('ascii')).toBe('PNG');
+    expect(bytes.readUInt32BE(16), src!).toBeGreaterThanOrEqual(1080);
+    expect(bytes.readUInt32BE(20), src!).toBeGreaterThanOrEqual(1920);
   }
   const icon = page.locator('.product-identity img');
   await expect(icon).toHaveAttribute('src', '/home-assets/app-icons/tagweaver-96.webp');
@@ -103,4 +107,36 @@ test('the condensed home ends with transparent trust and a useful footer', async
   await expect(page.locator('footer.site-footer')).toHaveCount(1);
   await expect(page.locator('.closing-section, .workflow-section, .values-section, .updates-section')).toHaveCount(0);
   await expect(page.locator('.home-hero .primary-link')).toHaveCount(1);
+});
+
+test('all nine homepage locales use matching uncompressed original UI captures', async ({ page, request }) => {
+  const localeMap: Record<string, string> = {
+    'zh-hans': 'zh-Hans', 'zh-hant': 'zh-Hant', 'pt-br': 'pt-BR'
+  };
+  for (const route of routes) {
+    await page.goto(route.home);
+    const paths = await page.locator('.hero-stage img, .featured-screen img, .product-screen img')
+      .evaluateAll((nodes) => nodes.map((node) => (node as HTMLImageElement).getAttribute('src')));
+    expect(paths).toHaveLength(7);
+    const uniquePaths = [...new Set(paths)];
+    expect(uniquePaths).toHaveLength(5);
+    const segment = route.segment ? route.segment.slice(0, -1) : 'en';
+    const assetLocale = localeMap[segment] ?? segment;
+    for (const source of uniquePaths) {
+      expect(source).toContain('/home-assets/screenshots/' + assetLocale + '/');
+      expect((await request.get(source!)).status(), source!).toBe(200);
+    }
+  }
+});
+
+test('selected product originals load sharply when scrolled into view', async ({ page }) => {
+  await page.goto('/ko/');
+  const pictures = page.locator('.product-screen img');
+  await expect(pictures).toHaveCount(3);
+  for (const picture of await pictures.all()) {
+    await picture.scrollIntoViewIfNeeded();
+    await expect.poll(async () => picture.evaluate((img) =>
+      (img as HTMLImageElement).complete ? (img as HTMLImageElement).naturalWidth : 0
+    )).toBeGreaterThanOrEqual(1080);
+  }
 });
