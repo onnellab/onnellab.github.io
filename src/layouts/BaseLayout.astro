@@ -225,7 +225,7 @@ const gaScript = gaMeasurementId
 
   :root {
     --onnellab-wordmark-font: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
-    --site-header-control-height: 36px;
+    --site-header-control-height: 44px;
     --site-header-control-border: #ded6ca;
     --site-header-control-border-hover: #cfc5b7;
     --site-header-control-background: rgba(255, 253, 248, 0.82);
@@ -355,5 +355,20 @@ const gaScript = gaMeasurementId
 
   main[data-core-page='about'] .intro-copy {
     max-width: none;
+  }
+
+  /* Accessibility belongs to every page family, not only the homepage. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto !important;
+    }
+    body *,
+    body *::before,
+    body *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 </style>
