@@ -581,17 +581,17 @@
   min-height: 435px;
   padding: 28px 48px 0;
   overflow: hidden;
-  background: linear-gradient(145deg, var(--accent-bg, #fbf7ec), #fffdf8);
+  background: var(--accent-bg, #fbf7ec);
 }
 
 .homepage .featured-screen {
   width: min(55%, 298px);
   height: 405px;
   overflow: hidden;
-  border: 7px solid white;
-  border-radius: 26px 26px 0 0;
+  border: 4px solid white;
+  border-radius: 22px 22px 0 0;
   background: white;
-  box-shadow: 0 18px 44px rgba(49, 44, 54, 0.1);
+  box-shadow: 0 9px 24px rgba(49, 44, 54, 0.07);
 }
 
 .homepage .featured-screen img {
@@ -686,7 +686,7 @@
   overflow: hidden;
   border: 1px solid var(--accent-border, var(--home-border));
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(255, 253, 248, .96) 16%, var(--accent-bg, #fffdf8));
+  background: var(--accent-bg, #fffdf8);
   color: inherit;
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
@@ -703,7 +703,7 @@
   align-items: flex-end;
   height: 250px;
   padding: 20px 20px 0;
-  background: linear-gradient(145deg, var(--accent-bg, #f8f5f8), #fffdf8);
+  background: var(--accent-bg, #f8f5f8);
   overflow: hidden;
 }
 
@@ -711,10 +711,10 @@
   width: min(72%, 218px);
   height: 228px;
   overflow: hidden;
-  border: 5px solid white;
-  border-radius: 19px 19px 0 0;
+  border: 2px solid #fff;
+  border-radius: 15px 15px 0 0;
   background: white;
-  box-shadow: 0 9px 24px rgba(57, 49, 61, 0.1);
+  box-shadow: 0 4px 14px rgba(57, 49, 61, 0.06);
 }
 
 .homepage .product-screen img {
@@ -973,7 +973,7 @@
   .homepage .section-heading-row > .inline-link { margin-top: 17px; }
   .homepage .featured { display: flex; flex-direction: column; }
   .homepage .featured-image-stage { min-height: 268px; height: 268px; padding: 18px 22px 0; }
-  .homepage .featured-screen { width: min(57%, 178px); height: 248px; border-width: 5px; }
+  .homepage .featured-screen { width: min(57%, 178px); height: 248px; border-width: 3px; }
   .homepage .featured-copy { padding: 27px 24px 30px; }
   .homepage .featured-copy h2 { font-size: 30px; }
   .homepage .featured-copy > p { margin-top: 12px; font-size: 15px; }
@@ -1000,8 +1000,8 @@
   .homepage .product-screen {
     width: min(100%, 132px);
     height: 207px;
-    border-width: 4px;
-    border-radius: 15px 15px 0 0;
+    border-width: 2px;
+    border-radius: 14px 14px 0 0;
     box-shadow: none;
   }
   .homepage .product-card-body {

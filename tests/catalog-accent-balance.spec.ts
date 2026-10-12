@@ -43,13 +43,31 @@ test('ten distinct app card colors keep the four homepage signatures unchanged',
   }
 });
 
-test('the trust signals share exactly aligned ordinal labels', async ({ page }) => {
-  await page.goto('/ko/');
-  await expect(page.locator('.trust-ordinal')).toHaveText(['01', '02', '03']);
-  await expect(page.locator('.trust-count')).toHaveCount(0);
-  const tops = await page.locator('.trust-ordinal').evaluateAll((nodes) =>
-    nodes.map((node) => Math.round(node.getBoundingClientRect().top))
-  );
-  expect(new Set(tops).size).toBe(1);
-  await expect(page.locator('.trust-item h3')).toHaveCount(3);
+test('the trust ordinals align with their titles in the responsive layout', async ({ page }) => {
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/ko/');
+    await expect(page.locator('.trust-ordinal')).toHaveText(['01', '02', '03']);
+    await expect(page.locator('.trust-count')).toHaveCount(0);
+    const measurements = await page.locator('.trust-item').evaluateAll((items) => items.map((item) => {
+      const number = item.querySelector('.trust-ordinal')!.getBoundingClientRect();
+      const heading = item.querySelector('h3')!.getBoundingClientRect();
+      return {
+        numberY: Math.round(number.top),
+        numberX: Math.round(number.left),
+        headingY: Math.round(heading.top),
+        beside: number.right < heading.left
+      };
+    }));
+    expect(measurements).toHaveLength(3);
+    if (width <= 650) {
+      expect(measurements.every((item) => item.beside)).toBe(true);
+      expect(measurements.every((item) => Math.abs(item.numberY - item.headingY) <= 2)).toBe(true);
+      expect(measurements[0].numberX).toBe(measurements[1].numberX);
+      expect(measurements[1].numberX).toBe(measurements[2].numberX);
+    } else {
+      expect(new Set(measurements.map((item) => item.numberY)).size).toBe(1);
+    }
+    await expect(page.locator('.trust-item h3')).toHaveCount(3);
+  }
 });

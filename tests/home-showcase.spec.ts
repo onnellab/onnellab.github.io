@@ -553,3 +553,40 @@ test('mobile trust is a compact three-row section with aligned ordinals in all n
   const koHeight = await page.locator('.trust-section').evaluate((el) => el.getBoundingClientRect().height);
   expect(koHeight).toBeLessThan(585);
 });
+
+test('signature and selected-product captures use flat brand surfaces and light unobtrusive frames', async ({ page }) => {
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/ko/');
+    const styles = await page.evaluate(() => {
+      const read = (selector: string) => {
+        const node = document.querySelector<HTMLElement>(selector)!;
+        const computed = getComputedStyle(node);
+        return {
+          backgroundImage: computed.backgroundImage,
+          backgroundColor: computed.backgroundColor,
+          borderWidth: Number.parseFloat(computed.borderTopWidth)
+        };
+      };
+      return {
+        signature: read('.featured-image-stage'),
+        signatureFrame: read('.featured-screen'),
+        cards: [...document.querySelectorAll<HTMLElement>('.product-card')].map((node) => ({
+          backgroundImage: getComputedStyle(node).backgroundImage,
+          color: getComputedStyle(node).backgroundColor,
+          productFrame: Number.parseFloat(getComputedStyle(node.querySelector('.product-screen')!).borderTopWidth),
+          image: node.querySelector<HTMLImageElement>('.product-screen img')?.getAttribute('src')
+        }))
+      };
+    });
+    expect(styles.signature.backgroundImage).toBe('none');
+    expect(styles.signatureFrame.borderWidth).toBeLessThanOrEqual(4);
+    expect(styles.cards).toHaveLength(3);
+    expect(styles.cards.map((x) => x.backgroundImage)).toEqual(['none', 'none', 'none']);
+    expect(new Set(styles.cards.map((x) => x.color)).size).toBe(3);
+    for (const card of styles.cards) {
+      expect(card.productFrame).toBeLessThanOrEqual(2);
+      expect(card.image).toContain('/home-assets/screenshots/android-20261012/ko/');
+    }
+  }
+});
