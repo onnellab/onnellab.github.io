@@ -46,7 +46,7 @@ const copies: Record<SiteLocale, AppsCopy> = {
     navLabel: 'Navigation',
     platformsLabel: 'Platforms',
     searchLabel: 'Find an app',
-    searchPlaceholder: 'Search app name',
+    searchPlaceholder: 'Search app names or features',
     empty: 'No matching apps.',
     status: { released: 'Released', preparing: 'Preparing for release' }
   },
@@ -59,7 +59,7 @@ const copies: Record<SiteLocale, AppsCopy> = {
     navLabel: '탐색',
     platformsLabel: '플랫폼',
     searchLabel: '앱 찾기',
-    searchPlaceholder: '앱 이름을 검색해요',
+    searchPlaceholder: '앱 이름이나 기능을 검색해요',
     empty: '일치하는 앱이 없어요.',
     status: { released: '출시됨', preparing: '출시 준비 중' }
   },
@@ -72,7 +72,7 @@ const copies: Record<SiteLocale, AppsCopy> = {
     navLabel: 'ナビゲーション',
     platformsLabel: '対応プラットフォーム',
     searchLabel: 'アプリを探す',
-    searchPlaceholder: 'アプリ名で検索',
+    searchPlaceholder: 'アプリ名や機能で検索',
     empty: '該当するアプリはありません。',
     status: { released: '公開済み', preparing: '公開準備中' }
   },
@@ -85,7 +85,7 @@ const copies: Record<SiteLocale, AppsCopy> = {
     navLabel: '导航',
     platformsLabel: '支持平台',
     searchLabel: '查找应用',
-    searchPlaceholder: '搜索应用名称',
+    searchPlaceholder: '搜索应用名称或功能',
     empty: '没有匹配的应用。',
     status: { released: '已发布', preparing: '准备发布' }
   },
@@ -98,7 +98,7 @@ const copies: Record<SiteLocale, AppsCopy> = {
     navLabel: '導覽',
     platformsLabel: '支援平台',
     searchLabel: '尋找應用程式',
-    searchPlaceholder: '搜尋應用程式名稱',
+    searchPlaceholder: '搜尋應用程式名稱或功能',
     empty: '沒有符合的應用程式。',
     status: { released: '已發布', preparing: '準備發布' }
   }
@@ -177,7 +177,7 @@ const collectionJsonLd = {
           href={app.href}
           style={appCardStyle(app)}
           data-app-row
-          data-app-title={app.title.toLowerCase()}
+          data-app-search-text={`${app.title} ${app.description}`.normalize("NFKC").toLocaleLowerCase()}
           data-status-kind={app.statusKind}
         >
           <img src={app.iconPath} alt="" width="64" height="64" loading="lazy" data-no-visual-search="true" />
@@ -204,11 +204,11 @@ const collectionJsonLd = {
         if (!(appSearch instanceof HTMLInputElement)) return;
 
         appSearch.addEventListener('input', () => {
-          const query = appSearch.value.trim().toLowerCase();
+          const query = appSearch.value.trim().normalize('NFKC').toLocaleLowerCase();
           let visibleCount = 0;
           appRows.forEach((row) => {
-            const title = row.getAttribute('data-app-title') ?? '';
-            const isHidden = query.length > 0 && !title.includes(query);
+            const searchText = row.getAttribute('data-app-search-text') ?? '';
+            const isHidden = query.length > 0 && !searchText.includes(query);
             row.hidden = isHidden;
             if (!isHidden) visibleCount += 1;
           });
