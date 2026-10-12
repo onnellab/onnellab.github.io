@@ -298,7 +298,7 @@
   min-width: 0;
 }
 .homepage .hero-stage {
-  --hero-side-inset: 36px;
+  --hero-side-inset: 48px;
   --hero-side-drop: clamp(16px, 2vw, 28px);
   display: grid;
   grid-template-columns: minmax(0, 32fr) minmax(0, 37fr) minmax(0, 31fr);
@@ -952,7 +952,7 @@
   .homepage .primary-link { min-height: 46px; margin-top: 22px; padding: 12px 17px; }
   .homepage .hero-carousel { width: 100%; margin-top: 12px; }
   .homepage .hero-stage {
-    --hero-side-inset: 24px;
+    --hero-side-inset: 30px;
     --hero-side-drop: 16px;
     grid-template-columns: minmax(0, 32fr) minmax(0, 37fr) minmax(0, 31fr);
     padding-top: 6px;
@@ -1059,6 +1059,8 @@
 }
 
 @media (max-width: 355px) {
+  /* At 320px retain recognizable side previews instead of hiding most of them. */
+  .homepage .hero-stage { --hero-side-inset: 24px; }
   .homepage .product-picture { flex-basis: 37%; width: 37%; padding-inline: 7px; }
   .homepage .product-card-body { padding: 16px 12px 17px; }
   .homepage .product-card h3 { font-size: 20px; }

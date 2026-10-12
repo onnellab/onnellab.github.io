@@ -366,7 +366,7 @@ test('the center card subtly occludes both complete side previews after every ro
       expect(result.stageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.allOnStage, 'all cards inside the Hero at ' + width).toBe(true);
       expect(result.balancedSizes).toBe(true);
-      const target = width <= 650 ? { min: 21, max: 27 } : { min: 32, max: 40 };
+      const target = width <= 355 ? { min: 22, max: 26 } : width <= 650 ? { min: 28, max: 32 } : { min: 46, max: 50 };
       for (const overlap of [result.coveredLeft, result.coveredRight]) {
         expect(overlap, 'side cards visibly behind center at ' + width).toBeGreaterThan(target.min);
         expect(overlap, 'side card remains recognizable at ' + width).toBeLessThan(target.max);
@@ -678,7 +678,7 @@ test('all three states preserve Melivra-centered fixed geometry down to the pixe
     expect(center.frameBounds.width).toBeGreaterThan(previous.frameBounds.width);
     const leftOverlap = previous.frameBounds.left + previous.frameBounds.width - center.frameBounds.left;
     const rightOverlap = center.frameBounds.left + center.frameBounds.width - next.frameBounds.left;
-    const inset = width <= 650 ? 24 : 36;
+    const inset = width <= 355 ? 24 : width <= 650 ? 30 : 48;
     expect(Math.abs(leftOverlap - inset)).toBeLessThanOrEqual(1);
     expect(Math.abs(rightOverlap - inset)).toBeLessThanOrEqual(1);
   }
