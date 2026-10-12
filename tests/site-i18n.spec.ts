@@ -220,7 +220,8 @@ test.describe('nine-language site core regression', () => {
       await expect(featured.locator('.featured-copy > p')).toHaveText(copy.signatureBody);
       await expect(featured.locator('.featured-screen img')).toHaveCount(1);
       await expect(page.locator('.collection-grid .product-card h3')).toHaveText(['Quivra', 'Melivra', 'Papira']);
-      await expect(page.locator('.trust-count')).toHaveText('8');
+      await expect(page.locator('.trust-ordinal')).toHaveText(['01', '02', '03']);
+      await expect(page.locator('.trust-count')).toHaveCount(0);
       const websiteSchema = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
         scripts
           .flatMap((script) => {

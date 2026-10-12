@@ -141,12 +141,21 @@ const accentPalette: ProductAccent[] = [
   { border: '#d6cdd2', background: '#f7f0f3', text: '#674f5b' }
 ];
 
+// Signature colors are part of ONNELLAB's existing homepage product identity.
 const appAccentOverrides: Record<string, ProductAccent> = {
   tagweaver: { border: '#ded2b5', background: '#fbf7ec', text: '#6a5a2e' },
-  // Pin the studio's purple product identity instead of relying on slug-hash ordering.
-  quivra: { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' },
-  vaultxt: { border: '#c8d6cf', background: '#eef6f2', text: '#4a6357' },
-  clipnest: { border: '#d6c9c9', background: '#f7efef', text: '#6b4f4f' }
+  quivra: { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' }
+};
+
+// Catalog-only colors are editorial assignments, not permanent brand locks.
+// Distinct neighboring colors make the 10 current cards easier to distinguish.
+const balancedCatalogAccents: Record<string, ProductAccent> = {
+  aligna: { border: '#bcd3c5', background: '#edf5ef', text: '#436253' },
+  clipnest: { border: '#e6cbd2', background: '#fbf1f3', text: '#754f5d' },
+  lunary: { border: '#ced3eb', background: '#f2f3fb', text: '#566387' },
+  meriq: { border: '#dfd0b8', background: '#f7f2e8', text: '#6a5a42' },
+  segra: { border: '#bed7d9', background: '#edf7f7', text: '#42656b' },
+  vaultxt: { border: '#cbd9bb', background: '#f3f7eb', text: '#526244' }
 };
 
 const fieldLabels = {
@@ -242,6 +251,7 @@ export function productAccent(source: ProductSource): ProductAccent {
   return (
     source.meta.accent ??
     appAccentOverrides[source.slug] ??
+    balancedCatalogAccents[source.slug] ??
     accentPalette[hashSlug(source.slug) % accentPalette.length]
   );
 }

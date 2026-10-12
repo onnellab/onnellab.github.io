@@ -25,7 +25,8 @@ test('compact home keeps product discovery, trust, and all nine localized routes
     await expect(page.locator('.locale-menu summary')).toHaveCount(1);
     await expect(page.locator('a.featured')).toHaveAttribute('href', `/apps/tagweaver/${route.segment}`);
     await expect(page.locator('.product-card h3')).toHaveText(['Quivra', 'Melivra', 'Papira']);
-    await expect(page.locator('.trust-count')).toHaveText('8');
+    await expect(page.locator('.trust-ordinal')).toHaveText(['01', '02', '03']);
+    await expect(page.locator('.trust-count')).toHaveCount(0);
     await expect(page.locator('.trust-principles, .trust-principle')).toHaveCount(0);
     for (const removed of ['.workflow-section', '.updates-section', '.values-section', '.closing-section', '.trust-note']) {
       await expect(page.locator(removed)).toHaveCount(0);

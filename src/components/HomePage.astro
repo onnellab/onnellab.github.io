@@ -297,11 +297,7 @@ const jsonLd = [
         <div class="trust-grid">
           {copy.trust.map((item, index) => (
             <article class="trust-item">
-              {index === 0 ? (
-                <div class="trust-number"><span class="trust-count">{releasedApps.length}</span><span>{copy.releasedUnit}</span></div>
-              ) : (
-                <span class="trust-ordinal" aria-hidden="true">0{index + 1}</span>
-              )}
+              <span class="trust-ordinal" aria-hidden="true">0{index + 1}</span>
               <h3>{item.title}</h3>
               <p>{item.body}</p>
             </article>
