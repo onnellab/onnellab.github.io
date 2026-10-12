@@ -1019,6 +1019,19 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
     }
     .top-nav {
       margin-bottom: 38px;
+      flex-wrap: wrap;
+    }
+    .top-nav .brand {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .nav-actions {
+      flex-shrink: 0;
+      max-width: 100%;
+      flex-wrap: wrap;
+    }
+    .nav-actions > a {
+      white-space: nowrap;
     }
     .description,
     .article-body p,
@@ -1105,3 +1118,4 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
     }
   }
 </style>
+

@@ -89,7 +89,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Verify backfilled blog articles at desktop and mobile widths
-        run: npx playwright test tests/blog-backfill.spec.ts --project=desktop --reporter=line,html
+        run: npx playwright test tests/blog-backfill.spec.ts tests/blog-header-responsive.spec.ts --project=desktop --reporter=line,html
 
       - name: Verify privacy route ownership
         run: npx playwright test tests/privacy-route-ownership.spec.ts --project=desktop --reporter=line,html
@@ -171,3 +171,4 @@ jobs:
             -f context="onnellab/i18n-smoke" \
             -f description="$description" \
             -f target_url="$TARGET_URL"
+
