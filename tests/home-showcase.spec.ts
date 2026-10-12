@@ -142,7 +142,7 @@ test('selected product originals load sharply when scrolled into view', async ({
   }
 });
 
-test('the named carousel keeps all three full Android screens sharp at four viewport sizes', async ({ page }) => {
+test('all three Android cards are fully visible with a large center at four widths', async ({ page }) => {
   for (const width of [1440, 820, 390, 320]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/ko/');
@@ -150,46 +150,53 @@ test('the named carousel keeps all three full Android screens sharp at four view
       const links = [...track.querySelectorAll<HTMLAnchorElement>('a.hero-slide')];
       await Promise.all(links.map(async (link) => {
         const img = link.querySelector('.hero-slide-screen img') as HTMLImageElement;
-        link.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
         await img.decode();
       }));
+      const outer = track.getBoundingClientRect();
       return {
         overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-        stageScroll: track.scrollWidth - track.clientWidth,
-        peek: links[1].getBoundingClientRect().left < track.getBoundingClientRect().right,
-        fit: links.map((link) => {
+        innerScroll: track.scrollWidth - track.clientWidth,
+        cards: links.map((link) => {
           const img = link.querySelector('.hero-slide-screen img') as HTMLImageElement;
-          const rect = img.getBoundingClientRect();
+          const rect = link.getBoundingClientRect();
           return {
-            name: link.getAttribute('aria-label'),
-            objectFit: getComputedStyle(img).objectFit,
+            name: link.querySelector('.hero-slide-identity strong')?.textContent,
+            position: link.dataset.position,
+            left: rect.left,
+            right: rect.right,
             width: rect.width,
-            height: rect.height,
+            withinStage: rect.left >= outer.left - 1 && rect.right <= outer.right + 1,
+            objectFit: getComputedStyle(img).objectFit,
             native: [img.naturalWidth, img.naturalHeight],
-            src: img.getAttribute('src'),
-            snap: getComputedStyle(link).scrollSnapAlign
+            src: img.getAttribute('src')
           };
         })
       };
     });
-    expect(result.overflow, 'width ' + width).toBeLessThanOrEqual(1);
-    expect(result.stageScroll, 'carousel scroll at width ' + width).toBeGreaterThan(150);
-    expect(result.fit).toHaveLength(3);
-    for (const frame of result.fit) {
+    expect(result.overflow, String(width)).toBeLessThanOrEqual(1);
+    expect(result.innerScroll, 'no half-visible scrolling on ' + width).toBeLessThanOrEqual(1);
+    expect(result.cards).toHaveLength(3);
+    expect(result.cards.map((item) => item.position)).toEqual(['active', 'next', 'previous']);
+    for (const frame of result.cards) {
+      expect(frame.withinStage, frame.name + ' at ' + width).toBe(true);
       expect(frame.src).toContain('/home-assets/screenshots/android-20261012/ko/');
       expect(frame.objectFit).toBe('contain');
-      expect(frame.snap).toBe('start');
       expect(frame.native[0]).toBeGreaterThanOrEqual(1080);
       expect(frame.native[1]).toBeGreaterThanOrEqual(2400);
-      expect(frame.width).toBeGreaterThan(130);
-      expect(Math.abs(frame.width / frame.height - 6 / 13)).toBeLessThan(0.045);
+      expect(frame.width, frame.name).toBeGreaterThan(45);
     }
-    const names = await page.locator('.hero-slide-identity strong').allTextContents();
-    expect(names).toEqual(['TagWeaver', 'Melivra', 'Papira']);
+    const middle = result.cards.find((x) => x.position === 'active')!;
+    expect(middle.name).toBe('TagWeaver');
+    expect(middle.width).toBeGreaterThan(result.cards[1].width * 2);
+    expect(middle.width).toBeGreaterThan(result.cards[2].width * 2);
+    expect(result.cards.find((x) => x.position === 'previous')!.left)
+      .toBeLessThan(middle.left);
+    expect(result.cards.find((x) => x.position === 'next')!.left)
+      .toBeGreaterThan(middle.left);
   }
 });
 
-test('carousel arrow buttons, dots, and keyboard navigate with accessible state', async ({ page }) => {
+test('carousel arrows, dots and keyboard rotate the central card continuously', async ({ page }) => {
   await page.goto('/ko/');
   const carousel = page.locator('[data-hero-carousel]');
   const dots = carousel.locator('[data-hero-dot]');
@@ -197,48 +204,65 @@ test('carousel arrow buttons, dots, and keyboard navigate with accessible state'
   const previous = carousel.locator('[data-hero-previous]');
   const track = carousel.locator('[data-hero-track]');
   const counter = carousel.locator('[data-hero-counter]');
+  const center = carousel.locator('.hero-slide[data-position="active"] .hero-slide-identity strong');
   await expect(carousel.locator('.hero-slide-identity strong')).toHaveText(['TagWeaver', 'Melivra', 'Papira']);
   await expect(carousel.locator('.hero-slide-identity small')).toHaveText([
     '음악 태그 편집', '로컬 음악 플레이어', '전자책 만들기'
   ]);
   await expect(dots).toHaveCount(3);
   await expect(counter).toHaveText('01 / 03');
-  await expect(previous).toBeDisabled();
+  await expect(center).toHaveText('TagWeaver');
+  await expect(previous).toBeEnabled();
   await expect(next).toBeEnabled();
   await expect(dots.nth(0)).toHaveAttribute('aria-current', 'true');
 
   await next.click();
+  await expect(center).toHaveText('Melivra');
   await expect(counter).toHaveText('02 / 03');
   await expect(dots.nth(1)).toHaveAttribute('aria-current', 'true');
-  await expect(previous).toBeEnabled();
-  await dots.nth(2).click();
+  await next.click();
+  await expect(center).toHaveText('Papira');
   await expect(counter).toHaveText('03 / 03');
-  await expect(next).toBeDisabled();
-  await expect(dots.nth(2)).toHaveAttribute('aria-current', 'true');
+  await next.click();
+  await expect(center).toHaveText('TagWeaver');
+  await expect(counter).toHaveText('01 / 03');
   await previous.click();
-  await expect(counter).toHaveText('02 / 03');
+  await expect(center).toHaveText('Papira');
+  await expect(counter).toHaveText('03 / 03');
 
+  await dots.nth(1).click();
+  await expect(center).toHaveText('Melivra');
   await track.focus();
   await page.keyboard.press('ArrowLeft');
-  await expect(counter).toHaveText('01 / 03');
+  await expect(center).toHaveText('TagWeaver');
   await page.keyboard.press('ArrowRight');
-  await expect(counter).toHaveText('02 / 03');
+  await expect(center).toHaveText('Melivra');
 });
 
-test('swiping or horizontally scrolling the Hero synchronizes navigation controls', async ({ page }) => {
+test('centered rotation works on mobile with fully visible side cards and links', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/ko/');
-  const track = page.locator('[data-hero-track]');
-  await track.evaluate((node) => node.scrollTo({ left: node.scrollWidth, behavior: 'instant' }));
-  await expect(page.locator('[data-hero-counter]')).toHaveText('03 / 03');
-  await expect(page.locator('[data-hero-dot][data-index="2"]')).toHaveAttribute('aria-current', 'true');
-  await expect(page.locator('[data-hero-next]')).toBeDisabled();
-  await track.evaluate((node) => node.scrollTo({ left: 0, behavior: 'instant' }));
-  await expect(page.locator('[data-hero-counter]')).toHaveText('01 / 03');
-  await expect(page.locator('[data-hero-previous]')).toBeDisabled();
-  const original = page.locator('.hero-slide[data-index="1"]');
-  await expect(original).toHaveAttribute('href', '/apps/melivra/ko/');
-  await original.click();
+  const stage = page.locator('[data-hero-track]');
+  const first = page.locator('.hero-slide[data-index="0"]');
+  const second = page.locator('.hero-slide[data-index="1"]');
+  const third = page.locator('.hero-slide[data-index="2"]');
+  await expect(first).toHaveAttribute('data-position', 'active');
+  await expect(second).toHaveAttribute('data-position', 'next');
+  await expect(third).toHaveAttribute('data-position', 'previous');
+  await page.locator('[data-hero-next]').click();
+  await expect(second).toHaveAttribute('data-position', 'active');
+  await expect(first).toHaveAttribute('data-position', 'previous');
+  await expect(third).toHaveAttribute('data-position', 'next');
+  const inside = await stage.evaluate((container) => {
+    const bounds = container.getBoundingClientRect();
+    return [...container.querySelectorAll('.hero-slide')].every((el) => {
+      const r = el.getBoundingClientRect();
+      return r.left >= bounds.left - 1 && r.right <= bounds.right + 1;
+    });
+  });
+  expect(inside).toBe(true);
+  await expect(second).toHaveAttribute('href', '/apps/melivra/ko/');
+  await second.click();
   await expect(page).toHaveURL(/\/apps\/melivra\/ko\/$/);
 });
 

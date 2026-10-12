@@ -148,12 +148,38 @@ const jsonLd = [
 
         {heroSlides.length > 0 && (
           <div class="hero-carousel" data-hero-carousel role="region" aria-label={copy.carousel.label}>
-            <div class="hero-stage" data-hero-track role="group" tabindex="0" aria-label={copy.carousel.choose}>
+            <div class="hero-carousel-controls">
+              <div class="hero-carousel-dots" aria-label={copy.carousel.choose}>
+                {heroSlides.map((slide, index) => (
+                  <button
+                    type="button"
+                    class="hero-carousel-dot"
+                    data-hero-dot
+                    data-index={index}
+                    aria-label={slide.app.title + ' ' + (index + 1) + ' / ' + heroSlides.length}
+                    aria-current={index === 0 ? 'true' : undefined}
+                  ><span aria-hidden="true"></span></button>
+                ))}
+              </div>
+              <span class="hero-carousel-counter" data-hero-counter aria-live="polite">
+                01 / {String(heroSlides.length).padStart(2, '0')}
+              </span>
+              <div class="hero-carousel-arrows">
+                <button type="button" data-hero-previous aria-label={copy.carousel.previous}>
+                  <span aria-hidden="true">←</span>
+                </button>
+                <button type="button" data-hero-next aria-label={copy.carousel.next}>
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>            <div class="hero-stage" data-hero-track role="group" tabindex="0" aria-label={copy.carousel.choose}>
               {heroSlides.map((slide, index) => (
                 <a
                   class="hero-slide"
                   data-hero-slide
                   data-index={index}
+                  data-position={index === 0 ? 'active' : index === 1 ? 'next' : 'previous'}
+                  aria-current={index === 0 ? 'true' : undefined}
                   href={linkFor(slide.slug)}
                   aria-label={slide.app.title + ' · ' + slide.category}
                   style={accentStyle(slide.app)}
@@ -189,31 +215,7 @@ const jsonLd = [
                 </a>
               ))}
             </div>
-            <div class="hero-carousel-controls">
-              <div class="hero-carousel-dots" aria-label={copy.carousel.choose}>
-                {heroSlides.map((slide, index) => (
-                  <button
-                    type="button"
-                    class="hero-carousel-dot"
-                    data-hero-dot
-                    data-index={index}
-                    aria-label={slide.app.title + ' ' + (index + 1) + ' / ' + heroSlides.length}
-                    aria-current={index === 0 ? 'true' : undefined}
-                  ><span aria-hidden="true"></span></button>
-                ))}
-              </div>
-              <span class="hero-carousel-counter" data-hero-counter aria-live="polite">
-                01 / {String(heroSlides.length).padStart(2, '0')}
-              </span>
-              <div class="hero-carousel-arrows">
-                <button type="button" data-hero-previous aria-label={copy.carousel.previous} disabled>
-                  <span aria-hidden="true">←</span>
-                </button>
-                <button type="button" data-hero-next aria-label={copy.carousel.next} disabled={heroSlides.length < 2}>
-                  <span aria-hidden="true">→</span>
-                </button>
-              </div>
-            </div>
+
           </div>
         )}
       </section>
