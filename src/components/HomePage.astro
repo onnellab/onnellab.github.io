@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
 import { getProductIndexItems, getProductPageData, type ProductIndexItem } from '../lib/products';
-import { releaseNotes, releaseNotePath, releaseNoteKoPath } from '../lib/releaseNotes';
 import { showcaseCopy } from '../lib/home-showcase-copy';
 import {
   allLocaleAlternates,
@@ -56,20 +55,6 @@ const footerLabels: Record<AllSiteLocale, string> = {
 };
 const blogHref = `/blog/${definition.pathSegment ? `${definition.pathSegment}/` : ''}`;
 const linkFor = (slug: string) => allProductRouteFor(slug, locale);
-
-const eligibleSlugs = new Set(releasedApps.map((app) => app.slug));
-const usedUpdates = new Set<string>();
-const recentUpdates = releaseNotes
-  .filter((note) => eligibleSlugs.has(note.appSlug))
-  .sort((a, b) => b.releasedDate.localeCompare(a.releasedDate))
-  .filter((note) => {
-    if (usedUpdates.has(note.appSlug)) return false;
-    usedUpdates.add(note.appSlug);
-    return true;
-  })
-  .slice(0, 3);
-const noteHref = (note: (typeof recentUpdates)[number]) =>
-  locale === 'ko' ? releaseNoteKoPath(note) : releaseNotePath(note);
 
 const jsonLd = [
   {
@@ -256,82 +241,10 @@ const jsonLd = [
             </article>
           ))}
         </div>
-        <div class="trust-note">
-          <h3>{copy.trustQuestion}</h3>
-          <p>{copy.trustAnswer}</p>
-          <a class="inline-link" href={allRouteFor('apps', locale)}>{copy.browse}<span aria-hidden="true">↗</span></a>
+        <div class="trust-principles" aria-label={copy.approachLabel}>
+          <span class="trust-principles-label">{copy.approachLabel}</span>
+          {copy.values.map((value) => <span class="trust-principle">{value.title}</span>)}
         </div>
-      </section>
-
-      <section class="home-section values-section" aria-labelledby="values-title">
-        <div class="section-topline"><p class="section-kicker">{copy.approachLabel}</p><span class="section-rule"></span></div>
-        <div class="values-intro"><h2 id="values-title">{copy.approachTitle}</h2></div>
-        <div class="value-grid">
-          {copy.values.map((value, index) => (
-            <article>
-              <span class="value-index" aria-hidden="true">0{index + 1}</span>
-              <h3>{value.title}</h3>
-              <p>{value.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section class="home-section workflow-section" aria-labelledby="workflow-title">
-        <div class="section-topline"><p class="section-kicker">{copy.workflowsLabel}</p><span class="section-rule"></span></div>
-        <div class="section-heading-row">
-          <div><h2 id="workflow-title">{copy.togetherTitle}</h2><p class="section-description">{copy.togetherIntro}</p></div>
-        </div>
-        <div class="workflow-grid">
-          {(['tagweaver', 'quivra'] as const).map((startSlug, index) => {
-            const endSlug = index === 0 ? 'melivra' : 'segra';
-            const startApp = releasedApps.find((app) => app.slug === startSlug);
-            const endApp = releasedApps.find((app) => app.slug === endSlug);
-            if (!startApp || !endApp) return null;
-            return (
-              <article class="workflow-card">
-                <div class="workflow-icons">
-                  <a href={linkFor(startSlug)} aria-label={startApp.title}>
-                    <img src={iconPath(startSlug, 96)} alt="" loading="lazy" width="48" height="48" />
-                    <span>{startApp.title}</span>
-                  </a>
-                  <span class="workflow-chevron" aria-hidden="true">→</span>
-                  <a href={linkFor(endSlug)} aria-label={endApp.title}>
-                    <img src={iconPath(endSlug, 96)} alt="" loading="lazy" width="48" height="48" />
-                    <span>{endApp.title}</span>
-                  </a>
-                </div>
-                <h3>{copy.workflows[index].title}</h3>
-                <p>{copy.workflows[index].body}</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      {recentUpdates.length > 0 && (
-        <section class="home-section updates-section" aria-labelledby="updates-title">
-          <div class="section-topline"><p class="section-kicker">{copy.latestLabel}</p><span class="section-rule"></span></div>
-          <div class="section-heading-row">
-            <div><h2 id="updates-title">{copy.latestTitle}</h2><p class="section-description">{copy.latestIntro}</p></div>
-          </div>
-          <div class="updates-list">
-            {recentUpdates.map((note) => (
-              <a class="update-row" href={noteHref(note)}>
-                <time datetime={note.releasedDate}>{note.releasedDate}</time>
-                <div><h3>{note.appName}</h3><p>v{note.version} · {note.platform}</p></div>
-                <span class="update-link">{copy.releaseLink}<span aria-hidden="true">↗</span></span>
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section class="closing-section" aria-labelledby="closing-title">
-        <p class="eyebrow">ONNELLAB</p>
-        <h2 id="closing-title">{copy.closingTitle}</h2>
-        <p>{copy.closingBody}</p>
-        <a class="primary-link" href={allRouteFor('apps', locale)}>{copy.browse}<span aria-hidden="true">↗</span></a>
       </section>
 
       <nav class="footer-directory" aria-label={footerLabels[locale]}>

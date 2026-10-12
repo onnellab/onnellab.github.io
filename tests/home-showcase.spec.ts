@@ -12,7 +12,7 @@ const routes = [
   { home: '/es/', segment: 'es/', title: 'Herramientas pequeñas, hechas con cuidado.', apps: '/apps/es/', about: '/about/es/', blog: '/blog/es/' }
 ] as const;
 
-test('premium home keeps the existing product ecosystem and localizes all nine home routes', async ({ page }) => {
+test('compact home keeps product discovery, trust, and all nine localized routes', async ({ page }) => {
   for (const route of routes) {
     await page.goto(route.home);
     await expect(page.locator('h1')).toContainText(route.title);
@@ -26,8 +26,10 @@ test('premium home keeps the existing product ecosystem and localizes all nine h
     await expect(page.locator('a.featured')).toHaveAttribute('href', `/apps/tagweaver/${route.segment}`);
     await expect(page.locator('.product-card h3')).toHaveText(['Quivra', 'Melivra', 'Papira']);
     await expect(page.locator('.trust-count')).toHaveText('8');
-    await expect(page.locator('.workflow-card')).toHaveCount(2);
-    await expect(page.locator('.update-row')).toHaveCount(3);
+    await expect(page.locator('.trust-principle')).toHaveCount(3);
+    for (const removed of ['.workflow-section', '.updates-section', '.values-section', '.closing-section', '.trust-note']) {
+      await expect(page.locator(removed)).toHaveCount(0);
+    }
     await expect(page.locator('.home-hero .primary-link')).toHaveAttribute('href', route.apps);
     await expect(page.locator('main')).not.toContainText('여름 소리 만들기');
     await expect(page.locator('main')).not.toContainText('가상 고객 사례');
@@ -93,14 +95,12 @@ test('home remains free of horizontal overflow at small mobile widths', async ({
   }
 });
 
-test('workflow icons load when the section enters the viewport', async ({ page }) => {
+test('the condensed home ends with transparent trust and a useful footer', async ({ page }) => {
   await page.goto('/ko/');
-  const workflowIcons = page.locator('.workflow-icons img');
-  await expect(workflowIcons).toHaveCount(4);
-  for (const image of await workflowIcons.all()) {
-    await image.scrollIntoViewIfNeeded();
-    await expect.poll(async () => image.evaluate((element) =>
-      (element as HTMLImageElement).complete && (element as HTMLImageElement).naturalWidth > 0
-    )).toBe(true);
-  }
+  await expect(page.locator('.trust-grid .trust-item')).toHaveCount(3);
+  await expect(page.locator('.trust-principles .trust-principle')).toHaveCount(3);
+  await expect(page.locator('.footer-directory a')).toHaveCount(3);
+  await expect(page.locator('footer.site-footer')).toHaveCount(1);
+  await expect(page.locator('.closing-section, .workflow-section, .values-section, .updates-section')).toHaveCount(0);
+  await expect(page.locator('.home-hero .primary-link')).toHaveCount(1);
 });
