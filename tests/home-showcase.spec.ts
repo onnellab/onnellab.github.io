@@ -188,13 +188,13 @@ test('all three Android cards are fully visible with a large center at four widt
     }
     const middle = result.cards.find((x) => x.position === 'active')!;
     expect(middle.name).toBe('TagWeaver');
-    // Restore the first design's approximately 31 / 40 / 29 width proportions.
+    // Slightly enlarged side screenshots: width proportions 32 : 37 : 31.
     const leftCard = result.cards.find((x) => x.position === 'previous')!;
     const rightCard = result.cards.find((x) => x.position === 'next')!;
-    expect(middle.width / leftCard.width).toBeGreaterThan(1.25);
-    expect(middle.width / leftCard.width).toBeLessThan(1.4);
-    expect(middle.width / rightCard.width).toBeGreaterThan(1.3);
-    expect(middle.width / rightCard.width).toBeLessThan(1.5);
+    expect(middle.width / leftCard.width).toBeGreaterThan(1.1);
+    expect(middle.width / leftCard.width).toBeLessThan(1.22);
+    expect(middle.width / rightCard.width).toBeGreaterThan(1.14);
+    expect(middle.width / rightCard.width).toBeLessThan(1.26);
     expect(result.cards.find((x) => x.position === 'previous')!.left)
       .toBeLessThan(middle.left);
     expect(result.cards.find((x) => x.position === 'next')!.left)
@@ -359,7 +359,7 @@ test('the center card subtly occludes both complete side previews after every ro
           prevZ: Number(getComputedStyle(previous).zIndex),
           nextZ: Number(getComputedStyle(next).zIndex),
           allOnStage: [c, p, n].every((r) => r.left >= outer.left - 1 && r.right <= outer.right + 1),
-          balancedSizes: c.width > p.width * 1.25 && c.width < p.width * 1.4 && c.width > n.width * 1.3 && c.width < n.width * 1.5
+          balancedSizes: c.width > p.width * 1.1 && c.width < p.width * 1.22 && c.width > n.width * 1.14 && c.width < n.width * 1.26
         };
       });
       expect(result.pageOverflow, String(width)).toBeLessThanOrEqual(1);
@@ -588,5 +588,21 @@ test('signature and selected-product captures use flat brand surfaces and light 
       expect(card.productFrame).toBeLessThanOrEqual(2);
       expect(card.image).toContain('/home-assets/screenshots/android-20261012/ko/');
     }
+  }
+});
+
+test('Hero titles appear as text only, without adjacent app icons', async ({ page }) => {
+  for (const width of [320, 390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/ko/');
+    const labels = page.locator('.hero-slide-label');
+    await expect(labels).toHaveCount(3);
+    await expect(labels.locator('strong')).toHaveText(['TagWeaver', 'Melivra', 'Papira']);
+    await expect(labels.locator('img')).toHaveCount(0);
+    await expect(page.locator('.hero-slide-screen img')).toHaveCount(3);
+    await expect(page.locator('.hero-slide[data-position="active"] strong')).toHaveText('TagWeaver');
+    await page.locator('[data-hero-next]').click();
+    await expect(page.locator('.hero-slide[data-position="active"] strong')).toHaveText('Melivra');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
   }
 });
