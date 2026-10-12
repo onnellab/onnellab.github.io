@@ -52,7 +52,7 @@ test('the logo is cropped from the existing favicon without replacing it', async
 
 test('the home uses original localized UI captures rather than store composites', async ({ page, request }) => {
   await page.goto('/ko/');
-  const sources = await page.locator('.hero-stage img, .featured-screen img, .product-screen img')
+  const sources = await page.locator('.hero-slide-screen img, .featured-screen img, .product-screen img')
     .evaluateAll((imgs) => imgs.map((img) => (img as HTMLImageElement).getAttribute('src')));
   expect(sources).toHaveLength(7);
   for (const src of sources) {
@@ -82,7 +82,7 @@ test('mobile navigation, first viewport, and nine-language layout remain usable'
     await nav.locator('.mobile-menu summary').click();
     await expect(nav.locator(`.mobile-menu-panel a[href="${route.about}"]`)).toBeVisible();
     await nav.locator('.mobile-menu summary').click();
-    const stage = await page.locator('.stage-main').boundingBox();
+    const stage = await page.locator('.hero-slide').first().boundingBox();
     expect(stage, route.home).not.toBeNull();
     expect(stage!.y, route.home).toBeLessThan(844);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
@@ -115,7 +115,7 @@ test('all nine homepage locales use matching uncompressed original UI captures',
   };
   for (const route of routes) {
     await page.goto(route.home);
-    const paths = await page.locator('.hero-stage img, .featured-screen img, .product-screen img')
+    const paths = await page.locator('.hero-slide-screen img, .featured-screen img, .product-screen img')
       .evaluateAll((nodes) => nodes.map((node) => (node as HTMLImageElement).getAttribute('src')));
     expect(paths).toHaveLength(7);
     const uniquePaths = [...new Set(paths)];
@@ -141,23 +141,24 @@ test('selected product originals load sharply when scrolled into view', async ({
   }
 });
 
-test('the Hero uses three crisp uncropped Android screens at desktop and mobile widths', async ({ page }) => {
+test('the named carousel keeps all three full Android screens sharp at four viewport sizes', async ({ page }) => {
   for (const width of [1440, 820, 390, 320]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/ko/');
-    const result = await page.locator('.hero-stage').evaluate(async (stage) => {
-      const links = [...stage.querySelectorAll<HTMLAnchorElement>('a.stage-device')];
+    const result = await page.locator('.hero-stage').evaluate(async (track) => {
+      const links = [...track.querySelectorAll<HTMLAnchorElement>('a.hero-slide')];
       await Promise.all(links.map(async (link) => {
-        const img = link.querySelector('img')!;
-        await img.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
+        const img = link.querySelector('.hero-slide-screen img') as HTMLImageElement;
+        link.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
         await img.decode();
       }));
       return {
         overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-        mobileScroll: stage.scrollWidth - stage.clientWidth,
+        stageScroll: track.scrollWidth - track.clientWidth,
+        peek: links[1].getBoundingClientRect().left < track.getBoundingClientRect().right,
         fit: links.map((link) => {
-          const img = link.querySelector('img')!;
-          const rect = link.getBoundingClientRect();
+          const img = link.querySelector('.hero-slide-screen img') as HTMLImageElement;
+          const rect = img.getBoundingClientRect();
           return {
             name: link.getAttribute('aria-label'),
             objectFit: getComputedStyle(img).objectFit,
@@ -165,36 +166,84 @@ test('the Hero uses three crisp uncropped Android screens at desktop and mobile 
             height: rect.height,
             native: [img.naturalWidth, img.naturalHeight],
             src: img.getAttribute('src'),
-            scrollSnapAlign: getComputedStyle(link).scrollSnapAlign
+            snap: getComputedStyle(link).scrollSnapAlign
           };
         })
       };
     });
     expect(result.overflow, 'width ' + width).toBeLessThanOrEqual(1);
+    expect(result.stageScroll, 'carousel scroll at width ' + width).toBeGreaterThan(150);
     expect(result.fit).toHaveLength(3);
     for (const frame of result.fit) {
       expect(frame.src).toContain('/home-assets/screenshots/android-20261012/ko/');
       expect(frame.objectFit).toBe('contain');
-      expect(frame.scrollSnapAlign).toBe('start');
+      expect(frame.snap).toBe('start');
       expect(frame.native[0]).toBeGreaterThanOrEqual(1080);
       expect(frame.native[1]).toBeGreaterThanOrEqual(2400);
       expect(frame.width).toBeGreaterThan(130);
-      const ratio = frame.width / frame.height;
-      expect(Math.abs(ratio - 6 / 13)).toBeLessThan(0.045);
+      expect(Math.abs(frame.width / frame.height - 6 / 13)).toBeLessThan(0.045);
     }
-    if (width <= 650) {
-      expect(result.mobileScroll).toBeGreaterThan(150);
-      const main = result.fit.find((x) => x.name === 'TagWeaver')!;
-      expect(main.width).toBeGreaterThan(200);
-    } else {
-      expect(result.mobileScroll).toBeLessThanOrEqual(1);
-    }
+    const names = await page.locator('.hero-slide-identity strong').allTextContents();
+    expect(names).toEqual(['TagWeaver', 'Melivra', 'Papira']);
   }
+});
+
+test('carousel arrow buttons, dots, and keyboard navigate with accessible state', async ({ page }) => {
+  await page.goto('/ko/');
+  const carousel = page.locator('[data-hero-carousel]');
+  const dots = carousel.locator('[data-hero-dot]');
+  const next = carousel.locator('[data-hero-next]');
+  const previous = carousel.locator('[data-hero-previous]');
+  const track = carousel.locator('[data-hero-track]');
+  const counter = carousel.locator('[data-hero-counter]');
+  await expect(carousel.locator('.hero-slide-identity strong')).toHaveText(['TagWeaver', 'Melivra', 'Papira']);
+  await expect(carousel.locator('.hero-slide-identity small')).toHaveText([
+    '음악 태그 편집', '로컬 음악 플레이어', '전자책 만들기'
+  ]);
+  await expect(dots).toHaveCount(3);
+  await expect(counter).toHaveText('01 / 03');
+  await expect(previous).toBeDisabled();
+  await expect(next).toBeEnabled();
+  await expect(dots.nth(0)).toHaveAttribute('aria-current', 'true');
+
+  await next.click();
+  await expect(counter).toHaveText('02 / 03');
+  await expect(dots.nth(1)).toHaveAttribute('aria-current', 'true');
+  await expect(previous).toBeEnabled();
+  await dots.nth(2).click();
+  await expect(counter).toHaveText('03 / 03');
+  await expect(next).toBeDisabled();
+  await expect(dots.nth(2)).toHaveAttribute('aria-current', 'true');
+  await previous.click();
+  await expect(counter).toHaveText('02 / 03');
+
+  await track.focus();
+  await page.keyboard.press('ArrowLeft');
+  await expect(counter).toHaveText('01 / 03');
+  await page.keyboard.press('ArrowRight');
+  await expect(counter).toHaveText('02 / 03');
+});
+
+test('swiping or horizontally scrolling the Hero synchronizes navigation controls', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/ko/');
+  const track = page.locator('[data-hero-track]');
+  await track.evaluate((node) => node.scrollTo({ left: node.scrollWidth, behavior: 'instant' }));
+  await expect(page.locator('[data-hero-counter]')).toHaveText('03 / 03');
+  await expect(page.locator('[data-hero-dot][data-index="2"]')).toHaveAttribute('aria-current', 'true');
+  await expect(page.locator('[data-hero-next]')).toBeDisabled();
+  await track.evaluate((node) => node.scrollTo({ left: 0, behavior: 'instant' }));
+  await expect(page.locator('[data-hero-counter]')).toHaveText('01 / 03');
+  await expect(page.locator('[data-hero-previous]')).toBeDisabled();
+  const original = page.locator('.hero-slide[data-index="1"]');
+  await expect(original).toHaveAttribute('href', '/apps/melivra/ko/');
+  await original.click();
+  await expect(page).toHaveURL(/\/apps\/melivra\/ko\/$/);
 });
 
 test('the homepage uses only Android source dimensions for every product', async ({ page }) => {
   await page.goto('/ko/');
-  const images = await page.locator('.hero-stage img, .featured-screen img, .product-screen img')
+  const images = await page.locator('.hero-slide-screen img, .featured-screen img, .product-screen img')
     .evaluateAll(async (nodes) => {
       const items = nodes as HTMLImageElement[];
       await Promise.all(items.map(async (img) => {

@@ -143,6 +143,8 @@ const accentPalette: ProductAccent[] = [
 
 const appAccentOverrides: Record<string, ProductAccent> = {
   tagweaver: { border: '#ded2b5', background: '#fbf7ec', text: '#6a5a2e' },
+  // Pin the studio's purple product identity instead of relying on slug-hash ordering.
+  quivra: { border: '#d7cfdb', background: '#f4eff5', text: '#614f68' },
   vaultxt: { border: '#c8d6cf', background: '#eef6f2', text: '#4a6357' },
   clipnest: { border: '#d6c9c9', background: '#f7efef', text: '#6b4f4f' }
 };

@@ -7,6 +7,7 @@ export type ShowcaseCopy = {
   seoTitle: string;
   description: string;
   nav: { apps: string; about: string; blog: string; menu: string };
+  carousel: { label: string; previous: string; next: string; choose: string; musicTag: string };
   eyebrow: string;
   heroTitle: string;
   heroIntro: string;
@@ -47,6 +48,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     seoTitle: 'ONNELLAB - Focused apps for files and creative work',
     description: 'ONNELLAB makes focused apps for managing files, media, creative work, and everyday tasks.',
     nav: { apps: 'Apps', about: 'About', blog: 'Blog', menu: 'Open menu' },
+    carousel: { label: 'Featured apps', previous: 'Previous app', next: 'Next app', choose: 'Choose an app', musicTag: 'Music tag editor' },
     eyebrow: 'Independent software studio',
     heroTitle: 'Small tools. Calmly made.',
     heroIntro: 'Thoughtful apps for music, files, media and creative work. Less friction, fewer unnecessary steps, and control where it belongs: with you.',
@@ -100,6 +102,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     seoTitle: 'ONNELLAB - 파일과 창작 작업을 위한 앱',
     description: 'ONNELLAB은 파일과 미디어를 관리하고 창작 작업과 일상의 일을 돕는 목적이 분명한 앱을 만들어요.',
     nav: { apps: '앱', about: '소개', blog: '블로그', menu: '메뉴 열기' },
+    carousel: { label: '대표 앱 미리보기', previous: '이전 앱', next: '다음 앱', choose: '앱 선택', musicTag: '음악 태그 편집' },
     eyebrow: '독립 소프트웨어 스튜디오',
     heroTitle: '작은 도구를, 세심하게 만들어요.',
     heroIntro: '음악, 문서, 미디어와 창작 작업을 위한 목적이 분명한 앱을 만들어요. 불필요한 단계는 줄이고, 가능한 작업은 기기 안에서 처리해 사용자의 선택과 파일을 존중해요.',
@@ -153,6 +156,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     seoTitle: 'ONNELLAB - ファイル管理と創作のためのアプリ',
     description: 'ONNELLABは、ファイルやメディアの管理、創作、日々の作業に役立つ、目的の明確なアプリをつくります。',
     nav: { apps: 'アプリ', about: '紹介', blog: 'ブログ', menu: 'メニューを開く' },
+    carousel: { label: 'おすすめアプリのプレビュー', previous: '前のアプリ', next: '次のアプリ', choose: 'アプリを選択', musicTag: '音楽タグ編集' },
     eyebrow: 'インディーソフトウェアスタジオ',
     heroTitle: '小さな道具を、丁寧に。',
     heroIntro: '音楽やファイル、メディア、創作のために、役割の明確なアプリをつくっています。余計な手順を減らし、できる限り自分の端末で、自分のデータを扱えるように。',
@@ -201,6 +205,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     seoTitle: 'ONNELLAB - 专注于文件与创作的应用',
     description: 'ONNELLAB 打造用途明确的应用，帮助你管理文件与媒体，完成创作和日常任务。',
     nav: { apps: '应用', about: '关于', blog: '博客', menu: '打开菜单' },
+    carousel: { label: '精选应用预览', previous: '上一个应用', next: '下一个应用', choose: '选择应用', musicTag: '音乐标签编辑' },
     eyebrow: '独立软件工作室', heroTitle: '小工具，用心做。',
     heroIntro: '为音乐、文件、媒体与创作打造目标明确的应用。减少不必要的步骤，尽可能让文件留在设备上，由你掌控。',
     browse: '浏览应用', signatureLabel: '代表产品',
@@ -248,6 +253,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     seoTitle: 'ONNELLAB - 專注於檔案與創作的應用程式',
     description: 'ONNELLAB 打造用途明確的應用程式，幫助你管理檔案與媒體，完成創作與日常工作。',
     nav: { apps: '應用程式', about: '關於', blog: '部落格', menu: '開啟選單' },
+    carousel: { label: '精選應用程式預覽', previous: '上一個應用程式', next: '下一個應用程式', choose: '選擇應用程式', musicTag: '音樂標籤編輯' },
     eyebrow: '獨立軟體工作室', heroTitle: '小工具，用心做。',
     heroIntro: '為音樂、檔案、影音與創作打造目標明確的應用程式。減少不必要的步驟，盡可能讓檔案留在裝置上，由你掌控。',
     browse: '瀏覽應用程式', signatureLabel: '代表產品',
@@ -295,6 +301,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     seoTitle: 'ONNELLAB - Apps focados em arquivos e criação',
     description: 'A ONNELLAB cria apps focados para organizar arquivos, mídia, trabalhos criativos e tarefas do dia a dia.',
     nav: { apps: 'Apps', about: 'Sobre', blog: 'Blog', menu: 'Abrir menu' },
+    carousel: { label: 'Prévia dos apps em destaque', previous: 'App anterior', next: 'Próximo app', choose: 'Escolher um app', musicTag: 'Editor de tags musicais' },
     eyebrow: 'Estúdio independente de software',
     heroTitle: 'Ferramentas pequenas. Feitas com cuidado.',
     heroIntro: 'Criamos apps focados em música, arquivos, mídia e criação. Menos etapas desnecessárias e mais controle sobre o que é seu.',
@@ -343,6 +350,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     seoTitle: 'ONNELLAB - Fokussierte Apps für Dateien und kreative Arbeit',
     description: 'ONNELLAB entwickelt fokussierte Apps für Dateien, Medien, kreative Arbeit und alltägliche Aufgaben.',
     nav: { apps: 'Apps', about: 'Über uns', blog: 'Blog', menu: 'Menü öffnen' },
+    carousel: { label: 'Ausgewählte Apps in der Vorschau', previous: 'Vorherige App', next: 'Nächste App', choose: 'App auswählen', musicTag: 'Musik-Tags bearbeiten' },
     eyebrow: 'Unabhängiges Softwarestudio',
     heroTitle: 'Kleine Werkzeuge. Mit Sorgfalt gemacht.',
     heroIntro: 'Wir entwickeln klare, fokussierte Apps für Musik, Dateien, Medien und Kreatives. Weniger unnötige Schritte und mehr Kontrolle über die eigenen Dateien.',
@@ -391,6 +399,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     seoTitle: 'ONNELLAB - Des apps ciblées pour les fichiers et la création',
     description: 'ONNELLAB crée des apps ciblées pour gérer fichiers, médias, travaux créatifs et tâches du quotidien.',
     nav: { apps: 'Apps', about: 'À propos', blog: 'Blog', menu: 'Ouvrir le menu' },
+    carousel: { label: 'Aperçu des applications phares', previous: 'Application précédente', next: 'Application suivante', choose: 'Choisir une application', musicTag: 'Éditeur de tags musicaux' },
     eyebrow: 'Studio logiciel indépendant',
     heroTitle: 'De petits outils, conçus avec soin.',
     heroIntro: 'Des applications ciblées pour la musique, les fichiers, les médias et la création. Moins d’étapes superflues, plus de maîtrise sur ce qui vous appartient.',
@@ -439,6 +448,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     seoTitle: 'ONNELLAB - Apps enfocadas en archivos y trabajo creativo',
     description: 'ONNELLAB crea apps enfocadas para gestionar archivos, contenido multimedia, trabajo creativo y tareas cotidianas.',
     nav: { apps: 'Apps', about: 'Acerca de', blog: 'Blog', menu: 'Abrir menú' },
+    carousel: { label: 'Vista previa de apps destacadas', previous: 'App anterior', next: 'Siguiente app', choose: 'Elegir una app', musicTag: 'Editor de etiquetas musicales' },
     eyebrow: 'Estudio de software independiente',
     heroTitle: 'Herramientas pequeñas, hechas con cuidado.',
     heroIntro: 'Creamos apps enfocadas en música, archivos, contenido multimedia y creación. Menos pasos innecesarios y más control sobre tus propios archivos.',
