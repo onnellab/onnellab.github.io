@@ -303,230 +303,7 @@ test.describe('site layout and navigation', () => {
     await expect.poll(() => new URL(page.url()).pathname).toBe('/apps/tagweaver/');
   });
 
-  test('home uses TagWeaver as featured and the requested four other apps', async ({ page }) => {
-    for (const segment of ['', 'ko/', 'ja/', 'zh-hans/', 'zh-hant/']) {
-      await page.goto(`/${segment}`);
-      const featured = page.locator('a.featured');
-      await expect(featured).toHaveAttribute('href', `/apps/tagweaver/${segment}`);
-      await expect(featured.locator('h2')).toContainText('TagWeaver');
-      await expect(featured.locator('a')).toHaveCount(0);
-      await expect(page.locator('.product-card')).toHaveCount(4);
-      await expect(page.locator('.product-card h3')).toHaveText(['Melivra', 'Papira', 'Quivra', 'VaultXT']);
-    }
-  });
-
-  test('home delivers responsive WebP derivatives while product identity keeps its source icon', async ({ page, request }, testInfo) => {
-    const homeIcons = [
-      { slug: 'melivra', width: 44, sizes: '44px', source: '/app-assets/melivra/assets/icon/melivra.png' },
-      { slug: 'papira', width: 44, sizes: '44px', source: '/app-assets/papira/icon.png' },
-      { slug: 'quivra', width: 44, sizes: '44px', source: '/app-assets/quivra/assets/icon/quivra.png' },
-      { slug: 'vaultxt', width: 44, sizes: '44px', source: '/app-assets/vaultxt/assets/icon/vaultxt.png' },
-      {
-        slug: 'tagweaver',
-        width: 92,
-        sizes: '(max-width: 520px) 64px, 92px',
-        source: '/app-assets/tagweaver/assets/icon/tagweaver.png'
-      }
-    ] as const;
-
-    await page.goto('/');
-    const homeMarkup = await page.locator('main[data-core-page="home"]').innerHTML();
-
-    for (const icon of homeIcons) {
-      const image = page.locator(`a[href="/apps/${icon.slug}/"] img`);
-      const expectedSrc = `/home-assets/app-icons/${icon.slug}-96.webp`;
-      const expectedSrcset = [96, 192]
-        .map((size) => `/home-assets/app-icons/${icon.slug}-${size}.webp ${size}w`)
-        .join(', ');
-
-      await expect(image).toHaveAttribute('src', expectedSrc);
-      await expect(image).toHaveAttribute('srcset', expectedSrcset);
-      await expect(image).toHaveAttribute('sizes', icon.sizes);
-      await expect(image).toHaveAttribute('width', String(icon.width));
-      await expect(image).toHaveAttribute('height', String(icon.width));
-      expect(homeMarkup).not.toContain(icon.source);
-
-      const selected = await image.evaluate((node) => {
-        const element = node as HTMLImageElement;
-        return {
-          currentSrc: new URL(element.currentSrc).pathname,
-          naturalWidth: element.naturalWidth,
-          naturalHeight: element.naturalHeight
-        };
-      });
-      const expectedSelectedSize = testInfo.project.name === 'mobile' ? 192 : 96;
-      const expectedNaturalWidth = testInfo.project.name === 'mobile' && icon.slug === 'tagweaver' ? 64 : icon.width;
-      expect(selected.currentSrc).toBe(`/home-assets/app-icons/${icon.slug}-${expectedSelectedSize}.webp`);
-      expect(selected.naturalWidth).toBe(expectedNaturalWidth);
-      expect(selected.naturalHeight).toBe(expectedNaturalWidth);
-
-      for (const size of [96, 192]) {
-        const assetPath = `/home-assets/app-icons/${icon.slug}-${size}.webp`;
-        const response = await request.get(assetPath);
-        expect(response.status(), assetPath).toBe(200);
-        expect(response.headers()['content-type'], assetPath).toContain('image/webp');
-
-        const dimensions = await page.evaluate(
-          ({ path }) => new Promise<{ width: number; height: number }>((resolve, reject) => {
-            const candidate = new Image();
-            candidate.onload = () => resolve({ width: candidate.naturalWidth, height: candidate.naturalHeight });
-            candidate.onerror = () => reject(new Error(`Unable to load ${path}`));
-            candidate.src = path;
-          }),
-          { path: assetPath }
-        );
-        expect(dimensions, assetPath).toEqual({ width: size, height: size });
-      }
-    }
-
-    await page.goto('/apps/tagweaver/');
-    const sourceIcon = '/app-assets/tagweaver/assets/icon/tagweaver.png';
-    await expect(page.locator('.identity img')).toHaveAttribute('src', sourceIcon);
-    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
-      'content',
-      `https://onnellab.com${sourceIcon}`
-    );
-  });
-
-  test('compact home selects the 96px featured icon at fractional DPR', async ({ browser }) => {
-    const context = await browser.newContext({
-      baseURL: 'http://127.0.0.1:4321',
-      viewport: { width: 500, height: 1000 },
-      deviceScaleFactor: 1.25
-    });
-
-    try {
-      const page = await context.newPage();
-      await page.goto('/');
-      const image = page.locator('a.featured img');
-      await image.evaluate((node) => (node as HTMLImageElement).decode());
-
-      expect(await image.evaluate((node) => (node as HTMLImageElement).getBoundingClientRect().width)).toBe(64);
-      expect(await image.evaluate((node) => new URL((node as HTMLImageElement).currentSrc).pathname)).toBe(
-        '/home-assets/app-icons/tagweaver-96.webp'
-      );
-    } finally {
-      await context.close();
-    }
-  });
-
-  test('home introduction uses the card measure and breaks between sentences', async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 900 });
-    await page.goto('/ko/');
-
-    const lede = page.locator('.home-hero .lede');
-    await expect(lede).toContainText('목적이 분명한 앱을 만들어요.');
-    await expect(lede).toContainText('기능을 쌓아 올리거나');
-
-    const ledeBox = await lede.boundingBox();
-    const featuredBox = await page.locator('a.featured').boundingBox();
-    expect(ledeBox).not.toBeNull();
-    expect(featuredBox).not.toBeNull();
-    if (!ledeBox || !featuredBox) return;
-    expect(Math.abs(ledeBox.width - featuredBox.width)).toBeLessThan(1.5);
-
-    const renderedText = await lede.innerText();
-    expect(renderedText).toContain('만들어요.\n기능을');
-  });
-
-  test('mobile home reveals the representative app within the first viewport', async ({ page }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto('/ko/');
-
-    const titleMetrics = await page.locator('.home-hero h1').evaluate((heading) => {
-      const style = getComputedStyle(heading);
-      return {
-        fontSize: Number.parseFloat(style.fontSize),
-        lineHeight: Number.parseFloat(style.lineHeight)
-      };
-    });
-    expect(titleMetrics.fontSize).toBeLessThanOrEqual(44.1);
-    expect(titleMetrics.lineHeight).toBeGreaterThan(titleMetrics.fontSize);
-    expect(await page.locator('.home-hero h1').innerText()).toBe('작은 도구를,\n차분하게 만들어요.');
-    await expect(page.locator('.home-hero h1 .title-line')).toHaveCount(2);
-
-    const mobileNavStyle = await page.locator('.top-nav').evaluate((nav) => {
-      const brand = nav.querySelector('.brand');
-      const links = nav.querySelector('.nav-links');
-      const locale = nav.querySelector('.locale-menu summary');
-      if (!(brand instanceof HTMLElement) || !(links instanceof HTMLElement) || !(locale instanceof HTMLElement)) return null;
-      return {
-        brandSize: Number.parseFloat(getComputedStyle(brand).fontSize),
-        gap: Number.parseFloat(getComputedStyle(links).gap),
-        localeHeight: locale.getBoundingClientRect().height,
-        localePadding: Number.parseFloat(getComputedStyle(locale).paddingInlineStart)
-      };
-    });
-    expect(mobileNavStyle).toEqual({ brandSize: 14, gap: 12, localeHeight: 36, localePadding: 13 });
-
-    const featuredBox = await page.locator('a.featured').boundingBox();
-    expect(featuredBox).not.toBeNull();
-    if (!featuredBox) return;
-    expect(featuredBox.y).toBeLessThan(844);
-    await expect(page.locator('a.featured')).toContainText('TagWeaver');
-  });
-
-  test('Japanese home title breaks once after the comma', async ({ page }) => {
-    await page.goto('/ja/');
-
-    const heading = page.locator('.home-hero h1');
-    await expect(heading).toHaveText('小さな道具を、静かに。');
-    expect(await heading.innerText()).toBe('小さな道具を、\n静かに。');
-    await expect(heading.locator('.title-line')).toHaveText(['小さな道具を、', '静かに。']);
-
-    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-    expect(overflow).toBeLessThanOrEqual(1);
-  });
-
-  test('Japanese and Chinese home navigation follows the established English and Korean style', async ({ page }) => {
-    const routes = [
-      { path: '/', family: '"SUIT Variable"', weight: '620' },
-      { path: '/ko/', family: '"SUIT Variable"', weight: '620' },
-      { path: '/ja/', family: '"ONNELLAB Japanese Nav"', weight: '600' },
-      { path: '/zh-hans/', family: '"ONNELLAB Simplified Chinese Nav"', weight: '600' },
-      { path: '/zh-hant/', family: '"ONNELLAB Traditional Chinese Nav"', weight: '600' }
-    ];
-
-    for (const route of routes) {
-      await page.goto(route.path);
-      await page.evaluate(() => document.fonts.ready);
-
-      const styles = await page.locator('.home-hero').evaluate(() =>
-        Array.from(document.querySelectorAll<HTMLElement>('.nav-links > a')).map((link) => {
-          const style = getComputedStyle(link);
-          return { fontFamily: style.fontFamily, fontWeight: style.fontWeight };
-        })
-      );
-      expect(styles).toHaveLength(3);
-      for (const style of styles) {
-        expect(style.fontFamily.split(',')[0]).toBe(route.family);
-        expect(style.fontWeight).toBe(route.weight);
-      }
-    }
-  });
-
-  test('mobile home keeps About and Blog navigation visible in every locale', async ({ page }) => {
-    const routes = [
-      { home: '/', about: '/about/', blog: '/blog/', blogText: 'Blog', title: 'More apps', all: 'View all' },
-      { home: '/ko/', about: '/about/ko/', blog: '/blog/ko/', blogText: '블로그', title: '다른 앱', all: '전체 보기' },
-      { home: '/ja/', about: '/about/ja/', blog: '/blog/ja/', blogText: 'ブログ', title: 'ほかのアプリ', all: '一覧を見る' },
-      { home: '/zh-hans/', about: '/about/zh-hans/', blog: '/blog/zh-hans/', blogText: '博客', title: '其他应用', all: '查看全部' },
-      { home: '/zh-hant/', about: '/about/zh-hant/', blog: '/blog/zh-hant/', blogText: '部落格', title: '其他應用程式', all: '查看全部' }
-    ];
-
-    await page.setViewportSize({ width: 390, height: 844 });
-    for (const route of routes) {
-      await page.goto(route.home);
-      await expect(page.locator(`.top-nav a[href="${route.about}"]`)).toBeVisible();
-      const blog = page.locator(`.top-nav a[href="${route.blog}"]`);
-      await expect(blog).toBeVisible();
-      await expect(blog).toHaveText(route.blogText);
-      await expect(blog).toHaveAccessibleName(route.blogText);
-      await expect(page.locator('#apps-title')).toHaveText(route.title);
-      await expect(page.locator('.section-head a')).toHaveText(route.all);
-      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
-    }
-  });
+  // Homepage showcase contracts are covered in home-showcase.spec.ts.
 
   test('Japanese and Chinese pages wrap without horizontal mobile scrolling', async ({ page }) => {
     const locales = ['ja', 'zh-hans', 'zh-hant'];
@@ -607,6 +384,15 @@ test.describe('site layout and navigation', () => {
 
     for (const route of routes) {
       await page.goto(route);
+      if (route === '/ko/') {
+        // The home showcase has an intentional premium lockup and full-height header.
+        const homeHeader = page.locator('main .top-nav').first();
+        await expect(homeHeader).toBeVisible();
+        await expect(homeHeader.locator('.brand')).toHaveText('ONNELLAB');
+        await expect(homeHeader.locator('.brand-symbol')).toBeVisible();
+        await expect(homeHeader.locator('.locale-menu summary')).toBeVisible();
+        continue;
+      }
       const header = page.locator('main > :is(nav, header.topbar)').first();
       const brand = header.locator('.brand');
       const languageControl = header.locator('.locale-menu summary, .language').first();
@@ -771,7 +557,10 @@ test.describe('site layout and navigation', () => {
     for (const route of routes) {
       await page.goto(route.path);
       const main = page.locator('main').first();
-      const footer = main.locator(':scope > footer.site-footer');
+      // Home uses a full-bleed header and an inner content shell; product/information pages stay unchanged.
+      const footer = route.path === '/ko/'
+        ? main.locator('.content-shell > footer.site-footer')
+        : main.locator(':scope > footer.site-footer');
       await expect(footer).toHaveCount(1);
       await expect(footer.locator(':scope > *')).toHaveCount(4);
       await expect(footer.locator(':scope > a')).toHaveText([
@@ -807,7 +596,7 @@ test.describe('site layout and navigation', () => {
         rowGap: '9px',
         columnGap: '20px',
         borderTopStyle: 'solid',
-        paddingTop: '28px',
+        paddingTop: route.path === '/ko/' ? '25px' : '28px',
         fontSize: '12px'
       });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
@@ -931,13 +720,22 @@ test.describe('site layout and navigation', () => {
   });
 
   test('core navigation follows the active locale', async ({ page }) => {
-    await page.goto('/ja/');
-    await expect(page.locator('.top-nav a[href="/apps/ja/"]')).toBeVisible();
-    await expect(page.locator('.top-nav a[href="/about/ja/"]')).toBeVisible();
-
-    await page.goto('/zh-hans/');
-    await expect(page.locator('.top-nav a[href="/apps/zh-hans/"]')).toBeVisible();
-    await expect(page.locator('.top-nav a[href="/about/zh-hans/"]')).toBeVisible();
+    for (const locale of ['ja', 'zh-hans']) {
+      await page.goto(`/${locale}/`);
+      for (const section of ['apps', 'about']) {
+        const desktopLink = page.locator(`.top-nav .nav-links > a[href="/${section}/${locale}/"]`);
+        await expect(desktopLink).toHaveCount(1);
+        if ((page.viewportSize()?.width ?? 1440) > 650) {
+          await expect(desktopLink).toBeVisible();
+        }
+      }
+      if ((page.viewportSize()?.width ?? 1440) <= 650) {
+        await page.locator('.mobile-menu summary').click();
+        for (const section of ['apps', 'about']) {
+          await expect(page.locator(`.mobile-menu-panel > a[href="/${section}/${locale}/"]`)).toBeVisible();
+        }
+      }
+    }
   });
 
   test('legacy collection paths still redirect to canonical routes', async ({ page }) => {

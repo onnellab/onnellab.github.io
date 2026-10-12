@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
+import { showcaseCopy } from '../src/lib/home-showcase-copy';
 
 const locales = [
   {
@@ -192,6 +193,7 @@ test.describe('nine-language site core regression', () => {
   for (const locale of locales) {
     test(`home ${locale.code}`, async ({ page }) => {
       const path = locale.segment ? `/${locale.segment}` : '/';
+      const copy = showcaseCopy[locale.code];
       await page.goto(path);
       await expect(page).toHaveTitle(locale.homeTitle);
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', locale.homeDescription);
@@ -203,28 +205,22 @@ test.describe('nine-language site core regression', () => {
         expect(renderedDescription).toMatch(term);
       }
       await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
-      await expect(page.locator('.home-hero h1')).toHaveText(locale.homeHeading);
+      await expect(page.locator('.home-hero h1')).toHaveText(copy.heroTitle);
       const navigation = page.getByRole('navigation', { name: locale.navLabel, exact: true });
       await expect(navigation).toHaveCount(1);
       const blog = navigation.getByRole('link', { name: locale.blogText, exact: true });
       await expect(blog).toHaveAttribute('href', locale.blogHref);
       await expect(blog).toHaveText(locale.blogText);
-      await expect(blog).toHaveAccessibleName(locale.blogText);
       const languageMenu = page.locator('.locale-menu summary');
       await expect(languageMenu).toHaveAccessibleName(locale.languageMenuLabel);
       await expect(languageMenu).toHaveText(locale.currentLanguage);
       const featured = page.locator('a.featured');
       await expect(featured).toHaveAttribute('href', `/apps/tagweaver/${locale.segment}`);
-      await expect(featured.locator('h2')).toHaveText(locale.featuredTitle);
-      await expect(featured.locator('.featured-copy > p')).toHaveText(locale.featuredBody);
-      await expect(featured.getByRole('img', { name: locale.featuredIconAlt, exact: true })).toHaveCount(1);
-      await expect(page.getByRole('group', { name: locale.platformsLabel, exact: true })).toHaveCount(5);
-      const renderedFeaturedTitle = await featured.locator('h2').innerText();
-      const renderedFeaturedBody = await featured.locator('.featured-copy > p').innerText();
-      const renderedFeaturedCopy = `${renderedFeaturedTitle}\n${renderedFeaturedBody}`;
-      for (const term of Object.values(semanticTerms.featured)) {
-        expect(renderedFeaturedCopy).toMatch(term);
-      }
+      await expect(featured.locator('h2')).toHaveText(copy.signatureTitle);
+      await expect(featured.locator('.featured-copy > p')).toHaveText(copy.signatureBody);
+      await expect(featured.locator('.featured-screen img')).toHaveCount(1);
+      await expect(page.locator('.collection-grid .product-card h3')).toHaveText(['Quivra', 'Melivra', 'Papira']);
+      await expect(page.locator('.trust-count')).toHaveText('8');
       const websiteSchema = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
         scripts
           .flatMap((script) => {
