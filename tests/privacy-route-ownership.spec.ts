@@ -109,9 +109,9 @@ for (const { code, suffix } of locales) {
       ...locales.map(locale => ({ lang: locale.code, href: `${siteUrl}/privacy/segra/${locale.suffix}` })),
       { lang: 'x-default', href: `${siteUrl}/privacy/segra/` }
     ]);
-    await expect(main.locator('[data-locale-choice]')).toHaveCount(9);
+    await expect(page.locator('[data-site-header] [data-locale-choice]')).toHaveCount(9);
     for (const locale of locales) {
-      const link = main.locator(`[data-locale-choice="${locale.code}"]`);
+      const link = page.locator(`[data-site-header] [data-locale-choice="${locale.code}"]`);
       await expect(link).toHaveAttribute('href', `/privacy/segra/${locale.suffix}`);
       await expect(link).toHaveAttribute('hreflang', locale.code);
     }

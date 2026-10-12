@@ -24,7 +24,7 @@ for (const locale of allSiteLocales) {
     await expect(page.locator('.platform-badges').first()).toHaveAttribute('aria-label', uiLabels[locale].platforms);
 
     await page.goto(oauthPathFor(locale));
-    await expect(page.locator('nav.topbar')).toHaveAttribute('aria-label', uiLabels[locale].navigation);
+    await expect(page.locator('nav.site-header')).toHaveAttribute('aria-label', uiLabels[locale].navigation);
     await expect(page.locator('footer a').nth(0)).toHaveText(uiLabels[locale].privacyPolicy);
     await expect(page.locator('footer a').nth(1)).toHaveText(uiLabels[locale].terms);
   });

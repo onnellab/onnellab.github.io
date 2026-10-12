@@ -1,4 +1,6 @@
 ---
+import GlobalSiteHeader from '../components/GlobalSiteHeader.astro';
+
 type Props = {
   title: string;
   description: string;
@@ -180,6 +182,7 @@ const gaScript = gaMeasurementId
     {gaMeasurementId && <script is:inline set:html={gaScript}></script>}
   </head>
   <body>
+    <GlobalSiteHeader lang={lang} canonicalPath={canonicalPath} alternates={alternates} />
     <slot />
     <script is:inline>
       (() => {

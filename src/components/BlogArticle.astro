@@ -245,14 +245,7 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
   alternates={blogPostAlternates(post.meta.slug)}
 >
   <main class="article-shell">
-    <nav class="top-nav site-header" aria-label={uiLabels[locale].articleNavigation}>
-      <a class="brand" href={homeHref}>ONNELLAB</a>
-      <div class="nav-actions">
-        <a href={appsHref}>{copy.apps}</a>
-        <a href={blogHref}>{copy.blog}</a>
-        <BlogLocaleMenu locale={locale} slug={post.meta.slug} />
-      </div>
-    </nav>
+
 
     <article>
       <header class="article-header">

@@ -23,7 +23,7 @@ for (const { locale, segment, index } of locales) {
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href', `https://onnellab.com${index}`
     );
-    await expect(page.locator('.blog-locale-menu a[data-locale-choice]')).toHaveCount(9);
+    await expect(page.locator('[data-site-header] .locale-menu-panel a[data-locale-choice]')).toHaveCount(9);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
 
     const availableCategory = page.locator('.filter-row [data-blog-filter]:not([data-blog-filter="all"])').first();
@@ -45,7 +45,7 @@ for (const { locale, segment, index } of locales) {
     await expect(page.locator('.toc-box')).toBeVisible();
     await expect(page.locator('.faq-section')).toBeVisible();
     await expect(page.locator('.article-body strong').first()).toBeVisible();
-    await expect(page.locator('.blog-locale-menu a[data-locale-choice]')).toHaveCount(9);
+    await expect(page.locator('[data-site-header] .locale-menu-panel a[data-locale-choice]')).toHaveCount(9);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href', `https://onnellab.com/blog/${segment}/${slug}/`
     );
@@ -67,14 +67,20 @@ for (const { locale, segment, index } of locales) {
   });
 }
 
-test('language chooser falls back to a valid blog index when an article lacks a translation', async ({ page }) => {
-  await page.goto('/blog/en/number-tracks-multi-disc-mp3-album/');
-  await expect(page.locator('.blog-locale-menu a[data-locale-choice="ja"]')).toHaveAttribute('href', '/blog/ja/');
-  await expect(page.locator('.blog-locale-menu a[data-locale-choice="ko"]')).toHaveAttribute(
-    'href', '/blog/ko/number-tracks-multi-disc-mp3-album/'
+test('blog language choices only link to translated posts, otherwise the localized blog index', async ({ page, request }) => {
+  const articlePath = '/blog/en/number-tracks-multi-disc-mp3-album/';
+  await page.goto(articlePath);
+  const alternateMap = await page.locator('link[rel="alternate"][hreflang]').evaluateAll((nodes) =>
+    Object.fromEntries(nodes.map((node) => {
+      const link = node as HTMLLinkElement;
+      return [link.getAttribute('hreflang'), new URL(link.href).pathname];
+    }))
   );
-  const alternateUrls = await page.locator('link[rel="alternate"][hreflang]').evaluateAll((nodes) =>
-    nodes.map((node) => (node as HTMLLinkElement).href)
-  );
-  expect(alternateUrls).not.toContain('https://onnellab.com/blog/ja/number-tracks-multi-disc-mp3-album/');
+  for (const {locale, index} of locales) {
+    const article = alternateMap[locale] as string | undefined;
+    const expectedPath = article ?? index;
+    const link = page.locator('[data-site-header] .locale-menu-panel a[data-locale-choice="' + locale + '"]');
+    await expect(link).toHaveAttribute('href', expectedPath);
+    expect((await request.get(expectedPath)).status(), expectedPath).toBe(200);
+  }
 });

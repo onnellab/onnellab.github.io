@@ -41,30 +41,7 @@ const email = 'onnellab.app@gmail.com';
   ogType="article"
 >
   <main class="privacy-shell" data-app-privacy={kind === 'privacy' ? slug : undefined} data-app-terms={kind === 'terms' ? slug : undefined} data-policy-locale={locale}>
-    <nav class="topbar site-header" aria-label={uiLabels[locale].navigation}>
-      <a class="home-link brand" href={allRouteFor('home', locale)}>ONNELLAB</a>
-      <details class="locale-menu">
-        <summary class="site-language-control" aria-label={definition.label}>{definition.label}</summary>
-        <ul class="locale-menu-panel">
-          {allSiteLocales.map((item) => {
-            const localized = allLocaleDefinitions[item];
-            return (
-              <li>
-                <a
-                  href={routeFor(item)}
-                  lang={localized.htmlLang}
-                  hreflang={localized.hreflang}
-                  data-locale-choice={item}
-                  aria-current={item === locale ? 'page' : undefined}
-                >
-                  {localized.label}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </details>
-    </nav>
+
 
     <header>
       <h1>{policy.title}</h1>

@@ -1,68 +1,70 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 const locales = ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de', 'fr', 'es'];
-const labelSelector = '.top-nav > .brand, .top-nav .nav-actions > a';
-async function lineCounts(page: Page) {
-  return page.locator(labelSelector).evaluateAll(labels => labels.map(label => {
-    const range = document.createRange();
-    range.selectNodeContents(label);
-    const tops = [...range.getClientRects()].map(rect => Math.round(rect.top));
-    return { text: label.textContent?.trim(), lines: new Set(tops).size };
-  }));
-}
 
 for (const locale of locales) for (const width of [320, 390]) {
-  test(`blog navigation ${locale} preserves whole labels at ${width}px`, async ({ page }) => {
+  test('shared blog header ' + locale + ' stays legible at ' + width + 'px', async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto(`/blog/${locale.toLowerCase()}/reuse-copied-text-snippets-iphone/`);
+    await page.goto('/blog/' + locale.toLowerCase() + '/reuse-copied-text-snippets-iphone/');
     await page.evaluate(() => document.fonts.ready);
-    const labels = await lineCounts(page);
-    expect(labels).toHaveLength(3);
-    expect(labels.every(label => label.lines === 1), JSON.stringify(labels)).toBe(true);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
-    const control = page.locator('.blog-locale-menu > summary');
-    await expect(control).toBeVisible();
+    const header = page.locator('[data-site-header]');
+    await expect(header).toHaveCount(1);
+    const brand = header.locator('.brand-lockup');
+    const language = header.locator('.locale-menu > summary');
+    const mobile = header.locator('.mobile-menu > summary');
+    await expect(brand).toBeVisible();
+    await expect(language).toBeVisible();
+    await expect(mobile).toBeVisible();
+    await expect(header.locator('.nav-links')).toBeHidden();
+    const elements = [brand, language, mobile];
     const boxes = [];
-    for (const label of await page.locator(`${labelSelector}, .blog-locale-menu > summary`).all()) {
-      const box = await label.boundingBox();
-      expect(box).not.toBeNull();
-      expect(box!.x).toBeGreaterThanOrEqual(0);
-      expect(box!.x + box!.width).toBeLessThanOrEqual(width + 1);
-      boxes.push(box!);
+    for (const item of elements) {
+      const bounds = await item.boundingBox();
+      expect(bounds).not.toBeNull();
+      expect(bounds!.x).toBeGreaterThanOrEqual(0);
+      expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width + 1);
+      boxes.push(bounds!);
     }
     for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
       const a = boxes[i], b = boxes[j];
-      const overlap = Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x) > 1 && Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y) > 1;
-      expect(overlap, `navigation targets ${i}/${j} overlap`).toBe(false);
+      const overlap = Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x) > 1 &&
+        Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y) > 1;
+      expect(overlap, 'Header control ' + i + '/' + j + ' overlaps at ' + width).toBe(false);
     }
-    await control.focus();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
+    const textLayout = await header.evaluate((node) => {
+      const name = node.querySelector('.brand-lockup span')!;
+      const lang = node.querySelector('.locale-menu summary')!;
+      return {
+        brand: name.getBoundingClientRect().height,
+        font: Number.parseFloat(getComputedStyle(name).lineHeight) || 19,
+        language: getComputedStyle(lang).whiteSpace
+      };
+    });
+    expect(textLayout.brand).toBeLessThan(textLayout.font * 1.5);
+    expect(textLayout.language).toBe('nowrap');
+    await language.focus();
     await page.keyboard.press('Enter');
-    await expect(page.locator('.blog-locale-menu')).toHaveAttribute('open', '');
-    await expect(page.locator('.blog-locale-menu a')).toHaveCount(9);
-    const menu = await page.locator('.blog-locale-menu ul').boundingBox();
+    await expect(header.locator('.locale-menu')).toHaveAttribute('open', '');
+    const panel = header.locator('.locale-menu-panel');
+    await expect(panel.locator('a')).toHaveCount(9);
+    const menu = await panel.boundingBox();
     expect(menu!.x).toBeGreaterThanOrEqual(0);
     expect(menu!.x + menu!.width).toBeLessThanOrEqual(width + 1);
     await page.keyboard.press('Enter');
-    await expect(page.locator('.blog-locale-menu')).not.toHaveAttribute('open', '');
+    await expect(header.locator('.locale-menu')).not.toHaveAttribute('open', '');
   });
 }
 
-test('regression detects original PT-BR squeezed-label layout', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 900 });
+test('Portuguese long labels remain separate from the mobile menu at 320px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
   await page.goto('/blog/pt-br/reuse-copied-text-snippets-iphone/');
-  await page.evaluate(() => document.fonts.ready);
-  expect((await lineCounts(page)).every(label => label.lines === 1)).toBe(true);
-  // Restore only the previous computed flex/wrap values; copy and DOM stay exact.
-  const previous = await page.addStyleTag({ content: `
-    @media (max-width: 640px) {
-      .top-nav { flex-wrap: nowrap !important; }
-      .top-nav .brand { flex-shrink: 1 !important; white-space: normal !important; }
-      .top-nav .nav-actions { flex-shrink: 1 !important; max-width: none !important; flex-wrap: nowrap !important; }
-      .top-nav .nav-actions > a { white-space: normal !important; }
-    }
-  ` });
-  const original = await lineCounts(page);
-  expect(original.some(label => label.lines > 1), JSON.stringify(original)).toBe(true);
-  await previous.evaluate(node => node.remove());
-  expect((await lineCounts(page)).every(label => label.lines === 1)).toBe(true);
+  await expect(page.locator('.brand-lockup')).toHaveText('ONNELLAB');
+  await expect(page.locator('.locale-menu .locale-label-short')).toBeVisible();
+  await expect(page.locator('.locale-menu .locale-label-short')).toHaveText('PT-BR');
+  await expect(page.locator('.locale-menu summary')).toHaveAttribute('aria-label', 'Idioma: Português (Brasil)');
+  await page.locator('.mobile-menu summary').click();
+  await expect(page.locator('.mobile-menu-panel a')).toHaveCount(3);
+  await expect(page.locator('.mobile-menu-panel a[href="/blog/pt-br/"]')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
 });

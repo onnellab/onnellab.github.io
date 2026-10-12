@@ -61,11 +61,6 @@ const navigationLabels: Record<AllSiteLocale, string> = {
   'zh-Hans': '导航', 'zh-Hant': '導覽',
   'pt-BR': 'Navegação', de: 'Navigation', fr: 'Navigation', es: 'Navegación'
 };
-const footerLabels: Record<AllSiteLocale, string> = {
-  en: 'Footer navigation', ko: '하단 탐색', ja: 'フッターナビゲーション',
-  'zh-Hans': '页脚导航', 'zh-Hant': '頁尾導覽',
-  'pt-BR': 'Navegação do rodapé', de: 'Footernavigation', fr: 'Navigation de pied de page', es: 'Navegación del pie'
-};
 const blogHref = `/blog/${definition.pathSegment ? `${definition.pathSegment}/` : ''}`;
 const linkFor = (slug: string) => allProductRouteFor(slug, locale);
 
@@ -101,33 +96,7 @@ const jsonLd = [
   socialImage="/social-card.png"
 >
   <main class="site-shell homepage" data-core-page="home" data-locale={locale}>
-    <header class="header-wrap">
-      <nav class="top-nav site-header" aria-label={navigationLabels[locale]}>
-        <a class="brand brand-lockup" href={canonicalPath} aria-label="ONNELLAB">
-          <img class="brand-symbol" src="/brand/onnellab-symbol.svg" alt="" width="36" height="30" />
-          <span>ONNELLAB</span>
-        </a>
 
-        <div class="nav-actions">
-          <div class="nav-links">
-            <a href={allRouteFor('apps', locale)}>{copy.nav.apps}</a>
-            <a href={allRouteFor('about', locale)}>{copy.nav.about}</a>
-            <a href={blogHref}>{copy.nav.blog}</a>
-          </div>
-          <LocaleMenu locale={locale} page="home" />
-          <details class="mobile-menu">
-            <summary aria-label={copy.nav.menu}>
-              <span class="menu-line"></span><span class="menu-line"></span>
-            </summary>
-            <div class="mobile-menu-panel">
-              <a href={allRouteFor('apps', locale)}>{copy.nav.apps}</a>
-              <a href={allRouteFor('about', locale)}>{copy.nav.about}</a>
-              <a href={blogHref}>{copy.nav.blog}</a>
-            </div>
-          </details>
-        </div>
-      </nav>
-    </header>
 
     <div class="content-shell">
       <section class="home-hero" aria-labelledby="home-heading">
@@ -307,11 +276,7 @@ const jsonLd = [
         </div>
       </section>
 
-      <nav class="footer-directory" aria-label={footerLabels[locale]}>
-        <a href={allRouteFor('apps', locale)}>{copy.nav.apps}</a>
-        <a href={allRouteFor('about', locale)}>{copy.nav.about}</a>
-        <a href={blogHref}>{copy.nav.blog}</a>
-      </nav>
+
       <SiteFooter locale={locale} />
     </div>
   </main>

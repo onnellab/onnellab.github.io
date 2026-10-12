@@ -378,8 +378,8 @@ test.describe('nine-language site core regression', () => {
       const path = `/apps/tagweaver/${item.segment}`;
       await page.goto(path);
       await expect(page.locator('html')).toHaveAttribute('lang', item.lang);
-      await expect(page.locator('.apps-link')).toHaveText(item.allApps);
-      await expect(page.locator('.apps-link')).toHaveAttribute('href', `/apps/${item.segment}`);
+      // The one global header replaces the old product-only All apps link.
+      await expect(page.locator('.onnel-global-header .nav-links > a[href="/apps/' + item.segment + '"]')).toHaveCount(1);
       await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
       await expect(page.locator('.intro')).toHaveText(item.subtitle);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(

@@ -114,7 +114,7 @@ const alternates = [...allSiteLocales.map((item)=>({lang:allLocaleDefinitions[it
 ---
 <BaseLayout title={copy.title} description={copy.description} canonicalPath={canonicalPath} lang={definition.htmlLang} alternates={alternates}>
   <main class="oauth-shell">
-    <nav class="topbar" aria-label={copy.navLabel}><a href={allRouteFor('home',locale)}>ONNELLAB</a><details><summary>{definition.label}</summary><ul>{allSiteLocales.map((item)=><li><a href={callbackPath(item)} lang={allLocaleDefinitions[item].htmlLang} data-locale-choice={item} aria-current={item===locale?'page':undefined}>{allLocaleDefinitions[item].label}</a></li>)}</ul></details></nav>
+
     <header><h1>{copy.heading}</h1><p><strong>{copy.updated}:</strong> 2026-07-12</p></header>
     <div class="sections">{copy.sections.map((section)=><section><h2>{section.title}</h2>{section.body.map((p)=><p>{p}</p>)}</section>)}</div>
     <footer><a href={allRouteFor('privacy',locale)}>{copy.privacy}</a><a href={allRouteFor('terms',locale)}>{copy.terms}</a><a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a><span>© ONNELLAB</span></footer>

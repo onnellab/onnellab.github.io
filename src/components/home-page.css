@@ -137,9 +137,6 @@
 
 .homepage .nav-links > a:hover,
 .homepage .mobile-menu-panel > a:hover,
-.homepage .footer-directory a:hover {
-  color: #70578c;
-}
 
 .homepage .mobile-menu {
   display: none;
@@ -852,19 +849,7 @@
   line-height: 1.7;
 }
 
-.homepage .footer-directory {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px 32px;
-  margin-top: 36px;
-}
 
-.homepage .footer-directory a {
-  color: var(--home-text);
-  font-size: 14px;
-  font-weight: 650;
-}
 
 .homepage .site-footer.site-footer {
   margin-top: 20px;
@@ -1001,7 +986,6 @@
   .homepage .trust-number { min-height: 49px; margin-bottom: 10px; }
   .homepage .trust-ordinal { min-height: 38px; margin-bottom: 10px; }
   .homepage .trust-count { font-size: 54px; }
-  .homepage .footer-directory { margin-top: 30px; gap: 18px 24px; }
 }
 
 @media (max-width: 355px) {

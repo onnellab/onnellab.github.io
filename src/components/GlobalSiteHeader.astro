@@ -1,0 +1,322 @@
+---
+import {
+  allLocaleDefinitions,
+  allRouteFor,
+  allProductRouteFor,
+  allAppPrivacyRouteFor,
+  allSiteLocales,
+  type AllSiteLocale
+} from '../lib/extended-site-i18n';
+import { blogIndexPathFor } from '../lib/blog-i18n';
+import { showcaseCopy } from '../lib/home-showcase-copy';
+import { uiLabels } from '../lib/ui-labels';
+
+type Props = {
+  lang: string;
+  canonicalPath: string;
+  alternates: Array<{ lang: string; path: string }>;
+};
+
+const { lang, canonicalPath, alternates } = Astro.props;
+const locale: AllSiteLocale =
+  allSiteLocales.find((item) => allLocaleDefinitions[item].htmlLang.toLowerCase() === lang.toLowerCase()) ?? 'en';
+const nav = showcaseCopy[locale].nav;
+const currentDefinition = allLocaleDefinitions[locale];
+const activeGroup = canonicalPath.startsWith('/apps/') ? 'apps'
+  : canonicalPath.startsWith('/about/') ? 'about'
+  : canonicalPath.startsWith('/blog/') ? 'blog'
+  : '';
+const isBlogArticle = canonicalPath.startsWith('/blog/') &&
+  canonicalPath.split('/').filter(Boolean).length > 2;
+const currentNavLabel = canonicalPath.startsWith('/blog/')
+  ? isBlogArticle ? uiLabels[locale].articleNavigation : uiLabels[locale].blogNavigation
+  : uiLabels[locale].navigation;
+const languageControlLabel: Record<AllSiteLocale, string> = {
+  en: 'Language', ko: '언어', ja: '言語',
+  'zh-Hans': '语言', 'zh-Hant': '語言', 'pt-BR': 'Idioma',
+  de: 'Sprache', fr: 'Langue', es: 'Idioma'
+};
+
+const routeInLanguage = (item: AllSiteLocale): string => {
+  const targetLanguage = allLocaleDefinitions[item].hreflang.toLowerCase();
+  const alternate = alternates.find((entry) => entry.lang.toLowerCase() === targetLanguage);
+  if (alternate) return alternate.path;
+
+  // Blog articles can be published in a subset of languages. Untranslated
+  // variants should open their localized blog index rather than a broken post.
+  if (canonicalPath.startsWith('/blog/')) return blogIndexPathFor(item);
+
+  // For legacy or single-language routes without alternates, preserve the
+  // page family when a verified localized route is available.
+  const segments = canonicalPath.split('/').filter(Boolean);
+  if (segments[0] === 'apps') {
+    return segments.length > 1 && !Object.values(allLocaleDefinitions).some((def) => def.pathSegment === segments[1])
+      ? allProductRouteFor(segments[1], item)
+      : allRouteFor('apps', item);
+  }
+  if (segments[0] === 'privacy') {
+    return segments.length > 1 && !Object.values(allLocaleDefinitions).some((def) => def.pathSegment === segments[1])
+      ? allAppPrivacyRouteFor(segments[1], item)
+      : allRouteFor('privacy', item);
+  }
+  if (segments[0] === 'about') return allRouteFor('about', item);
+  if (segments[0] === 'terms') return allRouteFor('terms', item);
+  return allRouteFor('home', item);
+};
+
+const accessibleLanguageLabel = languageControlLabel[locale] +
+  (locale === 'zh-Hans' || locale === 'zh-Hant' ? '：' : ': ') + currentDefinition.label;
+const appPath = allRouteFor('apps', locale);
+const aboutPath = allRouteFor('about', locale);
+const blogPath = blogIndexPathFor(locale);
+const homePath = allRouteFor('home', locale);
+---
+<header class="onnel-global-header" data-site-header data-nav-locale={locale}>
+  <nav class="onnel-global-nav top-nav site-header" aria-label={currentNavLabel}>
+    <a class="brand brand-lockup" href={homePath} aria-label="ONNELLAB">
+      <img class="brand-symbol" src="/brand/onnellab-symbol.svg" width="36" height="30" alt="" />
+      <span>ONNELLAB</span>
+    </a>
+    <div class="nav-actions">
+      <div class="nav-links">
+        <a href={appPath} aria-current={activeGroup === 'apps' ? 'page' : undefined}>{nav.apps}</a>
+        <a href={aboutPath} aria-current={activeGroup === 'about' ? 'page' : undefined}>{nav.about}</a>
+        <a href={blogPath} aria-current={activeGroup === 'blog' ? 'page' : undefined}>{nav.blog}</a>
+      </div>
+      <details class="locale-menu" data-language-switcher>
+        <summary class="site-language-control" aria-label={accessibleLanguageLabel}>
+          {locale === 'pt-BR' ? (
+            <><span class="locale-label-long">{currentDefinition.label}</span><span class="locale-label-short">PT-BR</span></>
+          ) : currentDefinition.label}
+        </summary>
+        <ul class="locale-menu-panel">
+          {allSiteLocales.map((item) => (
+            <li>
+              <a
+                href={routeInLanguage(item)}
+                lang={allLocaleDefinitions[item].htmlLang}
+                hreflang={allLocaleDefinitions[item].hreflang}
+                data-locale-choice={item}
+                aria-current={item === locale ? 'page' : undefined}
+              >{allLocaleDefinitions[item].label}</a>
+            </li>
+          ))}
+        </ul>
+      </details>
+      <details class="mobile-menu">
+        <summary aria-label={nav.menu}>
+          <span class="menu-line"></span>
+          <span class="menu-line"></span>
+        </summary>
+        <div class="mobile-menu-panel">
+          <a href={appPath} aria-current={activeGroup === 'apps' ? 'page' : undefined}>{nav.apps}</a>
+          <a href={aboutPath} aria-current={activeGroup === 'about' ? 'page' : undefined}>{nav.about}</a>
+          <a href={blogPath} aria-current={activeGroup === 'blog' ? 'page' : undefined}>{nav.blog}</a>
+        </div>
+      </details>
+    </div>
+  </nav>
+</header>
+
+<style is:global>
+  .onnel-global-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background: rgba(250, 249, 246, .97);
+    border-bottom: 1px solid rgba(105, 96, 107, .12);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+  .onnel-global-header *,
+  .onnel-global-header *::before,
+  .onnel-global-header *::after { box-sizing: border-box; }
+  .onnel-global-header .onnel-global-nav {
+    width: min(1180px, calc(100% - 64px));
+    height: 76px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .onnel-global-header .onnel-global-nav .brand.brand-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+    min-height: 44px;
+    color: #34323a;
+    font-family: var(--onnellab-wordmark-font);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: .035em;
+    text-decoration: none;
+  }
+  .onnel-global-header .brand-lockup .brand-symbol {
+    display: block;
+    width: 36px;
+    height: 30px;
+    object-fit: contain;
+  }
+  .onnel-global-header .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    min-width: 0;
+  }
+  .onnel-global-header .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  .onnel-global-header .nav-links > a,
+  .onnel-global-header .mobile-menu-panel > a {
+    color: #514e55;
+    font-size: 14px;
+    font-weight: 640;
+    line-height: 1.3;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .onnel-global-header .nav-links > a:hover,
+  .onnel-global-header .nav-links > a[aria-current="page"] {
+    color: #705689;
+  }
+  .onnel-global-header .locale-menu,
+  .onnel-global-header .mobile-menu { position: relative; }
+  .onnel-global-header .locale-menu { z-index: 21; }
+  .onnel-global-header .locale-menu summary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 13px;
+    border: 1px solid #ded6ca;
+    border-radius: 999px;
+    background: #fffdf8;
+    color: #514e55;
+    font-size: 13px;
+    font-weight: 650;
+    list-style: none;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .onnel-global-header summary::-webkit-details-marker { display: none; }
+  .onnel-global-header .locale-label-short { display: none; }
+
+  .onnel-global-header .locale-menu summary::after {
+    content: "⌄";
+    margin-left: 7px;
+    color: #90877b;
+    font-size: 12px;
+  }
+  .onnel-global-header .locale-menu[open] summary,
+  .onnel-global-header .locale-menu summary:hover {
+    border-color: #cfc5b7;
+  }
+  .onnel-global-header .locale-menu-panel,
+  .onnel-global-header .mobile-menu-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    display: grid;
+    gap: 2px;
+    width: max-content;
+    min-width: 164px;
+    margin: 0;
+    padding: 6px;
+    border: 1px solid #e1dbe3;
+    border-radius: 13px;
+    background: #fffdf8;
+    box-shadow: 0 14px 34px rgba(57, 48, 39, .11);
+    list-style: none;
+  }
+  .onnel-global-header .locale-menu-panel a,
+  .onnel-global-header .mobile-menu-panel > a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: #514e55;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .onnel-global-header .locale-menu-panel a:hover,
+  .onnel-global-header .locale-menu-panel a[aria-current="page"],
+  .onnel-global-header .mobile-menu-panel a:hover,
+  .onnel-global-header .mobile-menu-panel a[aria-current="page"] {
+    background: #f3eff8;
+    color: #544367;
+  }
+  .onnel-global-header .mobile-menu { display: none; }
+  .onnel-global-header .mobile-menu summary {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-content: center;
+    gap: 5px;
+    cursor: pointer;
+    border: 1px solid #e0dae4;
+    border-radius: 11px;
+    background: #fffdfb;
+    list-style: none;
+  }
+  .onnel-global-header .mobile-menu .menu-line {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: #34323a;
+  }
+  .onnel-global-header .brand:focus-visible,
+  .onnel-global-header a:focus-visible,
+  .onnel-global-header summary:focus-visible {
+    outline: 2px solid #75649b;
+    outline-offset: 3px;
+  }
+  @media (max-width: 820px) {
+    .onnel-global-header .onnel-global-nav {
+      width: calc(100% - 48px);
+      height: 68px;
+    }
+    .onnel-global-header .nav-actions { gap: 16px; }
+    .onnel-global-header .nav-links { gap: 18px; }
+  }
+  @media (max-width: 650px) {
+    .onnel-global-header { -webkit-backdrop-filter: none; backdrop-filter: none; }
+    .onnel-global-header .onnel-global-nav {
+      width: calc(100% - 40px);
+      height: 60px;
+      gap: 10px;
+    }
+    .onnel-global-header .onnel-global-nav .brand.brand-lockup {
+      font-size: 16px;
+      gap: 8px;
+      letter-spacing: .035em;
+    }
+    .onnel-global-header .brand-lockup .brand-symbol {
+      width: 28px;
+      height: 25px;
+    }
+    .onnel-global-header .nav-actions { gap: 9px; }
+    .onnel-global-header .nav-links { display: none; }
+    .onnel-global-header .mobile-menu { display: block; }
+    .onnel-global-header .locale-menu summary {
+      min-height: 40px;
+      padding-inline: 9px;
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 355px) {
+    .onnel-global-header .onnel-global-nav { width: calc(100% - 30px); }
+    .onnel-global-header .onnel-global-nav .brand.brand-lockup { font-size: 14px; gap: 6px; }
+    .onnel-global-header .brand-lockup .brand-symbol { width: 25px; }
+    .onnel-global-header .locale-menu summary { padding-inline: 7px; }
+    .onnel-global-header[data-nav-locale="pt-BR"] .locale-label-long { display: none; }
+    .onnel-global-header[data-nav-locale="pt-BR"] .locale-label-short { display: inline; }
+
+  }
+</style>

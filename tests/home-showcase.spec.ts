@@ -104,7 +104,8 @@ test('the condensed home ends with transparent trust and a useful footer', async
   await page.goto('/ko/');
   await expect(page.locator('.trust-grid .trust-item')).toHaveCount(3);
   await expect(page.locator('.trust-principles, .trust-principle')).toHaveCount(0);
-  await expect(page.locator('.footer-directory a')).toHaveCount(3);
+  await expect(page.locator('.footer-directory')).toHaveCount(0);
+  await expect(page.locator('[data-site-header] .nav-links > a')).toHaveCount(3);
   await expect(page.locator('footer.site-footer')).toHaveCount(1);
   await expect(page.locator('.closing-section, .workflow-section, .values-section, .updates-section')).toHaveCount(0);
   await expect(page.locator('.home-hero .primary-link')).toHaveCount(1);

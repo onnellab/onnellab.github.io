@@ -226,17 +226,7 @@ const email = 'onnellab.app@gmail.com';
 
 <BaseLayout title={title} description={description} canonicalPath={canonicalPath} lang={definition.htmlLang} alternates={allLocaleAlternates(page)} socialImage={page === 'home' ? '/social-card.png' : undefined}>
   <main class="extended-shell" data-core-page={page} data-locale={locale}>
-    <nav class="top-nav site-header" aria-label={uiLabels[locale].navigation}>
-      <a class="brand" href={allRouteFor('home', locale)}>ONNELLAB</a>
-      <div class="nav-links">
-        {page !== 'apps' && <a href={allRouteFor('apps', locale)}>{copy.nav.apps}</a>}
-        {page !== 'about' && <a href={allRouteFor('about', locale)}>{copy.nav.about}</a>}
-        {page !== 'privacy' && <a href={allRouteFor('privacy', locale)}>{copy.nav.privacy}</a>}
-        {page !== 'terms' && <a href={allRouteFor('terms', locale)}>{copy.nav.terms}</a>}
-        <a href={blogHref}>{copy.nav.blog}</a>
-        <LocaleMenu locale={locale} page={page} />
-      </div>
-    </nav>
+
 
     {page === 'home' && (
       <>

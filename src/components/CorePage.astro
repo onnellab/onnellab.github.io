@@ -161,15 +161,7 @@ const jsonLd = {
   alternates={localeAlternates('terms')}
 >
   <main class="site-shell" data-core-page="terms">
-    <nav class="top-nav" aria-label={copy.navLabel}>
-      <a class="brand" href={routeFor('home', locale)}>ONNELLAB</a>
-      <div class="nav-links">
-        <a href={routeFor('apps', locale)}>{copy.nav.apps}</a>
-        <a href={routeFor('about', locale)}>{copy.nav.about}</a>
-        <a href={blogHref}>{copy.nav.blog}</a>
-        <LocaleMenu locale={locale} page="terms" />
-      </div>
-    </nav>
+
 
     <header class="page-hero">
       <p class="eyebrow">{copy.eyebrow}</p>

@@ -370,109 +370,46 @@ test.describe('site layout and navigation', () => {
     expect(new Set(fontFamilies).size).toBe(1);
   });
 
-  test('rendered page families share the brand, header, and language-control visual contract', async ({ page }) => {
+  test('all public page families share one sticky ONNELLAB header design', async ({ page }) => {
     const routes = [
-      '/ko/',
-      '/apps/ko/',
-      '/apps/tagweaver/fr/',
-      '/about/ko/',
-      '/privacy/ko/',
-      '/apps/papira/ko/',
-      '/terms/ko/',
+      '/ko/', '/apps/ko/', '/apps/tagweaver/fr/', '/about/ko/',
+      '/privacy/ko/', '/apps/papira/ko/', '/terms/ko/', '/blog/ko/'
     ];
-    const failures: Array<{ route: string; metric: string; actual: unknown }> = [];
-
+    let reference: unknown = null;
     for (const route of routes) {
       await page.goto(route);
-      if (route === '/ko/') {
-        // The home showcase has an intentional premium lockup and full-height header.
-        const homeHeader = page.locator('main .top-nav').first();
-        await expect(homeHeader).toBeVisible();
-        await expect(homeHeader.locator('.brand')).toHaveText('ONNELLAB');
-        await expect(homeHeader.locator('.brand-symbol')).toBeVisible();
-        await expect(homeHeader.locator('.locale-menu summary')).toBeVisible();
-        continue;
-      }
-      const header = page.locator('main > :is(nav, header.topbar)').first();
-      const brand = header.locator('.brand');
-      const languageControl = header.locator('.locale-menu summary, .language').first();
+      const header = page.locator('[data-site-header]');
+      await expect(header).toHaveCount(1);
       await expect(header).toBeVisible();
-      await expect(brand).toHaveText('ONNELLAB');
-      await expect(languageControl).toBeVisible();
-
-      const headerStyle = await header.evaluate((node) => {
-        const style = getComputedStyle(node);
-        return { alignItems: style.alignItems, minHeight: style.minHeight };
-      });
-      const brandStyle = await brand.evaluate((node) => {
-        const style = getComputedStyle(node);
+      const nav = header.locator('nav.site-header');
+      await expect(nav.locator('.brand')).toHaveText('ONNELLAB');
+      await expect(nav.locator('.brand-symbol')).toBeVisible();
+      await expect(nav.locator('.locale-menu summary')).toBeVisible();
+      await expect(nav.locator('.nav-links > a')).toHaveCount(3);
+      await expect(page.locator('main nav.site-header, main header.topbar')).toHaveCount(0);
+      const metrics = await header.evaluate((node) => {
+        const nav = node.querySelector('nav')!;
+        const brand = node.querySelector('.brand')!;
+        const language = node.querySelector('.locale-menu summary')!;
+        const h = getComputedStyle(node);
+        const n = getComputedStyle(nav);
+        const b = getComputedStyle(brand);
+        const l = getComputedStyle(language);
         return {
-          fontFamily: style.fontFamily,
-          fontSize: style.fontSize,
-          fontWeight: style.fontWeight,
-          lineHeight: style.lineHeight,
-          minHeight: style.minHeight,
-          textDecorationLine: style.textDecorationLine
+          position: h.position, headerHeight: Math.round(node.getBoundingClientRect().height),
+          navHeight: Math.round(nav.getBoundingClientRect().height),
+          navAlignment: n.alignItems, navWidth: Math.round(nav.getBoundingClientRect().width),
+          logoFont: b.fontFamily, logoSize: b.fontSize, logoWeight: b.fontWeight,
+          logoColor: b.color, languageHeight: l.minHeight,
+          languageRadius: l.borderRadius, languageFontSize: l.fontSize
         };
       });
-      const controlStyle = await languageControl.evaluate((node) => {
-        const style = getComputedStyle(node);
-        return {
-          minHeight: style.minHeight,
-          borderStyle: style.borderStyle,
-          borderColor: style.borderColor,
-          borderRadius: style.borderRadius,
-          paddingBlock: `${style.paddingTop} ${style.paddingBottom}`,
-          paddingInline: `${style.paddingLeft} ${style.paddingRight}`,
-          fontSize: style.fontSize,
-          fontWeight: style.fontWeight,
-          lineHeight: style.lineHeight,
-          textDecorationLine: style.textDecorationLine
-        };
-      });
-      await languageControl.focus();
-      const focusStyle = await languageControl.evaluate((node) => {
-        const style = getComputedStyle(node);
-        return { outlineStyle: style.outlineStyle, outlineWidth: style.outlineWidth, outlineOffset: style.outlineOffset };
-      });
-
-      const expected = {
-        header: { alignItems: 'center', minHeight: '36px' },
-        brand: {
-          fontFamily: '"Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif',
-          fontSize: '14px',
-          fontWeight: '560',
-          lineHeight: '16.8px',
-          minHeight: '36px',
-          textDecorationLine: 'none'
-        },
-        control: {
-          minHeight: '36px',
-          borderStyle: 'solid',
-          borderColor: 'rgb(222, 214, 202)',
-          borderRadius: '999px',
-          paddingBlock: '7px 7px',
-          paddingInline: '13px 13px',
-          fontSize: '13px',
-          fontWeight: '650',
-          lineHeight: '17.55px',
-          textDecorationLine: 'none'
-        },
-        focus: { outlineStyle: 'solid', outlineWidth: '2px', outlineOffset: '3px' }
-      };
-      for (const [metric, actual] of Object.entries({
-        header: headerStyle,
-        brand: brandStyle,
-        control: controlStyle,
-        focus: focusStyle
-      })) {
-        if (JSON.stringify(actual) !== JSON.stringify(expected[metric as keyof typeof expected])) {
-          failures.push({ route, metric, actual });
-        }
-      }
+      expect(metrics.position).toBe('sticky');
+      expect(metrics.logoSize).toBe('18px');
+      expect(metrics.headerHeight).toBe(77);
+      if (reference) expect(metrics, route).toEqual(reference);
+      else reference = metrics;
     }
-
-    expect(failures).toEqual([]);
   });
 
   test('information hubs share one shell and heading geometry in every locale', async ({ page }) => {
@@ -699,7 +636,8 @@ test.describe('site layout and navigation', () => {
       await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
       const main = page.locator('main.site-shell[data-core-page="terms"]');
       await expect(main).toHaveCount(1);
-      await expect(main.locator(':scope > .top-nav')).toHaveCount(1);
+      await expect(page.locator('[data-site-header]')).toHaveCount(1);
+      await expect(main.locator(':scope > .top-nav')).toHaveCount(0);
       await expect(main.locator(':scope > .page-hero h1')).toHaveText(route.title);
       await expect(main.locator(':scope > .terms-prose > section')).toHaveCount(6);
       await expect(main.locator('.terms-prose h2').first()).toHaveText(route.first);
@@ -1012,7 +950,8 @@ test.describe('existing product pages', () => {
         const main = page.locator('main.page-shell');
         await expect(main).toHaveAttribute('data-product-slug', slug);
         await expect(main).toHaveAttribute('data-product-locale', locale.code);
-        await expect(main.locator(':scope > .topbar')).toHaveCount(1);
+        await expect(page.locator('[data-site-header]')).toHaveCount(1);
+        await expect(main.locator(':scope > .topbar')).toHaveCount(0);
         await expect(main.locator(':scope > .hero')).toHaveCount(1);
         await expect(main.locator(':scope > .content-band')).toHaveCount(1);
         await expect(main.locator(':scope > .faq-band')).toHaveCount(1);
@@ -1027,7 +966,7 @@ test.describe('existing product pages', () => {
           'mailto:onnellab.app@gmail.com'
         ]);
         await expect(footer.locator(':scope > span')).toHaveText('© ONNELLAB');
-        const localeLinks = main.locator('.locale-menu-panel a[data-locale-choice]');
+        const localeLinks = page.locator('[data-site-header] .locale-menu-panel a[data-locale-choice]');
         await expect(localeLinks).toHaveCount(9);
         expect(await localeLinks.evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual([
           `/apps/${slug}/`,
@@ -1156,13 +1095,13 @@ test.describe('blog and crawl endpoints', () => {
     await expect(
       page.locator('.post-card').filter({ hasText: 'How to Read Large TXT Files Without Lag' })
     ).toHaveCount(1);
-    await expect(page.locator('.top-nav a[href="/apps/"]')).toBeVisible();
+    await expect(page.locator('.top-nav .nav-links > a[href="/apps/"]')).toBeVisible();
 
     await page.goto('/blog/ko/');
     await expect(
       page.locator('.post-card').filter({ hasText: '대용량 TXT 파일을 지연 없이 읽는 방법' })
     ).toHaveCount(1);
-    await expect(page.locator('.top-nav a[href="/apps/ko/"]')).toBeVisible();
+    await expect(page.locator('.top-nav .nav-links > a[href="/apps/ko/"]')).toBeVisible();
   });
 
   test('blog article metadata remains answer-friendly', async ({ page }) => {
