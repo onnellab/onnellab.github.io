@@ -71,7 +71,7 @@ La **codificación de caracteres** define cómo se convierten los bytes en texto
 
 > La opción más segura es tratar un TXT enorme primero como documento de referencia y solo después como documento editable.
 
-![Diagrama de lectura](/blog-assets/en/read-large-txt-files-without-lag/workflow-diagram.svg "Comprobar archivo, codificación, modo de lectura, búsqueda y marcadores")
+![Diagrama de lectura](/blog-assets/es/read-large-txt-files-without-lag/workflow-diagram.svg "Comprobar archivo, codificación, modo de lectura, búsqueda y marcadores")
 
 ## Cargar todo o renderizar primero lo visible
 

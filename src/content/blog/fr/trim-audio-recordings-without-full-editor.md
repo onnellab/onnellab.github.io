@@ -92,7 +92,7 @@ Les métadonnées exigent une vérification séparée. Titres, commentaires, poc
 9. **Vérifiez l’export.** Rouvrez-le, si possible dans un lecteur indépendant, puis contrôlez début, fin, durée, navigation, canaux et qualité audible.
 10. **Gardez l’original.** Au moins jusqu’à ce que le fichier final ait atteint sa destination et y soit validé.
 
-![Schéma de découpage](/blog-assets/en/trim-audio-recordings-without-full-editor/workflow-diagram.svg "Préserver la source, sélectionner, préécouter, exporter et vérifier un extrait audio")
+![Schéma de découpage](/blog-assets/fr/trim-audio-recordings-without-full-editor/workflow-diagram.svg "Préserver la source, sélectionner, préécouter, exporter et vérifier un extrait audio")
 
 ## Application ONNELLAB
 

@@ -58,7 +58,7 @@ updated_at: "2026-07-14T09:00:00+09:00"
 5. 刪除或移動原檔前，實際開啟並播放轉換結果。
 6. 只有第一份結果確實太大時，再建立較小版本。
 
-![本機轉換流程](/blog-assets/en/convert-local-media-files-privately/workflow-diagram.svg "保留原件、在裝置上轉換並驗證結果")
+![本機轉換流程](/blog-assets/zh-Hant/convert-local-media-files-privately/workflow-diagram.svg "保留原件、在裝置上轉換並驗證結果")
 
 ## 方法比較
 

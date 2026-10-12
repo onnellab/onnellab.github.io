@@ -63,7 +63,7 @@ updated_at: "2026-08-20T09:00:00+09:00"
 7. **只對測試集套用。** 用平常使用的應用程式重新開啟幾個結果，確認內容、順序、連結和配套檔案關係。
 8. **再套用整批。** 在真實工作流程驗證完成前保留備份，並記錄使用的命名規則。
 
-![安全批次重新命名流程](/blog-assets/en/rename-files-safely-preview-workflow/workflow-diagram.svg "先規劃規則、預覽全部結果，再小批測試並擴大範圍")
+![安全批次重新命名流程](/blog-assets/zh-Hant/rename-files-safely-preview-workflow/workflow-diagram.svg "先規劃規則、預覽全部結果，再小批測試並擴大範圍")
 
 ## 方法比較
 

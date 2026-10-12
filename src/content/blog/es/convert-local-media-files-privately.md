@@ -59,7 +59,7 @@ La privacidad añade otra condición. Si el archivo es sensible, subirlo no debe
 5. Abre el archivo convertido antes de mover o borrar el original.
 6. Genera una versión más comprimida solo si la primera salida resulta realmente demasiado grande.
 
-![Diagrama de conversión local](/blog-assets/en/convert-local-media-files-privately/workflow-diagram.svg "Flujo para convertir archivos multimedia de forma local y privada")
+![Diagrama de conversión local](/blog-assets/es/convert-local-media-files-privately/workflow-diagram.svg "Flujo para convertir archivos multimedia de forma local y privada")
 
 ## Comparación de opciones
 

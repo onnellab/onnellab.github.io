@@ -63,7 +63,7 @@ updated_at: "2026-08-20T09:00:00+09:00"
 7. **テストセットだけ適用する。** 通常使うアプリで数個を開き、内容、並び順、リンク、サイドカー関係を確認します。
 8. **全体へ適用する。** 実際の作業環境が確認できるまでバックアップを残し、次回用に使った命名規則を記録します。
 
-![ワークフロー図](/blog-assets/en/rename-files-safely-preview-workflow/workflow-diagram.svg "ルールを計画し、プレビューし、少量テストしてから一括変更する流れ")
+![ワークフロー図](/blog-assets/ja/rename-files-safely-preview-workflow/workflow-diagram.svg "ルールを計画し、プレビューし、少量テストしてから一括変更する流れ")
 
 ## リネーム方法の比較
 

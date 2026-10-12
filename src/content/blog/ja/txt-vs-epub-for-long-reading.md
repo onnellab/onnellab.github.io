@@ -93,7 +93,7 @@ TXTからEPUBへ、元に戻せる形で進めます。
 7. **実際のリーダーでテストする。** 文字サイズ、画面幅、テーマ、章移動、検索、リンク、進捗を確認し、必要なら支援技術でも試します。
 8. **正本と作り方を残す。** TXT、変換設定／スクリプト、素材、生成EPUBを分けて保管します。修正は正本へ行い、配布ファイルを再生成できる状態を維持します。
 
-![ワークフロー図](/blog-assets/en/txt-vs-epub-for-long-reading/workflow-diagram.svg "TXT正本を保護し、構造化し、EPUBを検証・実機確認する流れ")
+![ワークフロー図](/blog-assets/ja/txt-vs-epub-for-long-reading/workflow-diagram.svg "TXT正本を保護し、構造化し、EPUBを検証・実機確認する流れ")
 
 ## 変換時の注意
 

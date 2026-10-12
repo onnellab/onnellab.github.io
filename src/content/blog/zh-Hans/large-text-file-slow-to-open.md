@@ -109,7 +109,7 @@ updated_at: "2026-08-14T09:00:00+09:00"
 7. 只读或抽取优先流式／窗口方式；反复跳转可用带索引或虚拟化的查看器；只有确实需要修改时才用完整编辑器。
 8. 必须编辑时，在验证过的边界分割副本，或选择明确支持大文件的编辑器。另存为新文件并重新检查大小、编码和内容。
 
-![大型文本排查流程](/blog-assets/en/large-text-file-slow-to-open/workflow-diagram.svg "保护原件、定位慢阶段并用代表副本验证")
+![大型文本排查流程](/blog-assets/zh-Hans/large-text-file-slow-to-open/workflow-diagram.svg "保护原件、定位慢阶段并用代表副本验证")
 
 ## ONNELLAB 应用
 

@@ -92,7 +92,7 @@ Revisa los metadatos por separado. Títulos, comentarios, carátulas, fechas, ub
 9. Vuelve a abrir la salida, idealmente en otro reproductor, y comprueba principio, final, duración, seeking, canales y calidad.
 10. Conserva el original hasta validar la entrega final.
 
-![Flujo de recorte](/blog-assets/en/trim-audio-recordings-without-full-editor/workflow-diagram.svg "Conservar la fuente, seleccionar, previsualizar, exportar y verificar un clip de audio")
+![Flujo de recorte](/blog-assets/es/trim-audio-recordings-without-full-editor/workflow-diagram.svg "Conservar la fuente, seleccionar, previsualizar, exportar y verificar un clip de audio")
 
 ## Aplicación ONNELLAB
 

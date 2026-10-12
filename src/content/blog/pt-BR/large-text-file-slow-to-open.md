@@ -109,7 +109,7 @@ Streaming, janela e virtualização não são sinônimos. Streaming limita quant
 7. Para leitura/extração, prefira streaming ou janelas; para navegação repetida, considere visualizador com índice/virtualização; use editor completo só quando precisar alterar.
 8. Quando editar for inevitável, divida cópias em limites verificados ou use um editor explicitamente preparado para arquivos grandes. Salve em novo arquivo e confira tamanho, codificação e conteúdo.
 
-![Fluxo de diagnóstico](/blog-assets/en/large-text-file-slow-to-open/workflow-diagram.svg "Proteger o original, isolar a etapa lenta e validar com uma amostra representativa")
+![Fluxo de diagnóstico](/blog-assets/pt-BR/large-text-file-slow-to-open/workflow-diagram.svg "Proteger o original, isolar a etapa lenta e validar com uma amostra representativa")
 
 ## Como isso se relaciona à ONNELLAB
 

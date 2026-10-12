@@ -110,7 +110,7 @@ Le **streaming**, le **fenêtrage** et la **virtualisation** répondent à des p
 7. Préférez streaming ou fenêtrage pour l’inspection, un lecteur indexé ou virtualisé pour la navigation répétée et un éditeur complet seulement lorsque des modifications sont nécessaires.
 8. Si l’édition est incontournable, divisez uniquement une copie sur des limites vérifiées ou utilisez un éditeur conçu pour les gros fichiers. Enregistrez dans un nouveau fichier et vérifiez taille, encodage et contenu.
 
-![Schéma de diagnostic](/blog-assets/en/large-text-file-slow-to-open/workflow-diagram.svg "Protéger l’original, isoler l’étape lente, tester une copie représentative et choisir une stratégie d’accès bornée")
+![Schéma de diagnostic](/blog-assets/fr/large-text-file-slow-to-open/workflow-diagram.svg "Protéger l’original, isoler l’étape lente, tester une copie représentative et choisir une stratégie d’accès bornée")
 
 ## Application ONNELLAB
 

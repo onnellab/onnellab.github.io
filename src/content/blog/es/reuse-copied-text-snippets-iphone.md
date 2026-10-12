@@ -64,7 +64,7 @@ Universal Clipboard resuelve algo distinto. Permite transferir el elemento actua
 7. **Separa la información sensible.** No conserves contraseñas, códigos de un solo uso, claves de recuperación, datos de pago, información médica o datos privados de clientes como fragmentos ordinarios.
 8. **Revisa periódicamente.** Borra duplicados y enlaces caducados, actualiza los datos y deja de fijar lo que ya no sea frecuente.
 
-![Diagrama del flujo](/blog-assets/en/reuse-copied-text-snippets-iphone/workflow-diagram.svg "Capturar, verificar, organizar y reutilizar fragmentos de texto")
+![Diagrama del flujo](/blog-assets/es/reuse-copied-text-snippets-iphone/workflow-diagram.svg "Capturar, verificar, organizar y reutilizar fragmentos de texto")
 
 ## Comparación de métodos
 

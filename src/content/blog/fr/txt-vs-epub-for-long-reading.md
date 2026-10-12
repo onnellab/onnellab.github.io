@@ -92,7 +92,7 @@ Cette matrice n’est pas une garantie de compatibilité. Testez un fichier repr
 7. **Testez de vrais lecteurs.** Vérifiez tailles de texte, écrans, thèmes, navigation, recherche, liens et progression. Incluez les technologies d’assistance si le besoin l’exige.
 8. **Conservez source et recette.** Gardez TXT, ressources, réglages ou scripts de conversion et EPUB généré séparément. Corrigez la source puis régénérez la sortie afin de maintenir un processus reproductible.
 
-![Schéma TXT vers EPUB](/blog-assets/en/txt-vs-epub-for-long-reading/workflow-diagram.svg "Préserver le TXT, identifier la structure, générer et valider EPUB, tester les lecteurs puis conserver source et sortie")
+![Schéma TXT vers EPUB](/blog-assets/fr/txt-vs-epub-for-long-reading/workflow-diagram.svg "Préserver le TXT, identifier la structure, générer et valider EPUB, tester les lecteurs puis conserver source et sortie")
 
 ## Précautions de conversion
 

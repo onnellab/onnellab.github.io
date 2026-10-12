@@ -64,7 +64,7 @@ Universal Clipboard répond à un autre besoin. Il permet de transférer le cont
 7. **Traitez les données sensibles à part.** Ne stockez pas mots de passe, codes à usage unique, clés de récupération, données de paiement, informations médicales ou données privées de clients comme de simples fragments.
 8. **Révisez régulièrement.** Supprimez doublons et liens expirés, mettez à jour les informations et désépinglez ce qui n’est plus fréquent.
 
-![Schéma du flux](/blog-assets/en/reuse-copied-text-snippets-iphone/workflow-diagram.svg "Capturer, vérifier, organiser et réutiliser des fragments de texte")
+![Schéma du flux](/blog-assets/fr/reuse-copied-text-snippets-iphone/workflow-diagram.svg "Capturer, vérifier, organiser et réutiliser des fragments de texte")
 
 ## Comparaison des méthodes de stockage
 

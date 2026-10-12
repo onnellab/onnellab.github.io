@@ -65,7 +65,7 @@ L’objectif n’est pas de remplir tous les champs. Il est de rendre cohérente
 7. **Enregistrez puis rouvrez les fichiers.** Fermez l’éditeur, rouvrez le lot de test et confirmez que texte, numérotation et pochette ont bien été écrits.
 8. **Testez la bibliothèque cible.** Importez uniquement le petit lot et vérifiez regroupement, ordre, recherche, caractères non latins et affichage de la pochette avant de traiter toute la collection.
 
-![Schéma du flux de travail](/blog-assets/en/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "Nettoyage des métadonnées MP3 avec sauvegarde préalable")
+![Schéma du flux de travail](/blog-assets/fr/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "Nettoyage des métadonnées MP3 avec sauvegarde préalable")
 
 ## Priorité des champs
 

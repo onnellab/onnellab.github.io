@@ -103,6 +103,8 @@ A documentação do concat demuxer do FFmpeg ilustra bem essa diferença: os flu
 9. Ouça o começo, todas as junções, trechos do meio e os segundos finais.
 10. Preserve fontes, manifesto e anotações até a entrega ser aceita.
 
+![Fluxo de verificação de clipes de áudio](/blog-assets/pt-BR/verify-audio-clips-before-combining/workflow-diagram.svg "Mantenha a fonte original e confira o resultado.")
+
 ## Aplicação ONNELLAB
 
 Depois de definir o método de verificação, o [Segra](/apps/segra/pt-br/) pode se encaixar na preparação quando a tarefa envolve recortar e organizar segmentos de áudio. Esse é o escopo relevante documentado para este fluxo. Ele não deve ser tratado como uma estação completa de produção de áudio, e este artigo não pressupõe que execute sozinho concatenação final, conformidade de loudness ou verificação de entrega.

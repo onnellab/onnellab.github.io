@@ -58,7 +58,7 @@ updated_at: "2026-07-14T09:00:00+09:00"
 5. 元ファイルを削除・移動する前に、変換後ファイルを実際に開いて確認します。
 6. 最初の出力が大きすぎる場合だけ、より小さい設定で再度作ります。
 
-![ワークフロー図](/blog-assets/en/convert-local-media-files-privately/workflow-diagram.svg "プライベートなローカルメディア変換のワークフロー")
+![ワークフロー図](/blog-assets/ja/convert-local-media-files-privately/workflow-diagram.svg "プライベートなローカルメディア変換のワークフロー")
 
 ## 変換方法の比較
 

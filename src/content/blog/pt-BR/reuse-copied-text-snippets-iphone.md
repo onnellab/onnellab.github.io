@@ -39,7 +39,7 @@ Renderização virtual pode deixar uma lista enorme mais leve ao desenhar apenas
 
 ## Por que textos copiados se perdem ou ficam desorganizados
 
-O área de transferência não conhece projetos. Um novo copy pode substituir o valor anterior. Endereços e respostas parecidos ficam difíceis de distinguir depois de algum tempo. E textos reutilizáveis mudam: links expiram, endereços são atualizados e respostas padrão ganham novas observações. Guardar tudo para sempre transforma uma ferramenta de acesso rápido em outro problema de busca.
+A área de transferência não conhece projetos. Uma nova cópia pode substituir o valor anterior. Endereços e respostas parecidos ficam difíceis de distinguir depois de algum tempo. E textos reutilizáveis mudam: links expiram, endereços são atualizados e respostas padrão ganham novas observações. Guardar tudo para sempre transforma uma ferramenta de acesso rápido em outro problema de busca.
 
 Universal Clipboard resolve outra necessidade. Em dispositivos Apple próximos, com o mesmo Apple Account e os requisitos de Continuity atendidos, ele move o **conteúdo atual** da área de transferência entre os aparelhos. Não é uma biblioteca permanente com rótulos e versões.
 
@@ -63,13 +63,13 @@ Universal Clipboard resolve outra necessidade. Em dispositivos Apple próximos, 
 7. **Separe dados sensíveis.** Não guarde senhas, chaves de recuperação, códigos temporários, pagamentos, dados médicos ou informações confidenciais de clientes em uma lista comum de trechos.
 8. **Revise periodicamente.** Apague duplicados e links vencidos, atualize informações e desfixe itens que perderam frequência.
 
-![Fluxo de trechos de texto](/blog-assets/en/reuse-copied-text-snippets-iphone/workflow-diagram.svg "Salvar, conferir, organizar e reutilizar textos selecionados")
+![Fluxo de trechos de texto](/blog-assets/pt-BR/reuse-copied-text-snippets-iphone/workflow-diagram.svg "Salvar, conferir, organizar e reutilizar textos selecionados")
 
 ## Comparação de formas de reutilização
 
 | Método | Melhor para | Limitação principal | Prática segura |
 | --- | --- | --- | --- |
-| Clipboard atual | Transferência imediata e única | É substituído pelo próximo copy | Cole logo e confira |
+| Clipboard atual | Transferência imediata e única | É substituído pela próxima cópia | Cole logo e confira |
 | Universal Clipboard | Levar o conteúdo atual entre seus dispositivos Apple | Tem duração curta e depende dos requisitos de Continuity | Confirme o dispositivo de destino |
 | Notas/documentos | Modelos longos com explicações e seções | Exige mais navegação antes de colar | Use títulos e mantenha uma fonte principal |
 | Substituição de texto | Frases curtas e previsíveis acionadas por atalho | Pode expandir no contexto errado | Use atalhos distintos e releia antes de enviar |
@@ -79,13 +79,13 @@ Universal Clipboard resolve outra necessidade. Em dispositivos Apple próximos, 
 
 Colar é uma etapa de edição, não um comando de envio automático. Modelos podem conter nome errado, preço antigo, URL expirada, placeholder esquecido ou quebras de linha invisíveis. Quando a precisão importar, compare o resultado com a fonte confiável antes de enviar.
 
-Universal Clipboard e armazenamento local de trechos são conceitos separados. O primeiro pode transportar o área de transferência atual entre dispositivos; o segundo mantém uma coleção escolhida em um app. Se conteúdo estiver aparecendo em outro aparelho quando você não espera, revise Apple Account, Handoff, Bluetooth e Wi-Fi.
+Universal Clipboard e armazenamento local de trechos são conceitos separados. O primeiro pode transportar a área de transferência atual entre dispositivos; o segundo mantém uma coleção escolhida em um app. Se conteúdo estiver aparecendo em outro aparelho quando você não espera, revise Apple Account, Handoff, Bluetooth e Wi-Fi.
 
 Retenção também é uma decisão de privacidade. “Uso frequente” não significa “seguro para guardar”. Credenciais pertencem a um gerenciador de senhas; strings sensíveis temporárias devem ser removidas quando deixam de ser necessárias. Antes de confiar em um app de terceiros, confira as informações atuais de privacidade da loja e a política do desenvolvedor.
 
 ## Como isso se relaciona à ONNELLAB
 
-[ClipNest](/apps/clipnest/pt-br/) se encaixa quando você quer reutilizar textos escolhidos por meio de uma lista acessível pelo teclado. A listagem pública da App Store explica que, quando o teclado ClipNest é aberto, ele verifica o área de transferência atual uma vez, salva localmente novos textos e oferece fixação e tratamento de duplicados; ele não monitora continuamente a área de transferência em segundo plano.
+[ClipNest](/apps/clipnest/pt-br/) se encaixa quando você quer reutilizar textos escolhidos por meio de uma lista acessível pelo teclado. A listagem pública da App Store explica que, quando o teclado ClipNest é aberto, ele verifica a área de transferência atual uma vez, salva localmente novos textos e oferece fixação e tratamento de duplicados; ele não monitora continuamente a área de transferência em segundo plano.
 
 Esse comportamento orientado por evento é importante. Abra o teclado quando quiser capturar ou reutilizar um trecho e confira o que foi salvo. A ferramenta reduz a ida e volta entre uma nota e um campo de texto, mas não decide se o trecho está atualizado, adequado ao contexto ou seguro para retenção.
 
@@ -104,7 +104,7 @@ Reutilização confiável nasce de uma biblioteca pequena e selecionada. Salve i
 
 ### O iPhone mantém um histórico permanente da área de transferência?
 
-A Apple trata o área de transferência como armazenamento do conteúdo atual de copiar e colar, e o Universal Clipboard também tem disponibilidade temporária. Para histórico persistente, salve conscientemente os itens em uma ferramenta apropriada.
+A Apple trata a área de transferência como armazenamento do conteúdo atual de copiar e colar, e o Universal Clipboard também tem disponibilidade temporária. Para histórico persistente, salve conscientemente os itens em uma ferramenta apropriada.
 
 ### Devo salvar automaticamente tudo o que copio?
 

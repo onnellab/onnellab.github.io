@@ -62,7 +62,7 @@ MP3 可以正常播放，并不代表资料库会把它显示在正确的位置�
 7. **保存后重新打开。** 关闭编辑器，再次读取测试文件，确认字符、编号、封面确实写入了文件。
 8. **在目标播放器中测试。** 只导入小批文件，确认分组、曲序、搜索、非拉丁字符和封面显示，再扩展到整个资料库。
 
-![MP3 元数据整理流程](/blog-assets/en/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "先备份、再统一标签并验证的小批量流程")
+![MP3 元数据整理流程](/blog-assets/zh-Hans/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "先备份、再统一标签并验证的小批量流程")
 
 ## 字段优先级
 

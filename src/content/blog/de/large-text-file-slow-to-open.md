@@ -110,7 +110,7 @@ Streaming, Windowing und Virtualisierung lösen unterschiedliche Probleme. Strea
 7. Für reine Inspektion Streaming oder Windowing, für wiederholte Navigation einen indexierten oder virtualisierten Viewer und für notwendige Änderungen einen großen Texteditor verwenden.
 8. Wenn Bearbeitung unvermeidbar ist, nur Kopien an überprüften Grenzen aufteilen oder einen geeigneten Large-File-Editor nutzen. In eine neue Datei speichern und Größe, Kodierung und Inhalt prüfen.
 
-![Diagnose-Workflow](/blog-assets/en/large-text-file-slow-to-open/workflow-diagram.svg "Original schützen, langsame Stufe isolieren, repräsentative Kopie testen und passende Zugriffsstrategie wählen")
+![Diagnose-Workflow](/blog-assets/de/large-text-file-slow-to-open/workflow-diagram.svg "Original schützen, langsame Stufe isolieren, repräsentative Kopie testen und passende Zugriffsstrategie wählen")
 
 ## ONNELLAB-Anwendung
 

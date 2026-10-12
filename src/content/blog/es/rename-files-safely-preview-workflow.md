@@ -64,7 +64,7 @@ Los nombres también participan en flujos externos. Un documento puede estar enl
 7. **Aplica a la muestra.** Abre varios archivos renombrados en la aplicación que normalmente los usa y comprueba contenido, orden, enlaces y relaciones con archivos auxiliares.
 8. **Ejecuta el lote completo.** Conserva el respaldo hasta verificar el flujo final y guarda la convención para futuras operaciones.
 
-![Diagrama de renombrado](/blog-assets/en/rename-files-safely-preview-workflow/workflow-diagram.svg "Planificar reglas, revisar la vista previa, probar una muestra y aplicar el renombrado por lotes")
+![Diagrama de renombrado](/blog-assets/es/rename-files-safely-preview-workflow/workflow-diagram.svg "Planificar reglas, revisar la vista previa, probar una muestra y aplicar el renombrado por lotes")
 
 ## Comparación de enfoques
 

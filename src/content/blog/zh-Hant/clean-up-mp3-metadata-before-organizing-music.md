@@ -62,7 +62,7 @@ MP3 能正常播放，不代表音樂庫會把它放在正確的位置。演出�
 7. **儲存後重新開啟。** 關閉編輯器，再次讀取測試檔案，確認字元、編號、封面真的寫入檔案。
 8. **在目標播放器測試。** 只匯入小批檔案，確認分組、曲序、搜尋、非拉丁字元和封面顯示，再擴展到整個音樂庫。
 
-![MP3 中繼資料整理流程](/blog-assets/en/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "先備份、統一標籤並以小批量驗證")
+![MP3 中繼資料整理流程](/blog-assets/zh-Hant/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "先備份、統一標籤並以小批量驗證")
 
 ## 欄位優先順序
 

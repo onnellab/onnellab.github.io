@@ -93,7 +93,7 @@ MP3、AAC、Opus、Vorbis 屬於有損 codec。把它們解碼後再寫成同類
 9. **重新驗證輸出。** 最好用另一個播放器檢查開頭、結尾、總長度、seek、左右聲道與整體品質。
 10. **暫時保留原檔。** 等結果實際交付並再次驗證後再決定是否刪除。
 
-![音訊裁切流程](/blog-assets/en/trim-audio-recordings-without-full-editor/workflow-diagram.svg "保護原件、選擇邊界、輸出並驗證")
+![音訊裁切流程](/blog-assets/zh-Hant/trim-audio-recordings-without-full-editor/workflow-diagram.svg "保護原件、選擇邊界、輸出並驗證")
 
 ## ONNELLAB 應用
 

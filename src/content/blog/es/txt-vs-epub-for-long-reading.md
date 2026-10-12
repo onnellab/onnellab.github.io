@@ -92,7 +92,7 @@ La matriz no es una garantía de compatibilidad. Prueba un archivo representativ
 7. **Prueba lectores reales.** Revisa tamaños de texto, pantallas, temas, navegación de capítulos, búsqueda, enlaces y progreso. Incluye tecnologías de asistencia cuando sea necesario.
 8. **Conserva fuente y receta.** Guarda TXT, recursos, configuración o script de conversión y EPUB generado por separado. Corrige en la fuente y regenera para mantener un proceso reproducible.
 
-![Flujo TXT a EPUB](/blog-assets/en/txt-vs-epub-for-long-reading/workflow-diagram.svg "Conservar TXT, identificar estructura, generar y validar EPUB, probar lectores y mantener fuente y salida")
+![Flujo TXT a EPUB](/blog-assets/es/txt-vs-epub-for-long-reading/workflow-diagram.svg "Conservar TXT, identificar estructura, generar y validar EPUB, probar lectores y mantener fuente y salida")
 
 ## Precauciones al convertir
 

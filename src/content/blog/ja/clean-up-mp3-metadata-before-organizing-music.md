@@ -62,7 +62,7 @@ MP3は問題なく再生できても、違うアーティスト名の下に表�
 7. **保存後にファイルを開き直す。** エディタを閉じ、テスト分を再度開いて、文字、番号、アートワークが実際に書き込まれたか確認します。
 8. **目的のライブラリでテストする。** 少量のテスト分だけ取り込み、グループ化、曲順、検索結果、非ラテン文字、カバー表示を確認してから全体へ広げます。
 
-![ワークフロー図](/blog-assets/en/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "バックアップを先に取るMP3メタデータ整理ワークフロー")
+![ワークフロー図](/blog-assets/ja/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "バックアップを先に取るMP3メタデータ整理ワークフロー")
 
 ## 項目ごとの優先度
 

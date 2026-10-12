@@ -64,7 +64,7 @@ Universal Clipboard löst ein anderes Problem. Damit lassen sich aktuelle Zwisch
 7. **Sensible Inhalte getrennt behandeln.** Passwörter, Einmalcodes, Wiederherstellungsschlüssel, Zahlungsdaten, medizinische Informationen oder private Kundendaten gehören nicht in gewöhnliche Textbausteine.
 8. **Regelmäßig aufräumen.** Lösche Duplikate und abgelaufene Links, aktualisiere geänderte Angaben und löse Pins für selten gewordene Einträge.
 
-![Workflow-Diagramm](/blog-assets/en/reuse-copied-text-snippets-iphone/workflow-diagram.svg "Textbausteine bewusst erfassen, prüfen, ordnen und wiederverwenden")
+![Workflow-Diagramm](/blog-assets/de/reuse-copied-text-snippets-iphone/workflow-diagram.svg "Textbausteine bewusst erfassen, prüfen, ordnen und wiederverwenden")
 
 ## Vergleich der Speicherwege
 

@@ -91,7 +91,7 @@ TXT 也可以和屏幕阅读器、放大、高对比、TTS、用户字体一起�
 7. **在真实阅读器测试。** 改字号、屏幕宽度、主题，测试章节跳转、搜索、链接和阅读进度；需要时配合辅助技术。
 8. **保留正本和生成方法。** TXT、转换配置／脚本、资源和生成 EPUB 分开保存。修改发生在正本，再重新生成分发文件。
 
-![TXT 到 EPUB 的可恢复流程](/blog-assets/en/txt-vs-epub-for-long-reading/workflow-diagram.svg "保护 TXT 正本、建立结构、验证 EPUB 并在真实阅读器测试")
+![TXT 到 EPUB 的可恢复流程](/blog-assets/zh-Hans/txt-vs-epub-for-long-reading/workflow-diagram.svg "保护 TXT 正本、建立结构、验证 EPUB 并在真实阅读器测试")
 
 ## 转换时要避免什么
 

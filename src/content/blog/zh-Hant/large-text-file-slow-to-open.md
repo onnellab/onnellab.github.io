@@ -109,7 +109,7 @@ updated_at: "2026-08-14T09:00:00+09:00"
 7. 唯讀或擷取優先串流／視窗方式；反覆跳轉可用帶索引或虛擬化的檢視器；只有真的要修改時才使用完整編輯器。
 8. 必須編輯時，在驗證過的邊界分割副本，或選擇明確支援大型檔案的編輯器。另存新檔並重新檢查大小、編碼與內容。
 
-![大型文字排查流程](/blog-assets/en/large-text-file-slow-to-open/workflow-diagram.svg "保護原件、找出慢的階段，並用代表性副本驗證")
+![大型文字排查流程](/blog-assets/zh-Hant/large-text-file-slow-to-open/workflow-diagram.svg "保護原件、找出慢的階段，並用代表性副本驗證")
 
 ## ONNELLAB 應用
 

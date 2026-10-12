@@ -63,7 +63,7 @@ updated_at: "2026-08-20T09:00:00+09:00"
 7. **只对测试集应用。** 用平时使用的应用重新打开几个结果，确认内容、顺序、链接和配套文件关系。
 8. **再应用到整批。** 在真实工作流验证完成前保留备份，并记录使用的命名规则。
 
-![安全批量重命名流程](/blog-assets/en/rename-files-safely-preview-workflow/workflow-diagram.svg "先规划规则、预览全部结果，再小批测试并扩大范围")
+![安全批量重命名流程](/blog-assets/zh-Hans/rename-files-safely-preview-workflow/workflow-diagram.svg "先规划规则、预览全部结果，再小批测试并扩大范围")
 
 ## 方法比较
 

@@ -68,7 +68,7 @@ Codificação de caracteres é a regra que transforma bytes em caracteres legív
 
 > Uma regra segura é tratar primeiro o TXT gigante como um documento de consulta; só depois, se necessário, tratá-lo como um documento de edição.
 
-![Fluxo de leitura de TXT grande](/blog-assets/en/read-large-txt-files-without-lag/workflow-diagram.svg "Verificar arquivo, codificação, leitura, busca e marcadores")
+![Fluxo de leitura de TXT grande](/blog-assets/pt-BR/read-large-txt-files-without-lag/workflow-diagram.svg "Verificar arquivo, codificação, leitura, busca e marcadores")
 
 ## Carregar tudo ou priorizar o que está visível
 

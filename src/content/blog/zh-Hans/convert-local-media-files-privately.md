@@ -58,7 +58,7 @@ updated_at: "2026-07-14T09:00:00+09:00"
 5. 在删除或移动原文件之前，实际打开并播放转换结果。
 6. 只有当第一份输出确实太大时，再生成更小的版本。
 
-![本地转换流程](/blog-assets/en/convert-local-media-files-privately/workflow-diagram.svg "保留原件、在设备上转换并验证结果")
+![本地转换流程](/blog-assets/zh-Hans/convert-local-media-files-privately/workflow-diagram.svg "保留原件、在设备上转换并验证结果")
 
 ## 方法比较
 

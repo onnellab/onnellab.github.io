@@ -70,7 +70,7 @@ Stille ist nicht automatisch ein Fehler. Bewahre natürliche Pausen, Sprachansä
 
 Auch Überlappung ist kontextabhängig. Eine versehentliche Überlappung wiederholt Material und sollte korrigiert werden. Eine beabsichtigte Überlappung ermöglicht einen Crossfade, bei dem ein Clip aus- und der nächste eingeblendet wird. Crossfades sind kein universelles Reparaturmittel: Sie verkürzen die resultierende Timeline um die Überlappungsdauer und können Sprache, Rhythmus oder unpassende Hintergrundgeräusche verschmieren. Eine direkte Verbindung ist richtig, wenn bereits eine natürliche Grenze existiert; ein kurzes Fade passt bei einem einzelnen Klick; ein Crossfade dann, wenn zwei Clips tatsächlich überlappen sollen.
 
-![Workflow-Diagramm](/blog-assets/en/verify-audio-clips-before-combining/workflow-diagram.svg "Audioclips inventarisieren, prüfen, anordnen, verbinden und die Ausgabe verifizieren")
+![Workflow-Diagramm](/blog-assets/de/verify-audio-clips-before-combining/workflow-diagram.svg "Audioclips inventarisieren, prüfen, anordnen, verbinden und die Ausgabe verifizieren")
 
 ## Wahrgenommene Lautheit prüfen, nicht nur Spitzenwerte
 

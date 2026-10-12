@@ -68,7 +68,7 @@ TXT 结构简单，但文件极大时依然会给移动设备和桌面应用带�
 
 > 一个安全的默认做法是：先把巨大 TXT 当成“要查阅的文档”，需要修改时再把它当成“要编辑的文档”。
 
-![大型 TXT 阅读流程](/blog-assets/en/read-large-txt-files-without-lag/workflow-diagram.svg "确认文件、检查编码、阅读、搜索和书签")
+![大型 TXT 阅读流程](/blog-assets/zh-Hans/read-large-txt-files-without-lag/workflow-diagram.svg "确认文件、检查编码、阅读、搜索和书签")
 
 ## 全文加载与按需绘制
 

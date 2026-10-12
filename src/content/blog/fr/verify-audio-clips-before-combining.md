@@ -70,7 +70,7 @@ Le silence n’est pas automatiquement une erreur. Préservez les pauses naturel
 
 Le chevauchement dépend lui aussi du contexte. Un chevauchement accidentel répète du contenu et doit être corrigé. Un chevauchement volontaire permet un **crossfade**, où un clip diminue pendant que le suivant augmente. Il peut rendre une transition compatible plus douce, mais ce n’est pas un remède universel : il raccourcit la timeline de la durée du chevauchement et peut brouiller des mots, des temps musicaux ou des ambiances différentes. Préférez une jonction directe lorsqu’une limite naturelle existe, un fade court lorsqu’un bord seul clique et un crossfade lorsque les deux sons doivent réellement se recouvrir.
 
-![Schéma de vérification](/blog-assets/en/verify-audio-clips-before-combining/workflow-diagram.svg "Inventorier, vérifier, ordonner, joindre et contrôler les clips audio")
+![Schéma de vérification](/blog-assets/fr/verify-audio-clips-before-combining/workflow-diagram.svg "Inventorier, vérifier, ordonner, joindre et contrôler les clips audio")
 
 ## Comparer la niveau sonore perçu sans se limiter aux crêtes
 

@@ -70,7 +70,7 @@ El silencio no es automáticamente un error. Conserva pausas naturales, entradas
 
 El solapamiento también depende del contexto. Uno accidental repite material y debe corregirse. Uno deliberado permite un **crossfade**, donde un clip baja mientras el siguiente sube. Puede suavizar una transición compatible, pero no es una reparación universal: reduce la duración final en la cantidad solapada y puede emborronar palabras, ritmo o fondos incompatibles. Usa una unión directa si ya existe un límite natural, un fade corto si solo hay un clic y un crossfade si ambos clips deben superponerse de verdad.
 
-![Diagrama de verificación](/blog-assets/en/verify-audio-clips-before-combining/workflow-diagram.svg "Inventariar, comprobar, ordenar, unir y verificar clips de audio")
+![Diagrama de verificación](/blog-assets/es/verify-audio-clips-before-combining/workflow-diagram.svg "Inventariar, comprobar, ordenar, unir y verificar clips de audio")
 
 ## Compara la sonoridad, no solo los picos
 

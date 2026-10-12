@@ -91,7 +91,7 @@ A tabela não substitui teste de compatibilidade. Use arquivos representativos n
 7. **Teste em leitores reais.** Altere fonte, tamanho, largura, tema e orientação; teste capítulos, busca, links e progresso. Use tecnologia assistiva quando necessário.
 8. **Preserve a fonte e o processo.** Guarde TXT, configuração/script, recursos e EPUB gerado separadamente. Faça correções na fonte e regenere a distribuição.
 
-![Fluxo TXT para EPUB](/blog-assets/en/txt-vs-epub-for-long-reading/workflow-diagram.svg "Proteger a fonte TXT, estruturar, validar o EPUB e testar em leitores reais")
+![Fluxo TXT para EPUB](/blog-assets/pt-BR/txt-vs-epub-for-long-reading/workflow-diagram.svg "Proteger a fonte TXT, estruturar, validar o EPUB e testar em leitores reais")
 
 ## Cuidados na conversão
 

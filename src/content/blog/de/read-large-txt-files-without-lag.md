@@ -71,7 +71,7 @@ Kläre deshalb zuerst die Aufgabe. Lesen, Suchen, Lesezeichen setzen, Konvertier
 
 > Der sicherste Ausgangspunkt ist, eine riesige TXT-Datei zuerst als Referenzdokument und erst danach als bearbeitbares Dokument zu behandeln.
 
-![Workflow für große TXT-Dateien](/blog-assets/en/read-large-txt-files-without-lag/workflow-diagram.svg "Datei prüfen, Kodierung prüfen, Lesemodus, Suche, Lesezeichen und optional passendes Werkzeug")
+![Workflow für große TXT-Dateien](/blog-assets/de/read-large-txt-files-without-lag/workflow-diagram.svg "Datei prüfen, Kodierung prüfen, Lesemodus, Suche, Lesezeichen und optional passendes Werkzeug")
 
 ## Gesamte Datei laden oder nur den benötigten Bereich darstellen
 

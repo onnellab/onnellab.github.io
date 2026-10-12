@@ -59,7 +59,7 @@ Datenschutz ist eine zusätzliche Bedingung. Enthält eine Datei sensible Inform
 5. Öffne die konvertierte Datei, bevor du das Original verschiebst oder löschst.
 6. Erzeuge erst dann eine stärker komprimierte Variante, wenn die erste Ausgabe tatsächlich zu groß ist.
 
-![Workflow-Diagramm](/blog-assets/en/convert-local-media-files-privately/workflow-diagram.svg "Workflow für private lokale Medienkonvertierung")
+![Workflow-Diagramm](/blog-assets/de/convert-local-media-files-privately/workflow-diagram.svg "Workflow für private lokale Medienkonvertierung")
 
 ## Möglichkeiten der lokalen und externen Konvertierung
 

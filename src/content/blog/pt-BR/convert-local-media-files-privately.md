@@ -58,7 +58,7 @@ Privacidade também deve entrar na decisão. Quanto mais sensível o arquivo, ma
 5. Antes de apagar ou mover o original, abra e reproduza a saída convertida.
 6. Gere uma versão menor somente se a primeira saída realmente exceder o tamanho necessário.
 
-![Fluxo de conversão local](/blog-assets/en/convert-local-media-files-privately/workflow-diagram.svg "Preservar o original, converter no dispositivo e validar a saída")
+![Fluxo de conversão local](/blog-assets/pt-BR/convert-local-media-files-privately/workflow-diagram.svg "Preservar o original, converter no dispositivo e validar a saída")
 
 ## Comparação de métodos
 

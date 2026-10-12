@@ -92,7 +92,7 @@ Die Matrix ist keine Kompatibilitätsgarantie. Teste eine repräsentative Datei 
 7. **In echten Readern testen.** Verschiedene Schriftgrößen, Bildschirmgrößen, Themes, Kapitelwechsel, Suche, Links und Fortschritt kontrollieren.
 8. **Quelle und Rezept behalten.** TXT, Assets, Konvertierungseinstellungen oder Skript und das erzeugte EPUB separat speichern. Korrekturen in der Quelle durchführen und die Ausgabe neu erzeugen.
 
-![TXT-zu-EPUB-Workflow](/blog-assets/en/txt-vs-epub-for-long-reading/workflow-diagram.svg "TXT-Quelle bewahren, Struktur festlegen, EPUB erzeugen und validieren, Reader testen und Quelle sowie Ausgabe behalten")
+![TXT-zu-EPUB-Workflow](/blog-assets/de/txt-vs-epub-for-long-reading/workflow-diagram.svg "TXT-Quelle bewahren, Struktur festlegen, EPUB erzeugen und validieren, Reader testen und Quelle sowie Ausgabe behalten")
 
 ## Vorsicht bei der Konvertierung
 

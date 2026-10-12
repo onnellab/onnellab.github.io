@@ -93,7 +93,7 @@ Metadados também merecem revisão separada: título, comentário, capa, data, l
 9. **Valide a saída.** Abra em outro player quando possível e confira começo, fim, duração, seek, canais e qualidade.
 10. **Mantenha o original.** Só considere removê-lo depois que o resultado final tiver sido aceito no destino.
 
-![Fluxo de recorte de áudio](/blog-assets/en/trim-audio-recordings-without-full-editor/workflow-diagram.svg "Preservar o original, escolher limites, exportar e verificar")
+![Fluxo de recorte de áudio](/blog-assets/pt-BR/trim-audio-recordings-without-full-editor/workflow-diagram.svg "Preservar o original, escolher limites, exportar e verificar")
 
 ## Como isso se relaciona à ONNELLAB
 

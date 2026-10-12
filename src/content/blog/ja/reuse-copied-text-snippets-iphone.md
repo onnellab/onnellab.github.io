@@ -63,7 +63,7 @@ Universal Clipboardは別の問題を解決します。同じApple Accountでサ
 7. **機密情報は別管理にする。** パスワード、ワンタイムコード、復旧キー、決済情報、医療情報、非公開の顧客情報を通常スニペットとして保存しません。
 8. **定期的に見直す。** 重複と期限切れリンクを削除し、変わった情報を更新し、使用頻度が落ちた項目のピンを外します。
 
-![ワークフロー図](/blog-assets/en/reuse-copied-text-snippets-iphone/workflow-diagram.svg "文章を取り込み、確認し、整理して再利用する流れ")
+![ワークフロー図](/blog-assets/ja/reuse-copied-text-snippets-iphone/workflow-diagram.svg "文章を取り込み、確認し、整理して再利用する流れ")
 
 ## 保存方法の比較
 

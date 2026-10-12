@@ -59,7 +59,7 @@ La confidentialité ajoute une contrainte. Pour un fichier sensible, un téléve
 5. Ouvrez le fichier converti avant de déplacer ou supprimer l’original.
 6. Ne générez une version plus compressée que si la première sortie est réellement trop volumineuse.
 
-![Schéma de conversion locale](/blog-assets/en/convert-local-media-files-privately/workflow-diagram.svg "Flux de conversion multimédia locale et privée")
+![Schéma de conversion locale](/blog-assets/fr/convert-local-media-files-privately/workflow-diagram.svg "Flux de conversion multimédia locale et privée")
 
 ## Comparaison des options
 

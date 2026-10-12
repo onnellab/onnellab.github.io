@@ -63,7 +63,7 @@ El objetivo no es dejar todos los campos llenos. Lo importante es que los datos 
 7. **Guarda y vuelve a abrir.** Cierra el editor, abre de nuevo el lote y confirma que texto, numeración y carátula se escribieron realmente.
 8. **Prueba la biblioteca de destino.** Importa solo el lote pequeño y comprueba agrupación, orden, búsqueda, caracteres no latinos y visualización de la portada antes de repetir el proceso con toda la colección.
 
-![Diagrama del flujo](/blog-assets/en/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "Flujo con copia de respaldo para limpiar metadatos MP3")
+![Diagrama del flujo](/blog-assets/es/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "Flujo con copia de respaldo para limpiar metadatos MP3")
 
 ## Prioridad de los campos
 

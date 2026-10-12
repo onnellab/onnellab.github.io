@@ -64,7 +64,7 @@ Dateinamen sind außerdem Teil externer Workflows. Ein Dokument kann von einem P
 7. **Testgruppe anwenden.** Mehrere umbenannte Dateien in der Anwendung öffnen, die sie normalerweise verwendet. Inhalt, Sortierung, Verweise und Sidecar-Beziehungen prüfen.
 8. **Gesamten Stapel ausführen.** Backup behalten, bis der Zielworkflow geprüft ist, und die verwendete Benennungsregel für spätere Stapel dokumentieren.
 
-![Workflow-Diagramm](/blog-assets/en/rename-files-safely-preview-workflow/workflow-diagram.svg "Regeln planen, Vorschau prüfen, Teilmenge testen und Stapelumbenennung anwenden")
+![Workflow-Diagramm](/blog-assets/de/rename-files-safely-preview-workflow/workflow-diagram.svg "Regeln planen, Vorschau prüfen, Teilmenge testen und Stapelumbenennung anwenden")
 
 ## Vergleich der Umbenennungsansätze
 

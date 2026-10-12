@@ -63,7 +63,7 @@ Nomes de arquivo também participam de fluxos externos. Um documento pode ser re
 7. **Aplique apenas ao conjunto de teste.** Abra alguns resultados nos apps usados no dia a dia e valide conteúdo, ordem, links e relações com arquivos auxiliares.
 8. **Só então aplique ao lote inteiro.** Mantenha backup até o fluxo real ser validado e registre a convenção usada para poder repeti-la.
 
-![Fluxo de renomeação segura](/blog-assets/en/rename-files-safely-preview-workflow/workflow-diagram.svg "Planejar a regra, revisar a prévia, testar em pequeno lote e só então aplicar")
+![Fluxo de renomeação segura](/blog-assets/pt-BR/rename-files-safely-preview-workflow/workflow-diagram.svg "Planejar a regra, revisar a prévia, testar em pequeno lote e só então aplicar")
 
 ## Comparação de métodos
 

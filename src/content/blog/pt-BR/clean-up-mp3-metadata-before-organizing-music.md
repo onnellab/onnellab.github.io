@@ -62,7 +62,7 @@ O objetivo não é eliminar todos os campos vazios. É fazer com que os campos c
 7. **Reabra depois de salvar.** Feche o editor e leia novamente o lote de teste para confirmar que caracteres, números e imagem foram realmente gravados no arquivo.
 8. **Teste na biblioteca real.** Importe apenas o lote pequeno e verifique agrupamento, ordem, pesquisa, caracteres não latinos e exibição da capa antes de ampliar o processo.
 
-![Fluxo de metadados MP3](/blog-assets/en/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "Backup, padronização de tags e validação em lote pequeno")
+![Fluxo de metadados MP3](/blog-assets/pt-BR/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg "Backup, padronização de tags e validação em lote pequeno")
 
 ## Prioridade dos campos
 

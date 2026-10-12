@@ -71,7 +71,7 @@ L’**encodage des caractères** est la règle qui transforme les octets en cara
 
 > Pour commencer en sécurité, traitez un énorme TXT comme un document de référence avant de le considérer comme un document à modifier.
 
-![Schéma de lecture gros TXT](/blog-assets/en/read-large-txt-files-without-lag/workflow-diagram.svg "Vérifier le fichier, l’encodage, le mode de lecture, la recherche et les signets")
+![Schéma de lecture gros TXT](/blog-assets/fr/read-large-txt-files-without-lag/workflow-diagram.svg "Vérifier le fichier, l’encodage, le mode de lecture, la recherche et les signets")
 
 ## Charger tout ou rendre seulement ce qui est utile
 

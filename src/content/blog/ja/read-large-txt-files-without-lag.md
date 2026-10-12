@@ -68,7 +68,7 @@ TXTは単純な形式ですが、非常に大きくなるとモバイルでも�
 
 > 安全な基本方針は、巨大なTXTをまず「参照する文書」として扱い、必要になったときだけ「編集する文書」にすることです。
 
-![大容量TXT読書ワークフロー](/blog-assets/en/read-large-txt-files-without-lag/workflow-diagram.svg "ファイル確認、エンコーディング確認、閲覧、検索、ブックマークの流れ")
+![大容量TXT読書ワークフロー](/blog-assets/ja/read-large-txt-files-without-lag/workflow-diagram.svg "ファイル確認、エンコーディング確認、閲覧、検索、ブックマークの流れ")
 
 ## 全文読み込みと必要部分の描画の違い
 

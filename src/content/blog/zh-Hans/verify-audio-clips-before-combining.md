@@ -69,7 +69,7 @@ updated_at: "2026-08-23T09:00:00+09:00"
 
 重叠同样取决于语境。意外重复应删除；有意重叠时可以用 crossfade 让前一段淡出、后一段淡入。但 crossfade 不是万能修补。它会让总时间线缩短，也可能把语音、节拍或不同底噪叠在一起。天然接缝不需要 crossfade；只是边缘 click 时，短 fade 往往更合适。
 
-![音频合并前验证流程](/blog-assets/en/verify-audio-clips-before-combining/workflow-diagram.svg "列出片段、确认顺序、检查接缝、导出并验证结果")
+![音频合并前验证流程](/blog-assets/zh-Hans/verify-audio-clips-before-combining/workflow-diagram.svg "列出片段、确认顺序、检查接缝、导出并验证结果")
 
 ## 不要只追求相同峰值
 

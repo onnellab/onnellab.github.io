@@ -110,7 +110,7 @@ Usa una herramienta no destructiva que respete bytes y codificación. Incluye re
 7. Usa streaming o ventanas para inspección, un visor indexado o virtualizado para navegación repetida y un editor completo solo cuando debas modificar.
 8. Si editar es imprescindible, divide únicamente una copia por límites verificados o usa un editor de archivos grandes. Guarda en un nuevo archivo y comprueba tamaño, codificación y contenido.
 
-![Diagrama de diagnóstico](/blog-assets/en/large-text-file-slow-to-open/workflow-diagram.svg "Proteger el original, aislar la etapa lenta, probar una copia representativa y elegir acceso acotado")
+![Diagrama de diagnóstico](/blog-assets/es/large-text-file-slow-to-open/workflow-diagram.svg "Proteger el original, aislar la etapa lenta, probar una copia representativa y elegir acceso acotado")
 
 ## Aplicación ONNELLAB
 

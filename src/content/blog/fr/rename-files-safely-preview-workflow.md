@@ -64,7 +64,7 @@ Les noms participent aussi à d’autres flux de travail. Un document peut être
 7. **Appliquez le test.** Ouvrez plusieurs fichiers renommés dans l’application qui les utilise normalement et vérifiez contenu, ordre, liens et relations avec les fichiers associés.
 8. **Traitez le lot complet.** Gardez la sauvegarde jusqu’à validation du workflow final et conservez la convention de nommage pour les prochaines opérations.
 
-![Schéma de renommage](/blog-assets/en/rename-files-safely-preview-workflow/workflow-diagram.svg "Planifier les règles, examiner l’aperçu, tester un sous-ensemble puis appliquer le lot")
+![Schéma de renommage](/blog-assets/fr/rename-files-safely-preview-workflow/workflow-diagram.svg "Planifier les règles, examiner l’aperçu, tester un sous-ensemble puis appliquer le lot")
 
 ## Comparaison des approches
 

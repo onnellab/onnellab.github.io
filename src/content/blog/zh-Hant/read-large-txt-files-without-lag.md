@@ -68,7 +68,7 @@ TXT 結構簡單，但檔案非常大時仍會對行動裝置與桌面應用程�
 
 > 安全的預設方式是：先把巨大 TXT 當成「要查閱的文件」，需要修改時再把它當成「要編輯的文件」。
 
-![大型 TXT 閱讀流程](/blog-assets/en/read-large-txt-files-without-lag/workflow-diagram.svg "確認檔案、檢查編碼、閱讀、搜尋與書籤")
+![大型 TXT 閱讀流程](/blog-assets/zh-Hant/read-large-txt-files-without-lag/workflow-diagram.svg "確認檔案、檢查編碼、閱讀、搜尋與書籤")
 
 ## 全文載入與按需繪製
 

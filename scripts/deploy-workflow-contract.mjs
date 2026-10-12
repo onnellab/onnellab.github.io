@@ -17,3 +17,12 @@ test('Pages deploy always binds live ops verification to the deployed commit', (
   assert.match(workflow, /needs: \[build, deploy, verify_ops\]/);
   assert.match(workflow, /Retain sanitized verification evidence/);
 });
+
+test('historical translated image rendering and browser checks precede Pages upload', () => {
+  assert.match(workflow, /python3 scripts\/test-blog-workflow-localizations\.py/);
+  assert.match(workflow, /librsvg2-bin fonts-noto-core fonts-noto-cjk/);
+  assert.match(workflow, /python3 scripts\/render-blog-workflow-localizations\.py/);
+  assert.match(workflow, /tests\/blog-workflow-localizations\.spec\.ts/);
+  assert.ok(workflow.indexOf('Render the 63 audited') < workflow.indexOf('- name: Build'));
+  assert.ok(workflow.indexOf('Verify localized blog diagrams') < workflow.indexOf('- name: Upload Pages artifact'));
+});

@@ -63,7 +63,7 @@ Universal Clipboard 解決的是另一個問題：在符合條件、使用同一
 7. **敏感資訊另外管理。** 不把密碼、復原金鑰、一次性代碼、付款資料、醫療或非公開客戶資訊當作普通片段保存。
 8. **定期檢查。** 刪除重複項與失效連結，更新已變更資訊，取消釘選不再高頻的內容。
 
-![文字片段流程](/blog-assets/en/reuse-copied-text-snippets-iphone/workflow-diagram.svg "主動保存、確認、整理並重複使用常用文字")
+![文字片段流程](/blog-assets/zh-Hant/reuse-copied-text-snippets-iphone/workflow-diagram.svg "主動保存、確認、整理並重複使用常用文字")
 
 ## 不同保存方式
 

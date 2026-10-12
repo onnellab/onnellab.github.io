@@ -1,0 +1,2096 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "15c6800585721bf44c01ba03a559355d0012faba",
+  "content_engine_commit": "dd4a50ce960612064564e5de73562f75bf977507",
+  "locales": [
+    "ja",
+    "zh-Hans",
+    "zh-Hant",
+    "pt-BR",
+    "de",
+    "fr",
+    "es"
+  ],
+  "slugs": [
+    "clean-up-mp3-metadata-before-organizing-music",
+    "convert-local-media-files-privately",
+    "large-text-file-slow-to-open",
+    "read-large-txt-files-without-lag",
+    "rename-files-safely-preview-workflow",
+    "reuse-copied-text-snippets-iphone",
+    "trim-audio-recordings-without-full-editor",
+    "txt-vs-epub-for-long-reading",
+    "verify-audio-clips-before-combining"
+  ],
+  "items": [
+    {
+      "locale": "ja",
+      "slug": "clean-up-mp3-metadata-before-organizing-music",
+      "title": "音楽を整理する前にMP3メタデータを整える方法",
+      "article": "src/content/blog/ja/clean-up-mp3-metadata-before-organizing-music.md",
+      "original_article_blob": "51ba82ff9bf3ae3272db73dfa5f302546cc3775c",
+      "workflow_svg": "public/blog-assets/ja/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/ja/clean-up-mp3-metadata-before-organizing-music/social-card.svg",
+      "social_png": "public/blog-assets/ja/clean-up-mp3-metadata-before-organizing-music/social-card.png",
+      "steps": [
+        "元のMP3を保管",
+        "タグとアルバム分けを確認",
+        "少数の曲で編集を試す",
+        "開き直して再生を確認"
+      ],
+      "stages": [
+        "保管",
+        "確認",
+        "試行",
+        "検証"
+      ],
+      "subtitle": "記事の手順をまとめた図",
+      "footer": "原本を保管し、結果を確認しましょう。",
+      "brand": "ONNELLAB Blog · 手順図",
+      "alt": "ワークフロー図",
+      "published_at": "2026-07-20T14:56:51+09:00",
+      "canonical_url": "https://onnellab.com/blog/ja/clean-up-mp3-metadata-before-organizing-music/",
+      "workflow_svg_blob": "1b8446ecf3c60956db5f6cf5b09c2fee1a744ddc",
+      "social_svg_blob": "1b8446ecf3c60956db5f6cf5b09c2fee1a744ddc"
+    },
+    {
+      "locale": "ja",
+      "slug": "convert-local-media-files-privately",
+      "title": "ローカルのメディアファイルを端末内で変換する方法",
+      "article": "src/content/blog/ja/convert-local-media-files-privately.md",
+      "original_article_blob": "1a69e06ea7282a6f4ee5644ab6d534c69d370ac8",
+      "workflow_svg": "public/blog-assets/ja/convert-local-media-files-privately/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/ja/convert-local-media-files-privately/social-card.svg",
+      "social_png": "public/blog-assets/ja/convert-local-media-files-privately/social-card.png",
+      "steps": [
+        "元のメディアを保管",
+        "端末内処理と形式を確認",
+        "端末上でサンプルを変換",
+        "書き出したコピーを再生"
+      ],
+      "stages": [
+        "保管",
+        "確認",
+        "試行",
+        "検証"
+      ],
+      "subtitle": "記事の手順をまとめた図",
+      "footer": "原本を保管し、結果を確認しましょう。",
+      "brand": "ONNELLAB Blog · 手順図",
+      "alt": "ワークフロー図",
+      "published_at": "2026-07-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ja/convert-local-media-files-privately/",
+      "workflow_svg_blob": "9816af7452e65121ab52c7151d8861ea5274ec2a",
+      "social_svg_blob": "9816af7452e65121ab52c7151d8861ea5274ec2a"
+    },
+    {
+      "locale": "ja",
+      "slug": "large-text-file-slow-to-open",
+      "title": "大きなテキストファイルを開くのが遅い理由",
+      "article": "src/content/blog/ja/large-text-file-slow-to-open.md",
+      "original_article_blob": "919b1a335e4824662407e4c94d34a1a55a5bb188",
+      "workflow_svg": "public/blog-assets/ja/large-text-file-slow-to-open/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/ja/large-text-file-slow-to-open/social-card.svg",
+      "social_png": "public/blog-assets/ja/large-text-file-slow-to-open/social-card.png",
+      "steps": [
+        "元のテキストを保管",
+        "容量・行・文字コードを確認",
+        "代表的なコピーで試す",
+        "負荷の小さい方法を選ぶ"
+      ],
+      "stages": [
+        "保管",
+        "確認",
+        "試行",
+        "検証"
+      ],
+      "subtitle": "記事の手順をまとめた図",
+      "footer": "原本を保管し、結果を確認しましょう。",
+      "brand": "ONNELLAB Blog · 手順図",
+      "alt": "大容量テキスト診断ワークフロー",
+      "published_at": "2026-08-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ja/large-text-file-slow-to-open/",
+      "workflow_svg_blob": "b9954306471d9611747d80900482b7ab9791322c",
+      "social_svg_blob": "b9954306471d9611747d80900482b7ab9791322c"
+    },
+    {
+      "locale": "ja",
+      "slug": "read-large-txt-files-without-lag",
+      "title": "大きなTXTファイルを重くならずに読む方法",
+      "article": "src/content/blog/ja/read-large-txt-files-without-lag.md",
+      "original_article_blob": "4f7c770de9916d682bb50507ae27785566eae5ce",
+      "workflow_svg": "public/blog-assets/ja/read-large-txt-files-without-lag/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/ja/read-large-txt-files-without-lag/social-card.svg",
+      "social_png": "public/blog-assets/ja/read-large-txt-files-without-lag/social-card.png",
+      "steps": [
+        "元のTXTを保管",
+        "文字コードと行の長さを確認",
+        "一部分を読んで試す",
+        "検索と移動を確認"
+      ],
+      "stages": [
+        "保管",
+        "確認",
+        "試行",
+        "検証"
+      ],
+      "subtitle": "記事の手順をまとめた図",
+      "footer": "原本を保管し、結果を確認しましょう。",
+      "brand": "ONNELLAB Blog · 手順図",
+      "alt": "大容量TXT読書ワークフロー",
+      "published_at": "2026-07-11T00:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ja/read-large-txt-files-without-lag/",
+      "workflow_svg_blob": "fef5a0951bbb649e748b84143a8516f657e5af07",
+      "social_svg_blob": "fef5a0951bbb649e748b84143a8516f657e5af07"
+    },
+    {
+      "locale": "ja",
+      "slug": "rename-files-safely-preview-workflow",
+      "title": "プレビューで安全にファイル名を一括変更する方法",
+      "article": "src/content/blog/ja/rename-files-safely-preview-workflow.md",
+      "original_article_blob": "2c79aac5c6be5c10285e186ca48a74f6abb18308",
+      "workflow_svg": "public/blog-assets/ja/rename-files-safely-preview-workflow/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/ja/rename-files-safely-preview-workflow/social-card.svg",
+      "social_png": "public/blog-assets/ja/rename-files-safely-preview-workflow/social-card.png",
+      "steps": [
+        "バックアップを保管",
+        "規則と名前の重複を確認",
+        "プレビュー後、少数のファイルで試す",
+        "名前と内容を照合"
+      ],
+      "stages": [
+        "保管",
+        "確認",
+        "試行",
+        "検証"
+      ],
+      "subtitle": "記事の手順をまとめた図",
+      "footer": "原本を保管し、結果を確認しましょう。",
+      "brand": "ONNELLAB Blog · 手順図",
+      "alt": "ワークフロー図",
+      "published_at": "2026-08-20T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ja/rename-files-safely-preview-workflow/",
+      "workflow_svg_blob": "fc62aa4f549be7467750ccf3a69b9174a7878e0f",
+      "social_svg_blob": "fc62aa4f549be7467750ccf3a69b9174a7878e0f"
+    },
+    {
+      "locale": "ja",
+      "slug": "reuse-copied-text-snippets-iphone",
+      "title": "iPhoneでコピーした定型文を繰り返し使う方法",
+      "article": "src/content/blog/ja/reuse-copied-text-snippets-iphone.md",
+      "original_article_blob": "760bf3469a96465531c15d10c2c83833f3e6e8a3",
+      "workflow_svg": "public/blog-assets/ja/reuse-copied-text-snippets-iphone/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/ja/reuse-copied-text-snippets-iphone/social-card.svg",
+      "social_png": "public/blog-assets/ja/reuse-copied-text-snippets-iphone/social-card.png",
+      "steps": [
+        "再利用する文を選ぶ",
+        "古い情報や機密情報を除く",
+        "選んだ文を端末内に保存",
+        "貼り付けて調整し読み直す"
+      ],
+      "stages": [
+        "保管",
+        "確認",
+        "試行",
+        "検証"
+      ],
+      "subtitle": "記事の手順をまとめた図",
+      "footer": "原本を保管し、結果を確認しましょう。",
+      "brand": "ONNELLAB Blog · 手順図",
+      "alt": "ワークフロー図",
+      "published_at": "2026-07-24T08:24:05+09:00",
+      "canonical_url": "https://onnellab.com/blog/ja/reuse-copied-text-snippets-iphone/",
+      "workflow_svg_blob": "fa3ef0401e79927182b7378e5a5f4d782e023919",
+      "social_svg_blob": "fa3ef0401e79927182b7378e5a5f4d782e023919"
+    },
+    {
+      "locale": "ja",
+      "slug": "trim-audio-recordings-without-full-editor",
+      "title": "フル編集ソフトを使わず音声録音をトリミングする方法",
+      "article": "src/content/blog/ja/trim-audio-recordings-without-full-editor.md",
+      "original_article_blob": "c648926d70c7314d9b879dc74f445a3b7cfa2bf9",
+      "workflow_svg": "public/blog-assets/ja/trim-audio-recordings-without-full-editor/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/ja/trim-audio-recordings-without-full-editor/social-card.svg",
+      "social_png": "public/blog-assets/ja/trim-audio-recordings-without-full-editor/social-card.png",
+      "steps": [
+        "元の録音を保管",
+        "聴いて切り出す範囲を決める",
+        "作業用コピーをトリミング",
+        "書き出した音声を聴く"
+      ],
+      "stages": [
+        "保管",
+        "確認",
+        "試行",
+        "検証"
+      ],
+      "subtitle": "記事の手順をまとめた図",
+      "footer": "原本を保管し、結果を確認しましょう。",
+      "brand": "ONNELLAB Blog · 手順図",
+      "alt": "音声トリミングワークフロー",
+      "published_at": "2026-08-17T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ja/trim-audio-recordings-without-full-editor/",
+      "workflow_svg_blob": "81e9edc29c03bef66d304f5b9b847946503e8758",
+      "social_svg_blob": "81e9edc29c03bef66d304f5b9b847946503e8758"
+    },
+    {
+      "locale": "ja",
+      "slug": "txt-vs-epub-for-long-reading",
+      "title": "長文を読むならTXTとEPUBのどちらがよいか",
+      "article": "src/content/blog/ja/txt-vs-epub-for-long-reading.md",
+      "original_article_blob": "5cd4ac5b814851b839d08c89edd04cdcc808f0bf",
+      "workflow_svg": "public/blog-assets/ja/txt-vs-epub-for-long-reading/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/ja/txt-vs-epub-for-long-reading/social-card.svg",
+      "social_png": "public/blog-assets/ja/txt-vs-epub-for-long-reading/social-card.png",
+      "steps": [
+        "元のTXTを保管",
+        "読書に合う形式を選ぶ",
+        "必要ならコピーを変換",
+        "本文・表示・移動を確認"
+      ],
+      "stages": [
+        "保管",
+        "確認",
+        "試行",
+        "検証"
+      ],
+      "subtitle": "記事の手順をまとめた図",
+      "footer": "原本を保管し、結果を確認しましょう。",
+      "brand": "ONNELLAB Blog · 手順図",
+      "alt": "ワークフロー図",
+      "published_at": "2026-08-11T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ja/txt-vs-epub-for-long-reading/",
+      "workflow_svg_blob": "e322c245043870459e553357c6d887d16753daa8",
+      "social_svg_blob": "e322c245043870459e553357c6d887d16753daa8"
+    },
+    {
+      "locale": "ja",
+      "slug": "verify-audio-clips-before-combining",
+      "title": "音声クリップを結合する前に確認する方法",
+      "article": "src/content/blog/ja/verify-audio-clips-before-combining.md",
+      "original_article_blob": "5ca76e0638f448876770760069b29caf04f4ae7d",
+      "workflow_svg": "public/blog-assets/ja/verify-audio-clips-before-combining/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/ja/verify-audio-clips-before-combining/social-card.svg",
+      "social_png": "public/blog-assets/ja/verify-audio-clips-before-combining/social-card.png",
+      "steps": [
+        "元のクリップを保管",
+        "順番と音声の仕様を確認",
+        "すべてのつなぎ目を聴く",
+        "別ファイルに書き出して再生確認"
+      ],
+      "stages": [
+        "保管",
+        "確認",
+        "試行",
+        "検証"
+      ],
+      "subtitle": "記事の手順をまとめた図",
+      "footer": "原本を保管し、結果を確認しましょう。",
+      "brand": "ONNELLAB Blog · 手順図",
+      "alt": "ワークフロー図",
+      "published_at": "2026-08-23T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ja/verify-audio-clips-before-combining/",
+      "workflow_svg_blob": "adb4ba49580df7f99f751bab48dac1b933fa7ce2",
+      "social_svg_blob": "adb4ba49580df7f99f751bab48dac1b933fa7ce2"
+    },
+    {
+      "locale": "zh-Hans",
+      "slug": "clean-up-mp3-metadata-before-organizing-music",
+      "title": "整理音乐前，怎样清理 MP3 元数据",
+      "article": "src/content/blog/zh-Hans/clean-up-mp3-metadata-before-organizing-music.md",
+      "original_article_blob": "641180d8960e9ebcf22bb1719b103d08a1c8ff95",
+      "workflow_svg": "public/blog-assets/zh-Hans/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hans/clean-up-mp3-metadata-before-organizing-music/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hans/clean-up-mp3-metadata-before-organizing-music/social-card.png",
+      "steps": [
+        "保留原始MP3文件",
+        "检查标签和专辑分组",
+        "先编辑少量样本",
+        "重新打开并测试播放"
+      ],
+      "stages": [
+        "保留",
+        "检查",
+        "试做",
+        "验证"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始内容，并验证操作结果。",
+      "brand": "ONNELLAB Blog · 流程图",
+      "alt": "MP3 元数据整理流程",
+      "published_at": "2026-07-20T14:56:51+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hans/clean-up-mp3-metadata-before-organizing-music/",
+      "workflow_svg_blob": "629133542aaff4eb76489d9ddb7f9da8e36c3045",
+      "social_svg_blob": "629133542aaff4eb76489d9ddb7f9da8e36c3045"
+    },
+    {
+      "locale": "zh-Hans",
+      "slug": "convert-local-media-files-privately",
+      "title": "怎样在本地私密地转换媒体文件",
+      "article": "src/content/blog/zh-Hans/convert-local-media-files-privately.md",
+      "original_article_blob": "546bd990eb2e1437004d622789bdfdaa4db89340",
+      "workflow_svg": "public/blog-assets/zh-Hans/convert-local-media-files-privately/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hans/convert-local-media-files-privately/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hans/convert-local-media-files-privately/social-card.png",
+      "steps": [
+        "保留原始媒体文件",
+        "确认本地转换和文件格式",
+        "在设备上转换样本",
+        "播放导出的副本"
+      ],
+      "stages": [
+        "保留",
+        "检查",
+        "试做",
+        "验证"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始内容，并验证操作结果。",
+      "brand": "ONNELLAB Blog · 流程图",
+      "alt": "本地转换流程",
+      "published_at": "2026-07-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hans/convert-local-media-files-privately/",
+      "workflow_svg_blob": "1a43945ad8d9fb232fc57ad3d806c410f4a24d6f",
+      "social_svg_blob": "1a43945ad8d9fb232fc57ad3d806c410f4a24d6f"
+    },
+    {
+      "locale": "zh-Hans",
+      "slug": "large-text-file-slow-to-open",
+      "title": "为什么大型文本文件打开很慢",
+      "article": "src/content/blog/zh-Hans/large-text-file-slow-to-open.md",
+      "original_article_blob": "77fcdf07a682799e1888996db4496d20233cad60",
+      "workflow_svg": "public/blog-assets/zh-Hans/large-text-file-slow-to-open/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hans/large-text-file-slow-to-open/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hans/large-text-file-slow-to-open/social-card.png",
+      "steps": [
+        "保留原始文本",
+        "检查大小、行和编码",
+        "用有代表性的副本测试",
+        "选择负担较小的读取方式"
+      ],
+      "stages": [
+        "保留",
+        "检查",
+        "试做",
+        "验证"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始内容，并验证操作结果。",
+      "brand": "ONNELLAB Blog · 流程图",
+      "alt": "大型文本排查流程",
+      "published_at": "2026-08-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hans/large-text-file-slow-to-open/",
+      "workflow_svg_blob": "c5d2dfc45158c2f664ceb78d1d9beb7588337eb8",
+      "social_svg_blob": "c5d2dfc45158c2f664ceb78d1d9beb7588337eb8"
+    },
+    {
+      "locale": "zh-Hans",
+      "slug": "read-large-txt-files-without-lag",
+      "title": "怎样流畅阅读大型 TXT 文件",
+      "article": "src/content/blog/zh-Hans/read-large-txt-files-without-lag.md",
+      "original_article_blob": "85f96801385a27c8da89aea01f67cdd5ef60dc5f",
+      "workflow_svg": "public/blog-assets/zh-Hans/read-large-txt-files-without-lag/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hans/read-large-txt-files-without-lag/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hans/read-large-txt-files-without-lag/social-card.png",
+      "steps": [
+        "保留原始TXT",
+        "检查编码和行长度",
+        "先读取一小部分",
+        "验证搜索和导航"
+      ],
+      "stages": [
+        "保留",
+        "检查",
+        "试做",
+        "验证"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始内容，并验证操作结果。",
+      "brand": "ONNELLAB Blog · 流程图",
+      "alt": "大型 TXT 阅读流程",
+      "published_at": "2026-07-11T00:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hans/read-large-txt-files-without-lag/",
+      "workflow_svg_blob": "17add922ad05c3b61e53bdebe2998dbe9cf246a7",
+      "social_svg_blob": "17add922ad05c3b61e53bdebe2998dbe9cf246a7"
+    },
+    {
+      "locale": "zh-Hans",
+      "slug": "rename-files-safely-preview-workflow",
+      "title": "怎样用预览安全地批量重命名文件",
+      "article": "src/content/blog/zh-Hans/rename-files-safely-preview-workflow.md",
+      "original_article_blob": "609c73899ee243825250c398f5c3cd8e84a034b3",
+      "workflow_svg": "public/blog-assets/zh-Hans/rename-files-safely-preview-workflow/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hans/rename-files-safely-preview-workflow/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hans/rename-files-safely-preview-workflow/social-card.png",
+      "steps": [
+        "保留备份",
+        "检查规则和重名冲突",
+        "预览并先试少量文件",
+        "核对名称和文件内容"
+      ],
+      "stages": [
+        "保留",
+        "检查",
+        "试做",
+        "验证"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始内容，并验证操作结果。",
+      "brand": "ONNELLAB Blog · 流程图",
+      "alt": "安全批量重命名流程",
+      "published_at": "2026-08-20T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hans/rename-files-safely-preview-workflow/",
+      "workflow_svg_blob": "91097b5b79c5c331eff910977ddd5a421fa9a7f7",
+      "social_svg_blob": "91097b5b79c5c331eff910977ddd5a421fa9a7f7"
+    },
+    {
+      "locale": "zh-Hans",
+      "slug": "reuse-copied-text-snippets-iphone",
+      "title": "怎样在 iPhone 上重复使用复制过的常用文本",
+      "article": "src/content/blog/zh-Hans/reuse-copied-text-snippets-iphone.md",
+      "original_article_blob": "6dae038f48eb570750dd0f360716806dbf74f233",
+      "workflow_svg": "public/blog-assets/zh-Hans/reuse-copied-text-snippets-iphone/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hans/reuse-copied-text-snippets-iphone/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hans/reuse-copied-text-snippets-iphone/social-card.png",
+      "steps": [
+        "选择要复用的文本",
+        "移除过期或敏感信息",
+        "在本地保存选定片段",
+        "粘贴、调整并重新检查"
+      ],
+      "stages": [
+        "保留",
+        "检查",
+        "试做",
+        "验证"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始内容，并验证操作结果。",
+      "brand": "ONNELLAB Blog · 流程图",
+      "alt": "文本片段工作流",
+      "published_at": "2026-07-24T08:24:05+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hans/reuse-copied-text-snippets-iphone/",
+      "workflow_svg_blob": "e5e219629b2d8776d248aa2c762dcae4ab245a75",
+      "social_svg_blob": "e5e219629b2d8776d248aa2c762dcae4ab245a75"
+    },
+    {
+      "locale": "zh-Hans",
+      "slug": "trim-audio-recordings-without-full-editor",
+      "title": "不用完整音频编辑器，怎样安全裁剪录音",
+      "article": "src/content/blog/zh-Hans/trim-audio-recordings-without-full-editor.md",
+      "original_article_blob": "52912a6f18919f03064d0741df7bae13b19e4a02",
+      "workflow_svg": "public/blog-assets/zh-Hans/trim-audio-recordings-without-full-editor/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hans/trim-audio-recordings-without-full-editor/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hans/trim-audio-recordings-without-full-editor/social-card.png",
+      "steps": [
+        "保留原始录音",
+        "试听并标记裁剪边界",
+        "裁剪工作副本",
+        "试听导出的文件"
+      ],
+      "stages": [
+        "保留",
+        "检查",
+        "试做",
+        "验证"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始内容，并验证操作结果。",
+      "brand": "ONNELLAB Blog · 流程图",
+      "alt": "音频裁剪流程",
+      "published_at": "2026-08-17T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hans/trim-audio-recordings-without-full-editor/",
+      "workflow_svg_blob": "9521b244ec4b603ebca20d498d2cd9780009e13e",
+      "social_svg_blob": "9521b244ec4b603ebca20d498d2cd9780009e13e"
+    },
+    {
+      "locale": "zh-Hans",
+      "slug": "txt-vs-epub-for-long-reading",
+      "title": "长篇阅读该选 TXT 还是 EPUB",
+      "article": "src/content/blog/zh-Hans/txt-vs-epub-for-long-reading.md",
+      "original_article_blob": "a71fddf2fa20106bea57d7d467e48a5169f022ba",
+      "workflow_svg": "public/blog-assets/zh-Hans/txt-vs-epub-for-long-reading/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hans/txt-vs-epub-for-long-reading/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hans/txt-vs-epub-for-long-reading/social-card.png",
+      "steps": [
+        "保留原始TXT",
+        "选择适合阅读的格式",
+        "需要时转换副本",
+        "检查文本、排版和导航"
+      ],
+      "stages": [
+        "保留",
+        "检查",
+        "试做",
+        "验证"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始内容，并验证操作结果。",
+      "brand": "ONNELLAB Blog · 流程图",
+      "alt": "TXT 到 EPUB 的可恢复流程",
+      "published_at": "2026-08-11T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hans/txt-vs-epub-for-long-reading/",
+      "workflow_svg_blob": "66430442fed76a91207b7f489d00e969ea884395",
+      "social_svg_blob": "66430442fed76a91207b7f489d00e969ea884395"
+    },
+    {
+      "locale": "zh-Hans",
+      "slug": "verify-audio-clips-before-combining",
+      "title": "合并音频片段前，应该怎样验证",
+      "article": "src/content/blog/zh-Hans/verify-audio-clips-before-combining.md",
+      "original_article_blob": "e980149fea4f325afb41b4335429114cac364af7",
+      "workflow_svg": "public/blog-assets/zh-Hans/verify-audio-clips-before-combining/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hans/verify-audio-clips-before-combining/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hans/verify-audio-clips-before-combining/social-card.png",
+      "steps": [
+        "保留原始音频片段",
+        "检查顺序和音频属性",
+        "试听每个衔接处",
+        "导出副本并检查播放"
+      ],
+      "stages": [
+        "保留",
+        "检查",
+        "试做",
+        "验证"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始内容，并验证操作结果。",
+      "brand": "ONNELLAB Blog · 流程图",
+      "alt": "音频合并前验证流程",
+      "published_at": "2026-08-23T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hans/verify-audio-clips-before-combining/",
+      "workflow_svg_blob": "96d20c1025dc7512d7beba0b55c21cac0fb9c432",
+      "social_svg_blob": "96d20c1025dc7512d7beba0b55c21cac0fb9c432"
+    },
+    {
+      "locale": "zh-Hant",
+      "slug": "clean-up-mp3-metadata-before-organizing-music",
+      "title": "整理音樂前，如何清理 MP3 中繼資料",
+      "article": "src/content/blog/zh-Hant/clean-up-mp3-metadata-before-organizing-music.md",
+      "original_article_blob": "52099c15286f57ff61de3c091922f1dd2a275454",
+      "workflow_svg": "public/blog-assets/zh-Hant/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hant/clean-up-mp3-metadata-before-organizing-music/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hant/clean-up-mp3-metadata-before-organizing-music/social-card.png",
+      "steps": [
+        "保留原始MP3檔案",
+        "檢查標籤與專輯分組",
+        "先編輯少量樣本",
+        "重新開啟並測試播放"
+      ],
+      "stages": [
+        "保留",
+        "檢查",
+        "試作",
+        "驗證"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始內容，並驗證操作結果。",
+      "brand": "ONNELLAB Blog · 流程圖",
+      "alt": "MP3 中繼資料整理流程",
+      "published_at": "2026-07-20T14:56:51+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hant/clean-up-mp3-metadata-before-organizing-music/",
+      "workflow_svg_blob": "6af5d477e9861c9bf20ef35edb911ec31f1becc9",
+      "social_svg_blob": "6af5d477e9861c9bf20ef35edb911ec31f1becc9"
+    },
+    {
+      "locale": "zh-Hant",
+      "slug": "convert-local-media-files-privately",
+      "title": "如何在本機私密地轉換媒體檔案",
+      "article": "src/content/blog/zh-Hant/convert-local-media-files-privately.md",
+      "original_article_blob": "e11cd3a975ea32d5bcf5aa26b7159f1db8c96fc5",
+      "workflow_svg": "public/blog-assets/zh-Hant/convert-local-media-files-privately/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hant/convert-local-media-files-privately/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hant/convert-local-media-files-privately/social-card.png",
+      "steps": [
+        "保留原始媒體檔案",
+        "確認本機轉換與檔案格式",
+        "在裝置上轉換樣本",
+        "播放匯出的副本"
+      ],
+      "stages": [
+        "保留",
+        "檢查",
+        "試作",
+        "驗證"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始內容，並驗證操作結果。",
+      "brand": "ONNELLAB Blog · 流程圖",
+      "alt": "本機轉換流程",
+      "published_at": "2026-07-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hant/convert-local-media-files-privately/",
+      "workflow_svg_blob": "d6cd16e5258ac0899685edb98375ecf58c2a8d15",
+      "social_svg_blob": "d6cd16e5258ac0899685edb98375ecf58c2a8d15"
+    },
+    {
+      "locale": "zh-Hant",
+      "slug": "large-text-file-slow-to-open",
+      "title": "為什麼大型文字檔案開啟很慢",
+      "article": "src/content/blog/zh-Hant/large-text-file-slow-to-open.md",
+      "original_article_blob": "05bb901b5b282c5c806a6ffcce0375d67ab7ff23",
+      "workflow_svg": "public/blog-assets/zh-Hant/large-text-file-slow-to-open/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hant/large-text-file-slow-to-open/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hant/large-text-file-slow-to-open/social-card.png",
+      "steps": [
+        "保留原始文字檔",
+        "檢查大小、行與編碼",
+        "用具代表性的副本測試",
+        "選擇負擔較小的讀取方式"
+      ],
+      "stages": [
+        "保留",
+        "檢查",
+        "試作",
+        "驗證"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始內容，並驗證操作結果。",
+      "brand": "ONNELLAB Blog · 流程圖",
+      "alt": "大型文字排查流程",
+      "published_at": "2026-08-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hant/large-text-file-slow-to-open/",
+      "workflow_svg_blob": "ddfd8fc5fab24161d39f108734b95e9f2554ebf2",
+      "social_svg_blob": "ddfd8fc5fab24161d39f108734b95e9f2554ebf2"
+    },
+    {
+      "locale": "zh-Hant",
+      "slug": "read-large-txt-files-without-lag",
+      "title": "如何流暢閱讀大型 TXT 檔案",
+      "article": "src/content/blog/zh-Hant/read-large-txt-files-without-lag.md",
+      "original_article_blob": "33dbfa9668477d3692bf171a3151fc3b6edd576b",
+      "workflow_svg": "public/blog-assets/zh-Hant/read-large-txt-files-without-lag/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hant/read-large-txt-files-without-lag/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hant/read-large-txt-files-without-lag/social-card.png",
+      "steps": [
+        "保留原始TXT",
+        "檢查編碼與行長度",
+        "先讀取一小部分",
+        "驗證搜尋與導覽"
+      ],
+      "stages": [
+        "保留",
+        "檢查",
+        "試作",
+        "驗證"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始內容，並驗證操作結果。",
+      "brand": "ONNELLAB Blog · 流程圖",
+      "alt": "大型 TXT 閱讀流程",
+      "published_at": "2026-07-11T00:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hant/read-large-txt-files-without-lag/",
+      "workflow_svg_blob": "c1a77e6b77eee5e0eafd3188ec55d8b83065a98b",
+      "social_svg_blob": "c1a77e6b77eee5e0eafd3188ec55d8b83065a98b"
+    },
+    {
+      "locale": "zh-Hant",
+      "slug": "rename-files-safely-preview-workflow",
+      "title": "如何用預覽安全地批次重新命名檔案",
+      "article": "src/content/blog/zh-Hant/rename-files-safely-preview-workflow.md",
+      "original_article_blob": "20d745aa4661c83e3e2a62d9245a9ae14c7be077",
+      "workflow_svg": "public/blog-assets/zh-Hant/rename-files-safely-preview-workflow/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hant/rename-files-safely-preview-workflow/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hant/rename-files-safely-preview-workflow/social-card.png",
+      "steps": [
+        "保留備份",
+        "檢查規則與同名衝突",
+        "預覽並先試少量檔案",
+        "核對名稱與檔案內容"
+      ],
+      "stages": [
+        "保留",
+        "檢查",
+        "試作",
+        "驗證"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始內容，並驗證操作結果。",
+      "brand": "ONNELLAB Blog · 流程圖",
+      "alt": "安全批次重新命名流程",
+      "published_at": "2026-08-20T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hant/rename-files-safely-preview-workflow/",
+      "workflow_svg_blob": "e12e3b835d1909df3ddfcffbdbf89ad44b52aedf",
+      "social_svg_blob": "e12e3b835d1909df3ddfcffbdbf89ad44b52aedf"
+    },
+    {
+      "locale": "zh-Hant",
+      "slug": "reuse-copied-text-snippets-iphone",
+      "title": "如何在 iPhone 重複使用複製過的常用文字",
+      "article": "src/content/blog/zh-Hant/reuse-copied-text-snippets-iphone.md",
+      "original_article_blob": "2e877bd9b5cb62534c9425949e3b40bb4e426191",
+      "workflow_svg": "public/blog-assets/zh-Hant/reuse-copied-text-snippets-iphone/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hant/reuse-copied-text-snippets-iphone/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hant/reuse-copied-text-snippets-iphone/social-card.png",
+      "steps": [
+        "選擇要重用的文字",
+        "移除過期或敏感資訊",
+        "在本機儲存選定片段",
+        "貼上、調整並重新檢查"
+      ],
+      "stages": [
+        "保留",
+        "檢查",
+        "試作",
+        "驗證"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始內容，並驗證操作結果。",
+      "brand": "ONNELLAB Blog · 流程圖",
+      "alt": "文字片段流程",
+      "published_at": "2026-07-24T08:24:05+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hant/reuse-copied-text-snippets-iphone/",
+      "workflow_svg_blob": "4e82133bd4e8f5a2d970b11baf6d589ef393492e",
+      "social_svg_blob": "4e82133bd4e8f5a2d970b11baf6d589ef393492e"
+    },
+    {
+      "locale": "zh-Hant",
+      "slug": "trim-audio-recordings-without-full-editor",
+      "title": "不用完整音訊編輯器，如何安全裁切錄音",
+      "article": "src/content/blog/zh-Hant/trim-audio-recordings-without-full-editor.md",
+      "original_article_blob": "b7409d200c100807198173a94cc13b3517cdbec3",
+      "workflow_svg": "public/blog-assets/zh-Hant/trim-audio-recordings-without-full-editor/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hant/trim-audio-recordings-without-full-editor/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hant/trim-audio-recordings-without-full-editor/social-card.png",
+      "steps": [
+        "保留原始錄音",
+        "試聽並標記裁切邊界",
+        "裁切工作副本",
+        "試聽匯出的檔案"
+      ],
+      "stages": [
+        "保留",
+        "檢查",
+        "試作",
+        "驗證"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始內容，並驗證操作結果。",
+      "brand": "ONNELLAB Blog · 流程圖",
+      "alt": "音訊裁切流程",
+      "published_at": "2026-08-17T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hant/trim-audio-recordings-without-full-editor/",
+      "workflow_svg_blob": "f4b617d77a33840622373ccea05df6a06a0105c3",
+      "social_svg_blob": "f4b617d77a33840622373ccea05df6a06a0105c3"
+    },
+    {
+      "locale": "zh-Hant",
+      "slug": "txt-vs-epub-for-long-reading",
+      "title": "長篇閱讀該選 TXT 還是 EPUB",
+      "article": "src/content/blog/zh-Hant/txt-vs-epub-for-long-reading.md",
+      "original_article_blob": "7189eab99bfb40688bdaff6574c0f59072df8006",
+      "workflow_svg": "public/blog-assets/zh-Hant/txt-vs-epub-for-long-reading/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hant/txt-vs-epub-for-long-reading/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hant/txt-vs-epub-for-long-reading/social-card.png",
+      "steps": [
+        "保留原始TXT",
+        "選擇適合閱讀的格式",
+        "需要時轉換副本",
+        "檢查文字、排版與導覽"
+      ],
+      "stages": [
+        "保留",
+        "檢查",
+        "試作",
+        "驗證"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始內容，並驗證操作結果。",
+      "brand": "ONNELLAB Blog · 流程圖",
+      "alt": "TXT 到 EPUB 的可復原流程",
+      "published_at": "2026-08-11T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hant/txt-vs-epub-for-long-reading/",
+      "workflow_svg_blob": "77f85291148a1e21d36aa97201230d46c7224dde",
+      "social_svg_blob": "77f85291148a1e21d36aa97201230d46c7224dde"
+    },
+    {
+      "locale": "zh-Hant",
+      "slug": "verify-audio-clips-before-combining",
+      "title": "合併音訊片段前，應該如何驗證",
+      "article": "src/content/blog/zh-Hant/verify-audio-clips-before-combining.md",
+      "original_article_blob": "c7d07ae73ec0f243b6a42720baf9f809ed0af096",
+      "workflow_svg": "public/blog-assets/zh-Hant/verify-audio-clips-before-combining/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/zh-Hant/verify-audio-clips-before-combining/social-card.svg",
+      "social_png": "public/blog-assets/zh-Hant/verify-audio-clips-before-combining/social-card.png",
+      "steps": [
+        "保留原始音訊片段",
+        "檢查順序與音訊屬性",
+        "試聽每個銜接處",
+        "匯出副本並檢查播放"
+      ],
+      "stages": [
+        "保留",
+        "檢查",
+        "試作",
+        "驗證"
+      ],
+      "subtitle": "文章操作流程摘要",
+      "footer": "保留原始內容，並驗證操作結果。",
+      "brand": "ONNELLAB Blog · 流程圖",
+      "alt": "音訊合併前驗證流程",
+      "published_at": "2026-08-23T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/zh-hant/verify-audio-clips-before-combining/",
+      "workflow_svg_blob": "b39abc50d72c2d1864d1d6431349f8994e6db4a6",
+      "social_svg_blob": "b39abc50d72c2d1864d1d6431349f8994e6db4a6"
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "clean-up-mp3-metadata-before-organizing-music",
+      "title": "Como organizar os metadados de MP3 antes de arrumar sua biblioteca",
+      "article": "src/content/blog/pt-BR/clean-up-mp3-metadata-before-organizing-music.md",
+      "original_article_blob": "3b6fba1527c736137622d7957b080f767e3b8a9c",
+      "workflow_svg": "public/blog-assets/pt-BR/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/pt-BR/clean-up-mp3-metadata-before-organizing-music/social-card.svg",
+      "social_png": "public/blog-assets/pt-BR/clean-up-mp3-metadata-before-organizing-music/social-card.png",
+      "steps": [
+        "Guarde os MP3 originais",
+        "Confira tags e grupos de álbuns",
+        "Edite uma pequena amostra",
+        "Reabra e teste no player"
+      ],
+      "stages": [
+        "Preservar",
+        "Conferir",
+        "Testar",
+        "Validar"
+      ],
+      "subtitle": "Resumo do fluxo explicado no artigo",
+      "footer": "Mantenha a fonte original e confira o resultado.",
+      "brand": "ONNELLAB Blog · Diagrama do fluxo",
+      "alt": "Fluxo de metadados MP3",
+      "published_at": "2026-07-20T14:56:51+09:00",
+      "canonical_url": "https://onnellab.com/blog/pt-br/clean-up-mp3-metadata-before-organizing-music/",
+      "workflow_svg_blob": "244833c03ecf52e867b52b76e27a8751e3aef6d8",
+      "social_svg_blob": "244833c03ecf52e867b52b76e27a8751e3aef6d8"
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "convert-local-media-files-privately",
+      "title": "Como converter arquivos de mídia localmente e com mais privacidade",
+      "article": "src/content/blog/pt-BR/convert-local-media-files-privately.md",
+      "original_article_blob": "3effeba6ad6dbb105be32a7bb8afc55f7293ea91",
+      "workflow_svg": "public/blog-assets/pt-BR/convert-local-media-files-privately/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/pt-BR/convert-local-media-files-privately/social-card.svg",
+      "social_png": "public/blog-assets/pt-BR/convert-local-media-files-privately/social-card.png",
+      "steps": [
+        "Guarde as mídias originais",
+        "Confira conversão local e formatos",
+        "Converta uma amostra no aparelho",
+        "Reproduza a cópia exportada"
+      ],
+      "stages": [
+        "Preservar",
+        "Conferir",
+        "Testar",
+        "Validar"
+      ],
+      "subtitle": "Resumo do fluxo explicado no artigo",
+      "footer": "Mantenha a fonte original e confira o resultado.",
+      "brand": "ONNELLAB Blog · Diagrama do fluxo",
+      "alt": "Fluxo de conversão local",
+      "published_at": "2026-07-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/pt-br/convert-local-media-files-privately/",
+      "workflow_svg_blob": "2135008296396500e4114ce4f78e0c5d46f18986",
+      "social_svg_blob": "2135008296396500e4114ce4f78e0c5d46f18986"
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "large-text-file-slow-to-open",
+      "title": "Por que arquivos de texto grandes demoram para abrir",
+      "article": "src/content/blog/pt-BR/large-text-file-slow-to-open.md",
+      "original_article_blob": "36c0c75fd795292c311038bec0ba00a8f77b8040",
+      "workflow_svg": "public/blog-assets/pt-BR/large-text-file-slow-to-open/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/pt-BR/large-text-file-slow-to-open/social-card.svg",
+      "social_png": "public/blog-assets/pt-BR/large-text-file-slow-to-open/social-card.png",
+      "steps": [
+        "Guarde o texto original",
+        "Confira tamanho, linhas e codificação",
+        "Teste uma cópia representativa",
+        "Escolha um acesso mais leve"
+      ],
+      "stages": [
+        "Preservar",
+        "Conferir",
+        "Testar",
+        "Validar"
+      ],
+      "subtitle": "Resumo do fluxo explicado no artigo",
+      "footer": "Mantenha a fonte original e confira o resultado.",
+      "brand": "ONNELLAB Blog · Diagrama do fluxo",
+      "alt": "Fluxo de diagnóstico",
+      "published_at": "2026-08-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/pt-br/large-text-file-slow-to-open/",
+      "workflow_svg_blob": "f16b9d879edaba30f0a47bb35cbfaa84d79552dd",
+      "social_svg_blob": "f16b9d879edaba30f0a47bb35cbfaa84d79552dd"
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "read-large-txt-files-without-lag",
+      "title": "Como ler arquivos TXT grandes com menos travamentos",
+      "article": "src/content/blog/pt-BR/read-large-txt-files-without-lag.md",
+      "original_article_blob": "4765a93e28507490607862ffc1a67b410ffde1d2",
+      "workflow_svg": "public/blog-assets/pt-BR/read-large-txt-files-without-lag/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/pt-BR/read-large-txt-files-without-lag/social-card.svg",
+      "social_png": "public/blog-assets/pt-BR/read-large-txt-files-without-lag/social-card.png",
+      "steps": [
+        "Guarde o TXT original",
+        "Confira a codificação e o tamanho das linhas",
+        "Leia uma pequena parte",
+        "Teste a busca e a navegação"
+      ],
+      "stages": [
+        "Preservar",
+        "Conferir",
+        "Testar",
+        "Validar"
+      ],
+      "subtitle": "Resumo do fluxo explicado no artigo",
+      "footer": "Mantenha a fonte original e confira o resultado.",
+      "brand": "ONNELLAB Blog · Diagrama do fluxo",
+      "alt": "Fluxo de leitura de TXT grande",
+      "published_at": "2026-07-11T00:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/pt-br/read-large-txt-files-without-lag/",
+      "workflow_svg_blob": "79b64c84472502fd23f2d0475d8b8dddb48bb332",
+      "social_svg_blob": "79b64c84472502fd23f2d0475d8b8dddb48bb332"
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "rename-files-safely-preview-workflow",
+      "title": "Como renomear arquivos em lote com segurança usando pré-visualização",
+      "article": "src/content/blog/pt-BR/rename-files-safely-preview-workflow.md",
+      "original_article_blob": "d8ba03e26792e15a376aa013bfd121147f74f0b8",
+      "workflow_svg": "public/blog-assets/pt-BR/rename-files-safely-preview-workflow/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/pt-BR/rename-files-safely-preview-workflow/social-card.svg",
+      "social_png": "public/blog-assets/pt-BR/rename-files-safely-preview-workflow/social-card.png",
+      "steps": [
+        "Guarde um backup",
+        "Confira regras e nomes repetidos",
+        "Pré-visualize e teste poucos arquivos",
+        "Compare nomes e conteúdo"
+      ],
+      "stages": [
+        "Preservar",
+        "Conferir",
+        "Testar",
+        "Validar"
+      ],
+      "subtitle": "Resumo do fluxo explicado no artigo",
+      "footer": "Mantenha a fonte original e confira o resultado.",
+      "brand": "ONNELLAB Blog · Diagrama do fluxo",
+      "alt": "Fluxo de renomeação segura",
+      "published_at": "2026-08-20T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/pt-br/rename-files-safely-preview-workflow/",
+      "workflow_svg_blob": "a96c09ecebff2006b33154f0b3723e4d3b88fbd6",
+      "social_svg_blob": "a96c09ecebff2006b33154f0b3723e4d3b88fbd6"
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "reuse-copied-text-snippets-iphone",
+      "title": "Como reutilizar textos copiados no iPhone sem perder os trechos importantes",
+      "article": "src/content/blog/pt-BR/reuse-copied-text-snippets-iphone.md",
+      "original_article_blob": "dee310dada2835c783b6dfff6d2259d9be1ee700",
+      "workflow_svg": "public/blog-assets/pt-BR/reuse-copied-text-snippets-iphone/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/pt-BR/reuse-copied-text-snippets-iphone/social-card.svg",
+      "social_png": "public/blog-assets/pt-BR/reuse-copied-text-snippets-iphone/social-card.png",
+      "steps": [
+        "Escolha textos reutilizáveis",
+        "Remova dados antigos ou sensíveis",
+        "Salve trechos selecionados localmente",
+        "Cole, ajuste e releia"
+      ],
+      "stages": [
+        "Preservar",
+        "Conferir",
+        "Testar",
+        "Validar"
+      ],
+      "subtitle": "Resumo do fluxo explicado no artigo",
+      "footer": "Mantenha a fonte original e confira o resultado.",
+      "brand": "ONNELLAB Blog · Diagrama do fluxo",
+      "alt": "Fluxo de trechos de texto",
+      "published_at": "2026-07-24T08:24:05+09:00",
+      "canonical_url": "https://onnellab.com/blog/pt-br/reuse-copied-text-snippets-iphone/",
+      "workflow_svg_blob": "3491aaeb10ae2563f9cb790ed06d150fcc5e254e",
+      "social_svg_blob": "3491aaeb10ae2563f9cb790ed06d150fcc5e254e"
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "trim-audio-recordings-without-full-editor",
+      "title": "Como recortar gravações de áudio sem usar um editor completo",
+      "article": "src/content/blog/pt-BR/trim-audio-recordings-without-full-editor.md",
+      "original_article_blob": "427bd66ec1ca283fff62249a368ce068626a50fa",
+      "workflow_svg": "public/blog-assets/pt-BR/trim-audio-recordings-without-full-editor/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/pt-BR/trim-audio-recordings-without-full-editor/social-card.svg",
+      "social_png": "public/blog-assets/pt-BR/trim-audio-recordings-without-full-editor/social-card.png",
+      "steps": [
+        "Guarde a gravação original",
+        "Ouça e marque os limites",
+        "Recorte uma cópia de trabalho",
+        "Ouça o arquivo exportado"
+      ],
+      "stages": [
+        "Preservar",
+        "Conferir",
+        "Testar",
+        "Validar"
+      ],
+      "subtitle": "Resumo do fluxo explicado no artigo",
+      "footer": "Mantenha a fonte original e confira o resultado.",
+      "brand": "ONNELLAB Blog · Diagrama do fluxo",
+      "alt": "Fluxo de recorte de áudio",
+      "published_at": "2026-08-17T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/pt-br/trim-audio-recordings-without-full-editor/",
+      "workflow_svg_blob": "b22ad6b1ef20667c92fada52ec1f0ec57eb86d33",
+      "social_svg_blob": "b22ad6b1ef20667c92fada52ec1f0ec57eb86d33"
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "txt-vs-epub-for-long-reading",
+      "title": "TXT ou EPUB: qual formato é melhor para leitura longa?",
+      "article": "src/content/blog/pt-BR/txt-vs-epub-for-long-reading.md",
+      "original_article_blob": "cac21d47c7bbac56aead32e2d32490a078178382",
+      "workflow_svg": "public/blog-assets/pt-BR/txt-vs-epub-for-long-reading/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/pt-BR/txt-vs-epub-for-long-reading/social-card.svg",
+      "social_png": "public/blog-assets/pt-BR/txt-vs-epub-for-long-reading/social-card.png",
+      "steps": [
+        "Guarde o TXT original",
+        "Escolha o formato de leitura",
+        "Converta uma cópia se necessário",
+        "Confira texto, layout e navegação"
+      ],
+      "stages": [
+        "Preservar",
+        "Conferir",
+        "Testar",
+        "Validar"
+      ],
+      "subtitle": "Resumo do fluxo explicado no artigo",
+      "footer": "Mantenha a fonte original e confira o resultado.",
+      "brand": "ONNELLAB Blog · Diagrama do fluxo",
+      "alt": "Fluxo TXT para EPUB",
+      "published_at": "2026-08-11T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/pt-br/txt-vs-epub-for-long-reading/",
+      "workflow_svg_blob": "0b9f75bda669e49fddb3bf540de9e756ade8fde2",
+      "social_svg_blob": "0b9f75bda669e49fddb3bf540de9e756ade8fde2"
+    },
+    {
+      "locale": "pt-BR",
+      "slug": "verify-audio-clips-before-combining",
+      "title": "Como verificar clipes de áudio antes de combiná-los",
+      "article": "src/content/blog/pt-BR/verify-audio-clips-before-combining.md",
+      "original_article_blob": "8597b9b6b84c9080e03416fe28e19ed19cc122c1",
+      "workflow_svg": "public/blog-assets/pt-BR/verify-audio-clips-before-combining/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/pt-BR/verify-audio-clips-before-combining/social-card.svg",
+      "social_png": "public/blog-assets/pt-BR/verify-audio-clips-before-combining/social-card.png",
+      "steps": [
+        "Guarde os clipes originais",
+        "Confira ordem e propriedades",
+        "Ouça todas as transições",
+        "Exporte uma cópia e teste o áudio"
+      ],
+      "stages": [
+        "Preservar",
+        "Conferir",
+        "Testar",
+        "Validar"
+      ],
+      "subtitle": "Resumo do fluxo explicado no artigo",
+      "footer": "Mantenha a fonte original e confira o resultado.",
+      "brand": "ONNELLAB Blog · Diagrama do fluxo",
+      "alt": "Fluxo de verificação de clipes de áudio",
+      "published_at": "2026-08-23T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/pt-br/verify-audio-clips-before-combining/",
+      "workflow_svg_blob": "d3999eb6d416993d8b3320b0a759d6f853068562",
+      "social_svg_blob": "d3999eb6d416993d8b3320b0a759d6f853068562"
+    },
+    {
+      "locale": "de",
+      "slug": "clean-up-mp3-metadata-before-organizing-music",
+      "title": "MP3-Metadaten vor dem Sortieren der Musiksammlung bereinigen",
+      "article": "src/content/blog/de/clean-up-mp3-metadata-before-organizing-music.md",
+      "original_article_blob": "ac600cbef4c7afe7af4c3bb501f86905236abed0",
+      "workflow_svg": "public/blog-assets/de/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/de/clean-up-mp3-metadata-before-organizing-music/social-card.svg",
+      "social_png": "public/blog-assets/de/clean-up-mp3-metadata-before-organizing-music/social-card.png",
+      "steps": [
+        "Original-MP3s behalten",
+        "Tags und Albumgruppen prüfen",
+        "Eine kleine Auswahl bearbeiten",
+        "Neu öffnen und im Player testen"
+      ],
+      "stages": [
+        "Sichern",
+        "Prüfen",
+        "Testen",
+        "Validieren"
+      ],
+      "subtitle": "Überblick über den Ablauf im Artikel",
+      "footer": "Original behalten und Ergebnis prüfen.",
+      "brand": "ONNELLAB Blog · Ablaufdiagramm",
+      "alt": "Workflow-Diagramm",
+      "published_at": "2026-07-20T14:56:51+09:00",
+      "canonical_url": "https://onnellab.com/blog/de/clean-up-mp3-metadata-before-organizing-music/",
+      "workflow_svg_blob": "bbb836483feafd41fe8f35877342595d2ddb00e8",
+      "social_svg_blob": "bbb836483feafd41fe8f35877342595d2ddb00e8"
+    },
+    {
+      "locale": "de",
+      "slug": "convert-local-media-files-privately",
+      "title": "Lokale Mediendateien privat konvertieren",
+      "article": "src/content/blog/de/convert-local-media-files-privately.md",
+      "original_article_blob": "aae3b0351f41c4a783eeb844e7e2324d61f2d4ed",
+      "workflow_svg": "public/blog-assets/de/convert-local-media-files-privately/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/de/convert-local-media-files-privately/social-card.svg",
+      "social_png": "public/blog-assets/de/convert-local-media-files-privately/social-card.png",
+      "steps": [
+        "Originalmedien behalten",
+        "Lokale Verarbeitung und Formate prüfen",
+        "Eine Probe auf dem Gerät umwandeln",
+        "Die exportierte Kopie abspielen"
+      ],
+      "stages": [
+        "Sichern",
+        "Prüfen",
+        "Testen",
+        "Validieren"
+      ],
+      "subtitle": "Überblick über den Ablauf im Artikel",
+      "footer": "Original behalten und Ergebnis prüfen.",
+      "brand": "ONNELLAB Blog · Ablaufdiagramm",
+      "alt": "Workflow-Diagramm",
+      "published_at": "2026-07-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/de/convert-local-media-files-privately/",
+      "workflow_svg_blob": "7f0bd0806f79120b3ed1066b922fa217868fca31",
+      "social_svg_blob": "7f0bd0806f79120b3ed1066b922fa217868fca31"
+    },
+    {
+      "locale": "de",
+      "slug": "large-text-file-slow-to-open",
+      "title": "Warum das Öffnen großer Textdateien lange dauert",
+      "article": "src/content/blog/de/large-text-file-slow-to-open.md",
+      "original_article_blob": "a16041ebf27e47c30e8c025695815b6335fb5465",
+      "workflow_svg": "public/blog-assets/de/large-text-file-slow-to-open/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/de/large-text-file-slow-to-open/social-card.svg",
+      "social_png": "public/blog-assets/de/large-text-file-slow-to-open/social-card.png",
+      "steps": [
+        "Originaltext behalten",
+        "Größe, Zeilen und Kodierung prüfen",
+        "Repräsentative Kopie testen",
+        "Eine schlanke Zugriffsmethode wählen"
+      ],
+      "stages": [
+        "Sichern",
+        "Prüfen",
+        "Testen",
+        "Validieren"
+      ],
+      "subtitle": "Überblick über den Ablauf im Artikel",
+      "footer": "Original behalten und Ergebnis prüfen.",
+      "brand": "ONNELLAB Blog · Ablaufdiagramm",
+      "alt": "Diagnose-Workflow",
+      "published_at": "2026-08-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/de/large-text-file-slow-to-open/",
+      "workflow_svg_blob": "9aa4c89a62021cb9d99142c3583c8057881efcca",
+      "social_svg_blob": "9aa4c89a62021cb9d99142c3583c8057881efcca"
+    },
+    {
+      "locale": "de",
+      "slug": "read-large-txt-files-without-lag",
+      "title": "Große TXT-Dateien ohne Ruckeln lesen",
+      "article": "src/content/blog/de/read-large-txt-files-without-lag.md",
+      "original_article_blob": "511ef2a76ac24d50519d2b0de9043b244cd4afc5",
+      "workflow_svg": "public/blog-assets/de/read-large-txt-files-without-lag/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/de/read-large-txt-files-without-lag/social-card.svg",
+      "social_png": "public/blog-assets/de/read-large-txt-files-without-lag/social-card.png",
+      "steps": [
+        "Original-TXT behalten",
+        "Kodierung und Zeilenlänge prüfen",
+        "Einen kleinen Abschnitt lesen",
+        "Suche und Navigation testen"
+      ],
+      "stages": [
+        "Sichern",
+        "Prüfen",
+        "Testen",
+        "Validieren"
+      ],
+      "subtitle": "Überblick über den Ablauf im Artikel",
+      "footer": "Original behalten und Ergebnis prüfen.",
+      "brand": "ONNELLAB Blog · Ablaufdiagramm",
+      "alt": "Workflow für große TXT-Dateien",
+      "published_at": "2026-07-11T00:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/de/read-large-txt-files-without-lag/",
+      "workflow_svg_blob": "905a02079dd28faf7eba76016d03e22a18c8e399",
+      "social_svg_blob": "905a02079dd28faf7eba76016d03e22a18c8e399"
+    },
+    {
+      "locale": "de",
+      "slug": "rename-files-safely-preview-workflow",
+      "title": "Dateien sicher mit einer Vorschau umbenennen",
+      "article": "src/content/blog/de/rename-files-safely-preview-workflow.md",
+      "original_article_blob": "0a02ba21378c29d811877356da257da96d77a62e",
+      "workflow_svg": "public/blog-assets/de/rename-files-safely-preview-workflow/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/de/rename-files-safely-preview-workflow/social-card.svg",
+      "social_png": "public/blog-assets/de/rename-files-safely-preview-workflow/social-card.png",
+      "steps": [
+        "Sicherung behalten",
+        "Regeln und Namenskonflikte prüfen",
+        "Vorschau prüfen und wenige Dateien testen",
+        "Namen und Dateiinhalt vergleichen"
+      ],
+      "stages": [
+        "Sichern",
+        "Prüfen",
+        "Testen",
+        "Validieren"
+      ],
+      "subtitle": "Überblick über den Ablauf im Artikel",
+      "footer": "Original behalten und Ergebnis prüfen.",
+      "brand": "ONNELLAB Blog · Ablaufdiagramm",
+      "alt": "Workflow-Diagramm",
+      "published_at": "2026-08-20T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/de/rename-files-safely-preview-workflow/",
+      "workflow_svg_blob": "d30b76604b8abbbba88ddce74f15a2ffdc4eac57",
+      "social_svg_blob": "d30b76604b8abbbba88ddce74f15a2ffdc4eac57"
+    },
+    {
+      "locale": "de",
+      "slug": "reuse-copied-text-snippets-iphone",
+      "title": "Kopierte Textbausteine auf dem iPhone wiederverwenden",
+      "article": "src/content/blog/de/reuse-copied-text-snippets-iphone.md",
+      "original_article_blob": "0fa33e992f88175c3eb28183449b86782cb40a3a",
+      "workflow_svg": "public/blog-assets/de/reuse-copied-text-snippets-iphone/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/de/reuse-copied-text-snippets-iphone/social-card.svg",
+      "social_png": "public/blog-assets/de/reuse-copied-text-snippets-iphone/social-card.png",
+      "steps": [
+        "Wiederverwendbare Texte wählen",
+        "Veraltete oder sensible Angaben entfernen",
+        "Ausgewählte Texte lokal speichern",
+        "Einfügen, anpassen und erneut lesen"
+      ],
+      "stages": [
+        "Sichern",
+        "Prüfen",
+        "Testen",
+        "Validieren"
+      ],
+      "subtitle": "Überblick über den Ablauf im Artikel",
+      "footer": "Original behalten und Ergebnis prüfen.",
+      "brand": "ONNELLAB Blog · Ablaufdiagramm",
+      "alt": "Workflow-Diagramm",
+      "published_at": "2026-07-24T08:24:05+09:00",
+      "canonical_url": "https://onnellab.com/blog/de/reuse-copied-text-snippets-iphone/",
+      "workflow_svg_blob": "81aa90dd41614266fa96541ee8d8b0f2ba3de272",
+      "social_svg_blob": "81aa90dd41614266fa96541ee8d8b0f2ba3de272"
+    },
+    {
+      "locale": "de",
+      "slug": "trim-audio-recordings-without-full-editor",
+      "title": "Audioaufnahmen ohne vollständigen Editor zuschneiden",
+      "article": "src/content/blog/de/trim-audio-recordings-without-full-editor.md",
+      "original_article_blob": "5b637ad34178929977a9c8dbc078f4773ad25adc",
+      "workflow_svg": "public/blog-assets/de/trim-audio-recordings-without-full-editor/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/de/trim-audio-recordings-without-full-editor/social-card.svg",
+      "social_png": "public/blog-assets/de/trim-audio-recordings-without-full-editor/social-card.png",
+      "steps": [
+        "Originalaufnahme behalten",
+        "Anhören und Schnittgrenzen markieren",
+        "Eine Arbeitskopie schneiden",
+        "Exportierte Datei anhören"
+      ],
+      "stages": [
+        "Sichern",
+        "Prüfen",
+        "Testen",
+        "Validieren"
+      ],
+      "subtitle": "Überblick über den Ablauf im Artikel",
+      "footer": "Original behalten und Ergebnis prüfen.",
+      "brand": "ONNELLAB Blog · Ablaufdiagramm",
+      "alt": "Audio-Trim-Workflow",
+      "published_at": "2026-08-17T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/de/trim-audio-recordings-without-full-editor/",
+      "workflow_svg_blob": "cdc109398b44ef2abe07f26b82a65247516f0325",
+      "social_svg_blob": "cdc109398b44ef2abe07f26b82a65247516f0325"
+    },
+    {
+      "locale": "de",
+      "slug": "txt-vs-epub-for-long-reading",
+      "title": "TXT oder EPUB für langes Lesen?",
+      "article": "src/content/blog/de/txt-vs-epub-for-long-reading.md",
+      "original_article_blob": "8fd91ec6a08a5bf0e4a79d5003cb0316e22b31b9",
+      "workflow_svg": "public/blog-assets/de/txt-vs-epub-for-long-reading/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/de/txt-vs-epub-for-long-reading/social-card.svg",
+      "social_png": "public/blog-assets/de/txt-vs-epub-for-long-reading/social-card.png",
+      "steps": [
+        "Original-TXT behalten",
+        "Passendes Leseformat wählen",
+        "Bei Bedarf eine Kopie umwandeln",
+        "Text, Layout und Navigation prüfen"
+      ],
+      "stages": [
+        "Sichern",
+        "Prüfen",
+        "Testen",
+        "Validieren"
+      ],
+      "subtitle": "Überblick über den Ablauf im Artikel",
+      "footer": "Original behalten und Ergebnis prüfen.",
+      "brand": "ONNELLAB Blog · Ablaufdiagramm",
+      "alt": "TXT-zu-EPUB-Workflow",
+      "published_at": "2026-08-11T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/de/txt-vs-epub-for-long-reading/",
+      "workflow_svg_blob": "94d2962368464c75b7246f0ca2df04fb4a8b2863",
+      "social_svg_blob": "94d2962368464c75b7246f0ca2df04fb4a8b2863"
+    },
+    {
+      "locale": "de",
+      "slug": "verify-audio-clips-before-combining",
+      "title": "Audioclips vor dem Zusammenfügen prüfen",
+      "article": "src/content/blog/de/verify-audio-clips-before-combining.md",
+      "original_article_blob": "5c0f62ebbbc76df10a36780fbb468eaf93193363",
+      "workflow_svg": "public/blog-assets/de/verify-audio-clips-before-combining/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/de/verify-audio-clips-before-combining/social-card.svg",
+      "social_png": "public/blog-assets/de/verify-audio-clips-before-combining/social-card.png",
+      "steps": [
+        "Originalclips behalten",
+        "Reihenfolge und Audioeigenschaften prüfen",
+        "Jeden Übergang anhören",
+        "Kopie exportieren und Wiedergabe prüfen"
+      ],
+      "stages": [
+        "Sichern",
+        "Prüfen",
+        "Testen",
+        "Validieren"
+      ],
+      "subtitle": "Überblick über den Ablauf im Artikel",
+      "footer": "Original behalten und Ergebnis prüfen.",
+      "brand": "ONNELLAB Blog · Ablaufdiagramm",
+      "alt": "Workflow-Diagramm",
+      "published_at": "2026-08-23T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/de/verify-audio-clips-before-combining/",
+      "workflow_svg_blob": "f2e4f8905c384c6010031a2992afd264a26c9567",
+      "social_svg_blob": "f2e4f8905c384c6010031a2992afd264a26c9567"
+    },
+    {
+      "locale": "fr",
+      "slug": "clean-up-mp3-metadata-before-organizing-music",
+      "title": "Nettoyer les métadonnées MP3 avant d’organiser sa musique",
+      "article": "src/content/blog/fr/clean-up-mp3-metadata-before-organizing-music.md",
+      "original_article_blob": "8a4e39d051d8c32dfd08b40e1084004c73e0bfcf",
+      "workflow_svg": "public/blog-assets/fr/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/fr/clean-up-mp3-metadata-before-organizing-music/social-card.svg",
+      "social_png": "public/blog-assets/fr/clean-up-mp3-metadata-before-organizing-music/social-card.png",
+      "steps": [
+        "Garder les MP3 originaux",
+        "Vérifier les tags et les albums",
+        "Modifier un petit échantillon",
+        "Rouvrir et tester la lecture"
+      ],
+      "stages": [
+        "Conserver",
+        "Vérifier",
+        "Tester",
+        "Valider"
+      ],
+      "subtitle": "Résumé de la méthode présentée dans l’article",
+      "footer": "Conservez la source et vérifiez le résultat.",
+      "brand": "ONNELLAB Blog · Schéma de la méthode",
+      "alt": "Schéma du flux de travail",
+      "published_at": "2026-07-20T14:56:51+09:00",
+      "canonical_url": "https://onnellab.com/blog/fr/clean-up-mp3-metadata-before-organizing-music/",
+      "workflow_svg_blob": "a736c5e801e57055f8eeeb59be44244899390104",
+      "social_svg_blob": "a736c5e801e57055f8eeeb59be44244899390104"
+    },
+    {
+      "locale": "fr",
+      "slug": "convert-local-media-files-privately",
+      "title": "Convertir des fichiers multimédias localement et en toute confidentialité",
+      "article": "src/content/blog/fr/convert-local-media-files-privately.md",
+      "original_article_blob": "af01a22462fc232afd4102c9afad3c977a77eafb",
+      "workflow_svg": "public/blog-assets/fr/convert-local-media-files-privately/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/fr/convert-local-media-files-privately/social-card.svg",
+      "social_png": "public/blog-assets/fr/convert-local-media-files-privately/social-card.png",
+      "steps": [
+        "Garder les médias originaux",
+        "Vérifier le traitement local et les formats",
+        "Convertir un fichier test sur l’appareil",
+        "Lire la copie exportée"
+      ],
+      "stages": [
+        "Conserver",
+        "Vérifier",
+        "Tester",
+        "Valider"
+      ],
+      "subtitle": "Résumé de la méthode présentée dans l’article",
+      "footer": "Conservez la source et vérifiez le résultat.",
+      "brand": "ONNELLAB Blog · Schéma de la méthode",
+      "alt": "Schéma de conversion locale",
+      "published_at": "2026-07-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/fr/convert-local-media-files-privately/",
+      "workflow_svg_blob": "08a849172e4a96f12196f6cfb219f529e671ea41",
+      "social_svg_blob": "08a849172e4a96f12196f6cfb219f529e671ea41"
+    },
+    {
+      "locale": "fr",
+      "slug": "large-text-file-slow-to-open",
+      "title": "Pourquoi les gros fichiers texte sont parfois lents à ouvrir",
+      "article": "src/content/blog/fr/large-text-file-slow-to-open.md",
+      "original_article_blob": "ab752c44d0f517dbf0f647a88afebae259417e2e",
+      "workflow_svg": "public/blog-assets/fr/large-text-file-slow-to-open/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/fr/large-text-file-slow-to-open/social-card.svg",
+      "social_png": "public/blog-assets/fr/large-text-file-slow-to-open/social-card.png",
+      "steps": [
+        "Garder le texte original",
+        "Vérifier taille, lignes et encodage",
+        "Tester une copie représentative",
+        "Choisir un accès plus léger"
+      ],
+      "stages": [
+        "Conserver",
+        "Vérifier",
+        "Tester",
+        "Valider"
+      ],
+      "subtitle": "Résumé de la méthode présentée dans l’article",
+      "footer": "Conservez la source et vérifiez le résultat.",
+      "brand": "ONNELLAB Blog · Schéma de la méthode",
+      "alt": "Schéma de diagnostic",
+      "published_at": "2026-08-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/fr/large-text-file-slow-to-open/",
+      "workflow_svg_blob": "cb26d27b6474bfa0374d9b768cd1ce7cece674ed",
+      "social_svg_blob": "cb26d27b6474bfa0374d9b768cd1ce7cece674ed"
+    },
+    {
+      "locale": "fr",
+      "slug": "read-large-txt-files-without-lag",
+      "title": "Lire de gros fichiers TXT sans ralentissements inutiles",
+      "article": "src/content/blog/fr/read-large-txt-files-without-lag.md",
+      "original_article_blob": "13eddc6678ed3fc48396318cd5f8a45ebfe89e85",
+      "workflow_svg": "public/blog-assets/fr/read-large-txt-files-without-lag/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/fr/read-large-txt-files-without-lag/social-card.svg",
+      "social_png": "public/blog-assets/fr/read-large-txt-files-without-lag/social-card.png",
+      "steps": [
+        "Garder le TXT original",
+        "Vérifier encodage et longueur des lignes",
+        "Lire une petite partie",
+        "Tester recherche et navigation"
+      ],
+      "stages": [
+        "Conserver",
+        "Vérifier",
+        "Tester",
+        "Valider"
+      ],
+      "subtitle": "Résumé de la méthode présentée dans l’article",
+      "footer": "Conservez la source et vérifiez le résultat.",
+      "brand": "ONNELLAB Blog · Schéma de la méthode",
+      "alt": "Schéma de lecture gros TXT",
+      "published_at": "2026-07-11T00:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/fr/read-large-txt-files-without-lag/",
+      "workflow_svg_blob": "375eafbdcddb1cfd1fde16bdc33093c916dcda2d",
+      "social_svg_blob": "375eafbdcddb1cfd1fde16bdc33093c916dcda2d"
+    },
+    {
+      "locale": "fr",
+      "slug": "rename-files-safely-preview-workflow",
+      "title": "Renommer des fichiers en lot en vérifiant d’abord l’aperçu",
+      "article": "src/content/blog/fr/rename-files-safely-preview-workflow.md",
+      "original_article_blob": "d017b6fe4b85679fcec4af216b0892cd0e328a9d",
+      "workflow_svg": "public/blog-assets/fr/rename-files-safely-preview-workflow/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/fr/rename-files-safely-preview-workflow/social-card.svg",
+      "social_png": "public/blog-assets/fr/rename-files-safely-preview-workflow/social-card.png",
+      "steps": [
+        "Garder une sauvegarde",
+        "Vérifier règles et conflits de noms",
+        "Prévisualiser et tester un petit lot",
+        "Comparer noms et contenu"
+      ],
+      "stages": [
+        "Conserver",
+        "Vérifier",
+        "Tester",
+        "Valider"
+      ],
+      "subtitle": "Résumé de la méthode présentée dans l’article",
+      "footer": "Conservez la source et vérifiez le résultat.",
+      "brand": "ONNELLAB Blog · Schéma de la méthode",
+      "alt": "Schéma de renommage",
+      "published_at": "2026-08-20T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/fr/rename-files-safely-preview-workflow/",
+      "workflow_svg_blob": "d6a258569b2afb74a387c4195ad92268c2c0bf54",
+      "social_svg_blob": "d6a258569b2afb74a387c4195ad92268c2c0bf54"
+    },
+    {
+      "locale": "fr",
+      "slug": "reuse-copied-text-snippets-iphone",
+      "title": "Réutiliser des fragments de texte copiés sur iPhone",
+      "article": "src/content/blog/fr/reuse-copied-text-snippets-iphone.md",
+      "original_article_blob": "fca7331877040c0b62af6529c4fd4035569479f4",
+      "workflow_svg": "public/blog-assets/fr/reuse-copied-text-snippets-iphone/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/fr/reuse-copied-text-snippets-iphone/social-card.svg",
+      "social_png": "public/blog-assets/fr/reuse-copied-text-snippets-iphone/social-card.png",
+      "steps": [
+        "Choisir les textes réutilisables",
+        "Retirer les données périmées ou sensibles",
+        "Enregistrer les extraits choisis en local",
+        "Coller, adapter et relire"
+      ],
+      "stages": [
+        "Conserver",
+        "Vérifier",
+        "Tester",
+        "Valider"
+      ],
+      "subtitle": "Résumé de la méthode présentée dans l’article",
+      "footer": "Conservez la source et vérifiez le résultat.",
+      "brand": "ONNELLAB Blog · Schéma de la méthode",
+      "alt": "Schéma du flux",
+      "published_at": "2026-07-24T08:24:05+09:00",
+      "canonical_url": "https://onnellab.com/blog/fr/reuse-copied-text-snippets-iphone/",
+      "workflow_svg_blob": "95fcb3766688ccaabd881c8c68672638aaf57801",
+      "social_svg_blob": "95fcb3766688ccaabd881c8c68672638aaf57801"
+    },
+    {
+      "locale": "fr",
+      "slug": "trim-audio-recordings-without-full-editor",
+      "title": "Découper un enregistrement audio sans utiliser un éditeur complet",
+      "article": "src/content/blog/fr/trim-audio-recordings-without-full-editor.md",
+      "original_article_blob": "a983e093106dcc7accc81391f4f797ec3a031498",
+      "workflow_svg": "public/blog-assets/fr/trim-audio-recordings-without-full-editor/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/fr/trim-audio-recordings-without-full-editor/social-card.svg",
+      "social_png": "public/blog-assets/fr/trim-audio-recordings-without-full-editor/social-card.png",
+      "steps": [
+        "Garder l’enregistrement original",
+        "Écouter et repérer les limites",
+        "Découper une copie de travail",
+        "Écouter le fichier exporté"
+      ],
+      "stages": [
+        "Conserver",
+        "Vérifier",
+        "Tester",
+        "Valider"
+      ],
+      "subtitle": "Résumé de la méthode présentée dans l’article",
+      "footer": "Conservez la source et vérifiez le résultat.",
+      "brand": "ONNELLAB Blog · Schéma de la méthode",
+      "alt": "Schéma de découpage",
+      "published_at": "2026-08-17T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/fr/trim-audio-recordings-without-full-editor/",
+      "workflow_svg_blob": "29901225f54651678eb76a5a35e4228ae5d560d8",
+      "social_svg_blob": "29901225f54651678eb76a5a35e4228ae5d560d8"
+    },
+    {
+      "locale": "fr",
+      "slug": "txt-vs-epub-for-long-reading",
+      "title": "TXT ou EPUB pour lire de longs textes ?",
+      "article": "src/content/blog/fr/txt-vs-epub-for-long-reading.md",
+      "original_article_blob": "ac2fbcea70141117cffef9473c377a80cd0a4446",
+      "workflow_svg": "public/blog-assets/fr/txt-vs-epub-for-long-reading/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/fr/txt-vs-epub-for-long-reading/social-card.svg",
+      "social_png": "public/blog-assets/fr/txt-vs-epub-for-long-reading/social-card.png",
+      "steps": [
+        "Garder le TXT original",
+        "Choisir le format de lecture",
+        "Convertir une copie si nécessaire",
+        "Vérifier texte, mise en page et navigation"
+      ],
+      "stages": [
+        "Conserver",
+        "Vérifier",
+        "Tester",
+        "Valider"
+      ],
+      "subtitle": "Résumé de la méthode présentée dans l’article",
+      "footer": "Conservez la source et vérifiez le résultat.",
+      "brand": "ONNELLAB Blog · Schéma de la méthode",
+      "alt": "Schéma TXT vers EPUB",
+      "published_at": "2026-08-11T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/fr/txt-vs-epub-for-long-reading/",
+      "workflow_svg_blob": "12cfce6403325db841ff76c528b7b6362ae3acf7",
+      "social_svg_blob": "12cfce6403325db841ff76c528b7b6362ae3acf7"
+    },
+    {
+      "locale": "fr",
+      "slug": "verify-audio-clips-before-combining",
+      "title": "Vérifier des clips audio avant de les combiner",
+      "article": "src/content/blog/fr/verify-audio-clips-before-combining.md",
+      "original_article_blob": "7134ffa0f7ad6939f0b28b9182b7629321365d66",
+      "workflow_svg": "public/blog-assets/fr/verify-audio-clips-before-combining/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/fr/verify-audio-clips-before-combining/social-card.svg",
+      "social_png": "public/blog-assets/fr/verify-audio-clips-before-combining/social-card.png",
+      "steps": [
+        "Garder les clips originaux",
+        "Vérifier ordre et propriétés audio",
+        "Écouter chaque transition",
+        "Exporter une copie et tester la lecture"
+      ],
+      "stages": [
+        "Conserver",
+        "Vérifier",
+        "Tester",
+        "Valider"
+      ],
+      "subtitle": "Résumé de la méthode présentée dans l’article",
+      "footer": "Conservez la source et vérifiez le résultat.",
+      "brand": "ONNELLAB Blog · Schéma de la méthode",
+      "alt": "Schéma de vérification",
+      "published_at": "2026-08-23T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/fr/verify-audio-clips-before-combining/",
+      "workflow_svg_blob": "64ebccc7d09bbb0bd011bd15ff46a5390cdd4851",
+      "social_svg_blob": "64ebccc7d09bbb0bd011bd15ff46a5390cdd4851"
+    },
+    {
+      "locale": "es",
+      "slug": "clean-up-mp3-metadata-before-organizing-music",
+      "title": "Cómo limpiar los metadatos MP3 antes de organizar tu música",
+      "article": "src/content/blog/es/clean-up-mp3-metadata-before-organizing-music.md",
+      "original_article_blob": "302bdf94d6eec7ad2e9c7a693c9639a95a2d09aa",
+      "workflow_svg": "public/blog-assets/es/clean-up-mp3-metadata-before-organizing-music/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/es/clean-up-mp3-metadata-before-organizing-music/social-card.svg",
+      "social_png": "public/blog-assets/es/clean-up-mp3-metadata-before-organizing-music/social-card.png",
+      "steps": [
+        "Guarda los MP3 originales",
+        "Revisa etiquetas y grupos de álbumes",
+        "Edita una muestra pequeña",
+        "Abre de nuevo y prueba la reproducción"
+      ],
+      "stages": [
+        "Conservar",
+        "Revisar",
+        "Probar",
+        "Validar"
+      ],
+      "subtitle": "Resumen del proceso explicado en el artículo",
+      "footer": "Conserva el original y comprueba el resultado.",
+      "brand": "ONNELLAB Blog · Diagrama del proceso",
+      "alt": "Diagrama del flujo",
+      "published_at": "2026-07-20T14:56:51+09:00",
+      "canonical_url": "https://onnellab.com/blog/es/clean-up-mp3-metadata-before-organizing-music/",
+      "workflow_svg_blob": "c69d1597cdaaa0dfb0889ee5d39ae3cd778f5b50",
+      "social_svg_blob": "c69d1597cdaaa0dfb0889ee5d39ae3cd778f5b50"
+    },
+    {
+      "locale": "es",
+      "slug": "convert-local-media-files-privately",
+      "title": "Cómo convertir archivos multimedia localmente y con privacidad",
+      "article": "src/content/blog/es/convert-local-media-files-privately.md",
+      "original_article_blob": "ddc24c54f57b25f91e0fad043a9c5f9e65c4892b",
+      "workflow_svg": "public/blog-assets/es/convert-local-media-files-privately/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/es/convert-local-media-files-privately/social-card.svg",
+      "social_png": "public/blog-assets/es/convert-local-media-files-privately/social-card.png",
+      "steps": [
+        "Guarda los medios originales",
+        "Revisa conversión local y formatos",
+        "Convierte una muestra en el dispositivo",
+        "Reproduce la copia exportada"
+      ],
+      "stages": [
+        "Conservar",
+        "Revisar",
+        "Probar",
+        "Validar"
+      ],
+      "subtitle": "Resumen del proceso explicado en el artículo",
+      "footer": "Conserva el original y comprueba el resultado.",
+      "brand": "ONNELLAB Blog · Diagrama del proceso",
+      "alt": "Diagrama de conversión local",
+      "published_at": "2026-07-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/es/convert-local-media-files-privately/",
+      "workflow_svg_blob": "07d82550d72680d3730f0d5ec0b7a3c0ee123b1b",
+      "social_svg_blob": "07d82550d72680d3730f0d5ec0b7a3c0ee123b1b"
+    },
+    {
+      "locale": "es",
+      "slug": "large-text-file-slow-to-open",
+      "title": "Por qué los archivos de texto grandes tardan en abrirse",
+      "article": "src/content/blog/es/large-text-file-slow-to-open.md",
+      "original_article_blob": "372f32f55a098183bdd08f125d6a0ac9cc75e9a8",
+      "workflow_svg": "public/blog-assets/es/large-text-file-slow-to-open/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/es/large-text-file-slow-to-open/social-card.svg",
+      "social_png": "public/blog-assets/es/large-text-file-slow-to-open/social-card.png",
+      "steps": [
+        "Guarda el texto original",
+        "Revisa tamaño, líneas y codificación",
+        "Prueba una copia representativa",
+        "Elige un método de acceso ligero"
+      ],
+      "stages": [
+        "Conservar",
+        "Revisar",
+        "Probar",
+        "Validar"
+      ],
+      "subtitle": "Resumen del proceso explicado en el artículo",
+      "footer": "Conserva el original y comprueba el resultado.",
+      "brand": "ONNELLAB Blog · Diagrama del proceso",
+      "alt": "Diagrama de diagnóstico",
+      "published_at": "2026-08-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/es/large-text-file-slow-to-open/",
+      "workflow_svg_blob": "9dc03ae8b12fa2b17973e144be50dbd4e92d177b",
+      "social_svg_blob": "9dc03ae8b12fa2b17973e144be50dbd4e92d177b"
+    },
+    {
+      "locale": "es",
+      "slug": "read-large-txt-files-without-lag",
+      "title": "Cómo leer archivos TXT grandes sin ralentizaciones innecesarias",
+      "article": "src/content/blog/es/read-large-txt-files-without-lag.md",
+      "original_article_blob": "88665a030902c17ba06201bb77c0957f838adc97",
+      "workflow_svg": "public/blog-assets/es/read-large-txt-files-without-lag/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/es/read-large-txt-files-without-lag/social-card.svg",
+      "social_png": "public/blog-assets/es/read-large-txt-files-without-lag/social-card.png",
+      "steps": [
+        "Guarda el TXT original",
+        "Revisa codificación y longitud de líneas",
+        "Lee una parte pequeña",
+        "Prueba búsqueda y navegación"
+      ],
+      "stages": [
+        "Conservar",
+        "Revisar",
+        "Probar",
+        "Validar"
+      ],
+      "subtitle": "Resumen del proceso explicado en el artículo",
+      "footer": "Conserva el original y comprueba el resultado.",
+      "brand": "ONNELLAB Blog · Diagrama del proceso",
+      "alt": "Diagrama de lectura",
+      "published_at": "2026-07-11T00:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/es/read-large-txt-files-without-lag/",
+      "workflow_svg_blob": "6f8493881ccdceac4d2c34d6b761b3f992d4d8dd",
+      "social_svg_blob": "6f8493881ccdceac4d2c34d6b761b3f992d4d8dd"
+    },
+    {
+      "locale": "es",
+      "slug": "rename-files-safely-preview-workflow",
+      "title": "Cómo renombrar archivos por lotes usando una vista previa",
+      "article": "src/content/blog/es/rename-files-safely-preview-workflow.md",
+      "original_article_blob": "8005f642f80b173e1cec85e86483c2fe87335da6",
+      "workflow_svg": "public/blog-assets/es/rename-files-safely-preview-workflow/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/es/rename-files-safely-preview-workflow/social-card.svg",
+      "social_png": "public/blog-assets/es/rename-files-safely-preview-workflow/social-card.png",
+      "steps": [
+        "Guarda una copia de seguridad",
+        "Revisa reglas y conflictos de nombres",
+        "Previsualiza y prueba pocos archivos",
+        "Compara nombres y contenido"
+      ],
+      "stages": [
+        "Conservar",
+        "Revisar",
+        "Probar",
+        "Validar"
+      ],
+      "subtitle": "Resumen del proceso explicado en el artículo",
+      "footer": "Conserva el original y comprueba el resultado.",
+      "brand": "ONNELLAB Blog · Diagrama del proceso",
+      "alt": "Diagrama de renombrado",
+      "published_at": "2026-08-20T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/es/rename-files-safely-preview-workflow/",
+      "workflow_svg_blob": "549f9df0233d4fc2ee981b9692bb801fc8260189",
+      "social_svg_blob": "549f9df0233d4fc2ee981b9692bb801fc8260189"
+    },
+    {
+      "locale": "es",
+      "slug": "reuse-copied-text-snippets-iphone",
+      "title": "Cómo reutilizar fragmentos de texto copiados en iPhone",
+      "article": "src/content/blog/es/reuse-copied-text-snippets-iphone.md",
+      "original_article_blob": "60d6ec0be2399abba7655124a8b015d3679a3119",
+      "workflow_svg": "public/blog-assets/es/reuse-copied-text-snippets-iphone/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/es/reuse-copied-text-snippets-iphone/social-card.svg",
+      "social_png": "public/blog-assets/es/reuse-copied-text-snippets-iphone/social-card.png",
+      "steps": [
+        "Elige textos reutilizables",
+        "Elimina datos antiguos o sensibles",
+        "Guarda los fragmentos elegidos localmente",
+        "Pega, adapta y vuelve a leer"
+      ],
+      "stages": [
+        "Conservar",
+        "Revisar",
+        "Probar",
+        "Validar"
+      ],
+      "subtitle": "Resumen del proceso explicado en el artículo",
+      "footer": "Conserva el original y comprueba el resultado.",
+      "brand": "ONNELLAB Blog · Diagrama del proceso",
+      "alt": "Diagrama del flujo",
+      "published_at": "2026-07-24T08:24:05+09:00",
+      "canonical_url": "https://onnellab.com/blog/es/reuse-copied-text-snippets-iphone/",
+      "workflow_svg_blob": "39be8193ad7f8ca872efccfe8c45102d5f034d67",
+      "social_svg_blob": "39be8193ad7f8ca872efccfe8c45102d5f034d67"
+    },
+    {
+      "locale": "es",
+      "slug": "trim-audio-recordings-without-full-editor",
+      "title": "Cómo recortar una grabación de audio sin usar un editor completo",
+      "article": "src/content/blog/es/trim-audio-recordings-without-full-editor.md",
+      "original_article_blob": "2d2f5e52311b19d4535802db049c589072597292",
+      "workflow_svg": "public/blog-assets/es/trim-audio-recordings-without-full-editor/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/es/trim-audio-recordings-without-full-editor/social-card.svg",
+      "social_png": "public/blog-assets/es/trim-audio-recordings-without-full-editor/social-card.png",
+      "steps": [
+        "Guarda la grabación original",
+        "Escucha y marca los límites",
+        "Recorta una copia de trabajo",
+        "Escucha el archivo exportado"
+      ],
+      "stages": [
+        "Conservar",
+        "Revisar",
+        "Probar",
+        "Validar"
+      ],
+      "subtitle": "Resumen del proceso explicado en el artículo",
+      "footer": "Conserva el original y comprueba el resultado.",
+      "brand": "ONNELLAB Blog · Diagrama del proceso",
+      "alt": "Flujo de recorte",
+      "published_at": "2026-08-17T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/es/trim-audio-recordings-without-full-editor/",
+      "workflow_svg_blob": "0a5a483c1046999ae0f5a25db50d97180fbe5e26",
+      "social_svg_blob": "0a5a483c1046999ae0f5a25db50d97180fbe5e26"
+    },
+    {
+      "locale": "es",
+      "slug": "txt-vs-epub-for-long-reading",
+      "title": "TXT o EPUB para leer textos largos",
+      "article": "src/content/blog/es/txt-vs-epub-for-long-reading.md",
+      "original_article_blob": "a9cc6eb2b0e48485d706bdf23f9f6f8f2f257614",
+      "workflow_svg": "public/blog-assets/es/txt-vs-epub-for-long-reading/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/es/txt-vs-epub-for-long-reading/social-card.svg",
+      "social_png": "public/blog-assets/es/txt-vs-epub-for-long-reading/social-card.png",
+      "steps": [
+        "Guarda el TXT original",
+        "Elige el formato de lectura",
+        "Convierte una copia si hace falta",
+        "Revisa texto, diseño y navegación"
+      ],
+      "stages": [
+        "Conservar",
+        "Revisar",
+        "Probar",
+        "Validar"
+      ],
+      "subtitle": "Resumen del proceso explicado en el artículo",
+      "footer": "Conserva el original y comprueba el resultado.",
+      "brand": "ONNELLAB Blog · Diagrama del proceso",
+      "alt": "Flujo TXT a EPUB",
+      "published_at": "2026-08-11T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/es/txt-vs-epub-for-long-reading/",
+      "workflow_svg_blob": "e31074abad017a73504c506c0c718767501b21ab",
+      "social_svg_blob": "e31074abad017a73504c506c0c718767501b21ab"
+    },
+    {
+      "locale": "es",
+      "slug": "verify-audio-clips-before-combining",
+      "title": "Cómo verificar clips de audio antes de combinarlos",
+      "article": "src/content/blog/es/verify-audio-clips-before-combining.md",
+      "original_article_blob": "1ec2d4e427e69712b11661588d3a2d968471d389",
+      "workflow_svg": "public/blog-assets/es/verify-audio-clips-before-combining/workflow-diagram.svg",
+      "social_svg": "public/blog-assets/es/verify-audio-clips-before-combining/social-card.svg",
+      "social_png": "public/blog-assets/es/verify-audio-clips-before-combining/social-card.png",
+      "steps": [
+        "Guarda los clips originales",
+        "Revisa orden y propiedades de audio",
+        "Escucha cada transición",
+        "Exporta una copia y prueba la reproducción"
+      ],
+      "stages": [
+        "Conservar",
+        "Revisar",
+        "Probar",
+        "Validar"
+      ],
+      "subtitle": "Resumen del proceso explicado en el artículo",
+      "footer": "Conserva el original y comprueba el resultado.",
+      "brand": "ONNELLAB Blog · Diagrama del proceso",
+      "alt": "Diagrama de verificación",
+      "published_at": "2026-08-23T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/es/verify-audio-clips-before-combining/",
+      "workflow_svg_blob": "3ba9e81a852b8139fc954368ff794047a797adec",
+      "social_svg_blob": "3ba9e81a852b8139fc954368ff794047a797adec"
+    }
+  ],
+  "english_step_sources": {
+    "clean-up-mp3-metadata-before-organizing-music": [
+      "Keep original MP3 files",
+      "Check tags and album grouping",
+      "Edit a small sample",
+      "Reopen and test in a player"
+    ],
+    "convert-local-media-files-privately": [
+      "Keep original media",
+      "Check local conversion and formats",
+      "Convert a sample on the device",
+      "Play the exported copy"
+    ],
+    "large-text-file-slow-to-open": [
+      "Keep original text",
+      "Check size, lines and encoding",
+      "Test a representative copy",
+      "Choose a lightweight access method"
+    ],
+    "read-large-txt-files-without-lag": [
+      "Keep the original TXT",
+      "Check encoding and line length",
+      "Try reading a small portion",
+      "Verify search and navigation"
+    ],
+    "rename-files-safely-preview-workflow": [
+      "Keep a backup",
+      "Check rules and name conflicts",
+      "Preview and try a small batch",
+      "Compare names and file contents"
+    ],
+    "reuse-copied-text-snippets-iphone": [
+      "Choose reusable text",
+      "Remove stale or sensitive details",
+      "Save selected snippets locally",
+      "Paste, adapt and reread"
+    ],
+    "trim-audio-recordings-without-full-editor": [
+      "Keep the original recording",
+      "Listen and mark the boundaries",
+      "Trim a working copy",
+      "Listen to the exported file"
+    ],
+    "txt-vs-epub-for-long-reading": [
+      "Keep the original TXT",
+      "Choose the reading format",
+      "Convert a copy if needed",
+      "Check text, layout and navigation"
+    ],
+    "verify-audio-clips-before-combining": [
+      "Keep the original clips",
+      "Check order and audio properties",
+      "Listen to every transition",
+      "Export a copy and verify playback"
+    ]
+  },
+  "independent_text_review": {
+    "reviewed_on": "2026-10-12",
+    "reviewer": "separate editorial reviewer",
+    "scope": "Seven locales, nine four-step summaries plus shared labels; checked source fidelity and natural wording",
+    "corrections": [
+      "Japanese rename preview restored",
+      "Portuguese and Spanish album grouping clarified",
+      "Portuguese line-length meaning restored",
+      "German rereading and stage verb clarified",
+      "French test-file wording clarified"
+    ],
+    "native_speaker_attestation": false
+  },
+  "original_source_provenance": [
+    {
+      "path": "src/content/blog/en/clean-up-mp3-metadata-before-organizing-music.md",
+      "blob": "da17e66f66aa48aa49f1acbec5dc8c95f1c92d34",
+      "published_at": "2026-07-20T14:56:51+09:00",
+      "canonical_url": "https://onnellab.com/blog/en/clean-up-mp3-metadata-before-organizing-music/"
+    },
+    {
+      "path": "src/content/blog/en/convert-local-media-files-privately.md",
+      "blob": "8ee80abf612e99e23a920e4b241f1b336692d0f5",
+      "published_at": "2026-07-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/en/convert-local-media-files-privately/"
+    },
+    {
+      "path": "src/content/blog/en/large-text-file-slow-to-open.md",
+      "blob": "4871bc14aa933136a0e6cb95af9023912294f279",
+      "published_at": "2026-08-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/en/large-text-file-slow-to-open/"
+    },
+    {
+      "path": "src/content/blog/en/read-large-txt-files-without-lag.md",
+      "blob": "f8d3c9dd513438d45eda079107f84f8e907f565a",
+      "published_at": "2026-07-11T00:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/en/read-large-txt-files-without-lag/"
+    },
+    {
+      "path": "src/content/blog/en/rename-files-safely-preview-workflow.md",
+      "blob": "5c57c4065fa20d5acf80ff2f32a559256048d2b7",
+      "published_at": "2026-08-20T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/en/rename-files-safely-preview-workflow/"
+    },
+    {
+      "path": "src/content/blog/en/reuse-copied-text-snippets-iphone.md",
+      "blob": "8dbf609ebd929bbc7b8de538dd84c7ec82c3c732",
+      "published_at": "2026-07-24T08:24:05+09:00",
+      "canonical_url": "https://onnellab.com/blog/en/reuse-copied-text-snippets-iphone/"
+    },
+    {
+      "path": "src/content/blog/en/trim-audio-recordings-without-full-editor.md",
+      "blob": "2de756c29411ee783c176359147e51e4cf17c355",
+      "published_at": "2026-08-17T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/en/trim-audio-recordings-without-full-editor/"
+    },
+    {
+      "path": "src/content/blog/en/txt-vs-epub-for-long-reading.md",
+      "blob": "ff0cf7a432676ae4fde7f18f17f29fc5e00e9877",
+      "published_at": "2026-08-11T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/en/txt-vs-epub-for-long-reading/"
+    },
+    {
+      "path": "src/content/blog/en/verify-audio-clips-before-combining.md",
+      "blob": "076f14c5be05cf741fa58e2e828bf1828009cb9d",
+      "published_at": "2026-08-23T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/en/verify-audio-clips-before-combining/"
+    },
+    {
+      "path": "src/content/blog/ko/clean-up-mp3-metadata-before-organizing-music.md",
+      "blob": "d78474df433135843e00a9550b406e8da42ea513",
+      "published_at": "2026-07-20T14:56:51+09:00",
+      "canonical_url": "https://onnellab.com/blog/ko/clean-up-mp3-metadata-before-organizing-music/"
+    },
+    {
+      "path": "src/content/blog/ko/convert-local-media-files-privately.md",
+      "blob": "d0fc8bacaac68639701048797dab92918acc0a7c",
+      "published_at": "2026-07-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ko/convert-local-media-files-privately/"
+    },
+    {
+      "path": "src/content/blog/ko/large-text-file-slow-to-open.md",
+      "blob": "004a104c3a689e19f63ff94cfec57cd60be1506f",
+      "published_at": "2026-08-14T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ko/large-text-file-slow-to-open/"
+    },
+    {
+      "path": "src/content/blog/ko/read-large-txt-files-without-lag.md",
+      "blob": "00788a718e09a11bd5b7f7f7d413669984098fe1",
+      "published_at": "2026-07-11T00:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ko/read-large-txt-files-without-lag/"
+    },
+    {
+      "path": "src/content/blog/ko/rename-files-safely-preview-workflow.md",
+      "blob": "2b5178dd19ac0eed19315048dd56f6ac903d0759",
+      "published_at": "2026-08-20T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ko/rename-files-safely-preview-workflow/"
+    },
+    {
+      "path": "src/content/blog/ko/reuse-copied-text-snippets-iphone.md",
+      "blob": "8a12ef7c268e566fe2bb43e11a534a619d0a5ab1",
+      "published_at": "2026-07-24T08:24:05+09:00",
+      "canonical_url": "https://onnellab.com/blog/ko/reuse-copied-text-snippets-iphone/"
+    },
+    {
+      "path": "src/content/blog/ko/trim-audio-recordings-without-full-editor.md",
+      "blob": "9e93f6290837542ce479d86b0eb289cada3e7df9",
+      "published_at": "2026-08-17T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ko/trim-audio-recordings-without-full-editor/"
+    },
+    {
+      "path": "src/content/blog/ko/txt-vs-epub-for-long-reading.md",
+      "blob": "12c3102d0adc4a300a131798111b6269f5d0a946",
+      "published_at": "2026-08-11T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ko/txt-vs-epub-for-long-reading/"
+    },
+    {
+      "path": "src/content/blog/ko/verify-audio-clips-before-combining.md",
+      "blob": "fe88ff13f2b051480eaa1c87881b64156b603661",
+      "published_at": "2026-08-23T09:00:00+09:00",
+      "canonical_url": "https://onnellab.com/blog/ko/verify-audio-clips-before-combining/"
+    }
+  ]
+}

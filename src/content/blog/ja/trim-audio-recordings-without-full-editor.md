@@ -95,7 +95,7 @@ MP3、AAC、Opus、Vorbisは非可逆コーデックです。デコードした�
 9. **出力を検証する。** 可能なら別プレーヤーで開き、冒頭、末尾、長さ、シーク、両チャンネル、音質を確認します。
 10. **原本を保持する。** 結果が利用先へ届き、その後の確認まで終わるまで残します。
 
-![音声トリミングワークフロー](/blog-assets/en/trim-audio-recordings-without-full-editor/workflow-diagram.svg "原本を守り、境界を選び、書き出し、確認するワークフロー")
+![音声トリミングワークフロー](/blog-assets/ja/trim-audio-recordings-without-full-editor/workflow-diagram.svg "原本を守り、境界を選び、書き出し、確認するワークフロー")
 
 ## ONNELLABでの活用
 
