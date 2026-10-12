@@ -54,6 +54,13 @@ const heroSlides = [
   if (!app || !slide.screenshot) return [];
   return [{ ...slide, app, screenshot: slide.screenshot }];
 });
+// A fixed, slightly asymmetric three-slot showroom. Only the product content
+// rotates; the Melivra-centered geometry is the permanent layout reference.
+const initialHeroSlots = [
+  { position: 'previous', index: 2 },
+  { position: 'active', index: 0 },
+  { position: 'next', index: 1 }
+] as const;
 const accentStyle = (app: ProductIndexItem) =>
   '--accent-border: ' + app.accent.border + '; --accent-bg: ' + app.accent.background + '; --accent-text: ' + app.accent.text + ';';
 const navigationLabels: Record<AllSiteLocale, string> = {
@@ -143,37 +150,42 @@ const jsonLd = [
               </div>
             </div>
             <div class="hero-stage" data-hero-track role="group" tabindex="0" aria-label={copy.carousel.choose}>
-              {heroSlides.map((slide, index) => (
-                <a
-                  class="hero-slide"
-                  data-hero-slide
-                  data-index={index}
-                  data-position={index === 0 ? 'active' : index === 1 ? 'next' : 'previous'}
-                  aria-current={index === 0 ? 'true' : undefined}
-                  href={linkFor(slide.slug)}
-                  aria-label={slide.app.title + ' · ' + slide.category}
-                  style={accentStyle(slide.app)}
-                >
-                  <div class="hero-slide-screen">
-                    <img
-                      src={slide.screenshot}
-                      alt=""
-                      width={slide.width}
-                      height={slide.height}
-                      loading={index === 0 ? 'eager' : 'lazy'}
-                      fetchpriority={index === 0 ? 'high' : 'auto'}
-                      decoding="async"
-                    />
+              {initialHeroSlots.map(({ position, index }) => {
+                const slide = heroSlides[index];
+                return slide && (
+                  <div class="hero-slot" data-hero-slot={position}>
+                    <a
+                      class="hero-slide"
+                      data-hero-slide
+                      data-index={index}
+                      data-position={position}
+                      aria-current={position === 'active' ? 'true' : undefined}
+                      href={linkFor(slide.slug)}
+                      aria-label={slide.app.title + ' · ' + slide.category}
+                      style={accentStyle(slide.app)}
+                    >
+                      <div class="hero-slide-screen">
+                        <img
+                          src={slide.screenshot}
+                          alt=""
+                          width={slide.width}
+                          height={slide.height}
+                          loading={index === 0 ? 'eager' : 'lazy'}
+                          fetchpriority={index === 0 ? 'high' : 'auto'}
+                          decoding="async"
+                        />
+                      </div>
+                      <div class="hero-slide-label">
+                        <span class="hero-slide-identity">
+                          <strong>{slide.app.title}</strong>
+                          <small>{slide.category}</small>
+                        </span>
+                        <span class="hero-slide-link-arrow" aria-hidden="true">↗</span>
+                      </div>
+                    </a>
                   </div>
-                  <div class="hero-slide-label">
-                    <span class="hero-slide-identity">
-                      <strong>{slide.app.title}</strong>
-                      <small>{slide.category}</small>
-                    </span>
-                    <span class="hero-slide-link-arrow" aria-hidden="true">↗</span>
-                  </div>
-                </a>
-              ))}
+                );
+              })}
             </div>
 
           </div>

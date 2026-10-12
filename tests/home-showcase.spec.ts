@@ -177,7 +177,7 @@ test('all three Android cards are fully visible with a large center at four widt
     expect(result.overflow, String(width)).toBeLessThanOrEqual(1);
     expect(result.innerScroll, 'no half-visible scrolling on ' + width).toBeLessThanOrEqual(1);
     expect(result.cards).toHaveLength(3);
-    expect(result.cards.map((item) => item.position)).toEqual(['active', 'next', 'previous']);
+    expect(result.cards.map((item) => item.position)).toEqual(['previous', 'active', 'next']);
     for (const frame of result.cards) {
       expect(frame.withinStage, frame.name + ' at ' + width).toBe(true);
       expect(frame.src).toContain('/home-assets/screenshots/android-20261012/ko/');
@@ -211,9 +211,9 @@ test('carousel arrows, dots and keyboard rotate the central card continuously', 
   const track = carousel.locator('[data-hero-track]');
   const counter = carousel.locator('[data-hero-counter]');
   const center = carousel.locator('.hero-slide[data-position="active"] .hero-slide-identity strong');
-  await expect(carousel.locator('.hero-slide-identity strong')).toHaveText(['TagWeaver', 'Melivra', 'Papira']);
+  await expect(carousel.locator('.hero-slide-identity strong')).toHaveText(['Papira', 'TagWeaver', 'Melivra']);
   await expect(carousel.locator('.hero-slide-identity small')).toHaveText([
-    '음악 태그 편집', '로컬 음악 플레이어', '전자책 만들기'
+    '전자책 만들기', '음악 태그 편집', '로컬 음악 플레이어'
   ]);
   await expect(dots).toHaveCount(3);
   await expect(counter).toHaveText('01 / 03');
@@ -355,9 +355,9 @@ test('the center card subtly occludes both complete side previews after every ro
           stageOverflow: stage.scrollWidth - stage.clientWidth,
           coveredLeft: p.right - c.left,
           coveredRight: c.right - n.left,
-          centerZ: Number(getComputedStyle(center).zIndex),
-          prevZ: Number(getComputedStyle(previous).zIndex),
-          nextZ: Number(getComputedStyle(next).zIndex),
+          centerZ: Number(getComputedStyle(center.closest('[data-hero-slot]')!).zIndex),
+          prevZ: Number(getComputedStyle(previous.closest('[data-hero-slot]')!).zIndex),
+          nextZ: Number(getComputedStyle(next.closest('[data-hero-slot]')!).zIndex),
           allOnStage: [c, p, n].every((r) => r.left >= outer.left - 1 && r.right <= outer.right + 1),
           balancedSizes: c.width > p.width * 1.1 && c.width < p.width * 1.22 && c.width > n.width * 1.14 && c.width < n.width * 1.26
         };
@@ -398,7 +398,7 @@ test('hero screenshots stand alone and every product identity is below its image
         };
       })
     );
-    expect(cards.map((card) => card.name)).toEqual(['TagWeaver', 'Melivra', 'Papira']);
+    expect(cards.map((card) => card.name)).toEqual(['Papira', 'TagWeaver', 'Melivra']);
     for (const card of cards) {
       expect(card.visualBelow).toBeGreaterThanOrEqual(5);
       expect(card.labelBackground).toBe('rgba(0, 0, 0, 0)');
@@ -597,12 +597,147 @@ test('Hero titles appear as text only, without adjacent app icons', async ({ pag
     await page.goto('/ko/');
     const labels = page.locator('.hero-slide-label');
     await expect(labels).toHaveCount(3);
-    await expect(labels.locator('strong')).toHaveText(['TagWeaver', 'Melivra', 'Papira']);
+    await expect(labels.locator('strong')).toHaveText(['Papira', 'TagWeaver', 'Melivra']);
     await expect(labels.locator('img')).toHaveCount(0);
     await expect(page.locator('.hero-slide-screen img')).toHaveCount(3);
     await expect(page.locator('.hero-slide[data-position="active"] strong')).toHaveText('TagWeaver');
     await page.locator('[data-hero-next]').click();
     await expect(page.locator('.hero-slide[data-position="active"] strong')).toHaveText('Melivra');
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+  }
+});
+
+test('all three states preserve Melivra-centered fixed geometry down to the pixel', async ({ page }) => {
+  for (const width of [320, 390, 820, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/ko/');
+    await page.evaluate(() => document.fonts.ready);
+    await page.locator('.hero-slide-screen img').evaluateAll(async (nodes) =>
+      Promise.all(nodes.map((node) => (node as HTMLImageElement).decode()))
+    );
+    const measure = async () => page.locator('[data-hero-track]').evaluate((stage) => {
+      const rect = (node: Element) => {
+        const bounds = node.getBoundingClientRect();
+        return {
+          left: Number((bounds.left + scrollX).toFixed(2)),
+          top: Number((bounds.top + scrollY).toFixed(2)),
+          width: Number(bounds.width.toFixed(2)),
+          height: Number(bounds.height.toFixed(2))
+        };
+      };
+      const physicalSlots = ['previous', 'active', 'next'].map((name) => {
+        const slot = stage.querySelector<HTMLElement>('[data-hero-slot="' + name + '"]')!;
+        const card = slot.querySelector<HTMLElement>('[data-hero-slide]')!;
+        const picture = card.querySelector<HTMLImageElement>('.hero-slide-screen img')!;
+        return {
+          name, app: card.querySelector('strong')!.textContent,
+          slotBounds: rect(slot),
+          frameBounds: rect(card.querySelector('.hero-slide-screen')!),
+          labelBounds: rect(card.querySelector('.hero-slide-label')!),
+          source: picture.getAttribute('src'),
+          href: card.getAttribute('href'),
+          fit: getComputedStyle(picture).objectFit
+        };
+      });
+      return {
+        stageBounds: rect(stage),
+        fullPageHeight: document.documentElement.scrollHeight,
+        overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        physicalSlots
+      };
+    });
+    const baseline = await measure();
+    const signature = (value: Awaited<ReturnType<typeof measure>>) => ({
+      stage: value.stageBounds,
+      documentHeight: value.fullPageHeight,
+      slotGeometry: value.physicalSlots.map((slot) =>
+        ({ slot: slot.slotBounds, frame: slot.frameBounds, label: slot.labelBounds }))
+    });
+    const expectedOrder = [
+      ['Papira', 'TagWeaver', 'Melivra'],
+      ['TagWeaver', 'Melivra', 'Papira'],
+      ['Melivra', 'Papira', 'TagWeaver'],
+      ['Papira', 'TagWeaver', 'Melivra']
+    ];
+    for (let step = 0; step < expectedOrder.length; step++) {
+      if (step) await page.locator('[data-hero-next]').click();
+      const state = await measure();
+      expect(state.overflow, width + 'px step ' + step).toBeLessThanOrEqual(1);
+      expect(signature(state), width + 'px step ' + step + ': fixed slots must not move').toEqual(signature(baseline));
+      expect(state.physicalSlots.map((slot) => slot.app)).toEqual(expectedOrder[step]);
+      for (const slot of state.physicalSlots) {
+        expect(slot.source).toContain('/home-assets/screenshots/android-20261012/ko/');
+        expect(slot.href).toBe('/apps/' + slot.app.toLowerCase() + '/ko/');
+        expect(slot.fit).toBe('contain');
+      }
+    }
+    const [previous, center, next] = baseline.physicalSlots;
+    expect(previous.slotBounds.width, 'intentionally wider left preview').toBeGreaterThan(next.slotBounds.width);
+    expect(previous.frameBounds.top, 'left preview sits slightly higher').toBeLessThan(next.frameBounds.top);
+    expect(center.frameBounds.top).toBeLessThan(previous.frameBounds.top);
+    expect(center.frameBounds.width).toBeGreaterThan(previous.frameBounds.width);
+    const leftOverlap = previous.frameBounds.left + previous.frameBounds.width - center.frameBounds.left;
+    const rightOverlap = center.frameBounds.left + center.frameBounds.width - next.frameBounds.left;
+    const inset = width <= 650 ? 24 : 36;
+    expect(Math.abs(leftOverlap - inset)).toBeLessThanOrEqual(1);
+    expect(Math.abs(rightOverlap - inset)).toBeLessThanOrEqual(1);
+  }
+});
+
+test('rotation always preserves fixed slots through dots, keyboard, and reverse arrows', async ({ page }) => {
+  await page.goto('/ko/');
+  const slots = page.locator('[data-hero-slot]');
+  const slotNodes = await slots.evaluateAll((nodes) => nodes.map((node) => node.getAttribute('data-hero-slot')));
+  expect(slotNodes).toEqual(['previous', 'active', 'next']);
+  const slotsAreStable = async () => await slots.evaluateAll((nodes) =>
+    nodes.map((node) => ({
+      key: node.getAttribute('data-hero-slot'),
+      left: Number(node.getBoundingClientRect().left.toFixed(2)),
+      top: Number((node.getBoundingClientRect().top + scrollY).toFixed(2)),
+      width: Number(node.getBoundingClientRect().width.toFixed(2))
+    }))
+  );
+  const geometry = await slotsAreStable();
+  const center = page.locator('[data-hero-slot="active"] .hero-slide');
+  await page.locator('[data-hero-previous]').click();
+  await expect(center.locator('strong')).toHaveText('Papira');
+  expect(await slotsAreStable()).toEqual(geometry);
+  await page.locator('[data-hero-dot][data-index="1"]').click();
+  await expect(center.locator('strong')).toHaveText('Melivra');
+  expect(await slotsAreStable()).toEqual(geometry);
+  await page.locator('[data-hero-track]').focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(center.locator('strong')).toHaveText('Papira');
+  expect(await slotsAreStable()).toEqual(geometry);
+  await page.keyboard.press('ArrowLeft');
+  await expect(center.locator('strong')).toHaveText('Melivra');
+  expect(await slotsAreStable()).toEqual(geometry);
+  await expect(page.locator('[data-hero-counter]')).toHaveText('02 / 03');
+  await expect(page.locator('[data-hero-dot][data-index="1"]')).toHaveAttribute('aria-current', 'true');
+  await expect(center).toHaveAttribute('href', '/apps/melivra/ko/');
+  await center.click();
+  await expect(page).toHaveURL(/\/apps\/melivra\/ko\/$/);
+});
+
+test('all nine locale galleries keep three fixed physical slots when centered app changes', async ({ page }) => {
+  const paths = ['', 'ko/', 'ja/', 'zh-hans/', 'zh-hant/', 'pt-br/', 'de/', 'fr/', 'es/'];
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const path of paths) {
+    await page.goto('/' + path);
+    const stage = page.locator('[data-hero-track]');
+    const measure = async () => await stage.evaluate((element) => ({
+      height: element.getBoundingClientRect().height,
+      screens: [...element.querySelectorAll('[data-hero-slot]')].map((slot) => {
+        const r = slot.querySelector('.hero-slide-screen')!.getBoundingClientRect();
+        return [r.x, r.y + scrollY, r.width, r.height].map((n) => Number(n.toFixed(2)));
+      })
+    }));
+    const before = await measure();
+    await page.locator('[data-hero-next]').click();
+    await expect(page.locator('[data-hero-slot="active"] strong')).toHaveText('Melivra');
+    await expect.poll(measure).toEqual(before);
+    await page.locator('[data-hero-next]').click();
+    await expect(page.locator('[data-hero-slot="active"] strong')).toHaveText('Papira');
+    await expect.poll(measure).toEqual(before);
   }
 });

@@ -289,8 +289,9 @@
   font-weight: 400;
 }
 
-/* Balanced showroom proportions: 32% / 37% / 31%.
-   The center remains in front while both side screenshots are slightly larger. */
+/* The three positions never change. Only the products in these slots rotate.
+   Their fixed frame ratios are matched to the Melivra-centered composition:
+   the wider left preview sits slightly higher than the right preview. */
 .homepage .hero-carousel {
   width: min(100%, 490px);
   margin-inline: auto;
@@ -311,41 +312,46 @@
   outline-offset: 2px;
   border-radius: 14px;
 }
-.homepage .hero-slide {
+.homepage .hero-slot {
   position: relative;
   z-index: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+.homepage .hero-slot[data-hero-slot="previous"] {
+  grid-column: 1;
+  transform: translate(var(--hero-side-inset), var(--hero-side-drop));
+}
+.homepage .hero-slot[data-hero-slot="active"] {
+  grid-column: 2;
+  z-index: 3;
+}
+.homepage .hero-slot[data-hero-slot="next"] {
+  grid-column: 3;
+  transform: translate(calc(-1 * var(--hero-side-inset)), var(--hero-side-drop));
+}
+.homepage .hero-slot[data-hero-slot="previous"]:hover {
+  transform: translate(var(--hero-side-inset), calc(var(--hero-side-drop) - 2px));
+}
+.homepage .hero-slot[data-hero-slot="next"]:hover {
+  transform: translate(calc(-1 * var(--hero-side-inset)), calc(var(--hero-side-drop) - 2px));
+}
+.homepage .hero-slot[data-hero-slot="active"]:hover { transform: translateY(-2px); }
+.homepage .hero-slide {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  grid-row: 1;
+  width: 100%;
   min-width: 0;
   color: var(--home-ink);
   text-decoration: none;
   background: transparent;
 }
-.homepage .hero-slide[data-position="previous"] {
-  grid-column: 1;
-  transform: translate(var(--hero-side-inset), var(--hero-side-drop));
-}
-.homepage .hero-slide[data-position="active"] {
-  z-index: 3;
-  grid-column: 2;
-}
-.homepage .hero-slide[data-position="next"] {
-  grid-column: 3;
-  transform: translate(calc(-1 * var(--hero-side-inset)), var(--hero-side-drop));
-}
-.homepage .hero-slide[data-position="previous"]:hover {
-  transform: translate(var(--hero-side-inset), calc(var(--hero-side-drop) - 2px));
-}
-.homepage .hero-slide[data-position="next"]:hover {
-  transform: translate(calc(-1 * var(--hero-side-inset)), calc(var(--hero-side-drop) - 2px));
-}
-.homepage .hero-slide[data-position="active"]:hover { transform: translateY(-2px); }
 .homepage .hero-slide-screen {
   display: block;
   width: 100%;
   min-width: 0;
+  aspect-ratio: 0.475;
   padding: 3px;
   border: 1px solid var(--accent-border, var(--home-border));
   border-radius: 18px;
@@ -354,14 +360,15 @@
   box-shadow: 0 12px 32px rgba(53, 48, 59, .10);
   transition: box-shadow 160ms ease;
 }
-.homepage .hero-slide[data-position="active"] .hero-slide-screen {
+.homepage .hero-slot[data-hero-slot="active"] .hero-slide-screen {
+  aspect-ratio: 0.461;
   border-radius: 21px;
   box-shadow: 0 16px 38px rgba(53, 48, 59, .13);
 }
 .homepage .hero-slide-screen img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: contain;
   object-position: center top;
 }
@@ -395,7 +402,7 @@
 }
 .homepage .hero-slide-identity small,
 .homepage .hero-slide-link-arrow { display: none; }
-.homepage .hero-slide[data-position="active"] .hero-slide-identity strong {
+.homepage .hero-slot[data-hero-slot="active"] .hero-slide-identity strong {
   font-size: 14px;
 }
 
@@ -946,10 +953,10 @@
     padding-bottom: 9px;
   }
   .homepage .hero-slide-screen { border-radius: 12px; padding: 2px; }
-  .homepage .hero-slide[data-position="active"] .hero-slide-screen { border-radius: 16px; }
+  .homepage .hero-slot[data-hero-slot="active"] .hero-slide-screen { border-radius: 16px; }
   .homepage .hero-slide-label { margin-top: 6px; gap: 4px; min-height: 19px; }
   .homepage .hero-slide-identity strong { font-size: 11px; }
-  .homepage .hero-slide[data-position="active"] .hero-slide-identity strong { font-size: 13px; }
+  .homepage .hero-slot[data-hero-slot="active"] .hero-slide-identity strong { font-size: 13px; }
   .homepage .hero-carousel-controls { min-height: 40px; padding-top: 5px; }
   .homepage .home-section { padding: 44px 0 50px; }
   .homepage .section-topline { gap: 14px; margin-bottom: 22px; }
