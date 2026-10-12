@@ -268,38 +268,6 @@ const breadcrumbJsonLd = {
       </dl>
     </section>
 
-    <section class="content-band" aria-label={copy.android.name ?? copy.ios.name ?? meta.title}>
-      <div class="copy-column">
-        {bodyBlocks.map((block) => (
-          block.type === 'h2' ? (
-            <h2>{block.value}</h2>
-          ) : block.type === 'h3' ? (
-            <h3>{block.value}</h3>
-          ) : block.type === 'ul' ? (
-            <ul>
-              {(block.value as string[]).map((item) => <li>{item}</li>)}
-            </ul>
-          ) : (
-            <p>{block.value}</p>
-          )
-        ))}
-      </div>
-    </section>
-
-    {faqContent && (
-      <section class="faq-band" aria-labelledby="faq-title">
-        <h2 id="faq-title">{faqContent.title}</h2>
-        <div class="faq-list">
-          {faqContent.items.map((item) => (
-            <details>
-              <summary>{item.question}</summary>
-              <p>{item.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-    )}
-
     {landingScreenshotPaths.length > 0 && (
       <details class="screens-band" open>
         <summary>{labels.screens}</summary>
@@ -381,6 +349,38 @@ const breadcrumbJsonLd = {
           </div>
         </dialog>
       </details>
+    )}
+
+    <section class="content-band" aria-label={copy.android.name ?? copy.ios.name ?? meta.title}>
+      <div class="copy-column">
+        {bodyBlocks.map((block) => (
+          block.type === 'h2' ? (
+            <h2>{block.value}</h2>
+          ) : block.type === 'h3' ? (
+            <h3>{block.value}</h3>
+          ) : block.type === 'ul' ? (
+            <ul>
+              {(block.value as string[]).map((item) => <li>{item}</li>)}
+            </ul>
+          ) : (
+            <p>{block.value}</p>
+          )
+        ))}
+      </div>
+    </section>
+
+    {faqContent && (
+      <section class="faq-band" aria-labelledby="faq-title">
+        <h2 id="faq-title">{faqContent.title}</h2>
+        <div class="faq-list">
+          {faqContent.items.map((item) => (
+            <details>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
     )}
 
     <section class="download-band" aria-label={labels.download}>
