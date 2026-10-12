@@ -40,16 +40,16 @@
     "appName": "Aligna",
     "version": "1.1.0",
     "tag": "v1.1.0",
-    "platform": "Android",
-    "releasedDate": "2026-10-10",
-    "title": "Aligna v1.1.0 (Android)",
-    "summary": "Latest public store release of Aligna 1.1.0 for Android.",
-    "summaryKo": "Aligna 1.1.0 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-10-11",
+    "title": "Aligna v1.1.0 (iOS · Android)",
+    "summary": "Latest public store release of Aligna 1.1.0 for iOS · Android.",
+    "summaryKo": "Aligna 1.1.0 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
     "changes": [
-      "Aligna 1.1.0 is now available on Android."
+      "Aligna 1.1.0 is now available on iOS · Android."
     ],
     "changesKo": [
-      "Aligna 1.1.0 버전이 Android에 공개됐어요."
+      "Android 앱 용량을 줄였어요. 스토어 이미지를 새로 업데이트했어요."
     ],
     "internalGitHubUrl": ""
   },
@@ -68,6 +68,26 @@
     ],
     "changesKo": [
       "사소한 버그를 수정하고 안정성을 개선했어요."
+    ],
+    "internalGitHubUrl": ""
+  },
+  {
+    "appSlug": "clipnest",
+    "appName": "ClipNest",
+    "version": "1.0.5",
+    "tag": "v1.0.5",
+    "platform": "iOS",
+    "releasedDate": "2026-10-11",
+    "title": "ClipNest v1.0.5 (iOS)",
+    "summary": "Latest public store release of ClipNest 1.0.5 for iOS.",
+    "summaryKo": "ClipNest 1.0.5 iOS 공개 스토어 릴리즈 변경 사항이에요.",
+    "changes": [
+      "ClipNest 1.0.5 is now available on iOS."
+    ],
+    "changesKo": [
+      "저장한 텍스트를 검색하고 편집하는 화면을 다듬었어요.",
+      "설정에서 9개 언어를 선택할 수 있고, Pro 구매 버튼에는 스토어 가격을 표시해요.",
+      "공용 색상과 화면 구성을 정리하고, 키보드 붙여넣기 사용 예시와 스토어 안내를 개선했어요."
     ],
     "internalGitHubUrl": ""
   },
@@ -167,7 +187,7 @@
     "version": "2.0.1",
     "tag": "v2.0.1",
     "platform": "iOS · Android",
-    "releasedDate": "2026-10-06",
+    "releasedDate": "2026-10-05",
     "title": "Papira v2.0.1 (iOS · Android)",
     "summary": "Latest public store release of Papira 2.0.1 for iOS · Android.",
     "summaryKo": "Papira 2.0.1 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
