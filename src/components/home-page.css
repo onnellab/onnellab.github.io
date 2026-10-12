@@ -292,8 +292,14 @@
   font-weight: 400;
 }
 
+/* Keep the three Android screenshots at their natural proportions.
+   Older absolute-positioned boxes stretched/cropped them, especially on mobile. */
 .homepage .hero-stage {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(9px, 1.1vw, 16px);
   min-width: 0;
   height: 485px;
   isolation: isolate;
@@ -303,58 +309,52 @@
   content: "";
   position: absolute;
   inset: 9% 0 4%;
-  background: radial-gradient(ellipse at 49% 50%, rgba(200, 182, 226, 0.23), rgba(175, 200, 232, 0.075) 48%, transparent 72%);
+  background: radial-gradient(ellipse at 49% 50%, rgba(200, 182, 226, 0.18), rgba(175, 200, 232, 0.05) 50%, transparent 73%);
   border-radius: 50%;
   z-index: -1;
+  pointer-events: none;
 }
 
 .homepage .stage-device {
-  position: absolute;
+  position: relative;
   display: block;
+  flex: 0 0 auto;
+  height: 73%;
+  width: auto;
+  aspect-ratio: 6 / 13;
   overflow: hidden;
-  background: white;
-  border: 6px solid #fff;
-  border-radius: 25px;
-  box-shadow: 0 16px 44px rgba(53, 48, 59, 0.12);
-  transition: transform 170ms ease;
+  background: #fff;
+  border: 3px solid #fff;
+  border-radius: 18px;
+  box-shadow: 0 14px 38px rgba(53, 48, 59, 0.10);
+  transition: transform 170ms ease, box-shadow 170ms ease;
+  scroll-snap-align: start;
 }
 
-.homepage .stage-device:hover {
-  transform: translateY(-4px);
+.homepage .stage-device:hover,
+.homepage .stage-device:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 17px 40px rgba(53, 48, 59, 0.13);
 }
 
 .homepage .stage-device img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center;
 }
 
-.homepage .stage-back {
+.homepage .stage-back,
+.homepage .stage-front {
   z-index: 1;
-  width: 31%;
-  height: 62%;
-  left: 0;
-  top: 26%;
 }
 
 .homepage .stage-main {
-  z-index: 3;
-  width: 40%;
-  height: 85%;
-  left: 30%;
-  top: 6%;
-  border-width: 7px;
-  border-radius: 28px;
-}
-
-.homepage .stage-front {
   z-index: 2;
-  width: 29%;
-  height: 63%;
-  right: 0;
-  top: 27%;
+  height: 94%;
+  border-width: 4px;
+  border-radius: 23px;
 }
 
 .homepage .home-section {
@@ -840,15 +840,45 @@
     line-height: 1.68;
   }
   .homepage .primary-link { min-height: 46px; margin-top: 22px; padding: 12px 17px; }
-  .homepage .hero-stage { height: 295px; margin-top: 4px; }
-  .homepage .stage-device { border-width: 4px; border-radius: 17px; }
-  .homepage .stage-main { border-width: 5px; border-radius: 20px; width: 38%; left: 31%; }
-  .homepage .stage-back { left: 1%; }
-  .homepage .stage-front { right: 1%; }
+  /* One large Android capture at a time, with the next product peeking in.
+     No upscaling, forced cropping or three tiny overlapping thumbnails. */
+  .homepage .hero-stage {
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 14px;
+    width: calc(100% + 20px);
+    max-width: none;
+    height: auto;
+    min-height: 0;
+    margin: 4px -20px 0 0;
+    padding: 8px 20px 17px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0 20px;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #cfc3d7 transparent;
+  }
+  .homepage .hero-stage::before { display: none; }
+  .homepage .stage-device,
+  .homepage .stage-main {
+    flex: 0 0 min(72%, 255px);
+    width: min(72%, 255px);
+    height: auto;
+    aspect-ratio: 6 / 13;
+    border-width: 3px;
+    border-radius: 17px;
+    z-index: auto;
+  }
+  .homepage .stage-main { order: -1; }
+  .homepage .stage-back { order: 0; }
+  .homepage .stage-front { order: 1; }
   .homepage .home-section { padding: 44px 0 50px; }
   .homepage .section-topline { gap: 14px; margin-bottom: 22px; }
   .homepage .section-heading-row { display: block; margin-bottom: 25px; }
-  .homepage .home-section h2,
+  .homepage .home-section h2 { font-size: clamp(28px, 7.5vw, 35px); line-height: 1.24; }
   .homepage .section-description { font-size: 15px; line-height: 1.68; margin-top: 11px; }
   .homepage .section-heading-row > .inline-link { margin-top: 17px; }
   .homepage .featured { display: flex; flex-direction: column; }

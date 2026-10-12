@@ -56,7 +56,7 @@ test('the home uses original localized UI captures rather than store composites'
     .evaluateAll((imgs) => imgs.map((img) => (img as HTMLImageElement).getAttribute('src')));
   expect(sources).toHaveLength(7);
   for (const src of sources) {
-    expect(src).toContain('/home-assets/screenshots/ko/');
+    expect(src).toContain('/home-assets/screenshots/android-20261012/ko/');
     const response = await request.get(src!);
     expect(response.status(), src!).toBe(200);
     expect(response.headers()['content-type'], src!).toContain('image/png');
@@ -123,7 +123,7 @@ test('all nine homepage locales use matching uncompressed original UI captures',
     const segment = route.segment ? route.segment.slice(0, -1) : 'en';
     const assetLocale = localeMap[segment] ?? segment;
     for (const source of uniquePaths) {
-      expect(source).toContain('/home-assets/screenshots/' + assetLocale + '/');
+      expect(source).toContain('/home-assets/screenshots/android-20261012/' + assetLocale + '/');
       expect((await request.get(source!)).status(), source!).toBe(200);
     }
   }
@@ -139,4 +139,79 @@ test('selected product originals load sharply when scrolled into view', async ({
       (img as HTMLImageElement).complete ? (img as HTMLImageElement).naturalWidth : 0
     )).toBeGreaterThanOrEqual(1080);
   }
+});
+
+test('the Hero uses three crisp uncropped Android screens at desktop and mobile widths', async ({ page }) => {
+  for (const width of [1440, 820, 390, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/ko/');
+    const result = await page.locator('.hero-stage').evaluate(async (stage) => {
+      const links = [...stage.querySelectorAll<HTMLAnchorElement>('a.stage-device')];
+      await Promise.all(links.map(async (link) => {
+        const img = link.querySelector('img')!;
+        await img.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
+        await img.decode();
+      }));
+      return {
+        overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        mobileScroll: stage.scrollWidth - stage.clientWidth,
+        fit: links.map((link) => {
+          const img = link.querySelector('img')!;
+          const rect = link.getBoundingClientRect();
+          return {
+            name: link.getAttribute('aria-label'),
+            objectFit: getComputedStyle(img).objectFit,
+            width: rect.width,
+            height: rect.height,
+            native: [img.naturalWidth, img.naturalHeight],
+            src: img.getAttribute('src'),
+            scrollSnapAlign: getComputedStyle(link).scrollSnapAlign
+          };
+        })
+      };
+    });
+    expect(result.overflow, 'width ' + width).toBeLessThanOrEqual(1);
+    expect(result.fit).toHaveLength(3);
+    for (const frame of result.fit) {
+      expect(frame.src).toContain('/home-assets/screenshots/android-20261012/ko/');
+      expect(frame.objectFit).toBe('contain');
+      expect(frame.scrollSnapAlign).toBe('start');
+      expect(frame.native[0]).toBeGreaterThanOrEqual(1080);
+      expect(frame.native[1]).toBeGreaterThanOrEqual(2400);
+      expect(frame.width).toBeGreaterThan(130);
+      const ratio = frame.width / frame.height;
+      expect(Math.abs(ratio - 6 / 13)).toBeLessThan(0.045);
+    }
+    if (width <= 650) {
+      expect(result.mobileScroll).toBeGreaterThan(150);
+      const main = result.fit.find((x) => x.name === 'TagWeaver')!;
+      expect(main.width).toBeGreaterThan(200);
+    } else {
+      expect(result.mobileScroll).toBeLessThanOrEqual(1);
+    }
+  }
+});
+
+test('the homepage uses only Android source dimensions for every product', async ({ page }) => {
+  await page.goto('/ko/');
+  const images = await page.locator('.hero-stage img, .featured-screen img, .product-screen img')
+    .evaluateAll(async (nodes) => {
+      const items = nodes as HTMLImageElement[];
+      await Promise.all(items.map(async (img) => {
+        await img.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
+        await img.decode();
+      }));
+      return items.map((img) => ({
+        name: img.getAttribute('src')?.split('/').pop(),
+        size: [img.naturalWidth, img.naturalHeight]
+      }));
+    });
+  const dimensions: Record<string, number[]> = {
+    'tagweaver-library.png': [1440, 3120],
+    'tagweaver-editor.png': [1440, 3120],
+    'melivra.png': [1080, 2400],
+    'papira.png': [1440, 3120],
+    'quivra.png': [1080, 1920]
+  };
+  for (const img of images) expect(img.size, img.name).toEqual(dimensions[img.name!]);
 });
