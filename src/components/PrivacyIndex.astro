@@ -223,6 +223,20 @@ const collectionJsonLd = {
 
     <p class="empty-state" data-policy-empty hidden>{copy.empty}</p>
 
+    <section class="policy-list" aria-label={copy.heading}>
+      {policies.map((policy) => (
+        <a class="policy-row" href={policy.href} data-policy-row data-policy-title={policy.title.toLowerCase()}>
+          <div>
+            <h2>{policy.title}</h2>
+            <p><span>{copy.updated}</span> <time datetime={policy.date}>{policy.date}</time></p>
+          </div>
+          <div class="platform-badges" aria-label={copy.platformsLabel}>
+            {policy.platforms.map((platform) => <span>{platform}</span>)}
+          </div>
+        </a>
+      ))}
+    </section>
+
     <div class="notice-grid">
       <section>
         <h2>{copy.analyticsTitle}</h2>
@@ -237,20 +251,6 @@ const collectionJsonLd = {
         <p>{contactBefore}<a href={`mailto:${email}`}>{email}</a>{contactAfter}</p>
       </section>
     </div>
-
-    <section class="policy-list" aria-label={copy.heading}>
-      {policies.map((policy) => (
-        <a class="policy-row" href={policy.href} data-policy-row data-policy-title={policy.title.toLowerCase()}>
-          <div>
-            <h2>{policy.title}</h2>
-            <p><span>{copy.updated}</span> <time datetime={policy.date}>{policy.date}</time></p>
-          </div>
-          <div class="platform-badges" aria-label={copy.platformsLabel}>
-            {policy.platforms.map((platform) => <span>{platform}</span>)}
-          </div>
-        </a>
-      ))}
-    </section>
 
     <SiteFooter locale={locale} />
 
