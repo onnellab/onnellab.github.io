@@ -328,3 +328,45 @@ test('homepage product colors match the app catalog and Papira is blue', async (
     expect(fromDetail).toEqual(expected.papira);
   }
 });
+
+test('the center card subtly occludes both complete side previews after every rotation', async ({ page }) => {
+  for (const width of [320, 390, 820, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/ko/');
+    for (const step of [0, 1, 2]) {
+      if (step !== 0) await page.locator('[data-hero-next]').click();
+      const result = await page.locator('.hero-stage').evaluate((stage) => {
+        const outer = stage.getBoundingClientRect();
+        const byPosition = (position: string) =>
+          stage.querySelector<HTMLElement>('.hero-slide[data-position="' + position + '"]')!;
+        const center = byPosition('active');
+        const previous = byPosition('previous');
+        const next = byPosition('next');
+        const c = center.getBoundingClientRect();
+        const p = previous.getBoundingClientRect();
+        const n = next.getBoundingClientRect();
+        return {
+          pageOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          stageOverflow: stage.scrollWidth - stage.clientWidth,
+          coveredLeft: p.right - c.left,
+          coveredRight: c.right - n.left,
+          centerZ: Number(getComputedStyle(center).zIndex),
+          prevZ: Number(getComputedStyle(previous).zIndex),
+          nextZ: Number(getComputedStyle(next).zIndex),
+          allOnStage: [c, p, n].every((r) => r.left >= outer.left - 1 && r.right <= outer.right + 1),
+          centerLarger: c.width > p.width * 2 && c.width > n.width * 2
+        };
+      });
+      expect(result.pageOverflow, String(width)).toBeLessThanOrEqual(1);
+      expect(result.stageOverflow, String(width)).toBeLessThanOrEqual(1);
+      expect(result.allOnStage, 'all cards inside the Hero at ' + width).toBe(true);
+      expect(result.centerLarger).toBe(true);
+      for (const overlap of [result.coveredLeft, result.coveredRight]) {
+        expect(overlap, 'side cards gently behind center at ' + width).toBeGreaterThan(5);
+        expect(overlap, 'side image must not be hidden too much at ' + width).toBeLessThan(25);
+      }
+      expect(result.centerZ).toBeGreaterThan(result.prevZ);
+      expect(result.centerZ).toBeGreaterThan(result.nextZ);
+    }
+  }
+});
