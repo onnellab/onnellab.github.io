@@ -1019,18 +1019,44 @@
     line-height: 1.57;
   }
   .homepage .product-card-body > .platform-text { font-size: 11px; }
-  .homepage .trust-header { margin-bottom: 28px; }
-  .homepage .trust-header > p { font-size: 15px; }
-  .homepage .trust-grid { grid-template-columns: 1fr; }
+  /* Mobile trust should read as three concise editorial facts, not large stacked cards. */
+  .homepage .trust-section { padding-top: 34px; padding-bottom: 24px; }
+  .homepage .trust-header { gap: 10px; margin-bottom: 19px; }
+  .homepage .trust-header > p { max-width: 550px; font-size: 14px; line-height: 1.63; }
+  .homepage .trust-grid { grid-template-columns: minmax(0, 1fr); }
   .homepage .trust-item,
   .homepage .trust-item:not(:first-child) {
+    display: grid;
+    grid-template-columns: 39px minmax(0, 1fr);
+    column-gap: 13px;
+    row-gap: 4px;
+    align-content: start;
     border-left: none;
     border-top: 1px solid #cfbfdc;
-    padding: 22px 0;
+    padding: 17px 0;
   }
-  .homepage .trust-number { min-height: 49px; margin-bottom: 10px; }
-  .homepage .trust-ordinal { min-height: 38px; margin-bottom: 10px; }
-  .homepage .trust-count { font-size: 54px; }
+  .homepage .trust-ordinal {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    align-items: flex-start;
+    min-height: 0;
+    margin-bottom: 0;
+    font-size: 23px;
+    line-height: 1.23;
+  }
+  .homepage .trust-item h3 {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 16px;
+    line-height: 1.35;
+  }
+  .homepage .trust-item p {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.57;
+  }
 }
 
 @media (max-width: 355px) {

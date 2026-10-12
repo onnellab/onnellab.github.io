@@ -514,3 +514,42 @@ test('mobile selected products are compact horizontal cards with original Androi
   const desktop = await page.locator('.collection-section .product-card').first().evaluate((el) => getComputedStyle(el).flexDirection);
   expect(desktop).toBe('column');
 });
+
+test('mobile trust is a compact three-row section with aligned ordinals in all nine languages', async ({ page }) => {
+  const locales = ['', 'ko/', 'ja/', 'zh-hans/', 'zh-hant/', 'pt-br/', 'de/', 'fr/', 'es/'];
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const locale of locales) {
+    await page.goto('/' + locale);
+    const rows = page.locator('.trust-grid .trust-item');
+    await expect(rows).toHaveCount(3);
+    await expect(rows.locator('.trust-ordinal')).toHaveText(['01', '02', '03']);
+    const measurements = await rows.evaluateAll((nodes) =>
+      nodes.map((el) => {
+        const number = el.querySelector('.trust-ordinal')!;
+        const heading = el.querySelector('h3')!;
+        const body = el.querySelector('p')!;
+        const n = number.getBoundingClientRect(), h = heading.getBoundingClientRect();
+        const b = body.getBoundingClientRect(), r = el.getBoundingClientRect();
+        return {
+          rowHeight: r.height,
+          columns: getComputedStyle(el).gridTemplateColumns,
+          numberToHeading: n.top - h.top,
+          headingBesideNumber: n.right < h.left,
+          descriptionAligned: Math.abs(b.left - h.left) < 1
+        };
+      })
+    );
+    for (const item of measurements) {
+      expect(item.headingBesideNumber).toBe(true);
+      expect(Math.abs(item.numberToHeading)).toBeLessThanOrEqual(2);
+      expect(item.descriptionAligned).toBe(true);
+      expect(item.rowHeight).toBeLessThan(185);
+    }
+    const sectionHeight = await page.locator('.trust-section').evaluate((el) => el.getBoundingClientRect().height);
+    expect(sectionHeight, 'Trust mobile ' + locale).toBeLessThan(650);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+  }
+  await page.goto('/ko/');
+  const koHeight = await page.locator('.trust-section').evaluate((el) => el.getBoundingClientRect().height);
+  expect(koHeight).toBeLessThan(585);
+});
