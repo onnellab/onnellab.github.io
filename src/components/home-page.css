@@ -565,7 +565,9 @@
   overflow: hidden;
   border: 1px solid var(--accent-border, var(--home-border));
   border-radius: 17px;
-  background: #fff;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, 0.96) 16%, var(--accent-bg, #fffdf8)),
+    #fffdf8;
   color: inherit;
   transition: border-color 170ms ease;
 }
@@ -582,7 +584,7 @@
   min-height: 435px;
   padding: 28px 48px 0;
   overflow: hidden;
-  background: var(--accent-bg, #fbf7ec);
+  background: transparent;
 }
 
 .homepage .featured-screen {
@@ -687,7 +689,9 @@
   overflow: hidden;
   border: 1px solid var(--accent-border, var(--home-border));
   border-radius: 14px;
-  background: var(--accent-bg, #fffdf8);
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, 0.96) 16%, var(--accent-bg, #fffdf8)),
+    #fffdf8;
   color: inherit;
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
@@ -704,7 +708,7 @@
   align-items: flex-end;
   height: 250px;
   padding: 20px 20px 0;
-  background: var(--accent-bg, #f8f5f8);
+  background: transparent;
   overflow: hidden;
 }
 
