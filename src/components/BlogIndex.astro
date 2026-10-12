@@ -76,7 +76,7 @@ const blogJsonLd = [
   jsonLd={blogJsonLd}
   alternates={blogIndexAlternates()}
 >
-  <main class="blog-shell">
+  <main class="blog-shell" data-has-posts={posts.length > 0 ? "true" : "false"}>
 
 
     <header class="blog-header">
@@ -381,14 +381,11 @@ const blogJsonLd = [
     }
     .category-preview {
       grid-template-columns: 1fr;
-      order: 4;
-      padding-top: 26px;
     }
-    .filter-row {
-      order: 2;
-    }
-    .post-list {
-      order: 3;
+    /* Posted locales already provide category filtering. Keep the DOM and
+       visual order aligned so the footer always follows the articles. */
+    .blog-shell[data-has-posts='true'] .category-preview {
+      display: none;
     }
   }
 </style>
