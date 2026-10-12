@@ -741,3 +741,41 @@ test('all nine locale galleries keep three fixed physical slots when centered ap
     await expect.poll(measure).toEqual(before);
   }
 });
+
+test('only the centered Hero app name is visible without moving the reserved caption row', async ({ page }) => {
+  const widths = [320, 390, 820, 1440];
+  for (const width of widths) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/ko/');
+    const stage = page.locator('[data-hero-track]');
+    const geometry = async () => stage.evaluate((node) => {
+      const stageRect = node.getBoundingClientRect();
+      return {
+        stageHeight: Number(stageRect.height.toFixed(2)),
+        rowHeights: ['previous', 'active', 'next'].map((position) => {
+          const caption = node.querySelector<HTMLElement>('[data-hero-slot="' + position + '"] .hero-slide-label')!;
+          return Number(caption.getBoundingClientRect().height.toFixed(2));
+        })
+      };
+    });
+    const original = await geometry();
+    const apps = ['TagWeaver', 'Melivra', 'Papira', 'TagWeaver'];
+    for (let i = 0; i < apps.length; i++) {
+      if (i) await page.locator('[data-hero-next]').click();
+      const current = stage.locator('[data-hero-slot="active"] .hero-slide-label');
+      const previous = stage.locator('[data-hero-slot="previous"] .hero-slide-label');
+      const next = stage.locator('[data-hero-slot="next"] .hero-slide-label');
+      await expect(current).toBeVisible();
+      await expect(current.locator('strong')).toHaveText(apps[i]);
+      await expect(previous).toBeHidden();
+      await expect(next).toBeHidden();
+      for (const pos of ['previous', 'next']) {
+        const link = stage.locator('[data-hero-slot="' + pos + '"] .hero-slide');
+        await expect(link).toHaveAttribute('aria-label', /TagWeaver|Melivra|Papira/);
+        await expect(link.locator('.hero-slide-screen img')).toBeVisible();
+      }
+      expect(await geometry(), width + 'px rotation=' + i).toEqual(original);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+  }
+});

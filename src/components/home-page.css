@@ -384,6 +384,12 @@
   background: none;
   border: 0;
 }
+/* Keep each caption's layout box so rotating apps never changes the stage
+   geometry. Only the centered product's name is visually displayed.
+   All slides retain their accessible app name on the parent link. */
+.homepage .hero-slot:not([data-hero-slot="active"]) .hero-slide-label {
+  visibility: hidden;
+}
 .homepage .hero-slide-identity {
   display: flex;
   align-items: baseline;
