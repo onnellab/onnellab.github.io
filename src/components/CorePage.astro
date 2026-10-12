@@ -55,19 +55,19 @@ const copies: Record<SiteLocale, TermsCopy> = {
     nav: { apps: '앱', about: '소개', blog: '블로그' },
     navLabel: '탐색',
     seoTitle: 'ONNELLAB 이용약관',
-    description: 'ONNELLAB 앱과 웹사이트의 일반 이용약관이에요.',
+    description: 'ONNELLAB 앱과 웹사이트의 일반 이용약관입니다.',
     eyebrow: '법적 안내',
     title: '이용약관',
-    intro: '제품 페이지나 스토어 안내에 더 구체적인 규칙이 없는 경우 ONNELLAB 앱과 웹사이트에 이 일반 약관이 적용돼요.',
+    intro: '제품 페이지나 스토어 안내에 더 구체적인 규칙이 없는 경우, ONNELLAB 앱과 웹사이트에는 이 일반 약관이 적용됩니다.',
     updatedLabel: '최종 업데이트',
-    updatedValue: '2026-08-21',
+    updatedValue: '2026-10-12',
     sections: [
-      { title: '1. ONNELLAB 제품 이용', paragraphs: ['각 제품은 법률, 스토어 안내, 앱 안의 고지와 플랫폼 규칙을 지켜 사용해요. 서비스를 방해하거나 다른 사람의 데이터를 침해하는 방식으로 악용하면 안 돼요.'] },
-      { title: '2. 사용자의 파일과 콘텐츠', paragraphs: ['사용자가 선택한 파일, 원고, 미디어와 콘텐츠에 대한 책임은 사용자에게 있어요. ONNELLAB은 사용자 콘텐츠의 소유권을 주장하지 않아요. 처리하고 내보낼 권리가 있는 자료인지 확인해요.'] },
-      { title: '3. 구매와 환불', paragraphs: ['앱 다운로드, 구매, 구독, 환불과 구매 복원은 해당 앱 스토어가 자체 약관에 따라 처리해요. 제품별 가격과 이용 권한은 스토어나 앱에서 안내해요.'] },
-      { title: '4. 외부 서비스', paragraphs: ['제품에서 다른 앱, 웹사이트, 저장소 또는 플랫폼으로 데이터를 열거나 공유하면 해당 대상의 약관과 개인정보 처리방침이 적용돼요. ONNELLAB이 통제하지 않는 외부 서비스에 대해서는 책임지지 않아요.'] },
-      { title: '5. 제공 및 변경', paragraphs: ['오류 수정, 호환성 유지, 법률·스토어 요구 대응과 사용 경험 개선을 위해 제품을 업데이트할 수 있어요. 운영체제 규칙에 따라 플랫폼별 기능이 다를 수 있어요.'] },
-      { title: '6. 문의', paragraphs: ['이 약관에 관한 문의는 onnellab.app@gmail.com으로 보내요.'] }
+      { title: '1. ONNELLAB 제품 이용', paragraphs: ['각 제품은 관련 법률, 스토어 안내, 앱 내 고지 및 플랫폼 규칙을 준수하여 사용해야 합니다. 서비스를 방해하거나 타인의 데이터를 침해하는 방식으로 악용해서는 안 됩니다.'] },
+      { title: '2. 사용자의 파일과 콘텐츠', paragraphs: ['사용자가 선택한 파일, 원고, 미디어 및 기타 콘텐츠에 대한 책임은 사용자에게 있습니다. ONNELLAB은 사용자 콘텐츠의 소유권을 주장하지 않습니다. 자료를 처리하거나 내보내는 데 필요한 권리가 있는지 확인해야 합니다.'] },
+      { title: '3. 구매와 환불', paragraphs: ['앱 다운로드, 구매, 구독, 환불 및 구매 복원은 해당 앱 스토어가 자체 약관에 따라 처리합니다. 제품별 가격과 이용 권한은 스토어 또는 앱에서 안내합니다.'] },
+      { title: '4. 외부 서비스', paragraphs: ['제품에서 데이터를 다른 앱, 웹사이트, 저장소 또는 플랫폼으로 열거나 공유하는 경우 해당 대상의 약관과 개인정보 처리방침이 적용됩니다. ONNELLAB이 통제하지 않는 외부 서비스에 대해서는 책임지지 않습니다.'] },
+      { title: '5. 제공 및 변경', paragraphs: ['오류 수정, 호환성 유지, 법률·스토어 요구사항 대응 및 사용자 경험 개선을 위해 제품을 업데이트할 수 있습니다. 운영체제 규칙에 따라 플랫폼별 기능이 다를 수 있습니다.'] },
+      { title: '6. 문의', paragraphs: ['이 약관에 관한 문의는 onnellab.app@gmail.com으로 보내실 수 있습니다.'] }
     ]
   },
   ja: {
@@ -175,7 +175,9 @@ const jsonLd = {
           <h2>{section.title}</h2>
           {section.paragraphs.map((paragraph) =>
             paragraph.includes('onnellab.app@gmail.com') ? (
-              <p>{paragraph.replace('onnellab.app@gmail.com', '')}<a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a></p>
+              <p>
+                {paragraph.slice(0, paragraph.indexOf('onnellab.app@gmail.com'))}<a href="mailto:onnellab.app@gmail.com">onnellab.app@gmail.com</a>{paragraph.slice(paragraph.indexOf('onnellab.app@gmail.com') + 'onnellab.app@gmail.com'.length)}
+              </p>
             ) : (
               <p>{paragraph}</p>
             )
