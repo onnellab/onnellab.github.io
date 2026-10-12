@@ -468,3 +468,49 @@ test('signature has no stacked identity card or redundant 01 SIGNATURE ornament'
   expect(frame.nestedBackground).toBe('none');
   expect(frame.nestedColor).toBe('rgba(0, 0, 0, 0)');
 });
+
+test('mobile selected products are compact horizontal cards with original Android screenshots', async ({ page }) => {
+  for (const width of [320, 390, 650]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/ko/');
+    const section = page.locator('.collection-section');
+    const cards = section.locator('.product-card');
+    await expect(cards).toHaveCount(3);
+    const metrics = await cards.evaluateAll((nodes) => nodes.map((node) => {
+      const card = node as HTMLElement;
+      const visual = card.querySelector<HTMLElement>('.product-picture')!;
+      const screen = visual.querySelector<HTMLImageElement>('.product-screen img')!;
+      const body = card.querySelector<HTMLElement>('.product-card-body')!;
+      const r = card.getBoundingClientRect(), v = visual.getBoundingClientRect(), b = body.getBoundingClientRect();
+      return {
+        title: card.querySelector('h3')?.textContent,
+        direction: getComputedStyle(card).flexDirection,
+        height: r.height,
+        pictureWidth: v.width,
+        pictureLeft: v.left,
+        textLeft: b.left,
+        textWithin: b.right <= r.right + 1,
+        screenSrc: screen.getAttribute('src'),
+        categoryVisible: Boolean(card.querySelector('.product-category')?.textContent?.trim())
+      };
+    }));
+    expect(metrics.map((x) => x.title)).toEqual(['Quivra','Melivra','Papira']);
+    for (const card of metrics) {
+      expect(card.direction, width + ':' + card.title).toBe('row');
+      expect(card.pictureLeft + card.pictureWidth, card.title).toBeLessThanOrEqual(card.textLeft + 1);
+      expect(card.textWithin, card.title).toBe(true);
+      expect(card.height, card.title).toBeLessThan(350);
+      expect(card.height, card.title).toBeGreaterThanOrEqual(220);
+      expect(card.screenSrc, card.title).toContain('/home-assets/screenshots/android-20261012/ko/');
+      expect(card.categoryVisible).toBe(true);
+    }
+    const height = await section.evaluate((node) => node.getBoundingClientRect().height);
+    expect(height, 'mobile section height at ' + width).toBeLessThan(width === 320 ? 1200 : 1130);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+  }
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/ko/');
+  await expect(page.locator('.collection-section .product-card')).toHaveCount(3);
+  const desktop = await page.locator('.collection-section .product-card').first().evaluate((el) => getComputedStyle(el).flexDirection);
+  expect(desktop).toBe('column');
+});

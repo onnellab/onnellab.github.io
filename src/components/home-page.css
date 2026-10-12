@@ -981,11 +981,44 @@
   .homepage .product-identity { min-height: 54px; margin-bottom: 20px; padding: 0; }
   .homepage .product-identity img { width: 54px; height: 54px; border-radius: 13px; }
   .homepage .product-name { font-size: 21px; }
-  .homepage .collection-grid { grid-template-columns: 1fr; gap: 15px; }
-  .homepage .product-picture { height: 237px; }
-  .homepage .product-screen { width: min(64%, 194px); height: 218px; }
-  .homepage .product-card-body { padding: 21px 22px 23px; }
-  .homepage .product-card h3 { font-size: 23px; }
+  /* On phones, app discovery is editorial: one compact horizontal product row. */
+  .homepage .collection-grid { grid-template-columns: minmax(0, 1fr); gap: 13px; }
+  .homepage .product-card {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 225px;
+  }
+  .homepage .product-picture {
+    flex: 0 0 39%;
+    width: 39%;
+    min-width: 0;
+    height: auto;
+    min-height: 225px;
+    padding: 12px 9px 0;
+    align-items: flex-end;
+  }
+  .homepage .product-screen {
+    width: min(100%, 132px);
+    height: 207px;
+    border-width: 4px;
+    border-radius: 15px 15px 0 0;
+    box-shadow: none;
+  }
+  .homepage .product-card-body {
+    min-width: 0;
+    justify-content: center;
+    padding: 18px 16px 19px;
+  }
+  .homepage .product-category { font-size: 11px; line-height: 1.4; }
+  .homepage .product-card-heading { margin-top: 8px; gap: 8px; }
+  .homepage .product-card h3 { font-size: 21px; line-height: 1.22; }
+  .homepage .product-card-heading > span { font-size: 18px; }
+  .homepage .product-card-body > p:not(.product-category) {
+    margin: 9px 0 12px;
+    font-size: 13px;
+    line-height: 1.57;
+  }
+  .homepage .product-card-body > .platform-text { font-size: 11px; }
   .homepage .trust-header { margin-bottom: 28px; }
   .homepage .trust-header > p { font-size: 15px; }
   .homepage .trust-grid { grid-template-columns: 1fr; }
@@ -1001,6 +1034,11 @@
 }
 
 @media (max-width: 355px) {
+  .homepage .product-picture { flex-basis: 37%; width: 37%; padding-inline: 7px; }
+  .homepage .product-card-body { padding: 16px 12px 17px; }
+  .homepage .product-card h3 { font-size: 20px; }
+  .homepage .product-card-body > p:not(.product-category) { font-size: 12.5px; }
+
   .homepage .site-header .brand.brand { font-size: 14px; gap: 6px; }
   .homepage .brand-symbol { width: 25px; }
   .homepage .site-language-control.site-language-control { padding-inline: 7px; }
