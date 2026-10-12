@@ -141,7 +141,8 @@ const jsonLd = [
                   <span aria-hidden="true">→</span>
                 </button>
               </div>
-            </div>            <div class="hero-stage" data-hero-track role="group" tabindex="0" aria-label={copy.carousel.choose}>
+            </div>
+            <div class="hero-stage" data-hero-track role="group" tabindex="0" aria-label={copy.carousel.choose}>
               {heroSlides.map((slide, index) => (
                 <a
                   class="hero-slide"
@@ -153,6 +154,17 @@ const jsonLd = [
                   aria-label={slide.app.title + ' · ' + slide.category}
                   style={accentStyle(slide.app)}
                 >
+                  <div class="hero-slide-screen">
+                    <img
+                      src={slide.screenshot}
+                      alt=""
+                      width={slide.width}
+                      height={slide.height}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      fetchpriority={index === 0 ? 'high' : 'auto'}
+                      decoding="async"
+                    />
+                  </div>
                   <div class="hero-slide-label">
                     <img
                       src={iconPath(slide.slug, 96)}
@@ -169,17 +181,6 @@ const jsonLd = [
                       <small>{slide.category}</small>
                     </span>
                     <span class="hero-slide-link-arrow" aria-hidden="true">↗</span>
-                  </div>
-                  <div class="hero-slide-screen">
-                    <img
-                      src={slide.screenshot}
-                      alt=""
-                      width={slide.width}
-                      height={slide.height}
-                      loading={index === 0 ? 'eager' : 'lazy'}
-                      fetchpriority={index === 0 ? 'high' : 'auto'}
-                      decoding="async"
-                    />
                   </div>
                 </a>
               ))}

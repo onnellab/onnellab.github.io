@@ -188,8 +188,13 @@ test('all three Android cards are fully visible with a large center at four widt
     }
     const middle = result.cards.find((x) => x.position === 'active')!;
     expect(middle.name).toBe('TagWeaver');
-    expect(middle.width).toBeGreaterThan(result.cards[1].width * 2);
-    expect(middle.width).toBeGreaterThan(result.cards[2].width * 2);
+    // Restore the first design's approximately 31 / 40 / 29 width proportions.
+    const leftCard = result.cards.find((x) => x.position === 'previous')!;
+    const rightCard = result.cards.find((x) => x.position === 'next')!;
+    expect(middle.width / leftCard.width).toBeGreaterThan(1.25);
+    expect(middle.width / leftCard.width).toBeLessThan(1.4);
+    expect(middle.width / rightCard.width).toBeGreaterThan(1.3);
+    expect(middle.width / rightCard.width).toBeLessThan(1.5);
     expect(result.cards.find((x) => x.position === 'previous')!.left)
       .toBeLessThan(middle.left);
     expect(result.cards.find((x) => x.position === 'next')!.left)
@@ -354,19 +359,50 @@ test('the center card subtly occludes both complete side previews after every ro
           prevZ: Number(getComputedStyle(previous).zIndex),
           nextZ: Number(getComputedStyle(next).zIndex),
           allOnStage: [c, p, n].every((r) => r.left >= outer.left - 1 && r.right <= outer.right + 1),
-          centerLarger: c.width > p.width * 2 && c.width > n.width * 2
+          balancedSizes: c.width > p.width * 1.25 && c.width < p.width * 1.4 && c.width > n.width * 1.3 && c.width < n.width * 1.5
         };
       });
       expect(result.pageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.stageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.allOnStage, 'all cards inside the Hero at ' + width).toBe(true);
-      expect(result.centerLarger).toBe(true);
+      expect(result.balancedSizes).toBe(true);
       for (const overlap of [result.coveredLeft, result.coveredRight]) {
         expect(overlap, 'side cards gently behind center at ' + width).toBeGreaterThan(5);
         expect(overlap, 'side image must not be hidden too much at ' + width).toBeLessThan(25);
       }
       expect(result.centerZ).toBeGreaterThan(result.prevZ);
       expect(result.centerZ).toBeGreaterThan(result.nextZ);
+    }
+  }
+});
+
+test('hero screenshots stand alone and every product identity is below its image', async ({ page }) => {
+  for (const width of [320, 390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/ko/');
+    const cards = await page.locator('.hero-slide').evaluateAll((anchors) =>
+      anchors.map((anchor) => {
+        const screen = anchor.querySelector<HTMLElement>('.hero-slide-screen')!;
+        const label = anchor.querySelector<HTMLElement>('.hero-slide-label')!;
+        const name = label.querySelector('strong')!;
+        const screenRect = screen.getBoundingClientRect();
+        const labelRect = label.getBoundingClientRect();
+        const labelStyle = getComputedStyle(label);
+        return {
+          name: name.textContent?.trim(),
+          visualBelow: labelRect.top - screenRect.bottom,
+          labelBackground: labelStyle.backgroundColor,
+          labelBorder: labelStyle.borderTopWidth,
+          hasOriginalAndroidImage: Boolean(screen.querySelector('img[src*="android-20261012"]'))
+        };
+      })
+    );
+    expect(cards.map((card) => card.name)).toEqual(['TagWeaver', 'Melivra', 'Papira']);
+    for (const card of cards) {
+      expect(card.visualBelow).toBeGreaterThanOrEqual(5);
+      expect(card.labelBackground).toBe('rgba(0, 0, 0, 0)');
+      expect(card.labelBorder).toBe('0px');
+      expect(card.hasOriginalAndroidImage).toBe(true);
     }
   }
 });

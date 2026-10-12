@@ -289,21 +289,22 @@
   font-weight: 400;
 }
 
-/* Three complete cards at every width; arrows rotate the large center app. */
+/* Original showroom proportions: 31% / 40% / 29%.
+   Original Android screenshots stay intact, with their app names OUTSIDE the image. */
 .homepage .hero-carousel {
   width: min(100%, 490px);
   margin-inline: auto;
   min-width: 0;
 }
 .homepage .hero-stage {
+  --hero-side-inset: 12px;
+  --hero-side-drop: clamp(16px, 2vw, 28px);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2.45fr) minmax(0, 1fr);
-  /* Inset side cards slightly behind the featured center, never offscreen. */
-  --hero-side-inset: clamp(18px, 1.8vw, 27px);
-  gap: clamp(7px, 1vw, 11px);
+  grid-template-columns: minmax(0, 31fr) minmax(0, 40fr) minmax(0, 29fr);
+  gap: 0;
   align-items: center;
   min-width: 0;
-  padding: 8px 0 13px;
+  padding: 8px 0 10px;
 }
 .homepage .hero-stage:focus-visible {
   outline: 2px solid #75649b;
@@ -313,115 +314,101 @@
 .homepage .hero-slide {
   position: relative;
   z-index: 1;
-  display: block;
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   grid-row: 1;
-  overflow: hidden;
+  min-width: 0;
   color: var(--home-ink);
-  background: #fff;
-  border: 1px solid var(--accent-border, var(--home-border));
-  border-radius: 17px;
-  box-shadow: 0 9px 24px rgba(53, 48, 59, .08);
-  /* Position changes must be atomic: interpolation would briefly clip side cards. */
-  transition: box-shadow 160ms ease;
+  text-decoration: none;
+  background: transparent;
 }
 .homepage .hero-slide[data-position="previous"] {
   grid-column: 1;
-  transform: translateX(var(--hero-side-inset));
+  transform: translate(var(--hero-side-inset), var(--hero-side-drop));
 }
 .homepage .hero-slide[data-position="active"] {
   z-index: 3;
   grid-column: 2;
-  border-radius: 19px;
-  box-shadow: 0 16px 36px rgba(53, 48, 59, .13);
 }
 .homepage .hero-slide[data-position="next"] {
   grid-column: 3;
-  transform: translateX(calc(-1 * var(--hero-side-inset)));
+  transform: translate(calc(-1 * var(--hero-side-inset)), var(--hero-side-drop));
 }
 .homepage .hero-slide[data-position="previous"]:hover {
-  transform: translateX(var(--hero-side-inset)) translateY(-2px);
+  transform: translate(var(--hero-side-inset), calc(var(--hero-side-drop) - 2px));
 }
 .homepage .hero-slide[data-position="next"]:hover {
-  transform: translateX(calc(-1 * var(--hero-side-inset))) translateY(-2px);
+  transform: translate(calc(-1 * var(--hero-side-inset)), calc(var(--hero-side-drop) - 2px));
 }
 .homepage .hero-slide[data-position="active"]:hover { transform: translateY(-2px); }
-
-.homepage .hero-slide-label {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  min-height: 66px;
-  padding: 12px;
-  border-bottom: 1px solid var(--accent-border);
-  background: linear-gradient(135deg, rgba(255, 253, 248, .98) 15%, var(--accent-bg));
-}
-.homepage .hero-slide-label > img {
-  flex: 0 0 auto;
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-}
-.homepage .hero-slide-identity {
-  display: grid;
-  gap: 3px;
-  min-width: 0;
-}
-.homepage .hero-slide-identity strong {
-  font-size: 15px;
-  font-weight: 710;
-  line-height: 1.3;
-}
-.homepage .hero-slide-identity small {
-  color: var(--accent-text, var(--home-muted));
-  font-size: 11px;
-  font-weight: 550;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
-}
-.homepage .hero-slide-link-arrow {
-  margin-left: auto;
-  align-self: flex-start;
-  color: var(--accent-text, var(--home-muted));
-  font-size: 16px;
-}
-
-/* Side cards keep a legible icon/name, never a chopped-off screenshot. */
-.homepage .hero-slide:not([data-position="active"]) .hero-slide-label {
-  min-height: 0;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  padding: 8px 3px 7px;
-  text-align: center;
-}
-.homepage .hero-slide:not([data-position="active"]) .hero-slide-label > img {
-  width: 24px;
-  height: 24px;
-}
-.homepage .hero-slide:not([data-position="active"]) .hero-slide-identity { width: 100%; }
-.homepage .hero-slide:not([data-position="active"]) .hero-slide-identity strong {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 10px;
-}
-.homepage .hero-slide:not([data-position="active"]) .hero-slide-identity small,
-.homepage .hero-slide:not([data-position="active"]) .hero-slide-link-arrow { display: none; }
-.homepage .hero-slide:not([data-position="active"]) .hero-slide-screen { padding: 3px 3px 0; }
-
 .homepage .hero-slide-screen {
+  display: block;
   width: 100%;
-  padding: 7px 7px 0;
-  background: white;
+  min-width: 0;
+  padding: 3px;
+  border: 1px solid var(--accent-border, var(--home-border));
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(53, 48, 59, .10);
+  transition: box-shadow 160ms ease;
+}
+.homepage .hero-slide[data-position="active"] .hero-slide-screen {
+  border-radius: 21px;
+  box-shadow: 0 16px 38px rgba(53, 48, 59, .13);
 }
 .homepage .hero-slide-screen img {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 6 / 13;
   object-fit: contain;
   object-position: center top;
+}
+.homepage .hero-slide-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+  min-height: 24px;
+  padding: 0 2px;
+  color: var(--home-ink);
+  background: none;
+  border: 0;
+}
+.homepage .hero-slide-label > img {
+  display: block;
+  width: 19px;
+  height: 19px;
+  flex: 0 0 auto;
+  border-radius: 5px;
+}
+.homepage .hero-slide-identity {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+}
+.homepage .hero-slide-identity strong {
+  display: block;
+  overflow: hidden;
+  max-width: 100%;
+  color: var(--accent-text, var(--home-ink));
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 720;
+  line-height: 1.3;
+}
+.homepage .hero-slide-identity small,
+.homepage .hero-slide-link-arrow { display: none; }
+.homepage .hero-slide[data-position="active"] .hero-slide-label > img {
+  width: 23px;
+  height: 23px;
+  border-radius: 6px;
+}
+.homepage .hero-slide[data-position="active"] .hero-slide-identity strong {
+  font-size: 14px;
 }
 
 .homepage .hero-carousel-controls {
@@ -958,19 +945,19 @@
   .homepage .primary-link { min-height: 46px; margin-top: 22px; padding: 12px 17px; }
   .homepage .hero-carousel { width: 100%; margin-top: 12px; }
   .homepage .hero-stage {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2.45fr) minmax(0, 1fr);
-    gap: 7px;
-    padding-top: 5px;
-    padding-bottom: 13px;
+    --hero-side-inset: 9px;
+    --hero-side-drop: 16px;
+    grid-template-columns: minmax(0, 31fr) minmax(0, 40fr) minmax(0, 29fr);
+    padding-top: 6px;
+    padding-bottom: 9px;
   }
-  .homepage .hero-slide { border-radius: 13px; }
-  .homepage .hero-slide[data-position="active"] { border-radius: 17px; }
-  .homepage .hero-slide-label { min-height: 55px; padding: 9px 6px; gap: 5px; }
-  .homepage .hero-slide-label > img { width: 28px; height: 28px; }
-  .homepage .hero-slide-identity strong { font-size: 12px; }
-  .homepage .hero-slide-identity small { font-size: 10px; }
-  .homepage .hero-slide:not([data-position="active"]) .hero-slide-label > img { width: 19px; height: 19px; }
-  .homepage .hero-slide:not([data-position="active"]) .hero-slide-identity strong { font-size: 9px; }
+  .homepage .hero-slide-screen { border-radius: 12px; padding: 2px; }
+  .homepage .hero-slide[data-position="active"] .hero-slide-screen { border-radius: 16px; }
+  .homepage .hero-slide-label { margin-top: 6px; gap: 4px; min-height: 19px; }
+  .homepage .hero-slide-label > img { width: 15px; height: 15px; border-radius: 4px; }
+  .homepage .hero-slide-identity strong { font-size: 10px; }
+  .homepage .hero-slide[data-position="active"] .hero-slide-label > img { width: 18px; height: 18px; }
+  .homepage .hero-slide[data-position="active"] .hero-slide-identity strong { font-size: 12px; }
   .homepage .hero-carousel-controls { min-height: 40px; padding-top: 5px; }
   .homepage .home-section { padding: 44px 0 50px; }
   .homepage .section-topline { gap: 14px; margin-bottom: 22px; }
