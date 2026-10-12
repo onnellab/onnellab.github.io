@@ -366,9 +366,10 @@ test('the center card subtly occludes both complete side previews after every ro
       expect(result.stageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.allOnStage, 'all cards inside the Hero at ' + width).toBe(true);
       expect(result.balancedSizes).toBe(true);
+      const target = width <= 650 ? { min: 21, max: 27 } : { min: 32, max: 40 };
       for (const overlap of [result.coveredLeft, result.coveredRight]) {
-        expect(overlap, 'side cards gently behind center at ' + width).toBeGreaterThan(5);
-        expect(overlap, 'side image must not be hidden too much at ' + width).toBeLessThan(25);
+        expect(overlap, 'side cards visibly behind center at ' + width).toBeGreaterThan(target.min);
+        expect(overlap, 'side card remains recognizable at ' + width).toBeLessThan(target.max);
       }
       expect(result.centerZ).toBeGreaterThan(result.prevZ);
       expect(result.centerZ).toBeGreaterThan(result.nextZ);
