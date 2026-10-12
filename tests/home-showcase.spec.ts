@@ -26,7 +26,7 @@ test('compact home keeps product discovery, trust, and all nine localized routes
     await expect(page.locator('a.featured')).toHaveAttribute('href', `/apps/tagweaver/${route.segment}`);
     await expect(page.locator('.product-card h3')).toHaveText(['Quivra', 'Melivra', 'Papira']);
     await expect(page.locator('.trust-count')).toHaveText('8');
-    await expect(page.locator('.trust-principle')).toHaveCount(3);
+    await expect(page.locator('.trust-principles, .trust-principle')).toHaveCount(0);
     for (const removed of ['.workflow-section', '.updates-section', '.values-section', '.closing-section', '.trust-note']) {
       await expect(page.locator(removed)).toHaveCount(0);
     }
@@ -102,7 +102,7 @@ test('home remains free of horizontal overflow at small mobile widths', async ({
 test('the condensed home ends with transparent trust and a useful footer', async ({ page }) => {
   await page.goto('/ko/');
   await expect(page.locator('.trust-grid .trust-item')).toHaveCount(3);
-  await expect(page.locator('.trust-principles .trust-principle')).toHaveCount(3);
+  await expect(page.locator('.trust-principles, .trust-principle')).toHaveCount(0);
   await expect(page.locator('.footer-directory a')).toHaveCount(3);
   await expect(page.locator('footer.site-footer')).toHaveCount(1);
   await expect(page.locator('.closing-section, .workflow-section, .values-section, .updates-section')).toHaveCount(0);
@@ -214,4 +214,42 @@ test('the homepage uses only Android source dimensions for every product', async
     'quivra.png': [1080, 1920]
   };
   for (const img of images) expect(img.size, img.name).toEqual(dimensions[img.name!]);
+});
+
+test('homepage product colors match the app catalog and Papira is blue', async ({ page }) => {
+  const expected = {
+    tagweaver: ['#ded2b5', '#fbf7ec', '#6a5a2e'],
+    quivra: ['#d7cfdb', '#f4eff5', '#614f68'],
+    melivra: ['#f1c8bb', '#fbf2ed', '#6a5148'],
+    papira: ['#c2d5e9', '#edf5fd', '#385b78']
+  } as const;
+  for (const suffix of ['', 'ko/']) {
+    await page.goto('/' + suffix);
+    const actual = await page.locator('.featured, .collection-grid .product-card').evaluateAll(
+      (cards) => cards.map((card) => {
+        const style = getComputedStyle(card);
+        return {
+          slug: (card.getAttribute('href') ?? '').split('/')[2],
+          colors: ['--accent-border', '--accent-bg', '--accent-text'].map((property) => style.getPropertyValue(property).trim())
+        };
+      })
+    );
+    for (const {slug, colors} of actual) expect(colors, slug).toEqual(expected[slug as keyof typeof expected]);
+    for (const item of actual) {
+      await page.goto('/apps/' + suffix);
+      const appCard = page.locator('.app-card[href="/apps/' + item.slug + '/' + suffix + '"]');
+      await expect(appCard).toHaveCount(1);
+      const fromCatalog = await appCard.evaluate((node) => {
+        const style = getComputedStyle(node);
+        return ['--accent-border', '--accent-bg', '--accent-text'].map((property) => style.getPropertyValue(property).trim());
+      });
+      expect(fromCatalog, item.slug + ': website color must match app listing').toEqual(item.colors);
+    }
+    await page.goto('/apps/papira/' + suffix);
+    const fromDetail = await page.locator('main[data-product-slug="papira"]').evaluate((node) => {
+      const style = getComputedStyle(node);
+      return ['--accent-border', '--accent-bg', '--accent-text'].map((property) => style.getPropertyValue(property).trim());
+    });
+    expect(fromDetail).toEqual(expected.papira);
+  }
 });

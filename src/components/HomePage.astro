@@ -160,7 +160,7 @@ const jsonLd = [
             <p class="section-kicker">{copy.signatureLabel}</p>
             <span class="section-rule"></span>
           </div>
-          <a class="featured" href={linkFor(featured.slug)}>
+          <a class="featured" href={linkFor(featured.slug)} style={`--accent-border: ${featured.accent.border}; --accent-bg: ${featured.accent.background}; --accent-text: ${featured.accent.text};`}>
             <div class="featured-image-stage">
               <div class="featured-screen">
                 <img src={featuredScreenshot} alt={`${featured.title}: ${copy.signatureTitle}`} loading="lazy" decoding="async" width="1440" height="3120" />
@@ -200,7 +200,7 @@ const jsonLd = [
             const offer = copy.offers[app.slug as keyof typeof copy.offers];
             const screenshot = screenshotBySlug[app.slug];
             return (
-              <a class="product-card" href={linkFor(app.slug)} style={`--product-tint:${app.accent.background};--product-border:${app.accent.border}`}>
+              <a class="product-card" href={linkFor(app.slug)} style={`--accent-bg: ${app.accent.background}; --accent-border: ${app.accent.border}; --accent-text: ${app.accent.text};`}>
                 <div class="product-picture">
                   {screenshot ? (
                     <div class="product-screen">
@@ -242,10 +242,6 @@ const jsonLd = [
               <p>{item.body}</p>
             </article>
           ))}
-        </div>
-        <div class="trust-principles" aria-label={copy.approachLabel}>
-          <span class="trust-principles-label">{copy.approachLabel}</span>
-          {copy.values.map((value) => <span class="trust-principle">{value.title}</span>)}
         </div>
       </section>
 

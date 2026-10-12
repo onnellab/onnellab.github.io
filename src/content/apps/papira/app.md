@@ -11,7 +11,7 @@ googleplay: https://play.google.com/store/apps/details?id=com.onnellab.papira
 privacy: https://onnellab.com/privacy/papira/
 supportEmail: onnellab.app@gmail.com
 
-accent: #d7cfdb, #f4eff5, #614f68
+accent: #c2d5e9, #edf5fd, #385b78
 
 icon: icon.png
 socialImage: social-card.png
