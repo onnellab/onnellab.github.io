@@ -121,7 +121,7 @@ test('all nine homepage locales use matching uncompressed original UI captures',
       .evaluateAll((nodes) => nodes.map((node) => (node as HTMLImageElement).getAttribute('src')));
     expect(paths).toHaveLength(7);
     const uniquePaths = [...new Set(paths)];
-    expect(uniquePaths).toHaveLength(5);
+    expect(uniquePaths).toHaveLength(6);
     const segment = route.segment ? route.segment.slice(0, -1) : 'en';
     const assetLocale = localeMap[segment] ?? segment;
     for (const source of uniquePaths) {
@@ -287,10 +287,11 @@ test('the homepage uses only Android source dimensions for every product', async
       }));
     });
   const dimensions: Record<string, number[]> = {
-    'tagweaver-library.png': [1440, 3120],
+    'tagweaver-cover.png': [1440, 3120],
     'tagweaver-editor.png': [1440, 3120],
     'melivra.png': [1080, 2400],
     'papira.png': [1440, 3120],
+    'papira-hero.png': [1440, 3120],
     'quivra.png': [1080, 1920]
   };
   for (const img of images) expect(img.size, img.name).toEqual(dimensions[img.name!]);
@@ -777,5 +778,25 @@ test('only the centered Hero app name is visible without moving the reserved cap
       expect(await geometry(), width + 'px rotation=' + i).toEqual(original);
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+  }
+});
+
+test('the Hero chooses distinctive original Android artwork without duplicating selected-card captures', async ({ page, request }) => {
+  for (const route of routes) {
+    await page.goto(route.home);
+    const slugToScreenshot = {
+      tagweaver: 'tagweaver-cover.png',
+      melivra: 'melivra.png',
+      papira: 'papira-hero.png'
+    };
+    for (const [slug, filename] of Object.entries(slugToScreenshot)) {
+      const img = page.locator('.hero-slide[href*="/apps/' + slug + '/"] .hero-slide-screen img');
+      await expect(img).toHaveCount(1);
+      await expect(img).toHaveAttribute('src', new RegExp('/' + filename.replace('.', '\\.') + '$'));
+      expect((await request.get((await img.getAttribute('src'))!)).status(), slug + ' ' + route.home).toBe(200);
+    }
+    const papiraSelected = page.locator('.collection-grid .product-card[href*="/apps/papira/"] .product-screen img');
+    await expect(papiraSelected).toHaveAttribute('src', /\/papira\.png$/);
+    await expect(page.locator('.hero-slide[href*="/apps/tagweaver/"] img')).not.toHaveAttribute('src', /library_selected|tagweaver-library/);
   }
 });

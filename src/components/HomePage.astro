@@ -29,10 +29,10 @@ const selectedApps = (['quivra', 'melivra', 'papira'] as const)
   .filter((app): app is ProductIndexItem => Boolean(app));
 // Byte-preserved Android UI captures from each app's assets; versioned URL avoids stale browser cache.
 const sourceShot = (name: string) => '/home-assets/screenshots/android-20261012/' + locale + '/' + name + '.png';
-const heroScreenshot = featured ? sourceShot('tagweaver-library') : undefined;
+const heroScreenshot = featured ? sourceShot('tagweaver-cover') : undefined;
 const featuredScreenshot = featured ? sourceShot('tagweaver-editor') : undefined;
 const melivraScreenshot = selectedApps.some((app) => app.slug === 'melivra') ? sourceShot('melivra') : undefined;
-const papiraScreenshot = selectedApps.some((app) => app.slug === 'papira') ? sourceShot('papira') : undefined;
+const papiraScreenshot = selectedApps.some((app) => app.slug === 'papira') ? sourceShot('papira-hero') : undefined;
 const screenshotBySlug: Record<string, string> = {
   quivra: sourceShot('quivra'),
   melivra: sourceShot('melivra'),
