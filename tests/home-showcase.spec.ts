@@ -406,3 +406,41 @@ test('hero screenshots stand alone and every product identity is below its image
     }
   }
 });
+
+test('TagWeaver signature identity is a clear, prominent product name panel', async ({ page }) => {
+  for (const width of [320, 390, 820, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/ko/');
+    const badge = page.locator('.featured .product-identity');
+    await badge.scrollIntoViewIfNeeded();
+    await expect(badge.locator('.product-name')).toHaveText('TagWeaver');
+    const metrics = await badge.evaluate((el) => {
+      const icon = el.querySelector('img')!;
+      const title = el.querySelector('.product-name')!;
+      const outer = el.getBoundingClientRect();
+      const card = el.closest('.featured')!.getBoundingClientRect();
+      const copy = el.closest<HTMLElement>('.featured-copy')!;
+      const style = getComputedStyle(copy);
+      const availableWidth = copy.clientWidth - Number.parseFloat(style.paddingLeft) - Number.parseFloat(style.paddingRight);
+      return {
+        width: outer.width,
+        availableWidth,
+        height: outer.height,
+        iconWidth: icon.getBoundingClientRect().width,
+        titleFont: Number.parseFloat(getComputedStyle(title).fontSize),
+        withinCard: outer.left >= card.left - 1 && outer.right <= card.right + 1,
+        hasOutline: getComputedStyle(el).borderTopStyle === 'solid'
+      };
+    });
+    expect(metrics.width, String(width)).toBeGreaterThanOrEqual(235);
+    // The panel fills its available content width until its 330px desktop cap.
+    expect(Math.abs(metrics.width - Math.min(330, metrics.availableWidth)), String(width)).toBeLessThan(2);
+    expect(metrics.height, String(width)).toBeGreaterThanOrEqual(76);
+    expect(metrics.iconWidth, String(width)).toBeGreaterThanOrEqual(54);
+    expect(metrics.titleFont, String(width)).toBeGreaterThanOrEqual(20);
+    expect(metrics.withinCard).toBe(true);
+    expect(metrics.hasOutline).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth))
+      .toBeLessThanOrEqual(1);
+  }
+});

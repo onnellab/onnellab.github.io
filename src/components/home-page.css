@@ -614,32 +614,47 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: clamp(36px, 5vw, 67px);
+  padding: clamp(30px, 4.3vw, 56px);
   min-width: 0;
 }
 
 .homepage .product-identity {
   display: flex;
   align-items: center;
-  gap: 13px;
-  margin-bottom: 37px;
+  gap: 15px;
+  width: min(100%, 330px);
+  min-height: 84px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border: 1px solid var(--accent-border, var(--home-border));
+  border-radius: 16px;
+  background: linear-gradient(125deg, var(--accent-bg, #fbf7ec), #fffdf8);
 }
 
 .homepage .product-identity img {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 58px;
+  height: 58px;
+  flex: 0 0 auto;
+  border-radius: 14px;
 }
 
 .homepage .product-identity > div {
   display: grid;
-  gap: 4px;
+  gap: 6px;
+  min-width: 0;
 }
 
 .homepage .product-name {
-  font-size: 15px;
-  font-weight: 720;
+  font-size: clamp(20px, 1.7vw, 24px);
+  font-weight: 760;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   color: #3f3b43;
+}
+
+.homepage .product-identity .platform-text {
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .homepage .platform-text {
@@ -664,7 +679,7 @@
 }
 
 .homepage .featured-copy .text-arrow {
-  margin-top: 37px;
+  margin-top: 29px;
 }
 
 .homepage .collection-grid {
@@ -898,7 +913,7 @@
   .homepage .featured-image-stage { padding: 36px 16px 0; }
   .homepage .featured-screen { width: min(75%, 235px); }
   .homepage .featured-copy { padding: 30px; }
-  .homepage .product-identity { margin-bottom: 25px; }
+  .homepage .product-identity { margin-bottom: 22px; }
   .homepage .collection-grid { gap: 14px; }
   .homepage .product-picture { height: 215px; }
   .homepage .product-screen { width: min(74%, 170px); height: 195px; }
@@ -973,7 +988,9 @@
   .homepage .featured-copy h2 { font-size: 30px; }
   .homepage .featured-copy > p { margin-top: 12px; font-size: 15px; }
   .homepage .featured-copy .text-arrow { margin-top: 22px; }
-  .homepage .product-identity { margin-bottom: 20px; }
+  .homepage .product-identity { min-height: 78px; margin-bottom: 20px; padding: 11px 14px; }
+  .homepage .product-identity img { width: 54px; height: 54px; border-radius: 13px; }
+  .homepage .product-name { font-size: 21px; }
   .homepage .collection-grid { grid-template-columns: 1fr; gap: 15px; }
   .homepage .product-picture { height: 237px; }
   .homepage .product-screen { width: min(64%, 194px); height: 218px; }
