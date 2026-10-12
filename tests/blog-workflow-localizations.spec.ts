@@ -26,7 +26,7 @@ for (const item of manifest.items) {
       await expect(articleImage).toHaveAttribute('alt', item.alt);
       await articleImage.scrollIntoViewIfNeeded();
       await expect(articleImage).toBeVisible();
-      expect(await articleImage.evaluate(img => (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0)).toBe(true);
+      await expect.poll(() => articleImage.evaluate(img => (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0)).toBe(true);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
       await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', `https://onnellab.com${item.social_png.replace(/^public/, '')}`);
       if (item.slug === 'reuse-copied-text-snippets-iphone') {
@@ -47,18 +47,21 @@ for (const item of manifest.items) {
     await expect(page.locator('svg').first()).toHaveAttribute('xml:lang', item.locale);
     await expect(page.locator('svg > title').first()).toHaveText(item.title);
     await expect(page.locator('svg > desc').first()).toHaveText(item.steps.join(' → '));
-    const overflow = await page.locator('text').evaluateAll(texts => texts.flatMap(text => {
+    const bounds = await page.locator('text').evaluateAll(texts => texts.map(text => {
       const svgText = text as SVGGraphicsElement;
       const box = svgText.getBBox();
       const group = text.parentElement;
-      const maxWidth = group?.tagName.toLowerCase() === 'g' ? 190 : 1146;
+      const maxWidth = group?.tagName.toLowerCase() === 'g' ? 172 : 1146;
       const maxHeight = group?.tagName.toLowerCase() === 'g' ? 150 : 627;
-      return box.x < 0 || box.y < 0 || box.x + box.width > maxWidth || box.y + box.height > maxHeight
-        ? [{ text: text.textContent, x: box.x, y: box.y, width: box.width, height: box.height }]
-        : [];
+      return { text: text.textContent, x: box.x, y: box.y, width: box.width, height: box.height,
+        overflow: box.x < 0 || box.y < 0 || box.x + box.width > maxWidth || box.y + box.height > maxHeight };
     }));
-    expect(overflow).toEqual([]);
     fs.mkdirSync(evidence, { recursive: true });
+    fs.writeFileSync(path.join(evidence, `${item.locale}-${item.slug}-bounds.json`), JSON.stringify(bounds, null, 2) + '\n');
+    console.log(`SVG_BOUNDS ${item.locale}/${item.slug}: ${bounds.length} text blocks; ${bounds.filter(b => b.overflow).length} overflow`);
+    expect(bounds.filter(b => b.overflow)).toEqual([]);
+    const visibleSteps = await page.locator('g > text[font-size="14"]').allTextContents();
+    expect(visibleSteps).toEqual(item.steps);
     await page.screenshot({ path: path.join(evidence, `${item.locale}-${item.slug}.png`) });
   });
 }
