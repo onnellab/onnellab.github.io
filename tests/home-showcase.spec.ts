@@ -286,7 +286,7 @@ test('the homepage uses only Android source dimensions for every product', async
       }));
     });
   const dimensions: Record<string, number[]> = {
-    'tagweaver-cover.png': [1440, 3120],
+    'tagweaver-library.png': [1440, 3120],
     'tagweaver-editor.png': [1440, 3120],
     'melivra.png': [1080, 2400],
     'papira.png': [1440, 3120],
@@ -803,7 +803,7 @@ test('the Hero chooses distinctive original Android artwork without duplicating 
   for (const route of routes) {
     await page.goto(route.home);
     const slugToScreenshot = {
-      tagweaver: 'tagweaver-cover.png',
+      tagweaver: 'tagweaver-editor.png',
       melivra: 'melivra.png',
       papira: 'papira-hero.png'
     };
@@ -815,16 +815,22 @@ test('the Hero chooses distinctive original Android artwork without duplicating 
     }
     const papiraSelected = page.locator('.collection-grid .product-card[href*="/apps/papira/"] .product-screen img');
     await expect(papiraSelected).toHaveAttribute('src', /\/papira\.png$/);
-    await expect(page.locator('.hero-slide[href*="/apps/tagweaver/"] img')).not.toHaveAttribute('src', /library_selected|tagweaver-library/);
+    const hero = page.locator('.hero-slide[href*="/apps/tagweaver/"] img');
+    const featured = page.locator('.featured-screen img');
+    await expect(hero).toHaveAttribute('src', /tagweaver-editor\.png$/);
+    await expect(featured).toHaveAttribute('src', /tagweaver-library\.png$/);
+    expect(await hero.getAttribute('src')).not.toBe(await featured.getAttribute('src'));
   }
 });
 
 test('cached older home pages keep access to the legacy TagWeaver screenshot path', async ({ request }) => {
   const locales = ['en','ko','ja','zh-Hans','zh-Hant','pt-BR','de','fr','es'];
   for (const locale of locales) {
-    const url = '/home-assets/screenshots/android-20261012/' + locale + '/tagweaver-library.png';
-    const response = await request.get(url);
-    expect(response.status(), 'legacy cached HTML asset ' + locale).toBe(200);
-    expect(response.headers()['content-type']).toContain('image/png');
+    for (const file of ['tagweaver-cover.png', 'tagweaver-library.png', 'tagweaver-editor.png']) {
+      const url = '/home-assets/screenshots/android-20261012/' + locale + '/' + file;
+      const response = await request.get(url);
+      expect(response.status(), 'original and legacy screenshot ' + locale + '/' + file).toBe(200);
+      expect(response.headers()['content-type']).toContain('image/png');
+    }
   }
 });
