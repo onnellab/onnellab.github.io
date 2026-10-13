@@ -289,9 +289,9 @@
   font-weight: 400;
 }
 
-/* Balanced layered showcase: a clear center with readable side previews.
-   Physical slot sizes (32:38:30) drive the pointer/FLIP geometry; the
-   supporting cards sit near the same baseline instead of being scattered. */
+/* Balanced layered showcase: 32:38:30, with all screenshot bottoms aligned.
+   Physical slot widths still drive pointer/FLIP geometry; avoid translating
+   shorter previews upward, which makes them look like they are floating. */
 .homepage .hero-carousel {
   width: min(100%, 490px);
   margin-inline: auto;
@@ -299,12 +299,10 @@
 }
 .homepage .hero-stage {
   --hero-side-inset: 22px;
-  --hero-left-rise: 19px;
-  --hero-right-shift: -18px;
   display: grid;
   grid-template-columns: minmax(0, 32fr) minmax(0, 38fr) minmax(0, 30fr);
   gap: 0;
-  align-items: center;
+  align-items: end;
   min-width: 0;
   padding: 8px 0 10px;
   cursor: grab;
@@ -327,7 +325,7 @@
 }
 .homepage .hero-slot[data-hero-slot="previous"] {
   grid-column: 1;
-  transform: translate(var(--hero-side-inset), calc(-1 * var(--hero-left-rise)));
+  transform: translateX(var(--hero-side-inset));
 }
 .homepage .hero-slot[data-hero-slot="active"] {
   grid-column: 2;
@@ -335,7 +333,7 @@
 }
 .homepage .hero-slot[data-hero-slot="next"] {
   grid-column: 3;
-  transform: translate(calc(-1 * var(--hero-side-inset)), var(--hero-right-shift));
+  transform: translateX(calc(-1 * var(--hero-side-inset)));
 }
 .homepage .hero-slide {
   display: flex;
@@ -984,8 +982,6 @@
   .homepage .hero-carousel { width: 100%; margin-top: 12px; }
   .homepage .hero-stage {
     --hero-side-inset: clamp(12px, 4vw, 18px);
-    --hero-left-rise: 9px;
-    --hero-right-shift: -7px;
     grid-template-columns: minmax(0, 32fr) minmax(0, 38fr) minmax(0, 30fr);
     padding-top: 6px;
     padding-bottom: 9px;

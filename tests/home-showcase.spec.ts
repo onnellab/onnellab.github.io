@@ -363,8 +363,10 @@ test('the center card subtly occludes both complete side previews after every ro
           allOnStage: [c, p, n].every((r) => r.left >= outer.left - 1 && r.right <= outer.right + 1),
           centerToLeft: c.width / p.width,
           centerToRight: c.width / n.width,
-          leftDrop: p.top - c.top,
-          rightDrop: n.top - c.top
+          leftBottomDelta: p.bottom - c.bottom,
+          rightBottomDelta: n.bottom - c.bottom,
+          leftTopDelta: p.top - c.top,
+          rightTopDelta: n.top - c.top
         };
       });
       expect(result.pageOverflow, String(width)).toBeLessThanOrEqual(1);
@@ -373,12 +375,12 @@ test('the center card subtly occludes both complete side previews after every ro
       const expected = { left: 38 / 32, right: 38 / 30 };
       expect(Math.abs(result.centerToLeft - expected.left), String(width)).toBeLessThan(0.02);
       expect(Math.abs(result.centerToRight - expected.right), String(width)).toBeLessThan(0.02);
-      expect(result.leftDrop, 'left preview stays near the central baseline').toBeGreaterThan(10);
-      expect(result.leftDrop).toBeLessThan(20);
-      expect(result.rightDrop, 'right preview stays nearby at ' + width).toBeGreaterThan(18);
-      expect(result.rightDrop).toBeLessThan(32);
-      expect(result.rightDrop - result.leftDrop).toBeGreaterThan(5);
-      expect(result.rightDrop - result.leftDrop).toBeLessThan(15);
+      expect(Math.abs(result.leftBottomDelta), 'left screenshot shares the bottom baseline at ' + width)
+        .toBeLessThanOrEqual(0.2);
+      expect(Math.abs(result.rightBottomDelta), 'right screenshot shares the bottom baseline at ' + width)
+        .toBeLessThanOrEqual(0.2);
+      expect(result.leftTopDelta).toBeGreaterThan(20);
+      expect(result.rightTopDelta).toBeGreaterThan(result.leftTopDelta);
       const target = width <= 355
         ? { min: 11, max: 13 }
         : width <= 650 ? { min: 14, max: 17 } : { min: 21, max: 23 };

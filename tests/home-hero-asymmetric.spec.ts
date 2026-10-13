@@ -26,12 +26,14 @@ test('balanced layered hero preserves geometry after navigation', async ({page})
     const initial=await geometry();
     expect(initial.overflow).toBeLessThanOrEqual(1);
     expect(initial.frameBounds).toBe(true);
-    expect(initial.left.y-initial.center.y).toBeGreaterThan(10);
-    expect(initial.left.y-initial.center.y).toBeLessThan(20);
-    expect(initial.right.y-initial.center.y).toBeGreaterThan(18);
-    expect(initial.right.y-initial.center.y).toBeLessThan(32);
-    expect(initial.right.y-initial.left.y).toBeGreaterThan(5);
-    expect(initial.right.y-initial.left.y).toBeLessThan(15);
+    // Both supporting screenshots finish at the same baseline as the center,
+    // rather than appearing to float above it on desktop and mobile.
+    expect(Math.abs(initial.left.y + initial.left.height - initial.center.y - initial.center.height))
+      .toBeLessThanOrEqual(0.2);
+    expect(Math.abs(initial.right.y + initial.right.height - initial.center.y - initial.center.height))
+      .toBeLessThanOrEqual(0.2);
+    expect(initial.left.y).toBeGreaterThan(initial.center.y);
+    expect(initial.right.y).toBeGreaterThan(initial.left.y);
     expect(initial.center.width).toBeGreaterThan(initial.left.width);
     expect(initial.left.width).toBeGreaterThan(initial.right.width);
     const expectedRatio=[0.32,0.38,0.30];
@@ -58,15 +60,18 @@ test('all nine languages preserve balanced preview positions', async ({page}) =>
     const metrics=await page.locator('[data-hero-track]').evaluate(stage=>{
       const box=(s:string)=>stage.querySelector('[data-hero-slot="'+s+'"] .hero-slide-screen')!.getBoundingClientRect();
       const l=box('previous'),c=box('active'),r=box('next');
-      return {left:Number((l.y-c.y).toFixed(1)),right:Number((r.y-c.y).toFixed(1)),
+      return {leftBottom:Number((l.bottom-c.bottom).toFixed(2)),
+        rightBottom:Number((r.bottom-c.bottom).toFixed(2)),
+        leftTop:Number((l.top-c.top).toFixed(1)),
+        rightTop:Number((r.top-c.top).toFixed(1)),
         centerRatio:Number((c.width/l.width).toFixed(2)),
         viewportOverflow:document.documentElement.scrollWidth-innerWidth};
     });
     expect(metrics.centerRatio,locale).toBeCloseTo(38 / 32, 1);
-    expect(metrics.left,locale).toBeGreaterThan(10);
-    expect(metrics.left,locale).toBeLessThan(20);
-    expect(metrics.right,locale).toBeGreaterThan(18);
-    expect(metrics.right,locale).toBeLessThan(32);
+    expect(Math.abs(metrics.leftBottom),locale).toBeLessThanOrEqual(0.2);
+    expect(Math.abs(metrics.rightBottom),locale).toBeLessThanOrEqual(0.2);
+    expect(metrics.leftTop,locale).toBeGreaterThan(25);
+    expect(metrics.rightTop,locale).toBeGreaterThan(metrics.leftTop);
     expect(metrics.viewportOverflow,locale).toBeLessThanOrEqual(1);
   }
 });
