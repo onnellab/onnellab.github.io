@@ -21,11 +21,13 @@ function initializeHomeCarousels(): void {
     if (!stage || !previousSlot || !activeSlot || !nextSlot ||
       slides.length !== 3 || slides.length !== dots.length) continue;
 
+    type SlideRects = Map<HTMLAnchorElement, DOMRect>;
     type DragSession = {
       pointerId: number;
       startX: number;
       startY: number;
       dragging: boolean;
+      startRects?: SlideRects;
     };
 
     let active = 0;
@@ -44,31 +46,122 @@ function initializeHomeCarousels(): void {
       delete stage.dataset.animating;
     };
 
-    const clearDragOffset = () => {
-      delete stage.dataset.dragging;
-      stage.style.removeProperty('--hero-drag-x');
-    };
-
     const measureSlides = () => new Map(
       slides.map((slide) => [slide, slide.getBoundingClientRect()])
     );
 
+    const clearDragStyles = () => {
+      delete stage.dataset.dragging;
+      delete stage.dataset.dragPreview;
+      for (const slide of slides) {
+        slide.style.removeProperty('transform');
+        slide.style.removeProperty('opacity');
+      }
+      for (const slot of [previousSlot, activeSlot, nextSlot]) {
+        slot.style.removeProperty('z-index');
+      }
+    };
+
+    // The two adjacent cards move along *different* paths. The wrapped card
+    // fades out on its old side and reappears on the opposite side rather than
+    // flying through (and obscuring) the center card.
+    const updateDrag = (session: DragSession, deltaX: number) => {
+      const start = session.startRects;
+      if (!start) return;
+      const forward = deltaX < 0;
+      const progress = Math.min(1, Math.abs(deltaX) / Math.max(80, stage.clientWidth * 0.3));
+      const previous = previousSlot.querySelector<HTMLAnchorElement>('[data-hero-slide]')!;
+      const current = activeSlot.querySelector<HTMLAnchorElement>('[data-hero-slide]')!;
+      const following = nextSlot.querySelector<HTMLAnchorElement>('[data-hero-slide]')!;
+      const destinations = forward
+        ? [[current, previous], [following, current], [previous, following]]
+        : [[current, following], [previous, current], [following, previous]];
+      const wrapping = forward ? previous : following;
+      const incoming = forward ? following : previous;
+
+      stage.dataset.dragging = 'true';
+      // Once the new card visually occupies the center, let its caption lead
+      // too. Commit aria-current and the counter only when the drag settles.
+      if (progress >= 0.56) stage.dataset.dragPreview = forward ? 'next' : 'previous';
+      else delete stage.dataset.dragPreview;
+      for (const [slide, destination] of destinations) {
+        const from = start.get(slide)!;
+        const to = start.get(destination)!;
+        const isWrapping = slide === wrapping;
+        // At half-progress the wrapping card is fully transparent. Its
+        // position can then jump to the far side without a visible flash.
+        // Staggered, continuous progress: the incoming card leads and grows
+        // first, while the centered card eases out behind it. This is not one
+        // shared stage translate masquerading as a draggable carousel.
+        const moved = isWrapping
+          ? (progress <= 0.5 ? 0 : 1)
+          : slide === incoming
+            ? 1 - Math.pow(1 - progress, 1.5)
+            : Math.pow(progress, 1.35);
+        const dx = ((to.left + to.width / 2) - (from.left + from.width / 2)) * moved;
+        const dy = ((to.top + to.height / 2) - (from.top + from.height / 2)) * moved;
+        const sx = 1 + (to.width / from.width - 1) * moved;
+        const sy = 1 + (to.height / from.height - 1) * moved;
+        slide.style.transform =
+          'translate(' + dx + 'px, ' + dy + 'px) scale(' + sx + ', ' + sy + ')';
+        slide.style.opacity = isWrapping
+          ? String(Math.abs(1 - 2 * progress))
+          : '1';
+      }
+      // When the incoming card reaches the center it comes to the foreground,
+      // without changing the permanent stacking of the resting layout.
+      previousSlot.style.zIndex = !forward && progress > 0.5 ? '4' : '';
+      nextSlot.style.zIndex = forward && progress > 0.5 ? '4' : '';
+    };
+
+    const settleShortDrag = () => {
+      if (prefersReducedMotion() || typeof slides[0].animate !== 'function') {
+        clearDragStyles();
+        return;
+      }
+      cancelRunning();
+      const version = animationVersion;
+      const before = slides.map((slide) => ({
+        slide,
+        transform: slide.style.transform || 'none',
+        opacity: slide.style.opacity || '1'
+      }));
+      clearDragStyles();
+      stage.dataset.animating = 'true';
+      running = before.map(({ slide, transform, opacity }) =>
+        slide.animate([
+          { transform, opacity },
+          { transform: 'none', opacity: '1' }
+        ], { duration: 220, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' })
+      );
+      void Promise.all(running.map((animation) => animation.finished))
+        .then(() => {
+          if (version !== animationVersion) return;
+          running = [];
+          delete stage.dataset.animating;
+        })
+        .catch(() => { /* A later interaction superseded the return motion. */ });
+    };
+
     const rotate = (index: number, options?: { initial?: boolean; from?: Map<HTMLAnchorElement, DOMRect> }) => {
       const nextActive = (index + slides.length) % slides.length;
       if (nextActive === active && !options?.initial) {
-        clearDragOffset();
+        clearDragStyles();
         return;
       }
 
       // Capture the visible positions, including interrupted motion or a
       // pointer offset, before changing the permanent slot assignments.
       const before = options?.from ?? measureSlides();
+      const fromOpacity = new Map(slides.map((slide) => [
+        slide, Number.parseFloat(slide.style.opacity || '1')
+      ]));
       const focusedSlide = slides.find((slide) => slide === document.activeElement);
       cancelRunning();
       const animate = !options?.initial && !prefersReducedMotion() &&
         typeof slides[0].animate === 'function';
       if (animate) stage.dataset.animating = 'true';
-      clearDragOffset();
+      clearDragStyles();
       active = nextActive;
 
       const assignments = [
@@ -101,14 +194,19 @@ function initializeHomeCarousels(): void {
       running = slides.map((slide) => {
         const from = before.get(slide)!;
         const to = slide.getBoundingClientRect();
-        const deltaX = from.left - to.left;
-        const deltaY = from.top - to.top;
+        // A centered transform origin means FLIP translation must use center
+        // deltas, otherwise scaling introduces a visible sideways jump.
+        const deltaX = from.left + from.width / 2 - to.left - to.width / 2;
+        const deltaY = from.top + from.height / 2 - to.top - to.height / 2;
         const scaleX = from.width / to.width;
         const scaleY = from.height / to.height;
 
         return slide.animate([
-          { transform: 'translate(' + deltaX + 'px, ' + deltaY + 'px) scale(' + scaleX + ', ' + scaleY + ')' },
-          { transform: 'translate(0px, 0px) scale(1, 1)' }
+          {
+            transform: 'translate(' + deltaX + 'px, ' + deltaY + 'px) scale(' + scaleX + ', ' + scaleY + ')',
+            opacity: fromOpacity.get(slide) ?? 1
+          },
+          { transform: 'none', opacity: 1 }
         ], {
           duration: 340,
           easing: 'cubic-bezier(0.22, 1, 0.36, 1)'
@@ -162,21 +260,19 @@ function initializeHomeCarousels(): void {
       const deltaY = event.clientY - drag.startY;
 
       if (!drag.dragging) {
-        // Leave vertical scrolling to the browser. Capture only a deliberate
-        // horizontal gesture after passing the pointer slop threshold.
+        // A vertical gesture is still normal page scrolling. Horizontal
+        // movement captures the pointer only after a small intentional drag.
         if (Math.abs(deltaY) > 9 && Math.abs(deltaY) > Math.abs(deltaX)) {
           drag = null;
           return;
         }
         if (Math.abs(deltaX) < 9 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
         drag.dragging = true;
-        stage.dataset.dragging = 'true';
+        drag.startRects = measureSlides();
         stage.setPointerCapture(event.pointerId);
       }
 
-      const limit = stage.clientWidth * 0.22;
-      const offset = Math.max(-limit, Math.min(limit, deltaX));
-      stage.style.setProperty('--hero-drag-x', offset + 'px');
+      updateDrag(drag, deltaX);
       if (event.cancelable) event.preventDefault();
     }, { passive: false });
 
@@ -190,25 +286,27 @@ function initializeHomeCarousels(): void {
       if (stage.hasPointerCapture(event.pointerId)) {
         stage.releasePointerCapture(event.pointerId);
       }
-
       const distance = event.clientX - session.startX;
       const threshold = Math.max(32, Math.min(64, stage.clientWidth * 0.12));
       if (Math.abs(distance) >= threshold) {
+        // Each card has already followed its own path throughout the drag.
+        // Continue from the exact on-screen progress into its resting slot.
         const from = measureSlides();
         rotate(active + (distance < 0 ? 1 : -1), { from });
       } else {
-        clearDragOffset(); // A short drag smoothly springs back to the center.
+        settleShortDrag();
       }
 
-      // The click generated by pointerup runs before the next task.
-      // Never navigate to a product after a swipe gesture.
+      // Prevent the synthetic pointerup click from opening an app on swipe.
       window.setTimeout(() => { suppressClick = false; }, 0);
     });
 
     window.addEventListener('pointercancel', (event: PointerEvent) => {
       if (!drag || drag.pointerId !== event.pointerId) return;
+      const wasDragging = drag.dragging;
       drag = null;
-      clearDragOffset();
+      if (wasDragging) settleShortDrag();
+      else clearDragStyles();
     });
 
     rotate(0, { initial: true });

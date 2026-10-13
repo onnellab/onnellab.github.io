@@ -353,8 +353,7 @@
   text-decoration: none;
   background: transparent;
   cursor: grab;
-  translate: var(--hero-drag-x, 0px) 0;
-  transition: translate 190ms cubic-bezier(.22, 1, .36, 1);
+  transform-origin: center center;
 }
 .homepage .hero-stage[data-dragging='true'] .hero-slide {
   cursor: grabbing;
@@ -407,6 +406,15 @@
    All slides retain their accessible app name on the parent link. */
 .homepage .hero-slot:not([data-hero-slot="active"]) .hero-slide-label {
   visibility: hidden;
+}
+/* During direct manipulation, the caption follows the card that is actually
+   entering the center rather than lingering on the outgoing screenshot. */
+.homepage .hero-stage[data-drag-preview] .hero-slot[data-hero-slot="active"] .hero-slide-label {
+  visibility: hidden;
+}
+.homepage .hero-stage[data-drag-preview="next"] .hero-slot[data-hero-slot="next"] .hero-slide-label,
+.homepage .hero-stage[data-drag-preview="previous"] .hero-slot[data-hero-slot="previous"] .hero-slide-label {
+  visibility: visible;
 }
 .homepage .hero-slide-identity {
   display: flex;
