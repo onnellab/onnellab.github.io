@@ -917,6 +917,37 @@
   line-height: 1.7;
 }
 
+/* Evidence belongs with its claim; use a quiet text link rather than
+   introducing another marketing card, badge or unverified metric. */
+.homepage .trust-evidence-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 13px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #998ba6;
+  color: #53435f;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.5;
+  text-decoration: none;
+}
+.homepage .trust-evidence-link span {
+  flex: 0 0 auto;
+  font-size: 15px;
+  font-weight: 400;
+}
+.homepage .trust-evidence-link:hover {
+  border-bottom-color: #75649b;
+  color: #654b81;
+}
+.homepage .trust-evidence-link:focus-visible {
+  outline: 2px solid #75649b;
+  outline-offset: 4px;
+}
+
 
 
 .homepage .site-footer.site-footer {
@@ -1116,6 +1147,11 @@
     margin: 0;
     font-size: 13px;
     line-height: 1.57;
+  }
+  .homepage .trust-evidence-link {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: 7px;
   }
 }
 
