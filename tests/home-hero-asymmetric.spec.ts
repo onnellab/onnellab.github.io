@@ -27,7 +27,7 @@ test('balanced layered hero preserves geometry after navigation', async ({page})
     expect(initial.overflow).toBeLessThanOrEqual(1);
     expect(initial.frameBounds).toBe(true);
     // Center is lowest: the left preview rises most and the right rises less.
-    const leftLift = width <= 650 ? 12 : 18;
+    const leftLift = width <= 650 ? 15 : 22;
     const rightLift = width <= 650 ? 4 : 7;
     const leftDelta = initial.left.y + initial.left.height - initial.center.y - initial.center.height;
     const rightDelta = initial.right.y + initial.right.height - initial.center.y - initial.center.height;
@@ -74,7 +74,7 @@ test('all nine languages preserve balanced preview positions', async ({page}) =>
         viewportOverflow:document.documentElement.scrollWidth-innerWidth};
     });
     expect(metrics.centerRatio,locale).toBeCloseTo(37 / 33, 2);
-    expect(Math.abs(metrics.leftBottom + 12),locale).toBeLessThanOrEqual(0.2);
+    expect(Math.abs(metrics.leftBottom + 15),locale).toBeLessThanOrEqual(0.2);
     expect(Math.abs(metrics.rightBottom + 4),locale).toBeLessThanOrEqual(0.2);
     expect(metrics.leftBottom,locale).toBeLessThan(metrics.rightBottom);
     expect(metrics.rightBottom,locale).toBeLessThan(0);

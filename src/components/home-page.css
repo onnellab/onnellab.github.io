@@ -299,7 +299,7 @@
 }
 .homepage .hero-stage {
   --hero-side-inset: 22px;
-  --hero-left-lift: 18px;
+  --hero-left-lift: 22px;
   --hero-right-lift: 7px;
   display: grid;
   grid-template-columns: minmax(0, 33fr) minmax(0, 37fr) minmax(0, 33fr);
@@ -1007,7 +1007,7 @@
   .homepage .hero-carousel { width: 100%; margin-top: 12px; }
   .homepage .hero-stage {
     --hero-side-inset: clamp(12px, 4vw, 18px);
-    --hero-left-lift: 12px;
+    --hero-left-lift: 15px;
     --hero-right-lift: 4px;
     grid-template-columns: minmax(0, 33fr) minmax(0, 37fr) minmax(0, 33fr);
     padding-top: 6px;

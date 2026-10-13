@@ -376,7 +376,7 @@ test('the center card subtly occludes both complete side previews after every ro
       const expected = { left: 37 / 33, right: 37 / 33 };
       expect(Math.abs(result.centerToLeft - expected.left), String(width)).toBeLessThan(0.02);
       expect(Math.abs(result.centerToRight - expected.right), String(width)).toBeLessThan(0.02);
-      const expectedOffset = width <= 650 ? { leftLift: 12, rightLift: 4 } : { leftLift: 18, rightLift: 7 };
+      const expectedOffset = width <= 650 ? { leftLift: 15, rightLift: 4 } : { leftLift: 22, rightLift: 7 };
       expect(Math.abs(result.leftBottomDelta + expectedOffset.leftLift), 'left lifts slightly at ' + width)
         .toBeLessThanOrEqual(0.2);
       expect(Math.abs(result.rightBottomDelta + expectedOffset.rightLift), 'right rises slightly at ' + width)
