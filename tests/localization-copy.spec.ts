@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { homeAppOneLine } from '../src/lib/home-showcase-copy';
 
 const privacyDateLabels = [
   ['/privacy/', 'Last updated'],
@@ -97,7 +98,9 @@ test('Papira German title explains the TXT-to-EPUB conversion naturally', async 
   await expect(page).toHaveTitle(title);
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', title);
   await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute('content', title);
-  await expect(page.locator('.hero .intro')).toHaveText('TXT-zu-EPUB-Ersteller');
+  // The on-page hero now uses the same concise category as the homepage;
+  // the independently authored SEO title retains its TXT-to-EPUB wording.
+  await expect(page.locator('.hero .intro')).toHaveText(homeAppOneLine('de', 'papira')!);
   await expect(page.locator('[data-release-status]')).toHaveCount(0);
   await expect(page.locator('[data-store-link][data-store="app_store"]')).toHaveCount(2);
 });
