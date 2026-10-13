@@ -26,12 +26,15 @@ test('balanced layered hero preserves geometry after navigation', async ({page})
     const initial=await geometry();
     expect(initial.overflow).toBeLessThanOrEqual(1);
     expect(initial.frameBounds).toBe(true);
-    // Both supporting screenshots finish at the same baseline as the center,
-    // rather than appearing to float above it on desktop and mobile.
-    expect(Math.abs(initial.left.y + initial.left.height - initial.center.y - initial.center.height))
-      .toBeLessThanOrEqual(0.2);
-    expect(Math.abs(initial.right.y + initial.right.height - initial.center.y - initial.center.height))
-      .toBeLessThanOrEqual(0.2);
+    // Controlled off-baseline stagger: left raised slightly, right raised
+    // more. Keep the difference small enough to avoid detached previews.
+    const leftLift = width <= 650 ? 6 : 9;
+    const rightLift = width <= 650 ? 14 : 20;
+    const leftDelta = initial.left.y + initial.left.height - initial.center.y - initial.center.height;
+    const rightDelta = initial.right.y + initial.right.height - initial.center.y - initial.center.height;
+    expect(Math.abs(leftDelta + leftLift)).toBeLessThanOrEqual(0.2);
+    expect(Math.abs(rightDelta + rightLift)).toBeLessThanOrEqual(0.2);
+    expect(rightDelta).toBeLessThan(leftDelta);
     expect(initial.left.y).toBeGreaterThan(initial.center.y);
     expect(initial.right.y).toBeGreaterThan(initial.left.y);
     expect(initial.center.width).toBeGreaterThan(initial.left.width);
@@ -68,8 +71,9 @@ test('all nine languages preserve balanced preview positions', async ({page}) =>
         viewportOverflow:document.documentElement.scrollWidth-innerWidth};
     });
     expect(metrics.centerRatio,locale).toBeCloseTo(38 / 32, 1);
-    expect(Math.abs(metrics.leftBottom),locale).toBeLessThanOrEqual(0.2);
-    expect(Math.abs(metrics.rightBottom),locale).toBeLessThanOrEqual(0.2);
+    expect(Math.abs(metrics.leftBottom + 6),locale).toBeLessThanOrEqual(0.2);
+    expect(Math.abs(metrics.rightBottom + 14),locale).toBeLessThanOrEqual(0.2);
+    expect(metrics.rightBottom).toBeLessThan(metrics.leftBottom);
     expect(metrics.leftTop,locale).toBeGreaterThan(25);
     expect(metrics.rightTop,locale).toBeGreaterThan(metrics.leftTop);
     expect(metrics.viewportOverflow,locale).toBeLessThanOrEqual(1);

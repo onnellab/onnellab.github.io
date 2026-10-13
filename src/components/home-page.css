@@ -289,9 +289,9 @@
   font-weight: 400;
 }
 
-/* Balanced layered showcase: 32:38:30, with all screenshot bottoms aligned.
-   Physical slot widths still drive pointer/FLIP geometry; avoid translating
-   shorter previews upward, which makes them look like they are floating. */
+/* Calm, slightly asymmetric showcase: keep the 32:38:30 physical slot
+   widths for pointer/FLIP geometry, but raise the left screenshot a little
+   and the right one a little more relative to the center's bottom edge. */
 .homepage .hero-carousel {
   width: min(100%, 490px);
   margin-inline: auto;
@@ -299,6 +299,8 @@
 }
 .homepage .hero-stage {
   --hero-side-inset: 22px;
+  --hero-left-lift: 9px;
+  --hero-right-lift: 20px;
   display: grid;
   grid-template-columns: minmax(0, 32fr) minmax(0, 38fr) minmax(0, 30fr);
   gap: 0;
@@ -325,7 +327,7 @@
 }
 .homepage .hero-slot[data-hero-slot="previous"] {
   grid-column: 1;
-  transform: translateX(var(--hero-side-inset));
+  transform: translate(var(--hero-side-inset), calc(-1 * var(--hero-left-lift)));
 }
 .homepage .hero-slot[data-hero-slot="active"] {
   grid-column: 2;
@@ -333,7 +335,7 @@
 }
 .homepage .hero-slot[data-hero-slot="next"] {
   grid-column: 3;
-  transform: translateX(calc(-1 * var(--hero-side-inset)));
+  transform: translate(calc(-1 * var(--hero-side-inset)), calc(-1 * var(--hero-right-lift)));
 }
 .homepage .hero-slide {
   display: flex;
@@ -982,6 +984,8 @@
   .homepage .hero-carousel { width: 100%; margin-top: 12px; }
   .homepage .hero-stage {
     --hero-side-inset: clamp(12px, 4vw, 18px);
+    --hero-left-lift: 6px;
+    --hero-right-lift: 14px;
     grid-template-columns: minmax(0, 32fr) minmax(0, 38fr) minmax(0, 30fr);
     padding-top: 6px;
     padding-bottom: 9px;

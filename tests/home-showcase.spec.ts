@@ -375,10 +375,12 @@ test('the center card subtly occludes both complete side previews after every ro
       const expected = { left: 38 / 32, right: 38 / 30 };
       expect(Math.abs(result.centerToLeft - expected.left), String(width)).toBeLessThan(0.02);
       expect(Math.abs(result.centerToRight - expected.right), String(width)).toBeLessThan(0.02);
-      expect(Math.abs(result.leftBottomDelta), 'left screenshot shares the bottom baseline at ' + width)
+      const expectedLift = width <= 650 ? { left: 6, right: 14 } : { left: 9, right: 20 };
+      expect(Math.abs(result.leftBottomDelta + expectedLift.left), 'left lifts slightly at ' + width)
         .toBeLessThanOrEqual(0.2);
-      expect(Math.abs(result.rightBottomDelta), 'right screenshot shares the bottom baseline at ' + width)
+      expect(Math.abs(result.rightBottomDelta + expectedLift.right), 'right lifts farther at ' + width)
         .toBeLessThanOrEqual(0.2);
+      expect(result.rightBottomDelta).toBeLessThan(result.leftBottomDelta);
       expect(result.leftTopDelta).toBeGreaterThan(20);
       expect(result.rightTopDelta).toBeGreaterThan(result.leftTopDelta);
       const target = width <= 355
