@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
 import { getProductIndexItems, type ProductIndexItem } from '../lib/products';
+import { homeAppOneLine } from '../lib/home-showcase-copy';
 import {
   contentLocale,
   localeAlternates,
@@ -20,6 +21,7 @@ type StatusKind = 'released' | 'preparing';
 
 type AppCard = ProductIndexItem & {
   statusKind: StatusKind;
+  searchText: string;
 };
 
 type AppsCopy = {
@@ -113,8 +115,13 @@ const statusKind = (value: string): StatusKind =>
   /prepar|coming|soon/i.test(value) ? 'preparing' : 'released';
 const existingApps: AppCard[] = getProductIndexItems(contentLocale(locale)).map((app) => {
   const kind = statusKind(app.status);
+  const homepageLine = homeAppOneLine(locale, app.slug);
   return {
     ...app,
+    // Reuse homepage copy only where one exists; keep other app summaries.
+    description: homepageLine ?? app.description,
+    // Keep established search terms alongside the newly visible copy.
+    searchText: [app.title, app.description, homepageLine].filter(Boolean).join(' '),
     href: appHref(app.slug),
     status: copy.status[kind],
     statusKind: kind
@@ -178,7 +185,7 @@ const collectionJsonLd = {
           style={appCardStyle(app)}
           data-app-row
           data-app-title={app.title.toLocaleLowerCase()}
-          data-app-search-text={`${app.title} ${app.description}`.normalize("NFKC").toLocaleLowerCase()}
+          data-app-search-text={app.searchText.normalize("NFKC").toLocaleLowerCase()}
           data-status-kind={app.statusKind}
         >
           <img src={app.iconPath} alt="" width="64" height="64" loading="lazy" data-no-visual-search="true" />

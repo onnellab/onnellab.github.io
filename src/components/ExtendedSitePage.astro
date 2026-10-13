@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { uiLabels } from '../lib/ui-labels';
-import { showcaseCopy } from '../lib/home-showcase-copy';
+import { homeAppOneLine, showcaseCopy } from '../lib/home-showcase-copy';
 import LocaleMenu from './LocaleMenu.astro';
 import { getIconRoutePath, getProductSources } from '../lib/products';
 import { allPrivacyAppSlugs, getPrivacyPolicyDocument, type AllPrivacyAppSlug } from '../lib/privacy-policy-documents';
@@ -196,13 +196,16 @@ const appItems = productSources.map((source) => {
   if (!(allPrivacyAppSlugs as readonly string[]).includes(source.slug)) {
     throw new Error(`Missing app privacy document for ${source.slug}`);
   }
+  const originalSummary = copy.appSummaries[source.slug] ?? source.meta.title;
+  const homepageLine = page === 'apps' ? homeAppOneLine(locale, source.slug) : undefined;
   return {
   slug: source.slug,
   title: source.meta.title,
   status: statusKind(source.meta.status) === 'preparing' ? copy.apps.preparing : copy.apps.released,
   statusKind: statusKind(source.meta.status),
   platforms: source.meta.platforms,
-  description: copy.appSummaries[source.slug] ?? source.meta.title,
+  description: homepageLine ?? originalSummary,
+  searchText: [source.meta.title, originalSummary, homepageLine].filter(Boolean).join(' '),
   icon: getIconRoutePath(source),
   href: allProductRouteFor(source.slug, locale),
   privacy: allAppPrivacyRouteFor(source.slug, locale),
@@ -258,7 +261,7 @@ const email = 'onnellab.app@gmail.com';
         <header class="hero compact"><p class="eyebrow">{copy.apps.eyebrow}</p><h1>{copy.apps.title}</h1><p class="lede">{copy.apps.intro}</p></header>
         <label class="search"><span class="sr-only">{copy.apps.search}</span><input type="search" placeholder={copy.apps.search} data-search /></label>
         <p data-empty hidden>{copy.apps.empty}</p>
-        <section class="app-list">{appItems.map((item) => <a class="app-row" href={item.href} data-row data-title={item.title.toLowerCase()} data-search-text={`${item.title} ${item.description}`.normalize("NFKC").toLocaleLowerCase()}><img src={item.icon} alt="" width="58" height="58" /><div><div class="title-row"><h2>{item.title}</h2><span class="status-badge" data-status-kind={item.statusKind}>{item.status}</span></div><p>{item.description}</p><small class="platform-badges" aria-label={copy.common.platforms}>{item.platforms.join(' · ')}</small></div></a>)}</section>
+        <section class="app-list">{appItems.map((item) => <a class="app-row" href={item.href} data-row data-title={item.title.toLowerCase()} data-search-text={item.searchText.normalize("NFKC").toLocaleLowerCase()}><img src={item.icon} alt="" width="58" height="58" /><div><div class="title-row"><h2>{item.title}</h2><span class="status-badge" data-status-kind={item.statusKind}>{item.status}</span></div><p>{item.description}</p><small class="platform-badges" aria-label={copy.common.platforms}>{item.platforms.join(' · ')}</small></div></a>)}</section>
       </>
     )}
 

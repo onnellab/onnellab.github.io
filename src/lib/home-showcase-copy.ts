@@ -491,3 +491,17 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     platformsLabel: 'Plataformas'
   }
 };
+
+/**
+ * Reuse the homepage's authored one-line introductions in the apps catalogue.
+ * Other products have no homepage introduction and keep their own summaries.
+ * Avoid duplicating localized marketing copy across multiple page components.
+ */
+export function homeAppOneLine(locale: AllSiteLocale, slug: string): string | undefined {
+  const copy = showcaseCopy[locale];
+  if (slug === 'tagweaver') return copy.signatureTitle;
+  if (slug === 'quivra' || slug === 'melivra' || slug === 'papira') {
+    return copy.offers[slug].result;
+  }
+  return undefined;
+}
