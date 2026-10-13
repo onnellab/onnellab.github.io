@@ -689,31 +689,22 @@ test.describe('site layout and navigation', () => {
 });
 
 test.describe('app and privacy collections', () => {
-  test('Papira app cards use concise noun-phrase summaries in every locale', async ({ page }) => {
+  test('Papira app cards match the brief homepage function labels in every locale', async ({ page }) => {
     const summaries = [
-      {
-        path: '/apps/',
-        text: 'TXT-to-EPUB maker'
-      },
-      {
-        path: '/apps/ko/',
-        text: 'TXT→EPUB 제작 도구'
-      },
-      {
-        path: '/apps/ja/',
-        text: 'TXT→EPUB作成ツール'
-      },
-      {
-        path: '/apps/zh-hans/',
-        text: 'TXT 转 EPUB 制作工具'
-      },
-      {
-        path: '/apps/zh-hant/',
-        text: 'TXT 轉 EPUB 製作工具'
-      }
+      { path: '/apps/', text: 'E-book creator' },
+      { path: '/apps/ko/', text: '전자책 만들기' },
+      { path: '/apps/ja/', text: '電子書籍作成' },
+      { path: '/apps/zh-hans/', text: '电子书制作' },
+      { path: '/apps/zh-hant/', text: '電子書製作' }
     ];
 
     for (const summary of summaries) {
+      // A brief functional category is preferred over the previous
+      // TXT-to-EPUB tagline. It must match the real homepage, not drift.
+      await page.goto(summary.path.replace(/^\/apps\//, '/'));
+      const category = page.locator('.collection-section .product-card[href*="/apps/papira/"] .product-category');
+      await expect(category).toHaveText(summary.text);
+
       await page.goto(summary.path);
       const papira = page.locator('[data-app-row]').filter({ hasText: 'Papira' });
       await expect(papira.locator('.app-copy > p')).toHaveText(summary.text);

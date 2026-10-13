@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
-import { showcaseCopy } from '../src/lib/home-showcase-copy';
+import { homeAppOneLine, showcaseCopy } from '../src/lib/home-showcase-copy';
 
 const locales = [
   {
@@ -367,11 +367,11 @@ test.describe('nine-language site core regression', () => {
 
   test('every core app detail keeps content while exposing nine-language navigation', async ({ page }) => {
     const cases = [
-      { segment: '', lang: 'en', allApps: 'All apps', subtitle: 'Offline MP3/FLAC Tag Editor' },
-      { segment: 'ko/', lang: 'ko', allApps: '모든 앱', subtitle: 'MP3/FLAC 오프라인 태그 편집기' },
-      { segment: 'ja/', lang: 'ja', allApps: 'すべてのアプリ', subtitle: 'オフラインMP3/FLACタグエディター' },
-      { segment: 'zh-hans/', lang: 'zh-Hans', allApps: '全部应用', subtitle: '离线 MP3/FLAC 标签编辑器' },
-      { segment: 'zh-hant/', lang: 'zh-Hant', allApps: '全部應用程式', subtitle: '離線 MP3/FLAC 標籤編輯器' }
+      { segment: '', lang: 'en', allApps: 'All apps' },
+      { segment: 'ko/', lang: 'ko', allApps: '모든 앱' },
+      { segment: 'ja/', lang: 'ja', allApps: 'すべてのアプリ' },
+      { segment: 'zh-hans/', lang: 'zh-Hans', allApps: '全部应用' },
+      { segment: 'zh-hant/', lang: 'zh-Hant', allApps: '全部應用程式' }
     ] as const;
 
     for (const item of cases) {
@@ -381,7 +381,9 @@ test.describe('nine-language site core regression', () => {
       // The one global header replaces the old product-only All apps link.
       await expect(page.locator('.onnel-global-header .nav-links > a[href="/apps/' + item.segment + '"]')).toHaveCount(1);
       await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
-      await expect(page.locator('.intro')).toHaveText(item.subtitle);
+      // The visible hero subtitle follows the shared homepage category; the
+      // original detailed product description and SEO stay independent.
+      await expect(page.locator('.intro')).toHaveText(homeAppOneLine(item.lang, 'tagweaver')!);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
         `https://onnellab.com${path}`
@@ -449,7 +451,11 @@ test.describe('nine-language site core regression', () => {
         const path = `/apps/${slug}/${segment}/`;
         await page.goto(path);
         await expect(page.locator('html')).toHaveAttribute('lang', htmlLang[segment as keyof typeof htmlLang]);
-        await expect(page.locator('.intro')).toHaveText(subtitle);
+        // Only apps showcased on the homepage adopt the short function label.
+        // All other legacy apps still display their original subtitle.
+        await expect(page.locator('.intro')).toHaveText(
+          homeAppOneLine(htmlLang[segment as keyof typeof htmlLang], slug) ?? subtitle
+        );
         await expect(page.locator('.locale-menu-panel a')).toHaveCount(9);
         await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
         await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
