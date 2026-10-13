@@ -341,6 +341,8 @@ test('the center card subtly occludes both complete side previews after every ro
     await page.goto('/ko/');
     for (const step of [0, 1, 2]) {
       if (step !== 0) await page.locator('[data-hero-next]').click();
+      // Verify fixed overlap after the intentional slide transition settles.
+      await expect(page.locator('[data-hero-track]')).not.toHaveAttribute('data-animating', 'true');
       const result = await page.locator('.hero-stage').evaluate((stage) => {
         const outer = stage.getBoundingClientRect();
         const byPosition = (position: string) =>
@@ -662,6 +664,8 @@ test('all three states preserve Melivra-centered fixed geometry down to the pixe
     ];
     for (let step = 0; step < expectedOrder.length; step++) {
       if (step) await page.locator('[data-hero-next]').click();
+      // The animation moves cards temporarily; physical slots remain identical at rest.
+      await expect(page.locator('[data-hero-track]')).not.toHaveAttribute('data-animating', 'true');
       const state = await measure();
       expect(state.overflow, width + 'px step ' + step).toBeLessThanOrEqual(1);
       expect(signature(state), width + 'px step ' + step + ': fixed slots must not move').toEqual(signature(baseline));
@@ -763,6 +767,8 @@ test('only the centered Hero app name is visible without moving the reserved cap
     const apps = ['TagWeaver', 'Melivra', 'Papira', 'TagWeaver'];
     for (let i = 0; i < apps.length; i++) {
       if (i) await page.locator('[data-hero-next]').click();
+      // Captions keep exactly the same reserved height after motion settles.
+      await expect(stage).not.toHaveAttribute('data-animating', 'true');
       const current = stage.locator('[data-hero-slot="active"] .hero-slide-label');
       const previous = stage.locator('[data-hero-slot="previous"] .hero-slide-label');
       const next = stage.locator('[data-hero-slot="next"] .hero-slide-label');
