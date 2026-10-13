@@ -289,9 +289,10 @@
   font-weight: 400;
 }
 
-/* The three positions never change. Only the products in these slots rotate.
-   Their fixed frame ratios are matched to the Melivra-centered composition:
-   the wider left preview sits slightly higher than the right preview. */
+/* Fixed, intentionally asymmetric editorial slots: 31:42:27 on larger
+   screens, 32:40:28 on phones. Scale comes from real slot widths, not a
+   transform on individual cards, so drag interpolation and click targets
+   continue to use the same measured card geometry. */
 .homepage .hero-carousel {
   width: min(100%, 490px);
   margin-inline: auto;
@@ -299,9 +300,10 @@
 }
 .homepage .hero-stage {
   --hero-side-inset: 48px;
-  --hero-side-drop: clamp(16px, 2vw, 28px);
+  --hero-left-rise: 39px;
+  --hero-right-shift: -2px;
   display: grid;
-  grid-template-columns: minmax(0, 32fr) minmax(0, 37fr) minmax(0, 31fr);
+  grid-template-columns: minmax(0, 31fr) minmax(0, 42fr) minmax(0, 27fr);
   gap: 0;
   align-items: center;
   min-width: 0;
@@ -326,7 +328,7 @@
 }
 .homepage .hero-slot[data-hero-slot="previous"] {
   grid-column: 1;
-  transform: translate(var(--hero-side-inset), var(--hero-side-drop));
+  transform: translate(var(--hero-side-inset), calc(-1 * var(--hero-left-rise)));
 }
 .homepage .hero-slot[data-hero-slot="active"] {
   grid-column: 2;
@@ -334,15 +336,8 @@
 }
 .homepage .hero-slot[data-hero-slot="next"] {
   grid-column: 3;
-  transform: translate(calc(-1 * var(--hero-side-inset)), var(--hero-side-drop));
+  transform: translate(calc(-1 * var(--hero-side-inset)), var(--hero-right-shift));
 }
-.homepage .hero-slot[data-hero-slot="previous"]:hover {
-  transform: translate(var(--hero-side-inset), calc(var(--hero-side-drop) - 2px));
-}
-.homepage .hero-slot[data-hero-slot="next"]:hover {
-  transform: translate(calc(-1 * var(--hero-side-inset)), calc(var(--hero-side-drop) - 2px));
-}
-.homepage .hero-slot[data-hero-slot="active"]:hover { transform: translateY(-2px); }
 .homepage .hero-slide {
   display: flex;
   flex-direction: column;
@@ -379,6 +374,13 @@
   aspect-ratio: 0.461;
   border-radius: 21px;
   box-shadow: 0 16px 38px rgba(53, 48, 59, .13);
+}
+/* Hover feedback should not move the measured slot positions: keeping the
+   three resting coordinates fixed is important to smooth pointer dragging. */
+@media (hover: hover) {
+  .homepage .hero-slot:hover .hero-slide-screen {
+    box-shadow: 0 16px 38px rgba(53, 48, 59, .14);
+  }
 }
 .homepage .hero-slide-screen img {
   display: block;
@@ -983,8 +985,9 @@
   .homepage .hero-carousel { width: 100%; margin-top: 12px; }
   .homepage .hero-stage {
     --hero-side-inset: 30px;
-    --hero-side-drop: 16px;
-    grid-template-columns: minmax(0, 32fr) minmax(0, 37fr) minmax(0, 31fr);
+    --hero-left-rise: clamp(4px, 2vw, 8px);
+    --hero-right-shift: clamp(20px, 7vw, 28px);
+    grid-template-columns: minmax(0, 32fr) minmax(0, 40fr) minmax(0, 28fr);
     padding-top: 6px;
     padding-bottom: 9px;
   }

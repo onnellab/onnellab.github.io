@@ -188,13 +188,14 @@ test('all three Android cards are fully visible with a large center at four widt
     }
     const middle = result.cards.find((x) => x.position === 'active')!;
     expect(middle.name).toBe('TagWeaver');
-    // Slightly enlarged side screenshots: width proportions 32 : 37 : 31.
+    // Deliberate stagger: 31:42:27 at larger widths; 32:40:28 on phones.
     const leftCard = result.cards.find((x) => x.position === 'previous')!;
     const rightCard = result.cards.find((x) => x.position === 'next')!;
-    expect(middle.width / leftCard.width).toBeGreaterThan(1.1);
-    expect(middle.width / leftCard.width).toBeLessThan(1.22);
-    expect(middle.width / rightCard.width).toBeGreaterThan(1.14);
-    expect(middle.width / rightCard.width).toBeLessThan(1.26);
+    const proportions = width <= 650
+      ? { centerToLeft: 40 / 32, centerToRight: 40 / 28 }
+      : { centerToLeft: 42 / 31, centerToRight: 42 / 27 };
+    expect(Math.abs(middle.width / leftCard.width - proportions.centerToLeft)).toBeLessThan(0.02);
+    expect(Math.abs(middle.width / rightCard.width - proportions.centerToRight)).toBeLessThan(0.02);
     expect(result.cards.find((x) => x.position === 'previous')!.left)
       .toBeLessThan(middle.left);
     expect(result.cards.find((x) => x.position === 'next')!.left)
@@ -362,13 +363,27 @@ test('the center card subtly occludes both complete side previews after every ro
           prevZ: Number(getComputedStyle(previous.closest('[data-hero-slot]')!).zIndex),
           nextZ: Number(getComputedStyle(next.closest('[data-hero-slot]')!).zIndex),
           allOnStage: [c, p, n].every((r) => r.left >= outer.left - 1 && r.right <= outer.right + 1),
-          balancedSizes: c.width > p.width * 1.1 && c.width < p.width * 1.22 && c.width > n.width * 1.14 && c.width < n.width * 1.26
+          centerToLeft: c.width / p.width,
+          centerToRight: c.width / n.width,
+          leftDrop: p.top - c.top,
+          rightDrop: n.top - c.top
         };
       });
       expect(result.pageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.stageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.allOnStage, 'all cards inside the Hero at ' + width).toBe(true);
-      expect(result.balancedSizes).toBe(true);
+      const expected = width <= 650
+        ? { left: 40 / 32, right: 40 / 28 }
+        : { left: 42 / 31, right: 42 / 27 };
+      expect(Math.abs(result.centerToLeft - expected.left), String(width)).toBeLessThan(0.02);
+      expect(Math.abs(result.centerToRight - expected.right), String(width)).toBeLessThan(0.02);
+      expect(result.leftDrop, 'left preview sits slightly below center').toBeGreaterThan(18);
+      expect(result.leftDrop).toBeLessThan(32);
+      const rightRange = width <= 355 ? [55, 71] : width <= 650 ? [70, 87] : [76, 90];
+      expect(result.rightDrop, 'right preview sits distinctly lower at ' + width)
+        .toBeGreaterThan(rightRange[0]);
+      expect(result.rightDrop).toBeLessThan(rightRange[1]);
+      expect(result.rightDrop - result.leftDrop).toBeGreaterThan(38);
       const target = width <= 355 ? { min: 22, max: 26 } : width <= 650 ? { min: 28, max: 32 } : { min: 46, max: 50 };
       for (const overlap of [result.coveredLeft, result.coveredRight]) {
         expect(overlap, 'side cards visibly behind center at ' + width).toBeGreaterThan(target.min);
