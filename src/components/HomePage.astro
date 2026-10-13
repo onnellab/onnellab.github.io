@@ -3,10 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
 import { getProductIndexItems, type ProductIndexItem } from '../lib/products';
+import { latestReleaseNoteForApp, releaseNotePath, releaseNoteKoPath } from '../lib/releaseNotes';
+import { releaseNoteLocalePath, type ReleaseLocale } from '../lib/extended-release-notes';
 import { showcaseCopy } from '../lib/home-showcase-copy';
 import {
   allLocaleAlternates,
   allLocaleDefinitions,
+  allAppPrivacyRouteFor,
   allProductRouteFor,
   allRouteFor,
   type AllSiteLocale
@@ -70,6 +73,17 @@ const navigationLabels: Record<AllSiteLocale, string> = {
   'zh-Hans': '导航', 'zh-Hant': '導覽',
   'pt-BR': 'Navegação', de: 'Navigation', fr: 'Navigation', es: 'Navegación'
 };
+const latestTagWeaverNote = latestReleaseNoteForApp('tagweaver');
+const tagWeaverReleaseHref = latestTagWeaverNote
+  ? locale === 'en' ? releaseNotePath(latestTagWeaverNote)
+    : locale === 'ko' ? releaseNoteKoPath(latestTagWeaverNote)
+    : releaseNoteLocalePath(latestTagWeaverNote, locale as ReleaseLocale)
+  : undefined;
+const trustEvidence = [
+  undefined,
+  tagWeaverReleaseHref ? { href: tagWeaverReleaseHref, label: `TagWeaver · ${copy.releaseLink}` } : undefined,
+  { href: allAppPrivacyRouteFor('tagweaver', locale), label: `TagWeaver · ${copy.trustPrivacyLink}` }
+] as const;
 const blogHref = `/blog/${definition.pathSegment ? `${definition.pathSegment}/` : ''}`;
 const linkFor = (slug: string) => allProductRouteFor(slug, locale);
 
@@ -277,6 +291,11 @@ const jsonLd = [
               <span class="trust-ordinal" aria-hidden="true">0{index + 1}</span>
               <h3>{item.title}</h3>
               <p>{item.body}</p>
+              {trustEvidence[index] && (
+                <a class="trust-evidence-link" href={trustEvidence[index].href}>
+                  {trustEvidence[index].label}<span aria-hidden="true">↗</span>
+                </a>
+              )}
             </article>
           ))}
         </div>
