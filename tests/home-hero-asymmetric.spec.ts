@@ -38,11 +38,13 @@ test('balanced layered hero preserves geometry after navigation', async ({page})
     expect(initial.left.y).toBeGreaterThan(initial.center.y);
     expect(initial.right.y, 'right sits lower than the left but above center bottom').toBeGreaterThan(initial.left.y);
     expect(initial.center.width).toBeGreaterThan(initial.left.width);
-    expect(Math.abs(initial.left.width - initial.right.width),
-      'side preview widths are identical').toBeLessThanOrEqual(0.2);
-    expect(Math.abs(initial.left.height - initial.right.height),
-      'side preview heights are identical').toBeLessThanOrEqual(0.2);
-    const expectedRatio=[33 / 103,37 / 103,33 / 103];
+    expect(initial.right.width / initial.left.width,
+      'right preview is 5% narrower than the left').toBeCloseTo(0.95, 2);
+    expect(initial.right.height / initial.left.height,
+      'right preview preserves its aspect ratio when smaller').toBeCloseTo(0.95, 2);
+    const parts=[33,37,33*0.95];
+    const total=parts.reduce((sum, value)=>sum+value,0);
+    const expectedRatio=parts.map(value=>value/total);
     const sum=initial.left.width+initial.center.width+initial.right.width;
     for(const [i,value] of [initial.left.width,initial.center.width,initial.right.width].entries()) {
       expect(Math.abs(value/sum-expectedRatio[i])).toBeLessThan(0.002);

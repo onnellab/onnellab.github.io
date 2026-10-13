@@ -188,13 +188,13 @@ test('all three Android cards are fully visible with a large center at four widt
     }
     const middle = result.cards.find((x) => x.position === 'active')!;
     expect(middle.name).toBe('TagWeaver');
-    // Bigger, exactly equal side previews: 33:37:33 at every width.
+    // Grid slots remain 33:37:33, but the right-hand visible card is 95% of its slot.
     const leftCard = result.cards.find((x) => x.position === 'previous')!;
     const rightCard = result.cards.find((x) => x.position === 'next')!;
-    const proportions = { centerToLeft: 37 / 33, centerToRight: 37 / 33 };
+    const proportions = { centerToLeft: 37 / 33, centerToRight: 37 / (33 * 0.95) };
     expect(Math.abs(middle.width / leftCard.width - proportions.centerToLeft)).toBeLessThan(0.02);
     expect(Math.abs(middle.width / rightCard.width - proportions.centerToRight)).toBeLessThan(0.02);
-    expect(Math.abs(leftCard.width - rightCard.width), 'sides have equal width').toBeLessThanOrEqual(0.2);
+    expect(rightCard.width / leftCard.width, 'right card is subtly smaller').toBeCloseTo(0.95, 2);
     expect(result.cards.find((x) => x.position === 'previous')!.left)
       .toBeLessThan(middle.left);
     expect(result.cards.find((x) => x.position === 'next')!.left)
@@ -373,7 +373,7 @@ test('the center card subtly occludes both complete side previews after every ro
       expect(result.pageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.stageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.allOnStage, 'all cards inside the Hero at ' + width).toBe(true);
-      const expected = { left: 37 / 33, right: 37 / 33 };
+      const expected = { left: 37 / 33, right: 37 / (33 * 0.95) };
       expect(Math.abs(result.centerToLeft - expected.left), String(width)).toBeLessThan(0.02);
       expect(Math.abs(result.centerToRight - expected.right), String(width)).toBeLessThan(0.02);
       const expectedOffset = width <= 650 ? { leftLift: 15, rightLift: 4 } : { leftLift: 22, rightLift: 7 };
@@ -699,8 +699,8 @@ test('all three states preserve Melivra-centered fixed geometry down to the pixe
     const [previous, center, next] = baseline.physicalSlots;
     expect(Math.abs(previous.slotBounds.width - next.slotBounds.width),
       'matching left and right preview widths').toBeLessThanOrEqual(0.2);
-    expect(Math.abs(previous.frameBounds.height - next.frameBounds.height),
-      'matching left and right preview heights').toBeLessThanOrEqual(0.2);
+    expect(next.frameBounds.height / previous.frameBounds.height,
+      'right frame is 5% smaller while the slots remain the same size').toBeCloseTo(0.95, 2);
     expect(previous.frameBounds.top, 'left preview rises above right').toBeLessThan(next.frameBounds.top);
     expect(center.frameBounds.top).toBeLessThan(previous.frameBounds.top);
     expect(center.frameBounds.width).toBeGreaterThan(previous.frameBounds.width);

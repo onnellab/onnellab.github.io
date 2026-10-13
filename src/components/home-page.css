@@ -289,9 +289,9 @@
   font-weight: 400;
 }
 
-/* Equal-size 33:37:33 previews in a subtle stepped composition:
+/* Fixed 33:37:33 grid slots with a subtly smaller right-hand preview:
    the center finishes lowest, the left rises most, and the right rises
-   only slightly. Keep physical slots unchanged for pointer/FLIP geometry. */
+   only slightly. Keep the slot geometry stable for pointer/FLIP math. */
 .homepage .hero-carousel {
   width: min(100%, 490px);
   margin-inline: auto;
@@ -336,6 +336,12 @@
 .homepage .hero-slot[data-hero-slot="next"] {
   grid-column: 3;
   transform: translate(calc(-1 * var(--hero-side-inset)), calc(-1 * var(--hero-right-lift)));
+}
+/* Shrink only the visible right card by 5%, from its left edge so the
+   center overlap stays unchanged. The DOM slot remains full width and
+   no transform is applied to the slide, leaving FLIP drag geometry intact. */
+.homepage .hero-slot[data-hero-slot="next"] .hero-slide {
+  width: 95%;
 }
 .homepage .hero-slide {
   display: flex;
