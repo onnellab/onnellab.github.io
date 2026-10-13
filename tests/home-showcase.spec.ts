@@ -188,12 +188,10 @@ test('all three Android cards are fully visible with a large center at four widt
     }
     const middle = result.cards.find((x) => x.position === 'active')!;
     expect(middle.name).toBe('TagWeaver');
-    // Deliberate stagger: 31:42:27 at larger widths; 32:40:28 on phones.
+    // Balanced layers: 32:38:30 at every width, with shallower preview overlap.
     const leftCard = result.cards.find((x) => x.position === 'previous')!;
     const rightCard = result.cards.find((x) => x.position === 'next')!;
-    const proportions = width <= 650
-      ? { centerToLeft: 40 / 32, centerToRight: 40 / 28 }
-      : { centerToLeft: 42 / 31, centerToRight: 42 / 27 };
+    const proportions = { centerToLeft: 38 / 32, centerToRight: 38 / 30 };
     expect(Math.abs(middle.width / leftCard.width - proportions.centerToLeft)).toBeLessThan(0.02);
     expect(Math.abs(middle.width / rightCard.width - proportions.centerToRight)).toBeLessThan(0.02);
     expect(result.cards.find((x) => x.position === 'previous')!.left)
@@ -372,19 +370,18 @@ test('the center card subtly occludes both complete side previews after every ro
       expect(result.pageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.stageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.allOnStage, 'all cards inside the Hero at ' + width).toBe(true);
-      const expected = width <= 650
-        ? { left: 40 / 32, right: 40 / 28 }
-        : { left: 42 / 31, right: 42 / 27 };
+      const expected = { left: 38 / 32, right: 38 / 30 };
       expect(Math.abs(result.centerToLeft - expected.left), String(width)).toBeLessThan(0.02);
       expect(Math.abs(result.centerToRight - expected.right), String(width)).toBeLessThan(0.02);
-      expect(result.leftDrop, 'left preview sits slightly below center').toBeGreaterThan(18);
-      expect(result.leftDrop).toBeLessThan(32);
-      const rightRange = width <= 355 ? [55, 71] : width <= 650 ? [70, 87] : [76, 90];
-      expect(result.rightDrop, 'right preview sits distinctly lower at ' + width)
-        .toBeGreaterThan(rightRange[0]);
-      expect(result.rightDrop).toBeLessThan(rightRange[1]);
-      expect(result.rightDrop - result.leftDrop).toBeGreaterThan(38);
-      const target = width <= 355 ? { min: 22, max: 26 } : width <= 650 ? { min: 28, max: 32 } : { min: 46, max: 50 };
+      expect(result.leftDrop, 'left preview stays near the central baseline').toBeGreaterThan(10);
+      expect(result.leftDrop).toBeLessThan(20);
+      expect(result.rightDrop, 'right preview stays nearby at ' + width).toBeGreaterThan(18);
+      expect(result.rightDrop).toBeLessThan(32);
+      expect(result.rightDrop - result.leftDrop).toBeGreaterThan(5);
+      expect(result.rightDrop - result.leftDrop).toBeLessThan(15);
+      const target = width <= 355
+        ? { min: 11, max: 13 }
+        : width <= 650 ? { min: 14, max: 17 } : { min: 21, max: 23 };
       for (const overlap of [result.coveredLeft, result.coveredRight]) {
         expect(overlap, 'side cards visibly behind center at ' + width).toBeGreaterThan(target.min);
         expect(overlap, 'side card remains recognizable at ' + width).toBeLessThan(target.max);
@@ -698,7 +695,7 @@ test('all three states preserve Melivra-centered fixed geometry down to the pixe
     expect(center.frameBounds.width).toBeGreaterThan(previous.frameBounds.width);
     const leftOverlap = previous.frameBounds.left + previous.frameBounds.width - center.frameBounds.left;
     const rightOverlap = center.frameBounds.left + center.frameBounds.width - next.frameBounds.left;
-    const inset = width <= 355 ? 24 : width <= 650 ? 30 : 48;
+    const inset = width <= 355 ? 12 : width <= 650 ? width * 0.04 : 22;
     expect(Math.abs(leftOverlap - inset)).toBeLessThanOrEqual(1);
     expect(Math.abs(rightOverlap - inset)).toBeLessThanOrEqual(1);
   }

@@ -289,21 +289,20 @@
   font-weight: 400;
 }
 
-/* Fixed, intentionally asymmetric editorial slots: 31:42:27 on larger
-   screens, 32:40:28 on phones. Scale comes from real slot widths, not a
-   transform on individual cards, so drag interpolation and click targets
-   continue to use the same measured card geometry. */
+/* Balanced layered showcase: a clear center with readable side previews.
+   Physical slot sizes (32:38:30) drive the pointer/FLIP geometry; the
+   supporting cards sit near the same baseline instead of being scattered. */
 .homepage .hero-carousel {
   width: min(100%, 490px);
   margin-inline: auto;
   min-width: 0;
 }
 .homepage .hero-stage {
-  --hero-side-inset: 48px;
-  --hero-left-rise: 39px;
-  --hero-right-shift: -2px;
+  --hero-side-inset: 22px;
+  --hero-left-rise: 19px;
+  --hero-right-shift: -18px;
   display: grid;
-  grid-template-columns: minmax(0, 31fr) minmax(0, 42fr) minmax(0, 27fr);
+  grid-template-columns: minmax(0, 32fr) minmax(0, 38fr) minmax(0, 30fr);
   gap: 0;
   align-items: center;
   min-width: 0;
@@ -367,19 +366,19 @@
   border-radius: 18px;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 12px 32px rgba(53, 48, 59, .10);
+  box-shadow: 0 8px 24px rgba(53, 48, 59, .065);
   transition: box-shadow 160ms ease;
 }
 .homepage .hero-slot[data-hero-slot="active"] .hero-slide-screen {
   aspect-ratio: 0.461;
   border-radius: 21px;
-  box-shadow: 0 16px 38px rgba(53, 48, 59, .13);
+  box-shadow: 0 10px 28px rgba(53, 48, 59, .095);
 }
 /* Hover feedback should not move the measured slot positions: keeping the
    three resting coordinates fixed is important to smooth pointer dragging. */
 @media (hover: hover) {
   .homepage .hero-slot:hover .hero-slide-screen {
-    box-shadow: 0 16px 38px rgba(53, 48, 59, .14);
+    box-shadow: 0 12px 29px rgba(53, 48, 59, .10);
   }
 }
 .homepage .hero-slide-screen img {
@@ -984,10 +983,10 @@
   .homepage .primary-link { min-height: 46px; margin-top: 22px; padding: 12px 17px; }
   .homepage .hero-carousel { width: 100%; margin-top: 12px; }
   .homepage .hero-stage {
-    --hero-side-inset: 30px;
-    --hero-left-rise: clamp(4px, 2vw, 8px);
-    --hero-right-shift: clamp(20px, 7vw, 28px);
-    grid-template-columns: minmax(0, 32fr) minmax(0, 40fr) minmax(0, 28fr);
+    --hero-side-inset: clamp(12px, 4vw, 18px);
+    --hero-left-rise: 9px;
+    --hero-right-shift: -7px;
+    grid-template-columns: minmax(0, 32fr) minmax(0, 38fr) minmax(0, 30fr);
     padding-top: 6px;
     padding-bottom: 9px;
   }
@@ -1093,7 +1092,7 @@
 
 @media (max-width: 355px) {
   /* At 320px retain recognizable side previews instead of hiding most of them. */
-  .homepage .hero-stage { --hero-side-inset: 24px; }
+  .homepage .hero-stage { --hero-side-inset: 12px; }
   .homepage .product-picture { flex-basis: 37%; width: 37%; padding-inline: 7px; }
   .homepage .product-card-body { padding: 16px 12px 17px; }
   .homepage .product-card h3 { font-size: 20px; }

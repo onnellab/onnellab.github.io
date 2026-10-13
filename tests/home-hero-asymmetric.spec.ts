@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 const widths = [320, 390, 820, 1440];
 
-test('the fixed asymmetric hero remains stable after arrow navigation and mouse swipes', async ({page}) => {
+test('balanced layered hero preserves geometry after navigation', async ({page}) => {
   for (const width of widths) {
     await page.setViewportSize({width,height:900});
     await page.goto('/ko/');
@@ -26,17 +26,20 @@ test('the fixed asymmetric hero remains stable after arrow navigation and mouse 
     const initial=await geometry();
     expect(initial.overflow).toBeLessThanOrEqual(1);
     expect(initial.frameBounds).toBe(true);
-    expect(initial.left.y-initial.center.y).toBeGreaterThan(18);
-    expect(initial.right.y-initial.center.y).toBeGreaterThan(55);
-    expect(initial.right.y-initial.left.y).toBeGreaterThan(38);
+    expect(initial.left.y-initial.center.y).toBeGreaterThan(10);
+    expect(initial.left.y-initial.center.y).toBeLessThan(20);
+    expect(initial.right.y-initial.center.y).toBeGreaterThan(18);
+    expect(initial.right.y-initial.center.y).toBeLessThan(32);
+    expect(initial.right.y-initial.left.y).toBeGreaterThan(5);
+    expect(initial.right.y-initial.left.y).toBeLessThan(15);
     expect(initial.center.width).toBeGreaterThan(initial.left.width);
     expect(initial.left.width).toBeGreaterThan(initial.right.width);
-    const expectedRatio=width<=650 ? [0.32,0.4,0.28] : [0.31,0.42,0.27];
+    const expectedRatio=[0.32,0.38,0.30];
     const sum=initial.left.width+initial.center.width+initial.right.width;
     for(const [i,value] of [initial.left.width,initial.center.width,initial.right.width].entries()) {
       expect(Math.abs(value/sum-expectedRatio[i])).toBeLessThan(0.002);
     }
-    const inset=width<=355?24:width<=650?30:48;
+    const inset=width<=355?12:width<=650?width*0.04:22;
     expect(initial.leftOverlap).toBeCloseTo(inset,0);
     expect(initial.rightOverlap).toBeCloseTo(inset,0);
 
@@ -48,7 +51,7 @@ test('the fixed asymmetric hero remains stable after arrow navigation and mouse 
   }
 });
 
-test('all nine languages preserve the staggered preview positions', async ({page}) => {
+test('all nine languages preserve balanced preview positions', async ({page}) => {
   await page.setViewportSize({width:390,height:844});
   for(const locale of ['', 'ko/', 'ja/', 'zh-hans/', 'zh-hant/', 'pt-br/', 'de/', 'fr/', 'es/']){
     await page.goto('/'+locale);
@@ -59,11 +62,11 @@ test('all nine languages preserve the staggered preview positions', async ({page
         centerRatio:Number((c.width/l.width).toFixed(2)),
         viewportOverflow:document.documentElement.scrollWidth-innerWidth};
     });
-    expect(metrics.centerRatio,locale).toBeCloseTo(1.25,1);
-    expect(metrics.left,locale).toBeGreaterThan(18);
-    expect(metrics.left,locale).toBeLessThan(32);
-    expect(metrics.right,locale).toBeGreaterThan(70);
-    expect(metrics.right,locale).toBeLessThan(87);
+    expect(metrics.centerRatio,locale).toBeCloseTo(38 / 32, 1);
+    expect(metrics.left,locale).toBeGreaterThan(10);
+    expect(metrics.left,locale).toBeLessThan(20);
+    expect(metrics.right,locale).toBeGreaterThan(18);
+    expect(metrics.right,locale).toBeLessThan(32);
     expect(metrics.viewportOverflow,locale).toBeLessThanOrEqual(1);
   }
 });
