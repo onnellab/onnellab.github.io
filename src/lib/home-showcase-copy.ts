@@ -38,6 +38,7 @@ export type ShowcaseCopy = {
   latestTitle: string;
   latestIntro: string;
   releaseLink: string;
+  trustPrivacyLink: string;
   closingTitle: string;
   closingBody: string;
   platformsLabel: string;
@@ -94,6 +95,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     latestTitle: 'Refined beyond release.',
     latestIntro: 'A few recent changes from products already available.',
     releaseLink: 'Release notes',
+    trustPrivacyLink: 'Privacy policy',
     closingTitle: 'Tools to reach for when you need them.',
     closingBody: 'Simple, dependable apps for the work you do every day.',
     platformsLabel: 'Available platforms'
@@ -148,6 +150,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     latestTitle: '출시 이후에도, 계속 다듬어요.',
     latestIntro: '이미 출시된 앱의 최근 개선 내용을 살펴보세요.',
     releaseLink: '업데이트 내역',
+    trustPrivacyLink: '개인정보 처리방침 보기',
     closingTitle: '필요한 순간에, 믿고 꺼내는 도구.',
     closingBody: '일상의 작고 반복적인 작업이 조금 더 편리해지도록 만들어요.',
     platformsLabel: '지원 플랫폼'
@@ -197,6 +200,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     ],
     latestLabel: 'アップデート', latestTitle: '公開後も、少しずつ磨く。',
     latestIntro: '公開中のアプリの最近の改善内容です。', releaseLink: '更新履歴',
+    trustPrivacyLink: 'プライバシーポリシーを見る',
     closingTitle: '必要なときに、頼れる道具。',
     closingBody: '日々の小さな作業を、少しだけ使いやすく。',
     platformsLabel: '対応プラットフォーム'
@@ -245,6 +249,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     ],
     latestLabel: '产品更新', latestTitle: '发布之后，继续打磨。',
     latestIntro: '查看已发布应用近期的改进。', releaseLink: '更新记录',
+    trustPrivacyLink: '查看隐私政策',
     closingTitle: '需要的时候，顺手就能用。',
     closingBody: '为日常的小事，做更好用的工具。',
     platformsLabel: '支持平台'
@@ -293,6 +298,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     ],
     latestLabel: '產品更新', latestTitle: '推出之後，持續打磨。',
     latestIntro: '查看已上架應用程式近期的改善。', releaseLink: '更新紀錄',
+    trustPrivacyLink: '查看隱私權政策',
     closingTitle: '需要時，隨手就能使用。',
     closingBody: '讓日常的小事，多一分便利。',
     platformsLabel: '支援平台'
@@ -342,6 +348,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     ],
     latestLabel: 'Atualizações', latestTitle: 'Melhoramos mesmo depois de lançar.',
     latestIntro: 'Novidades recentes de apps disponíveis.', releaseLink: 'Notas da versão',
+    trustPrivacyLink: 'Ver política de privacidade',
     closingTitle: 'Ferramentas para quando você precisar.',
     closingBody: 'Mais facilidade nas pequenas tarefas do dia a dia.',
     platformsLabel: 'Plataformas'
@@ -391,6 +398,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     ],
     latestLabel: 'Produkt-Updates', latestTitle: 'Auch nach dem Start verbessert.',
     latestIntro: 'Jüngste Verbesserungen unserer veröffentlichten Apps.', releaseLink: 'Versionshinweise',
+    trustPrivacyLink: 'Datenschutzerklärung ansehen',
     closingTitle: 'Werkzeuge, auf die du zurückgreifen kannst.',
     closingBody: 'Für die kleinen Aufgaben des Alltags.',
     platformsLabel: 'Plattformen'
@@ -440,6 +448,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     ],
     latestLabel: 'Mises à jour', latestTitle: 'Peaufinées après leur sortie.',
     latestIntro: 'Quelques améliorations récentes des applications disponibles.', releaseLink: 'Notes de version',
+    trustPrivacyLink: 'Consulter la politique de confidentialité',
     closingTitle: 'Des outils utiles au bon moment.',
     closingBody: 'Pour faciliter les petites tâches du quotidien.',
     platformsLabel: 'Plateformes'
@@ -489,6 +498,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     ],
     latestLabel: 'Actualizaciones', latestTitle: 'Seguimos mejorando después del lanzamiento.',
     latestIntro: 'Algunas mejoras recientes de las apps disponibles.', releaseLink: 'Notas de versión',
+    trustPrivacyLink: 'Ver la política de privacidad',
     closingTitle: 'Herramientas para cuando las necesites.',
     closingBody: 'Un poco más de comodidad en las tareas de cada día.',
     platformsLabel: 'Plataformas'
