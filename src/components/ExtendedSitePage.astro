@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { uiLabels } from '../lib/ui-labels';
-import { homeAppOneLine, showcaseCopy } from '../lib/home-showcase-copy';
+import { homeAppOneLine, homeAppSearchSupplement, showcaseCopy } from '../lib/home-showcase-copy';
 import LocaleMenu from './LocaleMenu.astro';
 import { getIconRoutePath, getProductSources } from '../lib/products';
 import { allPrivacyAppSlugs, getPrivacyPolicyDocument, type AllPrivacyAppSlug } from '../lib/privacy-policy-documents';
@@ -198,6 +198,7 @@ const appItems = productSources.map((source) => {
   }
   const originalSummary = copy.appSummaries[source.slug] ?? source.meta.title;
   const homepageLine = page === 'apps' ? homeAppOneLine(locale, source.slug) : undefined;
+  const searchableLongCopy = page === 'apps' ? homeAppSearchSupplement(locale, source.slug) : undefined;
   return {
   slug: source.slug,
   title: source.meta.title,
@@ -205,7 +206,7 @@ const appItems = productSources.map((source) => {
   statusKind: statusKind(source.meta.status),
   platforms: source.meta.platforms,
   description: homepageLine ?? originalSummary,
-  searchText: [source.meta.title, originalSummary, homepageLine].filter(Boolean).join(' '),
+  searchText: [source.meta.title, originalSummary, homepageLine, searchableLongCopy].filter(Boolean).join(' '),
   icon: getIconRoutePath(source),
   href: allProductRouteFor(source.slug, locale),
   privacy: allAppPrivacyRouteFor(source.slug, locale),

@@ -3,21 +3,33 @@ import { expect, test } from '@playwright/test';
 const locales = ['', 'ko/', 'ja/', 'zh-hans/', 'zh-hant/', 'pt-br/', 'de/', 'fr/', 'es/'] as const;
 const showcased = ['tagweaver', 'quivra', 'melivra', 'papira'] as const;
 
-test('apps catalogue reuses the exact homepage one-line introductions in all nine languages', async ({ page }) => {
+test('apps catalogue reuses the exact short homepage function labels in all nine languages', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   for (const locale of locales) {
     await page.goto('/' + locale);
 
     const oneLiners: Record<string, string> = {
+      tagweaver: (await page.locator('[data-hero-product="tagweaver"] .hero-slide-identity small').innerText()).trim()
+    };
+    const oldLongCopy: Record<string, string> = {
       tagweaver: (await page.locator('.signature-section #signature-title').innerText()).trim()
     };
     for (const slug of showcased.filter((item) => item !== 'tagweaver')) {
       const card = page.locator('.collection-section .product-card[href*="/apps/' + slug + '/"]');
       await expect(card).toHaveCount(1);
-      oneLiners[slug] = (await card.locator('.product-card-body > p:not(.product-category)').innerText()).trim();
+      oneLiners[slug] = (await card.locator('.product-category').innerText()).trim();
+      oldLongCopy[slug] =
+        (await card.locator('.product-card-body > p:not(.product-category)').innerText()).trim();
     }
-    // Natural Chinese/Japanese one-liners can be concise without losing meaning.
     expect(Object.values(oneLiners).every((value) => value.trim().length > 0)).toBe(true);
+    if (locale === 'ko/') {
+      expect(oneLiners).toEqual({
+        tagweaver: '음악 태그 편집',
+        quivra: '미디어 파일 변환',
+        melivra: '로컬 음악 플레이어',
+        papira: '전자책 만들기'
+      });
+    }
 
     await page.goto('/apps/' + locale);
     const prefix = locale ? locale : '';
@@ -29,6 +41,8 @@ test('apps catalogue reuses the exact homepage one-line introductions in all nin
       const index = await card.getAttribute('data-app-search-text') ??
         await card.getAttribute('data-search-text') ?? '';
       expect(index, locale + slug).toContain(oneLiners[slug].normalize('NFKC').toLocaleLowerCase());
+      // Keep the long homepage sentence searchable without displaying it.
+      expect(index, locale + slug).toContain(oldLongCopy[slug].normalize('NFKC').toLocaleLowerCase());
     }
 
     // Apps without a homepage marketing line retain their ordinary localized
@@ -48,7 +62,7 @@ test('apps catalogue reuses the exact homepage one-line introductions in all nin
   }
 });
 
-test('existing search keywords still discover apps after their catalogue introductions change', async ({ page }) => {
+test('existing search keywords still discover apps after their catalogue descriptions change', async ({ page }) => {
   for (const example of [
     { locale: 'ko/', keyword: 'MP3/FLAC' },
     { locale: '', keyword: 'MP3/FLAC' },

@@ -493,11 +493,21 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
 };
 
 /**
- * Reuse the homepage's authored one-line introductions in the apps catalogue.
- * Other products have no homepage introduction and keep their own summaries.
- * Avoid duplicating localized marketing copy across multiple page components.
+ * Display the same brief category shown beneath the homepage Hero cards
+ * and above the homepage selected-product cards, in all nine languages.
+ * Products without a homepage category keep their existing index summaries.
  */
 export function homeAppOneLine(locale: AllSiteLocale, slug: string): string | undefined {
+  const copy = showcaseCopy[locale];
+  if (slug === 'tagweaver') return copy.carousel.musicTag;
+  if (slug === 'quivra' || slug === 'melivra' || slug === 'papira') {
+    return copy.offers[slug].category;
+  }
+  return undefined;
+}
+
+/** Keep the previously displayed longer homepage wording searchable. */
+export function homeAppSearchSupplement(locale: AllSiteLocale, slug: string): string | undefined {
   const copy = showcaseCopy[locale];
   if (slug === 'tagweaver') return copy.signatureTitle;
   if (slug === 'quivra' || slug === 'melivra' || slug === 'papira') {
