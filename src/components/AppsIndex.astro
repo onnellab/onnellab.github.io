@@ -177,6 +177,7 @@ const collectionJsonLd = {
           href={app.href}
           style={appCardStyle(app)}
           data-app-row
+          data-app-title={app.title.toLocaleLowerCase()}
           data-app-search-text={`${app.title} ${app.description}`.normalize("NFKC").toLocaleLowerCase()}
           data-status-kind={app.statusKind}
         >
