@@ -433,6 +433,15 @@
   font-weight: 720;
   line-height: 1.3;
 }
+/* Product-specific headline inks only: TagWeaver reads as golden yellow,
+   Melivra as warm peach/terracotta, Papira retains its existing blue.
+   Product-wide accent tokens and source screenshots remain authoritative. */
+.homepage .hero-slide[data-hero-product="tagweaver"] .hero-slide-identity strong {
+  color: #806016;
+}
+.homepage .hero-slide[data-hero-product="melivra"] .hero-slide-identity strong {
+  color: #984845;
+}
 .homepage .hero-slide-identity small,
 .homepage .hero-slide-link-arrow { display: none; }
 .homepage .hero-slot[data-hero-slot="active"] .hero-slide-identity strong {
