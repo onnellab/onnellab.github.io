@@ -1,15 +1,16 @@
 import { expect, test } from '@playwright/test';
+import { homeAppOneLine } from '../src/lib/home-showcase-copy';
 
 const locales = [
-  { path: '', lang: 'en', title: 'Melivra - Offline Music Player', subtitle: 'Offline Music Player', credit: 'AI Credits' },
-  { path: 'ko/', lang: 'ko', title: 'Melivra - 오프라인 음악 플레이어', subtitle: '오프라인 음악 플레이어', credit: 'AI 크레딧' },
-  { path: 'ja/', lang: 'ja', title: 'Melivra - オフライン音楽プレーヤー', subtitle: 'オフライン音楽プレーヤー', credit: 'AIクレジット' },
-  { path: 'zh-hans/', lang: 'zh-Hans', title: 'Melivra - 离线音乐播放器', subtitle: '离线音乐播放器', credit: 'AI 积分' },
-  { path: 'zh-hant/', lang: 'zh-Hant', title: 'Melivra - 離線音樂播放器', subtitle: '離線音樂播放器', credit: 'AI 點數' },
-  { path: 'pt-br/', lang: 'pt-BR', title: 'Melivra - Player de música offline', subtitle: 'Player de música offline', credit: 'Créditos de IA' },
-  { path: 'de/', lang: 'de', title: 'Melivra - Offline-Musikplayer', subtitle: 'Offline-Musikplayer', credit: 'KI-Credits' },
-  { path: 'fr/', lang: 'fr', title: 'Melivra - Lecteur de musique hors ligne', subtitle: 'Lecteur de musique hors ligne', credit: 'crédits IA' },
-  { path: 'es/', lang: 'es', title: 'Melivra - Reproductor de música sin conexión', subtitle: 'Reproductor de música sin conexión', credit: 'créditos de IA' }
+  { path: '', lang: 'en', title: 'Melivra - Offline Music Player', credit: 'AI Credits' },
+  { path: 'ko/', lang: 'ko', title: 'Melivra - 오프라인 음악 플레이어', credit: 'AI 크레딧' },
+  { path: 'ja/', lang: 'ja', title: 'Melivra - オフライン音楽プレーヤー', credit: 'AIクレジット' },
+  { path: 'zh-hans/', lang: 'zh-Hans', title: 'Melivra - 离线音乐播放器', credit: 'AI 积分' },
+  { path: 'zh-hant/', lang: 'zh-Hant', title: 'Melivra - 離線音樂播放器', credit: 'AI 點數' },
+  { path: 'pt-br/', lang: 'pt-BR', title: 'Melivra - Player de música offline', credit: 'Créditos de IA' },
+  { path: 'de/', lang: 'de', title: 'Melivra - Offline-Musikplayer', credit: 'KI-Credits' },
+  { path: 'fr/', lang: 'fr', title: 'Melivra - Lecteur de musique hors ligne', credit: 'crédits IA' },
+  { path: 'es/', lang: 'es', title: 'Melivra - Reproductor de música sin conexión', credit: 'créditos de IA' }
 ] as const;
 
 for (const locale of locales) {
@@ -18,7 +19,9 @@ for (const locale of locales) {
 
     await expect(page).toHaveTitle(locale.title);
     await expect(page.locator('html')).toHaveAttribute('lang', locale.lang);
-    await expect(page.locator('.hero .intro')).toHaveText(locale.subtitle);
+    // The detail-page hero shares the homepage's brief function label;
+    // independently authored SEO titles and comprehensive product scope stay unchanged.
+    await expect(page.locator('.hero .intro')).toHaveText(homeAppOneLine(locale.lang, 'melivra')!);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
       `https://onnellab.com/apps/melivra/${locale.path}`
