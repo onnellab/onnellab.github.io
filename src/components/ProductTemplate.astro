@@ -4,6 +4,7 @@ import { productPresentationLabels, validateProductPresentation } from '../lib/p
 import LocaleMenu from './LocaleMenu.astro';
 import SiteFooter from './SiteFooter.astro';
 import { landingSubtitle, pageBodyDescription, renderBlocks, type ProductPageData } from '../lib/products';
+import { homeAppOneLine } from '../lib/home-showcase-copy';
 import { latestReleaseNoteForApp, releaseNoteKoPath, releaseNotePath } from '../lib/releaseNotes';
 import { releaseNoteLocalePath, type ReleaseLocale } from '../lib/extended-release-notes';
 import {
@@ -79,7 +80,9 @@ if (!schemaClassification) {
 }
 
 const bodyBlocks = renderBlocks(pageBodyDescription(copy));
-const heroIntro = landingSubtitle(copy);
+// Keep the hero's brief function label aligned with the homepage and app
+// catalogue. Longer description, purchase disclosures, and SEO copy stay as-is.
+const heroIntro = homeAppOneLine(data.locale, data.source.slug) ?? landingSubtitle(copy);
 const firstFeatureList = (value: string | undefined): string[] | undefined => {
   if (!value) return undefined;
   return renderBlocks(value).find((block) => block.type === 'ul')?.value as string[] | undefined;
