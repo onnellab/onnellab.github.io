@@ -289,9 +289,9 @@
   font-weight: 400;
 }
 
-/* Equal-size 33:37:33 side previews with a deliberate editorial diagonal:
-   previous rises slightly; next sits lower. Physical widths and grid slots
-   stay unchanged so FLIP/drag math keeps matching the real card geometry. */
+/* Equal-size 33:37:33 previews in a subtle stepped composition:
+   the center finishes lowest, the left rises most, and the right rises
+   only slightly. Keep physical slots unchanged for pointer/FLIP geometry. */
 .homepage .hero-carousel {
   width: min(100%, 490px);
   margin-inline: auto;
@@ -299,8 +299,8 @@
 }
 .homepage .hero-stage {
   --hero-side-inset: 22px;
-  --hero-left-lift: 9px;
-  --hero-right-drop: 16px;
+  --hero-left-lift: 18px;
+  --hero-right-lift: 7px;
   display: grid;
   grid-template-columns: minmax(0, 33fr) minmax(0, 37fr) minmax(0, 33fr);
   gap: 0;
@@ -335,7 +335,7 @@
 }
 .homepage .hero-slot[data-hero-slot="next"] {
   grid-column: 3;
-  transform: translate(calc(-1 * var(--hero-side-inset)), var(--hero-right-drop));
+  transform: translate(calc(-1 * var(--hero-side-inset)), calc(-1 * var(--hero-right-lift)));
 }
 .homepage .hero-slide {
   display: flex;
@@ -984,8 +984,8 @@
   .homepage .hero-carousel { width: 100%; margin-top: 12px; }
   .homepage .hero-stage {
     --hero-side-inset: clamp(12px, 4vw, 18px);
-    --hero-left-lift: 6px;
-    --hero-right-drop: 10px;
+    --hero-left-lift: 12px;
+    --hero-right-lift: 4px;
     grid-template-columns: minmax(0, 33fr) minmax(0, 37fr) minmax(0, 33fr);
     padding-top: 6px;
     padding-bottom: 9px;
