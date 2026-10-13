@@ -1,6 +1,6 @@
 /**
  * Three original Android screenshots in fixed showroom slots.
- * Pointer swipes, arrows, dots, and keyboard input share one rotation path.
+ * Pointer swipes, minimal pagination dots, and keyboard input share one rotation path.
  * A FLIP transition moves cards without changing the physical grid.
  */
 function initializeHomeCarousels(): void {
@@ -15,9 +15,7 @@ function initializeHomeCarousels(): void {
     const activeSlot = carousel.querySelector<HTMLElement>('[data-hero-slot="active"]');
     const nextSlot = carousel.querySelector<HTMLElement>('[data-hero-slot="next"]');
     const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('[data-hero-dot]'));
-    const previous = carousel.querySelector<HTMLButtonElement>('[data-hero-previous]');
-    const next = carousel.querySelector<HTMLButtonElement>('[data-hero-next]');
-    const counter = carousel.querySelector<HTMLElement>('[data-hero-counter]');
+    const announcement = carousel.querySelector<HTMLElement>('[data-hero-announcement]');
     if (!stage || !previousSlot || !activeSlot || !nextSlot ||
       slides.length !== 3 || slides.length !== dots.length) continue;
 
@@ -233,9 +231,10 @@ function initializeHomeCarousels(): void {
         if (index === active) dot.setAttribute('aria-current', 'true');
         else dot.removeAttribute('aria-current');
       });
-      if (counter) {
-        counter.textContent =
-          String(active + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+      // With no visible counter, announce the selected app to screen readers
+      // after dot, swipe or arrow-key navigation.
+      if (announcement && !options?.initial) {
+        announcement.textContent = slides[active].getAttribute('aria-label') ?? slides[active].textContent?.trim() ?? '';
       }
       if (!animate) return;
 
@@ -297,8 +296,6 @@ function initializeHomeCarousels(): void {
         .catch(() => { /* A newer rotation canceled this transition. */ });
     };
 
-    previous?.addEventListener('click', () => rotate(active - 1));
-    next?.addEventListener('click', () => rotate(active + 1));
     dots.forEach((dot, index) => dot.addEventListener('click', () => rotate(index)));
 
     stage.addEventListener('keydown', (event: KeyboardEvent) => {

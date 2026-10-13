@@ -2,7 +2,14 @@ import { expect, test, type Page } from '@playwright/test';
 
 const stage = '[data-hero-track]';
 const center = '[data-hero-slot="active"] .hero-slide';
-const counter = '[data-hero-counter]';
+// The numeric counter and arrow buttons are intentionally not visible.
+const activeDot = (index: number) => '[data-hero-dot][data-index="' + index + '"]';
+async function clickHeroDotRelative(page: Page, direction: number) {
+  const index = Number(await page.locator('[data-hero-dot][aria-current="true"]').getAttribute('data-index'));
+  await page.locator(activeDot((index + direction + 3) % 3)).click();
+}
+const nextDot = (page: Page) => clickHeroDotRelative(page, 1);
+const previousDot = (page: Page) => clickHeroDotRelative(page, -1);
 
 async function dragCurrent(page: Page, dx: number, dy = 0) {
   const screenshot = page.locator(center + ' .hero-slide-screen');
@@ -27,7 +34,7 @@ test('mouse drags rotate both ways, wrap around, and never navigate by mistake',
 
   await dragCurrent(page, -92);
   await expect(page.locator(center + ' strong')).toHaveText('Melivra');
-  await expect(page.locator(counter)).toHaveText('02 / 03');
+  await expect(page.locator(activeDot(1))).toHaveAttribute('aria-current', 'true');
   await expect(page.locator('[data-hero-dot][data-index="1"]')).toHaveAttribute('aria-current', 'true');
   await waitSettled(page);
   expect(new URL(page.url()).pathname).toBe('/ko/');
@@ -38,7 +45,7 @@ test('mouse drags rotate both ways, wrap around, and never navigate by mistake',
 
   await dragCurrent(page, 95);
   await expect(page.locator(center + ' strong')).toHaveText('Papira');
-  await expect(page.locator(counter)).toHaveText('03 / 03');
+  await expect(page.locator(activeDot(2))).toHaveAttribute('aria-current', 'true');
   await waitSettled(page);
 
   await dragCurrent(page, -95);
@@ -88,7 +95,7 @@ test('cards move independently toward their destination before mouseup', async (
   expect(Math.abs(tagMove - melMove)).toBeGreaterThan(5);
   expect(progress[2].opacity).toBeLessThan(1);
   // The incoming Melivra caption follows its visible position even before
-  // the user lets go. The committed center/counter change only at settle.
+  // the user lets go. The committed center/dot selection changes only at settle.
   await expect(page.locator(stage)).toHaveAttribute('data-drag-preview', 'next');
   await expect(page.locator('[data-hero-slot="active"] .hero-slide-label')).toBeHidden();
   await expect(page.locator('[data-hero-slot="next"] .hero-slide-label')).toBeVisible();
@@ -102,7 +109,7 @@ test('cards move independently toward their destination before mouseup', async (
   expect(new URL(page.url()).pathname).toBe('/ko/');
 });
 
-test('dragging follows the pointer, short drags snap back, and arrows animate', async ({ page }) => {
+test('dragging follows the pointer, short drags snap back, and pagination animates', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/ko/');
   const screenshot = page.locator(center + ' .hero-slide-screen');
@@ -131,7 +138,7 @@ test('dragging follows the pointer, short drags snap back, and arrows animate', 
   await expect(page.locator(stage)).not.toHaveAttribute('data-dragging', 'true');
   expect(new URL(page.url()).pathname).toBe('/ko/');
 
-  await page.locator('[data-hero-next]').click();
+  await nextDot(page);
   await expect(page.locator(stage)).toHaveAttribute('data-animating', 'true');
   const inMotion = await page.locator(center).evaluate((slide) =>
     slide.getAnimations().some((animation) => animation.playState === 'running')
@@ -141,10 +148,10 @@ test('dragging follows the pointer, short drags snap back, and arrows animate', 
   await expect(page.locator(center + ' strong')).toHaveText('Melivra');
 
   await page.locator('[data-hero-dot][data-index="2"]').click();
-  await page.locator('[data-hero-previous]').click();
+  await previousDot(page);
   await waitSettled(page);
   await expect(page.locator(center + ' strong')).toHaveText('Melivra');
-  await expect(page.locator(counter)).toHaveText('02 / 03');
+  await expect(page.locator(activeDot(1))).toHaveAttribute('aria-current', 'true');
 });
 
 test('reduced motion skips FLIP animation but keeps swipe, buttons, and links functional', async ({ page }) => {
@@ -193,13 +200,13 @@ test('touch swiping works and a vertical gesture remains a page scroll', async (
   await cdp.detach();
 });
 
-test('nine localized heroes retain the same swipe behavior and counter', async ({ page }) => {
+test('nine localized heroes retain the same swipe behavior and selected dot', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   for (const locale of ['', 'ko/', 'ja/', 'zh-hans/', 'zh-hant/', 'pt-br/', 'de/', 'fr/', 'es/']) {
     await page.goto('/' + locale);
     await dragCurrent(page, -85);
     await expect(page.locator(center + ' strong')).toHaveText('Melivra');
-    await expect(page.locator(counter)).toHaveText('02 / 03');
+    await expect(page.locator(activeDot(1))).toHaveAttribute('aria-current', 'true');
     await waitSettled(page);
     const overflow = await page.evaluate(() =>
       document.documentElement.scrollWidth - document.documentElement.clientWidth
@@ -264,7 +271,7 @@ test('dragging back and forth cancels the preview without changing the selected 
   await page.mouse.up();
   await waitSettled(page);
   await expect(page.locator(center + ' strong')).toHaveText('TagWeaver');
-  await expect(page.locator(counter)).toHaveText('01 / 03');
+  await expect(page.locator(activeDot(0))).toHaveAttribute('aria-current', 'true');
   await expect(page.locator('[data-hero-slot="active"] .hero-slide-label')).toBeVisible();
   await expect(page.locator('[data-hero-slot="next"] .hero-slide-label')).toBeHidden();
   await expect(page.locator('[data-hero-slot="previous"] .hero-slide-label')).toBeHidden();
@@ -274,7 +281,7 @@ test('clicking a center app immediately after rotation is not swallowed by gestu
   await page.setViewportSize({ width: 390, height: 844 });
   for (let attempt = 0; attempt < 3; attempt++) {
     await page.goto('/ko/');
-    await page.locator('[data-hero-next]').click();
+    await nextDot(page);
     await expect(page.locator(center + ' strong')).toHaveText('Melivra');
     // Direct pointer clicks stay valid during the deliberate FLIP transition.
     await page.locator(center).click({ force: true });
@@ -314,10 +321,10 @@ test('weighted pointer tracking continues to ease toward the held cursor positio
   await expect(page.locator(stage)).not.toHaveAttribute('data-dragging', 'true');
 });
 
-test('arrow rotation uses a deliberate long ease and hides the wrapping card midway', async ({ page }) => {
+test('pagination rotation uses a deliberate long ease and hides the wrapping card midway', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/ko/');
-  await page.locator('[data-hero-next]').click();
+  await nextDot(page);
   await expect(page.locator(stage)).toHaveAttribute('data-animating', 'true');
   const timings = await page.locator(center).evaluate((slide) =>
     slide.getAnimations().map((animation) => ({

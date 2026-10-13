@@ -10,7 +10,7 @@ test('balanced layered hero preserves geometry after navigation', async ({page})
     const geometry = () => stage.evaluate(root => {
       const frame = (position:string) => {
         const rect = root.querySelector('[data-hero-slot="' + position + '"] .hero-slide-screen')!.getBoundingClientRect();
-        return {x:Number(rect.left.toFixed(1)),y:Number(rect.top.toFixed(1)),
+        return {x:Number(rect.left.toFixed(1)),y:Number((rect.top+scrollY).toFixed(1)),
           width:Number(rect.width.toFixed(1)),height:Number(rect.height.toFixed(1))};
       };
       const left=frame('previous'),center=frame('active'),right=frame('next');
@@ -53,10 +53,10 @@ test('balanced layered hero preserves geometry after navigation', async ({page})
     expect(initial.leftOverlap).toBeCloseTo(inset,0);
     expect(initial.rightOverlap).toBeCloseTo(inset,0);
 
-    for(const selector of ['[data-hero-next]','[data-hero-next]','[data-hero-previous]']) {
-      await page.locator(selector).click();
-      await expect(stage).not.toHaveAttribute('data-animating','true');
-      expect(await geometry(), width+'px '+selector).toEqual(initial);
+    for (const index of [1, 2, 1]) {
+      await page.locator('[data-hero-dot][data-index="' + index + '"]').click();
+      await expect(stage).not.toHaveAttribute('data-animating', 'true');
+      expect(await geometry(), width+'px dot '+index).toEqual(initial);
     }
   }
 });

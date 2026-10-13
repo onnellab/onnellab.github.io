@@ -1,4 +1,18 @@
 import { expect, test } from '@playwright/test';
+// The compact carousel has clickable dots below the caption rather than
+// visible arrows or a numeric counter. Next/previous use the same rotation.
+async function clickHeroDotRelative(page: import('@playwright/test').Page, direction: number) {
+  const current = await page.locator('[data-hero-dot][aria-current="true"]').getAttribute('data-index');
+  const index = (Number(current) + direction + 3) % 3;
+  await page.locator('[data-hero-dot][data-index="' + index + '"]').click();
+}
+async function clickNextDot(page: import('@playwright/test').Page) {
+  await clickHeroDotRelative(page, 1);
+}
+async function clickPreviousDot(page: import('@playwright/test').Page) {
+  await clickHeroDotRelative(page, -1);
+}
+
 
 const routes = [
   { home: '/', segment: '', title: 'Small tools. Calmly made.', apps: '/apps/', about: '/about/', blog: '/blog/' },
@@ -202,40 +216,36 @@ test('all three Android cards are fully visible with a large center at four widt
   }
 });
 
-test('carousel arrows, dots and keyboard rotate the central card continuously', async ({ page }) => {
+test('bottom pagination dots and keyboard rotate the central card continuously', async ({ page }) => {
   await page.goto('/ko/');
   const carousel = page.locator('[data-hero-carousel]');
   const dots = carousel.locator('[data-hero-dot]');
-  const next = carousel.locator('[data-hero-next]');
-  const previous = carousel.locator('[data-hero-previous]');
   const track = carousel.locator('[data-hero-track]');
-  const counter = carousel.locator('[data-hero-counter]');
+  const announcement = carousel.locator('[data-hero-announcement]');
   const center = carousel.locator('.hero-slide[data-position="active"] .hero-slide-identity strong');
   await expect(carousel.locator('.hero-slide-identity strong')).toHaveText(['Papira', 'TagWeaver', 'Melivra']);
   await expect(carousel.locator('.hero-slide-identity small')).toHaveText([
     '전자책 만들기', '음악 태그 편집', '로컬 음악 플레이어'
   ]);
+  await expect(carousel.locator('.hero-carousel-controls, [data-hero-counter], [data-hero-next], [data-hero-previous]')).toHaveCount(0);
   await expect(dots).toHaveCount(3);
-  await expect(counter).toHaveText('01 / 03');
   await expect(center).toHaveText('TagWeaver');
-  await expect(previous).toBeEnabled();
-  await expect(next).toBeEnabled();
   await expect(dots.nth(0)).toHaveAttribute('aria-current', 'true');
 
-  await next.click();
+  await dots.nth(1).click();
   await expect(center).toHaveText('Melivra');
-  await expect(counter).toHaveText('02 / 03');
+  await expect(announcement).toContainText('Melivra');
   await expect(dots.nth(1)).toHaveAttribute('aria-current', 'true');
-  await next.click();
-  await expect(center).toHaveText('Papira');
-  await expect(counter).toHaveText('03 / 03');
-  await next.click();
-  await expect(center).toHaveText('TagWeaver');
-  await expect(counter).toHaveText('01 / 03');
-  await previous.click();
-  await expect(center).toHaveText('Papira');
-  await expect(counter).toHaveText('03 / 03');
 
+  await dots.nth(2).click();
+  await expect(center).toHaveText('Papira');
+  await expect(dots.nth(2)).toHaveAttribute('aria-current', 'true');
+  await dots.nth(0).click();
+  await expect(center).toHaveText('TagWeaver');
+
+  await track.focus();
+  await page.keyboard.press('ArrowLeft');
+  await expect(center).toHaveText('Papira');
   await dots.nth(1).click();
   await expect(center).toHaveText('Melivra');
   await track.focus();
@@ -255,7 +265,7 @@ test('centered rotation works on mobile with fully visible side cards and links'
   await expect(first).toHaveAttribute('data-position', 'active');
   await expect(second).toHaveAttribute('data-position', 'next');
   await expect(third).toHaveAttribute('data-position', 'previous');
-  await page.locator('[data-hero-next]').click();
+  await clickNextDot(page);
   await expect(second).toHaveAttribute('data-position', 'active');
   await expect(first).toHaveAttribute('data-position', 'previous');
   await expect(third).toHaveAttribute('data-position', 'next');
@@ -340,7 +350,7 @@ test('the center card subtly occludes both complete side previews after every ro
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/ko/');
     for (const step of [0, 1, 2]) {
-      if (step !== 0) await page.locator('[data-hero-next]').click();
+      if (step !== 0) await clickNextDot(page);
       // Verify fixed overlap after the intentional slide transition settles.
       await expect(page.locator('[data-hero-track]')).not.toHaveAttribute('data-animating', 'true');
       const result = await page.locator('.hero-stage').evaluate((stage) => {
@@ -624,7 +634,7 @@ test('Hero titles appear as text only, without adjacent app icons', async ({ pag
     await expect(labels.locator('img')).toHaveCount(0);
     await expect(page.locator('.hero-slide-screen img')).toHaveCount(3);
     await expect(page.locator('.hero-slide[data-position="active"] strong')).toHaveText('TagWeaver');
-    await page.locator('[data-hero-next]').click();
+    await clickNextDot(page);
     await expect(page.locator('.hero-slide[data-position="active"] strong')).toHaveText('Melivra');
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
   }
@@ -683,7 +693,7 @@ test('all three states preserve Melivra-centered fixed geometry down to the pixe
       ['Papira', 'TagWeaver', 'Melivra']
     ];
     for (let step = 0; step < expectedOrder.length; step++) {
-      if (step) await page.locator('[data-hero-next]').click();
+      if (step) await clickNextDot(page);
       // The animation moves cards temporarily; physical slots remain identical at rest.
       await expect(page.locator('[data-hero-track]')).not.toHaveAttribute('data-animating', 'true');
       const state = await measure();
@@ -712,7 +722,7 @@ test('all three states preserve Melivra-centered fixed geometry down to the pixe
   }
 });
 
-test('rotation always preserves fixed slots through dots, keyboard, and reverse arrows', async ({ page }) => {
+test('rotation preserves fixed slots through dots, keyboard, and reverse selection', async ({ page }) => {
   await page.goto('/ko/');
   const slots = page.locator('[data-hero-slot]');
   const slotNodes = await slots.evaluateAll((nodes) => nodes.map((node) => node.getAttribute('data-hero-slot')));
@@ -727,7 +737,7 @@ test('rotation always preserves fixed slots through dots, keyboard, and reverse 
   );
   const geometry = await slotsAreStable();
   const center = page.locator('[data-hero-slot="active"] .hero-slide');
-  await page.locator('[data-hero-previous]').click();
+  await clickPreviousDot(page);
   await expect(center.locator('strong')).toHaveText('Papira');
   expect(await slotsAreStable()).toEqual(geometry);
   await page.locator('[data-hero-dot][data-index="1"]').click();
@@ -740,7 +750,7 @@ test('rotation always preserves fixed slots through dots, keyboard, and reverse 
   await page.keyboard.press('ArrowLeft');
   await expect(center.locator('strong')).toHaveText('Melivra');
   expect(await slotsAreStable()).toEqual(geometry);
-  await expect(page.locator('[data-hero-counter]')).toHaveText('02 / 03');
+  await expect(page.locator('[data-hero-dot][data-index="1"]')).toHaveAttribute('aria-current', 'true');
   await expect(page.locator('[data-hero-dot][data-index="1"]')).toHaveAttribute('aria-current', 'true');
   await expect(center).toHaveAttribute('href', '/apps/melivra/ko/');
   await center.click();
@@ -761,10 +771,10 @@ test('all nine locale galleries keep three fixed physical slots when centered ap
       })
     }));
     const before = await measure();
-    await page.locator('[data-hero-next]').click();
+    await clickNextDot(page);
     await expect(page.locator('[data-hero-slot="active"] strong')).toHaveText('Melivra');
     await expect.poll(measure).toEqual(before);
-    await page.locator('[data-hero-next]').click();
+    await clickNextDot(page);
     await expect(page.locator('[data-hero-slot="active"] strong')).toHaveText('Papira');
     await expect.poll(measure).toEqual(before);
   }
@@ -789,7 +799,7 @@ test('only the centered Hero app name is visible without moving the reserved cap
     const original = await geometry();
     const apps = ['TagWeaver', 'Melivra', 'Papira', 'TagWeaver'];
     for (let i = 0; i < apps.length; i++) {
-      if (i) await page.locator('[data-hero-next]').click();
+      if (i) await clickNextDot(page);
       // Captions keep exactly the same reserved height after motion settles.
       await expect(stage).not.toHaveAttribute('data-animating', 'true');
       const current = stage.locator('[data-hero-slot="active"] .hero-slide-label');
