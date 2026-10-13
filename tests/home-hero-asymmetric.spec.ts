@@ -36,10 +36,13 @@ test('balanced layered hero preserves geometry after navigation', async ({page})
     expect(Math.abs(rightDelta + rightLift)).toBeLessThanOrEqual(0.2);
     expect(rightDelta).toBeLessThan(leftDelta);
     expect(initial.left.y).toBeGreaterThan(initial.center.y);
-    expect(initial.right.y).toBeGreaterThan(initial.left.y);
+    expect(initial.right.y, 'right sits higher').toBeLessThan(initial.left.y);
     expect(initial.center.width).toBeGreaterThan(initial.left.width);
-    expect(initial.left.width).toBeGreaterThan(initial.right.width);
-    const expectedRatio=[0.32,0.38,0.30];
+    expect(Math.abs(initial.left.width - initial.right.width),
+      'side preview widths are identical').toBeLessThanOrEqual(0.2);
+    expect(Math.abs(initial.left.height - initial.right.height),
+      'side preview heights are identical').toBeLessThanOrEqual(0.2);
+    const expectedRatio=[33 / 103,37 / 103,33 / 103];
     const sum=initial.left.width+initial.center.width+initial.right.width;
     for(const [i,value] of [initial.left.width,initial.center.width,initial.right.width].entries()) {
       expect(Math.abs(value/sum-expectedRatio[i])).toBeLessThan(0.002);
@@ -70,12 +73,12 @@ test('all nine languages preserve balanced preview positions', async ({page}) =>
         centerRatio:Number((c.width/l.width).toFixed(2)),
         viewportOverflow:document.documentElement.scrollWidth-innerWidth};
     });
-    expect(metrics.centerRatio,locale).toBeCloseTo(38 / 32, 1);
+    expect(metrics.centerRatio,locale).toBeCloseTo(37 / 33, 2);
     expect(Math.abs(metrics.leftBottom + 6),locale).toBeLessThanOrEqual(0.2);
     expect(Math.abs(metrics.rightBottom + 14),locale).toBeLessThanOrEqual(0.2);
     expect(metrics.rightBottom).toBeLessThan(metrics.leftBottom);
-    expect(metrics.leftTop,locale).toBeGreaterThan(25);
-    expect(metrics.rightTop,locale).toBeGreaterThan(metrics.leftTop);
+    expect(metrics.leftTop,locale).toBeGreaterThan(12);
+    expect(metrics.rightTop,locale).toBeLessThan(metrics.leftTop);
     expect(metrics.viewportOverflow,locale).toBeLessThanOrEqual(1);
   }
 });

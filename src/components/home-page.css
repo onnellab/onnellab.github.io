@@ -289,9 +289,9 @@
   font-weight: 400;
 }
 
-/* Calm, slightly asymmetric showcase: keep the 32:38:30 physical slot
-   widths for pointer/FLIP geometry, but raise the left screenshot a little
-   and the right one a little more relative to the center's bottom edge. */
+/* Equal-size, enlarged side previews around a modestly larger center.
+   33:37:33 keeps the physical slot geometry symmetric for pointer/FLIP,
+   while the left/right vertical offsets retain a gentle asymmetric rhythm. */
 .homepage .hero-carousel {
   width: min(100%, 490px);
   margin-inline: auto;
@@ -302,7 +302,7 @@
   --hero-left-lift: 9px;
   --hero-right-lift: 20px;
   display: grid;
-  grid-template-columns: minmax(0, 32fr) minmax(0, 38fr) minmax(0, 30fr);
+  grid-template-columns: minmax(0, 33fr) minmax(0, 37fr) minmax(0, 33fr);
   gap: 0;
   align-items: end;
   min-width: 0;
@@ -986,7 +986,7 @@
     --hero-side-inset: clamp(12px, 4vw, 18px);
     --hero-left-lift: 6px;
     --hero-right-lift: 14px;
-    grid-template-columns: minmax(0, 32fr) minmax(0, 38fr) minmax(0, 30fr);
+    grid-template-columns: minmax(0, 33fr) minmax(0, 37fr) minmax(0, 33fr);
     padding-top: 6px;
     padding-bottom: 9px;
   }

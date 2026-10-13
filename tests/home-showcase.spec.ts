@@ -188,12 +188,13 @@ test('all three Android cards are fully visible with a large center at four widt
     }
     const middle = result.cards.find((x) => x.position === 'active')!;
     expect(middle.name).toBe('TagWeaver');
-    // Balanced layers: 32:38:30 at every width, with shallower preview overlap.
+    // Bigger, exactly equal side previews: 33:37:33 at every width.
     const leftCard = result.cards.find((x) => x.position === 'previous')!;
     const rightCard = result.cards.find((x) => x.position === 'next')!;
-    const proportions = { centerToLeft: 38 / 32, centerToRight: 38 / 30 };
+    const proportions = { centerToLeft: 37 / 33, centerToRight: 37 / 33 };
     expect(Math.abs(middle.width / leftCard.width - proportions.centerToLeft)).toBeLessThan(0.02);
     expect(Math.abs(middle.width / rightCard.width - proportions.centerToRight)).toBeLessThan(0.02);
+    expect(Math.abs(leftCard.width - rightCard.width), 'sides have equal width').toBeLessThanOrEqual(0.2);
     expect(result.cards.find((x) => x.position === 'previous')!.left)
       .toBeLessThan(middle.left);
     expect(result.cards.find((x) => x.position === 'next')!.left)
@@ -372,7 +373,7 @@ test('the center card subtly occludes both complete side previews after every ro
       expect(result.pageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.stageOverflow, String(width)).toBeLessThanOrEqual(1);
       expect(result.allOnStage, 'all cards inside the Hero at ' + width).toBe(true);
-      const expected = { left: 38 / 32, right: 38 / 30 };
+      const expected = { left: 37 / 33, right: 37 / 33 };
       expect(Math.abs(result.centerToLeft - expected.left), String(width)).toBeLessThan(0.02);
       expect(Math.abs(result.centerToRight - expected.right), String(width)).toBeLessThan(0.02);
       const expectedLift = width <= 650 ? { left: 6, right: 14 } : { left: 9, right: 20 };
@@ -382,7 +383,7 @@ test('the center card subtly occludes both complete side previews after every ro
         .toBeLessThanOrEqual(0.2);
       expect(result.rightBottomDelta).toBeLessThan(result.leftBottomDelta);
       expect(result.leftTopDelta).toBeGreaterThan(20);
-      expect(result.rightTopDelta).toBeGreaterThan(result.leftTopDelta);
+      expect(result.rightTopDelta, 'right side sits higher than equally sized left').toBeLessThan(result.leftTopDelta);
       const target = width <= 355
         ? { min: 11, max: 13 }
         : width <= 650 ? { min: 14, max: 17 } : { min: 21, max: 23 };
@@ -693,8 +694,11 @@ test('all three states preserve Melivra-centered fixed geometry down to the pixe
       }
     }
     const [previous, center, next] = baseline.physicalSlots;
-    expect(previous.slotBounds.width, 'intentionally wider left preview').toBeGreaterThan(next.slotBounds.width);
-    expect(previous.frameBounds.top, 'left preview sits slightly higher').toBeLessThan(next.frameBounds.top);
+    expect(Math.abs(previous.slotBounds.width - next.slotBounds.width),
+      'matching left and right preview widths').toBeLessThanOrEqual(0.2);
+    expect(Math.abs(previous.frameBounds.height - next.frameBounds.height),
+      'matching left and right preview heights').toBeLessThanOrEqual(0.2);
+    expect(previous.frameBounds.top, 'right preview lifted higher than left').toBeGreaterThan(next.frameBounds.top);
     expect(center.frameBounds.top).toBeLessThan(previous.frameBounds.top);
     expect(center.frameBounds.width).toBeGreaterThan(previous.frameBounds.width);
     const leftOverlap = previous.frameBounds.left + previous.frameBounds.width - center.frameBounds.left;
