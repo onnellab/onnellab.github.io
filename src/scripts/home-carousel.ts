@@ -28,6 +28,10 @@ function initializeHomeCarousels(): void {
       startY: number;
       dragging: boolean;
       startRects?: SlideRects;
+      targetX: number;
+      renderedX: number;
+      frameId: number | null;
+      lastFrameTime: number | null;
     };
 
     let active = 0;
@@ -35,6 +39,15 @@ function initializeHomeCarousels(): void {
     let suppressClick = false;
     let animationVersion = 0;
     let running: Animation[] = [];
+
+    // Deliberate, cinematic motion with no elastic overshoot.
+    // The pointer leads the artwork slightly; release glides into place.
+    const dragResponseMs = 43;
+    const releaseDurationMs = 555;
+    const navigationDurationMs = 625;
+    const settleDurationMs = 340;
+    const releaseEase = 'cubic-bezier(0.3, 0.62, 0.22, 1)';
+    const navigationEase = 'cubic-bezier(0.4, 0.06, 0.24, 1)';
 
     const prefersReducedMotion = () =>
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -69,7 +82,9 @@ function initializeHomeCarousels(): void {
       const start = session.startRects;
       if (!start) return;
       const forward = deltaX < 0;
-      const progress = Math.min(1, Math.abs(deltaX) / Math.max(80, stage.clientWidth * 0.3));
+      // A slightly longer gesture is needed to fill an entire slot: the
+      // preview has perceptible inertia instead of snapping under the cursor.
+      const progress = Math.min(1, Math.abs(deltaX) / Math.max(80, stage.clientWidth * 0.33));
       const previous = previousSlot.querySelector<HTMLAnchorElement>('[data-hero-slide]')!;
       const current = activeSlot.querySelector<HTMLAnchorElement>('[data-hero-slide]')!;
       const following = nextSlot.querySelector<HTMLAnchorElement>('[data-hero-slide]')!;
@@ -82,7 +97,7 @@ function initializeHomeCarousels(): void {
       stage.dataset.dragging = 'true';
       // Once the new card visually occupies the center, let its caption lead
       // too. Commit aria-current and the counter only when the drag settles.
-      if (progress >= 0.56) stage.dataset.dragPreview = forward ? 'next' : 'previous';
+      if (progress >= 0.50) stage.dataset.dragPreview = forward ? 'next' : 'previous';
       else delete stage.dataset.dragPreview;
       for (const [slide, destination] of destinations) {
         const from = start.get(slide)!;
@@ -96,8 +111,8 @@ function initializeHomeCarousels(): void {
         const moved = isWrapping
           ? (progress <= 0.5 ? 0 : 1)
           : slide === incoming
-            ? 1 - Math.pow(1 - progress, 1.5)
-            : Math.pow(progress, 1.35);
+            ? 1 - Math.pow(1 - progress, 1.22)
+            : Math.pow(progress, 1.17);
         const dx = ((to.left + to.width / 2) - (from.left + from.width / 2)) * moved;
         const dy = ((to.top + to.height / 2) - (from.top + from.height / 2)) * moved;
         const sx = 1 + (to.width / from.width - 1) * moved;
@@ -112,6 +127,42 @@ function initializeHomeCarousels(): void {
       // without changing the permanent stacking of the resting layout.
       previousSlot.style.zIndex = !forward && progress > 0.5 ? '4' : '';
       nextSlot.style.zIndex = forward && progress > 0.5 ? '4' : '';
+    };
+
+    // A small, frame-rate-independent low-pass filter creates a restrained
+    // trailing response while the pointer is held. There is no timer and no
+    // dependency; requestAnimationFrame stops as soon as it catches up.
+    const stopDragFrame = (session: DragSession) => {
+      if (session.frameId !== null) window.cancelAnimationFrame(session.frameId);
+      session.frameId = null;
+      session.lastFrameTime = null;
+    };
+    const paintDragFrame = (session: DragSession, now: number) => {
+      if (drag !== session || !session.dragging) return;
+      const elapsed = session.lastFrameTime === null
+        ? 16.67 : Math.min(48, Math.max(1, now - session.lastFrameTime));
+      session.lastFrameTime = now;
+      const blend = 1 - Math.exp(-elapsed / dragResponseMs);
+      session.renderedX += (session.targetX - session.renderedX) * blend;
+      if (Math.abs(session.targetX - session.renderedX) <= 0.35) {
+        session.renderedX = session.targetX;
+      }
+      updateDrag(session, session.renderedX);
+      session.frameId = session.renderedX === session.targetX
+        ? null : window.requestAnimationFrame((timestamp) => paintDragFrame(session, timestamp));
+    };
+    const trackDrag = (session: DragSession, deltaX: number) => {
+      session.targetX = deltaX;
+      if (prefersReducedMotion()) {
+        stopDragFrame(session);
+        session.renderedX = deltaX;
+        updateDrag(session, deltaX);
+        return;
+      }
+      stage.dataset.dragging = 'true';
+      if (session.frameId === null) {
+        session.frameId = window.requestAnimationFrame((timestamp) => paintDragFrame(session, timestamp));
+      }
     };
 
     const settleShortDrag = () => {
@@ -132,7 +183,7 @@ function initializeHomeCarousels(): void {
         slide.animate([
           { transform, opacity },
           { transform: 'none', opacity: '1' }
-        ], { duration: 220, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' })
+        ], { duration: settleDurationMs, easing: releaseEase })
       );
       void Promise.all(running.map((animation) => animation.finished))
         .then(() => {
@@ -201,15 +252,39 @@ function initializeHomeCarousels(): void {
         const scaleX = from.width / to.width;
         const scaleY = from.height / to.height;
 
-        return slide.animate([
-          {
-            transform: 'translate(' + deltaX + 'px, ' + deltaY + 'px) scale(' + scaleX + ', ' + scaleY + ')',
-            opacity: fromOpacity.get(slide) ?? 1
-          },
-          { transform: 'none', opacity: 1 }
-        ], {
-          duration: 340,
-          easing: 'cubic-bezier(0.22, 1, 0.36, 1)'
+        const fromTransform =
+          'translate(' + deltaX + 'px, ' + deltaY + 'px) scale(' + scaleX + ', ' + scaleY + ')';
+        // The card wrapping behind the carousel travels out of sight and
+        // fades back in. It never darts across the readable center screen.
+        const isWrapping = Math.abs(deltaX) > stage.clientWidth * 0.47;
+        const keyframes: Keyframe[] = [
+          { transform: fromTransform, opacity: fromOpacity.get(slide) ?? 1 }
+        ];
+        if (isWrapping) {
+          keyframes.push(
+            {
+              transform: 'translate(' + (deltaX * 0.54) + 'px, ' +
+                (deltaY * 0.54) + 'px) scale(' +
+                (1 + (scaleX - 1) * 0.54) + ', ' +
+                (1 + (scaleY - 1) * 0.54) + ')',
+              opacity: 0,
+              offset: 0.46
+            },
+            {
+              transform: 'translate(' + (deltaX * 0.38) + 'px, ' +
+                (deltaY * 0.38) + 'px) scale(' +
+                (1 + (scaleX - 1) * 0.38) + ', ' +
+                (1 + (scaleY - 1) * 0.38) + ')',
+              opacity: 0,
+              offset: 0.62
+            }
+          );
+        }
+        keyframes.push({ transform: 'none', opacity: 1 });
+
+        return slide.animate(keyframes, {
+          duration: options?.from ? releaseDurationMs : navigationDurationMs,
+          easing: options?.from ? releaseEase : navigationEase
         });
       });
 
@@ -252,7 +327,11 @@ function initializeHomeCarousels(): void {
         pointerId: event.pointerId,
         startX: event.clientX,
         startY: event.clientY,
-        dragging: false
+        dragging: false,
+        targetX: 0,
+        renderedX: 0,
+        frameId: null,
+        lastFrameTime: null
       };
     });
 
@@ -275,13 +354,14 @@ function initializeHomeCarousels(): void {
         stage.setPointerCapture(event.pointerId);
       }
 
-      updateDrag(drag, deltaX);
+      trackDrag(drag, deltaX);
       if (event.cancelable) event.preventDefault();
     }, { passive: false });
 
     window.addEventListener('pointerup', (event: PointerEvent) => {
       if (!drag || drag.pointerId !== event.pointerId) return;
       const session = drag;
+      stopDragFrame(session);
       drag = null;
       if (!session.dragging) return;
 
@@ -307,6 +387,7 @@ function initializeHomeCarousels(): void {
     window.addEventListener('pointercancel', (event: PointerEvent) => {
       if (!drag || drag.pointerId !== event.pointerId) return;
       const wasDragging = drag.dragging;
+      stopDragFrame(drag);
       drag = null;
       if (wasDragging) settleShortDrag();
       else clearDragStyles();

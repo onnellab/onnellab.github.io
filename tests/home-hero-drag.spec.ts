@@ -276,8 +276,69 @@ test('clicking a center app immediately after rotation is not swallowed by gestu
     await page.goto('/ko/');
     await page.locator('[data-hero-next]').click();
     await expect(page.locator(center + ' strong')).toHaveText('Melivra');
-    // Use a direct pointer click, even if the 340ms FLIP transition is active.
+    // Direct pointer clicks stay valid during the deliberate FLIP transition.
     await page.locator(center).click({ force: true });
     await expect(page).toHaveURL(new RegExp('/apps/melivra/ko/$'));
   }
+});
+
+test('weighted pointer tracking continues to ease toward the held cursor position', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/ko/');
+  const current = page.locator(center);
+  const screenshot = await current.locator('.hero-slide-screen').boundingBox();
+  const x = screenshot!.x + screenshot!.width / 2;
+  const y = screenshot!.y + screenshot!.height / 2;
+
+  await page.mouse.move(x, y);
+  await page.mouse.down();
+  await page.mouse.move(x - 108, y, { steps: 1 });
+  // One animation frame after the pointer moves is deliberately *not* the
+  // final dragged pose: the card follows with gently damped inertia.
+  await page.evaluate(() => new Promise<void>((resolve) => requestAnimationFrame(() => resolve())));
+  const early = await current.boundingBox();
+  await page.waitForTimeout(90);
+  const later = await current.boundingBox();
+  await expect(page.locator(stage)).toHaveAttribute('data-dragging', 'true');
+  expect(later!.x, 'card keeps gliding while the mouse is held still').toBeLessThan(early!.x - 5);
+  expect(later!.width, 'outgoing card scales gradually').toBeLessThan(early!.width);
+  await page.mouse.up();
+
+  await expect(page.locator(stage)).toHaveAttribute('data-animating', 'true');
+  const duration = await page.locator(center).evaluate((slide) =>
+    slide.getAnimations().map((animation) => animation.effect?.getTiming().duration)
+  );
+  expect(duration).toContain(555);
+  await waitSettled(page);
+  await expect(page.locator(center + ' strong')).toHaveText('Melivra');
+  await expect(page.locator(stage)).not.toHaveAttribute('data-dragging', 'true');
+});
+
+test('arrow rotation uses a deliberate long ease and hides the wrapping card midway', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/ko/');
+  await page.locator('[data-hero-next]').click();
+  await expect(page.locator(stage)).toHaveAttribute('data-animating', 'true');
+  const timings = await page.locator(center).evaluate((slide) =>
+    slide.getAnimations().map((animation) => ({
+      duration: animation.effect?.getTiming().duration,
+      easing: animation.effect?.getTiming().easing
+    }))
+  );
+  expect(timings.some((t) => t.duration === 625 &&
+    t.easing === 'cubic-bezier(0.4, 0.06, 0.24, 1)')).toBe(true);
+
+  // Papira wraps from the previous preview behind the carousel to the next.
+  const wrapping = await page.locator('[data-hero-slide][data-index="2"]').evaluate((slide) =>
+    slide.getAnimations().flatMap((animation) => {
+      const effect = animation.effect as KeyframeEffect | null;
+      return effect?.getKeyframes() ?? [];
+    })
+  );
+  // Web Animations serializes numeric opacity as a string in getKeyframes().
+  expect(wrapping.some((keyframe) =>
+    keyframe.opacity !== undefined && Number(keyframe.opacity) === 0
+  )).toBe(true);
+  await waitSettled(page);
+  await expect(page.locator(center + ' strong')).toHaveText('Melivra');
 });
