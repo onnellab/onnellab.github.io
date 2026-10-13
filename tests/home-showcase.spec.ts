@@ -376,14 +376,14 @@ test('the center card subtly occludes both complete side previews after every ro
       const expected = { left: 37 / 33, right: 37 / 33 };
       expect(Math.abs(result.centerToLeft - expected.left), String(width)).toBeLessThan(0.02);
       expect(Math.abs(result.centerToRight - expected.right), String(width)).toBeLessThan(0.02);
-      const expectedLift = width <= 650 ? { left: 6, right: 14 } : { left: 9, right: 20 };
-      expect(Math.abs(result.leftBottomDelta + expectedLift.left), 'left lifts slightly at ' + width)
+      const expectedOffset = width <= 650 ? { leftLift: 6, rightDrop: 10 } : { leftLift: 9, rightDrop: 16 };
+      expect(Math.abs(result.leftBottomDelta + expectedOffset.leftLift), 'left lifts slightly at ' + width)
         .toBeLessThanOrEqual(0.2);
-      expect(Math.abs(result.rightBottomDelta + expectedLift.right), 'right lifts farther at ' + width)
+      expect(Math.abs(result.rightBottomDelta - expectedOffset.rightDrop), 'right sits below center at ' + width)
         .toBeLessThanOrEqual(0.2);
-      expect(result.rightBottomDelta).toBeLessThan(result.leftBottomDelta);
+      expect(result.rightBottomDelta).toBeGreaterThan(result.leftBottomDelta);
       expect(result.leftTopDelta).toBeGreaterThan(20);
-      expect(result.rightTopDelta, 'right side sits higher than equally sized left').toBeLessThan(result.leftTopDelta);
+      expect(result.rightTopDelta, 'right side sits lower than equally sized left').toBeGreaterThan(result.leftTopDelta);
       const target = width <= 355
         ? { min: 11, max: 13 }
         : width <= 650 ? { min: 14, max: 17 } : { min: 21, max: 23 };
@@ -698,7 +698,7 @@ test('all three states preserve Melivra-centered fixed geometry down to the pixe
       'matching left and right preview widths').toBeLessThanOrEqual(0.2);
     expect(Math.abs(previous.frameBounds.height - next.frameBounds.height),
       'matching left and right preview heights').toBeLessThanOrEqual(0.2);
-    expect(previous.frameBounds.top, 'right preview lifted higher than left').toBeGreaterThan(next.frameBounds.top);
+    expect(previous.frameBounds.top, 'left preview sits higher than right').toBeLessThan(next.frameBounds.top);
     expect(center.frameBounds.top).toBeLessThan(previous.frameBounds.top);
     expect(center.frameBounds.width).toBeGreaterThan(previous.frameBounds.width);
     const leftOverlap = previous.frameBounds.left + previous.frameBounds.width - center.frameBounds.left;

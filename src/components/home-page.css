@@ -289,9 +289,9 @@
   font-weight: 400;
 }
 
-/* Equal-size, enlarged side previews around a modestly larger center.
-   33:37:33 keeps the physical slot geometry symmetric for pointer/FLIP,
-   while the left/right vertical offsets retain a gentle asymmetric rhythm. */
+/* Equal-size 33:37:33 side previews with a deliberate editorial diagonal:
+   previous rises slightly; next sits lower. Physical widths and grid slots
+   stay unchanged so FLIP/drag math keeps matching the real card geometry. */
 .homepage .hero-carousel {
   width: min(100%, 490px);
   margin-inline: auto;
@@ -300,7 +300,7 @@
 .homepage .hero-stage {
   --hero-side-inset: 22px;
   --hero-left-lift: 9px;
-  --hero-right-lift: 20px;
+  --hero-right-drop: 16px;
   display: grid;
   grid-template-columns: minmax(0, 33fr) minmax(0, 37fr) minmax(0, 33fr);
   gap: 0;
@@ -335,7 +335,7 @@
 }
 .homepage .hero-slot[data-hero-slot="next"] {
   grid-column: 3;
-  transform: translate(calc(-1 * var(--hero-side-inset)), calc(-1 * var(--hero-right-lift)));
+  transform: translate(calc(-1 * var(--hero-side-inset)), var(--hero-right-drop));
 }
 .homepage .hero-slide {
   display: flex;
@@ -985,7 +985,7 @@
   .homepage .hero-stage {
     --hero-side-inset: clamp(12px, 4vw, 18px);
     --hero-left-lift: 6px;
-    --hero-right-lift: 14px;
+    --hero-right-drop: 10px;
     grid-template-columns: minmax(0, 33fr) minmax(0, 37fr) minmax(0, 33fr);
     padding-top: 6px;
     padding-bottom: 9px;
