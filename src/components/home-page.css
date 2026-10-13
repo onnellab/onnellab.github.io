@@ -1069,8 +1069,8 @@
   .homepage .featured-copy h2 { font-size: clamp(26px, 7vw, 29px); }
   .homepage .featured-copy > p { margin-top: 9px; font-size: 14px; line-height: 1.6; }
   .homepage .featured-copy .text-arrow { margin-top: 14px; }
-  .homepage .product-identity { min-height: 46px; margin-bottom: 13px; padding: 0; }
-  .homepage .product-identity img { width: 46px; height: 46px; border-radius: 12px; }
+  .homepage .product-identity { min-height: 54px; margin-bottom: 13px; padding: 0; }
+  .homepage .product-identity img { width: 54px; height: 54px; border-radius: 13px; }
   .homepage .product-name { font-size: 20px; }
   /* On phones, app discovery is editorial: one compact horizontal product row. */
   .homepage .collection-grid { grid-template-columns: minmax(0, 1fr); gap: 13px; }
