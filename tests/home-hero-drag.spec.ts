@@ -269,3 +269,15 @@ test('dragging back and forth cancels the preview without changing the selected 
   await expect(page.locator('[data-hero-slot="next"] .hero-slide-label')).toBeHidden();
   await expect(page.locator('[data-hero-slot="previous"] .hero-slide-label')).toBeHidden();
 });
+
+test('clicking a center app immediately after rotation is not swallowed by gesture handling', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await page.goto('/ko/');
+    await page.locator('[data-hero-next]').click();
+    await expect(page.locator(center + ' strong')).toHaveText('Melivra');
+    // Use a direct pointer click, even if the 340ms FLIP transition is active.
+    await page.locator(center).click({ force: true });
+    await expect(page).toHaveURL(new RegExp('/apps/melivra/ko/$'));
+  }
+});

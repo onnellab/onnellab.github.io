@@ -245,7 +245,9 @@ function initializeHomeCarousels(): void {
 
     stage.addEventListener('pointerdown', (event: PointerEvent) => {
       if (event.button !== 0 || (event.pointerType !== 'mouse' && !event.isPrimary) || drag) return;
-      cancelRunning();
+      // A normal click must not cancel FLIP mid-frame: snapping a moving
+      // link back to its resting slot between pointerdown and pointerup can
+      // discard the click. Cancel only once a real horizontal drag begins.
       drag = {
         pointerId: event.pointerId,
         startX: event.clientX,
@@ -267,6 +269,7 @@ function initializeHomeCarousels(): void {
           return;
         }
         if (Math.abs(deltaX) < 9 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+        cancelRunning();
         drag.dragging = true;
         drag.startRects = measureSlides();
         stage.setPointerCapture(event.pointerId);
