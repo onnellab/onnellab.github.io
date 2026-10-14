@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { homeAppOneLine, showcaseCopy } from '../src/lib/home-showcase-copy';
 
 const locales = [
@@ -499,10 +500,16 @@ test.describe('nine-language site core regression', () => {
         : '/apps/tagweaver/';
       await page.goto(route);
       const screenshot = page.locator('.screenshot-link img').first();
-      await expect(screenshot).toHaveAttribute(
-        'src',
-        `/app-assets/tagweaver/assets/screenshots/${locale.code}/1.png`
-      );
+      const sourceBytes = fs.readFileSync(path.resolve(
+        process.cwd(), 'src/content/apps/tagweaver/assets/screenshots', locale.code, '1.png'
+      ));
+      const sha256 = createHash('sha256').update(sourceBytes).digest('hex');
+      const source = `/app-assets/tagweaver/assets/screenshots/${locale.code}/1.png?v=${sha256}`;
+      await expect(screenshot).toHaveAttribute('src', source);
+      await expect(page.locator('.screenshot-link').first()).toHaveAttribute('href', source);
+      const response = await page.request.get(source);
+      expect(response.ok()).toBe(true);
+      expect(Buffer.compare(await response.body(), sourceBytes)).toBe(0);
     }
   });
 

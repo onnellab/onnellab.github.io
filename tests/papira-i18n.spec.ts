@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 
 const locales = [
   { path: '', hreflang: 'en', title: 'Papira - TXT to EPUB Maker' },
@@ -476,12 +477,29 @@ test.describe('Papira nine-language launch surface', () => {
       expect(await page.locator('.viewer-thumb img').evaluateAll((images) =>
         images.map((image) => image.getAttribute('alt'))
       )).toEqual(['', '', '', '', '']);
+      const expectedSources: string[] = [];
       for (let index = 0; index < 5; index += 1) {
-        const source = `/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png`;
+        const sourcePath = path.resolve(process.cwd(), 'src/content/apps/papira/assets/screenshots', screenshotLocale, `0${index + 1}.png`);
+        expect(fs.existsSync(sourcePath)).toBe(true);
+        const sourceBytes = fs.readFileSync(sourcePath);
+        expect(sourceBytes.length).toBeGreaterThanOrEqual(33);
+        expect(sourceBytes.subarray(0, 8)).toEqual(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+        expect(sourceBytes.readUInt32BE(8)).toBe(13);
+        expect(sourceBytes.toString('ascii', 12, 16)).toBe('IHDR');
+        const width = sourceBytes.readUInt32BE(16);
+        const height = sourceBytes.readUInt32BE(20);
+        expect(width).toBeGreaterThan(0);
+        expect(height).toBeGreaterThan(0);
+        const sha256 = createHash('sha256').update(sourceBytes).digest('hex');
+        const source = `/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png?v=${sha256}`;
+        expectedSources.push(source);
         await expect(screenshots.nth(index)).toHaveAttribute('src', source);
-        await expect(screenshots.nth(index)).toHaveAttribute('width', '1080');
-        await expect(screenshots.nth(index)).toHaveAttribute('height', '2168');
-        expect(fs.existsSync(path.resolve(process.cwd(), 'src/content/apps/papira/assets/screenshots', screenshotLocale, `0${index + 1}.png`))).toBe(true);
+        await expect(page.locator('.screenshot-link').nth(index)).toHaveAttribute('href', source);
+        await expect(screenshots.nth(index)).toHaveAttribute('width', String(width));
+        await expect(screenshots.nth(index)).toHaveAttribute('height', String(height));
+        const response = await page.request.get(source);
+        expect(response.ok()).toBe(true);
+        expect(Buffer.compare(await response.body(), sourceBytes)).toBe(0);
         // Bring each lazy-loaded image into view, including offscreen mobile carousel items.
         await screenshots.nth(index).scrollIntoViewIfNeeded();
         await expect
@@ -492,16 +510,12 @@ test.describe('Papira nine-language launch surface', () => {
               naturalHeight: image.naturalHeight,
             }))
           )
-          .toEqual({ complete: true, naturalWidth: 1080, naturalHeight: 2168 });
+          .toEqual({ complete: true, naturalWidth: width, naturalHeight: height });
       }
       const schemas = await jsonLd(page);
       const software = schemas.find((item) => item['@type'] === 'SoftwareApplication');
       expect(software?.screenshot).toEqual(
-        Array.from(
-          { length: 5 },
-          (_, index) =>
-            `https://onnellab.com/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png`
-        )
+        expectedSources.map((source) => `https://onnellab.com${source}`)
       );
     }
   });
