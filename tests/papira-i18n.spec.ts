@@ -480,7 +480,7 @@ test.describe('Papira nine-language launch surface', () => {
         const source = `/app-assets/papira/assets/screenshots/${screenshotLocale}/0${index + 1}.png`;
         await expect(screenshots.nth(index)).toHaveAttribute('src', source);
         await expect(screenshots.nth(index)).toHaveAttribute('width', '1080');
-        await expect(screenshots.nth(index)).toHaveAttribute('height', '1920');
+        await expect(screenshots.nth(index)).toHaveAttribute('height', '2168');
         expect(fs.existsSync(path.resolve(process.cwd(), 'src/content/apps/papira/assets/screenshots', screenshotLocale, `0${index + 1}.png`))).toBe(true);
         // Bring each lazy-loaded image into view, including offscreen mobile carousel items.
         await screenshots.nth(index).scrollIntoViewIfNeeded();
@@ -492,7 +492,7 @@ test.describe('Papira nine-language launch surface', () => {
               naturalHeight: image.naturalHeight,
             }))
           )
-          .toEqual({ complete: true, naturalWidth: 1080, naturalHeight: 1920 });
+          .toEqual({ complete: true, naturalWidth: 1080, naturalHeight: 2168 });
       }
       const schemas = await jsonLd(page);
       const software = schemas.find((item) => item['@type'] === 'SoftwareApplication');

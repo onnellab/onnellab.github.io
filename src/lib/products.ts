@@ -222,7 +222,7 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     screenshotDimensions: source.slug === 'aligna'
       ? { width: 1080, height: 2160 }
       : source.slug === 'papira'
-        ? { width: 1080, height: 1920 }
+        ? { width: 1080, height: 2168 }
         : ['quivra', 'segra'].includes(source.slug) ? { width: 1080, height: 2168 } : undefined,
     accent: productAccent(source)
   };
