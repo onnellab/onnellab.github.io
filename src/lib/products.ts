@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { versionedScreenshotPath, screenshotAssetPath, screenshotGalleryDimensions } from './screenshot-versions.mjs';
 
 import { type SiteLocale } from './site-i18n';
 import {
@@ -219,11 +220,9 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     eyebrow: copy.android.eyebrow ?? copy.ios.eyebrow,
     screenshotPaths,
     screenshotAlts: getProductScreenshotAltsFromCopy(source, locale, screenshotPaths.length),
-    screenshotDimensions: source.slug === 'aligna'
-      ? { width: 1080, height: 2160 }
-      : source.slug === 'papira'
-        ? { width: 1080, height: 2168 }
-        : ['quivra', 'segra'].includes(source.slug) ? { width: 1080, height: 2168 } : undefined,
+    screenshotDimensions: screenshotGalleryDimensions(
+      screenshotPaths.map((routePath) => screenshotFilePath(source, routePath))
+    ),
     accent: productAccent(source)
   };
 }
@@ -325,7 +324,16 @@ export function getScreenshotRoutePaths(source: ProductSource, locale: Locale): 
     .filter((entry) => entry.isFile() && /\.(?:png|jpg|jpeg|webp)$/i.test(entry.name))
     .map((entry) => entry.name)
     .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-    .map((fileName) => `/app-assets/${source.slug}/assets/screenshots/${screenshotLocale}/${fileName}`);
+    // The static route is immutable-cached. Bind every gallery URL to its bytes.
+    .map((fileName) => versionedScreenshotPath(
+      `/app-assets/${source.slug}/assets/screenshots/${screenshotLocale}/${fileName}`,
+      path.join(screenshotDir, fileName)
+    ));
+}
+
+function screenshotFilePath(source: ProductSource, routePath: string): string {
+  const assetPath = screenshotAssetPath(routePath);
+  return path.resolve(source.contentDir, assetPath.replace(`/app-assets/${source.slug}/`, ''));
 }
 
 function getScreenshotAssets(): Array<{ routePath: string; filePath: string }> {
@@ -333,10 +341,11 @@ function getScreenshotAssets(): Array<{ routePath: string; filePath: string }> {
   for (const source of getProductSources()) {
     for (const locale of allSiteLocales) {
       for (const routePath of getScreenshotRoutePaths(source, locale)) {
-        const normalizedRoute = routePath.replace(/^\/+/, '');
+        const assetPath = screenshotAssetPath(routePath);
+        const normalizedRoute = assetPath.replace(/^\/+/, '');
         assets.set(
           normalizedRoute,
-          path.resolve(source.contentDir, routePath.replace(`/app-assets/${source.slug}/`, ''))
+          screenshotFilePath(source, routePath)
         );
       }
     }
