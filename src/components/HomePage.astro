@@ -34,23 +34,24 @@ const sourceShot = (name: string) => '/home-assets/screenshots/android-20261012/
 const heroScreenshot = featured ? sourceShot('tagweaver-editor') : undefined;
 const featuredScreenshot = featured ? sourceShot('tagweaver-library') : undefined;
 const melivraScreenshot = selectedApps.some((app) => app.slug === 'melivra') ? sourceShot('melivra') : undefined;
-const papiraScreenshot = selectedApps.some((app) => app.slug === 'papira') ? sourceShot('papira-hero') : undefined;
+const papiraShot = (name: string) => '/home-assets/screenshots/papira-20261014/' + locale + '/' + name + '.png';
+const papiraScreenshot = selectedApps.some((app) => app.slug === 'papira') ? papiraShot('papira-hero') : undefined;
 const screenshotBySlug: Record<string, string> = {
   quivra: sourceShot('quivra'),
   melivra: sourceShot('melivra'),
-  papira: sourceShot('papira')
+  papira: papiraShot('papira')
 };
 const shotDimensions: Record<string, { width: number; height: number }> = {
   quivra: { width: 1080, height: 1920 },
   melivra: { width: 1080, height: 2400 },
-  papira: { width: 1440, height: 3120 }
+  papira: { width: 1080, height: 2400 }
 };
 const iconPath = (slug: string, size: 96 | 192) => `/home-assets/app-icons/${slug}-${size}.webp`;
 const iconSrcset = (slug: string) => `${iconPath(slug, 96)} 96w, ${iconPath(slug, 192)} 192w`;
 const heroSlides = [
   { slug: 'tagweaver', category: copy.carousel.musicTag, screenshot: heroScreenshot, width: 1440, height: 3120 },
   { slug: 'melivra', category: copy.offers.melivra.category, screenshot: melivraScreenshot, width: 1080, height: 2400 },
-  { slug: 'papira', category: copy.offers.papira.category, screenshot: papiraScreenshot, width: 1440, height: 3120 }
+  { slug: 'papira', category: copy.offers.papira.category, screenshot: papiraScreenshot, width: 1080, height: 2400 }
 ].flatMap((slide) => {
   const app = releasedApps.find((item) => item.slug === slide.slug);
   if (!app || !slide.screenshot) return [];
