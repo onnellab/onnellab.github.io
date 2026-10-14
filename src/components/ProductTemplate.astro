@@ -151,6 +151,10 @@ const releaseNotesUrl = latestReleaseNote
 const alternates = data.alternates;
 const landingScreenshotPaths = data.screenshotPaths;
 const screenshotDimensions = data.screenshotDimensions ?? { width: 1242, height: 2688 };
+// Reviewed native captures may differ in size within one display class.
+// Keep each SHA-bound URL's own dimensions; preserve legacy gallery fallback.
+const screenshotSizeFor = (screenshotPath: string) =>
+  data.screenshotDimensionsByPath?.[screenshotPath] ?? screenshotDimensions;
 const hasScreenshotCarousel = landingScreenshotPaths.length > 3;
 const screenshotUrls = landingScreenshotPaths.map((screenshotPath) =>
   new URL(screenshotPath, Astro.site).toString()
@@ -291,8 +295,8 @@ const breadcrumbJsonLd = {
                 <img
                   src={screenshotPath}
                   alt={data.screenshotAlts?.[index] ?? `${meta.title} ${labels.screens} ${index + 1}`}
-                  width={screenshotDimensions.width}
-                  height={screenshotDimensions.height}
+                  width={screenshotSizeFor(screenshotPath).width}
+                  height={screenshotSizeFor(screenshotPath).height}
                   loading="lazy"
                   decoding="async"
                   data-no-visual-search="true"
@@ -340,8 +344,8 @@ const breadcrumbJsonLd = {
                   <img
                     src={screenshotPath}
                     alt=""
-                    width={screenshotDimensions.width}
-                    height={screenshotDimensions.height}
+                    width={screenshotSizeFor(screenshotPath).width}
+                    height={screenshotSizeFor(screenshotPath).height}
                     loading="lazy"
                     decoding="async"
                     data-no-visual-search="true"

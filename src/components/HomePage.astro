@@ -27,35 +27,20 @@ const featured = releasedApps.find((app) => app.slug === 'tagweaver');
 const selectedApps = (['quivra', 'melivra', 'papira'] as const)
   .map((slug) => releasedApps.find((app) => app.slug === slug))
   .filter((app): app is ProductIndexItem => Boolean(app));
-// Byte-preserved Android UI captures from each app's assets; versioned URL avoids stale browser cache.
-const sourceShot = (name: string) => '/home-assets/screenshots/android-20261012/' + locale + '/' + name + '.png';
-// Show a real metadata edit in the Hero and the selection workflow below it.
-// Both are original localized Android captures, never recomposed artwork.
-const heroScreenshot = featured ? sourceShot('tagweaver-editor') : undefined;
-const featuredScreenshot = featured ? sourceShot('tagweaver-library') : undefined;
-const melivraScreenshot = selectedApps.some((app) => app.slug === 'melivra') ? sourceShot('melivra') : undefined;
-const papiraShot = (name: string) => '/home-assets/screenshots/papira-20261014/' + locale + '/' + name + '.png';
-const papiraScreenshot = selectedApps.some((app) => app.slug === 'papira') ? papiraShot('papira-hero') : undefined;
-const screenshotBySlug: Record<string, string> = {
-  quivra: sourceShot('quivra'),
-  melivra: sourceShot('melivra'),
-  papira: papiraShot('papira')
-};
-const shotDimensions: Record<string, { width: number; height: number }> = {
-  quivra: { width: 1080, height: 1920 },
-  melivra: { width: 1080, height: 2400 },
-  papira: { width: 1080, height: 2400 }
-};
+// Detail and homepage resolve the same reviewed receipt and localized gallery.
+// Only apps without a receipt retain explicitly marked legacy originals.
+const featuredScreenshot = featured?.homeScreenshots.supporting;
 const iconPath = (slug: string, size: 96 | 192) => `/home-assets/app-icons/${slug}-${size}.webp`;
 const iconSrcset = (slug: string) => `${iconPath(slug, 96)} 96w, ${iconPath(slug, 192)} 192w`;
 const heroSlides = [
-  { slug: 'tagweaver', category: copy.carousel.musicTag, screenshot: heroScreenshot, width: 1440, height: 3120 },
-  { slug: 'melivra', category: copy.offers.melivra.category, screenshot: melivraScreenshot, width: 1080, height: 2400 },
-  { slug: 'papira', category: copy.offers.papira.category, screenshot: papiraScreenshot, width: 1080, height: 2400 }
+  { slug: 'tagweaver', category: copy.carousel.musicTag },
+  { slug: 'melivra', category: copy.offers.melivra.category },
+  { slug: 'papira', category: copy.offers.papira.category }
 ].flatMap((slide) => {
   const app = releasedApps.find((item) => item.slug === slide.slug);
-  if (!app || !slide.screenshot) return [];
-  return [{ ...slide, app, screenshot: slide.screenshot }];
+  const artwork = app?.homeScreenshots.hero;
+  if (!app || !artwork) return [];
+  return [{ ...slide, app, artwork }];
 });
 // A fixed, slightly asymmetric three-slot showroom. Only the product content
 // rotates; the Melivra-centered geometry is the permanent layout reference.
@@ -105,7 +90,7 @@ const jsonLd = [
   alternates={allLocaleAlternates('home')}
   socialImage="/social-card.png"
 >
-  <main class="site-shell homepage" data-core-page="home" data-locale={locale}>
+  <main class="site-shell homepage" data-core-page="home" data-locale={locale} data-home-artwork-contract="1" data-home-locale={locale}>
 
 
     <div class="content-shell">
@@ -136,6 +121,8 @@ const jsonLd = [
                       class="hero-slide"
                       data-hero-slide
                       data-hero-product={slide.slug}
+                      data-home-featured-slug={slide.slug}
+                      data-home-featured-locale={locale}
                       data-index={index}
                       data-position={position}
                       aria-current={position === 'active' ? 'true' : undefined}
@@ -145,10 +132,14 @@ const jsonLd = [
                     >
                       <div class="hero-slide-screen">
                         <img
-                          src={slide.screenshot}
+                          src={slide.artwork.src}
+                          data-home-artwork-slug={slide.slug}
+                          data-home-artwork-locale={locale}
+                          data-home-artwork-index={slide.artwork.index}
+                          data-home-artwork-source={slide.artwork.source}
                           alt=""
-                          width={slide.width}
-                          height={slide.height}
+                          width={slide.artwork.width}
+                          height={slide.artwork.height}
                           loading={index === 0 ? 'eager' : 'lazy'}
                           fetchpriority={index === 0 ? 'high' : 'auto'}
                           decoding="async"
@@ -192,15 +183,16 @@ const jsonLd = [
             <p class="section-kicker">{copy.signatureLabel}</p>
             <span class="section-rule"></span>
           </div>
-          <a class="featured" href={linkFor(featured.slug)} style={`--accent-border: ${featured.accent.border}; --accent-bg: ${featured.accent.background}; --accent-text: ${featured.accent.text};`}>
+          <a class="featured" href={linkFor(featured.slug)} data-home-featured-slug={featured.slug} data-home-featured-locale={locale} style={`--accent-border: ${featured.accent.border}; --accent-bg: ${featured.accent.background}; --accent-text: ${featured.accent.text};`}>
             <div class="featured-image-stage">
               <div class="featured-screen">
-                <img src={featuredScreenshot} alt={`${featured.title}: ${copy.signatureTitle}`} loading="lazy" decoding="async" width="1440" height="3120" />
+                <img src={featuredScreenshot.src} alt={`${featured.title}: ${copy.signatureTitle}`} loading="lazy" decoding="async" width={featuredScreenshot.width} height={featuredScreenshot.height}
+                  data-home-artwork-slug={featured.slug} data-home-artwork-locale={locale} data-home-artwork-index={featuredScreenshot.index} data-home-artwork-source={featuredScreenshot.source} />
               </div>
             </div>
             <div class="featured-copy">
               <div class="product-identity">
-                <img src={iconPath(featured.slug, 96)} srcset={iconSrcset(featured.slug)} sizes="64px" alt="" width="64" height="64" loading="lazy" />
+                <img src={iconPath(featured.slug, 96)} srcset={iconSrcset(featured.slug)} data-home-artwork-icon="true" sizes="64px" alt="" width="64" height="64" loading="lazy" />
                 <div>
                   <span class="product-name">{featured.title}</span>
                   <span class="platform-text">{featured.platforms.join(' · ')}</span>
@@ -229,16 +221,17 @@ const jsonLd = [
         <div class="collection-grid">
           {selectedApps.map((app) => {
             const offer = copy.offers[app.slug as keyof typeof copy.offers];
-            const screenshot = screenshotBySlug[app.slug];
+            const screenshot = app.homeScreenshots.supporting;
             return (
-              <a class="product-card" href={linkFor(app.slug)} style={`--accent-bg: ${app.accent.background}; --accent-border: ${app.accent.border}; --accent-text: ${app.accent.text};`}>
+              <a class="product-card" href={linkFor(app.slug)} data-home-featured-slug={app.slug} data-home-featured-locale={locale} style={`--accent-bg: ${app.accent.background}; --accent-border: ${app.accent.border}; --accent-text: ${app.accent.text};`}>
                 <div class="product-picture">
                   {screenshot ? (
                     <div class="product-screen">
-                      <img src={screenshot} alt={`${app.title}: ${offer?.category ?? app.title}`} loading="lazy" decoding="async" width={shotDimensions[app.slug]?.width} height={shotDimensions[app.slug]?.height} />
+                      <img src={screenshot.src} alt={`${app.title}: ${offer?.category ?? app.title}`} loading="lazy" decoding="async" width={screenshot.width} height={screenshot.height}
+                        data-home-artwork-slug={app.slug} data-home-artwork-locale={locale} data-home-artwork-index={screenshot.index} data-home-artwork-source={screenshot.source} />
                     </div>
                   ) : (
-                    <img class="fallback-icon" src={iconPath(app.slug, 192)} alt="" loading="lazy" width="96" height="96" />
+                    <img class="fallback-icon" src={iconPath(app.slug, 192)} data-home-artwork-icon="true" alt="" loading="lazy" width="96" height="96" />
                   )}
                 </div>
                 <div class="product-card-body">

@@ -26,3 +26,12 @@ test('historical translated image rendering and browser checks precede Pages upl
   assert.ok(workflow.indexOf('Render the 63 audited') < workflow.indexOf('- name: Build'));
   assert.ok(workflow.indexOf('Verify localized blog diagrams') < workflow.indexOf('- name: Upload Pages artifact'));
 });
+
+
+test('reviewed artwork and visual regression gates run on the existing runner before Pages upload', () => {
+  assert.match(workflow, /run: npm run test:artwork/);
+  assert.match(workflow, /tests\/home-showcase\.spec\.ts tests\/home-reviewed-artwork\.spec\.ts tests\/home-hero-drag\.spec\.ts/);
+  assert.ok(workflow.indexOf('Verify legacy and reviewed homepage artwork') < workflow.indexOf('- name: Upload Pages artifact'));
+  assert.match(workflow, /Retain homepage artwork visual evidence/);
+  assert.match(workflow, /runs-on: ubuntu-latest/);
+});

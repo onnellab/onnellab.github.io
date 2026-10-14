@@ -43,6 +43,9 @@ jobs:
       - name: Verify fail-closed static image boundary
         run: npm run test:image-boundary
 
+      - name: Verify reviewed artwork source and build contracts
+        run: npm run test:artwork
+
       - name: Validate bounded historical blog translations
         run: python3 scripts/test-blog-workflow-localizations.py
 
@@ -62,6 +65,18 @@ jobs:
 
       - name: Install existing homepage test browser
         run: npx playwright install --with-deps chromium
+
+      - name: Verify legacy and reviewed homepage artwork at desktop and mobile widths
+        run: npx playwright test tests/home-showcase.spec.ts tests/home-reviewed-artwork.spec.ts tests/home-hero-drag.spec.ts --project=desktop --workers=2 --reporter=line
+
+      - name: Retain homepage artwork visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-artwork-deploy-${{ github.sha }}
+          path: test-results
+          if-no-files-found: warn
+          retention-days: 3
 
       - name: Verify localized blog diagrams before deployment
         run: npx playwright test tests/blog-workflow-localizations.spec.ts --project=desktop --workers=2 --reporter=line

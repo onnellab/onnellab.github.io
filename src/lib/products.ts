@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { versionedScreenshotPath, screenshotAssetPath, screenshotGalleryDimensions } from './screenshot-versions.mjs';
+import { reviewedScreenshotGallery, homepageScreenshot } from './reviewed-screenshot-gallery.mjs';
 
 import { type SiteLocale } from './site-i18n';
 import {
@@ -102,6 +103,7 @@ export type ProductPageData = {
   screenshotPaths: string[];
   screenshotAlts?: string[];
   screenshotDimensions?: { width: number; height: number };
+  screenshotDimensionsByPath?: Record<string, { width: number; height: number }>;
   schemaFeatureList?: string[];
   accent: ProductAccent;
 };
@@ -114,10 +116,22 @@ export type ProductIndexItem = {
   description: string;
   iconPath: string;
   screenshotPath?: string;
+  homeScreenshots: { hero?: HomepageScreenshot; supporting?: HomepageScreenshot };
   href: string;
   privacy: string;
   hasStoreListing: boolean;
   accent: ProductAccent;
+};
+
+export type HomepageScreenshot = {
+  src: string;
+  width: number;
+  height: number;
+  sha256: string;
+  slug: string;
+  locale: string;
+  source: 'reviewed' | 'legacy';
+  index?: number;
 };
 
 export type ProductAccent = {
@@ -201,6 +215,7 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
   const seoDescription = seoPageDescription(source, copy);
   const canonicalPath = allProductRouteFor(source.slug, locale);
   const screenshotPaths = getScreenshotRoutePaths(source, locale);
+  const reviewedScreenshots = reviewedScreenshotGallery(source.contentDir, source.slug, locale);
   const bodyFeatures = renderBlocks(pageBodyDescription(copy)).find((block) => block.type === 'ul')?.value as
     | string[]
     | undefined;
@@ -220,6 +235,9 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     eyebrow: copy.android.eyebrow ?? copy.ios.eyebrow,
     screenshotPaths,
     screenshotAlts: getProductScreenshotAltsFromCopy(source, locale, screenshotPaths.length),
+    screenshotDimensionsByPath: reviewedScreenshots === undefined ? undefined : Object.fromEntries(
+      reviewedScreenshots.map(({ src, width, height }) => [src, { width, height }])
+    ),
     screenshotDimensions: screenshotGalleryDimensions(
       screenshotPaths.map((routePath) => screenshotFilePath(source, routePath))
     ),
@@ -230,6 +248,7 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
 export function getProductIndexItems(locale: Locale): ProductIndexItem[] {
   return getProductSources().map((source) => {
     const copy = readProductCopy(source.contentDir, locale);
+    const gallery = reviewedScreenshotGallery(source.contentDir, source.slug, locale);
     return {
       slug: source.slug,
       title: source.meta.title,
@@ -238,6 +257,10 @@ export function getProductIndexItems(locale: Locale): ProductIndexItem[] {
       description: copy.android.indexSummary ?? copy.ios.indexSummary ?? landingSubtitle(copy),
       iconPath: getIconRoutePath(source),
       screenshotPath: getScreenshotRoutePaths(source, locale)[0],
+      homeScreenshots: {
+        hero: homepageScreenshot(source.slug, locale, gallery, 'hero'),
+        supporting: homepageScreenshot(source.slug, locale, gallery, 'supporting')
+      },
       href: allProductRouteFor(source.slug, locale),
       privacy: source.meta.privacy,
       hasStoreListing: Boolean(source.meta.appstore || source.meta.googleplay),
@@ -314,6 +337,8 @@ export function getAppAssets(): Array<{ routePath: string; filePath: string }> {
 }
 
 export function getScreenshotRoutePaths(source: ProductSource, locale: Locale): string[] {
+  const reviewed = reviewedScreenshotGallery(source.contentDir, source.slug, locale);
+  if (reviewed !== undefined) return reviewed.map((image) => image.src);
   const screenshotLocale = fs.existsSync(path.resolve(source.contentDir, 'assets/screenshots', locale))
     ? locale
     : 'en';

@@ -1,5 +1,5 @@
 /**
- * Three original Android screenshots in fixed showroom slots.
+ * Three localized product artwork images in fixed showroom slots.
  * Pointer swipes, minimal pagination dots, and keyboard input share one rotation path.
  * A FLIP transition moves cards without changing the physical grid.
  */

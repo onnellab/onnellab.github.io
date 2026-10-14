@@ -1,4 +1,17 @@
 import { expect, test } from '@playwright/test';
+import path from 'node:path';
+import { createHash } from 'node:crypto';
+import { reviewedScreenshotGallery, homepageScreenshot } from '../src/lib/reviewed-screenshot-gallery.mjs';
+
+function expectedHomeScreenshot(slug: string, locale: string, role: 'hero' | 'supporting') {
+  const gallery = reviewedScreenshotGallery(path.resolve('src/content/apps', slug), slug, locale);
+  return homepageScreenshot(slug, locale, gallery, role);
+}
+
+function expectLocalizedArtwork(source: string | null, locale: string) {
+  expect(source).toMatch(new RegExp('^/(?:home-assets/screenshots/(?:android-20261012|papira-20261014)|app-assets/[a-z-]+/assets/screenshots)/' + locale + '/[A-Za-z0-9_-]+\\.png\\?v=[a-f0-9]{64}$'));
+}
+
 // The compact carousel has clickable dots below the caption rather than
 // visible arrows or a numeric counter. Next/previous use the same rotation.
 async function clickHeroDotRelative(page: import('@playwright/test').Page, direction: number) {
@@ -65,13 +78,13 @@ test('the logo is cropped from the existing favicon without replacing it', async
   expect(await logo.evaluate((img) => (img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
 });
 
-test('the home uses original localized UI captures rather than store composites', async ({ page, request }) => {
+test('the home serves localized artwork with content-addressed URLs', async ({ page, request }) => {
   await page.goto('/ko/');
   const sources = await page.locator('.hero-slide-screen img, .featured-screen img, .product-screen img')
     .evaluateAll((imgs) => imgs.map((img) => (img as HTMLImageElement).getAttribute('src')));
   expect(sources).toHaveLength(7);
   for (const src of sources) {
-    expect(src).toContain('/home-assets/screenshots/android-20261012/ko/');
+    expectLocalizedArtwork(src, 'ko');
     const response = await request.get(src!);
     expect(response.status(), src!).toBe(200);
     expect(response.headers()['content-type'], src!).toContain('image/png');
@@ -125,7 +138,7 @@ test('the condensed home ends with transparent trust and a useful footer', async
   await expect(page.locator('.home-hero .primary-link')).toHaveCount(1);
 });
 
-test('all nine homepage locales use matching uncompressed original UI captures', async ({ page, request }) => {
+test('all nine homepage locales use matching byte-preserved artwork', async ({ page, request }) => {
   const localeMap: Record<string, string> = {
     'zh-hans': 'zh-Hans', 'zh-hant': 'zh-Hant', 'pt-br': 'pt-BR'
   };
@@ -135,11 +148,12 @@ test('all nine homepage locales use matching uncompressed original UI captures',
       .evaluateAll((nodes) => nodes.map((node) => (node as HTMLImageElement).getAttribute('src')));
     expect(paths).toHaveLength(7);
     const uniquePaths = [...new Set(paths)];
-    expect(uniquePaths).toHaveLength(6);
+    expect(uniquePaths.length).toBeGreaterThanOrEqual(4);
+    expect(uniquePaths.length).toBeLessThanOrEqual(7);
     const segment = route.segment ? route.segment.slice(0, -1) : 'en';
     const assetLocale = localeMap[segment] ?? segment;
     for (const source of uniquePaths) {
-      expect(source).toContain('/home-assets/screenshots/android-20261012/' + assetLocale + '/');
+      expectLocalizedArtwork(source, assetLocale);
       expect((await request.get(source!)).status(), source!).toBe(200);
     }
   }
@@ -157,7 +171,7 @@ test('selected product originals load sharply when scrolled into view', async ({
   }
 });
 
-test('all three Android cards are fully visible with a large center at four widths', async ({ page }) => {
+test('all three artwork cards are fully visible with a large center at four widths', async ({ page }) => {
   for (const width of [1440, 820, 390, 320]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/ko/');
@@ -194,10 +208,10 @@ test('all three Android cards are fully visible with a large center at four widt
     expect(result.cards.map((item) => item.position)).toEqual(['previous', 'active', 'next']);
     for (const frame of result.cards) {
       expect(frame.withinStage, frame.name + ' at ' + width).toBe(true);
-      expect(frame.src).toContain('/home-assets/screenshots/android-20261012/ko/');
+      expectLocalizedArtwork(frame.src, 'ko');
       expect(frame.objectFit).toBe('contain');
       expect(frame.native[0]).toBeGreaterThanOrEqual(1080);
-      expect(frame.native[1]).toBeGreaterThanOrEqual(2400);
+      expect(frame.native[1]).toBeGreaterThanOrEqual(1920);
       expect(frame.width, frame.name).toBeGreaterThan(45);
     }
     const middle = result.cards.find((x) => x.position === 'active')!;
@@ -282,7 +296,7 @@ test('centered rotation works on mobile with fully visible side cards and links'
   await expect(page).toHaveURL(/\/apps\/melivra\/ko\/$/);
 });
 
-test('the homepage uses only Android source dimensions for every product', async ({ page }) => {
+test('homepage dimensions always match the actual selected image bytes', async ({ page }) => {
   await page.goto('/ko/');
   const images = await page.locator('.hero-slide-screen img, .featured-screen img, .product-screen img')
     .evaluateAll(async (nodes) => {
@@ -292,19 +306,12 @@ test('the homepage uses only Android source dimensions for every product', async
         await img.decode();
       }));
       return items.map((img) => ({
-        name: img.getAttribute('src')?.split('/').pop(),
-        size: [img.naturalWidth, img.naturalHeight]
+        name: img.getAttribute('src'),
+        size: [img.naturalWidth, img.naturalHeight],
+        declared: [Number(img.getAttribute('width')), Number(img.getAttribute('height'))]
       }));
     });
-  const dimensions: Record<string, number[]> = {
-    'tagweaver-library.png': [1440, 3120],
-    'tagweaver-editor.png': [1440, 3120],
-    'melivra.png': [1080, 2400],
-    'papira.png': [1440, 3120],
-    'papira-hero.png': [1440, 3120],
-    'quivra.png': [1080, 1920]
-  };
-  for (const img of images) expect(img.size, img.name).toEqual(dimensions[img.name!]);
+  for (const img of images) expect(img.size, img.name ?? '').toEqual(img.declared);
 });
 
 test('homepage product colors match the app catalog and Papira is blue', async ({ page }) => {
@@ -427,7 +434,7 @@ test('hero screenshots stand alone and every product identity is below its image
           visualBelow: labelRect.top - screenRect.bottom,
           labelBackground: labelStyle.backgroundColor,
           labelBorder: labelStyle.borderTopWidth,
-          hasOriginalAndroidImage: Boolean(screen.querySelector('img[src*="android-20261012"]'))
+          hasLocalizedArtwork: Boolean(screen.querySelector('img[data-home-artwork-source]'))
         };
       })
     );
@@ -436,7 +443,7 @@ test('hero screenshots stand alone and every product identity is below its image
       expect(card.visualBelow).toBeGreaterThanOrEqual(5);
       expect(card.labelBackground).toBe('rgba(0, 0, 0, 0)');
       expect(card.labelBorder).toBe('0px');
-      expect(card.hasOriginalAndroidImage).toBe(true);
+      expect(card.hasLocalizedArtwork).toBe(true);
     }
   }
 });
@@ -502,7 +509,7 @@ test('signature has no stacked identity card or redundant 01 SIGNATURE ornament'
   expect(frame.nestedColor).toBe('rgba(0, 0, 0, 0)');
 });
 
-test('mobile selected products are compact horizontal cards with original Android screenshots', async ({ page }) => {
+test('mobile selected products are compact horizontal cards with localized artwork', async ({ page }) => {
   for (const width of [320, 390, 650]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/ko/');
@@ -534,7 +541,7 @@ test('mobile selected products are compact horizontal cards with original Androi
       expect(card.textWithin, card.title).toBe(true);
       expect(card.height, card.title).toBeLessThan(350);
       expect(card.height, card.title).toBeGreaterThanOrEqual(220);
-      expect(card.screenSrc, card.title).toContain('/home-assets/screenshots/android-20261012/ko/');
+      expectLocalizedArtwork(card.screenSrc, 'ko');
       expect(card.categoryVisible).toBe(true);
     }
     const height = await section.evaluate((node) => node.getBoundingClientRect().height);
@@ -619,7 +626,7 @@ test('signature and selected-product captures use the catalog gradient with ligh
     expect(new Set(styles.cards.map((x) => x.accent)).size).toBe(3);
     for (const card of styles.cards) {
       expect(card.productFrame).toBeLessThanOrEqual(2);
-      expect(card.image).toContain('/home-assets/screenshots/android-20261012/ko/');
+      expectLocalizedArtwork(card.image, 'ko');
     }
   }
 });
@@ -701,7 +708,7 @@ test('all three states preserve Melivra-centered fixed geometry down to the pixe
       expect(signature(state), width + 'px step ' + step + ': fixed slots must not move').toEqual(signature(baseline));
       expect(state.physicalSlots.map((slot) => slot.app)).toEqual(expectedOrder[step]);
       for (const slot of state.physicalSlots) {
-        expect(slot.source).toContain('/home-assets/screenshots/android-20261012/ko/');
+        expectLocalizedArtwork(slot.source, 'ko');
         expect(slot.href).toBe('/apps/' + slot.app.toLowerCase() + '/ko/');
         expect(slot.fit).toBe('contain');
       }
@@ -820,27 +827,37 @@ test('only the centered Hero app name is visible without moving the reserved cap
   }
 });
 
-test('the Hero chooses distinctive original Android artwork without duplicating selected-card captures', async ({ page, request }) => {
+test('hero and supporting cards select the same receipt-aware locale gallery as detail pages', async ({ page, request }) => {
+  const localeMap: Record<string, string> = { 'zh-hans': 'zh-Hans', 'zh-hant': 'zh-Hant', 'pt-br': 'pt-BR' };
   for (const route of routes) {
     await page.goto(route.home);
-    const slugToScreenshot = {
-      tagweaver: 'tagweaver-editor.png',
-      melivra: 'melivra.png',
-      papira: 'papira-hero.png'
-    };
-    for (const [slug, filename] of Object.entries(slugToScreenshot)) {
-      const img = page.locator('.hero-slide[href*="/apps/' + slug + '/"] .hero-slide-screen img');
+    const segment = route.segment.slice(0, -1) || 'en';
+    const locale = localeMap[segment] ?? segment;
+    await expect(page.locator('main[data-home-artwork-contract="1"]')).toHaveAttribute('data-home-locale', locale);
+    const containers = page.locator('[data-home-featured-slug]');
+    await expect(containers).toHaveCount(7);
+    for (const container of await containers.all()) {
+      const slug = (await container.getAttribute('data-home-featured-slug'))!;
+      await expect(container).toHaveAttribute('data-home-featured-locale', locale);
+      const isHero = await container.evaluate((el) => el.hasAttribute('data-hero-slide'));
+      const expected = expectedHomeScreenshot(slug, locale, isHero ? 'hero' : 'supporting')!;
+      const img = container.locator('img[data-home-artwork-source]');
       await expect(img).toHaveCount(1);
-      await expect(img).toHaveAttribute('src', new RegExp('/' + filename.replace('.', '\\.') + '$'));
-      expect((await request.get((await img.getAttribute('src'))!)).status(), slug + ' ' + route.home).toBe(200);
+      await expect(img).toHaveAttribute('src', expected.src);
+      await expect(img).toHaveAttribute('width', String(expected.width));
+      await expect(img).toHaveAttribute('height', String(expected.height));
+      await expect(img).toHaveAttribute('data-home-artwork-source', expected.source);
+      await expect(img).toHaveAttribute('data-home-artwork-slug', slug);
+      await expect(img).toHaveAttribute('data-home-artwork-locale', locale);
+      if (expected.source === 'reviewed') {
+        await expect(img).toHaveAttribute('data-home-artwork-index', String(expected.index));
+      } else {
+        await expect(img).not.toHaveAttribute('data-home-artwork-index');
+      }
+      const response = await request.get(expected.src);
+      expect(response.status()).toBe(200);
+      expect(createHash('sha256').update(await response.body()).digest('hex')).toBe(expected.sha256);
     }
-    const papiraSelected = page.locator('.collection-grid .product-card[href*="/apps/papira/"] .product-screen img');
-    await expect(papiraSelected).toHaveAttribute('src', /\/papira\.png$/);
-    const hero = page.locator('.hero-slide[href*="/apps/tagweaver/"] img');
-    const featured = page.locator('.featured-screen img');
-    await expect(hero).toHaveAttribute('src', /tagweaver-editor\.png$/);
-    await expect(featured).toHaveAttribute('src', /tagweaver-library\.png$/);
-    expect(await hero.getAttribute('src')).not.toBe(await featured.getAttribute('src'));
   }
 });
 

@@ -37,6 +37,17 @@ export function versionedScreenshotPath(routePath, filePath) {
   return `${screenshotAssetPath(routePath)}?v=${screenshotAsset(filePath).sha}`;
 }
 
+// The URL, digest and intrinsic dimensions must describe the same bytes.
+export function screenshotImage(routePath, filePath) {
+  const asset = screenshotAsset(filePath);
+  if (!asset.dimensions) throw new Error(`Screenshot is not a supported PNG: ${filePath}`);
+  return Object.freeze({
+    src: `${screenshotAssetPath(routePath)}?v=${asset.sha}`,
+    sha256: asset.sha,
+    ...asset.dimensions
+  });
+}
+
 // A single gallery-wide width/height is safe only when every selected image is
 // a PNG with matching intrinsic dimensions. Unsupported/mixed legacy galleries
 // retain ProductTemplate's existing fallback instead of inventing a ratio.
