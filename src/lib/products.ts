@@ -1,6 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { versionedScreenshotPath, screenshotAssetPath, screenshotGalleryDimensions } from './screenshot-versions.mjs';
+import {
+  versionedScreenshotPath,
+  screenshotAssetPath,
+  screenshotGalleryDimensions,
+  screenshotImage,
+  duoScreenshotGallery
+} from './screenshot-versions.mjs';
 import { reviewedScreenshotGallery, homepageScreenshot } from './reviewed-screenshot-gallery.mjs';
 
 import { type SiteLocale } from './site-i18n';
@@ -216,6 +222,25 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
   const canonicalPath = allProductRouteFor(source.slug, locale);
   const screenshotPaths = getScreenshotRoutePaths(source, locale);
   const reviewedScreenshots = reviewedScreenshotGallery(source.contentDir, source.slug, locale);
+  const duoScreenshots = duoScreenshotGallery(source.contentDir, source.slug, locale) ?? [];
+  const baseScreenshotCount = screenshotPaths.length - duoScreenshots.length;
+  const screenshotDimensionsByPath = reviewedScreenshots === undefined && duoScreenshots.length === 0
+    ? undefined
+    : Object.fromEntries((() => {
+      const dimensions = new Map(
+        [...reviewedScreenshots ?? [], ...duoScreenshots]
+          .map(({ src, width, height }) => [src, { width, height }] as const)
+      );
+      // Keep legacy PNGs at their intrinsic aspect ratio when a Duo receipt
+      // introduces differently sized images beside them.
+      for (const routePath of screenshotPaths) {
+        if (!dimensions.has(routePath) && /\.png(?:\?|$)/i.test(routePath)) {
+          const { width, height } = screenshotImage(routePath, screenshotFilePath(source, routePath));
+          dimensions.set(routePath, { width, height });
+        }
+      }
+      return [...dimensions.entries()];
+    })());
   const bodyFeatures = renderBlocks(pageBodyDescription(copy)).find((block) => block.type === 'ul')?.value as
     | string[]
     | undefined;
@@ -234,10 +259,11 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
     socialImagePath: getSocialImageRoutePath(source),
     eyebrow: copy.android.eyebrow ?? copy.ios.eyebrow,
     screenshotPaths,
-    screenshotAlts: getProductScreenshotAltsFromCopy(source, locale, screenshotPaths.length),
-    screenshotDimensionsByPath: reviewedScreenshots === undefined ? undefined : Object.fromEntries(
-      reviewedScreenshots.map(({ src, width, height }) => [src, { width, height }])
-    ),
+    screenshotAlts: [
+      ...getProductScreenshotAltsFromCopy(source, locale, baseScreenshotCount),
+      ...duoScreenshots.map(({ alt }) => alt)
+    ],
+    screenshotDimensionsByPath,
     screenshotDimensions: screenshotGalleryDimensions(
       screenshotPaths.map((routePath) => screenshotFilePath(source, routePath))
     ),
@@ -338,13 +364,15 @@ export function getAppAssets(): Array<{ routePath: string; filePath: string }> {
 
 export function getScreenshotRoutePaths(source: ProductSource, locale: Locale): string[] {
   const reviewed = reviewedScreenshotGallery(source.contentDir, source.slug, locale);
-  if (reviewed !== undefined) return reviewed.map((image) => image.src);
+  if (reviewed !== undefined) {
+    const duo = duoScreenshotGallery(source.contentDir, source.slug, locale) ?? [];
+    return [...reviewed.map((image) => image.src), ...duo.map((image) => image.src)];
+  }
   const screenshotLocale = fs.existsSync(path.resolve(source.contentDir, 'assets/screenshots', locale))
     ? locale
     : 'en';
   const screenshotDir = path.resolve(source.contentDir, 'assets/screenshots', screenshotLocale);
-  if (!fs.existsSync(screenshotDir)) return [];
-  return fs
+  const legacy = !fs.existsSync(screenshotDir) ? [] : fs
     .readdirSync(screenshotDir, { withFileTypes: true })
     .filter((entry) => entry.isFile() && /\.(?:png|jpg|jpeg|webp)$/i.test(entry.name))
     .map((entry) => entry.name)
@@ -354,6 +382,8 @@ export function getScreenshotRoutePaths(source: ProductSource, locale: Locale): 
       `/app-assets/${source.slug}/assets/screenshots/${screenshotLocale}/${fileName}`,
       path.join(screenshotDir, fileName)
     ));
+  const duo = duoScreenshotGallery(source.contentDir, source.slug, locale) ?? [];
+  return [...legacy, ...duo.map((image) => image.src)];
 }
 
 function screenshotFilePath(source: ProductSource, routePath: string): string {

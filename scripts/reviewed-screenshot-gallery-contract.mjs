@@ -156,14 +156,16 @@ test('homepage consumes the shared reader and exposes verification markers witho
   assert.match(home, /data-home-artwork-contract="1"/);
   assert.equal((home.match(/data-home-featured-slug=/g) ?? []).length, 3);
   assert.equal((home.match(/data-home-artwork-source=/g) ?? []).length, 3);
-  assert.match(products, /if \(reviewed !== undefined\) return reviewed\.map\(\(image\) => image\.src\)/);
+  assert.match(products, /if \(reviewed !== undefined\) \{\s+const duo = duoScreenshotGallery\(source\.contentDir, source\.slug, locale\) \?\? \[\];\s+return \[\.\.\.reviewed\.map\(\(image\) => image\.src\), \.\.\.duo\.map\(\(image\) => image\.src\)\];/);
+  assert.match(products, /return \[\.\.\.legacy, \.\.\.duo\.map\(\(image\) => image\.src\)\];/);
 });
 
 
-test('reviewed detail gallery and thumbnail dimensions are keyed to each selected image URL', () => {
+test('reviewed and opt-in Duo detail dimensions are keyed to each selected image URL', () => {
   const products = fs.readFileSync(new URL('../src/lib/products.ts', import.meta.url), 'utf8');
   const template = fs.readFileSync(new URL('../src/components/ProductTemplate.astro', import.meta.url), 'utf8');
-  assert.match(products, /screenshotDimensionsByPath: reviewedScreenshots === undefined \? undefined : Object\.fromEntries/);
+  assert.match(products, /const screenshotDimensionsByPath = reviewedScreenshots === undefined && duoScreenshots\.length === 0\s+\? undefined\s+: Object\.fromEntries\(\(\(\) => \{[\s\S]*\.\.\.reviewedScreenshots \?\? \[\], \.\.\.duoScreenshots[\s\S]*screenshotImage\(routePath, screenshotFilePath\(source, routePath\)\)/);
+  assert.match(products, /\.\.\.getProductScreenshotAltsFromCopy\(source, locale, baseScreenshotCount\),\s+\.\.\.duoScreenshots\.map\(\(\{ alt \}\) => alt\)/);
   assert.match(template, /data\.screenshotDimensionsByPath\?\.\[screenshotPath\] \?\? screenshotDimensions/);
   assert.equal((template.match(/width=\{screenshotSizeFor\(screenshotPath\)\.width\}/g) ?? []).length, 2);
   assert.equal((template.match(/height=\{screenshotSizeFor\(screenshotPath\)\.height\}/g) ?? []).length, 2);
