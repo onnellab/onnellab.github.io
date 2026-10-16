@@ -103,7 +103,7 @@ export const showcaseCopy: Record<AllSiteLocale, ShowcaseCopy> = {
     carousel: { label: '대표 앱 미리보기', previous: '이전 앱', next: '다음 앱', choose: '앱 선택', musicTag: '음악 태그 편집' },
     eyebrow: '독립 소프트웨어 스튜디오',
     heroTitle: '작은 도구를 세심하게 만들어요.',
-    heroIntro: '음악, 문서, 미디어와 창작 작업을 위한 목적이 분명한 앱을 만들어요. 불필요한 단계는 줄이고 가능한 작업은 기기 안에서 처리해 사용자의 선택과 파일을 존중해요.',
+    heroIntro: 'ONNELLAB은 여러 분야의 앱을 직접 기획하고 개발해요. 처음 사용하는 사람도 어렵지 않게 쓸 수 있도록 기능과 화면을 꼼꼼히 다듬고 있어요.',
     browse: '앱 둘러보기',
     signatureLabel: '대표 제품',
     signatureTitle: '소장한 음악을 원하는 모습으로 정리해요.',
