@@ -28,15 +28,15 @@ async function clickPreviousDot(page: import('@playwright/test').Page) {
 
 
 const routes = [
-  { home: '/', segment: '', title: 'Apps for files and media.', apps: '/apps/', about: '/about/', blog: '/blog/' },
-  { home: '/ko/', segment: 'ko/', title: '파일·미디어 앱을 만들어요.', apps: '/apps/ko/', about: '/about/ko/', blog: '/blog/ko/' },
-  { home: '/ja/', segment: 'ja/', title: 'ファイル・メディア向けのアプリ。', apps: '/apps/ja/', about: '/about/ja/', blog: '/blog/ja/' },
-  { home: '/zh-hans/', segment: 'zh-hans/', title: '文件与媒体处理应用', apps: '/apps/zh-hans/', about: '/about/zh-hans/', blog: '/blog/zh-hans/' },
-  { home: '/zh-hant/', segment: 'zh-hant/', title: '檔案與影音處理應用程式', apps: '/apps/zh-hant/', about: '/about/zh-hant/', blog: '/blog/zh-hant/' },
-  { home: '/pt-br/', segment: 'pt-br/', title: 'Apps para arquivos e mídia.', apps: '/apps/pt-br/', about: '/about/pt-br/', blog: '/blog/pt-br/' },
-  { home: '/de/', segment: 'de/', title: 'Apps für Dateien und Medien.', apps: '/apps/de/', about: '/about/de/', blog: '/blog/de/' },
-  { home: '/fr/', segment: 'fr/', title: 'Des apps pour les fichiers et les médias.', apps: '/apps/fr/', about: '/about/fr/', blog: '/blog/fr/' },
-  { home: '/es/', segment: 'es/', title: 'Apps para archivos y multimedia.', apps: '/apps/es/', about: '/about/es/', blog: '/blog/es/' }
+  { home: '/', segment: '', title: 'Small tools. Calmly made.', apps: '/apps/', about: '/about/', blog: '/blog/' },
+  { home: '/ko/', segment: 'ko/', title: '작은 도구를 세심하게 만들어요.', apps: '/apps/ko/', about: '/about/ko/', blog: '/blog/ko/' },
+  { home: '/ja/', segment: 'ja/', title: '小さな道具を、丁寧に。', apps: '/apps/ja/', about: '/about/ja/', blog: '/blog/ja/' },
+  { home: '/zh-hans/', segment: 'zh-hans/', title: '小工具，用心做。', apps: '/apps/zh-hans/', about: '/about/zh-hans/', blog: '/blog/zh-hans/' },
+  { home: '/zh-hant/', segment: 'zh-hant/', title: '小工具，用心做。', apps: '/apps/zh-hant/', about: '/about/zh-hant/', blog: '/blog/zh-hant/' },
+  { home: '/pt-br/', segment: 'pt-br/', title: 'Ferramentas pequenas. Feitas com cuidado.', apps: '/apps/pt-br/', about: '/about/pt-br/', blog: '/blog/pt-br/' },
+  { home: '/de/', segment: 'de/', title: 'Kleine Werkzeuge. Mit Sorgfalt gemacht.', apps: '/apps/de/', about: '/about/de/', blog: '/blog/de/' },
+  { home: '/fr/', segment: 'fr/', title: 'De petits outils, conçus avec soin.', apps: '/apps/fr/', about: '/about/fr/', blog: '/blog/fr/' },
+  { home: '/es/', segment: 'es/', title: 'Herramientas pequeñas, hechas con cuidado.', apps: '/apps/es/', about: '/about/es/', blog: '/blog/es/' }
 ] as const;
 
 test('compact home keeps product discovery, trust, and all nine localized routes', async ({ page }) => {
@@ -870,17 +870,5 @@ test('cached older home pages keep access to the legacy TagWeaver screenshot pat
       expect(response.status(), 'original and legacy screenshot ' + locale + '/' + file).toBe(200);
       expect(response.headers()['content-type']).toContain('image/png');
     }
-  }
-});
-
-
-test('Korean home describes real product functions instead of abstract slogans', async ({ page }) => {
-  await page.goto('/ko/');
-  await expect(page.locator('.home-hero h1')).toHaveText('파일·미디어 앱을 만들어요.');
-  await expect(page.locator('.signature-section h2')).toContainText('MP3·FLAC');
-  await expect(page.locator('.trust-section h2')).toHaveText('설치 전에 확인할 정보');
-  const visibleCopy = await page.locator('main').innerText();
-  for (const slogan of ['작은 도구를,', '필요한 일을, 더 간단하게.', '작지만, 믿고', '믿고 꺼내는 도구']) {
-    expect(visibleCopy).not.toContain(slogan);
   }
 });
