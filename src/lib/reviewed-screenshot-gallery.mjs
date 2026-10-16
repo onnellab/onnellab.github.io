@@ -82,8 +82,8 @@ export function reviewedScreenshotGallery(contentDir, slug, locale, siteRoot = p
   return galleries.get(locale);
 }
 
-// Existing originals remain solely for apps that have no reviewed receipt yet.
-// These routes are not evidence of a newly reviewed store-artwork publication.
+// Home cards always use genuine UI originals; reviewed promotional artwork
+// belongs to app detail galleries. Keep localized originals independently selected.
 const legacyHomeShots = {
   tagweaver: { hero: ['android-20261012', 'tagweaver-editor'], supporting: ['android-20261012', 'tagweaver-library'] },
   melivra: { hero: ['android-20261012', 'melivra'], supporting: ['android-20261012', 'melivra'] },
@@ -92,14 +92,7 @@ const legacyHomeShots = {
 };
 
 export function homepageScreenshot(slug, locale, gallery, role, siteRoot = process.cwd()) {
-  if (gallery !== undefined) {
-    if (!gallery.length || gallery.some((image) => image.slug !== slug || image.locale !== locale || image.source !== 'reviewed')) {
-      throw new Error(`Invalid homepage gallery for ${slug}/${locale}`);
-    }
-    // Receipt order is stable: first artwork in the hero, second in supporting
-    // cards. A single-image gallery reuses the first, never another locale.
-    return gallery[role === 'hero' ? 0 : Math.min(1, gallery.length - 1)];
-  }
+  if (!slugPattern.test(slug) || !locales.has(locale)) throw new Error('Invalid artwork slug or locale');
   const legacy = legacyHomeShots[slug]?.[role];
   if (!legacy) return undefined;
   const route = `/home-assets/screenshots/${legacy[0]}/${locale}/${legacy[1]}.png`;

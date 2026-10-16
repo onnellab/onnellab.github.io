@@ -759,26 +759,6 @@
   height: auto;
 }
 
-/* Reviewed store artwork includes its complete design. Preserve every pixel
-   instead of applying the clipped, open-bottom treatment for legacy UI shots. */
-.homepage .hero-slot[data-hero-slot] .hero-slide-screen:has(img[data-home-artwork-source='reviewed']) {
-  border-radius: 0;
-  overflow: visible;
-}
-.homepage .featured-screen:has(img[data-home-artwork-source='reviewed']),
-.homepage .product-screen:has(img[data-home-artwork-source='reviewed']) {
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-}
-.homepage .featured-screen img[data-home-artwork-source='reviewed'],
-.homepage .product-screen img[data-home-artwork-source='reviewed'] {
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-
 .homepage .product-picture .fallback-icon {
   align-self: center;
   width: 96px;

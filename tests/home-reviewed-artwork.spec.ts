@@ -12,7 +12,7 @@ test.beforeAll(async () => {
 test.afterAll(() => fixture?.cleanup());
 
 for (const width of [1440, 390]) {
-  test(`reviewed Android and iPhone artwork remains complete at ${width}px in every locale`, async ({ page }, testInfo) => {
+  test(`home originals stay rounded and cropped while detail artwork stays complete at ${width}px in every locale`, async ({ page }, testInfo) => {
     test.setTimeout(120000);
     await page.setViewportSize({ width, height: 1000 });
     // In-memory request fulfillment keeps synthetic evidence private and avoids
@@ -29,34 +29,29 @@ for (const width of [1440, 390]) {
     });
     for (const [locale, segment] of Object.entries(localeRoutes)) {
       await page.goto(`http://reviewed-artwork.test/${segment ? segment + '/' : ''}`);
-      const reviewed = page.locator('img[data-home-artwork-source="reviewed"]');
-      await expect(reviewed).toHaveCount(4);
-      await expect(page.locator('img[data-home-artwork-source="legacy"]')).toHaveCount(3);
-      for (const image of await reviewed.all()) {
+      await expect(page.locator('img[data-home-artwork-source="reviewed"]')).toHaveCount(0);
+      await expect(page.locator('img[data-home-artwork-source="legacy"]')).toHaveCount(7);
+      for (const image of await page.locator('.product-screen img').all()) {
         await image.scrollIntoViewIfNeeded();
         const geometry = await image.evaluate(async (node) => {
           const img = node as HTMLImageElement;
           await img.decode();
-          const rect = img.getBoundingClientRect();
-          const parentNode = img.parentElement!;
-          const parent = parentNode.getBoundingClientRect();
-          const parentStyle = getComputedStyle(parentNode);
-          return { locale:img.dataset.homeArtworkLocale, index:img.dataset.homeArtworkIndex,
-            radii:[parentStyle.borderTopLeftRadius,parentStyle.borderTopRightRadius,parentStyle.borderBottomLeftRadius,parentStyle.borderBottomRightRadius],
-            fit:getComputedStyle(img).objectFit, native:[img.naturalWidth,img.naturalHeight],
-            declared:[Number(img.getAttribute('width')),Number(img.getAttribute('height'))],
-            image:{left:rect.left,right:rect.right,top:rect.top,bottom:rect.bottom},
-            frame:{left:parent.left,right:parent.right,top:parent.top,bottom:parent.bottom} };
+          const frame = img.parentElement!;
+          const style = getComputedStyle(frame);
+          return { locale: img.dataset.homeArtworkLocale,
+            radius: parseFloat(style.borderTopLeftRadius), border: parseFloat(style.borderTopWidth),
+            overflow: style.overflow, imageHeight: img.getBoundingClientRect().height,
+            frameHeight: frame.getBoundingClientRect().height,
+            declared: [Number(img.getAttribute('width')), Number(img.getAttribute('height'))],
+            native: [img.naturalWidth, img.naturalHeight] };
         });
         expect(geometry.locale).toBe(locale);
-        expect(['1','2']).toContain(geometry.index);
-        expect(geometry.fit).toBe('contain');
-        expect(geometry.radii).toEqual(['0px','0px','0px','0px']);
+        expect(geometry.radius).toBeGreaterThan(0);
+        expect(geometry.border).toBe(2);
+        expect(geometry.overflow).toBe('hidden');
+        // Desktop tiles crop the lower UI; compact mobile rows retain their existing geometry.
+        if (width === 1440) expect(geometry.imageHeight).toBeGreaterThan(geometry.frameHeight * 1.25);
         expect(geometry.native).toEqual(geometry.declared);
-        expect(geometry.image.left).toBeGreaterThanOrEqual(geometry.frame.left - 1);
-        expect(geometry.image.right).toBeLessThanOrEqual(geometry.frame.right + 1);
-        expect(geometry.image.top).toBeGreaterThanOrEqual(geometry.frame.top - 1);
-        expect(geometry.image.bottom).toBeLessThanOrEqual(geometry.frame.bottom + 1);
       }
       expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
       if (locale === 'ko') {
@@ -64,7 +59,7 @@ for (const width of [1440, 390]) {
         await page.screenshot({ path: screenshotPath, fullPage: true });
         await testInfo.attach(`Reviewed Android and iPhone ${width}px`, { path: screenshotPath, contentType: 'image/png' });
       }
-      // Rotation keeps the exact reviewed source attached to its product.
+      // Rotation keeps each original screenshot attached to its product.
       const sources = await page.locator('[data-hero-slide] img').evaluateAll((nodes) => Object.fromEntries(nodes.map((node) => [node.getAttribute('data-home-artwork-slug'), node.getAttribute('src')])));
       await page.locator('[data-hero-dot][data-index="2"]').click();
       await expect(page.locator('[data-hero-slide][data-position="active"]')).toHaveAttribute('data-hero-product', 'papira');

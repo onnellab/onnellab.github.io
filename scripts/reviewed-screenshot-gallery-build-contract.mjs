@@ -2,11 +2,12 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
+import { homepageScreenshot } from '../src/lib/reviewed-screenshot-gallery.mjs';
 import { reviewedSiteFixture, localeRoutes, digest } from './reviewed-artwork-test-fixture.mjs';
 
 const attributes = (tag) => Object.fromEntries([...tag.matchAll(/([\w-]+)="([^"]*)"/g)].map((match) => [match[1], match[2]]));
 
-test('real Astro build keeps Android and mixed native iPhone sizes correct on detail, thumbnails and all nine homepages', { timeout: 120000 }, async () => {
+test('real Astro build separates homepage originals from native-sized reviewed detail and thumbnails in all nine locales', { timeout: 120000 }, async () => {
   const fixture = await reviewedSiteFixture();
   const { dir, receipts, build } = fixture;
   try {
@@ -18,10 +19,10 @@ test('real Astro build keeps Android and mixed native iPhone sizes correct on de
       assert.ok(home.includes(`data-home-locale="${locale}"`));
       const images = [...home.matchAll(/<img\s[^>]*>/g)].map((match) => attributes(match[0]));
       const reviewed = images.filter((image) => image['data-home-artwork-source'] === 'reviewed');
-      assert.equal(reviewed.length, 4, locale);
+      assert.equal(reviewed.length, 0, locale);
       for (const [slug, receipt] of receipts) {
-        const selected = reviewed.filter((image) => image['data-home-artwork-slug'] === slug);
-        assert.deepEqual(selected.map((image) => Number(image['data-home-artwork-index'])).sort(), [1,2]);
+        const selected = images.filter((image) => image['data-home-artwork-slug'] === slug);
+        assert.equal(selected.length, 2);
         const detail = fs.readFileSync(path.join(dir, 'dist/apps', slug, segment, 'index.html'), 'utf8');
         const detailImages = [...detail.matchAll(/<img\s[^>]*>/g)].map((match) => attributes(match[0]));
         const localizedAssets = receipt.assets.filter((asset) => asset.locale === locale);
@@ -35,17 +36,17 @@ test('real Astro build keeps Android and mixed native iPhone sizes correct on de
           }
         }
 
-        for (const image of selected) {
-          const asset = receipt.assets.find((item) => item.locale === locale && String(item.index) === image['data-home-artwork-index']);
-          const route = `/app-assets/${slug}/assets/screenshots/${asset.site_path}`;
+        for (const [index, image] of selected.entries()) {
+          const expected = homepageScreenshot(slug, locale, undefined, index === 0 ? 'hero' : 'supporting', dir);
           assert.equal(image['data-home-artwork-locale'], locale);
-          assert.equal(image.src, `${route}?v=${asset.sha256}`);
-          assert.deepEqual([Number(image.width), Number(image.height)], asset.size);
-          assert.equal(digest(fs.readFileSync(path.join(dir, 'dist', route))), asset.sha256);
-          assert.ok(detail.includes(image.src), `${slug}/${locale} must share the homepage source`);
+          assert.equal(image['data-home-artwork-source'], 'legacy');
+          assert.equal(image.src, expected.src);
+          assert.deepEqual([Number(image.width), Number(image.height)], [expected.width, expected.height]);
+          assert.equal(digest(fs.readFileSync(path.join(dir, 'dist', expected.src.split('?')[0]))), expected.sha256);
+          assert.ok(!detail.includes(image.src), `${slug}/${locale} detail keeps its edited source`);
         }
       }
-      assert.equal(images.filter((image) => image['data-home-artwork-source'] === 'legacy').length, 3);
+      assert.equal(images.filter((image) => image['data-home-artwork-source'] === 'legacy').length, 7);
     }
     // A receipt remaining after accidental file replacement stops publication.
     fs.appendFileSync(path.join(dir, 'src/content/apps/tagweaver/assets/screenshots/en/1.png'), 'changed');

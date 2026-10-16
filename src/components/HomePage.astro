@@ -27,8 +27,8 @@ const featured = releasedApps.find((app) => app.slug === 'tagweaver');
 const selectedApps = (['quivra', 'melivra', 'papira'] as const)
   .map((slug) => releasedApps.find((app) => app.slug === slug))
   .filter((app): app is ProductIndexItem => Boolean(app));
-// Detail and homepage resolve the same reviewed receipt and localized gallery.
-// Only apps without a receipt retain explicitly marked legacy originals.
+// Home uses original UI screenshots in rounded, clipped cards.
+// App detail galleries independently retain reviewed promotional artwork.
 const featuredScreenshot = featured?.homeScreenshots.supporting;
 const iconPath = (slug: string, size: 96 | 192) => `/home-assets/app-icons/${slug}-${size}.webp`;
 const iconSrcset = (slug: string) => `${iconPath(slug, 96)} 96w, ${iconPath(slug, 192)} 192w`;

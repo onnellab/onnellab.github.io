@@ -827,7 +827,7 @@ test('only the centered Hero app name is visible without moving the reserved cap
   }
 });
 
-test('hero and supporting cards select the same receipt-aware locale gallery as detail pages', async ({ page, request }) => {
+test('hero and supporting cards use localized originals independently of detail artwork', async ({ page, request }) => {
   const localeMap: Record<string, string> = { 'zh-hans': 'zh-Hans', 'zh-hant': 'zh-Hant', 'pt-br': 'pt-BR' };
   for (const route of routes) {
     await page.goto(route.home);

@@ -45,27 +45,30 @@ function fixture(kind = 'android') {
 }
 
 for (const kind of ['android', 'iphone_medium']) {
-  test(`${kind}: one localized candidate drives deterministic homepage index, SHA URL and real dimensions`, () => {
+  test(`${kind}: detail keeps reviewed artwork while home selects a localized original`, () => {
     const f = fixture(kind);
     try {
       for (const locale of ['en', 'ko']) {
         const gallery = f.read(locale);
         assert.deepEqual(gallery.map((image) => image.index), [1, 2]);
         assert.ok(gallery.every((image) => image.kind === kind && image.locale === locale));
+        assert.equal(gallery[0].src, `/app-assets/tagweaver/assets/screenshots/${locale}/z-first.png?v=${gallery[0].sha256}`);
+        assert.deepEqual([gallery[0].width, gallery[0].height], kind === 'android' ? [1080, 2160] : [1179, 2556]);
+        assert.equal(gallery[0].version, '2.1.0+42'); assert.equal(gallery[0].source, 'reviewed');
+        const route = `home-assets/screenshots/android-20261012/${locale}/tagweaver-editor.png`;
+        const file = path.join(f.root, 'public', route);
+        fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, png(1440, 3120, 'original'));
         const hero = homepageScreenshot('tagweaver', locale, gallery, 'hero', f.root);
-        const supporting = homepageScreenshot('tagweaver', locale, gallery, 'supporting', f.root);
-        assert.equal(hero.index, 1); assert.equal(supporting.index, 2);
-        assert.equal(hero.src, `/app-assets/tagweaver/assets/screenshots/${locale}/z-first.png?v=${hero.sha256}`);
-        assert.deepEqual([hero.width, hero.height], kind === 'android' ? [1080, 2160] : [1179, 2556]);
-        assert.equal(hero.version, '2.1.0+42'); assert.equal(hero.source, 'reviewed');
-        assert.equal(homepageScreenshot('tagweaver', locale, gallery.slice(0, 1), 'supporting', f.root), hero);
+        assert.equal(hero.source, 'legacy');
+        assert.equal(hero.src, `/${route}?v=${hero.sha256}`);
+        assert.deepEqual([hero.width, hero.height], [1440, 3120]);
       }
-      assert.throws(() => homepageScreenshot('tagweaver', 'ko', f.read('en'), 'hero', f.root), /Invalid homepage gallery/);
+      assert.equal(homepageScreenshot('unmapped-app', 'en', f.read(), 'hero', f.root), undefined);
     } finally { f.cleanup(); }
   });
 }
 
-test('only absence of a receipt allows explicit localized legacy originals with real dimensions and SHA URL', () => {
+test('homepage originals retain real dimensions and SHA URL without a detail receipt', () => {
   const f = fixture();
   try {
     fs.unlinkSync(f.receiptPath);
