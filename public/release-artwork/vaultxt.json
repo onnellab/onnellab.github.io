@@ -1,9 +1,9 @@
 {
   "status": "staged_not_published",
-  "candidate_sha256": "02c87400585edf57797fb19f28084acb1a27750924d53a50736ce55a3fd87acc",
+  "candidate_sha256": "72684651e11587944a8c9446a3360f1d4aa527e11d722fe45ff183fa4f28351a",
   "app_slug": "vaultxt",
-  "version": "2.0.2+69",
-  "source_commit": "d37368fc2fd6afcc10e114449f4741a1cb589e49",
+  "version": "2.0.2+71",
+  "source_commit": "2abfebdc084d8dfc401ee15726b96b75c83c3442",
   "source_selection": {
     "policy": "android-edited-then-iphone-edited",
     "kind": "android",
