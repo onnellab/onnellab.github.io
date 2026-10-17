@@ -236,3 +236,170 @@ They should appear as linked cards after the article body.
   );
   assert.doesNotMatch(commaTitleHtml, /<span class="recommendation-card"/);
 });
+
+test('ordered list starts survive paragraph boundaries in all nine blog locales', () => {
+  const slug = 'template-contract-ordered-lists';
+  // Do not replace a real article or another task's fixture.
+  for (const locale of fixtureLocales) {
+    assert.equal(
+      fs.existsSync(path.join(root, 'src/content/blog', locale, slug + '.md')),
+      false,
+      locale + ': ordered-list fixture path must be unused'
+    );
+  }
+  const steps = (separator, paragraph = false) => Array.from({ length: 6 }, (_, index) => {
+    const number = index + 1;
+    return paragraph
+      ? number + '. **Step ' + number + '**\n\n   Explanation ' + number + '.'
+      : number + '. **Step ' + number + '** Explanation ' + number + '.';
+  }).join(separator);
+  const source = [
+    '---',
+    'title: "Ordered list rendering contract"',
+    'slug: "' + slug + '"',
+    'category: "productivity"',
+    'language: "en"',
+    'description: "Temporary ordered-list regression fixture."',
+    '---',
+    '',
+    '# Ordered list rendering contract',
+    '',
+    '## Tight sequence',
+    '',
+    steps('\n'),
+    '',
+    '## Blank separated sequence',
+    '',
+    steps('\n\n'),
+    '',
+    '## Paragraph separated sequence',
+    '',
+    steps('\n\n', true),
+    '',
+    '## Repeated markers',
+    '',
+    '1. First repeated marker',
+    '1. Second repeated marker',
+    '1. Third repeated marker',
+    '',
+    '## Nonsequential markers',
+    '',
+    '3. First marker defines the start',
+    '9. Later markers do not override counting',
+    '1. Repeated markers do not restart a tight list',
+    '',
+    '## Intentional restart',
+    '',
+    '4. Fourth item',
+    '5. Fifth item',
+    '',
+    'A standalone paragraph ends the first block.',
+    '',
+    '1. First restarted item',
+    '2. Second restarted item',
+    '',
+    '## Unordered unchanged',
+    '',
+    '- First bullet',
+    '- Second bullet',
+    '- Third bullet',
+    '',
+    '## Numeric bounds',
+    '',
+    '0. Zero is a valid start',
+    '',
+    '000000002. Leading zeros are decimal',
+    '',
+    '999999999. Largest nine-digit marker',
+    '',
+    '1000000000. Ten digits are not a list marker',
+    '',
+    '9007199254740993. Unsafe integer stays ordinary text',
+    '',
+    '-1. Negative marker stays ordinary text',
+    '',
+    '1e3. Exponent stays ordinary text',
+    '',
+    '+2. Signed marker stays ordinary text',
+    '',
+    '## Existing blocks',
+    '',
+    'Ordinary **bold paragraph**.',
+    '',
+    '> A retained quotation.',
+    '',
+    '| Field | Meaning |',
+    '| --- | --- |',
+    '| Code | Retained table |',
+    '',
+    String.fromCharCode(96).repeat(3),
+    '8. Code is not an ordered-list marker',
+    String.fromCharCode(96).repeat(3),
+    '',
+    '## End sentinel',
+    '',
+    'End of the temporary fixture.',
+    ''
+  ].join('\n');
+  writeLocalizedFixture(slug, source);
+  execFileSync('npm', ['run', 'build'], { cwd: root, stdio: 'pipe' });
+
+  const section = (html, id) => {
+    const pattern = new RegExp(
+      '<h2\\b[^>]*\\bid="' + id + '"[^>]*>[\\s\\S]*?<\\/h2>([\\s\\S]*?)(?=<h2\\b)'
+    );
+    const match = html.match(pattern);
+    assert.ok(match, 'Missing test section: ' + id);
+    return match[1];
+  };
+  const orderedLists = (html) => Array.from(html.matchAll(/<ol\b([^>]*)>([\s\S]*?)<\/ol>/g), (match) => {
+    const start = match[1].match(/\bstart="(\d+)"/);
+    assert.ok(start, 'Every rendered ordered block must carry its numeric start');
+    const items = Array.from(match[2].matchAll(/<li\b([^>]*)>([\s\S]*?)<\/li>/g));
+    assert.ok(items.length > 0, 'Ordered blocks must not be empty');
+    for (const item of items) {
+      assert.doesNotMatch(item[1], /\bvalue=/, 'Later source markers must not override Markdown counting');
+    }
+    return { start: Number(start[1]), count: items.length };
+  });
+  const markers = (lists) => lists.flatMap(({ start, count }) =>
+    Array.from({ length: count }, (_, index) => start + index)
+  );
+
+  for (const locale of fixtureLocales) {
+    const segment = locale.toLowerCase();
+    const html = fs.readFileSync(path.join(root, 'dist/blog', segment, slug, 'index.html'), 'utf8');
+    for (const id of ['tight-sequence', 'blank-separated-sequence', 'paragraph-separated-sequence']) {
+      const content = section(html, id);
+      const lists = orderedLists(content);
+      assert.deepEqual(markers(lists), [1, 2, 3, 4, 5, 6], locale + ': ' + id);
+      assert.equal(lists.length, id === 'tight-sequence' ? 1 : 6, locale + ': retain existing block boundaries');
+      assert.equal((content.match(/<strong>Step \d<\/strong>/g) || []).length, 6, locale + ': preserve inline emphasis');
+      if (id === 'paragraph-separated-sequence') {
+        assert.equal((content.match(/<p\b[^>]*>Explanation \d\.<\/p>/g) || []).length, 6, locale + ': preserve paragraph content');
+      }
+    }
+    assert.deepEqual(markers(orderedLists(section(html, 'repeated-markers'))), [1, 2, 3], locale);
+    assert.deepEqual(markers(orderedLists(section(html, 'nonsequential-markers'))), [3, 4, 5], locale);
+    assert.deepEqual(markers(orderedLists(section(html, 'intentional-restart'))), [4, 5, 1, 2], locale);
+    const unordered = section(html, 'unordered-unchanged');
+    assert.equal((unordered.match(/<ul\b/g) || []).length, 1, locale);
+    assert.equal((unordered.match(/<li\b/g) || []).length, 3, locale);
+    assert.doesNotMatch(unordered, /<ol\b|\bstart=/, locale);
+    const numeric = section(html, 'numeric-bounds');
+    assert.deepEqual(orderedLists(numeric), [
+      { start: 0, count: 1 },
+      { start: 2, count: 1 },
+      { start: 999999999, count: 1 }
+    ], locale);
+    for (const prefix of ['1000000000.', '9007199254740993.', '-1.', '1e3.', '+2.']) {
+      assert.ok(numeric.includes(prefix), locale + ': rejected marker must retain its text');
+    }
+    const existing = section(html, 'existing-blocks');
+    assert.match(existing, /<strong>bold paragraph<\/strong>/, locale);
+    assert.match(existing, /<blockquote\b/, locale);
+    assert.match(existing, /<table\b/, locale);
+    assert.match(existing, /<pre\b[^>]*><code\b[^>]*>8\. Code is not an ordered-list marker<\/code><\/pre>/, locale);
+    assert.doesNotMatch(existing, /<ol\b/, locale);
+  }
+});

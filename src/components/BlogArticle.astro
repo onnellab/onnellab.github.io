@@ -319,7 +319,7 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
             );
           }
           if (block.type === 'ol') {
-            return <ol>{(block.value as string[]).map((item) => <li><BlogInline value={item} /></li>)}</ol>;
+            return <ol start={block.start}>{(block.value as string[]).map((item) => <li><BlogInline value={item} /></li>)}</ol>;
           }
           if (block.type === 'blockquote') return <blockquote><BlogInline value={String(block.value)} /></blockquote>;
           if (block.type === 'code') return <pre><code>{block.value}</code></pre>;

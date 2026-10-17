@@ -34,7 +34,8 @@ export type BlogPost = {
 
 export type MarkdownBlock =
   | { type: 'p' | 'h2' | 'h3' | 'blockquote' | 'code' | 'image'; value: string; alt?: string; src?: string; caption?: string }
-  | { type: 'ul' | 'ol'; value: string[] }
+  | { type: 'ul'; value: string[] }
+  | { type: 'ol'; value: string[]; start: number }
   | { type: 'table'; value: { headers: string[]; rows: string[][] } };
 
 export function getBlogPosts(locale?: Locale): BlogPost[] {
@@ -61,6 +62,7 @@ export function renderMarkdownBlocks(markdown: string): MarkdownBlock[] {
   let paragraph: string[] = [];
   let unordered: string[] = [];
   let ordered: string[] = [];
+  let orderedStart = 1;
   let blockquote: string[] = [];
   let code: string[] = [];
   let inCodeBlock = false;
@@ -72,9 +74,10 @@ export function renderMarkdownBlocks(markdown: string): MarkdownBlock[] {
   };
   const flushLists = () => {
     if (unordered.length) blocks.push({ type: 'ul', value: unordered });
-    if (ordered.length) blocks.push({ type: 'ol', value: ordered });
+    if (ordered.length) blocks.push({ type: 'ol', value: ordered, start: orderedStart });
     unordered = [];
     ordered = [];
+    orderedStart = 1;
   };
   const flushBlockquote = () => {
     if (!blockquote.length) return;
@@ -116,7 +119,9 @@ export function renderMarkdownBlocks(markdown: string): MarkdownBlock[] {
     const h2 = trimmed.match(/^##\s+(.+)$/);
     const h3 = trimmed.match(/^###\s+(.+)$/);
     const ul = trimmed.match(/^-\s+(.+)$/);
-    const ol = trimmed.match(/^\d+\.\s+(.+)$/);
+    // Markdown ordered-list markers have one to nine decimal digits. This
+    // bounds the parsed start to an exact, non-negative safe integer.
+    const ol = trimmed.match(/^(\d{1,9})\.\s+(.+)$/);
     const quote = trimmed.match(/^>\s?(.+)$/);
     const image = trimmed.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]+)")?\)$/);
     if (h2) {
@@ -146,7 +151,10 @@ export function renderMarkdownBlocks(markdown: string): MarkdownBlock[] {
       flushParagraph();
       flushBlockquote();
       if (unordered.length) flushLists();
-      ordered.push(ol[1]);
+      // Only the first marker sets a list's start. Later markers retain
+      // Markdown's automatic numbering, including repeated `1.` markers.
+      if (!ordered.length) orderedStart = Number(ol[1]);
+      ordered.push(ol[2]);
     } else if (!trimmed.startsWith('# ')) {
       flushLists();
       flushBlockquote();
