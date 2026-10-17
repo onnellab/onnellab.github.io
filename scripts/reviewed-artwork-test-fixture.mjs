@@ -12,7 +12,12 @@ export const digest = (bytes) => createHash('sha256').update(bytes).digest('hex'
 
 // Synthetic fixture only. Never stage these receipts into a production tree.
 export async function reviewedSiteFixture() {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'reviewed-home-build-'));
+  // macOS exposes the same temporary directory through both /var and
+  // /private/var. Vite keys compile metadata by absolute path, so mixing the
+  // lexical alias with the resolved path can make an Astro module and its
+  // virtual CSS module look unrelated. Canonicalize before creating the
+  // copied-site fixture so every child process sees one path identity.
+  const dir = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'reviewed-home-build-'));
   try {
     for (const name of ['src', 'public', 'scripts', 'vendor', 'package.json', 'astro.config.mjs', 'tsconfig.json']) {
       fs.cpSync(path.join(root, name), path.join(dir, name), { recursive: true });

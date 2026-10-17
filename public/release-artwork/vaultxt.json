@@ -1,0 +1,509 @@
+{
+  "status": "staged_not_published",
+  "candidate_sha256": "d8ef1de5c5aff527037c538ab7ed8627008ec9314bb58df8d7241bb55649a387",
+  "app_slug": "vaultxt",
+  "version": "2.0.2+67",
+  "source_commit": "b074c22282af40d9f87bc08220ba0186e27a3f83",
+  "source_selection": {
+    "policy": "android-edited-then-iphone-edited",
+    "kind": "android",
+    "reason": "android_edited_available"
+  },
+  "assets": [
+    {
+      "locale": "de",
+      "kind": "android",
+      "index": 1,
+      "site_path": "de/1.png",
+      "sha256": "5ca57e5434b74e5400fe3474ce3babaed2ddc3c86b54b14e598386c190effbfe",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "de",
+      "kind": "android",
+      "index": 2,
+      "site_path": "de/2.png",
+      "sha256": "165bbe616e670b04ebd8ed19e1e9ff8361390773a0b111ef3ac9f19c59eee247",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "de",
+      "kind": "android",
+      "index": 3,
+      "site_path": "de/3.png",
+      "sha256": "5a289c6e1457b801bd176d53f90a92d93b4aa30b9c593bbd6205c5f00216ddc2",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "de",
+      "kind": "android",
+      "index": 4,
+      "site_path": "de/4.png",
+      "sha256": "b9c197c18f68dfd48c1449336a98e8cdfcf6906790dbc5d6ff6e1d297abef4bc",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "de",
+      "kind": "android",
+      "index": 5,
+      "site_path": "de/5.png",
+      "sha256": "905a42122710459c0e221a3ba4ef5f1873fd687b4168347f6dc59d6f0a8a4c88",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "en",
+      "kind": "android",
+      "index": 1,
+      "site_path": "en/1.png",
+      "sha256": "86c461f443e31cd03d0a79060af284c0f528f627f1a4c858fddf43cafda79c23",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "en",
+      "kind": "android",
+      "index": 2,
+      "site_path": "en/2.png",
+      "sha256": "ea345cf6095f343a870f5d2d706ea30b94464dca3ced22b910879e7309351a6a",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "en",
+      "kind": "android",
+      "index": 3,
+      "site_path": "en/3.png",
+      "sha256": "ed3fcf473ecf74ebed28e0e53054d19090c56126b42e7245553410f707df37ec",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "en",
+      "kind": "android",
+      "index": 4,
+      "site_path": "en/4.png",
+      "sha256": "4389d3f6fc91ce9a384fd457f0723c06c8f17b907275e85a843243f51349861b",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "en",
+      "kind": "android",
+      "index": 5,
+      "site_path": "en/5.png",
+      "sha256": "2010c5600b7fab7b95566a8900ea7512db7e7a7abbc101ef4b99ca5426c409f1",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "es",
+      "kind": "android",
+      "index": 1,
+      "site_path": "es/1.png",
+      "sha256": "a16791f1bca238f877638b2a373a01c153f14dae54678a501f9d0afcee0c8e97",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "es",
+      "kind": "android",
+      "index": 2,
+      "site_path": "es/2.png",
+      "sha256": "5dfda0a0476763f29cdf7ac9ba26c2dc1dbbe241a76c4ff09ffd83db81aa0851",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "es",
+      "kind": "android",
+      "index": 3,
+      "site_path": "es/3.png",
+      "sha256": "d4c53457dde30f9882e2d716dd74de0e4d6390b961317561d75d7d7108a9b2f0",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "es",
+      "kind": "android",
+      "index": 4,
+      "site_path": "es/4.png",
+      "sha256": "f06b42b87e87def3a5998e2a561a0720d2de2a46440035a50daef8b171fd4d6d",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "es",
+      "kind": "android",
+      "index": 5,
+      "site_path": "es/5.png",
+      "sha256": "630a3853b91ee3b69413603eaa92c2fee32f717ce87c88ec08a6058b024cd94d",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "fr",
+      "kind": "android",
+      "index": 1,
+      "site_path": "fr/1.png",
+      "sha256": "175e0f2a10b4330c7691dc60eec0269077d4656a92cbf7af050b0dc9530dd9eb",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "fr",
+      "kind": "android",
+      "index": 2,
+      "site_path": "fr/2.png",
+      "sha256": "e550febb7f705d03b9d1d2ef7eb0df225197d696c025101f9c7c774b35079b60",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "fr",
+      "kind": "android",
+      "index": 3,
+      "site_path": "fr/3.png",
+      "sha256": "9bebe36cbac1d4e63e1225382a650d69856d0cd9c368a5129371512fb2a7fa03",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "fr",
+      "kind": "android",
+      "index": 4,
+      "site_path": "fr/4.png",
+      "sha256": "2b65cc034d56dcccf8f560e5f393111d98b5b5eb6b6182e08a023977a2aa47c5",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "fr",
+      "kind": "android",
+      "index": 5,
+      "site_path": "fr/5.png",
+      "sha256": "f507f5c17f87615c17b2861dc734a67baf724ada39a0b43dde322c814211e7eb",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "ja",
+      "kind": "android",
+      "index": 1,
+      "site_path": "ja/1.png",
+      "sha256": "a25dcb82d960fc5580c963d69145e7ddc8e849033bc6af6fa500729c77922b8c",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "ja",
+      "kind": "android",
+      "index": 2,
+      "site_path": "ja/2.png",
+      "sha256": "c3d445fb8ec0614d7d9c1b8fe6d4da2a988a763c071957b9717feaae87d1dfb4",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "ja",
+      "kind": "android",
+      "index": 3,
+      "site_path": "ja/3.png",
+      "sha256": "690d4e67eaa6e4bf9d43ed51746bc4ee87a37b2d2e4cb1fa7413090803d05c9b",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "ja",
+      "kind": "android",
+      "index": 4,
+      "site_path": "ja/4.png",
+      "sha256": "7fbc08fecb9d4833eeaf4fac25dfd76699ad70b170379fd08431806671ac6beb",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "ja",
+      "kind": "android",
+      "index": 5,
+      "site_path": "ja/5.png",
+      "sha256": "83ce1f93650f41f47f4f1d18d31af092888cfe9fd922891851c05c49b3fa7554",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "ko",
+      "kind": "android",
+      "index": 1,
+      "site_path": "ko/1.png",
+      "sha256": "affc700692d98443d6f0194026bb56ac23cd3e2e28c6f8469f1fde260451854f",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "ko",
+      "kind": "android",
+      "index": 2,
+      "site_path": "ko/2.png",
+      "sha256": "64d66af37ddd44fb2e41eaf419bac54c57b18e09ab79e79a326700b338a1c720",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "ko",
+      "kind": "android",
+      "index": 3,
+      "site_path": "ko/3.png",
+      "sha256": "2f5eba16607a8f92a48e30c67433c514ef7d7e95d82501e460fd5bc47b8cfea8",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "ko",
+      "kind": "android",
+      "index": 4,
+      "site_path": "ko/4.png",
+      "sha256": "fa6107017c136df2c1b23db64d89c5eeb90514c7f15dad49b69cf222e0b68446",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "ko",
+      "kind": "android",
+      "index": 5,
+      "site_path": "ko/5.png",
+      "sha256": "6f0fe88c611aa35c0a2501457e44c9668e5cc6b12fe9f456ffcc7a4679e78ddf",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "kind": "android",
+      "index": 1,
+      "site_path": "pt-BR/1.png",
+      "sha256": "6b4aec5b48110eeb44de26f82fb6a3c64f09e2b2c19a89ba9b94ba3ad467ab01",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "kind": "android",
+      "index": 2,
+      "site_path": "pt-BR/2.png",
+      "sha256": "e32e7ddb1702aebb6afc6b9ef1a3d1dfe5b07edf225ca1f1017ca4cbf5a8dc51",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "kind": "android",
+      "index": 3,
+      "site_path": "pt-BR/3.png",
+      "sha256": "a6fcf5a38ca29fc51933831e13f4523b3b3de3ed281d0756c6072f0b224196b1",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "kind": "android",
+      "index": 4,
+      "site_path": "pt-BR/4.png",
+      "sha256": "8cfff1a3ea289e9ad0c1b291235bfa11fdaf7df3215a4f410044d24002d804b7",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "kind": "android",
+      "index": 5,
+      "site_path": "pt-BR/5.png",
+      "sha256": "c35a203fc1b261a0fc13035e8cc70a09473bd305e077d2dcd2f330bbaa2d1978",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "kind": "android",
+      "index": 1,
+      "site_path": "zh-Hans/1.png",
+      "sha256": "f4fced5ecd8418e280052c9b4763e76ab1bf02b31ed26d027b401d806a2d9bc9",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "kind": "android",
+      "index": 2,
+      "site_path": "zh-Hans/2.png",
+      "sha256": "48cf06a2d8fa034b5e0b709f9c556685372f98245aedac2198316b4038fd55bd",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "kind": "android",
+      "index": 3,
+      "site_path": "zh-Hans/3.png",
+      "sha256": "8f86f38e78b82becca6d1735665f7239265aab2d334d9705298741d30817470c",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "kind": "android",
+      "index": 4,
+      "site_path": "zh-Hans/4.png",
+      "sha256": "8346cb2698ad9e05b6b5a6d455b56fd66d2460932c11697969eaa166cda2ed44",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "kind": "android",
+      "index": 5,
+      "site_path": "zh-Hans/5.png",
+      "sha256": "4375a7bcd73901ced5af79ea1f9dd7aa8c5950ea1ef1519ed917951cdd5b20d9",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "kind": "android",
+      "index": 1,
+      "site_path": "zh-Hant/1.png",
+      "sha256": "b8706e82d8bc0f65c1bb2620b787582fd7d67c0158220d85737a9116518e0323",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "kind": "android",
+      "index": 2,
+      "site_path": "zh-Hant/2.png",
+      "sha256": "e048e73f8c59d5fd29bc31b5081f545dced78ecaaf9e82de1af4cbc987c4c268",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "kind": "android",
+      "index": 3,
+      "site_path": "zh-Hant/3.png",
+      "sha256": "268bf4f2c9fa564706a3d4ae72eaa583b5f1c10ea2a72f736c337e4228c1e382",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "kind": "android",
+      "index": 4,
+      "site_path": "zh-Hant/4.png",
+      "sha256": "2f772ea0915d94a695ffa87d59cf2d1804dd1df49839e01e522116580740c2e1",
+      "size": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "kind": "android",
+      "index": 5,
+      "site_path": "zh-Hant/5.png",
+      "sha256": "992408e6bdcfd56575a69e885131185c9bb448303a57d07857ead869c55bc21f",
+      "size": [
+        1080,
+        2160
+      ]
+    }
+  ]
+}
