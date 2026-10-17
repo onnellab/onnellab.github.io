@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "app_slug": "vaultxt",
-  "version": "2.0.2+68",
-  "source_commit": "f17646a0a9452a3dd16510e42b1498db49e80a41",
+  "version": "2.0.2+69",
+  "source_commit": "d37368fc2fd6afcc10e114449f4741a1cb589e49",
   "locales": {
     "en": {
       "outer": [
         {
           "index": 1,
           "alt": "VaultXT — Text editor screen with a draft open — Duo outer display",
-          "sha256": "11aa70ce2b467e064bad9001c9ae830b8b6a1548abc4f4147f189c177cdcad29",
+          "sha256": "2d5a05b5853353a72fd4bb88cb99ba60b516f1f9caca496ef833987c5952c5ec",
           "size": [
             1398,
             2034
@@ -18,7 +18,7 @@
         {
           "index": 2,
           "alt": "VaultXT — Autosave status visible while editing — Duo outer display",
-          "sha256": "bcfa5e9691d99566b76e6781cc0aa63351db6874d17be970ae9073b5d320e3c9",
+          "sha256": "a02f6ed9ce290a420aea58bb6099f3dbdd31dbd038ba3019e5fb7ed5e1f51659",
           "size": [
             1398,
             2034
@@ -27,7 +27,7 @@
         {
           "index": 3,
           "alt": "VaultXT — Search and replace dialog with highlighted results — Duo outer display",
-          "sha256": "c372a3f778289824ca5fc16915f30d53d0a07351e6f4daf5f221ff5f1c735abb",
+          "sha256": "8a0482079190a7e596051f9580107e23dbc31bc5e5b70431829fb3131d891d7d",
           "size": [
             1398,
             2034
@@ -36,7 +36,7 @@
         {
           "index": 4,
           "alt": "VaultXT — Snapshot list with recoverable states — Duo outer display",
-          "sha256": "384d9a3a612413fdcd4bf6c1ed3624a49cb2996c3931294277d77d9a78f4a881",
+          "sha256": "f777a744ac2873fefcd446583dcaaac56a6ffa8ad5f60518bf5aca1a117f45fc",
           "size": [
             1398,
             2034
@@ -45,7 +45,7 @@
         {
           "index": 5,
           "alt": "VaultXT — Library list of imported documents — Duo outer display",
-          "sha256": "cff80b30c8d3db92e15c405c563d580e08c1f578873ce39ddb12061771586ccd",
+          "sha256": "cea808eac7e70bf52231a53e2439a2496c6d1d0b8096954bda387dfc62acf9f3",
           "size": [
             1398,
             2034
@@ -56,7 +56,7 @@
         {
           "index": 1,
           "alt": "VaultXT — Text editor screen with a draft open — Duo inner display",
-          "sha256": "1573c4e51fb9d79cea3f0c6c85c32be098fec8e9729af37e7a70701b60b06f21",
+          "sha256": "473b48151492c90381e513c1e8074a200f401844037cd36c3a42edab94efd7df",
           "size": [
             2007,
             2853
@@ -65,7 +65,7 @@
         {
           "index": 2,
           "alt": "VaultXT — Autosave status visible while editing — Duo inner display",
-          "sha256": "a081cdfca6152b31924e52283db3ddd108102a35df02cf34aab00bbff15c329e",
+          "sha256": "59da696ef0a62a910bf1625ddc16eb34c1d799fe189ad299f50f135e9168b19e",
           "size": [
             2007,
             2853
@@ -74,7 +74,7 @@
         {
           "index": 3,
           "alt": "VaultXT — Search and replace dialog with highlighted results — Duo inner display",
-          "sha256": "2ba11923dbf4c97a6ea1f3d1fa3ccd40c50086e5d705cf6e177d4d44ccaf96dc",
+          "sha256": "ff7d4f412c49df7b6ad4f58dd8dace28f65ed077e12bea34d995ff5a2cdf32b3",
           "size": [
             2007,
             2853
@@ -83,7 +83,7 @@
         {
           "index": 4,
           "alt": "VaultXT — Snapshot list with recoverable states — Duo inner display",
-          "sha256": "b6252d750536a049ee707bcb301c491e66dba4a42ad0c965604033427d880f9a",
+          "sha256": "4d9f5b77e585adacc9497c272cc930abed5ace8b8fb35724aa6d7bd8daeebe14",
           "size": [
             2007,
             2853
@@ -92,7 +92,7 @@
         {
           "index": 5,
           "alt": "VaultXT — Library list of imported documents — Duo inner display",
-          "sha256": "d2fde408cd244bc5e553b3f07bbd7d7fd66bce5de4e09ede428c524fa45f3611",
+          "sha256": "689d6e2a66dc6e5a1baff94e16e72de20dbf250ece89fa22f3d35b17d04b73d4",
           "size": [
             2007,
             2853
@@ -105,7 +105,7 @@
         {
           "index": 1,
           "alt": "VaultXT — 텍스트 초안 편집 화면 — Duo 외부 화면",
-          "sha256": "f54717f142dca8acd33ac5e361b273a9c4ccd053f67d5e326645e01418f041e1",
+          "sha256": "7542261d103efe5ad8d7d885247ce0b9b08f910f0b9a69d11548822c486cb43c",
           "size": [
             1398,
             2034
@@ -114,7 +114,7 @@
         {
           "index": 2,
           "alt": "VaultXT — 편집 화면의 자동저장 상태 표시 — Duo 외부 화면",
-          "sha256": "6b4480cfd8a027308318304a9cdaa2e4ebea85b71ae31ff28495957f2bb7f386",
+          "sha256": "c27b5675bb16030b9371a7f7bd9ca372f0d7803c3a6fba4ec4c3a34d453017b2",
           "size": [
             1398,
             2034
@@ -123,7 +123,7 @@
         {
           "index": 3,
           "alt": "VaultXT — 찾기와 바꾸기 결과가 강조된 편집 화면 — Duo 외부 화면",
-          "sha256": "fc47beab200110b62f68d3e28dc5b7a0cdab6ea883dd6cd3341e6190b54ff273",
+          "sha256": "92496293bdfbdd3152322be822588bc1c0fd3a3f4377cd83e2a8641b806760b9",
           "size": [
             1398,
             2034
@@ -132,7 +132,7 @@
         {
           "index": 4,
           "alt": "VaultXT — 스냅샷 목록에서 이전 버전 선택 화면 — Duo 외부 화면",
-          "sha256": "34bc2156f86b87ddc9737c88c1cf7f8d8eb74517ef9429070ed53dae9b9e720e",
+          "sha256": "6a5540383a8cc2ede8692d66f9fbd162ce9a0a5d8302badc024628d750607d91",
           "size": [
             1398,
             2034
@@ -141,7 +141,7 @@
         {
           "index": 5,
           "alt": "VaultXT — 문서함에서 정렬된 문서 목록 — Duo 외부 화면",
-          "sha256": "905f5ee6e3083c0f06d88286aaccc02e17b1cf779fda6dbd5d124cced5b74eb6",
+          "sha256": "a28d800475881fbad0d2feea1d8bae58bfff875d25893f702522ae4dfbb690a2",
           "size": [
             1398,
             2034
@@ -152,7 +152,7 @@
         {
           "index": 1,
           "alt": "VaultXT — 텍스트 초안 편집 화면 — Duo 내부 화면",
-          "sha256": "944e365f74df416b0635b5d83c35c5159279f33b0114c40ae6e134c9e116cebc",
+          "sha256": "37f7c95ba4c98d2a65ed29c7038c46e45e18474d5ae6e53da24498f86bcac7ae",
           "size": [
             2007,
             2853
@@ -161,7 +161,7 @@
         {
           "index": 2,
           "alt": "VaultXT — 편집 화면의 자동저장 상태 표시 — Duo 내부 화면",
-          "sha256": "6c3f6bf637a3beb86e379cf10cd06f0fd7c1c72323a0bd4b9ac4fd77d5a9fe7b",
+          "sha256": "ea22b6722aa5b01dc31091852287873af3f5043949907a25747b08b590ee1d42",
           "size": [
             2007,
             2853
@@ -170,7 +170,7 @@
         {
           "index": 3,
           "alt": "VaultXT — 찾기와 바꾸기 결과가 강조된 편집 화면 — Duo 내부 화면",
-          "sha256": "a8cfd343a918f7b5f8331fa82dee61307f5a37490f3b7bccb502047bcf3abee0",
+          "sha256": "ce6519e2976634939c512c7cce67bb04ef13bdf6e89e1386655048df0c13351e",
           "size": [
             2007,
             2853
@@ -179,7 +179,7 @@
         {
           "index": 4,
           "alt": "VaultXT — 스냅샷 목록에서 이전 버전 선택 화면 — Duo 내부 화면",
-          "sha256": "52a4b4c0085a943fab2b890806a189850dafa7d9c2414c07e56b7fb1a4f6026f",
+          "sha256": "2a33d408190f9dac3b2ca721325b734d4086effbfaa8085efb7c94f8fc9bae9e",
           "size": [
             2007,
             2853
@@ -188,7 +188,7 @@
         {
           "index": 5,
           "alt": "VaultXT — 문서함에서 정렬된 문서 목록 — Duo 내부 화면",
-          "sha256": "02fb8f53af84786030bc37b6793782f5bdeb8c057b3d554be1be9b30930a2f76",
+          "sha256": "c86e2af64ef8b60e581640c628d2f0fb923e9d65b230076347f090ff62f5650d",
           "size": [
             2007,
             2853
@@ -201,7 +201,7 @@
         {
           "index": 1,
           "alt": "VaultXT — ワークスペースでドラフト編集中の画面 — Duo 外側ディスプレイ",
-          "sha256": "709df50f2f61ed52094388a5685d86a85d25d9d7947834cadbed0837f768e85a",
+          "sha256": "a5a976beed9546d597b80dc34f708db086307590bf14d947faa3676c3387bb80",
           "size": [
             1398,
             2034
@@ -210,7 +210,7 @@
         {
           "index": 2,
           "alt": "VaultXT — 編集中の自動保存ステータス — Duo 外側ディスプレイ",
-          "sha256": "b3e90a7c4cc67c43334eafb0a01a696489db8127e00befe7ed507aa5355539dc",
+          "sha256": "d78882ce30203b90f6dbedd8cf3099532c0059709dd46d2696b939ed9b648d1f",
           "size": [
             1398,
             2034
@@ -219,7 +219,7 @@
         {
           "index": 3,
           "alt": "VaultXT — 検索・置換ダイアログで結果をハイライト表示 — Duo 外側ディスプレイ",
-          "sha256": "1e60178dabe661c9ea793bde7310cae1000d6a7ee10e40cf9200b0883ddef68e",
+          "sha256": "8d2a794c2abbfd8ab6e8d16b8e8c0e746623ee998c86d69053d8d5ce46656692",
           "size": [
             1398,
             2034
@@ -228,7 +228,7 @@
         {
           "index": 4,
           "alt": "VaultXT — スナップショットの一覧画面 — Duo 外側ディスプレイ",
-          "sha256": "bfb31498846e5549a4ebb0db6fce8dcb81602dae5cd31681a743d49005ed10e9",
+          "sha256": "2df18db1363b7c638e84bfbba9bdf59bc372b5dd1d9abdf447398cf55accab7b",
           "size": [
             1398,
             2034
@@ -237,7 +237,7 @@
         {
           "index": 5,
           "alt": "VaultXT — インポートした文書のライブラリ一覧 — Duo 外側ディスプレイ",
-          "sha256": "8e4698b4d404ec5bd7d9a1b5b70b3b9883e1f2be3d9c7a1b63087eb973e04554",
+          "sha256": "b3d38efb661a5b54012084414eb0d86c7a5fa27c675ec414de1cc2e23bac9169",
           "size": [
             1398,
             2034
@@ -248,7 +248,7 @@
         {
           "index": 1,
           "alt": "VaultXT — ワークスペースでドラフト編集中の画面 — Duo 内側ディスプレイ",
-          "sha256": "eb341408dfb65a915e165d7fb1c773d09e2d9bd777d0936ede348ce6437d9b9f",
+          "sha256": "4dee1732ee0e1c678deafaf7063c5803b4c8513fd60f5bc9c89bc77abaed2846",
           "size": [
             2007,
             2853
@@ -257,7 +257,7 @@
         {
           "index": 2,
           "alt": "VaultXT — 編集中の自動保存ステータス — Duo 内側ディスプレイ",
-          "sha256": "4db9271b653a73eaa57f43d3fa942b4c1cccfa3a646e221f2bdf5ec3977824ea",
+          "sha256": "7b694581bc12f38a680ebe3b5d5a7a89d2868463cf08891f0781767c44909eb0",
           "size": [
             2007,
             2853
@@ -266,7 +266,7 @@
         {
           "index": 3,
           "alt": "VaultXT — 検索・置換ダイアログで結果をハイライト表示 — Duo 内側ディスプレイ",
-          "sha256": "91a826a3193d6c52895ce62c02a39eba06c31b4eab3b343d4ad0fd17ff4e9167",
+          "sha256": "6362ced72a1012d87951f900971e9554f3c9dae7ed6d3e306dd7456904661be8",
           "size": [
             2007,
             2853
@@ -275,7 +275,7 @@
         {
           "index": 4,
           "alt": "VaultXT — スナップショットの一覧画面 — Duo 内側ディスプレイ",
-          "sha256": "35c091831da5da43f5b99c5605b929035086e2e4887f27158861d8de60d061f7",
+          "sha256": "fef8bc37f1404ae16308495740c05091d3ffe948671f41b61da5727867379d9d",
           "size": [
             2007,
             2853
@@ -284,7 +284,7 @@
         {
           "index": 5,
           "alt": "VaultXT — インポートした文書のライブラリ一覧 — Duo 内側ディスプレイ",
-          "sha256": "17d42e047bddbb1bb7bb493756edcd0659bc73dbc73b1eae47dadc54e10a7d32",
+          "sha256": "ed5e3ddf7f0cd144bf02168db6fb38e762039e166d28ffb22b6c4645724df632",
           "size": [
             2007,
             2853
@@ -297,7 +297,7 @@
         {
           "index": 1,
           "alt": "VaultXT — 显示草稿编辑的文本编辑画面 — Duo 外屏",
-          "sha256": "8fcefe3cecd8ed60d3a446b4029c92f052544c1b12cffda3255ba8f18fae0880",
+          "sha256": "6be65a6d5a69846525100579162584665caa0b80411ccc180953e6d1db275aba",
           "size": [
             1398,
             2034
@@ -306,7 +306,7 @@
         {
           "index": 2,
           "alt": "VaultXT — 自动保存状态可见的编辑页面 — Duo 外屏",
-          "sha256": "13f46dcd48af00b25d72bce9491cdf92e88764ff4deb461d0c7b85b0b43eda97",
+          "sha256": "b0d606b452c833647dcdbe0c84750a8db6ac688af46e7db7378340af02e70742",
           "size": [
             1398,
             2034
@@ -315,7 +315,7 @@
         {
           "index": 3,
           "alt": "VaultXT — 查找替换结果高亮界面 — Duo 外屏",
-          "sha256": "f51b8dc583f412b077429dc9d8b0d473fb418a9e00eff0b9982d63eb0916f48f",
+          "sha256": "11c56533d262d55e554cd8c70c242eb38d1123e74f3a618403341d51415a3915",
           "size": [
             1398,
             2034
@@ -324,7 +324,7 @@
         {
           "index": 4,
           "alt": "VaultXT — 快照记录列表 — Duo 外屏",
-          "sha256": "082dc6152b5a36a50e4cae4376b6e6b5fbee596b4deb43b963a2294080ab4430",
+          "sha256": "32ea7fc9bcd3e9d3c83ec7cc758e00f234ef69b255aed9b59738c1cb9d59bea6",
           "size": [
             1398,
             2034
@@ -333,7 +333,7 @@
         {
           "index": 5,
           "alt": "VaultXT — 文档库中的文件列表 — Duo 外屏",
-          "sha256": "172eb14850aa58c903598de08a6fa50c671ddf89fa5d3897d67d660eca45021f",
+          "sha256": "5cef9e3b53f7f7a12d96f55436279a843483668ffcc50649d2508879dbd45f3b",
           "size": [
             1398,
             2034
@@ -344,7 +344,7 @@
         {
           "index": 1,
           "alt": "VaultXT — 显示草稿编辑的文本编辑画面 — Duo 内屏",
-          "sha256": "03b5d64976887d6f4752516a61daffdb7980fccdbb231be50852236ee10ca12e",
+          "sha256": "932686fffa8782c2e3a741dfd4c635b462c7b8085ddb66a41c805d283f61d4a7",
           "size": [
             2007,
             2853
@@ -353,7 +353,7 @@
         {
           "index": 2,
           "alt": "VaultXT — 自动保存状态可见的编辑页面 — Duo 内屏",
-          "sha256": "275864afa693309e7916184e30ebdd067cc1e32b95a0ec46251df139ee4bcfbd",
+          "sha256": "2450eb41a9a165c45f570d84cb5d7a9e3e5eeca2c9eef5a6546d72715e9c4a1b",
           "size": [
             2007,
             2853
@@ -362,7 +362,7 @@
         {
           "index": 3,
           "alt": "VaultXT — 查找替换结果高亮界面 — Duo 内屏",
-          "sha256": "4f4bf7bb8da92d1c3465fbcbcdd24d410b2cd474050323634b480a3899ee3064",
+          "sha256": "db2530f58dc8047db7b3800f8fd94256162bcb8d9fa517d49769a37ad07e3848",
           "size": [
             2007,
             2853
@@ -371,7 +371,7 @@
         {
           "index": 4,
           "alt": "VaultXT — 快照记录列表 — Duo 内屏",
-          "sha256": "a24b6056b0a701cda60c1be8af315b6f9e22615d725e6dd5c6910cc7c50468a4",
+          "sha256": "286284fa13e7a015e8a5a644aed385051150ef68c230c7ca94de3ad638edd371",
           "size": [
             2007,
             2853
@@ -380,7 +380,7 @@
         {
           "index": 5,
           "alt": "VaultXT — 文档库中的文件列表 — Duo 内屏",
-          "sha256": "a3a65eb7eb1eee4789df4976e8f0b5febf96948d363dae9e02a9f01e4ccd6e21",
+          "sha256": "a1d7eaba66bc2ba34e832ac8e95f33bade939a024fbe30dd04aed57f6e53cb9d",
           "size": [
             2007,
             2853
@@ -393,7 +393,7 @@
         {
           "index": 1,
           "alt": "VaultXT — 顯示草稿編輯的文字編輯介面 — Duo 外螢幕",
-          "sha256": "14e858e1d22925020d2872ab017e1a6e3de89f69142b6fc60250b0d4b225ddb8",
+          "sha256": "6a81858a683efc47b2a5530682a4318dc3c5a871753d63f33b0f95484d0a3373",
           "size": [
             1398,
             2034
@@ -402,7 +402,7 @@
         {
           "index": 2,
           "alt": "VaultXT — 自動存檔狀態提示畫面 — Duo 外螢幕",
-          "sha256": "1ba17d86c726c8f06da4df0ee49fce2dca14d2b7ee0981543951b91b60f18b1f",
+          "sha256": "6491557f1ed3c14bb895bf0259b8f87eae4099b0ce0bb582004bdc07bda2625a",
           "size": [
             1398,
             2034
@@ -411,7 +411,7 @@
         {
           "index": 3,
           "alt": "VaultXT — 搜尋取代結果標註畫面 — Duo 外螢幕",
-          "sha256": "80165bba0ab4817a1c4c7fec3b5280951b021a51f877835d7c9b8fbb6b472d35",
+          "sha256": "2fbc753eccca6bcf4846aca766a2fdf9c036ccb59798b57419bb2ac2e4c3e7a9",
           "size": [
             1398,
             2034
@@ -420,7 +420,7 @@
         {
           "index": 4,
           "alt": "VaultXT — 快照清單與版本預覽 — Duo 外螢幕",
-          "sha256": "ff536de0bc91ebbcbf67dc9e78066c37df3a7187b6bba9706c90184c136b9f97",
+          "sha256": "150b16e6c9c2229a30919a02ecb0c10c18f06d2b6c605b75c86d1953bc6a008f",
           "size": [
             1398,
             2034
@@ -429,7 +429,7 @@
         {
           "index": 5,
           "alt": "VaultXT — 整理後的文件列表 — Duo 外螢幕",
-          "sha256": "5af3d3cc2dacc6cf6cac4d2862a6b1b326f7d1bc2252d8a111f69b8eb3c31ff9",
+          "sha256": "8e44a3fd6e19cdf4171db04739b3951cd531c7874fdb49dfae844db595708ee3",
           "size": [
             1398,
             2034
@@ -440,7 +440,7 @@
         {
           "index": 1,
           "alt": "VaultXT — 顯示草稿編輯的文字編輯介面 — Duo 內螢幕",
-          "sha256": "b9d4c5e1b503b9b033d7c3f653ab848c3d39bb2675c1722dff8083fa2b6838e9",
+          "sha256": "b4abfcd5e829ddff55608ecb5d76fb3c19f0281ad06d304f564266fa27692da3",
           "size": [
             2007,
             2853
@@ -449,7 +449,7 @@
         {
           "index": 2,
           "alt": "VaultXT — 自動存檔狀態提示畫面 — Duo 內螢幕",
-          "sha256": "d8d4ee17b21f37773658bba62d1153c17d2e430c2ecfe26972954cd81d47a091",
+          "sha256": "209dd796da48e776237b17a12149d22ad6eeae15dcec0c5526c37150695019ae",
           "size": [
             2007,
             2853
@@ -458,7 +458,7 @@
         {
           "index": 3,
           "alt": "VaultXT — 搜尋取代結果標註畫面 — Duo 內螢幕",
-          "sha256": "a0777fcb87d0b96ef58241447f7a39ffc7621404d538f033e6fbc9233afeace6",
+          "sha256": "a2ae7e0cee2b8dbc270ebef248d8c5b41ee02b509423d3b885c0f650362bd9ea",
           "size": [
             2007,
             2853
@@ -467,7 +467,7 @@
         {
           "index": 4,
           "alt": "VaultXT — 快照清單與版本預覽 — Duo 內螢幕",
-          "sha256": "d31cc03e6e367c725efdb58a00d8746641135b1d8d70d18ad420cd140538d9e8",
+          "sha256": "b7ec7861c7953874c52de84e95e0381df82bf5491714a16b1a1c66a098ee451e",
           "size": [
             2007,
             2853
@@ -476,7 +476,7 @@
         {
           "index": 5,
           "alt": "VaultXT — 整理後的文件列表 — Duo 內螢幕",
-          "sha256": "2e94858e08717a546e2bda303ecf74a44e6139d501ff17d97b279bb8f700cfb9",
+          "sha256": "a544937374969d650883f63387d9491f95a57aaee06bffd78572e8ca754fdd94",
           "size": [
             2007,
             2853
@@ -489,7 +489,7 @@
         {
           "index": 1,
           "alt": "VaultXT — Tela do editor com um rascunho aberto — tela externa do Duo",
-          "sha256": "1c1476b0d03d7c4c4bcf6d32c52feae897dbead8ccebe9039bde65e5c98d977d",
+          "sha256": "f1cf9d1f25a2a2cdd9f6d98e58e7ca4ea97719a5d02e65f5bf39a67be66778ef",
           "size": [
             1398,
             2034
@@ -498,7 +498,7 @@
         {
           "index": 2,
           "alt": "VaultXT — Tela de edição com status de salvamento automático — tela externa do Duo",
-          "sha256": "86bf69b9952d107f5fc6b8be1438c77b66c8c475b9aaaae8a1610a3c58bd158d",
+          "sha256": "4f00a16f70169f40b662a435fb48f17504043d531494f256ff74cb801aa327f1",
           "size": [
             1398,
             2034
@@ -507,7 +507,7 @@
         {
           "index": 3,
           "alt": "VaultXT — Janela de localizar e substituir com destaque — tela externa do Duo",
-          "sha256": "2b951828eba10f34b70a4be8f2670c834fef6cda6254dfa10ce22d8eb7371fe8",
+          "sha256": "1e7749ce2f2af351f2b83733488771378907f583ec70a9b29bc3891015e81a75",
           "size": [
             1398,
             2034
@@ -516,7 +516,7 @@
         {
           "index": 4,
           "alt": "VaultXT — Lista de instantâneos com opção de restauração — tela externa do Duo",
-          "sha256": "f1a111936d30327a40e2ab6d349f5ec87b24c69ff1ea5c327eb9808a651f8d74",
+          "sha256": "1f854dd12037ecc5b22e970d3b09208cac6a97a81f47f63bf3a6eecdc7a55704",
           "size": [
             1398,
             2034
@@ -525,7 +525,7 @@
         {
           "index": 5,
           "alt": "VaultXT — Lista organizada de documentos na biblioteca — tela externa do Duo",
-          "sha256": "d7717115075120b55e641cebd95ffdc71747791ea8c464069a14d791db5e474f",
+          "sha256": "d0924f6a4cbe607880fd9b0df97373e341d94e4af9060e9ad12c5645d9752917",
           "size": [
             1398,
             2034
@@ -536,7 +536,7 @@
         {
           "index": 1,
           "alt": "VaultXT — Tela do editor com um rascunho aberto — tela interna do Duo",
-          "sha256": "1d548ff9a5be80445b074c19d1b45b6ed9b084fd42f90b70487d93856fc86d24",
+          "sha256": "00733cfba7a762e73e894ea9ba77ba8485143ca9adbc361ff83f70a3e290be38",
           "size": [
             2007,
             2853
@@ -545,7 +545,7 @@
         {
           "index": 2,
           "alt": "VaultXT — Tela de edição com status de salvamento automático — tela interna do Duo",
-          "sha256": "408c1ad8ea637fb2243965a822ec7a0b033b92629832b09868b4ec2edaa19132",
+          "sha256": "c98743ae7d04f0edc4ad2e269cf3a37ff127e6a1284b851b6bbac81383de2b09",
           "size": [
             2007,
             2853
@@ -554,7 +554,7 @@
         {
           "index": 3,
           "alt": "VaultXT — Janela de localizar e substituir com destaque — tela interna do Duo",
-          "sha256": "11275e543532e39768b98969b668f456a048aac4d84fd2b4b3028eb5c3b6fa17",
+          "sha256": "bc3ad335985fe03a05b0a9a09ba7550dc7eab948196f9ea3108b9004f0a38ca8",
           "size": [
             2007,
             2853
@@ -563,7 +563,7 @@
         {
           "index": 4,
           "alt": "VaultXT — Lista de instantâneos com opção de restauração — tela interna do Duo",
-          "sha256": "c280536860dba77af27277bf8c96949103f2ac761ed9862095082aebfad86d92",
+          "sha256": "4168d17aede3441928c0988345a99f053e6a1b9a75ee7f4448c64fc8a91b7bbc",
           "size": [
             2007,
             2853
@@ -572,7 +572,7 @@
         {
           "index": 5,
           "alt": "VaultXT — Lista organizada de documentos na biblioteca — tela interna do Duo",
-          "sha256": "b0fc892d93851c4902370de62c3bf1c3c009717b61de7d4185ea687d131fcb69",
+          "sha256": "e2c309b83833f09f485e522e4b23c653a4d5d3a583f8f0e1afb061f32a73319c",
           "size": [
             2007,
             2853
@@ -585,7 +585,7 @@
         {
           "index": 1,
           "alt": "VaultXT — Screenshot eines geöffneten TXT-Editors — äußeres Duo-Display",
-          "sha256": "3e4af44f7c446d93dec9aaa0d85bc53e8b7a6ab5ceffd0bb116fe6c250a10580",
+          "sha256": "5f58ad0f1163800d1cbef9938e8780c77ec5cb4f242c6dcdc938fba91466cb2d",
           "size": [
             1398,
             2034
@@ -594,7 +594,7 @@
         {
           "index": 2,
           "alt": "VaultXT — Bearbeitungsbildschirm mit Status zum automatischen Speichern — äußeres Duo-Display",
-          "sha256": "093bf70d20105dd0554c69fe14fe52f2615950d977170bdf67809a45f7611460",
+          "sha256": "fad258d207c7fdb53074b425734745ce7c1c905e0e8f1c5e6083df27c583d4e8",
           "size": [
             1398,
             2034
@@ -603,7 +603,7 @@
         {
           "index": 3,
           "alt": "VaultXT — Dialog zum Suchen und Ersetzen mit hervorgehobenen Ergebnissen — äußeres Duo-Display",
-          "sha256": "9630837778bfe4ce11cf953207fa1a14918fdc4f892bf476bb3a55788df51bde",
+          "sha256": "d2eac13de960bb821677aafeec8b1aa146ccd1704106442bcd5d6655e1f7ee50",
           "size": [
             1398,
             2034
@@ -612,7 +612,7 @@
         {
           "index": 4,
           "alt": "VaultXT — Snapshot-Liste mit älteren Versionen — äußeres Duo-Display",
-          "sha256": "9b92d4f75df4f67833bf4c3e6c6cc4cdf10414cced74ea2c416936bc4fa46cd8",
+          "sha256": "bece74d958230c412c221febda18d435d252f590b1fbc438a9f0ac6688ab73d2",
           "size": [
             1398,
             2034
@@ -621,7 +621,7 @@
         {
           "index": 5,
           "alt": "VaultXT — Geordnete Bibliotheksansicht — äußeres Duo-Display",
-          "sha256": "c234fabc8e238f457edc4a0990452fcccbe9dc7fdafcc6707c87819e6956d0a4",
+          "sha256": "9a94d3399c9076c08420f55ed48608c8d8cb36ad3f4e2b3fc28f4f232a4377ea",
           "size": [
             1398,
             2034
@@ -632,7 +632,7 @@
         {
           "index": 1,
           "alt": "VaultXT — Screenshot eines geöffneten TXT-Editors — inneres Duo-Display",
-          "sha256": "a104e3815a14c7daa359bff870271fd7fda6ef23accb4ff1814b5c67ec87f813",
+          "sha256": "c9daccc6563da791f804ccc4f357ccd9838280ca9c478ae3a72992874c1e6aee",
           "size": [
             2007,
             2853
@@ -641,7 +641,7 @@
         {
           "index": 2,
           "alt": "VaultXT — Bearbeitungsbildschirm mit Status zum automatischen Speichern — inneres Duo-Display",
-          "sha256": "140bc6101b1059f2bac691cf7fd5a28c35b42b618e9b8c40bfda47dd1180bd7c",
+          "sha256": "8869e91d4886e430c6d153dea274bc4b563b76cb87a3e3768918580094e4a2b1",
           "size": [
             2007,
             2853
@@ -650,7 +650,7 @@
         {
           "index": 3,
           "alt": "VaultXT — Dialog zum Suchen und Ersetzen mit hervorgehobenen Ergebnissen — inneres Duo-Display",
-          "sha256": "660bacddb26b949356c5b909f03a4e7743b4546ac370b0e496c175d4b36154bb",
+          "sha256": "bd3b726d951970e488774e7e9ede728857f818e66c822eaeb40ac5290b14d685",
           "size": [
             2007,
             2853
@@ -659,7 +659,7 @@
         {
           "index": 4,
           "alt": "VaultXT — Snapshot-Liste mit älteren Versionen — inneres Duo-Display",
-          "sha256": "6c44e27e17436db7f8035eaf12d281a954aa08fd9a13acd367fc87d356faabf7",
+          "sha256": "98a03fa0897cd7433eb67409bfcf56254ba5f6c500c00233025207da33427261",
           "size": [
             2007,
             2853
@@ -668,7 +668,7 @@
         {
           "index": 5,
           "alt": "VaultXT — Geordnete Bibliotheksansicht — inneres Duo-Display",
-          "sha256": "af686c625f69ca44925d6520626eb28e0d21de1090beda84b04a00e024f00150",
+          "sha256": "59b4e80d9753c376ef3f22ec46723c5ddb01efd3283d0072caac7f542e922c08",
           "size": [
             2007,
             2853
@@ -681,7 +681,7 @@
         {
           "index": 1,
           "alt": "VaultXT — Éditeur texte avec un brouillon ouvert — écran externe du Duo",
-          "sha256": "97891c68192ba4d50713f133c11ff53413b41e926935dd0bb9dc35e57a19ffcc",
+          "sha256": "1f558e6cd4686ba35d2b5dd9f463bcfed3b31c75fbbc33b5555025ef93ccf0fc",
           "size": [
             1398,
             2034
@@ -690,7 +690,7 @@
         {
           "index": 2,
           "alt": "VaultXT — Écran d’édition avec statut d’enregistrement automatique — écran externe du Duo",
-          "sha256": "c403bd9582846f54f157e6943aae72a57e3f52040608f9d2e6c5e0dbd2a166fe",
+          "sha256": "cd367c5f551576a62dc2b65f119a6bd5f5c2d7cdbeca44a2662779897fc84a35",
           "size": [
             1398,
             2034
@@ -699,7 +699,7 @@
         {
           "index": 3,
           "alt": "VaultXT — Fenêtre de recherche et remplacement avec résultats en surbrillance — écran externe du Duo",
-          "sha256": "70d8016b91636a47f6150bd2118cb5f438f8aa6db61f717a6cca9ee45f9307ac",
+          "sha256": "ae2947df49c84d85468e939f6bd521d9d339df96d25009b01a752a6637d8737b",
           "size": [
             1398,
             2034
@@ -708,7 +708,7 @@
         {
           "index": 4,
           "alt": "VaultXT — Liste des instantanés avec aperçu — écran externe du Duo",
-          "sha256": "1168b1da35afec17c5a87ca5cbbcfad058a323f0f0fbfc0d8c5fa6961c9b3d57",
+          "sha256": "f33da4358536fb900e1b1640d106570d943bcd07b98824186644139b05355d72",
           "size": [
             1398,
             2034
@@ -717,7 +717,7 @@
         {
           "index": 5,
           "alt": "VaultXT — Liste organisée de documents dans la Bibliothèque — écran externe du Duo",
-          "sha256": "0d6b2dfeb8a3a97b8642cd6c58166116422a5655037ce54f613156da11302b07",
+          "sha256": "adc48bda4e5d28ab506a291d84894461466323de94fac1dac96a51ec73f16e45",
           "size": [
             1398,
             2034
@@ -728,7 +728,7 @@
         {
           "index": 1,
           "alt": "VaultXT — Éditeur texte avec un brouillon ouvert — écran interne du Duo",
-          "sha256": "50b017a7ca0851421e0c3b7604b84405a09d21be188eac75939ef3a90454f054",
+          "sha256": "04c26d4d2d68b139fa292b571130ec68b8b38b6257ba6bb92ee016c8f3a93fde",
           "size": [
             2007,
             2853
@@ -737,7 +737,7 @@
         {
           "index": 2,
           "alt": "VaultXT — Écran d’édition avec statut d’enregistrement automatique — écran interne du Duo",
-          "sha256": "9b1747fdb93e7a11a25f75c08679efacc6489b42d3cb2c60bd974367f4fc5be3",
+          "sha256": "940674cf5786aaf6a63bc8db8e77345888d955ee62b59e8ab1c22c7e83a61593",
           "size": [
             2007,
             2853
@@ -746,7 +746,7 @@
         {
           "index": 3,
           "alt": "VaultXT — Fenêtre de recherche et remplacement avec résultats en surbrillance — écran interne du Duo",
-          "sha256": "ea608099ef79d0ebdd6e86c57f6b449ee2e07e64a70655809f152c6f42212898",
+          "sha256": "2755d6ef9ec68ee636b5f288e78ec6f2e6bdd85207737c5239e1582759698df0",
           "size": [
             2007,
             2853
@@ -755,7 +755,7 @@
         {
           "index": 4,
           "alt": "VaultXT — Liste des instantanés avec aperçu — écran interne du Duo",
-          "sha256": "87d9b7ea15fdb80e00fb0967acd25eba4404fd1e267d765e9784b0ed3ba6f4e4",
+          "sha256": "9fce379adb7461b1f4bf89d5f50a90483564724234c1b9d1442c34c50ea9c327",
           "size": [
             2007,
             2853
@@ -764,7 +764,7 @@
         {
           "index": 5,
           "alt": "VaultXT — Liste organisée de documents dans la Bibliothèque — écran interne du Duo",
-          "sha256": "ed7593567303bf34eced4b8dc9f3adf2a0f975d3192339650578b5b86ea2d396",
+          "sha256": "977331e8e7e065960dd4bc416a6f875acfd1da58f10fe36666af908175c46d62",
           "size": [
             2007,
             2853
@@ -777,7 +777,7 @@
         {
           "index": 1,
           "alt": "VaultXT — Pantalla del editor de texto con un borrador abierto — pantalla exterior del Duo",
-          "sha256": "51ec819eaece100473378556267a38c077f5677b221c85b033b9a8fcbd49ab80",
+          "sha256": "e2e13797f45e3d1e3978dd11c32ef0762bec00cfe9737810612f21e3405bc436",
           "size": [
             1398,
             2034
@@ -786,7 +786,7 @@
         {
           "index": 2,
           "alt": "VaultXT — Vista de edición con estado de guardado automático — pantalla exterior del Duo",
-          "sha256": "501a9084472e28cea6efef4cdc647d4ffb18aa056c03f7fd6f5b4a8e6f01c463",
+          "sha256": "430a15c19d1e7c044a4e85acc8c750c64236f94a1df9ce7b76570d9656bc3427",
           "size": [
             1398,
             2034
@@ -795,7 +795,7 @@
         {
           "index": 3,
           "alt": "VaultXT — Resultado de búsqueda y reemplazo resaltado — pantalla exterior del Duo",
-          "sha256": "e4096954b92c8c48818c03fae0ab622672510aa39e33712fa09581c5dd516e65",
+          "sha256": "7623a15e3faa131ef26deab8feae7f2923426ae11328297b981130e550637bbc",
           "size": [
             1398,
             2034
@@ -804,7 +804,7 @@
         {
           "index": 4,
           "alt": "VaultXT — Lista de instantáneas con vista previa de versiones anteriores — pantalla exterior del Duo",
-          "sha256": "ff38216e4363aba7e5d3aeb3c16b79383a700e9d035dd4ce47f823d5fed1db3f",
+          "sha256": "f2213e9411263b38ca904280403c68d78a98bd55c62f31f6a7a5f6fe336c333a",
           "size": [
             1398,
             2034
@@ -813,7 +813,7 @@
         {
           "index": 5,
           "alt": "VaultXT — Lista ordenada de documentos en biblioteca — pantalla exterior del Duo",
-          "sha256": "8915154efbde04e22ac79f7d8264df697555022843e7920c0d126f1bbf9b0df7",
+          "sha256": "6ffa9fb9cb7f5eae8e8681deb9bb25067b2dc03a804486479a1816de8446b222",
           "size": [
             1398,
             2034
@@ -824,7 +824,7 @@
         {
           "index": 1,
           "alt": "VaultXT — Pantalla del editor de texto con un borrador abierto — pantalla interior del Duo",
-          "sha256": "191bc602e04cba832435867e690959dba821c4d7e827391b4a9e0c5fd2ce38af",
+          "sha256": "f959f70bcd0bb8415509966a7651e785427aec20998a1faa8e50061943bc9e1f",
           "size": [
             2007,
             2853
@@ -833,7 +833,7 @@
         {
           "index": 2,
           "alt": "VaultXT — Vista de edición con estado de guardado automático — pantalla interior del Duo",
-          "sha256": "83bb9b8b2b6be9e9a5625f3546cf0abb1324cec28027b8cd9e15f5e9e4e8fe30",
+          "sha256": "10bcd16dce9f5d3c6f2c94e97e555c5963212694c79517b063972fc3c5dda279",
           "size": [
             2007,
             2853
@@ -842,7 +842,7 @@
         {
           "index": 3,
           "alt": "VaultXT — Resultado de búsqueda y reemplazo resaltado — pantalla interior del Duo",
-          "sha256": "610e515ee9ca93226a2a6f40ffa05ec99f56ae867efe60b85a7200519830bf24",
+          "sha256": "1413c55852dce70e87a26531ce3e50a8f38b967f166b1b19e2df6f613102c731",
           "size": [
             2007,
             2853
@@ -851,7 +851,7 @@
         {
           "index": 4,
           "alt": "VaultXT — Lista de instantáneas con vista previa de versiones anteriores — pantalla interior del Duo",
-          "sha256": "605998f31a5d072d135f9dc2bc1da135d6a448dd352935525aea3c092baeed1e",
+          "sha256": "7658bab8e79b8a8e1fc9d29dffbefd72409ec5731ac29a3680496e13948e8fb6",
           "size": [
             2007,
             2853
@@ -860,7 +860,7 @@
         {
           "index": 5,
           "alt": "VaultXT — Lista ordenada de documentos en biblioteca — pantalla interior del Duo",
-          "sha256": "37ff6bb6b2e9333bc9ca04ac44af7c174d1909aa19b760d783cf76c584bf8566",
+          "sha256": "412ddf7366990c5e798ab5cd75c7535e900056f8c9ffbe6445890598f6271268",
           "size": [
             2007,
             2853
