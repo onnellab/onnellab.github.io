@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "app_slug": "vaultxt",
-  "version": "2.0.2+69",
-  "source_commit": "d37368fc2fd6afcc10e114449f4741a1cb589e49",
+  "version": "2.0.2+71",
+  "source_commit": "2abfebdc084d8dfc401ee15726b96b75c83c3442",
   "locales": {
     "en": {
       "outer": [
