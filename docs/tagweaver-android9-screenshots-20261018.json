@@ -1,0 +1,751 @@
+{
+  "scope": "remaining6locale36Android updated; original18 unchanged; all9 use Android",
+  "source_commit": "5f0210c46ccf73412d58fd155de812afcbfb5e9d",
+  "base_candidate_sha256": "03192b3238695e807b35446779eeb9f5cf7fba2a03aff5478ffffe37abd22a62",
+  "supplement_sha256": "58af643cce30b06f51f37d747dee1fdf117b62bd7c6de8b7dfcb496820e153d5",
+  "website_union_candidate_sha256": "b9093cd37907e2637d6caf91d731161641222b187e3ab0b88ce84fb4557d3acf",
+  "updated": [
+    {
+      "locale": "zh-Hans",
+      "index": 1,
+      "source_path": "assets/store_promo/generated/zh-Hans/android/01.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hans/1.png",
+      "previous_sha256": "60b2a8bac9483178b3634b2d0f19ea4b0d34ed850eb2519307b9756eb74cc6a6",
+      "sha256": "edfa41e48470e701adfef185ef8d045bb4c3eb63560025259cbcabbc5269a129",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hans/1.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 2,
+      "source_path": "assets/store_promo/generated/zh-Hans/android/02.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hans/2.png",
+      "previous_sha256": "60daf301bdba62dbb7b26087f69a499a3a545237314839d16ca73c3dd42d5bf0",
+      "sha256": "6931d6f7c1567ba0b5210f78a936da8bee4a76e198b51e55689f8d696217c3e0",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hans/2.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 3,
+      "source_path": "assets/store_promo/generated/zh-Hans/android/03.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hans/3.png",
+      "previous_sha256": "95f78b3f71bfc766c4d4e81e01cda848f8c3aa779bba513018b3567d518d8886",
+      "sha256": "93aea7439f9b1c285a9b8cdd06e4a1e7360e64b74204f85481a9e006d69e4f87",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hans/3.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 4,
+      "source_path": "assets/store_promo/generated/zh-Hans/android/04.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hans/4.png",
+      "previous_sha256": "d7d12d3fe7d55c096bec5fe1394961a349e8097e2c92a62097b9193b7057def7",
+      "sha256": "5919625d2acb553ce6ea41601682b49ef7f9dc831b54c222c2297e55fdea328a",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hans/4.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 5,
+      "source_path": "assets/store_promo/generated/zh-Hans/android/05.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hans/5.png",
+      "previous_sha256": "35c4556cdcdbc69df8cbfaa8f382ffc8b9a9a128982bd0f82fc5816a346a626a",
+      "sha256": "21ad90d619842e99b0c04c23327d8f6e9c11494d81be56e0ee7c9c1292bf6392",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hans/5.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 6,
+      "source_path": "assets/store_promo/generated/zh-Hans/android/06.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hans/6.png",
+      "previous_sha256": "c5c637cc1bf791a27718c1dad70b479e0ae3550f7f54f4d3dc61350a3ce58117",
+      "sha256": "41e880c55bf1ed45f365cae94ca634989b437eaca6a3695f3daa0f88a2ed1295",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hans/6.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 1,
+      "source_path": "assets/store_promo/generated/zh-Hant/android/01.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hant/1.png",
+      "previous_sha256": "8eb169baf905158f01df8756520ffafba234f2363e004c6e2664ef6deceb4b3d",
+      "sha256": "0aa5872e8223d4edf2d264846d5ce66d9be9282ffc5466bdd5bb682dac6761e3",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hant/1.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 2,
+      "source_path": "assets/store_promo/generated/zh-Hant/android/02.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hant/2.png",
+      "previous_sha256": "dfb3c03296387ed83008aecdec4e678b953845cd2d67025fee3408d69ff96e69",
+      "sha256": "9d9a3c61ad9b908aaaa9e37989ef247c4e8fd5a0b88feb1fc58265539a3763fd",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hant/2.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 3,
+      "source_path": "assets/store_promo/generated/zh-Hant/android/03.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hant/3.png",
+      "previous_sha256": "c59ab549b39c62aeb1dd928d740d4e5fbbc40b923bc67d663b81f5026e685499",
+      "sha256": "c4f672afc5fa6d8915265b9225e2875a6eb01957d23552e21e09464af41bc779",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hant/3.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 4,
+      "source_path": "assets/store_promo/generated/zh-Hant/android/04.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hant/4.png",
+      "previous_sha256": "85289e9225390197097a90f237f0415f9fe5228dccdf58a4b874b9c713b6bb79",
+      "sha256": "604c559974f7ae7ca1f5593183124277c21cda888502c8b630feb1c01ecdcfd9",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hant/4.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 5,
+      "source_path": "assets/store_promo/generated/zh-Hant/android/05.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hant/5.png",
+      "previous_sha256": "4d336f99efa5e2c72cd888acc204dca94d4b34f2453214545e19745d820c4bc2",
+      "sha256": "c2c59ba35a92ac9679c9bd2489d9530ab10d47b6bfd93a20e12b9d910bc16243",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hant/5.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 6,
+      "source_path": "assets/store_promo/generated/zh-Hant/android/06.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/zh-Hant/6.png",
+      "previous_sha256": "c3e8f3fab50fec105aa6cabdc95474991eb9eebf5804afec76b3d78b2372bf9b",
+      "sha256": "886265a3c9d43a3257daeba2149a4a4811ab096620193bb5b22b7c444dc7386f",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/zh-Hant/6.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 1,
+      "source_path": "assets/store_promo/generated/pt-BR/android/01.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/pt-BR/1.png",
+      "previous_sha256": "06fedae79be540e81b91d1429be525b4831b101edbc1239a345f54e677182cf7",
+      "sha256": "9b85cc462f61d8702650602e34b4c61c11f55984047f2af86908c23019abd857",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/pt-BR/1.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 2,
+      "source_path": "assets/store_promo/generated/pt-BR/android/02.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/pt-BR/2.png",
+      "previous_sha256": "950397a8536b5f6b5f8916977d273402f73129540b0c82597f4aa17eb2036f3f",
+      "sha256": "9d226be5133bc142633f894fd6fa2a9b5ee33cefe8fb6bd796e207b1c1f5feff",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/pt-BR/2.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 3,
+      "source_path": "assets/store_promo/generated/pt-BR/android/03.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/pt-BR/3.png",
+      "previous_sha256": "a999a605fdba17b825cab44723df1e959e6a8495c7a848e59bf2e8b191b8a065",
+      "sha256": "2d8ecbec3d313e5522c9a56ef5c61c653cf16569d8af7acfda4fb045cf71bef1",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/pt-BR/3.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 4,
+      "source_path": "assets/store_promo/generated/pt-BR/android/04.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/pt-BR/4.png",
+      "previous_sha256": "f9535b1817fe262ba85cfa351be91a7b7ed57f27d7078b8b2d3ea8e42fb3a275",
+      "sha256": "e29d5ccfc656109d026a133c3aaeb1500711595366f59ba6fbebfd442206d574",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/pt-BR/4.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 5,
+      "source_path": "assets/store_promo/generated/pt-BR/android/05.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/pt-BR/5.png",
+      "previous_sha256": "0409a8d980b994af5864a2d5e862ca6c2c3353e1ab845ddbd914950c95bf957d",
+      "sha256": "0ab77b98bc4d3988b9f1ab305929d63a9df49821873f0d7737b36fdc111330e6",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/pt-BR/5.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 6,
+      "source_path": "assets/store_promo/generated/pt-BR/android/06.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/pt-BR/6.png",
+      "previous_sha256": "d046bdf3d75e2c72429bd3965a616c9e41f11f4648d252de538a87cd3c227730",
+      "sha256": "3b92bda0be67d7e27e2b287982e34a1549f4b08332ba81e67b46faef7acf846c",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/pt-BR/6.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "de",
+      "index": 1,
+      "source_path": "assets/store_promo/generated/de/android/01.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/de/1.png",
+      "previous_sha256": "fb6d96714cf843700cc38327a0b6af353bd357f2515ef91fe629a6ef8c8d49d6",
+      "sha256": "1bcb93d7aeb0bf389bc5f259c84d80bff9fde159e36d0ef35ac20bfced84d172",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/de/1.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "de",
+      "index": 2,
+      "source_path": "assets/store_promo/generated/de/android/02.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/de/2.png",
+      "previous_sha256": "dd1fb79446d0611890a882ded157a009bca873cfd08cc2b24cc0c362fbc05746",
+      "sha256": "08f527491c8e486c6be87764b70e9c85a1a255d5c71a81772683dc57367a504a",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/de/2.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "de",
+      "index": 3,
+      "source_path": "assets/store_promo/generated/de/android/03.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/de/3.png",
+      "previous_sha256": "621e60aaccf70b3495bdb0bd77865fcc58c940b22ed0ba8c9a3f750752348cc7",
+      "sha256": "b5ac58d2d11c8bf806351ab6afd112fc48ff058ef327bb28fe2b5a18164ebe3f",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/de/3.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "de",
+      "index": 4,
+      "source_path": "assets/store_promo/generated/de/android/04.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/de/4.png",
+      "previous_sha256": "0d91d940cf36b7f733b817f24fb406edac10ddeb186ff3a9f184399f3afbcc9a",
+      "sha256": "2185cc139b7bce544f63df4b80c0d5b828c5b8e6d97c8cb514874df2b16faaf0",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/de/4.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "de",
+      "index": 5,
+      "source_path": "assets/store_promo/generated/de/android/05.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/de/5.png",
+      "previous_sha256": "7e33dcf3832fdef8d685cac837570544647ae07988124368b9e65012f135c8bd",
+      "sha256": "d2ad6427f093561a00b43aafbadec5636baf7c0654ebb3c962429bb7d5702b31",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/de/5.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "de",
+      "index": 6,
+      "source_path": "assets/store_promo/generated/de/android/06.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/de/6.png",
+      "previous_sha256": "87380cf88931845da0afd71fd31f4ba8134b2d35d146299878b3ad43d535af06",
+      "sha256": "d2fcf17679759dbbf32037c7ea1687cf3f180f50d2bd105950daa2a7c716e4c0",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/de/6.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "fr",
+      "index": 1,
+      "source_path": "assets/store_promo/generated/fr/android/01.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/fr/1.png",
+      "previous_sha256": "6bccb0ea5312449eca1b680b2427771ae859b7618e4c6b072500ec093d343083",
+      "sha256": "5b7b5863815c03301f4ec0a6d478ef33a70d6979e61757fd87ee683ffcae1601",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/fr/1.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "fr",
+      "index": 2,
+      "source_path": "assets/store_promo/generated/fr/android/02.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/fr/2.png",
+      "previous_sha256": "46cc832a626b15928f29038f46999c6c1205400411c0c69dca485c727fdc9c02",
+      "sha256": "fac538944fea1d8d0308d6b01e10af681663b3efc20fd4ab3ed127558e14dc28",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/fr/2.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "fr",
+      "index": 3,
+      "source_path": "assets/store_promo/generated/fr/android/03.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/fr/3.png",
+      "previous_sha256": "307524160fb84e2bb46ab5f9e116bcb04b1c9fb506bf2b60a3e853f044e6b05c",
+      "sha256": "ad968a8ebde83e97445afe1b0bbf7d1e79cd82b8ec0bb373f80bdeb8ef6f1237",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/fr/3.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "fr",
+      "index": 4,
+      "source_path": "assets/store_promo/generated/fr/android/04.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/fr/4.png",
+      "previous_sha256": "5c1a26ca7395e34eb00741b6a6d44dca89d2d5542dba5b7c807466fdb113f784",
+      "sha256": "4b1d1f3ea6ede1cde61be67f07af8e628403ca9929d58a3d13ecaeddb6689a3a",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/fr/4.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "fr",
+      "index": 5,
+      "source_path": "assets/store_promo/generated/fr/android/05.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/fr/5.png",
+      "previous_sha256": "26f7082253c926186772d3888ea28480139b63d237ec6049807d93f88851daec",
+      "sha256": "daaed1a2c2cda7c7e9719a35e0d8b30c1a5211227ee46e7b1b30428647e5c314",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/fr/5.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "fr",
+      "index": 6,
+      "source_path": "assets/store_promo/generated/fr/android/06.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/fr/6.png",
+      "previous_sha256": "be2ff4b08bf1196d534ed2e62db57a98ff5139d208cb4a0e14359cb32d2fe2f1",
+      "sha256": "8c84d62b650c17c1f02f859d52c51c9182176ad2c2c0f33a5ea0d0e532869605",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/fr/6.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "es",
+      "index": 1,
+      "source_path": "assets/store_promo/generated/es/android/01.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/es/1.png",
+      "previous_sha256": "b04a43160f5ddfa2d0e01e86ca6c65043a9d705ba02ccf48878fa23174976560",
+      "sha256": "1c8b34fee78a4c04e60ebad4db7785e8b930eb3934bbd013d8f7fe058da73ca5",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/es/1.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "es",
+      "index": 2,
+      "source_path": "assets/store_promo/generated/es/android/02.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/es/2.png",
+      "previous_sha256": "a8b104dc4a89a33eba890d14f2e852171e3add2acd6b5869938363467fd0767c",
+      "sha256": "b178c19a79f7d06081ef6cad1ec8d54972dd38af4065471d2dc8c9522645d615",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/es/2.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "es",
+      "index": 3,
+      "source_path": "assets/store_promo/generated/es/android/03.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/es/3.png",
+      "previous_sha256": "643043bc29055e75881e0729c05e005206d48f07a98380b18ece7185213845e9",
+      "sha256": "3c65440db5b7a4eb9f952b11d3944f692cda8aeb10618f1ca8bc12976336251c",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/es/3.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "es",
+      "index": 4,
+      "source_path": "assets/store_promo/generated/es/android/04.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/es/4.png",
+      "previous_sha256": "9ce36244f1cfea1678e092768dbd622111035b4d3d70a0426e2f7e857dd6f99b",
+      "sha256": "318cc2a8028bd2a9a18482ec8959964904ba41b9a371981e46bf0187a1861e36",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/es/4.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "es",
+      "index": 5,
+      "source_path": "assets/store_promo/generated/es/android/05.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/es/5.png",
+      "previous_sha256": "aa3927965ef197b4c46469c8642646cd00d6846ac99ec152af7ee4aeb0bef66e",
+      "sha256": "7337a56e68cdeb0faf1f86aea5914840af172e9af776b676fdea2fb5f8aaf507",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/es/5.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    },
+    {
+      "locale": "es",
+      "index": 6,
+      "source_path": "assets/store_promo/generated/es/android/06.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/es/6.png",
+      "previous_sha256": "7bede60204de11a8633d4c06c6cafc1435ff2a8efd0ab110dafc513fbbe4720c",
+      "sha256": "2647c998cece82c3e35faf83d39e7aba37672fd01d992a087147db444c140337",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/es/6.png",
+      "source_scope": "separately reviewed historicalaace-to-current5f compatible Android36"
+    }
+  ],
+  "preserved_previous18": [
+    {
+      "locale": "en",
+      "index": 1,
+      "source_path": "assets/store_promo/generated/en/android/01.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/en/1.png",
+      "previous_sha256": "a2b5c380c00fba53c6d8ed950c216dfd8b9621549b5dc129f8f52da7b1f5af66",
+      "sha256": "2c1ea47b6619424bf85ecb67982b177479dc43a53359dfd8888d9888586c1a9e",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/en/1.png"
+    },
+    {
+      "locale": "en",
+      "index": 2,
+      "source_path": "assets/store_promo/generated/en/android/02.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/en/2.png",
+      "previous_sha256": "12ca65f00321b79781c9d40ae7a4f0786995155064123dfe615816775a1b8458",
+      "sha256": "5d5af712b72d19aa14e9f0ea288d44449497022ccc5c0a6cf52c8b7f5d8c6fcf",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/en/2.png"
+    },
+    {
+      "locale": "en",
+      "index": 3,
+      "source_path": "assets/store_promo/generated/en/android/03.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/en/3.png",
+      "previous_sha256": "efd49b832481c4cab7afa584d18705ea72dc497ddf3998dfe048591dccd2e364",
+      "sha256": "74ab1136b65e8b7656115d8c3f2648b8f8ae59a86fe9e26516e32189cead0d4a",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/en/3.png"
+    },
+    {
+      "locale": "en",
+      "index": 4,
+      "source_path": "assets/store_promo/generated/en/android/04.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/en/4.png",
+      "previous_sha256": "a3c77edecf96f1913f28513a93c22fbdd4aa8d0c6730e84cb44938455f79138c",
+      "sha256": "2cf75cc243a6b44f1fd9da65a30fb7dcbbe1b132c3c979016e339ca20fa2ecb5",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/en/4.png"
+    },
+    {
+      "locale": "en",
+      "index": 5,
+      "source_path": "assets/store_promo/generated/en/android/05.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/en/5.png",
+      "previous_sha256": "6687f241c8ce0bbae21a362e944b062b31391241c150e3b34a8b3a9f592bdca0",
+      "sha256": "2f8612b510ee19e499e1ba155c0e2a1ca80886a79c227acc7d4fd382be70b573",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/en/5.png"
+    },
+    {
+      "locale": "en",
+      "index": 6,
+      "source_path": "assets/store_promo/generated/en/android/06.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/en/6.png",
+      "previous_sha256": "7778c9e3deb35bd0f29ea21269ba48e6a65cf4c606ee80fe1d956e0ea3ce3fea",
+      "sha256": "a2169e82fc941075d60a0334c02e519b9c3ad2692de4edb5a678e41f68956bd9",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/en/6.png"
+    },
+    {
+      "locale": "ja",
+      "index": 1,
+      "source_path": "assets/store_promo/generated/ja/android/01.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ja/1.png",
+      "previous_sha256": "35466d4c99af43f2743a6dcd832869be9edbd251e069cf97b849226c866130f2",
+      "sha256": "872f358efddea2fe18924bb1997fe80e7f47f43382433a366348b48c022c51c9",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ja/1.png"
+    },
+    {
+      "locale": "ja",
+      "index": 2,
+      "source_path": "assets/store_promo/generated/ja/android/02.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ja/2.png",
+      "previous_sha256": "6b6da112203b3b8577344bc88db31a376c93c7ce9ab0c53200cc21b63586b185",
+      "sha256": "8768f8cccaf4b3613e864d1eec2712c1814fbc6643f11bf96ab2cca0ac7728ba",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ja/2.png"
+    },
+    {
+      "locale": "ja",
+      "index": 3,
+      "source_path": "assets/store_promo/generated/ja/android/03.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ja/3.png",
+      "previous_sha256": "1717e35b8555990caff0ffd4d94bb2cc11fdf51677df99f8cc976e398b5eb53b",
+      "sha256": "abf9f476c4cd62d2e73492d2047d1e33e3d047f9c902657548bbb01c541afb50",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ja/3.png"
+    },
+    {
+      "locale": "ja",
+      "index": 4,
+      "source_path": "assets/store_promo/generated/ja/android/04.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ja/4.png",
+      "previous_sha256": "99c067c60f51fc93639078a075f7b9c5a1f3162c1938b1783f16e56732435e54",
+      "sha256": "c76613d759640d5a9a90661f7a9c5055f7104aad6697eb50761e6e7855610410",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ja/4.png"
+    },
+    {
+      "locale": "ja",
+      "index": 5,
+      "source_path": "assets/store_promo/generated/ja/android/05.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ja/5.png",
+      "previous_sha256": "0af38835f9126b00af3c9a8d4aa5751a6e6c3a02f4a64b0d1fb2066abe355bcf",
+      "sha256": "07b2fa8990d6b2d3f2d459191092ae6d537f46c5bde074c8c06643f146c2f737",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ja/5.png"
+    },
+    {
+      "locale": "ja",
+      "index": 6,
+      "source_path": "assets/store_promo/generated/ja/android/06.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ja/6.png",
+      "previous_sha256": "430e0a71c2c88a05063fe53d2804e356528814d4ad455f491210fb0a4769ce88",
+      "sha256": "dee3bdd775dc02c7f8ea195b6c4c6f78b0f21e8b40b48654101d2920f14155e5",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ja/6.png"
+    },
+    {
+      "locale": "ko",
+      "index": 1,
+      "source_path": "assets/store_promo/generated/ko/android/01.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ko/1.png",
+      "previous_sha256": "eb6a53eeff336152609b06d198fe64145e919a2daa8fdd2348979f4c8c1a1db1",
+      "sha256": "426b98081716d3bbd078bc198bb15772005252a45d00c75862531f8a76378d10",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ko/1.png"
+    },
+    {
+      "locale": "ko",
+      "index": 2,
+      "source_path": "assets/store_promo/generated/ko/android/02.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ko/2.png",
+      "previous_sha256": "04996fc299a249941a18063a42ec2d506509cee94d9fc255220754c6739d0b5f",
+      "sha256": "a2eeb01bb51d350e2a294a8104a570932681e163989a6caa416c01d228748c24",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ko/2.png"
+    },
+    {
+      "locale": "ko",
+      "index": 3,
+      "source_path": "assets/store_promo/generated/ko/android/03.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ko/3.png",
+      "previous_sha256": "648777a9b6bdebb26ac61ad67e3007f86f2d0a7bebc4abfd40471b4b616d644e",
+      "sha256": "88aee4b331a36661b30b16d6b70871c18dcc8ae6c0546dc88bdf2c68cddd7cbe",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ko/3.png"
+    },
+    {
+      "locale": "ko",
+      "index": 4,
+      "source_path": "assets/store_promo/generated/ko/android/04.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ko/4.png",
+      "previous_sha256": "bf6bf49e947641f51c5b5d60bfb7cb5b05752dd02084025df2946504fd040d07",
+      "sha256": "9493fe3ebdc4f78df8b2c6e31f554d02d5cf55fda7f53b6abd6d1cba04ed057f",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ko/4.png"
+    },
+    {
+      "locale": "ko",
+      "index": 5,
+      "source_path": "assets/store_promo/generated/ko/android/05.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ko/5.png",
+      "previous_sha256": "c5ba0314c4f8f6a71d6680f96e1b91429832561462a17a962d8d8b8008819ebd",
+      "sha256": "91502f4aa7571488597f5b936898b29c5e77d4df3a33a47997b0912360412498",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ko/5.png"
+    },
+    {
+      "locale": "ko",
+      "index": 6,
+      "source_path": "assets/store_promo/generated/ko/android/06.png",
+      "site_path": "src/content/apps/tagweaver/assets/screenshots/ko/6.png",
+      "previous_sha256": "c6b49aacf8f44f01bc6d639e1ca9a1cd97d12805aea6dab68d96649066c4075d",
+      "sha256": "9b94318eb0abfd807fd9d9f4e4481d28692289749315524c634c0c2041cee458",
+      "size": [
+        1080,
+        2160
+      ],
+      "public_path": "/app-assets/tagweaver/assets/screenshots/ko/6.png"
+    }
+  ],
+  "claim_limit": "historical Android2.5.4(98) localized captures; current-source compatibility reviewed separately; not a new OS/runtime/binary recapture or same99candidate approval",
+  "original_app_candidate_unchanged": true
+}
