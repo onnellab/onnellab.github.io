@@ -4,6 +4,9 @@ test('VaultXT landing keeps five localized Android screenshots and a matching vi
   for (const locale of ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de', 'fr', 'es']) {
     const segment = locale === 'en' ? '' : `${locale.toLowerCase()}/`;
     await page.goto(`/apps/vaultxt/${segment}`);
+    await expect(page.locator('.faq-band details')).toHaveCount(4);
+    await expect(page.locator('.content-band')).not.toContainText(/\bPro\b|\bfree\b|무료|無料|免费|免費|gratuit|kostenlos/iu);
+    await expect(page.locator('.faq-band')).not.toContainText(/\bPro\b|\bfree\b|무료|無料|免费|免費|gratuit|kostenlos/iu);
     const images = page.locator('.screenshot-row img');
     await expect(images).toHaveCount(5);
     for (let index = 0; index < 5; index++) {

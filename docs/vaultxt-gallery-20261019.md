@@ -49,3 +49,13 @@ the local source files in exact decoded pixels, so this report does **not** clai
 the latest candidate's Apple artwork is public or verified. Pending submissions
 and non-public console state are outside this public inspection. No store
 replacement, submission, release, or other mutation was performed.
+
+## Landing-copy follow-up
+
+The user requested removal of free/Pro comparisons from the VaultXT landing.
+In all nine locales, only the final comparison paragraph in `landingBody` and
+the pricing FAQ were changed. The fourth FAQ now explains the already-supported
+snapshot review/restore feature, preserving the shared four-FAQ validator.
+The three other FAQs and all separate store-description, SEO and artwork fields
+remain unchanged. No unlimited/free-feature claims were added. Source and
+desktop/mobile browser regressions check comparison removal and keep Android5.

@@ -12,7 +12,7 @@
     "preview": "astro preview",
     "test:blog-template": "node --test scripts/blog-template-contract.mjs",
     "test:brand": "node --test scripts/brand-assets-contract.mjs",
-    "test:artwork": "node --test --test-concurrency=1 scripts/screenshot-versions-contract.mjs scripts/reviewed-screenshot-gallery-contract.mjs scripts/reviewed-screenshot-gallery-build-contract.mjs scripts/duo-screenshots-contract.mjs",
+    "test:artwork": "node --test --test-concurrency=1 scripts/screenshot-versions-contract.mjs scripts/reviewed-screenshot-gallery-contract.mjs scripts/reviewed-screenshot-gallery-build-contract.mjs scripts/duo-screenshots-contract.mjs scripts/vaultxt-landing-copy-contract.mjs",
     "test:visual": "playwright test",
     "check:i18n-quality": "node scripts/check-localization-quality.mjs",
     "audit:security": "npm audit --package-lock-only --include=dev --audit-level=high",

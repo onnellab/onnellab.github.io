@@ -19,6 +19,11 @@ FAQ count and feature-count ranges are editorial choices, not search-engine rank
 - Papira body: `src/lib/papira-description.ts`; FAQs: `src/lib/papira.ts` and the Papira records in `src/lib/extended-product-localizations.ts`.
 - VaultXT: `landingBody` and `faq` in `src/content/apps/vaultxt/promo-copy.json`. Do not silently rewrite its separate store metadata or screenshots when editing the web page.
 
+VaultXT owner-directed exception (2026-10-19): omit free/Pro comparison copy
+from the landing body and FAQs. Preserve functional and file-handling constraints,
+the four-FAQ structure, and separate store metadata. Do not replace the removed
+comparison with claims of unlimited usage or free access to paid capabilities.
+
 The shared template validates the structure at build time. `tests/product-presentation.spec.ts` checks all products and languages, visible features against structured data, FAQ behavior, locale links, and layout overflow. Existing product-specific tests still protect semantic boundaries.
 
 Run `npm run build`, `npm run check:i18n-quality`, and `npx playwright test` before final delivery. Do not bypass failures by deleting product-safety assertions. Keep meaningful independent edits committed and pushed on `main`.
