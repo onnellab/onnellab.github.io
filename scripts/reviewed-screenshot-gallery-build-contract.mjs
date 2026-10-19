@@ -47,6 +47,24 @@ test('real Astro build separates homepage originals from native-sized reviewed d
         }
       }
       assert.equal(images.filter((image) => image['data-home-artwork-source'] === 'legacy').length, 7);
+      const vaultxt = fs.readFileSync(path.join(dir, 'dist/apps/vaultxt', segment, 'index.html'), 'utf8');
+      const vaultxtImages = [...vaultxt.matchAll(/<img\s[^>]*>/g)].map((match) => attributes(match[0]));
+      const vaultxtGallery = vaultxtImages.filter((image) => image.alt?.startsWith('VaultXT —'));
+      assert.equal(vaultxtGallery.length, 5, `${locale}: one reviewed gallery, not three device galleries`);
+      assert.equal(new Set(vaultxtGallery.map((image) => image.src)).size, 5);
+      assert.ok(vaultxtGallery.every((image) => image.src.includes(`/assets/screenshots/${locale}/`)));
+      assert.ok(!vaultxt.includes('/assets/duo-screenshots/'), `${locale}: no appended Duo repeats`);
+      const vaultxtReceipt = JSON.parse(fs.readFileSync(path.join(dir, 'public/release-artwork/vaultxt.json'), 'utf8'));
+      assert.equal(vaultxtReceipt.source_selection.kind, 'android', 'VaultXT landing uses Android artwork only');
+      for (const asset of vaultxtReceipt.assets.filter((asset) => asset.locale === locale)) {
+        const image = vaultxtGallery[asset.index - 1];
+        assert.equal(image.src, `/app-assets/vaultxt/assets/screenshots/${asset.site_path}?v=${asset.sha256}`);
+        assert.deepEqual([Number(image.width), Number(image.height)], asset.size);
+      }
+      for (const slot of ['outer', 'inner']) {
+        assert.ok(fs.existsSync(path.join(dir, 'dist/app-assets/vaultxt/assets/duo-screenshots', locale, slot, '01.png')),
+          `${locale}/${slot}: retain published Duo asset URLs independently of the default gallery`);
+      }
     }
     // A receipt remaining after accidental file replacement stops publication.
     fs.appendFileSync(path.join(dir, 'src/content/apps/tagweaver/assets/screenshots/en/1.png'), 'changed');

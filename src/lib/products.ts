@@ -222,7 +222,10 @@ export function getProductPageData(slug: string, locale: Locale): ProductPageDat
   const canonicalPath = allProductRouteFor(source.slug, locale);
   const screenshotPaths = getScreenshotRoutePaths(source, locale);
   const reviewedScreenshots = reviewedScreenshotGallery(source.contentDir, source.slug, locale);
-  const duoScreenshots = duoScreenshotGallery(source.contentDir, source.slug, locale) ?? [];
+  // Reviewed landing artwork is one platform gallery, never a concatenation
+  // of the same features captured on additional devices.
+  const duoScreenshots = reviewedScreenshots === undefined
+    ? duoScreenshotGallery(source.contentDir, source.slug, locale) ?? [] : [];
   const baseScreenshotCount = screenshotPaths.length - duoScreenshots.length;
   const screenshotDimensionsByPath = reviewedScreenshots === undefined && duoScreenshots.length === 0
     ? undefined
@@ -365,8 +368,7 @@ export function getAppAssets(): Array<{ routePath: string; filePath: string }> {
 export function getScreenshotRoutePaths(source: ProductSource, locale: Locale): string[] {
   const reviewed = reviewedScreenshotGallery(source.contentDir, source.slug, locale);
   if (reviewed !== undefined) {
-    const duo = duoScreenshotGallery(source.contentDir, source.slug, locale) ?? [];
-    return [...reviewed.map((image) => image.src), ...duo.map((image) => image.src)];
+    return reviewed.map((image) => image.src);
   }
   const screenshotLocale = fs.existsSync(path.resolve(source.contentDir, 'assets/screenshots', locale))
     ? locale
@@ -395,7 +397,10 @@ function getScreenshotAssets(): Array<{ routePath: string; filePath: string }> {
   const assets = new Map<string, string>();
   for (const source of getProductSources()) {
     for (const locale of allSiteLocales) {
-      for (const routePath of getScreenshotRoutePaths(source, locale)) {
+      // Keep existing device-specific asset URLs valid without appending them
+      // to the reviewed landing gallery. Sidecar validation remains fail closed.
+      const duo = duoScreenshotGallery(source.contentDir, source.slug, locale) ?? [];
+      for (const routePath of [...getScreenshotRoutePaths(source, locale), ...duo.map((image) => image.src)]) {
         const assetPath = screenshotAssetPath(routePath);
         const normalizedRoute = assetPath.replace(/^\/+/, '');
         assets.set(

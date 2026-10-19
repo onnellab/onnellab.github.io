@@ -159,7 +159,8 @@ test('homepage consumes the shared reader and exposes verification markers witho
   assert.match(home, /data-home-artwork-contract="1"/);
   assert.equal((home.match(/data-home-featured-slug=/g) ?? []).length, 3);
   assert.equal((home.match(/data-home-artwork-source=/g) ?? []).length, 3);
-  assert.match(products, /if \(reviewed !== undefined\) \{\s+const duo = duoScreenshotGallery\(source\.contentDir, source\.slug, locale\) \?\? \[\];\s+return \[\.\.\.reviewed\.map\(\(image\) => image\.src\), \.\.\.duo\.map\(\(image\) => image\.src\)\];/);
+  assert.match(products, /if \(reviewed !== undefined\) \{\s+return reviewed\.map\(\(image\) => image\.src\);/);
+  assert.match(products, /const duoScreenshots = reviewedScreenshots === undefined\s+\? duoScreenshotGallery\(source\.contentDir, source\.slug, locale\) \?\? \[\] : \[\];/);
   assert.match(products, /return \[\.\.\.legacy, \.\.\.duo\.map\(\(image\) => image\.src\)\];/);
 });
 
