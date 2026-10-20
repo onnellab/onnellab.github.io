@@ -1,0 +1,751 @@
+{
+  "schema": 1,
+  "version": "2026-10-20.1",
+  "coverage": {
+    "firstYear": 2026,
+    "lastYear": 2035,
+    "nationalCountries": [
+      "KR"
+    ],
+    "internationalScope": "Selected UN-system public-interest observances; not national holiday declarations.",
+    "completeness": "curatedMajorSubset",
+    "verifiedOn": "2026-10-20",
+    "historicalCoverage": false,
+    "futureDates": "Projections of the verified recurring rules, subject to later legal or source changes.",
+    "unsupported": "National and family observances outside KR; exhaustive national, cultural, religious, regional and commercial-day catalogues.",
+    "refreshPolicy": "Bundled versioned supplement; not automatically refreshed by the public-holiday feed.",
+    "classification": "Observance labels only. Never creates a public-holiday or non-working-day flag."
+  },
+  "entries": [
+    {
+      "id": "kr.arbor_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "national",
+      "rule": {
+        "type": "fixed",
+        "month": 4,
+        "day": 5
+      },
+      "names": {
+        "ko": "식목일",
+        "en": "Arbor Day",
+        "ja": "植樹の日",
+        "zh_Hant": "植樹節",
+        "zh_Hans": "植树节",
+        "pt_BR": "Dia da Árvore",
+        "de": "Tag des Baumes",
+        "fr": "Journée de l’arbre",
+        "es": "Día del Árbol"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.persons_with_disabilities_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "national",
+      "rule": {
+        "type": "fixed",
+        "month": 4,
+        "day": 20
+      },
+      "names": {
+        "ko": "장애인의 날",
+        "en": "Day of Persons with Disabilities",
+        "ja": "障害者の日",
+        "zh_Hant": "身心障礙者日",
+        "zh_Hans": "残疾人日",
+        "pt_BR": "Dia das Pessoas com Deficiência",
+        "de": "Tag der Menschen mit Behinderungen",
+        "fr": "Journée des personnes handicapées",
+        "es": "Día de las Personas con Discapacidad"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.science_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "national",
+      "rule": {
+        "type": "fixed",
+        "month": 4,
+        "day": 21
+      },
+      "names": {
+        "ko": "과학의 날",
+        "en": "Science Day",
+        "ja": "科学の日",
+        "zh_Hant": "科學日",
+        "zh_Hans": "科学日",
+        "pt_BR": "Dia da Ciência",
+        "de": "Tag der Wissenschaft",
+        "fr": "Journée de la science",
+        "es": "Día de la Ciencia"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.parents_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "family",
+      "rule": {
+        "type": "fixed",
+        "month": 5,
+        "day": 8
+      },
+      "names": {
+        "ko": "어버이날",
+        "en": "Parents’ Day",
+        "ja": "父母の日",
+        "zh_Hant": "父母節",
+        "zh_Hans": "父母节",
+        "pt_BR": "Dia dos Pais e das Mães",
+        "de": "Elterntag",
+        "fr": "Journée des parents",
+        "es": "Día de las Madres y los Padres"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.teachers_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "family",
+      "rule": {
+        "type": "fixed",
+        "month": 5,
+        "day": 15
+      },
+      "names": {
+        "ko": "스승의 날",
+        "en": "Teachers’ Day",
+        "ja": "先生に感謝する日",
+        "zh_Hant": "教師節",
+        "zh_Hans": "教师节",
+        "pt_BR": "Dia dos Professores",
+        "de": "Tag der Lehrkräfte",
+        "fr": "Journée des enseignants",
+        "es": "Día del Docente"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.king_sejong_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "national",
+      "rule": {
+        "type": "fixed",
+        "month": 5,
+        "day": 15
+      },
+      "names": {
+        "ko": "세종대왕 나신 날",
+        "en": "King Sejong’s Birthday",
+        "ja": "世宗大王生誕の日",
+        "zh_Hant": "世宗大王誕辰",
+        "zh_Hans": "世宗大王诞辰",
+        "pt_BR": "Aniversário do Rei Sejong",
+        "de": "Geburtstag von König Sejong",
+        "fr": "Anniversaire de la naissance du roi Sejong",
+        "es": "Natalicio del rey Sejong"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.coming_of_age_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "family",
+      "rule": {
+        "type": "nthWeekday",
+        "month": 5,
+        "weekday": 1,
+        "ordinal": 3
+      },
+      "names": {
+        "ko": "성년의 날",
+        "en": "Coming-of-Age Day",
+        "ja": "成人の日（韓国）",
+        "zh_Hant": "成年日",
+        "zh_Hans": "成年日",
+        "pt_BR": "Dia da Maioridade",
+        "de": "Tag der Volljährigkeit",
+        "fr": "Journée du passage à l’âge adulte",
+        "es": "Día de la Mayoría de Edad"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.married_couples_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "family",
+      "rule": {
+        "type": "fixed",
+        "month": 5,
+        "day": 21
+      },
+      "names": {
+        "ko": "부부의 날",
+        "en": "Married Couples’ Day",
+        "ja": "夫婦の日",
+        "zh_Hant": "夫妻日",
+        "zh_Hans": "夫妻日",
+        "pt_BR": "Dia dos Cônjuges",
+        "de": "Tag der Ehepaare",
+        "fr": "Journée des couples mariés",
+        "es": "Día de las Parejas Casadas"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.korean_war_remembrance",
+      "countries": [
+        "KR"
+      ],
+      "category": "national",
+      "rule": {
+        "type": "fixed",
+        "month": 6,
+        "day": 25
+      },
+      "names": {
+        "ko": "6·25전쟁일",
+        "en": "Korean War Remembrance Day",
+        "ja": "朝鮮戦争の日",
+        "zh_Hant": "韓戰紀念日",
+        "zh_Hans": "朝鲜战争纪念日",
+        "pt_BR": "Dia de Memória da Guerra da Coreia",
+        "de": "Gedenktag des Koreakriegs",
+        "fr": "Commémoration de la guerre de Corée",
+        "es": "Conmemoración de la Guerra de Corea"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.older_persons_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "family",
+      "rule": {
+        "type": "fixed",
+        "month": 10,
+        "day": 2
+      },
+      "names": {
+        "ko": "노인의 날",
+        "en": "Older Persons’ Day",
+        "ja": "高齢者の日",
+        "zh_Hant": "敬老日",
+        "zh_Hans": "敬老日",
+        "pt_BR": "Dia das Pessoas Idosas",
+        "de": "Tag der älteren Menschen",
+        "fr": "Journée des personnes âgées",
+        "es": "Día de las Personas Mayores"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.culture_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "national",
+      "rule": {
+        "type": "nthWeekday",
+        "month": 10,
+        "weekday": 6,
+        "ordinal": 3
+      },
+      "names": {
+        "ko": "문화의 날",
+        "en": "Culture Day",
+        "ja": "文化の日（韓国）",
+        "zh_Hant": "文化日",
+        "zh_Hans": "文化日",
+        "pt_BR": "Dia da Cultura",
+        "de": "Tag der Kultur",
+        "fr": "Journée de la culture",
+        "es": "Día de la Cultura"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.student_independence_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "national",
+      "rule": {
+        "type": "fixed",
+        "month": 11,
+        "day": 3
+      },
+      "names": {
+        "ko": "학생독립운동 기념일",
+        "en": "Student Independence Movement Day",
+        "ja": "学生独立運動記念日",
+        "zh_Hant": "學生獨立運動紀念日",
+        "zh_Hans": "学生独立运动纪念日",
+        "pt_BR": "Dia do Movimento Estudantil pela Independência",
+        "de": "Gedenktag der studentischen Unabhängigkeitsbewegung",
+        "fr": "Journée du mouvement étudiant pour l’indépendance",
+        "es": "Día del Movimiento Estudiantil por la Independencia"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.farmers_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "national",
+      "rule": {
+        "type": "fixed",
+        "month": 11,
+        "day": 11
+      },
+      "names": {
+        "ko": "농업인의 날",
+        "en": "Farmers’ Day",
+        "ja": "農業者の日",
+        "zh_Hant": "農民節",
+        "zh_Hans": "农民节",
+        "pt_BR": "Dia dos Agricultores",
+        "de": "Tag der Landwirtinnen und Landwirte",
+        "fr": "Journée des agriculteurs",
+        "es": "Día de los Agricultores"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "kr.consumer_day",
+      "countries": [
+        "KR"
+      ],
+      "category": "national",
+      "rule": {
+        "type": "fixed",
+        "month": 12,
+        "day": 3
+      },
+      "names": {
+        "ko": "소비자의 날",
+        "en": "Consumer Day",
+        "ja": "消費者の日",
+        "zh_Hant": "消費者日",
+        "zh_Hans": "消费者日",
+        "pt_BR": "Dia do Consumidor",
+        "de": "Tag der Verbraucher",
+        "fr": "Journée des consommateurs",
+        "es": "Día de las Personas Consumidoras"
+      },
+      "sourceUrl": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110201&flSeq=156961859&gubun=",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.education_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 1,
+        "day": 24
+      },
+      "names": {
+        "ko": "세계 교육의 날",
+        "en": "International Day of Education",
+        "ja": "国際教育デー",
+        "zh_Hant": "國際教育日",
+        "zh_Hans": "国际教育日",
+        "pt_BR": "Dia Internacional da Educação",
+        "de": "Internationaler Tag der Bildung",
+        "fr": "Journée internationale de l’éducation",
+        "es": "Día Internacional de la Educación"
+      },
+      "sourceUrl": "https://www.un.org/en/observances/education-day/background",
+      "verifiedOn": "2026-10-20",
+      "validFromYear": 2019
+    },
+    {
+      "id": "international.womens_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 3,
+        "day": 8
+      },
+      "names": {
+        "ko": "세계 여성의 날",
+        "en": "International Women’s Day",
+        "ja": "国際女性デー",
+        "zh_Hant": "國際婦女節",
+        "zh_Hans": "国际妇女节",
+        "pt_BR": "Dia Internacional da Mulher",
+        "de": "Internationaler Frauentag",
+        "fr": "Journée internationale des droits des femmes",
+        "es": "Día Internacional de la Mujer"
+      },
+      "sourceUrl": "https://www.un.org/en/observances/womens-day",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.water_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 3,
+        "day": 22
+      },
+      "names": {
+        "ko": "세계 물의 날",
+        "en": "World Water Day",
+        "ja": "世界水の日",
+        "zh_Hant": "世界水日",
+        "zh_Hans": "世界水日",
+        "pt_BR": "Dia Mundial da Água",
+        "de": "Weltwassertag",
+        "fr": "Journée mondiale de l’eau",
+        "es": "Día Mundial del Agua"
+      },
+      "sourceUrl": "https://www.unwater.org/our-work/world-water-day",
+      "verifiedOn": "2026-10-20",
+      "validFromYear": 1993
+    },
+    {
+      "id": "international.health_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 4,
+        "day": 7
+      },
+      "names": {
+        "ko": "세계 보건의 날",
+        "en": "World Health Day",
+        "ja": "世界保健デー",
+        "zh_Hant": "世界衛生日",
+        "zh_Hans": "世界卫生日",
+        "pt_BR": "Dia Mundial da Saúde",
+        "de": "Weltgesundheitstag",
+        "fr": "Journée mondiale de la santé",
+        "es": "Día Mundial de la Salud"
+      },
+      "sourceUrl": "https://www.who.int/campaigns/world-health-day",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.mother_earth_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 4,
+        "day": 22
+      },
+      "names": {
+        "ko": "지구의 날",
+        "en": "International Mother Earth Day",
+        "ja": "地球の日",
+        "zh_Hant": "世界地球日",
+        "zh_Hans": "世界地球日",
+        "pt_BR": "Dia Internacional da Mãe Terra",
+        "de": "Internationaler Tag der Erde",
+        "fr": "Journée internationale de la Terre nourricière",
+        "es": "Día Internacional de la Madre Tierra"
+      },
+      "sourceUrl": "https://www.un.org/en/observances/earth-day/background",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.families_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 5,
+        "day": 15
+      },
+      "names": {
+        "ko": "세계 가정의 날",
+        "en": "International Day of Families",
+        "ja": "国際家族デー",
+        "zh_Hant": "國際家庭日",
+        "zh_Hans": "国际家庭日",
+        "pt_BR": "Dia Internacional das Famílias",
+        "de": "Internationaler Tag der Familie",
+        "fr": "Journée internationale des familles",
+        "es": "Día Internacional de las Familias"
+      },
+      "sourceUrl": "https://www.un.org/en/observances/international-day-of-families/",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.environment_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 6,
+        "day": 5
+      },
+      "names": {
+        "ko": "세계 환경의 날",
+        "en": "World Environment Day",
+        "ja": "世界環境デー",
+        "zh_Hant": "世界環境日",
+        "zh_Hans": "世界环境日",
+        "pt_BR": "Dia Mundial do Meio Ambiente",
+        "de": "Weltumwelttag",
+        "fr": "Journée mondiale de l’environnement",
+        "es": "Día Mundial del Medio Ambiente"
+      },
+      "sourceUrl": "https://www.unesco.org/en/days/environment?hub=180536",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.oceans_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 6,
+        "day": 8
+      },
+      "names": {
+        "ko": "세계 해양의 날",
+        "en": "World Oceans Day",
+        "ja": "世界海洋デー",
+        "zh_Hant": "世界海洋日",
+        "zh_Hans": "世界海洋日",
+        "pt_BR": "Dia Mundial dos Oceanos",
+        "de": "Welttag der Ozeane",
+        "fr": "Journée mondiale des océans",
+        "es": "Día Mundial de los Océanos"
+      },
+      "sourceUrl": "https://www.un.org/en/observances/list-days-weeks",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.refugee_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 6,
+        "day": 20
+      },
+      "names": {
+        "ko": "세계 난민의 날",
+        "en": "World Refugee Day",
+        "ja": "世界難民の日",
+        "zh_Hant": "世界難民日",
+        "zh_Hans": "世界难民日",
+        "pt_BR": "Dia Mundial do Refugiado",
+        "de": "Weltflüchtlingstag",
+        "fr": "Journée mondiale des réfugiés",
+        "es": "Día Mundial de las Personas Refugiadas"
+      },
+      "sourceUrl": "https://www.un.org/en/observances/list-days-weeks",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.peace_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 9,
+        "day": 21
+      },
+      "names": {
+        "ko": "세계 평화의 날",
+        "en": "International Day of Peace",
+        "ja": "国際平和デー",
+        "zh_Hant": "國際和平日",
+        "zh_Hans": "国际和平日",
+        "pt_BR": "Dia Internacional da Paz",
+        "de": "Internationaler Tag des Friedens",
+        "fr": "Journée internationale de la paix",
+        "es": "Día Internacional de la Paz"
+      },
+      "sourceUrl": "https://www.un.org/en/observances/international-day-peace",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.older_persons_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 10,
+        "day": 1
+      },
+      "names": {
+        "ko": "세계 노인의 날",
+        "en": "International Day of Older Persons",
+        "ja": "国際高齢者デー",
+        "zh_Hant": "國際老年人日",
+        "zh_Hans": "国际老年人日",
+        "pt_BR": "Dia Internacional das Pessoas Idosas",
+        "de": "Internationaler Tag der älteren Menschen",
+        "fr": "Journée internationale des personnes âgées",
+        "es": "Día Internacional de las Personas Mayores"
+      },
+      "sourceUrl": "https://www.un.org/en/observances/list-days-weeks",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.teachers_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 10,
+        "day": 5
+      },
+      "names": {
+        "ko": "세계 교사의 날",
+        "en": "World Teachers’ Day",
+        "ja": "世界教師デー",
+        "zh_Hant": "世界教師日",
+        "zh_Hans": "世界教师日",
+        "pt_BR": "Dia Mundial dos Professores",
+        "de": "Welttag der Lehrkräfte",
+        "fr": "Journée mondiale des enseignants",
+        "es": "Día Mundial de los Docentes"
+      },
+      "sourceUrl": "https://www.unesco.org/en/days/teachers?hub=66657",
+      "verifiedOn": "2026-10-20",
+      "validFromYear": 1994
+    },
+    {
+      "id": "international.childrens_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 11,
+        "day": 20
+      },
+      "names": {
+        "ko": "세계 어린이의 날",
+        "en": "World Children’s Day",
+        "ja": "世界子どもの日",
+        "zh_Hant": "世界兒童日",
+        "zh_Hans": "世界儿童日",
+        "pt_BR": "Dia Mundial da Criança",
+        "de": "Internationaler Tag der Kinderrechte",
+        "fr": "Journée mondiale de l’enfance",
+        "es": "Día Mundial de la Infancia"
+      },
+      "sourceUrl": "https://www.un.org/en/observances/world-childrens-day/background",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.persons_with_disabilities_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 12,
+        "day": 3
+      },
+      "names": {
+        "ko": "세계 장애인의 날",
+        "en": "International Day of Persons with Disabilities",
+        "ja": "国際障害者デー",
+        "zh_Hant": "國際身心障礙者日",
+        "zh_Hans": "国际残疾人日",
+        "pt_BR": "Dia Internacional das Pessoas com Deficiência",
+        "de": "Internationaler Tag der Menschen mit Behinderungen",
+        "fr": "Journée internationale des personnes handicapées",
+        "es": "Día Internacional de las Personas con Discapacidad"
+      },
+      "sourceUrl": "https://www.un.org/en/observances/day-of-persons-with-disabilities",
+      "verifiedOn": "2026-10-20"
+    },
+    {
+      "id": "international.human_rights_day",
+      "countries": [
+        "*"
+      ],
+      "category": "international",
+      "rule": {
+        "type": "fixed",
+        "month": 12,
+        "day": 10
+      },
+      "names": {
+        "ko": "세계 인권의 날",
+        "en": "Human Rights Day",
+        "ja": "人権デー",
+        "zh_Hant": "人權日",
+        "zh_Hans": "人权日",
+        "pt_BR": "Dia dos Direitos Humanos",
+        "de": "Tag der Menschenrechte",
+        "fr": "Journée des droits de l’homme",
+        "es": "Día de los Derechos Humanos"
+      },
+      "sourceUrl": "https://www.un.org/observances/human-rights-day",
+      "verifiedOn": "2026-10-20"
+    }
+  ]
+}
