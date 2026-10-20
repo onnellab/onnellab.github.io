@@ -316,16 +316,17 @@
     "appName": "TagWeaver",
     "version": "2.5.4",
     "tag": "v2.5.4",
-    "platform": "Android",
-    "releasedDate": "2026-10-18",
-    "title": "TagWeaver v2.5.4 (Android)",
-    "summary": "Latest public store release of TagWeaver 2.5.4 for Android.",
-    "summaryKo": "TagWeaver 2.5.4 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-10-20",
+    "title": "TagWeaver v2.5.4 (iOS · Android)",
+    "summary": "Latest public store release of TagWeaver 2.5.4 for iOS · Android.",
+    "summaryKo": "TagWeaver 2.5.4 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
     "changes": [
-      "TagWeaver 2.5.4 is now available on Android."
+      "TagWeaver 2.5.4 is now available on iOS · Android."
     ],
     "changesKo": [
-      "TagWeaver 2.5.4 버전이 Android에 공개됐어요."
+      "Pro를 구매하기 전에 현재 스토어 가격을 확인할 수 있어요.",
+      "가격을 다시 불러오거나 구매를 복원하는 흐름을 더 안정적으로 다듬었어요."
     ],
     "internalGitHubUrl": ""
   },
