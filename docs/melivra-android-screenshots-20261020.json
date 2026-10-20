@@ -1,0 +1,689 @@
+{
+  "schema_version": 1,
+  "app_slug": "melivra",
+  "source_export": "assets/store_promo/exports_20261020/manifest.json",
+  "source_manifest_sha256": "9a30105a3cf893d23bed18f58c908648ecd8fdb8125dee7b7cf1e675313c62f0",
+  "source_commit": "4769feece508da02fb94c174f2b83086dc149b21",
+  "scope": "Android edited screenshots for app detail pages only; nine locales, five frames each",
+  "new_native_captures": 18,
+  "reused_unchanged_screens": 27,
+  "assets": [
+    {
+      "locale": "de",
+      "index": 1,
+      "source_path": "assets/store_promo/exports_20261020/de/android/01.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/de/1.png",
+      "previous_sha256": "dd115856507d5211f1d2b7b55ee8dd1b5328aac74639c976c7c77ae8bf8431b7",
+      "sha256": "2ae283cfb6c3e9231592a3bb4a44f6f6f2fb1dc6fede80e5092dbbc407177690",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "de",
+      "index": 2,
+      "source_path": "assets/store_promo/exports_20261020/de/android/02.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/de/2.png",
+      "previous_sha256": "718b11194e51429adcd906f3d8fc1bcd1c281eb07bade92f838d1e5736e50d08",
+      "sha256": "595456a1dacfef31ce6ce445f7fd797b468e26e20b50570ee4260a5f86c3c5a9",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "de",
+      "index": 3,
+      "source_path": "assets/store_promo/exports_20261020/de/android/03.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/de/3.png",
+      "previous_sha256": "6fd7939f0e6b4542cab2a14b8482c92566d328fa5f40c29948d83ab618bf3d9a",
+      "sha256": "ec4b3c9c1bdb07299348e2d3e57c1f9bf7037efd089e62119bbcdc957203445b",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "de",
+      "index": 4,
+      "source_path": "assets/store_promo/exports_20261020/de/android/04.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/de/4.png",
+      "previous_sha256": "770b0ca83636b7cc9828832f507b8013aeb39f25b4f4cd1b3963ef4711712c8c",
+      "sha256": "e329b691f5629072a52239faa2b08af3ced4b8e10dd75f7f6ffb0b43633c2a82",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "de",
+      "index": 5,
+      "source_path": "assets/store_promo/exports_20261020/de/android/05.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/de/5.png",
+      "previous_sha256": "27dbd735887b20bd9a371b743eeac6f759acb434d251bfbe3404ee7f3d970245",
+      "sha256": "16028af8cc706188311adf1856176abbf90c60723247b1a7c326f8b6170185e0",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "en",
+      "index": 1,
+      "source_path": "assets/store_promo/exports_20261020/en/android/01.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/en/1.png",
+      "previous_sha256": "3aa4506b44e41e90328dce1da010e4ace192ae52bbc04e8292d37ef0a446fe98",
+      "sha256": "b1d85d133d32a8462946a6fb8104d39b763eacf1c94e1e84d881775f5d5dc9bd",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "en",
+      "index": 2,
+      "source_path": "assets/store_promo/exports_20261020/en/android/02.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/en/2.png",
+      "previous_sha256": "3fc2e1d334fe7ff6ce9aedfef0f23c8a6c16ec21c05e2ebb9b085d82a82a9102",
+      "sha256": "b37d8dfe44e1c5adb8fd6c80303a1f5c9c63dc9cc85415be4504f58fd29425ab",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "en",
+      "index": 3,
+      "source_path": "assets/store_promo/exports_20261020/en/android/03.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/en/3.png",
+      "previous_sha256": "34316a2fc2fe46b690a3a931163cc41362291f0faeccfbc481b1db3abbac055e",
+      "sha256": "aaba2d00d57a9ba47802c61be8ef98413a3ef1277c3850c154188e845eae5ce3",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "en",
+      "index": 4,
+      "source_path": "assets/store_promo/exports_20261020/en/android/04.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/en/4.png",
+      "previous_sha256": "746e87f7a120f00a8f711efeefe87a8a2319ac14e7466c2234847505077d261f",
+      "sha256": "33edb2252937421500d40cca9469a9f8454ddcecfd619854bf50482f3f6450a8",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "en",
+      "index": 5,
+      "source_path": "assets/store_promo/exports_20261020/en/android/05.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/en/5.png",
+      "previous_sha256": "d808c41ef9d71b489becea65c38fdc897846042cf158abf6f7df8e3ccbcdc9e6",
+      "sha256": "cec9cb5e88797380661bdfa64e5ff28e948d0794576f9af3fe824d0f8a1d6b16",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "es",
+      "index": 1,
+      "source_path": "assets/store_promo/exports_20261020/es/android/01.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/es/1.png",
+      "previous_sha256": "fd3bb96a56e36977bf9fd0aa4a8d30079c1aed19c3258ba96e80bd81d5d7fcfb",
+      "sha256": "9e89437720a746503738b01ed3814798f58378553dab742b8d8d5ba8f8882aa5",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "es",
+      "index": 2,
+      "source_path": "assets/store_promo/exports_20261020/es/android/02.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/es/2.png",
+      "previous_sha256": "706fa301ffbfa7bc092c31cb2abe00c42199c48a603adb957e093cb279dcd960",
+      "sha256": "fe6a59ab4997962c5411a1d4349eb8d4e372b12ef628e242b035ec64d25097e3",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "es",
+      "index": 3,
+      "source_path": "assets/store_promo/exports_20261020/es/android/03.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/es/3.png",
+      "previous_sha256": "8915ed137e5ba582efe7fd8ca23375cfdcb2d9eb406f247583d5dc21f0082224",
+      "sha256": "640536934a010d66b50818e01eeaab3943bf546df3904ed3caba08267538bac7",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "es",
+      "index": 4,
+      "source_path": "assets/store_promo/exports_20261020/es/android/04.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/es/4.png",
+      "previous_sha256": "929b418e7dfdc405469f6842ff4a0ec50bb34f33500038d4a1548067b1ed66af",
+      "sha256": "e0370ababad2fe5e59cb819155a2298f368a8c37c8420e2d2eb69ada858fd2f1",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "es",
+      "index": 5,
+      "source_path": "assets/store_promo/exports_20261020/es/android/05.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/es/5.png",
+      "previous_sha256": "25eba33cbb8d584583954bc65735de1bf7c4987bef8e83445c796e093fea4a38",
+      "sha256": "fd9be322b9b34b245dcc83938aeca783fe5bfa807b3b305da2fc510289ecf8c1",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "fr",
+      "index": 1,
+      "source_path": "assets/store_promo/exports_20261020/fr/android/01.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/fr/1.png",
+      "previous_sha256": "3c28ce30534450f5808a81b0f7f17638ec559990632fc3b7df7d441da9d1a420",
+      "sha256": "0d03504934e3f802bce041a0a25ea639d132180149a74ba2fea460462b556523",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "fr",
+      "index": 2,
+      "source_path": "assets/store_promo/exports_20261020/fr/android/02.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/fr/2.png",
+      "previous_sha256": "e37a4bc2e15309841d495e55687c9b3070bf9bc3cff553a34b16e6fea0e89a5f",
+      "sha256": "0db95ed8173bd52a0467751bb0b7135e2c307799e8e829828d6a76693bf2e80e",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "fr",
+      "index": 3,
+      "source_path": "assets/store_promo/exports_20261020/fr/android/03.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/fr/3.png",
+      "previous_sha256": "e227ef4b9c21cc9bf3f43e39b479ccdf5f7faca08f45b2cbe17987644d49c325",
+      "sha256": "a5e8a3d965f053704f36eb5c9783929c45d655880680a8ec6cd3e8e761786498",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "fr",
+      "index": 4,
+      "source_path": "assets/store_promo/exports_20261020/fr/android/04.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/fr/4.png",
+      "previous_sha256": "02330eacf91a40767814a782a58cbac3d2bf1c975e111c5e2a09b49edfcf3c07",
+      "sha256": "1dba551d654755a209abccc74efaf7a4bfb8d6050d1041f0c6e1e4ce6b72f51b",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "fr",
+      "index": 5,
+      "source_path": "assets/store_promo/exports_20261020/fr/android/05.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/fr/5.png",
+      "previous_sha256": "0b96fdaeb68bd33781c3dc8b3f0792f1526cf756f4b03b17a74001b80d0c7c9c",
+      "sha256": "17ba3e86dc51c42c40dd1e6220270a4e12fde631cb45059226838ab6900cf8e7",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "ja",
+      "index": 1,
+      "source_path": "assets/store_promo/exports_20261020/ja/android/01.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/ja/1.png",
+      "previous_sha256": "6371fa036917a4977fbf1bb6dcd8a2cb2978aa98f90e96458498d7dce4d0569b",
+      "sha256": "9a377d4db9e413f9b4321f7a235cc4f92b5aadd26758b3622b6015ba9530bc42",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "ja",
+      "index": 2,
+      "source_path": "assets/store_promo/exports_20261020/ja/android/02.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/ja/2.png",
+      "previous_sha256": "d4439c4e473bca4af16bd80c680c4166c5d93b1dc864aada7a528f89d56f69fe",
+      "sha256": "a02d9d1309486cf1bbf6371a6822f2374a508b0a841628976c2bbb44c22aae57",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "ja",
+      "index": 3,
+      "source_path": "assets/store_promo/exports_20261020/ja/android/03.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/ja/3.png",
+      "previous_sha256": "a917ee9559e734db2d7b06fd916a1887be8e0185e99a295067f2263aef08ee7c",
+      "sha256": "f2e1a5a2a1ab4b1871bbfc0911e5256fc4ad75029b489868185b5945abc1300e",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "ja",
+      "index": 4,
+      "source_path": "assets/store_promo/exports_20261020/ja/android/04.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/ja/4.png",
+      "previous_sha256": "c0abca2d0162dc4f22ba0260b6b472ec8c444d3e0bc8fcca934530b2f998a1d0",
+      "sha256": "edf698466ebe611bfce1f36bf3c36d0b93ce3f1f0e91446d533a9f8abe59af3c",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "ja",
+      "index": 5,
+      "source_path": "assets/store_promo/exports_20261020/ja/android/05.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/ja/5.png",
+      "previous_sha256": "f27a95f213b68a323a116136358c4ba6c5b66f89d0884a975545d202d888ef75",
+      "sha256": "7c7ebeb6d63b3ab7a8b0b4c3632e38cf4673746c7159392be50ae78b18064d19",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "ko",
+      "index": 1,
+      "source_path": "assets/store_promo/exports_20261020/ko/android/01.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/ko/1.png",
+      "previous_sha256": "9a36477bc3e88daa8c7db11335700d83d317fd203b8dba4cf5135aa45c4ea9d1",
+      "sha256": "323464ba159438f6018c0a8ad29fedb15ea425551943a4bcf5fe182641cbb5d4",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "ko",
+      "index": 2,
+      "source_path": "assets/store_promo/exports_20261020/ko/android/02.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/ko/2.png",
+      "previous_sha256": "97488f4a816f72e9421050b0e50eb9b46a3c5f12f5ec9ae7ac4f91df9fd8e8a4",
+      "sha256": "0c1abbd69fca575b2571ce6042952eea012a2072015a2c5f34712c07b533cf35",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "ko",
+      "index": 3,
+      "source_path": "assets/store_promo/exports_20261020/ko/android/03.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/ko/3.png",
+      "previous_sha256": "d2636b6f33b94aed076cbf2cd89dc80f35c378544e3d7f96b3f7d6aa55c7bf9f",
+      "sha256": "33145264dc2c7449d52c132117a3e781b0063e421fb617b33d036ed0ab425fb0",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "ko",
+      "index": 4,
+      "source_path": "assets/store_promo/exports_20261020/ko/android/04.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/ko/4.png",
+      "previous_sha256": "7a88387e65da31ab5499714968f3c9d04e41da91e61dd6a9bfc9f90e2e03f13c",
+      "sha256": "588c11a7b14b982a8531f8db41803b247230456479f97912b48c43d1f6c0f653",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "ko",
+      "index": 5,
+      "source_path": "assets/store_promo/exports_20261020/ko/android/05.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/ko/5.png",
+      "previous_sha256": "967ee6fcdf075aea1db7b535b27bdc410a486914a4ba4458e480a6464cecadc3",
+      "sha256": "6a031f446fd9e6fb11069e1649b0fc93cc404ff0ac387878c7507c16a4990e50",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 1,
+      "source_path": "assets/store_promo/exports_20261020/pt-BR/android/01.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/pt-BR/1.png",
+      "previous_sha256": "7d0407506cbdacd2e87765bc557a750a0456c980c0366c0d2c277e9f2a2c4ec7",
+      "sha256": "19b49d6251cda281389dde4214e78aee16d1c371828a468ee10072dff23af170",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 2,
+      "source_path": "assets/store_promo/exports_20261020/pt-BR/android/02.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/pt-BR/2.png",
+      "previous_sha256": "a3cff98cd18883d6098b979c2f5e99f9439543b30dc16ac2763eaffe9c576ed3",
+      "sha256": "92cb4166a43dff92ad8e836c54087dc28d918554dee5dcfc269f80b99af0b51a",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 3,
+      "source_path": "assets/store_promo/exports_20261020/pt-BR/android/03.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/pt-BR/3.png",
+      "previous_sha256": "1ce809f298d8bfed84d9e2608d4a19edcd1583fda8616938b8fa53459039338b",
+      "sha256": "d9117d02848ea79b23b4681caec0d828804521fc67f300b68b54f68177d3e451",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 4,
+      "source_path": "assets/store_promo/exports_20261020/pt-BR/android/04.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/pt-BR/4.png",
+      "previous_sha256": "a69cfae68c1607145ada5a0000751686f7e1b25396ac5dba0402008f2c99738e",
+      "sha256": "c362e5f8e8d46aceaf0afd3a86d0f8ec57394dc237f650207038181c1d1fc708",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 5,
+      "source_path": "assets/store_promo/exports_20261020/pt-BR/android/05.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/pt-BR/5.png",
+      "previous_sha256": "fe7cc9f63685685979f45f571e536aada1774f98c6377c9b1ae0f6d42e11ea0c",
+      "sha256": "9c9af6e6f3840be90b9375d9f1185fe53503ae659454544cb7068a11239cba14",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 1,
+      "source_path": "assets/store_promo/exports_20261020/zh-Hans/android/01.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/zh-Hans/1.png",
+      "previous_sha256": "907b958227513ca9d6ef2269133515c4a77165329efe72020338bcc371975966",
+      "sha256": "4ff50e819b9c0f2884079a3941e67ed460862c355523bb23d3e4cba1ed563290",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 2,
+      "source_path": "assets/store_promo/exports_20261020/zh-Hans/android/02.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/zh-Hans/2.png",
+      "previous_sha256": "8f58bf87b68f89e12ce90ee4b4335b5c13f749c917e9cd8a85f03dffc9bdc154",
+      "sha256": "2f9fc66baafda6a85a75be8caf3c934fd42fb10f207c802f74cec3bfb0c7a789",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 3,
+      "source_path": "assets/store_promo/exports_20261020/zh-Hans/android/03.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/zh-Hans/3.png",
+      "previous_sha256": "373c53be7f3ef2a11b65edcd27d44b3a131d88d2cbb46b213a1ee03994337cdb",
+      "sha256": "6b5f62080aee203b27e20a78d483cc9fbdcd7234328c1b697440f050ea13e766",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 4,
+      "source_path": "assets/store_promo/exports_20261020/zh-Hans/android/04.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/zh-Hans/4.png",
+      "previous_sha256": "7996232695a86cad7c0948ba4cf051f0069137f7d3b6149a2c170b8d0ad8e67d",
+      "sha256": "593f820bc56228c1406eab7416f2644f2b1a02d9db62a4dbba3685b1db4b1acb",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 5,
+      "source_path": "assets/store_promo/exports_20261020/zh-Hans/android/05.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/zh-Hans/5.png",
+      "previous_sha256": "da405e459e864cf6cca84b61ac286b2f15b5a8d49e0e881dbe997c2b5a198fa3",
+      "sha256": "17824cc0cd500f72e4f30dd36f776e2a55950e27a0a6f08cfc72d4eac33261e7",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 1,
+      "source_path": "assets/store_promo/exports_20261020/zh-Hant/android/01.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/zh-Hant/1.png",
+      "previous_sha256": "e5c6a3628781517ff7ee5c01e351b7226ad1db7f49fe02354e6c844e0139b7fa",
+      "sha256": "a70c75cd7243429e903321d9fc0f732b9e96a19cc7762dde0edaae3d3060644d",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 2,
+      "source_path": "assets/store_promo/exports_20261020/zh-Hant/android/02.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/zh-Hant/2.png",
+      "previous_sha256": "0e189f5f6e8a30c4ef3714bcde9192e12be955796627c3cb9649119942503f9f",
+      "sha256": "36d15a85629aeadcbc1bc498fc13ec56c35357ac7ab56a6d35ea2ea85dfe38b7",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 3,
+      "source_path": "assets/store_promo/exports_20261020/zh-Hant/android/03.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/zh-Hant/3.png",
+      "previous_sha256": "97d6a47aec6a2090a01318350037dc7a06d8f8a3e7bc861e5cd712ab88eea7ca",
+      "sha256": "e9bd6e2b2275345e323beb512f913e5390a9ac36d501750ccc8407af3977e0e4",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "CURRENT_NATIVE_CAPTURE"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 4,
+      "source_path": "assets/store_promo/exports_20261020/zh-Hant/android/04.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/zh-Hant/4.png",
+      "previous_sha256": "37d6f34fd2e3505628f9aa4cae96c14317d262b5187d211c9d90080d52e054da",
+      "sha256": "da171d069476d457778d12cb8743200abbcb7a273eca6c3efa9993c6a03f9700",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 5,
+      "source_path": "assets/store_promo/exports_20261020/zh-Hant/android/05.png",
+      "site_path": "src/content/apps/melivra/assets/screenshots/zh-Hant/5.png",
+      "previous_sha256": "888a4a156401a097b2a85cec643673ff8692cd1b0b3023e59fd6c091e7efb5fa",
+      "sha256": "f8ecd98fbf99ecdef0d88f109124479696b38e31766859cbe6ba0bb55ba31f5d",
+      "size": [
+        1080,
+        2160
+      ],
+      "freshness": "REUSED_UNCHANGED_SCREEN"
+    }
+  ],
+  "homepage_originals": [
+    {
+      "locale": "de",
+      "source_path": "assets/store_promo/raw/refresh_20261020/android/de-1.png",
+      "site_path": "public/home-assets/screenshots/melivra-android-20261020/de/melivra.png",
+      "sha256": "28d1ca9c3b222ccefb4458bc90e07146ad3e3c7d3048079c669eeae091b5a4fe",
+      "size": [
+        1080,
+        2400
+      ]
+    },
+    {
+      "locale": "en",
+      "source_path": "assets/store_promo/raw/refresh_20261020/android/en-1.png",
+      "site_path": "public/home-assets/screenshots/melivra-android-20261020/en/melivra.png",
+      "sha256": "067ace082828529cb7ec6d280edf4b50b14254b62d0470f7158819df8425a5cd",
+      "size": [
+        1080,
+        2400
+      ]
+    },
+    {
+      "locale": "es",
+      "source_path": "assets/store_promo/raw/refresh_20261020/android/es-1.png",
+      "site_path": "public/home-assets/screenshots/melivra-android-20261020/es/melivra.png",
+      "sha256": "54fdef822571a36fd79d386f7b170a4627f0ba5b22187f744381311d0d03dd7b",
+      "size": [
+        1080,
+        2400
+      ]
+    },
+    {
+      "locale": "fr",
+      "source_path": "assets/store_promo/raw/refresh_20261020/android/fr-1.png",
+      "site_path": "public/home-assets/screenshots/melivra-android-20261020/fr/melivra.png",
+      "sha256": "e5b1a47ea94b63f76cd4317eb795bc9167fed0f393a8af360bf93c5397c26695",
+      "size": [
+        1080,
+        2400
+      ]
+    },
+    {
+      "locale": "ja",
+      "source_path": "assets/store_promo/raw/refresh_20261020/android/ja-1.png",
+      "site_path": "public/home-assets/screenshots/melivra-android-20261020/ja/melivra.png",
+      "sha256": "7b470b3b8fe7f206bd91eee290f6fd6ccb2d19563f73eb6b3120a6fa2d671924",
+      "size": [
+        1080,
+        2400
+      ]
+    },
+    {
+      "locale": "ko",
+      "source_path": "assets/store_promo/raw/refresh_20261020/android/ko-1.png",
+      "site_path": "public/home-assets/screenshots/melivra-android-20261020/ko/melivra.png",
+      "sha256": "24a6a989deac88ba899647a0818c20c5b81ccd943044eafc397dbbed0c9c90af",
+      "size": [
+        1080,
+        2400
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "source_path": "assets/store_promo/raw/refresh_20261020/android/pt-BR-1.png",
+      "site_path": "public/home-assets/screenshots/melivra-android-20261020/pt-BR/melivra.png",
+      "sha256": "e4019e38722dc7400102f192bf21dab7045b80999421510663ec34169959efe9",
+      "size": [
+        1080,
+        2400
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "source_path": "assets/store_promo/raw/refresh_20261020/android/zh-Hans-1.png",
+      "site_path": "public/home-assets/screenshots/melivra-android-20261020/zh-Hans/melivra.png",
+      "sha256": "47b432e8f6d313d7fd39e7d38693ef88e2d1ab9b89703a018417e8e11377db6a",
+      "size": [
+        1080,
+        2400
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "source_path": "assets/store_promo/raw/refresh_20261020/android/zh-Hant-1.png",
+      "site_path": "public/home-assets/screenshots/melivra-android-20261020/zh-Hant/melivra.png",
+      "sha256": "298ec7b01695504a3f00ec8e2cd8ed7bb7968d3b385296b7ba9545bbe66e5762",
+      "size": [
+        1080,
+        2400
+      ]
+    }
+  ]
+}

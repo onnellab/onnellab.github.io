@@ -86,7 +86,7 @@ export function reviewedScreenshotGallery(contentDir, slug, locale, siteRoot = p
 // belongs to app detail galleries. Keep localized originals independently selected.
 const legacyHomeShots = {
   tagweaver: { hero: ['android-20261012', 'tagweaver-editor'], supporting: ['android-20261012', 'tagweaver-library'] },
-  melivra: { hero: ['android-20261012', 'melivra'], supporting: ['android-20261012', 'melivra'] },
+  melivra: { hero: ['melivra-android-20261020', 'melivra'], supporting: ['melivra-android-20261020', 'melivra'] },
   papira: { hero: ['papira-20261014', 'papira-hero'], supporting: ['papira-20261014', 'papira'] },
   quivra: { supporting: ['android-20261012', 'quivra'] }
 };

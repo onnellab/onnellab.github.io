@@ -9,7 +9,7 @@ function expectedHomeScreenshot(slug: string, locale: string, role: 'hero' | 'su
 }
 
 function expectLocalizedArtwork(source: string | null, locale: string) {
-  expect(source).toMatch(new RegExp('^/(?:home-assets/screenshots/(?:android-20261012|papira-20261014)|app-assets/[a-z-]+/assets/screenshots)/' + locale + '/[A-Za-z0-9_-]+\\.png\\?v=[a-f0-9]{64}$'));
+  expect(source).toMatch(new RegExp('^/(?:home-assets/screenshots/(?:android-20261012|papira-20261014|melivra-android-20261020)|app-assets/[a-z-]+/assets/screenshots)/' + locale + '/[A-Za-z0-9_-]+\\.png\\?v=[a-f0-9]{64}$'));
 }
 
 // The compact carousel has clickable dots below the caption rather than

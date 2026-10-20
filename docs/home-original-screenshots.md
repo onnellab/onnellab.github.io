@@ -26,3 +26,7 @@ For future updates, select raw Android sources, revalidate matching locale cover
 - Melivra: keep Android 1.png, the four-cover music selection home; its color is easy to distinguish at thumbnail scale.
 - Papira: use Android 04.png in the Hero so the book preview is more prominent than in 02.png, while retaining 02.png for the separate selected-product card.
 - Hero uses native Android PNGs as-is. The file names are unique to prevent browsers reusing prior cached captures. The older TagWeaver cover PNG remains at its original URL for cached older HTML; the current homepage references the editor and library originals instead. Do not delete any of the three source captures.
+
+## Melivra refresh (2026-10-20)
+
+All nine localized Melivra Hero and Selected Apps cards now select native Android Start captures from `melivra/assets/store_promo/raw/refresh_20261020/android/{locale}-1.png`. Byte-identical originals are stored at `public/home-assets/screenshots/melivra-android-20261020/{locale}/melivra.png` (1080×2400); CSS frames and layout are preserved. Older captures remain for cached pages. See `melivra-android-screenshots-20261020.json` for source hashes and the separate 45 edited detail-gallery frames.
