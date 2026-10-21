@@ -1,0 +1,777 @@
+{
+  "schema_version": 1,
+  "app_slug": "segra",
+  "scope": "App detail screenshots only; Android edited native captures, nine locales, six scenes each",
+  "source_commit": "ae74860a28534f4aaf50c905ee4b10e165d5eeb2",
+  "source_manifest": "assets/store_promo/native_campaign_20261020.json",
+  "source_manifest_sha256": "cf153a4ee93758089a409d6fa52b0e8dcbd3501e14b7cacc561c75c3c6243c9a",
+  "source_visual_review_sha256": "85856bc4c43cb4a5dea4d63ac776b67fcb8068d5cbdc85cbb32d78ea51c2e097",
+  "platform": "android",
+  "native_size": [
+    1080,
+    2400
+  ],
+  "edited_size": [
+    1080,
+    2160
+  ],
+  "asset_count": 54,
+  "assets": [
+    {
+      "locale": "ko",
+      "index": 1,
+      "screen": "home",
+      "source_path": "assets/store_promo/android_devices/phone/ko/01.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ko/1.png",
+      "previous_sha256": "aae2301ace4b6deea370a723276fc076c8267deb0dc848548887814ecbe97b13",
+      "sha256": "2eef32ceb1b25dc6f5ce0f73cdee4df56b4ed4ccf652a6fb9763bc84f5d79ca2",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "74cb77785265481d4e302d7b2529e7eb3ff3c745104221217680b0b15e8e0c08"
+    },
+    {
+      "locale": "ko",
+      "index": 2,
+      "screen": "trim",
+      "source_path": "assets/store_promo/android_devices/phone/ko/02.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ko/2.png",
+      "previous_sha256": "005a2451070a550abb050a34bf530124dbf332025d6f0d352618aaa5530ee483",
+      "sha256": "2384f104c45a67e7776599ecd95797e2ab604e418d529e38e5e85185e61ecc4a",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "bacfa88d14140b0b707accea98fdfb6f88b2a1f202498e439ed93fca5aea1a9e"
+    },
+    {
+      "locale": "ko",
+      "index": 3,
+      "screen": "merge",
+      "source_path": "assets/store_promo/android_devices/phone/ko/03.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ko/3.png",
+      "previous_sha256": "5395f4760ca3cee0421bd908ee2b6d0dcd2eda7afa3f2e718f6de2dddcbd5d64",
+      "sha256": "f5973b7b1b783ef11e8e38e1abbe46344f937abbce1902345d324284d953f5bb",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "7898bdc73527daefcb8c92e5c8d30ddb1ce51203a533088ee5cf251b9b8c3b34"
+    },
+    {
+      "locale": "ko",
+      "index": 4,
+      "screen": "video_input",
+      "source_path": "assets/store_promo/android_devices/phone/ko/04.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ko/4.png",
+      "previous_sha256": "738885d6430914c314364646a97d57487dd34f339f02046ecc57fc8c6b7f8069",
+      "sha256": "9fe68ef10ef81af4eb87e75ba8a6d3def283725eb268212da76edf257ca49a2d",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "fc55467b9b84bbb0756c3a1ee58c423288f4953018949441f234df6b5a2fc668"
+    },
+    {
+      "locale": "ko",
+      "index": 5,
+      "screen": "video_options",
+      "source_path": "assets/store_promo/android_devices/phone/ko/05.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ko/5.png",
+      "previous_sha256": "932c7cbd6d96c3895b831526d2ee30d60de88c22ece50e097eb6db36587f229f",
+      "sha256": "c8fcb62f61f048283f99db47503fd5799a9a5dfe839ff7d5bdd5b4052ee1113c",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "6a2a5beb50c445ac5ae60b29e14b1803eec5ee8e84f0288a33f0443308a2ae9b"
+    },
+    {
+      "locale": "ko",
+      "index": 6,
+      "screen": "settings",
+      "source_path": "assets/store_promo/android_devices/phone/ko/06.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ko/6.png",
+      "previous_sha256": "29509812738b3bc61638b4444782ee2e311fed9bca0301ba945aa4c0cb63e949",
+      "sha256": "8e608aa2005037937072ebd0f493363bd23d6e225ce9045b99d5f97933724b72",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "e963de0d427af35d57b9ee8d31f98d1dcff879906362b7519a644819ec2f9199"
+    },
+    {
+      "locale": "en",
+      "index": 1,
+      "screen": "home",
+      "source_path": "assets/store_promo/android_devices/phone/en/01.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/en/1.png",
+      "previous_sha256": "48d27cc50160d5a1caf7588b0bb146b5128af785d61cfc9d07b04f47c32120c5",
+      "sha256": "a16e0fc0b8587590e583405e011ac7eada17b96201b81e8ac005808904bb4a4f",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "9b9dda16b34c2afbc21de03178645bf47fa1a8c165f88cf4cafde51cd99f8c3c"
+    },
+    {
+      "locale": "en",
+      "index": 2,
+      "screen": "trim",
+      "source_path": "assets/store_promo/android_devices/phone/en/02.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/en/2.png",
+      "previous_sha256": "122e27778705435993f480548242143513aba4df4e0e5aaaa12ee9ac99dcee42",
+      "sha256": "5423644a546ad9cba6d6d4eca839bec84e6f27917c7a36aeefaf36c3d12c06d4",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "e8c8fbf9a61c6e9f7640054cc290c5eac04145d96573ea3c1d0be3fea7313f07"
+    },
+    {
+      "locale": "en",
+      "index": 3,
+      "screen": "merge",
+      "source_path": "assets/store_promo/android_devices/phone/en/03.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/en/3.png",
+      "previous_sha256": "0cce949133ec39fb06f3978e94bf7fd400c60c09e6f061f04dcaaf948d04899b",
+      "sha256": "b517f7ed7f66d2a8e839b95907902fc8c753f48d0bcfc21b5897dc1e5740b097",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "967c8fbfddca79c12b5fa4aba2d7be3f477793b9a40b32545986d1ae35e409fa"
+    },
+    {
+      "locale": "en",
+      "index": 4,
+      "screen": "video_input",
+      "source_path": "assets/store_promo/android_devices/phone/en/04.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/en/4.png",
+      "previous_sha256": "c72ea3cb4a4221bb5d76f919bec57eec215ab4433c4dbfe975d3161fc6cf6866",
+      "sha256": "1004f879966f40c8efd21c2ab37fd2dcae5fcefe479f96c698a0bc8cf3a77053",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "46fed1391fd5138176ba3020a8560abac3691923b97d31f920f9884c51eac6e4"
+    },
+    {
+      "locale": "en",
+      "index": 5,
+      "screen": "video_options",
+      "source_path": "assets/store_promo/android_devices/phone/en/05.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/en/5.png",
+      "previous_sha256": "ad3b28d8d9c3f91eda7f29f9fde313aff142b76fe8100ef9484a7636ea1e4be2",
+      "sha256": "df18ecc00fd42a6dd9c2515ff72bcf21bb057ab8a7eab2ee8abb625d754e78a8",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "1e4687ebd2876a852c263007cb350b1d69feea689caf44751abf5de5ebada296"
+    },
+    {
+      "locale": "en",
+      "index": 6,
+      "screen": "settings",
+      "source_path": "assets/store_promo/android_devices/phone/en/06.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/en/6.png",
+      "previous_sha256": "54435f66b029170c02007d0b4e716e2f845054217c47c14b6e63323e8682a6fd",
+      "sha256": "e302174948297959df240234855e57c6f520dd7b3ff66ab659ab41e1e9d2630e",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "5fe131f1e5254215a15defecc5c0718e8ef6aba983518735d8b23bb0b0ad965d"
+    },
+    {
+      "locale": "ja",
+      "index": 1,
+      "screen": "home",
+      "source_path": "assets/store_promo/android_devices/phone/ja/01.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ja/1.png",
+      "previous_sha256": "24e36614314700d0e08cfe697dde6ef291f308550cf0d344c65123d32bd2df5b",
+      "sha256": "ef48904399589616c87a6cc87d8a6fc459e3ba9e6fd0d2bfdb9bba4822594c51",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "380b1e25e8cfd84d61fb530b29b32ddf5b16be2f3e05341ae654dbb353c7df48"
+    },
+    {
+      "locale": "ja",
+      "index": 2,
+      "screen": "trim",
+      "source_path": "assets/store_promo/android_devices/phone/ja/02.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ja/2.png",
+      "previous_sha256": "7599a8961300751e274b72d18aed154d71b6c727427adf48e6e6234a7f56776c",
+      "sha256": "4f2bdb42b9856e3ff0d38ac5da476dedefc0e3bd783d97de523465a60171a835",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "e68c20725109fe0b8c2e14502e30973989666669f75d88e563dfca36c9911f35"
+    },
+    {
+      "locale": "ja",
+      "index": 3,
+      "screen": "merge",
+      "source_path": "assets/store_promo/android_devices/phone/ja/03.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ja/3.png",
+      "previous_sha256": "af40c7c6fc666330477fba7ff554d341a960d0a52cd01ea4e27cf24c2ac9a412",
+      "sha256": "0ea8e1400a40a467e359d1bbc17c03f8a02936699f457f70a4d20797448b6d36",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "c295e796383998f92630cfe337ae7afbd4650449fa7355bc8bab51c401cb292b"
+    },
+    {
+      "locale": "ja",
+      "index": 4,
+      "screen": "video_input",
+      "source_path": "assets/store_promo/android_devices/phone/ja/04.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ja/4.png",
+      "previous_sha256": "03864d79ba217072d350b3a00b3fbb2ed89f3260e4e7d47fd20ee0d1a0c86281",
+      "sha256": "c97b5fc56fdde1436a1377d91cd80555b1d035f93bf575a3767295abeb84f8d2",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "2f1dc6be4a931c300ea9ac65aa1c13d04fd0680d88fce639a8e5cbd2b914413a"
+    },
+    {
+      "locale": "ja",
+      "index": 5,
+      "screen": "video_options",
+      "source_path": "assets/store_promo/android_devices/phone/ja/05.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ja/5.png",
+      "previous_sha256": "3d38560213cec65072a670a47afdfb9183fb29d5c137f7f651fcc2662dfaa744",
+      "sha256": "7a2af31996e988b092ff5db8ffa6a795a554ffae42d9f844f996193913af7b6a",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "307e94b902c797368c0d751884d9e880d4c0d4430b8a303f27037923f86d87bc"
+    },
+    {
+      "locale": "ja",
+      "index": 6,
+      "screen": "settings",
+      "source_path": "assets/store_promo/android_devices/phone/ja/06.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/ja/6.png",
+      "previous_sha256": "994b557576d3a0b312b318368d77fd5766bb5be0b994e3344813ee9498cd9d21",
+      "sha256": "57fc903f5a2adf50ce0c9d542a6226a3919bea08ed3ea5796a02eca5f0af43c7",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "10b9500b2aa0b2e569985712c0567be69f6063a97b26aa5223272a833e66a30e"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 1,
+      "screen": "home",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hans/01.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hans/1.png",
+      "previous_sha256": "284bb4fbb2006522386e22f3c16128b0e85482893c8afd15e5c48c383a035c66",
+      "sha256": "1b7e4f5fb13c1dc2a7fc5feeee644d71461740136bddccee537e4dd0c3a72c9f",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "4b7dfcd585412eef3db3dfa1251c48920cf08b04ba7fb3792f6c936f2a6d12d1"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 2,
+      "screen": "trim",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hans/02.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hans/2.png",
+      "previous_sha256": "1b537236bcc9ee2ad0eac2c13548202a087732ba87ad173de5e843f0c3867dad",
+      "sha256": "6665d537c1e01b0ae85b3ae3931ee456071fcbc959d2d9d33cf26cf37076d477",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "a77718ce27c017d2f5c128b09285c7ceaed153e967e7fd900a2b9dcb9c698a85"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 3,
+      "screen": "merge",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hans/03.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hans/3.png",
+      "previous_sha256": "6c3c34af8273bc996c3b5158952abcefcc231ceb88359718d24d261342db3ee7",
+      "sha256": "516a4b32eb2fc9136adb1b551fbe9ebc81d7ec54ef594c58918c385012f0ca66",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "7ae82ac4c19bb63e933bd03c580f5b7c136220743eb02cd8c45c928b020b1e3d"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 4,
+      "screen": "video_input",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hans/04.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hans/4.png",
+      "previous_sha256": "b8d5947300aa16737df9f7e22e20d555f15893efcfcff04413ab775cf4f5f82b",
+      "sha256": "abddba22fa2a115f48c01148767b0cfd2eee32c7a993d623a9790f0cbbdd16d4",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "a5d7c9779892ecc81ca118da942906a4626a393d505df792d3d782cfeb3b1615"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 5,
+      "screen": "video_options",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hans/05.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hans/5.png",
+      "previous_sha256": "77b9d1529b95f28ad67a33dd7e112eaa34f9d431b8242b0921a3cd05dc73edc9",
+      "sha256": "535ccc3d050eb5a431761eba891940e802d52a6fedf0e3aa87d5edc4fd916af5",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "941827abc0c023889d7a7d84fd361d7e6546c0085ebd7b4b6bfd4e996fab6889"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 6,
+      "screen": "settings",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hans/06.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hans/6.png",
+      "previous_sha256": "b2d4705cba83e62fe3129769261bd21faf52ad4decaa518b7ab8353dc9a554f2",
+      "sha256": "1dd0b4285d6af236ba247fdd5a83f5a2f7a7a9c22a8bf795356dd4ed2c67b677",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "c8368acde57100a5fdd3c1e42cd3be186ebd8ff1c0a43b55bce2f04b428eecd0"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 1,
+      "screen": "home",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hant/01.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hant/1.png",
+      "previous_sha256": "b644f15cbc5d570b08d1f92fe9f013fc6f38f2692ffc30bee1b9819106d7359b",
+      "sha256": "e528362a8f78a7f476d96cc8286779e8004721e373d4ef154140d887cd53b417",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "cde40e85cde827e596634467c4a6fbb5b41ed3df6e8bc884fed2d8f3156cc3da"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 2,
+      "screen": "trim",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hant/02.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hant/2.png",
+      "previous_sha256": "e8a98fca23280099ec911f8b12df52ac865d108a8bfc5c3dfff6d44ba4826f95",
+      "sha256": "790155bedc4711b65264a088f1456d79610e3f589038ccd4e04736189f378b0d",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "d09cdd4a5fb83d9106ec51ede6d4bfc8580ffd44ba2d30113a56a3f148d360e7"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 3,
+      "screen": "merge",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hant/03.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hant/3.png",
+      "previous_sha256": "6977f6ff70d81e6483290a769ad41cac7c4913ca0f13b6280f85e5732c0647e7",
+      "sha256": "faeb36ddc72d703fe9cbed00c59a1e2acbcdd399bf83d65c801bea05b004ee6b",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "d28f910afa65832fde1323291808b01158098361194dd83f9d5b60eeda0bbb3b"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 4,
+      "screen": "video_input",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hant/04.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hant/4.png",
+      "previous_sha256": "0eafa123340e877740f32ecb2832ffe046871b1148c2d0c483c30aae800a681c",
+      "sha256": "4076507f897308f8dadc69a785dc3d7c695fe6debfe5ff409b34c461fced971f",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "881e116096f0f870b213560af8bb35b72320d9a293b0496055ee94e588baa510"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 5,
+      "screen": "video_options",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hant/05.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hant/5.png",
+      "previous_sha256": "1ad393a50e8fa895bb65da546ef7b535352c6bdf5bd643f012bc68ac2d3e4f00",
+      "sha256": "07bc4d8dee16cbf00efe0dbcb7ea56019adc85587a51f630714d4d983564ac19",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "107af759479aa86c166752b068dc21cc02e47c3c41d66fb04bb0efe37c677b62"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 6,
+      "screen": "settings",
+      "source_path": "assets/store_promo/android_devices/phone/zh-Hant/06.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/zh-Hant/6.png",
+      "previous_sha256": "dbde288297b1e9070694f50f474f3c2935c5c9d59fc5e0853edc9dc11057a14d",
+      "sha256": "770f19efc7f6909c6efa3c1bf8ca9bc358a606f460938fd61af1b8e3a182e71b",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "c117a095428c6c36091d0081fd256cd73bbc7723005859eb52d914feaf73f990"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 1,
+      "screen": "home",
+      "source_path": "assets/store_promo/android_devices/phone/pt-BR/01.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/pt-BR/1.png",
+      "previous_sha256": "11872af22c2d9532952f02c6cb0ddf06760ef0bc52360cf6a852af2ccabbadc8",
+      "sha256": "e456093b982d763dcd64ed7c29f40f4fdf6b6e8b4a2a5e0db1a7affbbea5cc5b",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "d4b6dcd5c227900a2ef630a847c5eb44cda44010571280e059901d2acbdb9c27"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 2,
+      "screen": "trim",
+      "source_path": "assets/store_promo/android_devices/phone/pt-BR/02.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/pt-BR/2.png",
+      "previous_sha256": "bc1a61a6e6eb31f29b22132f1d37c4d12225ff8ded18fac352d4b81620975e7d",
+      "sha256": "5bee6b29fa5b3cd31d84095e77e35462de67dbd142def016a3ae0c8f6789885c",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "0394d40b23e78d0f57837d8cdf5701d2c32922a023523cc64f36f83a9a6cde64"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 3,
+      "screen": "merge",
+      "source_path": "assets/store_promo/android_devices/phone/pt-BR/03.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/pt-BR/3.png",
+      "previous_sha256": "785fa35e7af6a0d16d1ce4e565a65d8ee0670946ce916f1655338867efc81281",
+      "sha256": "ef1ec525d73325bb3161cbacc7955b0b86c8fde286d08159e4ef156bce5a0654",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "28234c89a7c1bc2626c09471c46d56719e63d90e7297d7c3f3caca36e3fa9f4d"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 4,
+      "screen": "video_input",
+      "source_path": "assets/store_promo/android_devices/phone/pt-BR/04.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/pt-BR/4.png",
+      "previous_sha256": "0d487f8e8cbdc422b544c7c54664c481a861b7790d29083d3f218d5e37fdbc77",
+      "sha256": "e87f5d76c377a8bf7511899c28cbdc0848baa6993d43fa011b84bff8842003b4",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "b6382f28e7f01c3b5da310348999343b106eabc457a93e4298c0a88b027600bd"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 5,
+      "screen": "video_options",
+      "source_path": "assets/store_promo/android_devices/phone/pt-BR/05.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/pt-BR/5.png",
+      "previous_sha256": "5768dd95704d0d6ae93b0da3781f4bd768c52af5647cf891d56dbd5a8afc88f0",
+      "sha256": "1e1af358620885199d0c297eace5d95317b70923a1bdc3d34ad48e3c9f7e9241",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "b0716d04d8219db982f04a732645d9539865487a334f2d368e30422091bad804"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 6,
+      "screen": "settings",
+      "source_path": "assets/store_promo/android_devices/phone/pt-BR/06.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/pt-BR/6.png",
+      "previous_sha256": "f9fd11a44d46451885875693b7d9d30edd43c91c74efbedbf3cfbc4ad11d5627",
+      "sha256": "d74b02cb791232abd0cbf1621978824fd9ea1fa0ff2cd2f9ee69776f3c79b899",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "b92879a78a6bc6e9962813a652e18a2a1d1c66e5d8bd5089612bfa7c5a3ecf4f"
+    },
+    {
+      "locale": "de",
+      "index": 1,
+      "screen": "home",
+      "source_path": "assets/store_promo/android_devices/phone/de/01.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/de/1.png",
+      "previous_sha256": "667b04d6c5e34b99689b7833ed83cea20ec58bcacff7469603f24d5a54b4db91",
+      "sha256": "4fb1b9a197e0243bf7d46c8d0d3479bb350cba5aa51cd79d3a0166fef7951348",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "129abcaa775464d072a0183edf10a25e12c2b1c5dde6ba9501180558e904dba4"
+    },
+    {
+      "locale": "de",
+      "index": 2,
+      "screen": "trim",
+      "source_path": "assets/store_promo/android_devices/phone/de/02.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/de/2.png",
+      "previous_sha256": "a1bb796b8c98164cf182c47547c314439a71135eed03f9cd511820dfa857f2d8",
+      "sha256": "3ab6352d218322bbc72994e119ef54c2fd9268ce2f696eec3d29108dc58fb318",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "bb83497015a9ea21fac8f9a94daf4c752fd3c821f83d14843fffcf1cf8b0740d"
+    },
+    {
+      "locale": "de",
+      "index": 3,
+      "screen": "merge",
+      "source_path": "assets/store_promo/android_devices/phone/de/03.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/de/3.png",
+      "previous_sha256": "b4a91658d41e35863dbd539b6acd9922a58e4722dfc893e53c0d20dd58d13124",
+      "sha256": "7d63af64ca1978e57929cafb6cb270ac5e07844a60391e1c3dc997c4edd991bb",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "ba3c18cc1df19c89da680c0fea1fd3796d1902cfc0c6331d47cf2807f106b247"
+    },
+    {
+      "locale": "de",
+      "index": 4,
+      "screen": "video_input",
+      "source_path": "assets/store_promo/android_devices/phone/de/04.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/de/4.png",
+      "previous_sha256": "8788cfc3d27891b629a62780d9a8721a21f57ba4797ba3a37e9882e9840fcfe4",
+      "sha256": "99ab9b9230f5625a8935ec9a63a62abcf3550a172ff65607cafdcba62de1a223",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "7ad6b0608ba66a17f967e0dc1b89c8f37baddf5816f666d1fff24ee46f9587b1"
+    },
+    {
+      "locale": "de",
+      "index": 5,
+      "screen": "video_options",
+      "source_path": "assets/store_promo/android_devices/phone/de/05.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/de/5.png",
+      "previous_sha256": "82d89774b1a7abf47e76f1cd02b29b5d67dc9a507289227b81058f8d10830a51",
+      "sha256": "b5f20402a4be1a2f2efc045b1da4dbdbc475595ed40cf738d7231a804b488590",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "a573330c1836844e879ec3383dceee27a7543253ee80574392e3c8f0834ae51a"
+    },
+    {
+      "locale": "de",
+      "index": 6,
+      "screen": "settings",
+      "source_path": "assets/store_promo/android_devices/phone/de/06.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/de/6.png",
+      "previous_sha256": "596d8192b338eae987d10bf927a351fbc0b240cbac017654ed6976c242109783",
+      "sha256": "be8bda9c6bf4103fe9ba0ec3b6aa0df2ab3dbbadd9255b601f2fa20a92e0c9fb",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "cb7a2a3adf388b39fcafff99ce843743622b6f1bb490cc86b342a982bcaa1760"
+    },
+    {
+      "locale": "fr",
+      "index": 1,
+      "screen": "home",
+      "source_path": "assets/store_promo/android_devices/phone/fr/01.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/fr/1.png",
+      "previous_sha256": "27650b7ba356671dbaca37839dc68144311ce6f94c0b896c6b357ddbd5b3d2ba",
+      "sha256": "6796fce71d076364800badb1254a0081e7de8a1b04e8e0ce1a12033e6b0c06ad",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "88600b1b09bc354f3831d42a2ebbb8e5d03893f6a3e6aa3ca175eda370409275"
+    },
+    {
+      "locale": "fr",
+      "index": 2,
+      "screen": "trim",
+      "source_path": "assets/store_promo/android_devices/phone/fr/02.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/fr/2.png",
+      "previous_sha256": "7ff0bc300024e3dace81a6d507524c7907fddf768d13f20356adc9231151d880",
+      "sha256": "4b29867525049f2536458f36532eba83246b7de617977d3f15b542275c60b699",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "076f479c8bff41ca6be177d9cf3e402ab06ba3c20fa28119e2c0ffd422e5d3db"
+    },
+    {
+      "locale": "fr",
+      "index": 3,
+      "screen": "merge",
+      "source_path": "assets/store_promo/android_devices/phone/fr/03.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/fr/3.png",
+      "previous_sha256": "2b97b440de2d1f305cb80a1d93d86c245fb545be6b048656544b71fc3aa0765e",
+      "sha256": "1e1aa1640a115dd68f0b9e5ff578d6518869b488a30dae34f9e736bb304dcd1a",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "4fc4926a739ae6037959b9a62784877899783add525eea144ca2ab10fb909228"
+    },
+    {
+      "locale": "fr",
+      "index": 4,
+      "screen": "video_input",
+      "source_path": "assets/store_promo/android_devices/phone/fr/04.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/fr/4.png",
+      "previous_sha256": "9efe5f3c9fefa8471649b9dd38e318deadd7f150ba736a898b466fe9fb5887c4",
+      "sha256": "e7f91eca4f3b093e447b37ee459ec03ba82d1f9e1fea4033a5bc4b39837530d2",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "c4e1fe4114ae4ec428154583e8000c801261f7684ef78cb7e21492659d676efe"
+    },
+    {
+      "locale": "fr",
+      "index": 5,
+      "screen": "video_options",
+      "source_path": "assets/store_promo/android_devices/phone/fr/05.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/fr/5.png",
+      "previous_sha256": "d04df2ed619a823f6cd50b6f8124bf8e88ce3e90ea26a485b02f1eb33288addd",
+      "sha256": "8d9204bd1a120901f71368edd414085294096ac19d895211f442dacb60511f7a",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "d83e2ce010a786da9f102fae7adfa6f1bbefe6a20598851a24d997fbfddca94b"
+    },
+    {
+      "locale": "fr",
+      "index": 6,
+      "screen": "settings",
+      "source_path": "assets/store_promo/android_devices/phone/fr/06.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/fr/6.png",
+      "previous_sha256": "c5bef14006d6c29de78d138d23d43e2dd3be45370d3ee0ef075c10b1cfbe2204",
+      "sha256": "e86ed98ba1b14137e34076d8d64a66c3632dd2cc6fe8d9ca1908a4300e8b4248",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "be9c69f055d26cfd9ef2f6b741425c51b7d049c88e07b01f88616ee4b811d521"
+    },
+    {
+      "locale": "es",
+      "index": 1,
+      "screen": "home",
+      "source_path": "assets/store_promo/android_devices/phone/es/01.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/es/1.png",
+      "previous_sha256": "3defd60cabb543dd1b7e7597910ca4935709741ac92333d4d9f717f5c1e47173",
+      "sha256": "868ce2dedca17ce490c2c4a04ecfa1230be46ee6b7c0ea3bec5f51dff7cbbe32",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "9f47a2b89ec05eabd4483c070d493e662a68aab80bc81bbfe9a5a6ca1b52baf2"
+    },
+    {
+      "locale": "es",
+      "index": 2,
+      "screen": "trim",
+      "source_path": "assets/store_promo/android_devices/phone/es/02.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/es/2.png",
+      "previous_sha256": "3baaf19ac8b559b6fb2e6d115f1363d6a270430f7580dabf0f4d871d575cd918",
+      "sha256": "15af205d9284f8c8000efa9642f75916968cb804fe8674c342efd8d2f0fe1832",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "ad30a95091b9a8f2573dc84dbb8ca14ca996664377fcf6fb989bde79414caee6"
+    },
+    {
+      "locale": "es",
+      "index": 3,
+      "screen": "merge",
+      "source_path": "assets/store_promo/android_devices/phone/es/03.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/es/3.png",
+      "previous_sha256": "94d5c49f50cdd4abb0550a3310cd95897401d9ea05d82d450defd0f88e867d00",
+      "sha256": "ca7f6016c84b7b71108a71f95b7557f36c78bd2cb3dee85a6f69aa843a159a80",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "1e04b5aebce8995921b1dbdf6ec17a9874d64b99e820143a93a19724aee25412"
+    },
+    {
+      "locale": "es",
+      "index": 4,
+      "screen": "video_input",
+      "source_path": "assets/store_promo/android_devices/phone/es/04.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/es/4.png",
+      "previous_sha256": "72e2e8b435776ff460938efa5d6747922af9ad3f9441141998495b95f550c84f",
+      "sha256": "9ead8bccecdc362b1081a40464322c0dd46a0d849529b792fed02b4f208699e4",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "3f50a4983d49dbb1ba7946197404e84dae2f4071a2cef883911e59b5e456c79a"
+    },
+    {
+      "locale": "es",
+      "index": 5,
+      "screen": "video_options",
+      "source_path": "assets/store_promo/android_devices/phone/es/05.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/es/5.png",
+      "previous_sha256": "d106931e445fc899e39332a140d19c5d4594792365f7bd6659dabcb88175d479",
+      "sha256": "510859b23de25a59a30b0b25fbba615c46aef2adf23e2e3fcddd625a1be214a7",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "aa94206c92a11a43b6db4e774dad004a984aae29b7e2891ad3f34a4bea8affc1"
+    },
+    {
+      "locale": "es",
+      "index": 6,
+      "screen": "settings",
+      "source_path": "assets/store_promo/android_devices/phone/es/06.png",
+      "site_path": "src/content/apps/segra/assets/screenshots/es/6.png",
+      "previous_sha256": "1cfba679fffe984cff8890347cf2d59d59a64f1c02f50f8765b8924e1981962e",
+      "sha256": "58d9d966509cdebd969be2fe86aba7e6e840a130066d97821b6a6d278c49f268",
+      "size": [
+        1080,
+        2160
+      ],
+      "native_raw_sha256": "8982f325f2997784da8fd8f77be962a861a988b92dfb783ceffd6e33c1010d53"
+    }
+  ]
+}
