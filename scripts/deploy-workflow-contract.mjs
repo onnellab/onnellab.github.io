@@ -37,3 +37,22 @@ test('reviewed artwork and visual regression gates run on the existing runner be
   assert.ok(workflow.indexOf('Verify VaultXT Android-only landing gallery') < workflow.indexOf('- name: Upload Pages artifact'));
   assert.match(workflow, /runs-on: ubuntu-latest/);
 });
+
+test('locked Vite tracks a security-patched release without bypassing npm audit', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+  const lockfile = JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
+  const pinned = manifest.overrides?.vite;
+  const installed = lockfile.packages?.['node_modules/vite'];
+  assert.equal(typeof pinned, 'string');
+  assert.equal(installed?.version, pinned, 'npm ci must use the pinned Vite build');
+  const version = /^8\.(\d+)\.(\d+)$/.exec(pinned);
+  assert.ok(version, 'Vite 8 version must be reviewed before changing the security pin');
+  const minor = Number(version[1]), patch = Number(version[2]);
+  assert.ok(minor > 3 || (minor === 3 && patch >= 3) ||
+            (minor === 2 && patch >= 4) || (minor === 1 && patch >= 6),
+            'known vulnerable Vite 8 patch levels are forbidden');
+  assert.equal(installed.resolved, `https://registry.npmjs.org/vite/-/vite-${pinned}.tgz`);
+  assert.match(installed.integrity, /^sha512-[A-Za-z0-9+/]+={0,2}$/);
+  assert.ok(workflow.indexOf('npm audit --package-lock-only --include=dev --audit-level=high') <
+            workflow.indexOf('run: npm ci'), 'security audit must remain fail-closed before install');
+});
