@@ -1,0 +1,389 @@
+{
+  "scope": "Settings only;9 replacement PNGs;45 other Segra screenshots unchanged",
+  "source_commit": "d6091317eb00523c483ddbc82748ea0fcac3b02d",
+  "source_manifest": "assets/store_promo/settings_refresh_20261021/manifest.json",
+  "capture_backend": "android_pixelcopy_surface",
+  "purchase_state": "Existing synthetic KRW6600 offer fixture;not a live-store quote",
+  "changes": [
+    {
+      "locale": "ko",
+      "index": 6,
+      "path": "src/content/apps/segra/assets/screenshots/ko/6.png",
+      "source": "assets/store_promo/settings_refresh_20261021/edited/android_phone/ko/06.png",
+      "sha256": "fd33633fd38e3b62e4098724f88843c542c3a5961216aa4bc34b7623a7b27dbe",
+      "previous_sha256": "8e608aa2005037937072ebd0f493363bd23d6e225ce9045b99d5f97933724b72",
+      "dimensions": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "en",
+      "index": 6,
+      "path": "src/content/apps/segra/assets/screenshots/en/6.png",
+      "source": "assets/store_promo/settings_refresh_20261021/edited/android_phone/en/06.png",
+      "sha256": "22de57070da27025eb4d57348377c9a696cb368f745ba5275bed83869be017c4",
+      "previous_sha256": "e302174948297959df240234855e57c6f520dd7b3ff66ab659ab41e1e9d2630e",
+      "dimensions": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "ja",
+      "index": 6,
+      "path": "src/content/apps/segra/assets/screenshots/ja/6.png",
+      "source": "assets/store_promo/settings_refresh_20261021/edited/android_phone/ja/06.png",
+      "sha256": "a191f1838a8ff0b7b98aa760679f9ac5a59db4f83f4a65a547782f5158c5c943",
+      "previous_sha256": "57fc903f5a2adf50ce0c9d542a6226a3919bea08ed3ea5796a02eca5f0af43c7",
+      "dimensions": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 6,
+      "path": "src/content/apps/segra/assets/screenshots/zh-Hans/6.png",
+      "source": "assets/store_promo/settings_refresh_20261021/edited/android_phone/zh-Hans/06.png",
+      "sha256": "b34d098265b5831ce3d6b1ea2b50817f9256bdfdef7926176931919cff96107c",
+      "previous_sha256": "1dd0b4285d6af236ba247fdd5a83f5a2f7a7a9c22a8bf795356dd4ed2c67b677",
+      "dimensions": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 6,
+      "path": "src/content/apps/segra/assets/screenshots/zh-Hant/6.png",
+      "source": "assets/store_promo/settings_refresh_20261021/edited/android_phone/zh-Hant/06.png",
+      "sha256": "ca35e3e18133d9def881f542f1ea0c2e2095560c0ae31c66a6104024b8fb2e0f",
+      "previous_sha256": "770f19efc7f6909c6efa3c1bf8ca9bc358a606f460938fd61af1b8e3a182e71b",
+      "dimensions": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "index": 6,
+      "path": "src/content/apps/segra/assets/screenshots/pt-BR/6.png",
+      "source": "assets/store_promo/settings_refresh_20261021/edited/android_phone/pt-BR/06.png",
+      "sha256": "c1360bcddd11f7edab1355d88f5c40d09f787cdb550bf3798387fabb88e7f4d5",
+      "previous_sha256": "d74b02cb791232abd0cbf1621978824fd9ea1fa0ff2cd2f9ee69776f3c79b899",
+      "dimensions": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "de",
+      "index": 6,
+      "path": "src/content/apps/segra/assets/screenshots/de/6.png",
+      "source": "assets/store_promo/settings_refresh_20261021/edited/android_phone/de/06.png",
+      "sha256": "ecbf56b98e886c048a6d4ec10366a3d045162f9bdc3d081567c4ddf73e47d3bb",
+      "previous_sha256": "be8bda9c6bf4103fe9ba0ec3b6aa0df2ab3dbbadd9255b601f2fa20a92e0c9fb",
+      "dimensions": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "fr",
+      "index": 6,
+      "path": "src/content/apps/segra/assets/screenshots/fr/6.png",
+      "source": "assets/store_promo/settings_refresh_20261021/edited/android_phone/fr/06.png",
+      "sha256": "336987c424a735d4edf6dfd7d4197c59a2a0657541f64809e94eff767bb76aa2",
+      "previous_sha256": "e86ed98ba1b14137e34076d8d64a66c3632dd2cc6fe8d9ca1908a4300e8b4248",
+      "dimensions": [
+        1080,
+        2160
+      ]
+    },
+    {
+      "locale": "es",
+      "index": 6,
+      "path": "src/content/apps/segra/assets/screenshots/es/6.png",
+      "source": "assets/store_promo/settings_refresh_20261021/edited/android_phone/es/06.png",
+      "sha256": "3c8e59ef1d42ce0d3eea6ff2fc76b821a0fa5e845dc9bcb038b87aa835129023",
+      "previous_sha256": "58d9d966509cdebd969be2fe86aba7e6e840a130066d97821b6a6d278c49f268",
+      "dimensions": [
+        1080,
+        2160
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "locale": "zh-Hans",
+      "index": 4,
+      "sha256": "abddba22fa2a115f48c01148767b0cfd2eee32c7a993d623a9790f0cbbdd16d4"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 5,
+      "sha256": "535ccc3d050eb5a431761eba891940e802d52a6fedf0e3aa87d5edc4fd916af5"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 6,
+      "sha256": "b34d098265b5831ce3d6b1ea2b50817f9256bdfdef7926176931919cff96107c"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 2,
+      "sha256": "6665d537c1e01b0ae85b3ae3931ee456071fcbc959d2d9d33cf26cf37076d477"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 3,
+      "sha256": "516a4b32eb2fc9136adb1b551fbe9ebc81d7ec54ef594c58918c385012f0ca66"
+    },
+    {
+      "locale": "zh-Hans",
+      "index": 1,
+      "sha256": "1b7e4f5fb13c1dc2a7fc5feeee644d71461740136bddccee537e4dd0c3a72c9f"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 4,
+      "sha256": "4076507f897308f8dadc69a785dc3d7c695fe6debfe5ff409b34c461fced971f"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 5,
+      "sha256": "07bc4d8dee16cbf00efe0dbcb7ea56019adc85587a51f630714d4d983564ac19"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 6,
+      "sha256": "ca35e3e18133d9def881f542f1ea0c2e2095560c0ae31c66a6104024b8fb2e0f"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 2,
+      "sha256": "790155bedc4711b65264a088f1456d79610e3f589038ccd4e04736189f378b0d"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 3,
+      "sha256": "faeb36ddc72d703fe9cbed00c59a1e2acbcdd399bf83d65c801bea05b004ee6b"
+    },
+    {
+      "locale": "zh-Hant",
+      "index": 1,
+      "sha256": "e528362a8f78a7f476d96cc8286779e8004721e373d4ef154140d887cd53b417"
+    },
+    {
+      "locale": "ja",
+      "index": 4,
+      "sha256": "c97b5fc56fdde1436a1377d91cd80555b1d035f93bf575a3767295abeb84f8d2"
+    },
+    {
+      "locale": "ja",
+      "index": 5,
+      "sha256": "7a2af31996e988b092ff5db8ffa6a795a554ffae42d9f844f996193913af7b6a"
+    },
+    {
+      "locale": "ja",
+      "index": 6,
+      "sha256": "a191f1838a8ff0b7b98aa760679f9ac5a59db4f83f4a65a547782f5158c5c943"
+    },
+    {
+      "locale": "ja",
+      "index": 2,
+      "sha256": "4f2bdb42b9856e3ff0d38ac5da476dedefc0e3bd783d97de523465a60171a835"
+    },
+    {
+      "locale": "ja",
+      "index": 3,
+      "sha256": "0ea8e1400a40a467e359d1bbc17c03f8a02936699f457f70a4d20797448b6d36"
+    },
+    {
+      "locale": "ja",
+      "index": 1,
+      "sha256": "ef48904399589616c87a6cc87d8a6fc459e3ba9e6fd0d2bfdb9bba4822594c51"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 4,
+      "sha256": "e87f5d76c377a8bf7511899c28cbdc0848baa6993d43fa011b84bff8842003b4"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 5,
+      "sha256": "1e1af358620885199d0c297eace5d95317b70923a1bdc3d34ad48e3c9f7e9241"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 6,
+      "sha256": "c1360bcddd11f7edab1355d88f5c40d09f787cdb550bf3798387fabb88e7f4d5"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 2,
+      "sha256": "5bee6b29fa5b3cd31d84095e77e35462de67dbd142def016a3ae0c8f6789885c"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 3,
+      "sha256": "ef1ec525d73325bb3161cbacc7955b0b86c8fde286d08159e4ef156bce5a0654"
+    },
+    {
+      "locale": "pt-BR",
+      "index": 1,
+      "sha256": "e456093b982d763dcd64ed7c29f40f4fdf6b6e8b4a2a5e0db1a7affbbea5cc5b"
+    },
+    {
+      "locale": "de",
+      "index": 4,
+      "sha256": "99ab9b9230f5625a8935ec9a63a62abcf3550a172ff65607cafdcba62de1a223"
+    },
+    {
+      "locale": "de",
+      "index": 5,
+      "sha256": "b5f20402a4be1a2f2efc045b1da4dbdbc475595ed40cf738d7231a804b488590"
+    },
+    {
+      "locale": "de",
+      "index": 6,
+      "sha256": "ecbf56b98e886c048a6d4ec10366a3d045162f9bdc3d081567c4ddf73e47d3bb"
+    },
+    {
+      "locale": "de",
+      "index": 2,
+      "sha256": "3ab6352d218322bbc72994e119ef54c2fd9268ce2f696eec3d29108dc58fb318"
+    },
+    {
+      "locale": "de",
+      "index": 3,
+      "sha256": "7d63af64ca1978e57929cafb6cb270ac5e07844a60391e1c3dc997c4edd991bb"
+    },
+    {
+      "locale": "de",
+      "index": 1,
+      "sha256": "4fb1b9a197e0243bf7d46c8d0d3479bb350cba5aa51cd79d3a0166fef7951348"
+    },
+    {
+      "locale": "ko",
+      "index": 4,
+      "sha256": "9fe68ef10ef81af4eb87e75ba8a6d3def283725eb268212da76edf257ca49a2d"
+    },
+    {
+      "locale": "ko",
+      "index": 5,
+      "sha256": "c8fcb62f61f048283f99db47503fd5799a9a5dfe839ff7d5bdd5b4052ee1113c"
+    },
+    {
+      "locale": "ko",
+      "index": 6,
+      "sha256": "fd33633fd38e3b62e4098724f88843c542c3a5961216aa4bc34b7623a7b27dbe"
+    },
+    {
+      "locale": "ko",
+      "index": 2,
+      "sha256": "2384f104c45a67e7776599ecd95797e2ab604e418d529e38e5e85185e61ecc4a"
+    },
+    {
+      "locale": "ko",
+      "index": 3,
+      "sha256": "f5973b7b1b783ef11e8e38e1abbe46344f937abbce1902345d324284d953f5bb"
+    },
+    {
+      "locale": "ko",
+      "index": 1,
+      "sha256": "2eef32ceb1b25dc6f5ce0f73cdee4df56b4ed4ccf652a6fb9763bc84f5d79ca2"
+    },
+    {
+      "locale": "fr",
+      "index": 4,
+      "sha256": "e7f91eca4f3b093e447b37ee459ec03ba82d1f9e1fea4033a5bc4b39837530d2"
+    },
+    {
+      "locale": "fr",
+      "index": 5,
+      "sha256": "8d9204bd1a120901f71368edd414085294096ac19d895211f442dacb60511f7a"
+    },
+    {
+      "locale": "fr",
+      "index": 6,
+      "sha256": "336987c424a735d4edf6dfd7d4197c59a2a0657541f64809e94eff767bb76aa2"
+    },
+    {
+      "locale": "fr",
+      "index": 2,
+      "sha256": "4b29867525049f2536458f36532eba83246b7de617977d3f15b542275c60b699"
+    },
+    {
+      "locale": "fr",
+      "index": 3,
+      "sha256": "1e1aa1640a115dd68f0b9e5ff578d6518869b488a30dae34f9e736bb304dcd1a"
+    },
+    {
+      "locale": "fr",
+      "index": 1,
+      "sha256": "6796fce71d076364800badb1254a0081e7de8a1b04e8e0ce1a12033e6b0c06ad"
+    },
+    {
+      "locale": "es",
+      "index": 4,
+      "sha256": "9ead8bccecdc362b1081a40464322c0dd46a0d849529b792fed02b4f208699e4"
+    },
+    {
+      "locale": "es",
+      "index": 5,
+      "sha256": "510859b23de25a59a30b0b25fbba615c46aef2adf23e2e3fcddd625a1be214a7"
+    },
+    {
+      "locale": "es",
+      "index": 6,
+      "sha256": "3c8e59ef1d42ce0d3eea6ff2fc76b821a0fa5e845dc9bcb038b87aa835129023"
+    },
+    {
+      "locale": "es",
+      "index": 2,
+      "sha256": "15af205d9284f8c8000efa9642f75916968cb804fe8674c342efd8d2f0fe1832"
+    },
+    {
+      "locale": "es",
+      "index": 3,
+      "sha256": "ca7f6016c84b7b71108a71f95b7557f36c78bd2cb3dee85a6f69aa843a159a80"
+    },
+    {
+      "locale": "es",
+      "index": 1,
+      "sha256": "868ce2dedca17ce490c2c4a04ecfa1230be46ee6b7c0ea3bec5f51dff7cbbe32"
+    },
+    {
+      "locale": "en",
+      "index": 4,
+      "sha256": "1004f879966f40c8efd21c2ab37fd2dcae5fcefe479f96c698a0bc8cf3a77053"
+    },
+    {
+      "locale": "en",
+      "index": 5,
+      "sha256": "df18ecc00fd42a6dd9c2515ff72bcf21bb057ab8a7eab2ee8abb625d754e78a8"
+    },
+    {
+      "locale": "en",
+      "index": 6,
+      "sha256": "22de57070da27025eb4d57348377c9a696cb368f745ba5275bed83869be017c4"
+    },
+    {
+      "locale": "en",
+      "index": 2,
+      "sha256": "5423644a546ad9cba6d6d4eca839bec84e6f27917c7a36aeefaf36c3d12c06d4"
+    },
+    {
+      "locale": "en",
+      "index": 3,
+      "sha256": "b517f7ed7f66d2a8e839b95907902fc8c753f48d0bcfc21b5897dc1e5740b097"
+    },
+    {
+      "locale": "en",
+      "index": 1,
+      "sha256": "a16e0fc0b8587590e583405e011ac7eada17b96201b81e8ac005808904bb4a4f"
+    }
+  ]
+}
