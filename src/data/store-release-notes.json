@@ -51,7 +51,6 @@
     "changesKo": [
       "Android 앱 용량을 줄였어요. 스토어 이미지를 새로 업데이트했어요."
     ],
-    "internalGitHubUrl": "",
     "localizations": {
       "ko": {
         "summary": "Aligna 1.1.0 버전의 변경 사항이에요.",
@@ -107,7 +106,8 @@
           "Reducimos el tamaño de la app para Android. Actualizamos las imágenes de la tienda."
         ]
       }
-    }
+    },
+    "internalGitHubUrl": ""
   },
   {
     "appSlug": "clipnest",
@@ -147,7 +147,6 @@
       "설정에서 9개 언어를 선택하고 Pro 구매 버튼에서 실제 스토어 가격을 확인할 수 있어요.",
       "키보드에서 텍스트를 붙여넣는 과정과 스토어 안내를 개선했어요."
     ],
-    "internalGitHubUrl": "",
     "localizations": {
       "ko": {
         "summary": "ClipNest 1.0.5 버전의 변경 사항이에요.",
@@ -221,7 +220,8 @@
           "Mejoramos las indicaciones para pegar desde el teclado y la información de la tienda."
         ]
       }
-    }
+    },
+    "internalGitHubUrl": ""
   },
   {
     "appSlug": "melivra",
@@ -301,7 +301,7 @@
     "version": "1.0.8",
     "tag": "v1.0.8",
     "platform": "Android",
-    "releasedDate": "2026-10-20",
+    "releasedDate": "2026-10-21",
     "title": "Melivra v1.0.8 (Android)",
     "summary": "Changes in Melivra 1.0.8.",
     "summaryKo": "Melivra 1.0.8 버전의 변경 사항이에요.",
@@ -313,7 +313,6 @@
       "플레이어 즐겨찾기 버튼과 앨범 커버 색상 효과, 시작 화면의 앨범 배치를 개선했어요.",
       "곡 사이를 끊김 없이 재생할 때 앞뒤 무음을 더 잘 처리하도록 개선하고, 설정과 가사 편집 안내도 정리했어요."
     ],
-    "internalGitHubUrl": "",
     "localizations": {
       "ko": {
         "summary": "Melivra 1.0.8 버전의 변경 사항이에요.",
@@ -378,7 +377,8 @@
           "Mejoramos el tratamiento de los silencios en la reproducción sin pausas y su estabilidad, y aclaramos las indicaciones de ajustes y edición de letras."
         ]
       }
-    }
+    },
+    "internalGitHubUrl": ""
   },
   {
     "appSlug": "papira",
@@ -442,7 +442,6 @@
       "저장 위치가 지원되지 않더라도 완성된 EPUB은 보존해 다른 곳으로 다시 내보낼 수 있어요.",
       "한 줄이 매우 긴 원고도 더 빠르게 변환해요."
     ],
-    "internalGitHubUrl": "",
     "localizations": {
       "ko": {
         "summary": "Papira 2.0.3 버전의 변경 사항이에요.",
@@ -543,7 +542,8 @@
           "Los manuscritos con líneas muy largas se convierten más rápido."
         ]
       }
-    }
+    },
+    "internalGitHubUrl": ""
   },
   {
     "appSlug": "quivra",
@@ -579,7 +579,6 @@
     "changesKo": [
       "변환 전과 변환 중에도 파일 목록의 위치와 높이가 그대로 유지되도록 화면을 개선했어요."
     ],
-    "internalGitHubUrl": "",
     "localizations": {
       "ko": {
         "summary": "Quivra 1.0.10 버전의 변경 사항이에요.",
@@ -635,7 +634,8 @@
           "La lista de archivos mantiene su posición y la altura de las filas antes y durante la conversión."
         ]
       }
-    }
+    },
+    "internalGitHubUrl": ""
   },
   {
     "appSlug": "segra",
@@ -657,7 +657,6 @@
       "Android 태블릿, 폴더블, 멀티 윈도우에서도 화면 크기와 방향에 맞춰 사용할 수 있어요.",
       "고해상도 이미지로 영상을 만들 때 메모리를 더 안정적으로 사용하도록 개선했어요."
     ],
-    "internalGitHubUrl": "",
     "localizations": {
       "ko": {
         "summary": "Segra 1.0.6 버전의 변경 사항이에요.",
@@ -731,7 +730,8 @@
           "La creación de vídeos con imágenes de alta resolución utiliza la memoria de forma más estable."
         ]
       }
-    }
+    },
+    "internalGitHubUrl": ""
   },
   {
     "appSlug": "tagweaver",
@@ -795,9 +795,9 @@
     "appName": "TagWeaver",
     "version": "2.5.5",
     "tag": "v2.5.5",
-    "platform": "Android",
-    "releasedDate": "2026-10-20",
-    "title": "TagWeaver v2.5.5 (Android)",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-10-21",
+    "title": "TagWeaver v2.5.5 (iOS · Android)",
     "summary": "Changes in TagWeaver 2.5.5.",
     "summaryKo": "TagWeaver 2.5.5 버전의 변경 사항이에요.",
     "changes": [
@@ -812,7 +812,6 @@
       "제목이 비어 있는 음악 파일의 제목을 파일명으로 한꺼번에 채울 수 있어요.",
       "긴 버튼 문구와 구매 안내창을 읽기 쉽게 다듬었어요."
     ],
-    "internalGitHubUrl": "",
     "localizations": {
       "ko": {
         "summary": "TagWeaver 2.5.5 버전의 변경 사항이에요.",
@@ -895,7 +894,8 @@
           "Mejoramos los botones con texto largo y el cuadro de compra."
         ]
       }
-    }
+    },
+    "internalGitHubUrl": ""
   },
   {
     "appSlug": "vaultxt",
@@ -937,7 +937,6 @@
       "문서나 스냅샷을 불러오지 못하면 바로 다시 시도할 수 있어요.",
       "찾기·바꾸기 화면과 대용량 문서 표시 문제를 개선하고, iOS 앱 시작도 다듬었어요."
     ],
-    "internalGitHubUrl": "",
     "localizations": {
       "ko": {
         "summary": "VaultXT 2.0.2 버전의 변경 사항이에요.",
@@ -1020,6 +1019,7 @@
           "Mejoramos Buscar y reemplazar, la visualización de documentos grandes y el inicio en iOS."
         ]
       }
-    }
+    },
+    "internalGitHubUrl": ""
   }
 ]
