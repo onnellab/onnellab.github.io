@@ -43,15 +43,71 @@
     "platform": "iOS · Android",
     "releasedDate": "2026-10-11",
     "title": "Aligna v1.1.0 (iOS · Android)",
-    "summary": "Latest public store release of Aligna 1.1.0 for iOS · Android.",
-    "summaryKo": "Aligna 1.1.0 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "summary": "Changes in Aligna 1.1.0.",
+    "summaryKo": "Aligna 1.1.0 버전의 변경 사항이에요.",
     "changes": [
-      "Aligna 1.1.0 is now available on iOS · Android."
+      "Reduced the Android app size. Updated the store screenshots."
     ],
     "changesKo": [
       "Android 앱 용량을 줄였어요. 스토어 이미지를 새로 업데이트했어요."
     ],
-    "internalGitHubUrl": ""
+    "internalGitHubUrl": "",
+    "localizations": {
+      "ko": {
+        "summary": "Aligna 1.1.0 버전의 변경 사항이에요.",
+        "changes": [
+          "Android 앱 용량을 줄였어요. 스토어 이미지를 새로 업데이트했어요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in Aligna 1.1.0.",
+        "changes": [
+          "Reduced the Android app size. Updated the store screenshots."
+        ]
+      },
+      "ja": {
+        "summary": "Aligna 1.1.0の変更点です。",
+        "changes": [
+          "Androidアプリのサイズを小さくしました。ストア画像を更新しました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "Aligna 1.1.0 的更新内容。",
+        "changes": [
+          "缩小了 Android 应用的体积。更新了商店展示图片。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "Aligna 1.1.0 的更新內容。",
+        "changes": [
+          "縮小了 Android 應用程式的大小。更新了商店展示圖片。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do Aligna 1.1.0.",
+        "changes": [
+          "Reduzimos o tamanho do app Android. Atualizamos as imagens da loja."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in Aligna 1.1.0.",
+        "changes": [
+          "Die Android-App ist jetzt kleiner. Die Store-Bilder wurden aktualisiert."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de Aligna 1.1.0.",
+        "changes": [
+          "La taille de l’application Android a été réduite. Les images de la boutique ont été mises à jour."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de Aligna 1.1.0.",
+        "changes": [
+          "Reducimos el tamaño de la app para Android. Actualizamos las imágenes de la tienda."
+        ]
+      }
+    }
   },
   {
     "appSlug": "clipnest",
@@ -79,17 +135,93 @@
     "platform": "iOS",
     "releasedDate": "2026-10-11",
     "title": "ClipNest v1.0.5 (iOS)",
-    "summary": "Latest public store release of ClipNest 1.0.5 for iOS.",
-    "summaryKo": "ClipNest 1.0.5 iOS 공개 스토어 릴리즈 변경 사항이에요.",
+    "summary": "Changes in ClipNest 1.0.5.",
+    "summaryKo": "ClipNest 1.0.5 버전의 변경 사항이에요.",
     "changes": [
-      "ClipNest 1.0.5 is now available on iOS."
+      "Made it easier to search and edit saved text.",
+      "Choose from nine languages in Settings and see the current store price before buying Pro.",
+      "Improved keyboard pasting guidance and store information."
     ],
     "changesKo": [
-      "저장한 텍스트를 검색하고 편집하는 화면을 다듬었어요.",
-      "설정에서 9개 언어를 선택할 수 있고, Pro 구매 버튼에는 스토어 가격을 표시해요.",
-      "공용 색상과 화면 구성을 정리하고, 키보드 붙여넣기 사용 예시와 스토어 안내를 개선했어요."
+      "저장한 텍스트를 검색하고 편집하는 화면을 더 편하게 다듬었어요.",
+      "설정에서 9개 언어를 선택하고 Pro 구매 버튼에서 실제 스토어 가격을 확인할 수 있어요.",
+      "키보드에서 텍스트를 붙여넣는 과정과 스토어 안내를 개선했어요."
     ],
-    "internalGitHubUrl": ""
+    "internalGitHubUrl": "",
+    "localizations": {
+      "ko": {
+        "summary": "ClipNest 1.0.5 버전의 변경 사항이에요.",
+        "changes": [
+          "저장한 텍스트를 검색하고 편집하는 화면을 더 편하게 다듬었어요.",
+          "설정에서 9개 언어를 선택하고 Pro 구매 버튼에서 실제 스토어 가격을 확인할 수 있어요.",
+          "키보드에서 텍스트를 붙여넣는 과정과 스토어 안내를 개선했어요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in ClipNest 1.0.5.",
+        "changes": [
+          "Made it easier to search and edit saved text.",
+          "Choose from nine languages in Settings and see the current store price before buying Pro.",
+          "Improved keyboard pasting guidance and store information."
+        ]
+      },
+      "ja": {
+        "summary": "ClipNest 1.0.5の変更点です。",
+        "changes": [
+          "保存したテキストを検索・編集しやすくしました。",
+          "設定で9言語から選べるようになり、Proの購入前にストアの価格を確認できます。",
+          "キーボードからの貼り付け案内とストアの説明を改善しました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "ClipNest 1.0.5 的更新内容。",
+        "changes": [
+          "改进了已保存文本的搜索和编辑体验。",
+          "可在设置中选择9种语言，并在购买Pro前查看商店实际价格。",
+          "优化了键盘粘贴提示和商店说明。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "ClipNest 1.0.5 的更新內容。",
+        "changes": [
+          "改善已儲存文字的搜尋與編輯體驗。",
+          "可在設定中選擇9種語言，購買Pro前也能查看商店實際價格。",
+          "改善鍵盤貼上操作提示與商店說明。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do ClipNest 1.0.5.",
+        "changes": [
+          "Ficou mais fácil buscar e editar textos salvos.",
+          "Escolha entre nove idiomas nas configurações e confira o preço da loja antes de comprar o Pro.",
+          "Melhoramos as orientações para colar texto pelo teclado e as informações da loja."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in ClipNest 1.0.5.",
+        "changes": [
+          "Gespeicherte Texte lassen sich leichter suchen und bearbeiten.",
+          "In den Einstellungen stehen neun Sprachen zur Auswahl; der aktuelle Store-Preis wird vor dem Pro-Kauf angezeigt.",
+          "Hinweise zum Einfügen über die Tastatur und Store-Informationen wurden verbessert."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de ClipNest 1.0.5.",
+        "changes": [
+          "Retrouvez et modifiez plus facilement vos textes enregistrés.",
+          "Choisissez parmi neuf langues dans les réglages et consultez le prix affiché sur la boutique avant d’acheter Pro.",
+          "Nous avons clarifié le collage depuis le clavier et les informations de la boutique."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de ClipNest 1.0.5.",
+        "changes": [
+          "Ahora es más fácil buscar y editar textos guardados.",
+          "Elige entre nueve idiomas en Ajustes y consulta el precio de la tienda antes de comprar Pro.",
+          "Mejoramos las indicaciones para pegar desde el teclado y la información de la tienda."
+        ]
+      }
+    }
   },
   {
     "appSlug": "melivra",
@@ -171,15 +303,82 @@
     "platform": "Android",
     "releasedDate": "2026-10-20",
     "title": "Melivra v1.0.8 (Android)",
-    "summary": "Latest public store release of Melivra 1.0.8 for Android.",
-    "summaryKo": "Melivra 1.0.8 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "summary": "Changes in Melivra 1.0.8.",
+    "summaryKo": "Melivra 1.0.8 버전의 변경 사항이에요.",
     "changes": [
-      "Melivra 1.0.8 is now available on Android."
+      "Improved the player’s favorites button, album-cover color effects, and album layout on the Start screen.",
+      "Improved silence handling in gapless playback and playback stability, and clarified settings and lyrics editing guidance."
     ],
     "changesKo": [
-      "Melivra 1.0.8 버전이 Android에 공개됐어요."
+      "플레이어 즐겨찾기 버튼과 앨범 커버 색상 효과, 시작 화면의 앨범 배치를 개선했어요.",
+      "곡 사이를 끊김 없이 재생할 때 앞뒤 무음을 더 잘 처리하도록 개선하고, 설정과 가사 편집 안내도 정리했어요."
     ],
-    "internalGitHubUrl": ""
+    "internalGitHubUrl": "",
+    "localizations": {
+      "ko": {
+        "summary": "Melivra 1.0.8 버전의 변경 사항이에요.",
+        "changes": [
+          "플레이어 즐겨찾기 버튼과 앨범 커버 색상 효과, 시작 화면의 앨범 배치를 개선했어요.",
+          "곡 사이를 끊김 없이 재생할 때 앞뒤 무음을 더 잘 처리하도록 개선하고, 설정과 가사 편집 안내도 정리했어요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in Melivra 1.0.8.",
+        "changes": [
+          "Improved the player’s favorites button, album-cover color effects, and album layout on the Start screen.",
+          "Improved silence handling in gapless playback and playback stability, and clarified settings and lyrics editing guidance."
+        ]
+      },
+      "ja": {
+        "summary": "Melivra 1.0.8の変更点です。",
+        "changes": [
+          "プレーヤーのお気に入りボタン、アルバムカバーの色の演出、開始画面のアルバム配置を改善しました。",
+          "ギャップレス再生での曲前後の無音処理と再生の安定性を改善し、設定と歌詞編集の案内を整理しました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "Melivra 1.0.8 的更新内容。",
+        "changes": [
+          "改进了播放器的收藏按钮、专辑封面色彩效果和开始页面的专辑布局。",
+          "改进了无缝播放时歌曲前后的静音处理和播放稳定性，并整理了设置和歌词编辑说明。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "Melivra 1.0.8 的更新內容。",
+        "changes": [
+          "改善了播放器的收藏按鈕、專輯封面色彩效果和開始頁面的專輯排列。",
+          "改善了無縫播放時歌曲前後的靜音處理和播放穩定性，並整理了設定和歌詞編輯說明。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do Melivra 1.0.8.",
+        "changes": [
+          "Melhoramos o botão de favoritos do player, os efeitos de cor das capas e a organização dos álbuns na tela inicial.",
+          "Melhoramos o tratamento de silêncio na reprodução sem intervalos e a estabilidade, além de esclarecer as orientações de configurações e edição de letras."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in Melivra 1.0.8.",
+        "changes": [
+          "Favoriten-Schaltfläche im Player, Farbeffekte der Albumcover und Albumanordnung auf der Startseite verbessert.",
+          "Stille am Titelanfang und -ende bei lückenloser Wiedergabe sowie die Wiedergabestabilität verbessert und Hinweise zu Einstellungen und Liedtextbearbeitung überarbeitet."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de Melivra 1.0.8.",
+        "changes": [
+          "Amélioration du bouton des favoris du lecteur, des effets de couleur des pochettes et de la disposition des albums sur l’écran de démarrage.",
+          "Amélioration du traitement des silences lors de la lecture sans interruption et de la stabilité, et clarification des indications sur les réglages et l’édition des paroles."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de Melivra 1.0.8.",
+        "changes": [
+          "Mejoramos el botón de favoritos del reproductor, los efectos de color de las portadas y la distribución de álbumes en la pantalla de inicio.",
+          "Mejoramos el tratamiento de los silencios en la reproducción sin pausas y su estabilidad, y aclaramos las indicaciones de ajustes y edición de letras."
+        ]
+      }
+    }
   },
   {
     "appSlug": "papira",
@@ -225,15 +424,126 @@
     "platform": "Android",
     "releasedDate": "2026-10-16",
     "title": "Papira v2.0.3 (Android)",
-    "summary": "Latest public store release of Papira 2.0.3 for Android.",
-    "summaryKo": "Papira 2.0.3 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "summary": "Changes in Papira 2.0.3.",
+    "summaryKo": "Papira 2.0.3 버전의 변경 사항이에요.",
     "changes": [
-      "Papira 2.0.3 is now available on Android."
+      "Improved menus and cover, title-page, and text previews on small screens and with larger text.",
+      "Canceling file sharing no longer disrupts your current work.",
+      "Title-page details and custom text are clearer and preserved.",
+      "Improved VoiceOver and keyboard navigation.",
+      "Finished EPUB files are preserved if an export location is unsupported, so you can try another location.",
+      "Very long single-line manuscripts convert faster."
     ],
     "changesKo": [
-      "Papira 2.0.3 버전이 Android에 공개됐어요."
+      "작은 화면과 큰 글씨에서도 메뉴를 끝까지 볼 수 있고, 표지·속표지·본문 미리보기와 확대 보기를 더 편하게 다듬었어요.",
+      "최근 파일 공유를 취소해도 작업 화면과 상태가 유지돼요.",
+      "속표지의 책 정보와 직접 입력한 내용을 더 명확히 구분하고 입력을 유지해요.",
+      "설정 이동 시 VoiceOver와 키보드 동작을 개선했어요.",
+      "저장 위치가 지원되지 않더라도 완성된 EPUB은 보존해 다른 곳으로 다시 내보낼 수 있어요.",
+      "한 줄이 매우 긴 원고도 더 빠르게 변환해요."
     ],
-    "internalGitHubUrl": ""
+    "internalGitHubUrl": "",
+    "localizations": {
+      "ko": {
+        "summary": "Papira 2.0.3 버전의 변경 사항이에요.",
+        "changes": [
+          "작은 화면과 큰 글씨에서도 메뉴를 끝까지 볼 수 있고, 표지·속표지·본문 미리보기와 확대 보기를 더 편하게 다듬었어요.",
+          "최근 파일 공유를 취소해도 작업 화면과 상태가 유지돼요.",
+          "속표지의 책 정보와 직접 입력한 내용을 더 명확히 구분하고 입력을 유지해요.",
+          "설정 이동 시 VoiceOver와 키보드 동작을 개선했어요.",
+          "저장 위치가 지원되지 않더라도 완성된 EPUB은 보존해 다른 곳으로 다시 내보낼 수 있어요.",
+          "한 줄이 매우 긴 원고도 더 빠르게 변환해요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in Papira 2.0.3.",
+        "changes": [
+          "Improved menus and cover, title-page, and text previews on small screens and with larger text.",
+          "Canceling file sharing no longer disrupts your current work.",
+          "Title-page details and custom text are clearer and preserved.",
+          "Improved VoiceOver and keyboard navigation.",
+          "Finished EPUB files are preserved if an export location is unsupported, so you can try another location.",
+          "Very long single-line manuscripts convert faster."
+        ]
+      },
+      "ja": {
+        "summary": "Papira 2.0.3の変更点です。",
+        "changes": [
+          "小さな画面や大きな文字でもメニューを最後まで確認でき、表紙・扉・本文のプレビューを見やすくしました。",
+          "ファイル共有をキャンセルしても作業状態が保たれます。",
+          "扉の書籍情報と手入力内容を分かりやすくし、入力内容を保持します。",
+          "VoiceOverとキーボード操作を改善しました。",
+          "保存先が使えない場合も完成したEPUBは残り、別の場所へ書き出せます。",
+          "極端に長い1行の原稿もより速く変換できます。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "Papira 2.0.3 的更新内容。",
+        "changes": [
+          "小屏幕或大字体下也能完整浏览菜单，封面、扉页和正文预览更加易用。",
+          "取消分享文件后，当前工作状态仍会保留。",
+          "扉页中的书籍信息和手动输入内容更加清晰，输入也会保留。",
+          "改进了VoiceOver和键盘操作。",
+          "即使导出位置不受支持，已生成的EPUB仍会保留，可重新导出到其他位置。",
+          "超长单行稿件的转换速度更快。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "Papira 2.0.3 的更新內容。",
+        "changes": [
+          "小螢幕或大字體下也能完整瀏覽選單，封面、扉頁與內文預覽更加好用。",
+          "取消分享檔案後，仍會保留目前的工作狀態。",
+          "扉頁的書籍資訊與手動輸入內容更容易分辨，輸入也會保留。",
+          "改善VoiceOver與鍵盤操作。",
+          "即使匯出位置不受支援，已完成的EPUB仍會保留，可再匯出至其他位置。",
+          "超長單行稿件也能更快轉換。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do Papira 2.0.3.",
+        "changes": [
+          "Menus e prévias de capa, folha de rosto e texto estão mais fáceis de usar em telas pequenas ou com letras grandes.",
+          "Cancelar o compartilhamento não interrompe seu trabalho.",
+          "Dados do livro e texto personalizado na folha de rosto ficaram mais claros e são preservados.",
+          "Melhoramos a navegação com VoiceOver e teclado.",
+          "O EPUB pronto é preservado se o destino não for aceito, para que você tente outro local.",
+          "Manuscritos com linhas muito longas são convertidos mais rápido."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in Papira 2.0.3.",
+        "changes": [
+          "Menüs und Vorschauen von Cover, Titelseite und Text sind auf kleinen Bildschirmen besser nutzbar.",
+          "Beim Abbrechen der Freigabe bleibt Ihre Arbeit erhalten.",
+          "Buchdaten und eigener Text auf der Titelseite sind klarer und bleiben gespeichert.",
+          "VoiceOver und Tastaturbedienung wurden verbessert.",
+          "Bei ungeeignetem Exportziel bleibt das fertige EPUB erhalten.",
+          "Sehr lange Textzeilen werden schneller konvertiert."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de Papira 2.0.3.",
+        "changes": [
+          "Menus et aperçus de couverture, page de titre et texte sont plus accessibles sur petit écran.",
+          "Annuler un partage ne perturbe plus le travail en cours.",
+          "Les données du livre et le texte personnalisé de la page de titre sont plus clairs et conservés.",
+          "La navigation VoiceOver et au clavier a été améliorée.",
+          "L’EPUB terminé reste disponible si le dossier de destination n’est pas compatible.",
+          "La conversion des très longues lignes de texte est plus rapide."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de Papira 2.0.3.",
+        "changes": [
+          "Mejoramos los menús y las vistas previas de portada, portadilla y texto en pantallas pequeñas o con letra grande.",
+          "Cancelar el uso compartido ya no interrumpe el trabajo.",
+          "Los datos del libro y el texto personalizado de la portadilla se distinguen mejor y se conservan.",
+          "Mejoramos la navegación con VoiceOver y el teclado.",
+          "Si el destino no es compatible, el EPUB terminado se conserva para exportarlo a otra ubicación.",
+          "Los manuscritos con líneas muy largas se convierten más rápido."
+        ]
+      }
+    }
   },
   {
     "appSlug": "quivra",
@@ -261,15 +571,71 @@
     "platform": "iOS · Android",
     "releasedDate": "2026-10-07",
     "title": "Quivra v1.0.10 (iOS · Android)",
-    "summary": "Latest public store release of Quivra 1.0.10 for iOS · Android.",
-    "summaryKo": "Quivra 1.0.10 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "summary": "Changes in Quivra 1.0.10.",
+    "summaryKo": "Quivra 1.0.10 버전의 변경 사항이에요.",
     "changes": [
-      "Quivra 1.0.10 is now available on iOS · Android."
+      "Improved the file list so its position and row heights stay stable before and during conversion."
     ],
     "changesKo": [
-      "변환 전과 변환 중에도 파일 목록의 위치와 높이가 안정적으로 유지되도록 화면을 다듬었어요."
+      "변환 전과 변환 중에도 파일 목록의 위치와 높이가 그대로 유지되도록 화면을 개선했어요."
     ],
-    "internalGitHubUrl": ""
+    "internalGitHubUrl": "",
+    "localizations": {
+      "ko": {
+        "summary": "Quivra 1.0.10 버전의 변경 사항이에요.",
+        "changes": [
+          "변환 전과 변환 중에도 파일 목록의 위치와 높이가 그대로 유지되도록 화면을 개선했어요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in Quivra 1.0.10.",
+        "changes": [
+          "Improved the file list so its position and row heights stay stable before and during conversion."
+        ]
+      },
+      "ja": {
+        "summary": "Quivra 1.0.10の変更点です。",
+        "changes": [
+          "変換前も変換中も、ファイル一覧の位置と行の高さが変わらないように画面を改善しました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "Quivra 1.0.10 的更新内容。",
+        "changes": [
+          "优化了文件列表，转换前和转换过程中列表位置与每行高度保持稳定。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "Quivra 1.0.10 的更新內容。",
+        "changes": [
+          "改善檔案清單，轉換前與轉換時清單位置和列高都能維持穩定。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do Quivra 1.0.10.",
+        "changes": [
+          "Melhoramos a lista de arquivos para manter a posição e a altura das linhas antes e durante a conversão."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in Quivra 1.0.10.",
+        "changes": [
+          "Die Dateiliste behält ihre Position und Zeilenhöhe vor und während der Konvertierung bei."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de Quivra 1.0.10.",
+        "changes": [
+          "La liste des fichiers conserve désormais sa position et la hauteur de ses lignes avant et pendant la conversion."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de Quivra 1.0.10.",
+        "changes": [
+          "La lista de archivos mantiene su posición y la altura de las filas antes y durante la conversión."
+        ]
+      }
+    }
   },
   {
     "appSlug": "segra",
@@ -279,17 +645,93 @@
     "platform": "iOS · Android",
     "releasedDate": "2026-09-28",
     "title": "Segra v1.0.6 (iOS · Android)",
-    "summary": "Latest public store release of Segra 1.0.6 for iOS · Android.",
-    "summaryKo": "Segra 1.0.6 iOS · Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "summary": "Changes in Segra 1.0.6.",
+    "summaryKo": "Segra 1.0.6 버전의 변경 사항이에요.",
     "changes": [
-      "Segra 1.0.6 is now available on iOS · Android."
+      "Updated the store description and screenshots to match the latest features.",
+      "Improved layouts for Android tablets, foldables, and multi-window use.",
+      "Improved memory stability when making videos from high-resolution images."
     ],
     "changesKo": [
-      "최신 기능 흐름에 맞춰 앱 소개와 스크린샷을 업데이트했어요.",
-      "Android 태블릿, 폴더블, 멀티 윈도우에서도 화면 크기와 방향에 맞춰 사용할 수 있도록 개선했어요.",
-      "고해상도 이미지로 영상을 만들 때 필요한 크기로 이미지를 처리해 메모리 사용 안정성을 높였어요."
+      "앱 소개와 스토어 이미지를 최신 기능에 맞게 업데이트했어요.",
+      "Android 태블릿, 폴더블, 멀티 윈도우에서도 화면 크기와 방향에 맞춰 사용할 수 있어요.",
+      "고해상도 이미지로 영상을 만들 때 메모리를 더 안정적으로 사용하도록 개선했어요."
     ],
-    "internalGitHubUrl": ""
+    "internalGitHubUrl": "",
+    "localizations": {
+      "ko": {
+        "summary": "Segra 1.0.6 버전의 변경 사항이에요.",
+        "changes": [
+          "앱 소개와 스토어 이미지를 최신 기능에 맞게 업데이트했어요.",
+          "Android 태블릿, 폴더블, 멀티 윈도우에서도 화면 크기와 방향에 맞춰 사용할 수 있어요.",
+          "고해상도 이미지로 영상을 만들 때 메모리를 더 안정적으로 사용하도록 개선했어요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in Segra 1.0.6.",
+        "changes": [
+          "Updated the store description and screenshots to match the latest features.",
+          "Improved layouts for Android tablets, foldables, and multi-window use.",
+          "Improved memory stability when making videos from high-resolution images."
+        ]
+      },
+      "ja": {
+        "summary": "Segra 1.0.6の変更点です。",
+        "changes": [
+          "最新の機能に合わせてストアの説明と画像を更新しました。",
+          "Androidタブレット、折りたたみ端末、マルチウィンドウでの表示を改善しました。",
+          "高解像度画像から動画を作成する際のメモリ使用を安定させました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "Segra 1.0.6 的更新内容。",
+        "changes": [
+          "根据最新功能更新了商店介绍和截图。",
+          "改进了Android平板、折叠屏和多窗口模式下的界面适配。",
+          "使用高分辨率图片制作视频时，内存处理更加稳定。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "Segra 1.0.6 的更新內容。",
+        "changes": [
+          "依照最新功能更新了商店介紹與截圖。",
+          "改善Android平板、摺疊裝置及多視窗模式的畫面配置。",
+          "使用高解析度圖片製作影片時，記憶體處理更加穩定。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do Segra 1.0.6.",
+        "changes": [
+          "Atualizamos a descrição e as imagens da loja para refletir os recursos atuais.",
+          "Melhoramos o layout em tablets, dobráveis e janelas múltiplas no Android.",
+          "O uso de memória ficou mais estável ao criar vídeos com imagens de alta resolução."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in Segra 1.0.6.",
+        "changes": [
+          "Store-Beschreibung und Screenshots wurden an die aktuellen Funktionen angepasst.",
+          "Die Anzeige auf Android-Tablets, Foldables und im Mehrfenstermodus wurde verbessert.",
+          "Die Videoerstellung aus hochauflösenden Bildern nutzt den Speicher zuverlässiger."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de Segra 1.0.6.",
+        "changes": [
+          "La description et les captures d’écran de la boutique ont été actualisées.",
+          "L’affichage sur les tablettes, appareils pliables et fenêtres multiples Android a été amélioré.",
+          "La création de vidéos à partir d’images haute résolution utilise la mémoire plus efficacement."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de Segra 1.0.6.",
+        "changes": [
+          "Actualizamos la descripción y las capturas de la tienda para reflejar las funciones actuales.",
+          "Mejoramos el diseño en tabletas, plegables y modo multiventana de Android.",
+          "La creación de vídeos con imágenes de alta resolución utiliza la memoria de forma más estable."
+        ]
+      }
+    }
   },
   {
     "appSlug": "tagweaver",
@@ -356,15 +798,104 @@
     "platform": "Android",
     "releasedDate": "2026-10-20",
     "title": "TagWeaver v2.5.5 (Android)",
-    "summary": "Latest public store release of TagWeaver 2.5.5 for Android.",
-    "summaryKo": "TagWeaver 2.5.5 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "summary": "Changes in TagWeaver 2.5.5.",
+    "summaryKo": "TagWeaver 2.5.5 버전의 변경 사항이에요.",
     "changes": [
-      "TagWeaver 2.5.5 is now available on Android."
+      "Tracks opened from Melivra now show their original folder more accurately, and saved tag changes are passed back to Melivra.",
+      "You can name unavailable folders on Android.",
+      "Fill missing track titles using each file's name.",
+      "Improved long button labels and the purchase dialog."
     ],
     "changesKo": [
-      "TagWeaver 2.5.5 버전이 Android에 공개됐어요."
+      "Melivra에서 연 음악 파일의 원본 폴더를 더 정확히 보여주고, 태그를 저장한 뒤 변경 내용을 Melivra에 알려줘요.",
+      "Android에서 찾을 수 없는 폴더에도 표시 이름을 직접 정할 수 있어요.",
+      "제목이 비어 있는 음악 파일의 제목을 파일명으로 한꺼번에 채울 수 있어요.",
+      "긴 버튼 문구와 구매 안내창을 읽기 쉽게 다듬었어요."
     ],
-    "internalGitHubUrl": ""
+    "internalGitHubUrl": "",
+    "localizations": {
+      "ko": {
+        "summary": "TagWeaver 2.5.5 버전의 변경 사항이에요.",
+        "changes": [
+          "Melivra에서 연 음악 파일의 원본 폴더를 더 정확히 보여주고, 태그를 저장한 뒤 변경 내용을 Melivra에 알려줘요.",
+          "Android에서 찾을 수 없는 폴더에도 표시 이름을 직접 정할 수 있어요.",
+          "제목이 비어 있는 음악 파일의 제목을 파일명으로 한꺼번에 채울 수 있어요.",
+          "긴 버튼 문구와 구매 안내창을 읽기 쉽게 다듬었어요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in TagWeaver 2.5.5.",
+        "changes": [
+          "Tracks opened from Melivra now show their original folder more accurately, and saved tag changes are passed back to Melivra.",
+          "You can name unavailable folders on Android.",
+          "Fill missing track titles using each file's name.",
+          "Improved long button labels and the purchase dialog."
+        ]
+      },
+      "ja": {
+        "summary": "TagWeaver 2.5.5の変更点です。",
+        "changes": [
+          "Melivraから開いた曲の元フォルダーをより正確に表示し、タグ保存後の変更をMelivraにも反映できるようにしました。",
+          "Androidで参照できないフォルダーにも表示名を設定できます。",
+          "空の曲名を各ファイル名でまとめて補完できます。",
+          "長いボタン名と購入画面を読みやすくしました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "TagWeaver 2.5.5 的更新内容。",
+        "changes": [
+          "更准确地显示从Melivra打开的歌曲所在文件夹，并在保存标签后将更改通知Melivra。",
+          "Android上无法访问的文件夹现在也能设置显示名称。",
+          "可用各文件名批量填充空白曲名。",
+          "优化了较长的按钮文字和购买对话框。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "TagWeaver 2.5.5 的更新內容。",
+        "changes": [
+          "更準確顯示從Melivra開啟的歌曲原始資料夾，儲存標籤後也會將變更通知Melivra。",
+          "Android上無法存取的資料夾也能自行設定顯示名稱。",
+          "可使用各檔案名稱批次補上空白曲名。",
+          "改善較長的按鈕文字與購買視窗。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do TagWeaver 2.5.5.",
+        "changes": [
+          "Mostramos com mais precisão a pasta original das músicas abertas pelo Melivra e informamos ao app quando as tags são salvas.",
+          "Defina nomes para pastas indisponíveis no Android.",
+          "Preencha títulos vazios com o nome de cada arquivo.",
+          "Melhoramos os botões com textos longos e a janela de compra."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in TagWeaver 2.5.5.",
+        "changes": [
+          "Der ursprüngliche Ordner von Titeln aus Melivra wird genauer angezeigt; gespeicherte Tag-Änderungen werden an Melivra übermittelt.",
+          "Für nicht verfügbare Ordner auf Android lassen sich Anzeigenamen festlegen.",
+          "Leere Titel können aus den Dateinamen ergänzt werden.",
+          "Lange Schaltflächentexte und der Kaufdialog wurden verbessert."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de TagWeaver 2.5.5.",
+        "changes": [
+          "Le dossier d’origine des morceaux ouverts depuis Melivra s’affiche plus précisément et les modifications de tags sont transmises à Melivra après l’enregistrement.",
+          "Vous pouvez nommer les dossiers indisponibles sur Android.",
+          "Les titres vides peuvent être complétés à partir des noms de fichiers.",
+          "Nous avons amélioré les libellés longs et la fenêtre d’achat."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de TagWeaver 2.5.5.",
+        "changes": [
+          "Mostramos con más precisión la carpeta original de los archivos abiertos desde Melivra y le comunicamos los cambios de etiquetas al guardarlos.",
+          "Puedes asignar nombres a carpetas no disponibles en Android.",
+          "Completa títulos vacíos con el nombre de cada archivo.",
+          "Mejoramos los botones con texto largo y el cuadro de compra."
+        ]
+      }
+    }
   },
   {
     "appSlug": "vaultxt",
@@ -392,14 +923,103 @@
     "platform": "Android",
     "releasedDate": "2026-10-17",
     "title": "VaultXT v2.0.2 (Android)",
-    "summary": "Latest public store release of VaultXT 2.0.2 for Android.",
-    "summaryKo": "VaultXT 2.0.2 Android 공개 스토어 릴리즈 변경 사항이에요.",
+    "summary": "Changes in VaultXT 2.0.2.",
+    "summaryKo": "VaultXT 2.0.2 버전의 변경 사항이에요.",
     "changes": [
-      "VaultXT 2.0.2 is now available on Android."
+      "Split and merge documents more easily on small screens and with larger text.",
+      "See the store price before buying Pro.",
+      "Retry loading documents or snapshots when something goes wrong.",
+      "Improved Find and Replace, fixed a large-document display issue, and refined iOS startup."
     ],
     "changesKo": [
-      "VaultXT 2.0.2 버전이 Android에 공개됐어요."
+      "작은 화면이나 큰 글씨에서도 문서 나누기·합치기와 Pro 구매 안내를 더 편하게 사용할 수 있어요.",
+      "Pro 구매 전에 스토어 가격을 확인할 수 있어요.",
+      "문서나 스냅샷을 불러오지 못하면 바로 다시 시도할 수 있어요.",
+      "찾기·바꾸기 화면과 대용량 문서 표시 문제를 개선하고, iOS 앱 시작도 다듬었어요."
     ],
-    "internalGitHubUrl": ""
+    "internalGitHubUrl": "",
+    "localizations": {
+      "ko": {
+        "summary": "VaultXT 2.0.2 버전의 변경 사항이에요.",
+        "changes": [
+          "작은 화면이나 큰 글씨에서도 문서 나누기·합치기와 Pro 구매 안내를 더 편하게 사용할 수 있어요.",
+          "Pro 구매 전에 스토어 가격을 확인할 수 있어요.",
+          "문서나 스냅샷을 불러오지 못하면 바로 다시 시도할 수 있어요.",
+          "찾기·바꾸기 화면과 대용량 문서 표시 문제를 개선하고, iOS 앱 시작도 다듬었어요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in VaultXT 2.0.2.",
+        "changes": [
+          "Split and merge documents more easily on small screens and with larger text.",
+          "See the store price before buying Pro.",
+          "Retry loading documents or snapshots when something goes wrong.",
+          "Improved Find and Replace, fixed a large-document display issue, and refined iOS startup."
+        ]
+      },
+      "ja": {
+        "summary": "VaultXT 2.0.2の変更点です。",
+        "changes": [
+          "小さな画面や大きな文字でも文書の分割・結合を操作しやすくしました。",
+          "Pro購入前にストアの価格を確認できます。",
+          "文書やスナップショットを読み込めない場合、すぐに再試行できます。",
+          "検索・置換と大きな文書の表示を改善し、iOSでの起動も調整しました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "VaultXT 2.0.2 的更新内容。",
+        "changes": [
+          "在小屏幕和大字体下也能更轻松地拆分、合并文档。",
+          "购买Pro前即可查看商店价格。",
+          "文档或快照加载失败时可直接重试。",
+          "改进了查找替换，修复大文档显示问题，并优化iOS启动体验。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "VaultXT 2.0.2 的更新內容。",
+        "changes": [
+          "在小螢幕或大字體下，也能更輕鬆分割與合併文件。",
+          "購買Pro前即可查看商店價格。",
+          "文件或快照載入失敗時可以直接重試。",
+          "改善尋找與取代、修正大型文件顯示問題，並優化iOS啟動體驗。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do VaultXT 2.0.2.",
+        "changes": [
+          "Ficou mais fácil dividir e unir documentos em telas pequenas e com texto ampliado.",
+          "Veja o preço da loja antes de comprar o Pro.",
+          "Tente novamente se documentos ou versões salvas não carregarem.",
+          "Melhoramos Buscar e Substituir, corrigimos a exibição de arquivos grandes e ajustamos a inicialização no iOS."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in VaultXT 2.0.2.",
+        "changes": [
+          "Dokumente lassen sich auch auf kleinen Bildschirmen und mit großer Schrift leichter teilen und zusammenführen.",
+          "Der Store-Preis wird vor dem Pro-Kauf angezeigt.",
+          "Dokumente und Schnappschüsse können bei Ladefehlern erneut geladen werden.",
+          "Suchen und Ersetzen, die Anzeige großer Dokumente und der iOS-Start wurden verbessert."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de VaultXT 2.0.2.",
+        "changes": [
+          "Divisez et fusionnez plus facilement vos documents sur petit écran ou avec une grande police.",
+          "Consultez le prix en boutique avant d’acheter Pro.",
+          "Réessayez directement si un document ou un instantané ne se charge pas.",
+          "Nous avons amélioré la recherche, le remplacement et l’affichage des grands documents ainsi que le démarrage sur iOS."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de VaultXT 2.0.2.",
+        "changes": [
+          "Divide y une documentos más fácilmente en pantallas pequeñas o con texto grande.",
+          "Consulta el precio de la tienda antes de comprar Pro.",
+          "Vuelve a intentar la carga si fallan los documentos o las instantáneas.",
+          "Mejoramos Buscar y reemplazar, la visualización de documentos grandes y el inicio en iOS."
+        ]
+      }
+    }
   }
 ]
