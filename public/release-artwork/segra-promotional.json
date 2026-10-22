@@ -1,0 +1,189 @@
+{
+  "status": "staged_not_published",
+  "version": "1.0.7+77",
+  "source_commit": "601f5e895be63917b29d28aa844b9a52e5fc751e",
+  "candidate_sha256": "3066c1bf3be5d2b7db719e073ca0d56df218a55c98d4de409a8452fb9dc131ae",
+  "assets": [
+    {
+      "locale": "de",
+      "kind": "header",
+      "url": "/app-promo/segra/de/header.png",
+      "sha256": "97ba03942bb5b007060ee279027df341092053db74a6eec7937e0146539b5abc",
+      "size": [
+        3840,
+        1646
+      ]
+    },
+    {
+      "locale": "de",
+      "kind": "search",
+      "url": "/app-promo/segra/de/search.png",
+      "sha256": "dbaa21a6370fba58bedf2c8cae2bb73c2c74420bf6c63f6cf28b8bbd087ffa06",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "locale": "en",
+      "kind": "header",
+      "url": "/app-promo/segra/en/header.png",
+      "sha256": "d1001dfb30dbee1a9e08393d3c61563144c7cd2fa68ab80465042a6007e66f89",
+      "size": [
+        3840,
+        1646
+      ]
+    },
+    {
+      "locale": "en",
+      "kind": "search",
+      "url": "/app-promo/segra/en/search.png",
+      "sha256": "e200eb54c69b6b1ba6ec38665ca97212fa1771d34feed41dbcec8973882839b9",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "locale": "es",
+      "kind": "header",
+      "url": "/app-promo/segra/es/header.png",
+      "sha256": "f71e72fb74f62022286f4514a6e7c2e50a3a1b1197c27e02174117d1cda1fe7a",
+      "size": [
+        3840,
+        1646
+      ]
+    },
+    {
+      "locale": "es",
+      "kind": "search",
+      "url": "/app-promo/segra/es/search.png",
+      "sha256": "cdab1ec70785b96d0dc880aee527364217c3090d5db483ce6d0e0818bdaecafa",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "locale": "fr",
+      "kind": "header",
+      "url": "/app-promo/segra/fr/header.png",
+      "sha256": "6f61bbcd744c909daee4f70a6609b3ca7c488d2329182977fb8c04c1f4356c78",
+      "size": [
+        3840,
+        1646
+      ]
+    },
+    {
+      "locale": "fr",
+      "kind": "search",
+      "url": "/app-promo/segra/fr/search.png",
+      "sha256": "dddfe07943b4035c2abf5c283aef4f1888e0edc26e7f57023591daf235e7451d",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "locale": "ja",
+      "kind": "header",
+      "url": "/app-promo/segra/ja/header.png",
+      "sha256": "61146dcdb6328a0f8cde7db9a1aab96cb879ac7a8f521165458a65335c463988",
+      "size": [
+        3840,
+        1646
+      ]
+    },
+    {
+      "locale": "ja",
+      "kind": "search",
+      "url": "/app-promo/segra/ja/search.png",
+      "sha256": "47a7899a54c631ccde5d56975d5d006d1661ca5a68ce891205a22862d2312d6e",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "locale": "ko",
+      "kind": "header",
+      "url": "/app-promo/segra/ko/header.png",
+      "sha256": "15e272e750abbdeaff795f8a7b8a9e3da1236eacae36383ab90f07421555f83a",
+      "size": [
+        3840,
+        1646
+      ]
+    },
+    {
+      "locale": "ko",
+      "kind": "search",
+      "url": "/app-promo/segra/ko/search.png",
+      "sha256": "a38236bdb88aff2693e2a15ee1da9e57c7c12f9de1e845606f6a16c991748b01",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "kind": "header",
+      "url": "/app-promo/segra/pt-BR/header.png",
+      "sha256": "cba6601e8285b6b1e5c060a81db103e0141922cafb83e8b17613ec73a1725545",
+      "size": [
+        3840,
+        1646
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "kind": "search",
+      "url": "/app-promo/segra/pt-BR/search.png",
+      "sha256": "17862346bcb5f4bb95ec32bfce0bac6a7113a021d421904b717cea754e7cdbb6",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "kind": "header",
+      "url": "/app-promo/segra/zh-Hans/header.png",
+      "sha256": "a69dbd8d5b2b2ef703d1e780b6d4e91c9c5b89097a243a4d346b32c9320661e8",
+      "size": [
+        3840,
+        1646
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "kind": "search",
+      "url": "/app-promo/segra/zh-Hans/search.png",
+      "sha256": "f3c8163db28528c13e3dc718581c35a55b924bc893be32c4892725d49c627b11",
+      "size": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "kind": "header",
+      "url": "/app-promo/segra/zh-Hant/header.png",
+      "sha256": "da55b08a724b3145c6664270a5a8b7984d6a830969cd6a3e7ea84c3124cd88cd",
+      "size": [
+        3840,
+        1646
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "kind": "search",
+      "url": "/app-promo/segra/zh-Hant/search.png",
+      "sha256": "7e71298083fa900e9b7f288720f30f76033fdf4e7d5b4dd0134489a1baf836dd",
+      "size": [
+        1920,
+        1280
+      ]
+    }
+  ],
+  "registered_play_icon_and_graphic": "preserved"
+}
