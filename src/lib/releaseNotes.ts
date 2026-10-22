@@ -12,6 +12,7 @@ export type ReleaseNote = {
   summaryKo: string;
   changes: string[];
   changesKo: string[];
+  localizations?: Partial<Record<'ko' | 'en' | 'ja' | 'zh-Hans' | 'zh-Hant' | 'pt-BR' | 'de' | 'fr' | 'es', {summary: string; changes: string[]}>>;
   internalGitHubUrl: string;
 };
 
@@ -203,5 +204,6 @@ export function getReleaseNote(appSlug: string, version: string): ReleaseNote | 
 export function latestReleaseNoteForApp(appSlug: string): ReleaseNote | undefined {
   return releaseNotes
     .filter((note) => note.appSlug === appSlug)
-    .sort((a, b) => b.releasedDate.localeCompare(a.releasedDate))[0];
+    .sort((a, b) => b.releasedDate.localeCompare(a.releasedDate)
+      || b.version.localeCompare(a.version, undefined, { numeric: true }))[0];
 }
