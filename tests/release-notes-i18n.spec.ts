@@ -14,6 +14,7 @@ import {
   releaseNoteKoPath,
   releaseNotePath,
   releaseNotes,
+  latestReleaseNoteForApp,
   type ReleaseNote
 } from '../src/lib/releaseNotes';
 
@@ -46,6 +47,25 @@ function localizedCopy(note: ReleaseNote, locale: AllSiteLocale) {
   }
   return getExtendedReleaseCopy(note, locale as ReleaseLocale);
 }
+
+test('latest public releases have actual changes in all nine localized versions', () => {
+  const releasedApps = ['aligna', 'clipnest', 'melivra', 'papira',
+    'quivra', 'segra', 'tagweaver', 'vaultxt'];
+
+  for (const slug of releasedApps) {
+    const note = latestReleaseNoteForApp(slug);
+    expect(note, slug).toBeDefined();
+    const copies = allSiteLocales.map((locale) => {
+      const text = note?.localizations?.[locale];
+      expect(text, `${slug}/${locale} versioned changes`).toBeDefined();
+      expect(text?.changes.length, `${slug}/${locale} changes`).toBeGreaterThan(0);
+      const combined = (text?.changes ?? []).join(' ');
+      expect(combined).not.toMatch(/\bis now available on\b|store update detected|공개됐어요/i);
+      return combined;
+    });
+    expect(new Set(copies).size, `${slug}: independent localized copy`).toBe(9);
+  }
+});
 
 test('English status detection preserves preview feature descriptions', () => {
   expect('Preview changes before saving.').not.toMatch(deploymentStatusTerms.en);
