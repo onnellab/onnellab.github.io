@@ -519,5 +519,12 @@ function fallbackReleaseCopy(note: ReleaseNote, locale: ReleaseLocale): ReleaseC
 }
 
 export function getExtendedReleaseCopy(note: ReleaseNote, locale: ReleaseLocale): ReleaseCopy {
+  // Newly published versions use the same locale-specific notes as the release source.
+  // Historic manually translated entries remain available for older versions.
+  const publishedCopy = note.localizations?.[locale];
+  if (publishedCopy?.summary?.trim() && publishedCopy.changes?.length
+      && publishedCopy.changes.every((change) => change.trim())) {
+    return publishedCopy;
+  }
   return copy[locale][`${note.appSlug}/${note.version}`] ?? fallbackReleaseCopy(note, locale);
 }
