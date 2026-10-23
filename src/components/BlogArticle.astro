@@ -397,13 +397,18 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
     {articleImages.length > 0 && (
       <dialog class="article-image-viewer" aria-label={uiLabels[locale].articleImage}>
         <div class="article-image-viewer-panel">
-          <button class="article-image-close" type="button" data-article-image-close aria-label={uiLabels[locale].close}>×</button>
+          <div class="article-image-controls">
+            <button class="article-image-zoom" type="button" data-article-image-zoom aria-pressed="false" aria-controls="article-image-viewport">{uiLabels[locale].originalImageSize}</button>
+            <button class="article-image-close" type="button" data-article-image-close aria-label={uiLabels[locale].close}>×</button>
+          </div>
+          <div id="article-image-viewport" class="article-image-viewport" data-article-image-viewport tabindex="0" role="region" aria-label={uiLabels[locale].articleImage}>
           <img
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
             alt=""
             data-article-image-viewer-img
             hidden
           />
+          </div>
           <p data-article-image-viewer-caption></p>
         </div>
       </dialog>
@@ -423,12 +428,36 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
       const viewerImage = document.querySelector('[data-article-image-viewer-img]');
       const viewerCaption = document.querySelector('[data-article-image-viewer-caption]');
       const closeButton = document.querySelector('[data-article-image-close]');
+      const zoomButton = document.querySelector('[data-article-image-zoom]');
+      const imageViewport = document.querySelector('[data-article-image-viewport]');
+      let activeTrigger = null;
       if (!triggers.length || !(viewer instanceof HTMLDialogElement) || !(viewerImage instanceof HTMLImageElement)) return;
+
+      const resetZoom = () => {
+        zoomButton?.setAttribute('aria-pressed', 'false');
+        viewerImage.classList.remove('is-original-size');
+        viewerImage.style.removeProperty('width');
+        if (imageViewport instanceof HTMLElement) imageViewport.scrollTo(0, 0);
+      };
+      zoomButton?.addEventListener('click', () => {
+        const zoomed = zoomButton.getAttribute('aria-pressed') !== 'true';
+        zoomButton.setAttribute('aria-pressed', String(zoomed));
+        viewerImage.classList.toggle('is-original-size', zoomed);
+        if (zoomed) viewerImage.style.width = `${viewerImage.naturalWidth}px`;
+        else viewerImage.style.removeProperty('width');
+        if (imageViewport instanceof HTMLElement) imageViewport.scrollTo(0, 0);
+      });
+      viewer.addEventListener('close', () => {
+        resetZoom();
+        activeTrigger?.focus({ preventScroll: true });
+      });
 
       const openViewer = (trigger) => {
         const image = trigger.querySelector('img');
         const figure = trigger.closest('figure');
         if (!(image instanceof HTMLImageElement)) return;
+        activeTrigger = trigger;
+        resetZoom();
         viewerImage.src = image.currentSrc || image.src;
         viewerImage.alt = image.alt || '';
         viewerImage.hidden = false;
@@ -884,6 +913,12 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
     gap: 10px;
     padding: 12px;
   }
+  .article-image-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .article-image-zoom { min-height: 44px; padding: 8px 14px; border: 1px solid #bcb1a2; border-radius: 8px; background: #fffdf8; color: #37342f; font: inherit; cursor: pointer; }
+  .article-image-zoom[aria-pressed="true"] { background: #e2edf3; border-color: #617c8d; }
+  .article-image-viewport { overflow: auto; max-height: calc(100vh - 200px); min-width: 0; overscroll-behavior: contain; }
+  .article-image-zoom:focus-visible, .article-image-viewport:focus-visible { outline: 3px solid #617c8d; outline-offset: 2px; }
+  .article-image-viewer img.is-original-size { max-width: none; max-height: none; margin: 0; }
   .article-image-close {
     width: 34px;
     height: 34px;
