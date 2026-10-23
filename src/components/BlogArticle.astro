@@ -145,7 +145,7 @@ const relatedTopicHref = (value: string) => {
   }
   return '';
 };
-const hasMeta = post.meta.publishedAt || post.meta.updatedAt || post.meta.relatedApps.length;
+const hasMeta = Boolean(post.meta.publishedAt || post.meta.updatedAt || post.meta.relatedApps.length);
 const hasRecommendations =
   post.meta.relatedApps.length > 0 ||
   post.meta.relatedArticles.length > 0 ||
