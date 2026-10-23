@@ -75,7 +75,7 @@ How should this template organize a long article?
 
 ## Short Answer
 
-This section should feed the summary box and should not appear again in the body.
+This differs from the summary and must remain in the body.
 
 ## Recommended Workflow
 
@@ -140,7 +140,8 @@ Yes. The template should render recommendation metadata as links when a URL is p
   assert.match(html, /data-article-image-trigger/);
   assert.match(html, /topics.csv -&gt; markdown draft/);
   assert.match(html, /Caption text for a future generated workflow image/);
-  assert.doesNotMatch(html, />Short Answer</);
+  assert.match(html, />Short Answer</);
+  assert.ok(html.includes('This differs from the summary and must remain in the body.'));
   for (const locale of fixtureLocales) {
     const segment = { 'zh-Hans': 'zh-hans', 'zh-Hant': 'zh-hant', 'pt-BR': 'pt-br' }[locale] ?? locale;
     const rendered = fs.readFileSync(path.join(root, 'dist/blog', segment, 'template-contract/index.html'), 'utf8');

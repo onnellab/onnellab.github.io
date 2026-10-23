@@ -6,6 +6,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { uiLabels } from '../lib/ui-labels';
 import BlogLocaleMenu from './BlogLocaleMenu.astro';
 import BlogInline from './BlogInline.astro';
+import { preserveShortAnswerContent } from '../lib/blog-summary-blocks.mjs';
 import { plainBlogInline } from '../lib/blog-inline';
 import SiteFooter from './SiteFooter.astro';
 import { blogPostAlternates } from '../lib/blog-i18n';
@@ -25,18 +26,8 @@ const copy = blogCopy[locale];
 const blocks = renderMarkdownBlocks(post.body);
 const shortAnswerHeadings = new Set(copy.shortAnswerHeadings);
 const faqHeadings = new Set(copy.faqHeadings);
-const articleBlocks: typeof blocks = [];
-let skippingShortAnswer = false;
-for (const block of blocks) {
-  if (block.type === 'h2' && shortAnswerHeadings.has(String(block.value).trim().toLowerCase())) {
-    skippingShortAnswer = true;
-    continue;
-  }
-  if (skippingShortAnswer && block.type === 'h2') {
-    skippingShortAnswer = false;
-  }
-  if (!skippingShortAnswer) articleBlocks.push(block);
-}
+const summaryText = post.meta.shortAnswer || post.meta.description;
+const articleBlocks: typeof blocks = preserveShortAnswerContent(blocks, shortAnswerHeadings, summaryText);
 const faqBlocks = new Map<number, Array<{ question: string; answer: string }>>();
 const skippedBlockIndexes = new Set<number>();
 for (let index = 0; index < articleBlocks.length; index += 1) {
@@ -69,7 +60,6 @@ const homeHref = allRouteFor('home', locale);
 const blogHref = blogIndexPathFor(locale);
 const appsHref = allRouteFor('apps', locale);
 const categoryLabel = copy.categoryLabels[post.meta.category] || post.meta.category;
-const summaryText = post.meta.shortAnswer || post.meta.description;
 const dateLabel = (value?: string) => {
   if (!value) return '';
   const localDate = value.match(/^\d{4}-\d{2}-\d{2}/);
