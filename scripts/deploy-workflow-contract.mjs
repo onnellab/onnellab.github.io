@@ -66,7 +66,7 @@ test('reviewed minimum patched Zod and Undici versions cannot regress in lockfil
   for (const { name, major, minimumMinor, minimumPatch } of dependencies) {
     const pkg = lockfile.packages?.[`node_modules/${name}`];
     assert.ok(pkg, `${name} must remain explicitly locked`);
-    const parsed = /^(\\d+)\\.(\\d+)\\.(\\d+)$/.exec(pkg.version ?? '');
+    const parsed = /^(\d+)\.(\d+)\.(\d+)$/.exec(pkg.version ?? '');
     assert.ok(parsed, `${name} requires an auditable stable semver`);
     const [, lockedMajor, lockedMinor, lockedPatch] = parsed.map(Number);
     assert.equal(lockedMajor, major, `${name} major upgrades require explicit review`);
