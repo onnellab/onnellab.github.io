@@ -898,6 +898,91 @@
     "internalGitHubUrl": ""
   },
   {
+    "appSlug": "tagweaver",
+    "appName": "TagWeaver",
+    "version": "2.5.6",
+    "tag": "v2.5.6",
+    "platform": "iOS",
+    "releasedDate": "2026-10-23",
+    "title": "TagWeaver v2.5.6 (iOS)",
+    "summary": "Changes in TagWeaver 2.5.6.",
+    "summaryKo": "TagWeaver 2.5.6 버전의 변경 사항이에요.",
+    "changes": [
+      "Fixed changes to URL and other additional tags not being retained after saving.",
+      "Improved preservation of other tag values when editing FLAC files."
+    ],
+    "changesKo": [
+      "URL 등 추가 태그를 수정하거나 삭제한 뒤 저장하면 변경 내용이 유지되도록 고쳤어요.",
+      "FLAC 파일의 태그를 편집할 때 다른 태그 값도 더 안전하게 보존해요."
+    ],
+    "localizations": {
+      "ko": {
+        "summary": "TagWeaver 2.5.6 버전의 변경 사항이에요.",
+        "changes": [
+          "URL 등 추가 태그를 수정하거나 삭제한 뒤 저장하면 변경 내용이 유지되도록 고쳤어요.",
+          "FLAC 파일의 태그를 편집할 때 다른 태그 값도 더 안전하게 보존해요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in TagWeaver 2.5.6.",
+        "changes": [
+          "Fixed changes to URL and other additional tags not being retained after saving.",
+          "Improved preservation of other tag values when editing FLAC files."
+        ]
+      },
+      "ja": {
+        "summary": "TagWeaver 2.5.6の変更点です。",
+        "changes": [
+          "URLなどの追加タグを変更・削除しても、保存後に反映されない問題を修正しました。",
+          "FLACファイルのタグ編集時に、ほかのタグの値をより確実に保持するよう改善しました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "TagWeaver 2.5.6 的更新内容。",
+        "changes": [
+          "修复了修改或删除URL等附加标签后，保存时未能保留更改的问题。",
+          "改善了编辑FLAC文件标签时对其他标签值的保留。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "TagWeaver 2.5.6 的更新內容。",
+        "changes": [
+          "修正修改或刪除URL等附加標籤後，儲存時未能保留變更的問題。",
+          "改善編輯FLAC檔案標籤時對其他標籤值的保留。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do TagWeaver 2.5.6.",
+        "changes": [
+          "Corrigimos um problema que impedia que alterações e exclusões de URL e outras tags adicionais fossem salvas.",
+          "Melhoramos a preservação dos demais valores de tags ao editar arquivos FLAC."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in TagWeaver 2.5.6.",
+        "changes": [
+          "Änderungen und Löschungen an URL- und weiteren Zusatz-Tags werden jetzt korrekt gespeichert.",
+          "Andere Tag-Werte bleiben beim Bearbeiten von FLAC-Dateien zuverlässiger erhalten."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de TagWeaver 2.5.6.",
+        "changes": [
+          "Correction d’un problème empêchant la sauvegarde des modifications ou de la suppression de l’URL et d’autres tags supplémentaires.",
+          "Meilleure préservation des autres valeurs de tags lors de la modification de fichiers FLAC."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de TagWeaver 2.5.6.",
+        "changes": [
+          "Corregimos un problema que impedía guardar los cambios o la eliminación de URL y otras etiquetas adicionales.",
+          "Mejoramos la conservación de los demás valores de etiquetas al editar archivos FLAC."
+        ]
+      }
+    },
+    "internalGitHubUrl": ""
+  },
+  {
     "appSlug": "vaultxt",
     "appName": "VaultXT",
     "version": "2.0.1",
