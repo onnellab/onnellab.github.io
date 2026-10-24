@@ -56,3 +56,26 @@ test('locked Vite tracks a security-patched release without bypassing npm audit'
   assert.ok(workflow.indexOf('npm audit --package-lock-only --include=dev --audit-level=high') <
             workflow.indexOf('run: npm ci'), 'security audit must remain fail-closed before install');
 });
+
+test('reviewed minimum patched Zod and Undici versions cannot regress in lockfile', () => {
+  const lockfile = JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
+  const dependencies = [
+    { name: 'zod', major: 4, minimumMinor: 6, minimumPatch: 6 },
+    { name: 'undici', major: 8, minimumMinor: 12, minimumPatch: 2 },
+  ];
+  for (const { name, major, minimumMinor, minimumPatch } of dependencies) {
+    const pkg = lockfile.packages?.[`node_modules/${name}`];
+    assert.ok(pkg, `${name} must remain explicitly locked`);
+    const parsed = /^(\d+)\.(\d+)\.(\d+)$/.exec(pkg.version ?? '');
+    assert.ok(parsed, `${name} requires an auditable stable semver`);
+    const [, lockedMajor, lockedMinor, lockedPatch] = parsed.map(Number);
+    assert.equal(lockedMajor, major, `${name} major upgrades require explicit review`);
+    assert.ok(
+      lockedMinor > minimumMinor ||
+      (lockedMinor === minimumMinor && lockedPatch >= minimumPatch),
+      `${name} reverted to a version with a previously reported High-severity advisory`,
+    );
+    assert.equal(pkg.resolved, `https://registry.npmjs.org/${name}/-/${name}-${pkg.version}.tgz`);
+    assert.match(pkg.integrity ?? '', /^sha512-[A-Za-z0-9+/]+={0,2}$/);
+  }
+});
