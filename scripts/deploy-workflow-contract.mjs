@@ -56,3 +56,26 @@ test('locked Vite tracks a security-patched release without bypassing npm audit'
   assert.ok(workflow.indexOf('npm audit --package-lock-only --include=dev --audit-level=high') <
             workflow.indexOf('run: npm ci'), 'security audit must remain fail-closed before install');
 });
+
+test('locked Zod and Undici security floor remains patched and audit remains fail-closed', () => {
+  const lockfile = JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
+  const securityFloor = [
+    ['zod', [4, 6, 6]],
+    ['undici', [8, 12, 2]],
+  ];
+  for (const [pkg, floor] of securityFloor) {
+    const installed = lockfile.packages?.[`node_modules/${pkg}`];
+    assert.ok(installed, `${pkg} must be explicitly present in the audited lockfile`);
+    const match = /^(\\d+)\\.(\\d+)\\.(\\d+)$/.exec(installed.version);
+    assert.ok(match, `${pkg} must have a reviewed concrete release version`);
+    const version = match.slice(1).map(Number);
+    const atLeastFloor = version.some((part, index) =>
+      part > floor[index] && version.slice(0, index).every((earlier, i) => earlier === floor[i])
+    ) || version.every((part, i) => part === floor[i]);
+    assert.ok(atLeastFloor, `${pkg} ${installed.version} is below the reviewed security floor ${floor.join('.')}`);
+    assert.equal(installed.resolved, `https://registry.npmjs.org/${pkg}/-/${pkg}-${installed.version}.tgz`);
+    assert.match(installed.integrity, /^sha512-[A-Za-z0-9+/]+={0,2}$/, `${pkg} requires a lockfile integrity digest`);
+  }
+  assert.ok(workflow.indexOf('npm audit --package-lock-only --include=dev --audit-level=high') <
+            workflow.indexOf('run: npm ci'), 'new advisories must still fail deployment before install');
+});
