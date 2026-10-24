@@ -910,6 +910,7 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
   }
   .article-image-viewer-panel {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 10px;
     padding: 12px;
   }
@@ -944,6 +945,10 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
   }
   .article-image-viewer p {
     margin: 0;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
     color: #716a5f;
     font-size: 13px;
     line-height: 1.45;
