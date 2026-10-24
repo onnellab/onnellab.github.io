@@ -66,7 +66,7 @@ test('locked Zod and Undici security floor remains patched and audit remains fai
   for (const [pkg, floor] of securityFloor) {
     const installed = lockfile.packages?.[`node_modules/${pkg}`];
     assert.ok(installed, `${pkg} must be explicitly present in the audited lockfile`);
-    const match = /^(\\d+)\\.(\\d+)\\.(\\d+)$/.exec(installed.version);
+    const match = /^(\d+)\.(\d+)\.(\d+)$/.exec(installed.version);
     assert.ok(match, `${pkg} must have a reviewed concrete release version`);
     const version = match.slice(1).map(Number);
     const atLeastFloor = version.some((part, index) =>
