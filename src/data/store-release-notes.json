@@ -110,6 +110,91 @@
     "internalGitHubUrl": ""
   },
   {
+    "appSlug": "aligna",
+    "appName": "Aligna",
+    "version": "1.1.1",
+    "tag": "v1.1.1",
+    "platform": "Android",
+    "releasedDate": "2026-10-24",
+    "title": "Aligna v1.1.1 (Android)",
+    "summary": "Changes in Aligna 1.1.1.",
+    "summaryKo": "Aligna 1.1.1 버전의 변경 사항이에요.",
+    "changes": [
+      "Improved restoration of your Pro purchase when reopening the app.",
+      "Updated store screenshots and promotional images."
+    ],
+    "changesKo": [
+      "앱을 다시 열었을 때 Pro 구매가 복원되도록 개선했어요.",
+      "스토어 스크린샷과 소개 이미지를 새로 업데이트했어요."
+    ],
+    "localizations": {
+      "ko": {
+        "summary": "Aligna 1.1.1 버전의 변경 사항이에요.",
+        "changes": [
+          "앱을 다시 열었을 때 Pro 구매가 복원되도록 개선했어요.",
+          "스토어 스크린샷과 소개 이미지를 새로 업데이트했어요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in Aligna 1.1.1.",
+        "changes": [
+          "Improved restoration of your Pro purchase when reopening the app.",
+          "Updated store screenshots and promotional images."
+        ]
+      },
+      "ja": {
+        "summary": "Aligna 1.1.1の変更点です。",
+        "changes": [
+          "アプリを開き直したときのPro購入の復元を改善しました。",
+          "ストアのスクリーンショットと紹介画像を更新しました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "Aligna 1.1.1 的更新内容。",
+        "changes": [
+          "改进了重新打开应用时恢复 Pro 购买的功能。",
+          "更新了商店截图和宣传图片。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "Aligna 1.1.1 的更新內容。",
+        "changes": [
+          "改善了重新開啟 App 時恢復 Pro 購買的功能。",
+          "更新了商店截圖和宣傳圖片。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do Aligna 1.1.1.",
+        "changes": [
+          "Melhoramos a restauração da compra do Pro ao reabrir o app.",
+          "Atualizamos as capturas de tela e as imagens promocionais da loja."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in Aligna 1.1.1.",
+        "changes": [
+          "Der Pro-Kauf wird beim erneuten Öffnen der App zuverlässiger wiederhergestellt.",
+          "Store-Screenshots und Werbebilder wurden aktualisiert."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de Aligna 1.1.1.",
+        "changes": [
+          "Amélioration de la restauration de votre achat Pro à la réouverture de l’application.",
+          "Mise à jour des captures d’écran et des visuels promotionnels de la boutique."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de Aligna 1.1.1.",
+        "changes": [
+          "Mejoramos la restauración de tu compra de Pro al volver a abrir la app.",
+          "Actualizamos las capturas de pantalla y las imágenes promocionales de la tienda."
+        ]
+      }
+    },
+    "internalGitHubUrl": ""
+  },
+  {
     "appSlug": "clipnest",
     "appName": "ClipNest",
     "version": "1.0.2",
@@ -421,9 +506,9 @@
     "appName": "Papira",
     "version": "2.0.3",
     "tag": "v2.0.3",
-    "platform": "Android",
-    "releasedDate": "2026-10-16",
-    "title": "Papira v2.0.3 (Android)",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-10-24",
+    "title": "Papira v2.0.3 (iOS · Android)",
     "summary": "Changes in Papira 2.0.3.",
     "summaryKo": "Papira 2.0.3 버전의 변경 사항이에요.",
     "changes": [
@@ -902,9 +987,9 @@
     "appName": "TagWeaver",
     "version": "2.5.6",
     "tag": "v2.5.6",
-    "platform": "iOS",
+    "platform": "iOS · Android",
     "releasedDate": "2026-10-23",
-    "title": "TagWeaver v2.5.6 (iOS)",
+    "title": "TagWeaver v2.5.6 (iOS · Android)",
     "summary": "Changes in TagWeaver 2.5.6.",
     "summaryKo": "TagWeaver 2.5.6 버전의 변경 사항이에요.",
     "changes": [
