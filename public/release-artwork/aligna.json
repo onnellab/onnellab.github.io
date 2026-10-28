@@ -1,9 +1,9 @@
 {
   "status": "staged_not_published",
   "app_slug": "aligna",
-  "version": "1.1.1+27",
-  "source_commit": "88aa278b84cf63fedb01ef509d7ad6aa6bae5261",
-  "candidate_sha256": "fee6508372f56262eef69f95313b4dacad62a63d3bcb80358709773005b2f185",
+  "version": "1.1.2+28",
+  "source_commit": "781684d3d403e1b0c78e6a9552eb1c7a3ff826c7",
+  "candidate_sha256": "6f5d01f8a6ca1633c3351613c2662be303883a3b278912ffbe85aa3710f8f19c",
   "source_selection": {
     "policy": "android-edited-then-iphone-edited",
     "kind": "android",
@@ -15,7 +15,7 @@
       "kind": "android",
       "index": 1,
       "site_path": "ko/01-9e19a5c48f6c.png",
-      "sha256": "7af399899975539eeb4174493857d282e8d2da1439b58e2ac1fa05e78dcf30ec",
+      "sha256": "6eef246228c875723b7edd496fa7e3629765b4fdff24fcb93a8bc91a5d2c50dc",
       "size": [
         1080,
         2160
@@ -26,7 +26,7 @@
       "kind": "android",
       "index": 2,
       "site_path": "ko/02-89ba1b8339f9.png",
-      "sha256": "c1c145eb967ea7285b1f99bd0582bdd52d8b436f2e027102d2d48af232404340",
+      "sha256": "178fbc70487f0893a19aa088773ccabcb84cd6646074fc68c513686506b9a2c6",
       "size": [
         1080,
         2160
@@ -37,7 +37,7 @@
       "kind": "android",
       "index": 3,
       "site_path": "ko/03-cc9f0d5a0022.png",
-      "sha256": "26d4131dca888d2492a7a568400a936835ec24c80b52fc101f2ca0cd8aae64c0",
+      "sha256": "ea36747af53495fe27954f2868a635e728e42098cbd69678a55afbecfba00674",
       "size": [
         1080,
         2160
@@ -59,7 +59,7 @@
       "kind": "android",
       "index": 1,
       "site_path": "en/01-4563a1206fb8.png",
-      "sha256": "208abb469d87fc7347c8f856e3129c54e7a3d2556351a776b3d0fa2d9f3b654e",
+      "sha256": "e43451af5d64cc317c9fb984ce42cdc54891c5473f47dfcd0d4cb8b04be25edf",
       "size": [
         1080,
         2160
@@ -70,7 +70,7 @@
       "kind": "android",
       "index": 2,
       "site_path": "en/02-5a0c1e646f50.png",
-      "sha256": "7fb5a7a7ac1262f27e95eb1da0f7c167821f4eb6c44c3e212923d47726fb36d9",
+      "sha256": "981ed363f88350930268b7159f6cd6d0a20c920a4b5298f2c2724258901f1f71",
       "size": [
         1080,
         2160
@@ -81,7 +81,7 @@
       "kind": "android",
       "index": 3,
       "site_path": "en/03-1b5eca140428.png",
-      "sha256": "8b3ba29affa8d8bf7cc32768d756e9a54df8f86e7bad152dea73e0e97123917c",
+      "sha256": "25d62bf05678eb5adb87027f2463e1983397d7f106ef7bfa4e3c3cbee68daf37",
       "size": [
         1080,
         2160
@@ -103,7 +103,7 @@
       "kind": "android",
       "index": 1,
       "site_path": "ja/01-2d278fe4cba5.png",
-      "sha256": "2cd717854feb2f7b7b54c4994e493f28a34989b83d29fdf899d40eab1059eb6c",
+      "sha256": "34ca04ba8b1318dbd5578487ea0a130c49ba48a2b2f8d3ed19ab42234119b71f",
       "size": [
         1080,
         2160
@@ -114,7 +114,7 @@
       "kind": "android",
       "index": 2,
       "site_path": "ja/02-581066c4ab6b.png",
-      "sha256": "6b261246c9a755fe1d86b89143cada47416166b176608d499a112b7536eae8dd",
+      "sha256": "4d01afdd8285af3066f23715768d595197133f62be48637fd54ea6bbc7915bcb",
       "size": [
         1080,
         2160
@@ -125,7 +125,7 @@
       "kind": "android",
       "index": 3,
       "site_path": "ja/03-11845f166116.png",
-      "sha256": "6b75b030ba1b0f10dc70ef7977c5ef682d829a46ceb4206a42679b704c0578cf",
+      "sha256": "b7807e31aa531b81c57ce7d371bfdafa69455ba489cfeb4f2e1d1ce82a56ff01",
       "size": [
         1080,
         2160
@@ -147,7 +147,7 @@
       "kind": "android",
       "index": 1,
       "site_path": "zh-Hans/01-d3dcb5b656d1.png",
-      "sha256": "a739473d4906805369d149c7e563c5184f699bcc653c25f8e772eb7aece9f339",
+      "sha256": "cdf76e2c7f4e9f3dcb8b563884d6a2a7127f54f8431abea9e269ed344ef3f82a",
       "size": [
         1080,
         2160
@@ -158,7 +158,7 @@
       "kind": "android",
       "index": 2,
       "site_path": "zh-Hans/02-0346cd959e12.png",
-      "sha256": "0ba98557794f9b9d51546ef5e2c8e4f36485797064a5f72fdf7f700d4ae4b382",
+      "sha256": "626a9fdab7d18186392a49d5115fe97bb02d6aecf4f6a8fb257203d8b17a920f",
       "size": [
         1080,
         2160
@@ -169,7 +169,7 @@
       "kind": "android",
       "index": 3,
       "site_path": "zh-Hans/03-12809a7736a7.png",
-      "sha256": "ebd3965262035636e30dba537feeb7b4714807f7b31ec4bce74e8f54b4d7f9b2",
+      "sha256": "99f3c35ccbff5981111054ffae39618349349b64c5c6639e3372c9e1de124da9",
       "size": [
         1080,
         2160
@@ -191,7 +191,7 @@
       "kind": "android",
       "index": 1,
       "site_path": "zh-Hant/01-96b24da576cd.png",
-      "sha256": "db72eadda3e07939eafa0580462e6c01ad29389471d12af7929f85571650d9a3",
+      "sha256": "0b78b0c6a990ca1b68e5cd2c5cf6287996e06e6c6f4258e371eafcabf3086813",
       "size": [
         1080,
         2160
@@ -202,7 +202,7 @@
       "kind": "android",
       "index": 2,
       "site_path": "zh-Hant/02-3c7d51cc5144.png",
-      "sha256": "f71fafb8672dc79f1bebd7156fee87e6332a00fef5d733aa447d92a1246edad5",
+      "sha256": "859d3fb5e1fd28f8d5632c89419111b38ece1129413ffb9645dd62471a9e4473",
       "size": [
         1080,
         2160
@@ -213,7 +213,7 @@
       "kind": "android",
       "index": 3,
       "site_path": "zh-Hant/03-470582cd1ecf.png",
-      "sha256": "56a2c67b28c8089bb6d3189f0a3a77e8bc11a03e9f8636a49597e4cb401aa4b8",
+      "sha256": "b02320fb32030cde2d1636476cb0a0f1d5e45462caf2d927ace95bae9ea8ec22",
       "size": [
         1080,
         2160
@@ -235,7 +235,7 @@
       "kind": "android",
       "index": 1,
       "site_path": "pt-BR/01-99f49285b546.png",
-      "sha256": "3ac30d4869b09b3a2887fdc9eea8724d332e2677b0c5331d15cf7ec593e2283a",
+      "sha256": "6ab33d11896cff4e3095ffe4204ab13830e1eadc48624872d0208949f90e3d1b",
       "size": [
         1080,
         2160
@@ -246,7 +246,7 @@
       "kind": "android",
       "index": 2,
       "site_path": "pt-BR/02-edca154d6133.png",
-      "sha256": "c7a79c1a7718ed4095b64aea0532e2b5b3bfc11f3832874359663c2a9e5c4926",
+      "sha256": "8273d26ea40e50b436a9c68e7c4f1df2449838a3a9b7afdb7f7c266544184361",
       "size": [
         1080,
         2160
@@ -257,7 +257,7 @@
       "kind": "android",
       "index": 3,
       "site_path": "pt-BR/03-d07fdd9b45ef.png",
-      "sha256": "3e01679ef264ed9b546d91c48f154479a9875a2a80236387a14ded7a1915f224",
+      "sha256": "5d1e03ef7ac07603e5207bbbf3b91f3726163ad778e6fa62d3a4bac1924b44b3",
       "size": [
         1080,
         2160
@@ -279,7 +279,7 @@
       "kind": "android",
       "index": 1,
       "site_path": "de/01-1fb7a2d720c6.png",
-      "sha256": "1188581593cf4107026bb1fd823fbd56cfdb9de1c678dd83ea8b3afeffac51ae",
+      "sha256": "54c9cba58720f4e9708eed2aa2565d3be4aa109da041b7438cba1b9cab376328",
       "size": [
         1080,
         2160
@@ -290,7 +290,7 @@
       "kind": "android",
       "index": 2,
       "site_path": "de/02-e3ef5f13d6d2.png",
-      "sha256": "76eb4ce42a171cb8799bb1867625381482d1dc1f07fdf8cd2087ee37df046313",
+      "sha256": "9bbd5df0ee9e31ba790488e82d5ec3711891bdde62be103c54d92f0453d1c122",
       "size": [
         1080,
         2160
@@ -301,7 +301,7 @@
       "kind": "android",
       "index": 3,
       "site_path": "de/03-c32b6158f50d.png",
-      "sha256": "e1c8273c9f6bf6463cb9b8f8ae73bea47d7961ea065e61d216f0daa96c4357b9",
+      "sha256": "1d588ad74fc26ae3564ef763b4e45b6e1e89c172d852814349656c22316a4ddc",
       "size": [
         1080,
         2160
@@ -323,7 +323,7 @@
       "kind": "android",
       "index": 1,
       "site_path": "fr/01-8dadb6e5d94f.png",
-      "sha256": "c1f023a6721c4dc295c461f6f5059f3ca734a1d82ef2f781857c884338bae840",
+      "sha256": "5fe646cf21cce6798ba0d7e4a57f8548cfebe315a37fdbd73467e4a9b327c443",
       "size": [
         1080,
         2160
@@ -334,7 +334,7 @@
       "kind": "android",
       "index": 2,
       "site_path": "fr/02-53b05db7132d.png",
-      "sha256": "6bd696f44962299aedc5708d2466f037c0b2dc1ed57db03792c1a154cab0d8bd",
+      "sha256": "a82c50070ec0759e4b9d896d271a9cb13792ad5fc635a49bcbfd83d7418332bb",
       "size": [
         1080,
         2160
@@ -345,7 +345,7 @@
       "kind": "android",
       "index": 3,
       "site_path": "fr/03-45f3a0b5ef09.png",
-      "sha256": "f501bac25f3532190886afc0dcbb54185df2e7600a81347d94efc5e023eaefd9",
+      "sha256": "910ea3f2c21074bcacc441da0f45f890134e7a7773b6d1943e31baf90ad5e923",
       "size": [
         1080,
         2160
@@ -367,7 +367,7 @@
       "kind": "android",
       "index": 1,
       "site_path": "es/01-73beb29de7b0.png",
-      "sha256": "61155f5c04a4f29a49c9773efc1eae0e4245ff4e4c46f66f9113d4041ce5c77f",
+      "sha256": "3f584f994b1949c8a7a96ea367861ebc1f6a61d4fc30771052889765a202f308",
       "size": [
         1080,
         2160
@@ -378,7 +378,7 @@
       "kind": "android",
       "index": 2,
       "site_path": "es/02-0f5b9fd19b18.png",
-      "sha256": "808d215897ad46753464f7652bc06350f2d3f39c32c04c20c46d2cd92e04e51b",
+      "sha256": "ba7c600449f49b971092d7e4d387cbbd1d2b41db98a8aafce365030a3676bae2",
       "size": [
         1080,
         2160
@@ -389,7 +389,7 @@
       "kind": "android",
       "index": 3,
       "site_path": "es/03-9da2207a91a4.png",
-      "sha256": "537e6fadcce35795606efefdfbfef2c11e7a367734b5702babac386c4e75c3e9",
+      "sha256": "3493917aa5d863c31d6efa450121be2102f504d9abdc42204e6e147bae9a4028",
       "size": [
         1080,
         2160
