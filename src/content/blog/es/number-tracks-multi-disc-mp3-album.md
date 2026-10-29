@@ -111,7 +111,7 @@ Revisa inicio y final de cada disco, transiciones y discos adicionales con disti
 
 [TagWeaver](/apps/tagweaver/) es un editor local de metadatos MP3 que permite aplicar una tabla revisada a los archivos seleccionados. La información mantenida del producto describe edición individual gratuita y edición por lotes incluida en la compra única Pro opcional. Las fichas oficiales incluyen pista y disco entre los campos editables; consulta los detalles de tu plataforma.
 
-La aplicación no identifica la edición correcta ni inventa posiciones fiables. Define primero la lista y las reglas, mantén la copia de seguridad fuera de la selección, guarda expresamente y comprueba una muestra. En iOS, sigue el funcionamiento documentado de guardar una copia, sin asumir que el original se sustituye en la misma ubicación.
+La aplicación no identifica la edición correcta ni inventa posiciones fiables. Define primero la lista y las reglas, mantén la copia de seguridad fuera de la selección, guarda expresamente y comprueba una muestra. Según las notas de la versión 2.5.1 en App Store, al guardar en iOS se actualiza el original seleccionado si su ubicación permite la escritura; de lo contrario, TagWeaver pregunta dónde guardar una copia. Haz una copia de seguridad aparte antes de editar y comprueba la ubicación del archivo guardado.
 
 ## Referencias
 

@@ -111,7 +111,7 @@ Verifique início e fim de cada disco, transições e discos extras com quantida
 
 [TagWeaver](/apps/tagweaver/) é um editor local de metadados MP3 que pode aplicar um mapa revisado aos arquivos selecionados. As informações mantidas do produto descrevem edição individual gratuita e edição em lote na compra única opcional Pro. As lojas oficiais incluem faixa e disco entre os campos editáveis; confira os detalhes da plataforma usada.
 
-O aplicativo não identifica a edição correta nem inventa posições confiáveis. Defina a lista e as regras primeiro, deixe o backup fora da seleção, salve explicitamente e valide uma amostra. No iOS, siga o comportamento documentado de salvar uma cópia, sem presumir substituição do original no mesmo local.
+O aplicativo não identifica a edição correta nem inventa posições confiáveis. Defina a lista e as regras primeiro, deixe o backup fora da seleção, salve explicitamente e valide uma amostra. Segundo as notas da versão 2.5.1 na App Store, ao salvar no iOS, o original selecionado é atualizado quando seu local permite gravação; caso contrário, o TagWeaver pergunta onde salvar uma cópia. Faça um backup separado antes de editar e confira o local do arquivo salvo.
 
 ## Referências
 

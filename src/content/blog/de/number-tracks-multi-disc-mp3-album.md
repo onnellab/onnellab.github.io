@@ -111,7 +111,7 @@ Kontrolliere Anfang und Ende jeder Disc, Discwechsel und Bonus-Discs mit abweich
 
 [TagWeaver](/apps/tagweaver/) ist ein lokaler MP3-Metadateneditor, mit dem sich eine geprüfte Feldzuordnung auf ausgewählte Dateien anwenden lässt. Die gepflegten Produktangaben beschreiben kostenlose Einzeltrack-Bearbeitung und Stapelbearbeitung als Teil des optionalen Pro-Einmalkaufs. Die offiziellen Store-Einträge nennen Track- und Discwerte als bearbeitbare Metadaten. Prüfe dort die Details für deine Plattform.
 
-Die App bestimmt weder die richtige Ausgabe noch verlässliche Positionswerte. Kläre Liste und Regeln zuerst, halte die Sicherung außerhalb der Auswahl, speichere ausdrücklich und prüfe eine kleine Stichprobe. Unter iOS gilt das dokumentierte Speichern als Kopie; setze nicht voraus, dass die Originaldatei an Ort und Stelle ersetzt wird.
+Die App bestimmt weder die richtige Ausgabe noch verlässliche Positionswerte. Kläre Liste und Regeln zuerst, halte die Sicherung außerhalb der Auswahl, speichere ausdrücklich und prüfe eine kleine Stichprobe. Laut den Versionshinweisen zu Version 2.5.1 im App Store wird unter iOS beim Speichern die ausgewählte Originaldatei aktualisiert, wenn ihr Speicherort beschreibbar ist; andernfalls fragt TagWeaver nach einem Speicherort für eine Kopie. Erstelle vor dem Bearbeiten eine separate Sicherung und prüfe den Speicherort der gespeicherten Datei.
 
 ## Quellen
 

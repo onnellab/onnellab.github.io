@@ -111,7 +111,7 @@ Contrôlez le début et la fin de chaque disque, les transitions et les disques 
 
 [TagWeaver](/apps/tagweaver/) est un éditeur local de métadonnées MP3 permettant d’appliquer une correspondance vérifiée aux fichiers sélectionnés. Les informations produit maintenues décrivent l’édition individuelle gratuite et l’édition par lot incluse dans l’achat unique Pro facultatif. Les fiches officielles mentionnent piste et disque parmi les champs modifiables ; consultez les détails de votre plateforme.
 
-L’application ne détermine pas l’édition correcte ni des positions fiables à votre place. Fixez d’abord liste et règles, laissez la sauvegarde hors sélection, enregistrez explicitement et vérifiez quelques résultats. Sur iOS, suivez le fonctionnement documenté d’enregistrement d’une copie sans supposer le remplacement de l’original sur place.
+L’application ne détermine pas l’édition correcte ni des positions fiables à votre place. Fixez d’abord liste et règles, laissez la sauvegarde hors sélection, enregistrez explicitement et vérifiez quelques résultats. Selon les notes de la version 2.5.1 sur l’App Store, l’enregistrement sous iOS met à jour l’original sélectionné si son emplacement autorise l’écriture ; sinon, TagWeaver demande où enregistrer une copie. Créez une sauvegarde séparée avant toute modification et vérifiez l’emplacement du fichier enregistré.
 
 ## Références
 
