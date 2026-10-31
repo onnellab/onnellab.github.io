@@ -1186,9 +1186,9 @@
     "appName": "VaultXT",
     "version": "2.0.2",
     "tag": "v2.0.2",
-    "platform": "Android",
-    "releasedDate": "2026-10-17",
-    "title": "VaultXT v2.0.2 (Android)",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-10-31",
+    "title": "VaultXT v2.0.2 (iOS · Android)",
     "summary": "Changes in VaultXT 2.0.2.",
     "summaryKo": "VaultXT 2.0.2 버전의 변경 사항이에요.",
     "changes": [
