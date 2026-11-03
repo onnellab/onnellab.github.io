@@ -15,8 +15,7 @@ short_answer: "元ファイルを残したまま、名前と保存場所を区�
 related_apps: "Segra"
 canonical_url: "https://onnellab.com/blog/ja/choose-safe-audio-working-copy/"
 published_at: "2026-11-02T09:00:00+09:00"
-updated_at: "2026-11-02T09:00:00+09:00"
-related_articles: "元ファイルを置き換える前に変換後のメディアを確認する方法 => https://onnellab.com/blog/ja/test-converted-media-before-replacing-original/|Androidの音楽ファイルをオフライン再生用に整理する方法 => https://onnellab.com/blog/ja/organize-local-music-library-offline-android/|EPUBの目次リンクと章の順序を確認する方法 => https://onnellab.com/blog/ja/check-epub-table-of-contents-and-reading-order/|繰り返し使う文章を再利用できる定型文に整理する方法 => https://onnellab.com/blog/ja/turn-repeated-text-into-reusable-snippets/|探しやすいファイル命名ルールの作り方 => https://onnellab.com/blog/ja/design-consistent-file-naming-system/|出典メモと自分の結論を分ける方法 => https://onnellab.com/blog/ja/separate-source-notes-from-conclusions/"
+updated_at: "2026-11-02T05:04:49+00:00"
 ---
 
 # 音声を編集する前に作業用コピーを選ぶ方法

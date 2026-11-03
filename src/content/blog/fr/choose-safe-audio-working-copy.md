@@ -15,8 +15,7 @@ short_answer: "Identifiez et conservez l’original, créez une copie distincte 
 related_apps: "Segra"
 canonical_url: "https://onnellab.com/blog/fr/choose-safe-audio-working-copy/"
 published_at: "2026-11-02T09:00:00+09:00"
-updated_at: "2026-11-02T09:00:00+09:00"
-related_articles: "Tester un fichier multimédia converti avant de remplacer l’original => https://onnellab.com/blog/fr/test-converted-media-before-replacing-original/|Comment séparer les notes de source de vos conclusions => https://onnellab.com/blog/fr/separate-source-notes-from-conclusions/|Organiser sa musique sur Android pour une écoute hors ligne => https://onnellab.com/blog/fr/organize-local-music-library-offline-android/|Vérifier la table des matières et l’ordre des chapitres d’un EPUB => https://onnellab.com/blog/fr/check-epub-table-of-contents-and-reading-order/|Créer une convention cohérente pour nommer ses fichiers => https://onnellab.com/blog/fr/design-consistent-file-naming-system/|Des tags d’album et d’artiste cohérents, des crédits préservés => https://onnellab.com/blog/fr/consistent-album-artist-names/"
+updated_at: "2026-11-02T05:04:49+00:00"
 ---
 
 # Préparer une copie de travail avant de modifier un fichier audio

@@ -15,8 +15,7 @@ short_answer: "원본의 위치와 내용을 확인해 보관하고, 이름이 �
 related_apps: "Segra"
 canonical_url: "https://onnellab.com/blog/ko/choose-safe-audio-working-copy/"
 published_at: "2026-11-02T09:00:00+09:00"
-updated_at: "2026-11-02T09:00:00+09:00"
-related_articles: "전문 편집기 없이 오디오 녹음을 자르는 방법 => https://onnellab.com/blog/ko/trim-audio-recordings-without-full-editor/|오디오 클립을 합치기 전에 확인하는 방법 => https://onnellab.com/blog/ko/verify-audio-clips-before-combining/|로컬 미디어 파일을 비공개로 변환하는 방법 => https://onnellab.com/blog/ko/convert-local-media-files-privately/|미디어 변환 전에 출력 형식을 선택하는 방법 => https://onnellab.com/blog/ko/choose-media-output-format-before-conversion/|원본을 교체하기 전에 변환한 미디어 파일 확인하기 => https://onnellab.com/blog/ko/test-converted-media-before-replacing-original/|대용량 TXT 파일을 지연 없이 읽는 방법 => https://onnellab.com/blog/ko/read-large-txt-files-without-lag/"
+updated_at: "2026-11-02T05:04:49+00:00"
 ---
 
 # 오디오 편집 전에 작업용 복사본을 구분하는 방법

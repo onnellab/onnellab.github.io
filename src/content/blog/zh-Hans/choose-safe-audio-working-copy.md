@@ -15,8 +15,7 @@ short_answer: "保留原文件，手动创建名称和位置都容易区分的�
 related_apps: "Segra"
 canonical_url: "https://onnellab.com/blog/zh-hans/choose-safe-audio-working-copy/"
 published_at: "2026-11-02T09:00:00+09:00"
-updated_at: "2026-11-02T09:00:00+09:00"
-related_articles: "替换原文件前，如何检查转换后的媒体文件 => https://onnellab.com/blog/zh-hans/test-converted-media-before-replacing-original/|在 Android 上整理音乐文件，准备离线播放 => https://onnellab.com/blog/zh-hans/organize-local-music-library-offline-android/|检查 EPUB 的目录链接和章节顺序 => https://onnellab.com/blog/zh-hans/check-epub-table-of-contents-and-reading-order/|如何整理可重复使用的文本片段 => https://onnellab.com/blog/zh-hans/turn-repeated-text-into-reusable-snippets/|如何建立一致、好查找的文件命名规则 => https://onnellab.com/blog/zh-hans/design-consistent-file-naming-system/|如何区分资料笔记与自己的结论 => https://onnellab.com/blog/zh-hans/separate-source-notes-from-conclusions/"
+updated_at: "2026-11-02T05:04:49+00:00"
 ---
 
 # 编辑音频前，怎样准备可辨认的工作副本
