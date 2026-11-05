@@ -1164,6 +1164,102 @@
     "internalGitHubUrl": ""
   },
   {
+    "appSlug": "tagweaver",
+    "appName": "TagWeaver",
+    "version": "2.5.9",
+    "tag": "v2.5.9",
+    "platform": "Android",
+    "releasedDate": "2026-11-04",
+    "title": "TagWeaver v2.5.9 (Android)",
+    "summary": "Changes in TagWeaver 2.5.9.",
+    "summaryKo": "TagWeaver 2.5.9 버전의 변경 사항이에요.",
+    "changes": [
+      "Fixed a save failure when removing comment tags from multiple FLAC files on Android.",
+      "Prevented repeated tag deletion when retrying after only some files were saved.",
+      "Fixed additional-tag previews to match the values actually saved."
+    ],
+    "changesKo": [
+      "Android에서 여러 FLAC 파일의 댓글 태그를 한 번에 삭제할 때 저장에 실패하던 문제를 고쳤어요.",
+      "일부 파일만 저장된 뒤 다시 시도할 때 이미 처리한 태그를 중복 삭제하지 않도록 개선했어요.",
+      "추가 태그의 변경 미리보기가 실제 저장값과 일치하도록 고쳤어요."
+    ],
+    "localizations": {
+      "ko": {
+        "summary": "TagWeaver 2.5.9 버전의 변경 사항이에요.",
+        "changes": [
+          "Android에서 여러 FLAC 파일의 댓글 태그를 한 번에 삭제할 때 저장에 실패하던 문제를 고쳤어요.",
+          "일부 파일만 저장된 뒤 다시 시도할 때 이미 처리한 태그를 중복 삭제하지 않도록 개선했어요.",
+          "추가 태그의 변경 미리보기가 실제 저장값과 일치하도록 고쳤어요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in TagWeaver 2.5.9.",
+        "changes": [
+          "Fixed a save failure when removing comment tags from multiple FLAC files on Android.",
+          "Prevented repeated tag deletion when retrying after only some files were saved.",
+          "Fixed additional-tag previews to match the values actually saved."
+        ]
+      },
+      "ja": {
+        "summary": "TagWeaver 2.5.9の変更点です。",
+        "changes": [
+          "Androidで複数のFLACファイルのコメントタグをまとめて削除すると、保存に失敗する問題を修正しました。",
+          "一部のファイルだけが保存された後に再試行しても、処理済みのタグを重複して削除しないよう改善しました。",
+          "追加タグの変更プレビューが実際の保存内容と一致するよう修正しました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "TagWeaver 2.5.9 的更新内容。",
+        "changes": [
+          "修复了在Android上批量删除多个FLAC文件的注释标签时保存失败的问题。",
+          "改善了部分文件保存成功后的重试行为，避免重复删除已处理的标签。",
+          "修复了附加标签的更改预览与实际保存值不一致的问题。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "TagWeaver 2.5.9 的更新內容。",
+        "changes": [
+          "修正了在Android上批次刪除多個FLAC檔案的註解標籤時儲存失敗的問題。",
+          "改善了部分檔案儲存成功後的重試行為，避免重複刪除已處理的標籤。",
+          "修正了附加標籤的變更預覽與實際儲存值不一致的問題。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do TagWeaver 2.5.9.",
+        "changes": [
+          "Corrigimos uma falha ao salvar após remover tags de comentário de vários arquivos FLAC no Android.",
+          "Evitamos a exclusão repetida de tags ao tentar novamente após salvar apenas parte dos arquivos.",
+          "Corrigimos a prévia das tags adicionais para corresponder aos valores salvos."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in TagWeaver 2.5.9.",
+        "changes": [
+          "Ein Speicherfehler beim Entfernen von Kommentar-Tags aus mehreren FLAC-Dateien unter Android wurde behoben.",
+          "Beim erneuten Versuch nach teilweise erfolgreichem Speichern werden bereits bearbeitete Tags nicht erneut gelöscht.",
+          "Die Vorschau zusätzlicher Tags stimmt jetzt mit den tatsächlich gespeicherten Werten überein."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de TagWeaver 2.5.9.",
+        "changes": [
+          "Correction d’un échec de sauvegarde lors de la suppression des tags de commentaire de plusieurs fichiers FLAC sur Android.",
+          "Les tags déjà traités ne sont plus supprimés à nouveau lors d’une nouvelle tentative après une sauvegarde partielle.",
+          "L’aperçu des tags supplémentaires correspond désormais aux valeurs enregistrées."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de TagWeaver 2.5.9.",
+        "changes": [
+          "Corregimos un fallo al guardar tras eliminar las etiquetas de comentario de varios archivos FLAC en Android.",
+          "Evitamos que se vuelvan a eliminar etiquetas al reintentar el guardado cuando solo se han guardado algunos archivos.",
+          "La vista previa de las etiquetas adicionales ahora coincide con los valores guardados."
+        ]
+      }
+    },
+    "internalGitHubUrl": ""
+  },
+  {
     "appSlug": "vaultxt",
     "appName": "VaultXT",
     "version": "2.0.1",
