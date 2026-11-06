@@ -40,7 +40,7 @@
       "blocks": [
         {
           "kind": "paragraph",
-          "value": "Combina crea un archivo de resultado nuevo y no modifica ni elimina los vídeos originales. En iOS, elige una carpeta cada vez que guardes, salvo que hayas establecido una carpeta preferida. En Android 10 o posterior, la ubicación predeterminada es Downloads/Combina; en Android 9 o anterior se utiliza la pantalla de guardado del sistema. Una carpeta seleccionada en los ajustes tiene prioridad. Los vídeos originales y los resultados guardados fuera del almacenamiento propio de la app siguen bajo tu control después de desinstalarla."
+          "value": "Combina crea un archivo de resultado nuevo y no modifica ni elimina los vídeos originales. En iOS, los resultados se guardan de forma predeterminada en la carpeta Documents de la app, que aparece en Archivos como «En mi iPhone > Combina». Al eliminar la app, también se eliminan los resultados de esta carpeta. Mueve los archivos que quieras conservar a otra ubicación antes de eliminar la app. En Android 10 o posterior, la ubicación predeterminada es Downloads/Combina; en Android 9 o anterior se utiliza la pantalla de guardado del sistema. Una carpeta seleccionada en los ajustes tiene prioridad. Los vídeos originales y los resultados guardados fuera del almacenamiento propio de la app siguen bajo tu control después de desinstalarla."
         }
       ]
     },

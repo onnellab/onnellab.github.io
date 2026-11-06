@@ -40,7 +40,7 @@
       "blocks": [
         {
           "kind": "paragraph",
-          "value": "Combina crée un nouveau fichier de résultat et ne modifie ni ne supprime les vidéos source. Sur iOS, vous choisissez un dossier à chaque enregistrement, sauf si vous avez défini un dossier préféré. Sur Android 10 ou version ultérieure, l’emplacement par défaut est Downloads/Combina ; sur Android 9 ou version antérieure, l’écran d’enregistrement du système est utilisé. Un dossier choisi dans les réglages est prioritaire. Les vidéos source et les résultats enregistrés hors de l’espace de stockage propre à l’application restent sous votre contrôle après sa désinstallation."
+          "value": "Combina crée un nouveau fichier de résultat et ne modifie ni ne supprime les vidéos source. Sur iOS, les résultats sont enregistrés par défaut dans le dossier Documents de l’application, affiché dans Fichiers sous « Sur mon iPhone > Combina ». La suppression de l’application supprime aussi les résultats de ce dossier. Déplacez les fichiers à conserver ailleurs avant de supprimer l’application. Sur Android 10 ou version ultérieure, l’emplacement par défaut est Downloads/Combina ; sur Android 9 ou version antérieure, l’écran d’enregistrement du système est utilisé. Un dossier choisi dans les réglages est prioritaire. Les vidéos source et les résultats enregistrés hors de l’espace de stockage propre à l’application restent sous votre contrôle après sa désinstallation."
         }
       ]
     },

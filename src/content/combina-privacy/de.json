@@ -40,7 +40,7 @@
       "blocks": [
         {
           "kind": "paragraph",
-          "value": "Combina erstellt eine neue Ergebnisdatei und verändert oder löscht die Quellvideos nicht. Unter iOS wählst du bei jedem Speichern einen Ordner, sofern du keinen bevorzugten Ordner festgelegt hast. Unter Android 10 oder neuer ist Downloads/Combina der Standardspeicherort; unter Android 9 oder älter wird der Speicherdialog des Systems verwendet. Ein in den Einstellungen gewählter Ordner hat Vorrang. Quellvideos und gespeicherte Ergebnisse außerhalb des app-eigenen Speichers bleiben auch nach der Deinstallation unter deiner Kontrolle."
+          "value": "Combina erstellt eine neue Ergebnisdatei und verändert oder löscht die Quellvideos nicht. Unter iOS werden Ergebnisse standardmäßig im Documents-Ordner der App gespeichert, der in „Dateien“ als „Auf meinem iPhone > Combina“ angezeigt wird. Beim Löschen der App werden auch die Ergebnisse in diesem Ordner gelöscht. Verschiebe Dateien, die du behalten möchtest, vorher an einen anderen Ort. Unter Android 10 oder neuer ist Downloads/Combina der Standardspeicherort; unter Android 9 oder älter wird der Speicherdialog des Systems verwendet. Ein in den Einstellungen gewählter Ordner hat Vorrang. Quellvideos und gespeicherte Ergebnisse außerhalb des app-eigenen Speichers bleiben auch nach der Deinstallation unter deiner Kontrolle."
         }
       ]
     },

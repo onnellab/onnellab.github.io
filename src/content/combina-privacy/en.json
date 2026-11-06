@@ -40,7 +40,7 @@
       "blocks": [
         {
           "kind": "paragraph",
-          "value": "Combina creates a new result and does not modify or delete source videos. On iOS, choose a folder for each save unless you set a preferred folder. On Android 10 or later, the default is Downloads/Combina; on Android 9 or earlier, the system save screen is used. A folder chosen in settings takes priority. Source videos and saved results outside the app’s own storage remain under your control after uninstallation."
+          "value": "Combina creates a new result and does not modify or delete source videos. On iOS, results are saved by default in the app’s Documents folder, shown as On My iPhone > Combina in Files. Deleting the app also deletes results in this folder; move files you want to keep elsewhere before deleting the app. On Android 10 or later, the default is Downloads/Combina; on Android 9 or earlier, the system save screen is used. A folder chosen in settings takes priority. Source videos and saved results outside the app’s own storage remain under your control after uninstallation."
         }
       ]
     },

@@ -40,7 +40,7 @@
       "blocks": [
         {
           "kind": "paragraph",
-          "value": "O Combina cria um novo arquivo de resultado e não modifica nem exclui os vídeos originais. No iOS, escolha uma pasta a cada salvamento, a menos que defina uma pasta preferencial. No Android 10 ou posterior, o destino padrão é Downloads/Combina; no Android 9 ou anterior, é usada a tela de salvamento do sistema. Uma pasta escolhida nas configurações tem prioridade. Os vídeos originais e resultados salvos fora do armazenamento do próprio app continuam sob seu controle após a desinstalação."
+          "value": "O Combina cria um novo arquivo de resultado e não modifica nem exclui os vídeos originais. No iOS, os resultados são salvos por padrão na pasta Documents do app, exibida em Arquivos como “No Meu iPhone > Combina”. Ao apagar o app, os resultados dessa pasta também são apagados. Mova os arquivos que deseja manter para outro local antes de apagar o app. No Android 10 ou posterior, o destino padrão é Downloads/Combina; no Android 9 ou anterior, é usada a tela de salvamento do sistema. Uma pasta escolhida nas configurações tem prioridade. Os vídeos originais e resultados salvos fora do armazenamento do próprio app continuam sob seu controle após a desinstalação."
         }
       ]
     },
