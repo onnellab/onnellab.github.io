@@ -1275,9 +1275,9 @@
     "appName": "TagWeaver",
     "version": "2.5.9",
     "tag": "v2.5.9",
-    "platform": "Android",
-    "releasedDate": "2026-11-04",
-    "title": "TagWeaver v2.5.9 (Android)",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-11-05",
+    "title": "TagWeaver v2.5.9 (iOS · Android)",
     "summary": "Changes in TagWeaver 2.5.9.",
     "summaryKo": "TagWeaver 2.5.9 버전의 변경 사항이에요.",
     "changes": [
