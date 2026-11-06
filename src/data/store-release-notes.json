@@ -915,6 +915,113 @@
     "internalGitHubUrl": ""
   },
   {
+    "appSlug": "segra",
+    "appName": "Segra",
+    "version": "1.0.7",
+    "tag": "v1.0.7",
+    "platform": "iOS · Android",
+    "releasedDate": "2026-10-23",
+    "title": "Segra v1.0.7 (iOS · Android)",
+    "summary": "Changes in Segra 1.0.7.",
+    "summaryKo": "Segra 1.0.7 버전의 변경 사항이에요.",
+    "changes": [
+      "Open the privacy policy in your selected app language directly from Settings.",
+      "See the current store price on the Pro purchase button.",
+      "Improved subtitle input and video preparation screens.",
+      "Strengthened local media validation and external resource restrictions."
+    ],
+    "changesKo": [
+      "설정에서 선택한 언어의 개인정보 처리방침을 바로 열 수 있어요.",
+      "Pro 구매 버튼에서 스토어의 현재 가격을 확인할 수 있어요.",
+      "자막 입력과 영상 생성 준비 화면의 사용성을 개선했어요.",
+      "로컬 미디어 입력 검증과 외부 리소스 접근 제한을 강화했어요."
+    ],
+    "localizations": {
+      "ko": {
+        "summary": "Segra 1.0.7 버전의 변경 사항이에요.",
+        "changes": [
+          "설정에서 선택한 언어의 개인정보 처리방침을 바로 열 수 있어요.",
+          "Pro 구매 버튼에서 스토어의 현재 가격을 확인할 수 있어요.",
+          "자막 입력과 영상 생성 준비 화면의 사용성을 개선했어요.",
+          "로컬 미디어 입력 검증과 외부 리소스 접근 제한을 강화했어요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in Segra 1.0.7.",
+        "changes": [
+          "Open the privacy policy in your selected app language directly from Settings.",
+          "See the current store price on the Pro purchase button.",
+          "Improved subtitle input and video preparation screens.",
+          "Strengthened local media validation and external resource restrictions."
+        ]
+      },
+      "ja": {
+        "summary": "Segra 1.0.7の変更点です。",
+        "changes": [
+          "設定から、選択したアプリの言語でプライバシーポリシーを直接開けます。",
+          "Pro購入ボタンで、ストアの現在の価格を確認できます。",
+          "字幕入力と動画生成の準備画面を使いやすくしました。",
+          "端末内のメディアファイルの検証と、外部リソースへのアクセス制限を強化しました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "Segra 1.0.7 的更新内容。",
+        "changes": [
+          "可从设置直接打开与所选应用语言对应的隐私政策。",
+          "可在 Pro 购买按钮上查看商店的当前价格。",
+          "改善了字幕输入和视频生成准备界面的使用体验。",
+          "加强了本地媒体输入验证和对外部资源的访问限制。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "Segra 1.0.7 的更新內容。",
+        "changes": [
+          "可從設定直接開啟與所選應用程式語言對應的隱私權政策。",
+          "可在 Pro 購買按鈕上查看商店目前的價格。",
+          "改善了字幕輸入與影片製作準備畫面的使用體驗。",
+          "加強了本機媒體輸入驗證及外部資源的存取限制。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do Segra 1.0.7.",
+        "changes": [
+          "Abra a política de privacidade no idioma selecionado no app diretamente nas Configurações.",
+          "Veja o preço atual da loja no botão de compra do Pro.",
+          "Melhoramos a usabilidade da inserção de legendas e da tela de preparação para gerar vídeos.",
+          "Reforçamos a validação da mídia local usada como entrada e as restrições de acesso a recursos externos."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in Segra 1.0.7.",
+        "changes": [
+          "Öffne die Datenschutzerklärung in der gewählten App-Sprache direkt in den Einstellungen.",
+          "Sieh dir den aktuellen Store-Preis auf dem Pro-Kaufbutton an.",
+          "Die Eingabe von Untertiteln und die Ansicht zur Vorbereitung der Videoerstellung sind leichter zu bedienen.",
+          "Die Prüfung lokaler Medieneingaben und die Beschränkungen für den Zugriff auf externe Ressourcen wurden verstärkt."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de Segra 1.0.7.",
+        "changes": [
+          "Ouvrez la politique de confidentialité dans la langue choisie pour l’application directement depuis les réglages.",
+          "Consultez le prix actuel de la boutique sur le bouton d’achat Pro.",
+          "La saisie des sous-titres et l’écran de préparation de la création vidéo sont plus faciles à utiliser.",
+          "Le contrôle des médias locaux utilisés en entrée et les restrictions d’accès aux ressources externes ont été renforcés."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de Segra 1.0.7.",
+        "changes": [
+          "Abre la política de privacidad en el idioma elegido para la app directamente desde Configuración.",
+          "Consulta el precio actual de la tienda en el botón de compra de Pro.",
+          "Mejoramos la entrada de subtítulos y la pantalla de preparación para crear vídeos.",
+          "Reforzamos la validación de los archivos multimedia locales utilizados como entrada y las restricciones de acceso a recursos externos."
+        ]
+      }
+    },
+    "internalGitHubUrl": ""
+  },
+  {
     "appSlug": "tagweaver",
     "appName": "TagWeaver",
     "version": "2.5.2",
@@ -1168,9 +1275,9 @@
     "appName": "TagWeaver",
     "version": "2.5.9",
     "tag": "v2.5.9",
-    "platform": "iOS · Android",
-    "releasedDate": "2026-11-05",
-    "title": "TagWeaver v2.5.9 (iOS · Android)",
+    "platform": "Android",
+    "releasedDate": "2026-11-04",
+    "title": "TagWeaver v2.5.9 (Android)",
     "summary": "Changes in TagWeaver 2.5.9.",
     "summaryKo": "TagWeaver 2.5.9 버전의 변경 사항이에요.",
     "changes": [
