@@ -171,7 +171,10 @@ const policies = existingApps.map((app) => {
     date: getPrivacyPolicyDocument(slug as AllPrivacyAppSlug, locale).updatedAt,
     platforms: app.platforms
   };
-}).concat([{title: 'Sonary', href: existingPolicyHref('/privacy/sonary/'), date: getPrivacyPolicyDocument('sonary', locale).updatedAt, platforms: ['iOS', 'Android']}]).sort((a, b) => a.title.localeCompare(b.title, 'en', { sensitivity: 'base' }));
+}).concat([
+  {title: 'Combina', href: existingPolicyHref('/privacy/combina/'), date: getPrivacyPolicyDocument('combina', locale).updatedAt, platforms: ['iOS', 'Android']},
+  {title: 'Sonary', href: existingPolicyHref('/privacy/sonary/'), date: getPrivacyPolicyDocument('sonary', locale).updatedAt, platforms: ['iOS', 'Android']}
+]).sort((a, b) => a.title.localeCompare(b.title, 'en', { sensitivity: 'base' }));
 const email = 'onnellab.app@gmail.com';
 const emailIndex = copy.contactBody.indexOf(email);
 const contactBefore = emailIndex >= 0 ? copy.contactBody.slice(0, emailIndex) : copy.contactBody;

@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const apps = ['aligna', 'clipnest', 'lunary', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'] as const;
+const apps = ['aligna', 'clipnest', 'combina', 'lunary', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'] as const;
 const locales = [
   { code: 'en', segment: '' }, { code: 'ko', segment: 'ko/' },
   { code: 'ja', segment: 'ja/' }, { code: 'zh-Hans', segment: 'zh-hans/' },
@@ -12,7 +12,7 @@ const locales = [
 ] as const;
 
 for (const { code, segment } of locales) {
-  test(`${code}: all ten app policies use one template and retain the app-specific copy`, async ({ page }) => {
+  test(`${code}: all eleven app policies use one template and retain the app-specific copy`, async ({ page }) => {
     for (const app of apps) {
       const route = `/privacy/${app}/${segment}`;
       await page.goto(route);
@@ -43,7 +43,7 @@ for (const { code, segment } of locales) {
 
 test('all 16 preserved EN/KO policies keep every original subsection and its individual data statements', async ({ page }) => {
   for (const locale of ['en', 'ko'] as const) {
-    for (const app of apps.filter((slug) => slug !== 'papira' && slug !== 'lunary')) {
+    for (const app of apps.filter((slug) => slug !== 'papira' && slug !== 'lunary' && slug !== 'combina')) {
       const reference = JSON.parse(fs.readFileSync(
         path.join(process.cwd(), 'src', 'content', 'privacy-policies', locale, app + '.json'), 'utf8'
       )) as { title: string; sections: Array<{ title: string; blocks: Array<{kind:string; value?:string; items?:string[]}> }> };
@@ -83,5 +83,37 @@ test('privacy directories display authoritative update dates and canonical app U
     await expect(papira).toContainText('2026-08-21');
     const lunary = policies.filter({ has: page.getByRole('heading', { name: 'Lunary' }) });
     await expect(lunary).toContainText('2026-09-27');
+    const combina = policies.filter({ has: page.getByRole('heading', { name: 'Combina' }) });
+    await expect(combina).toHaveCount(1);
+    await expect(combina).toContainText('2026-11-06');
+    await expect(combina).toHaveAttribute('href', `/privacy/combina/${segment}`);
+  }
+});
+
+test('Combina describes its data flow and all nine canonical routes appear in the sitemap', async ({ page, request }) => {
+  await page.goto('/privacy/combina/');
+  const main = page.locator('main.privacy-shell');
+  await expect(main).toContainText('does not require an account');
+  await expect(main).toContainText('does not upload videos or their metadata to ONNELLAB servers');
+  await expect(main).toContainText('one-time purchase');
+  await expect(main).toContainText('verify and restore a purchase');
+  await expect(main).toContainText('Google Analytics');
+  await expect(main.locator('section a[href="mailto:onnellab.app@gmail.com"]')).toBeVisible();
+
+  const sitemapResponse = await request.get('/sitemap.xml');
+  expect(sitemapResponse.ok()).toBeTruthy();
+  const sitemap = await sitemapResponse.text();
+  for (const { segment } of locales) {
+    const location = `<loc>https://onnellab.com/privacy/combina/${segment}</loc>`;
+    expect(sitemap.split(location)).toHaveLength(2);
+  }
+});
+
+test('Combina policies fit a narrow screen with enlarged text', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  for (const segment of ['de/', 'fr/', 'ja/', 'zh-hans/', 'zh-hant/']) {
+    await page.goto(`/privacy/combina/${segment}`);
+    await page.addStyleTag({ content: '.privacy-shell p, .privacy-shell li { font-size: 32px !important; }' });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
   }
 });

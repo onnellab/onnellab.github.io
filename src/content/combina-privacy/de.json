@@ -1,0 +1,84 @@
+{
+  "appName": "Combina",
+  "title": "Datenschutzerklärung für Combina",
+  "description": "Wie die Video-App Combina mit Dateien, Käufen und Datenschutz umgeht.",
+  "intro": "Diese Erklärung beschreibt, wie die Combina-App von ONNELLAB Daten verarbeitet.",
+  "updatedLabel": "Zuletzt aktualisiert",
+  "heading": "Über diese Erklärung",
+  "opening": "Combina führt Videos auf deinem Gerät zusammen, schneidet und komprimiert sie.",
+  "updatedAt": "2026-11-06",
+  "sections": [
+    {
+      "title": "Konto und Verarbeitung",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina benötigt weder ein Konto noch eine Anmeldung und bietet keinen Cloud-Speicher. Die App verwendet Videos, die du ausdrücklich auswählst oder importierst, sowie die für die Verarbeitung nötigen Dateiinformationen."
+        }
+      ]
+    },
+    {
+      "title": "Zugriff auf Videos und Ordner",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina greift über die Dateiauswahl des Systems auf Videos zu oder wenn du ein Video an die App sendest. Der Zugriff auf Videos oder einen Ausgabeordner wird beim Auswählen oder Verwenden angefordert; ein umfassender Zugriff auf deine gesamte Mediathek ist nicht erforderlich. Du kannst den Zugriff in den Geräteeinstellungen verwalten. Entziehst du ihn, ist der betreffende Vorgang möglicherweise nicht mehr möglich."
+        }
+      ]
+    },
+    {
+      "title": "Temporäre Dateien und lokale Daten",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Die App kann temporäre Kopien und Arbeitsdateien auf deinem Gerät erstellen. Nach Abschluss, Abbruch oder Fehlschlag eines Vorgangs versucht sie, ihre temporären Dateien sowie nach einer Unterbrechung verbliebene Dateien zu entfernen. Einstellungen, der Zugriff auf den gewählten Ordner und ein Zwischenspeicher für den Kaufstatus werden lokal gespeichert. Beim Deinstallieren entfernt das Betriebssystem normalerweise die app-eigenen Daten."
+        }
+      ]
+    },
+    {
+      "title": "Gespeicherte Ergebnisse",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina erstellt eine neue Ergebnisdatei und verändert oder löscht die Quellvideos nicht. Unter iOS wählst du bei jedem Speichern einen Ordner, sofern du keinen bevorzugten Ordner festgelegt hast. Unter Android 10 oder neuer ist Downloads/Combina der Standardspeicherort; unter Android 9 oder älter wird der Speicherdialog des Systems verwendet. Ein in den Einstellungen gewählter Ordner hat Vorrang. Quellvideos und gespeicherte Ergebnisse außerhalb des app-eigenen Speichers bleiben auch nach der Deinstallation unter deiner Kontrolle."
+        }
+      ]
+    },
+    {
+      "title": "Käufe",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Pro ist ein optionaler einmaliger Kauf. Der App Store von Apple oder Google Play verarbeitet die Zahlung nach den jeweils eigenen Richtlinien. Combina verwendet Produkt-, Transaktions- und Berechtigungsinformationen, soweit sie zur Prüfung und Wiederherstellung eines Kaufs nötig sind; deine Kartendaten erhält die App nicht."
+        }
+      ]
+    },
+    {
+      "title": "Teilen und Tracking",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina lädt Videos oder deren Metadaten nicht auf Server von ONNELLAB hoch. Die App zeigt keine Werbung und verwendet keine SDKs für Verhaltensanalysen oder Werbung. Wenn du ein Ergebnis über den Teilen-Dialog des Systems weitergibst, erhält die gewählte App die Datei oder Zugriff darauf und verarbeitet sie nach ihrer eigenen Datenschutzerklärung."
+        }
+      ]
+    },
+    {
+      "title": "Website und externe Dienste",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Beim Öffnen der Datenschutzerklärung wird dein Browser gestartet. Der Hosting-Anbieter der Website kann technische Daten zur Anfrage erhalten, etwa eine IP-Adresse. Wenn Google Analytics eingerichtet ist, kann die ONNELLAB-Website damit zusammengefasste Website-Besuche und Interaktionen messen. Das ist von der Videoverarbeitung auf deinem Gerät durch Combina getrennt."
+        }
+      ]
+    },
+    {
+      "title": "Deine Möglichkeiten und Kontakt",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Du kannst gespeicherte Dateien mit den Dateifunktionen deines Geräts verwalten, Zugriffe in den Systemeinstellungen ändern oder die App deinstallieren, um ihre eigenen Daten zu entfernen. Bei Datenschutzfragen erreichst du uns unter onnellab.app@gmail.com. Deine übermittelte E-Mail-Adresse und Nachricht verwenden wir, um zu antworten."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "appName": "Combina",
+  "title": "Combina Privacy Policy",
+  "description": "How the Combina video app handles files, purchases, and privacy.",
+  "intro": "This policy explains how ONNELLAB’s Combina app handles data.",
+  "updatedLabel": "Last updated",
+  "heading": "About this policy",
+  "opening": "Combina merges, trims, and compresses videos on your device.",
+  "updatedAt": "2026-11-06",
+  "sections": [
+    {
+      "title": "Account and processing",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina does not require an account or sign-in and does not offer cloud storage. It uses the videos you explicitly choose or import, along with the file information needed for processing."
+        }
+      ]
+    },
+    {
+      "title": "Video and folder access",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina accesses videos through the system picker or when you send a video to the app. Access to videos or an output folder is requested when you select or use it; the app does not require broad access to your entire library. You can manage access in device settings, though removing access may prevent the associated operation."
+        }
+      ]
+    },
+    {
+      "title": "Temporary files and local data",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "The app may create temporary copies and working files on your device. It attempts to clean app-owned temporary files after completion, cancellation, or failure and to remove leftovers after an interruption. Settings, selected folder access, and a purchase-status cache are stored locally. The operating system normally removes app-owned data when you uninstall the app."
+        }
+      ]
+    },
+    {
+      "title": "Saved results",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina creates a new result and does not modify or delete source videos. On iOS, choose a folder for each save unless you set a preferred folder. On Android 10 or later, the default is Downloads/Combina; on Android 9 or earlier, the system save screen is used. A folder chosen in settings takes priority. Source videos and saved results outside the app’s own storage remain under your control after uninstallation."
+        }
+      ]
+    },
+    {
+      "title": "Purchases",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Optional Pro is a one-time purchase. Apple’s App Store or Google Play processes payment under its own policies. Combina uses product, transaction, and entitlement information as needed to verify and restore a purchase; it does not receive your card details."
+        }
+      ]
+    },
+    {
+      "title": "Sharing and tracking",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina does not upload videos or their metadata to ONNELLAB servers. The app does not show ads or use behavioral analytics or advertising SDKs. When you choose to share a result through the system share sheet, the selected app receives the file or access to it and handles it under its own privacy policy."
+        }
+      ]
+    },
+    {
+      "title": "Website and external services",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Opening the privacy policy launches your browser. The website’s hosting provider may receive technical request information, such as an IP address. When configured, the ONNELLAB website may use Google Analytics to measure aggregate site visits and interactions. This is separate from Combina’s on-device video processing."
+        }
+      ]
+    },
+    {
+      "title": "Your choices and contact",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "You can manage saved files with your device’s file tools, change access in system settings, or uninstall the app to remove its app-owned data. For privacy questions, contact onnellab.app@gmail.com. We use the email address and message you provide to respond."
+        }
+      ]
+    }
+  ]
+}

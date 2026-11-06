@@ -9,7 +9,7 @@ import type { AllSiteLocale } from './extended-site-i18n';
 
 // Routes, styling and chrome are shared; app-specific privacy statements remain independent.
 export const allPrivacyAppSlugs = [
-  'aligna', 'clipnest', 'lunary', 'melivra', 'meriq',
+  'aligna', 'clipnest', 'combina', 'lunary', 'melivra', 'meriq',
   'papira', 'quivra', 'segra', 'sonary', 'tagweaver', 'vaultxt'
 ] as const;
 export type AllPrivacyAppSlug = (typeof allPrivacyAppSlugs)[number];
@@ -36,6 +36,15 @@ const googlePolicyUrl = 'https://developers.google.com/terms/api-services-user-d
 
 export function getPrivacyPolicyDocument(slug: AllPrivacyAppSlug, locale: AllSiteLocale): PolicyDocument {
   if (slug === 'sonary') return getSonaryLegalDocument('privacy', locale);
+
+  if (slug === 'combina') {
+    const sourcePath = path.resolve(process.cwd(), 'src/content/combina-privacy', locale + '.json');
+    const document = JSON.parse(fs.readFileSync(sourcePath, 'utf8')) as PolicyDocument;
+    if (document.appName !== 'Combina' || document.sections.length !== 8) {
+      throw new Error('Invalid Combina privacy document: ' + sourcePath);
+    }
+    return document;
+  }
 
   if (slug === 'papira') {
     const source = papiraPrivacyCopies[locale];

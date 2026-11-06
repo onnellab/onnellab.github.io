@@ -1,0 +1,84 @@
+{
+  "appName": "Combina",
+  "title": "Politique de confidentialité de Combina",
+  "description": "Comment l’application vidéo Combina traite les fichiers, les achats et la confidentialité.",
+  "intro": "Cette politique explique comment l’application Combina d’ONNELLAB traite les données.",
+  "updatedLabel": "Dernière mise à jour",
+  "heading": "À propos de cette politique",
+  "opening": "Combina assemble, découpe et compresse les vidéos sur votre appareil.",
+  "updatedAt": "2026-11-06",
+  "sections": [
+    {
+      "title": "Compte et traitement",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina ne nécessite ni compte ni connexion et ne propose pas de stockage dans le cloud. L’application utilise les vidéos que vous choisissez ou importez explicitement ainsi que les informations de fichier nécessaires au traitement."
+        }
+      ]
+    },
+    {
+      "title": "Accès aux vidéos et aux dossiers",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina accède aux vidéos à l’aide du sélecteur du système ou lorsque vous envoyez une vidéo à l’application. L’accès aux vidéos ou à un dossier de destination est demandé lorsque vous les sélectionnez ou les utilisez ; l’application ne demande pas un accès étendu à toute votre bibliothèque. Vous pouvez gérer les accès dans les réglages de l’appareil, mais leur retrait peut empêcher l’opération concernée."
+        }
+      ]
+    },
+    {
+      "title": "Fichiers temporaires et données locales",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "L’application peut créer des copies temporaires et des fichiers de travail sur votre appareil. Elle tente de nettoyer ses fichiers temporaires après la fin, l’annulation ou l’échec d’une opération, ainsi que les fichiers restants après une interruption. Les réglages, l’accès au dossier choisi et un cache de l’état d’achat sont stockés localement. Lors de la désinstallation, le système d’exploitation supprime normalement les données propres à l’application."
+        }
+      ]
+    },
+    {
+      "title": "Résultats enregistrés",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina crée un nouveau fichier de résultat et ne modifie ni ne supprime les vidéos source. Sur iOS, vous choisissez un dossier à chaque enregistrement, sauf si vous avez défini un dossier préféré. Sur Android 10 ou version ultérieure, l’emplacement par défaut est Downloads/Combina ; sur Android 9 ou version antérieure, l’écran d’enregistrement du système est utilisé. Un dossier choisi dans les réglages est prioritaire. Les vidéos source et les résultats enregistrés hors de l’espace de stockage propre à l’application restent sous votre contrôle après sa désinstallation."
+        }
+      ]
+    },
+    {
+      "title": "Achats",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Pro est un achat unique facultatif. L’App Store d’Apple ou Google Play traite le paiement selon ses propres règles. Combina utilise les informations sur le produit, la transaction et le droit d’utilisation nécessaires pour vérifier et restaurer un achat ; l’application ne reçoit pas les coordonnées de votre carte."
+        }
+      ]
+    },
+    {
+      "title": "Partage et suivi",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Combina n’envoie pas les vidéos ni leurs métadonnées aux serveurs d’ONNELLAB. L’application n’affiche pas de publicité et n’utilise pas de SDK d’analyse comportementale ou publicitaire. Lorsque vous partagez un résultat depuis l’interface de partage du système, l’application choisie reçoit le fichier ou l’accès à celui-ci et le traite selon sa propre politique de confidentialité."
+        }
+      ]
+    },
+    {
+      "title": "Site web et services externes",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "L’ouverture de la politique de confidentialité lance votre navigateur. L’hébergeur du site peut recevoir des informations techniques liées à la requête, comme une adresse IP. Lorsqu’il est configuré, le site web d’ONNELLAB peut utiliser Google Analytics pour mesurer des données agrégées de visites et d’interactions. Cela est distinct du traitement vidéo effectué par Combina sur votre appareil."
+        }
+      ]
+    },
+    {
+      "title": "Vos choix et contact",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Vous pouvez gérer les fichiers enregistrés avec les outils de votre appareil, modifier les accès dans les réglages du système ou désinstaller l’application pour supprimer ses données propres. Pour toute question de confidentialité, contactez onnellab.app@gmail.com. Nous utilisons l’adresse e-mail et le message que vous fournissez pour vous répondre."
+        }
+      ]
+    }
+  ]
+}

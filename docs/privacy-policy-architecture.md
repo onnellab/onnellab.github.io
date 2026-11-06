@@ -2,7 +2,7 @@
 
 ## Single app template
 
-All eleven consumer app policies (`aligna`, `clipnest`, `lunary`, `melivra`,
+All twelve consumer app policies (`aligna`, `clipnest`, `combina`, `lunary`, `melivra`,
 `meriq`, `papira`, `quivra`, `segra`, `sonary`, `tagweaver`, `vaultxt`) share
 `src/components/LocalizedAppPrivacyPage.astro` for all nine locales
 (`en, ko, ja, zh-Hans, zh-Hant, pt-BR, de, fr, es`).
@@ -27,6 +27,10 @@ into a shared display model. It is a presentation adapter, **not** a blanket pol
 - Eight apps' other seven locales: `src/lib/app-privacy-localizations.ts`
   continues to provide localized statements and Melivra's server-specific disclosures.
 - Papira: `src/lib/papira-privacy-copy.ts`, preserving all nine existing versions.
+- Combina: `src/content/combina-privacy/{locale}.json`, with nine app-specific
+  documents covering selected videos, local processing and storage, purchases,
+  sharing, and the separate website request/analytics context. The privacy hub
+  lists Combina independently of any product or store listing.
 - Lunary: `src/lib/lunary-privacy.ts`, preserving Google Calendar and
   Google API Services User Data Policy / Limited Use language in every locale.
 - Changes to server, analytics, payments, retention, permissions and data-sharing
@@ -39,7 +43,7 @@ the redirect uses client-side navigation and a refresh fallback; HTTP 301/308
 redirects require configuration at the hosting layer.
 
 The `/privacy/youtube-manager/` policy is a separate, operator-only Google/YouTube
-OAuth service (ONNELLAB Media Console), not one of the eleven consumer app policies.
+OAuth service (ONNELLAB Media Console), not one of the twelve consumer app policies.
 Its existing specialized legal page remains independent.
 
 App privacy hubs use the app policy source's last-updated date, not a duplicated

@@ -1,0 +1,84 @@
+{
+  "appName": "Combina",
+  "title": "Política de Privacidade do Combina",
+  "description": "Como o app de vídeo Combina trata arquivos, compras e privacidade.",
+  "intro": "Esta política explica como o app Combina, da ONNELLAB, trata dados.",
+  "updatedLabel": "Última atualização",
+  "heading": "Sobre esta política",
+  "opening": "O Combina une, corta e comprime vídeos no seu dispositivo.",
+  "updatedAt": "2026-11-06",
+  "sections": [
+    {
+      "title": "Conta e processamento",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "O Combina não exige conta nem login e não oferece armazenamento em nuvem. Ele usa os vídeos que você escolhe ou importa explicitamente e as informações dos arquivos necessárias ao processamento."
+        }
+      ]
+    },
+    {
+      "title": "Acesso a vídeos e pastas",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "O Combina acessa vídeos pelo seletor do sistema ou quando você envia um vídeo ao app. O acesso a vídeos ou a uma pasta de destino é solicitado quando você os seleciona ou usa; o app não exige acesso amplo a toda a sua biblioteca. Você pode gerenciar o acesso nas configurações do dispositivo, mas removê-lo pode impedir a operação correspondente."
+        }
+      ]
+    },
+    {
+      "title": "Arquivos temporários e dados locais",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "O app pode criar cópias temporárias e arquivos de trabalho no dispositivo. Ele tenta limpar os arquivos temporários do app após a conclusão, o cancelamento ou a falha de uma operação, bem como os arquivos restantes após uma interrupção. As configurações, o acesso à pasta escolhida e um cache do estado da compra ficam armazenados localmente. Ao desinstalar o app, o sistema operacional normalmente remove os dados pertencentes ao app."
+        }
+      ]
+    },
+    {
+      "title": "Resultados salvos",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "O Combina cria um novo arquivo de resultado e não modifica nem exclui os vídeos originais. No iOS, escolha uma pasta a cada salvamento, a menos que defina uma pasta preferencial. No Android 10 ou posterior, o destino padrão é Downloads/Combina; no Android 9 ou anterior, é usada a tela de salvamento do sistema. Uma pasta escolhida nas configurações tem prioridade. Os vídeos originais e resultados salvos fora do armazenamento do próprio app continuam sob seu controle após a desinstalação."
+        }
+      ]
+    },
+    {
+      "title": "Compras",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "O Pro é uma compra única e opcional. A App Store da Apple ou o Google Play processa o pagamento de acordo com suas próprias políticas. O Combina usa as informações de produto, transação e direito de uso necessárias para verificar e restaurar uma compra; ele não recebe os dados do seu cartão."
+        }
+      ]
+    },
+    {
+      "title": "Compartilhamento e rastreamento",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "O Combina não envia vídeos nem seus metadados aos servidores da ONNELLAB. O app não exibe anúncios nem usa SDKs de análise comportamental ou publicidade. Quando você compartilha um resultado pela tela de compartilhamento do sistema, o app escolhido recebe o arquivo ou acesso a ele e o trata de acordo com sua própria política de privacidade."
+        }
+      ]
+    },
+    {
+      "title": "Site e serviços externos",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Ao abrir a política de privacidade, seu navegador é iniciado. O provedor de hospedagem do site pode receber informações técnicas da solicitação, como o endereço IP. Quando configurado, o site da ONNELLAB pode usar o Google Analytics para medir dados agregados de visitas e interações. Isso é separado do processamento de vídeo do Combina no dispositivo."
+        }
+      ]
+    },
+    {
+      "title": "Suas escolhas e contato",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "value": "Você pode gerenciar os arquivos salvos com as ferramentas de arquivos do dispositivo, alterar o acesso nas configurações do sistema ou desinstalar o app para remover seus dados. Para dúvidas sobre privacidade, entre em contato pelo endereço onnellab.app@gmail.com. Usamos o endereço de e-mail e a mensagem que você enviar para responder à solicitação."
+        }
+      ]
+    }
+  ]
+}
