@@ -9,8 +9,8 @@ status: "published"
 topic_id: "TOPIC-0010"
 search_intent: "workflow"
 primary_keyword: "クリップボード定型文管理"
-secondary_keywords: "保存テキスト|iPhoneクリップボード|ローカルクリップボード|ClipNest"
-related_apps: "ClipNest"
+secondary_keywords: "保存テキスト|iPhoneクリップボード|ローカルクリップボード|Pastenel"
+related_apps: "Pastenel"
 tags: "クリップボード定型文管理|保存テキスト|iPhoneクリップボード|ローカルクリップボード"
 canonical_url: "https://onnellab.com/blog/ja/reuse-copied-text-snippets-iphone/"
 published_at: "2026-07-24T08:24:05+09:00"
@@ -85,7 +85,7 @@ Universal Clipboardが有効で条件を満たすと、クリップボード内�
 
 ## ONNELLABでの活用
 
-[ClipNest](/apps/clipnest/ja/)は、選んだコピー済み文章をキーボードベースのスニペット一覧から再利用したいときに合います。公式App Store掲載では、ClipNestキーボードを開いたときに現在のクリップボードを一度確認し、新しいテキストをローカル保存し、ピン留めと重複処理に対応し、常時クリップボードを監視しないと説明されています。
+[Pastenel](/apps/clipnest/ja/)は、選んだコピー済み文章をキーボードベースのスニペット一覧から再利用したいときに合います。公式App Store掲載では、Pastenelキーボードを開いたときに現在のクリップボードを一度確認し、新しいテキストをローカル保存し、ピン留めと重複処理に対応し、常時クリップボードを監視しないと説明されています。
 
 このイベント単位の動作が重要です。文章を取り込む・再利用するときにキーボードを開き、何が保存されたか確認します。アプリは元のメモと入力欄を行き来する回数を減らせますが、そのスニペットが最新か、文脈に合うか、保存して安全かまでは判断しません。
 
@@ -101,7 +101,7 @@ Universal Clipboardが有効で条件を満たすと、クリップボード内�
 - [Apple Support: Select, cut, copy, and paste text on iPhone](https://support.apple.com/guide/iphone/select-cut-copy-and-paste-text-iph1a9cae52c/ios) — iPhone標準のテキスト選択とコピー＆ペースト。
 - [Apple Support: Copy and paste between iPhone and other Apple devices](https://support.apple.com/guide/iphone/copy-and-paste-between-devices-iph220ea8dca/ios) — Universal Clipboardの条件と、コピー内容が短時間利用できることを説明しています。
 - [Apple Platform Security: Handoff security](https://support.apple.com/guide/security/handoff-security-secf78dbe639/web) — Handoffを使ったUniversal Clipboardのセキュリティ。
-- [ClipNest on the App Store](https://apps.apple.com/app/id6779928552) — 取り込み契機、ローカル保存、ピン留めなどの公式情報。
+- [Pastenel on the App Store](https://apps.apple.com/app/id6779928552) — 取り込み契機、ローカル保存、ピン留めなどの公式情報。
 
 ## まとめ
 

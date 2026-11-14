@@ -1,0 +1,16 @@
+---
+const { locale = 'en' } = Astro.props;
+const copy: Record<string, string> = {
+ en: 'Name transition in progress: Pastenel is the new name of our iOS clipboard app. The App Store listing, installed app and existing screenshots or videos may still show the previous name. This website update does not mean the renamed app update has been released.',
+ ko: '이름을 변경하고 있어요. Pastenel(페이스트넬)은 기존 iOS 클립보드 앱의 새 이름이에요. App Store, 설치된 앱, 기존 스크린샷과 영상에는 이전 이름이 남아 있을 수 있어요. 웹사이트의 이름 변경은 앱 업데이트 출시 완료를 뜻하지 않아요.',
+ ja: '名称を変更中です。Pastenelは既存のiOSクリップボードアプリの新しい名前です。App Store、インストール済みアプリ、既存の画像や動画には旧名称が残る場合があります。このサイトの変更は、改名したアプリの更新版が公開済みであることを意味しません。',
+ 'zh-Hans': '名称正在更新：Pastenel 是现有 iOS 剪贴板应用的新名称。App Store、已安装的应用及现有截图或视频可能仍显示旧名称。网站更名不代表更名后的应用更新已发布。',
+ 'zh-Hant': '名稱正在更新：Pastenel 是現有 iOS 剪貼簿應用程式的新名稱。App Store、已安裝的應用程式及現有截圖或影片可能仍顯示舊名稱。網站更名不代表更名後的應用程式更新已發布。',
+ 'pt-BR': 'Mudança de nome em andamento: Pastenel é o novo nome do nosso app de área de transferência para iOS. A App Store, o app instalado e as imagens ou vídeos existentes ainda podem mostrar o nome anterior. A mudança no site não significa que a atualização do app com o novo nome já foi lançada.',
+ de: 'Die Umbenennung läuft: Pastenel ist der neue Name unserer iOS-Zwischenablage-App. Im App Store, in der installierten App und in bisherigen Bildern oder Videos kann noch der alte Name stehen. Die Änderung dieser Website bedeutet nicht, dass das umbenannte App-Update bereits veröffentlicht wurde.',
+ fr: 'Le changement de nom est en cours : Pastenel est le nouveau nom de notre application de presse-papiers iOS. L’App Store, l’application installée et les images ou vidéos existantes peuvent encore afficher l’ancien nom. Cette modification du site ne signifie pas que la mise à jour de l’application renommée est déjà publiée.',
+ es: 'El cambio de nombre está en curso: Pastenel es el nuevo nombre de nuestra app de portapapeles para iOS. La App Store, la app instalada y las imágenes o vídeos existentes aún pueden mostrar el nombre anterior. El cambio en esta web no significa que ya se haya publicado la actualización de la app con el nuevo nombre.'
+};
+---
+<aside class="rename-notice" data-pastenel-transition>{copy[locale] || copy.en}</aside>
+<style>.rename-notice { padding: 1rem; margin: 1rem 0; border: 1px solid currentColor; border-radius: .75rem; line-height: 1.65; font-size: .95rem; }</style>

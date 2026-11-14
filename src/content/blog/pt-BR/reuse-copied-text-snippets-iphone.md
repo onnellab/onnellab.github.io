@@ -9,8 +9,8 @@ status: "published"
 topic_id: "TOPIC-0010"
 search_intent: "workflow"
 primary_keyword: "trechos da área de transferência"
-secondary_keywords: "texto salvo|área de transferência iPhone|área de transferência local|ClipNest"
-related_apps: "ClipNest"
+secondary_keywords: "texto salvo|área de transferência iPhone|área de transferência local|Pastenel"
+related_apps: "Pastenel"
 tags: "trechos da área de transferência|texto salvo|iPhone|área de transferência local"
 canonical_url: "https://onnellab.com/blog/pt-br/reuse-copied-text-snippets-iphone/"
 published_at: "2026-07-24T08:24:05+09:00"
@@ -85,7 +85,7 @@ Retenção também é uma decisão de privacidade. “Uso frequente” não sign
 
 ## Como isso se relaciona à ONNELLAB
 
-[ClipNest](/apps/clipnest/pt-br/) se encaixa quando você quer reutilizar textos escolhidos por meio de uma lista acessível pelo teclado. A listagem pública da App Store explica que, quando o teclado ClipNest é aberto, ele verifica a área de transferência atual uma vez, salva localmente novos textos e oferece fixação e tratamento de duplicados; ele não monitora continuamente a área de transferência em segundo plano.
+[Pastenel](/apps/clipnest/pt-br/) se encaixa quando você quer reutilizar textos escolhidos por meio de uma lista acessível pelo teclado. A listagem pública da App Store explica que, quando o teclado Pastenel é aberto, ele verifica a área de transferência atual uma vez, salva localmente novos textos e oferece fixação e tratamento de duplicados; ele não monitora continuamente a área de transferência em segundo plano.
 
 Esse comportamento orientado por evento é importante. Abra o teclado quando quiser capturar ou reutilizar um trecho e confira o que foi salvo. A ferramenta reduz a ida e volta entre uma nota e um campo de texto, mas não decide se o trecho está atualizado, adequado ao contexto ou seguro para retenção.
 
@@ -94,7 +94,7 @@ Esse comportamento orientado por evento é importante. Abra o teclado quando qui
 - [Apple Support: Select, cut, copy, and paste text on iPhone](https://support.apple.com/guide/iphone/select-cut-copy-and-paste-text-iph1a9cae52c/ios)
 - [Apple Support: Copy and paste between iPhone and other Apple devices](https://support.apple.com/guide/iphone/copy-and-paste-between-devices-iph220ea8dca/ios)
 - [Apple Platform Security: Handoff security](https://support.apple.com/guide/security/handoff-security-secf78dbe639/web)
-- [ClipNest on the App Store](https://apps.apple.com/app/id6779928552)
+- [Pastenel on the App Store](https://apps.apple.com/app/id6779928552)
 
 ## Conclusão
 

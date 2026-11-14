@@ -10,7 +10,7 @@ topic_id: "TOPIC-0070"
 search_intent: "workflow"
 primary_keyword: "재사용 가능한 텍스트 조각"
 secondary_keywords: "문장 사용 맥락|텍스트 자리표시자|저장한 답변|전송 전 확인"
-related_apps: "ClipNest"
+related_apps: "Pastenel"
 tags: "재사용 가능한 텍스트 조각|문장 사용 맥락|텍스트 자리표시자|저장한 답변|전송 전 확인"
 short_answer: "늘 그대로 써도 되는 표현만 저장하고 바뀌는 부분을 표시한 뒤, 언제 쓰는 문장인지 따로 기록합니다. 보내기 전에는 받는 사람을 확인하고 모든 자리표시자를 바꾼 다음 전체 메시지를 읽습니다. 근거가 바뀌면 저장한 문장도 검토합니다."
 canonical_url: "https://onnellab.com/blog/ko/turn-repeated-text-into-reusable-snippets/"
@@ -63,7 +63,7 @@ related_articles: "아이폰에서 복사한 텍스트 조각을 다시 사용�
 
 ## ONNELLAB 앱
 
-[ClipNest](/apps/clipnest/)는 iPhone과 iPad에서 복사한 글을 저장하고 다시 쓸 때 선택할 수 있는 도구입니다. [App Store 설명](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)에는 ClipNest 키보드가 열릴 때 한 번 수행하는 클립보드 확인, 기기 내 기록, 고정, 키보드에서 붙여 넣기가 소개되어 있습니다. 클립보드를 계속 감시하지는 않습니다.
+[Pastenel](/apps/clipnest/)는 iPhone과 iPad에서 복사한 글을 저장하고 다시 쓸 때 선택할 수 있는 도구입니다. [App Store 설명](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)에는 Pastenel 키보드가 열릴 때 한 번 수행하는 클립보드 확인, 기기 내 기록, 고정, 키보드에서 붙여 넣기가 소개되어 있습니다. 클립보드를 계속 감시하지는 않습니다.
 
 앞서 설명한 사용 메모, 자리표시자 교체, 최종 확인은 사용자가 관리하는 절차입니다. 이 절차가 앱의 자동 입력·정책 검사·별도 메모 기능을 뜻하는 것은 아닙니다. 다른 앱에 붙여 넣은 글은 그 앱의 데이터 처리 대상이 됩니다. 기기 내에 문장을 저장한다고 붙여 넣을 곳까지 비공개가 되는 것은 아닙니다.
 
@@ -73,7 +73,7 @@ related_articles: "아이폰에서 복사한 텍스트 조각을 다시 사용�
 
 ## 참고 자료
 
-- [ClipNest App Store 설명](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552): 제품의 저장·재사용 동작에 관한 설명입니다. 준비 점검표는 편집상 제안이며 측정된 생산성 결과가 아닙니다.
+- [Pastenel App Store 설명](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552): 제품의 저장·재사용 동작에 관한 설명입니다. 준비 점검표는 편집상 제안이며 측정된 생산성 결과가 아닙니다.
 
 ## 결론
 

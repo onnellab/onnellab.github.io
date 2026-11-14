@@ -1,4 +1,5 @@
 ---
+import PastenelTransitionNotice from './PastenelTransitionNotice.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { productPresentationLabels, validateProductPresentation } from '../lib/product-presentation';
 import LocaleMenu from './LocaleMenu.astro';
@@ -230,6 +231,7 @@ const breadcrumbJsonLd = {
   <main class="page-shell" style={pageStyle} data-product-slug={data.source.slug} data-product-locale={data.locale}>
 
 
+    {data.source.slug === 'clipnest' && <PastenelTransitionNotice locale={data.locale} />}
     <section class="hero" aria-labelledby="product-title" data-app={data.source.slug}>
       <div class="hero-grid">
         <div class="identity">

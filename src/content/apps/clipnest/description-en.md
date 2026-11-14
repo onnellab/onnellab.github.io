@@ -1,12 +1,12 @@
 ios
 SEO title:
-ClipNest - Clipboard & Snippet Keyboard
+Pastenel - Clipboard & Snippet Keyboard
 
 SEO description:
-Save copied text when the ClipNest keyboard opens, pin reusable snippets, and paste them into other apps. Stored text stays on your iPhone or iPad.
+Save copied text when the Pastenel keyboard opens, pin reusable snippets, and paste them into other apps. Stored text stays on your iPhone or iPad.
 
 앱 이름:
-ClipNest - Clipboard Tool
+Pastenel - Clipboard Tool
 
 부제:
 Keyboard Paste & Snippets
@@ -18,9 +18,9 @@ Clipboard & Snippet Keyboard
 Save copied text when the keyboard opens, pin important snippets, and paste again fast. Clipboard history stays local on your iPhone and iPad.
 
 설명:
-ClipNest is a local clipboard tool for iPhone and iPad.
+Pastenel is a local clipboard tool for iPhone and iPad.
 
-When the ClipNest keyboard opens, it checks your current clipboard once and saves new text locally on your device. Reuse copied messages, addresses, emails, links, and short snippets without searching through old apps or notes.
+When the Pastenel keyboard opens, it checks your current clipboard once and saves new text locally on your device. Reuse copied messages, addresses, emails, links, and short snippets without searching through old apps or notes.
 
 Features
 
@@ -34,18 +34,18 @@ Features
 • No ads
 • No subscription
 
-ClipNest does not constantly monitor your clipboard.
+Pastenel does not constantly monitor your clipboard.
 
 It checks for new clipboard content when the keyboard is opened and stores it locally on your device. Your data never leaves your device and is never sent to external servers.
 
-Whether you need a clipboard tool, quick paste helper, or text snippets organizer, ClipNest helps you reuse copied text faster.
+Whether you need a clipboard tool, quick paste helper, or text snippets organizer, Pastenel helps you reuse copied text faster.
 
 Copy it. Save it. Paste it anytime.
 
 Landing page:
-ClipNest keeps copied text ready when you need to paste it again.
+Pastenel keeps copied text ready when you need to paste it again.
 
-When the ClipNest keyboard opens, it checks your current clipboard once and saves new text locally on your device. Frequently used messages, addresses, emails, links, and snippets stay ready for fast reuse.
+When the Pastenel keyboard opens, it checks your current clipboard once and saves new text locally on your device. Frequently used messages, addresses, emails, links, and snippets stay ready for fast reuse.
 
 ## Key features
 
@@ -56,14 +56,14 @@ When the ClipNest keyboard opens, it checks your current clipboard once and save
 - Duplicate handling
 - Local storage on your device
 
-ClipNest checks the clipboard when its keyboard opens, not continuously. Saved text stays on your device and is not sent to external servers. No account is needed. There are no ads or subscriptions.
+Pastenel checks the clipboard when its keyboard opens, not continuously. Saved text stays on your device and is not sent to external servers. No account is needed. There are no ads or subscriptions.
 
 FAQ:
 Q: Can I paste saved text from the keyboard?
-A: Yes. Open the ClipNest keyboard and choose saved text to paste it into the app you are typing in.
+A: Yes. Open the Pastenel keyboard and choose saved text to paste it into the app you are typing in.
 
-Q: Does ClipNest monitor the clipboard all the time?
-A: No. ClipNest checks the current clipboard once when the keyboard opens and saves new text locally.
+Q: Does Pastenel monitor the clipboard all the time?
+A: No. Pastenel checks the current clipboard once when the keyboard opens and saves new text locally.
 
 Q: Is saved text sent to a server?
 A: No. Saved text stays on your device and is not sent to external servers.

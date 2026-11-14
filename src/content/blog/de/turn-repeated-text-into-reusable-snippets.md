@@ -10,7 +10,7 @@ topic_id: "TOPIC-0075"
 search_intent: "workflow"
 primary_keyword: "wiederverwendbare Textbausteine"
 secondary_keywords: "Textbausteine im Kontext|Platzhalter im Text|gespeicherte Antworten|Prüfung vor dem Senden"
-related_apps: "ClipNest"
+related_apps: "Pastenel"
 tags: "wiederverwendbare Textbausteine|Textbausteine im Kontext|Platzhalter im Text|gespeicherte Antworten|Prüfung vor dem Senden"
 short_answer: "Speichern Sie nur beständige Formulierungen, markieren Sie veränderliche Angaben und halten Sie den Verwendungszweck getrennt fest. Prüfen Sie vor dem Senden den Empfänger, ersetzen Sie alle Platzhalter und lesen Sie die gesamte Nachricht. Ändert sich die Grundlage, prüfen Sie auch die gespeicherten Texte."
 canonical_url: "https://onnellab.com/blog/de/turn-repeated-text-into-reusable-snippets/"
@@ -63,7 +63,7 @@ Diese erfundene Vorlage dient einer gewöhnlichen Dokumentenanfrage: „Bitte se
 
 ## Wo ONNELLAB dazu passt
 
-[ClipNest](/apps/clipnest/) ist eine mögliche Hilfe zum Speichern und Wiederverwenden kopierter Texte auf iPhone und iPad. Die [App-Store-Beschreibung](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) nennt eine einmalige Prüfung der Zwischenablage beim Öffnen der ClipNest-Tastatur, einen lokalen Verlauf, das Anheften von Einträgen und das Einfügen über die Tastatur. Die Zwischenablage wird nicht dauerhaft überwacht.
+[Pastenel](/apps/clipnest/) ist eine mögliche Hilfe zum Speichern und Wiederverwenden kopierter Texte auf iPhone und iPad. Die [App-Store-Beschreibung](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) nennt eine einmalige Prüfung der Zwischenablage beim Öffnen der Pastenel-Tastatur, einen lokalen Verlauf, das Anheften von Einträgen und das Einfügen über die Tastatur. Die Zwischenablage wird nicht dauerhaft überwacht.
 
 Kontextnotizen, das Ersetzen von Platzhaltern und die Abschlussprüfung sind Schritte Ihres eigenen Arbeitsablaufs. Dieser Artikel behauptet weder automatisches Ausfüllen noch Richtlinienprüfungen oder ein eigenes Notizfeld in der App. Sobald Sie Text in eine andere App einfügen, gilt deren Datenverarbeitung. Lokales Speichern macht das Einfügeziel nicht automatisch vertraulich.
 
@@ -73,7 +73,7 @@ Kontextnotizen, das Ersetzen von Platzhaltern und die Abschlussprüfung sind Sch
 
 ## Quellen
 
-- [ClipNest im App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552): beschriebene Funktionen zum Erfassen und Wiederverwenden. Die Vorbereitungsliste ist redaktionelle Orientierung, kein gemessenes Produktivitätsergebnis.
+- [Pastenel im App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552): beschriebene Funktionen zum Erfassen und Wiederverwenden. Die Vorbereitungsliste ist redaktionelle Orientierung, kein gemessenes Produktivitätsergebnis.
 
 ## Fazit
 

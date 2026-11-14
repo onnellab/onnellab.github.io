@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import PastenelTransitionNotice from './PastenelTransitionNotice.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { uiLabels } from '../lib/ui-labels';
 import BlogLocaleMenu from './BlogLocaleMenu.astro';
@@ -70,7 +71,8 @@ const dateLabel = (value?: string) => {
 };
 const appHref = (appName: string) => {
   const slug = appName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  return allProductRouteFor(slug, locale);
+  // Display-name migration must not break the existing product URL.
+  return allProductRouteFor(slug === 'pastenel' ? 'clipnest' : slug, locale);
 };
 const recommendation = (item: string) => {
   const markdown = item.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
@@ -238,6 +240,7 @@ const articleJsonLd = faqJsonLd ? [blogPostingJsonLd, breadcrumbJsonLd, faqJsonL
 
 
     <article>
+      {post.meta.relatedApps.includes('Pastenel') && <PastenelTransitionNotice locale={locale} />}
       <header class="article-header">
         <p class="category">{categoryLabel}</p>
         <h1>{post.meta.title}</h1>

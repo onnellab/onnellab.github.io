@@ -10,7 +10,7 @@ topic_id: "TOPIC-0073"
 search_intent: "workflow"
 primary_keyword: "可重複使用的文字片段"
 secondary_keywords: "文字使用情境|文字預留位置|儲存的回覆|傳送前檢查"
-related_apps: "ClipNest"
+related_apps: "Pastenel"
 tags: "可重複使用的文字片段|文字使用情境|文字預留位置|儲存的回覆|傳送前檢查"
 short_answer: "只儲存固定不變的表述，標示每次要修改的資訊，並另外記錄適用情境。傳送前確認收件人、替換所有預留位置，再讀過完整訊息。依據改變時，也要重新檢查儲存的文字。"
 canonical_url: "https://onnellab.com/blog/zh-hant/turn-repeated-text-into-reusable-snippets/"
@@ -63,7 +63,7 @@ related_articles: "在 Android 整理音樂檔案，準備離線播放 => https:
 
 ## ONNELLAB 應用程式說明
 
-[ClipNest](/apps/clipnest/)是在 iPhone 和 iPad 上儲存並重複使用已複製文字的一種選擇。[App Store 介紹](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)描述了開啟 ClipNest 鍵盤時檢查一次剪貼簿、儲存在裝置上的剪貼簿記錄、釘選及從鍵盤貼上等功能。它不會持續監控剪貼簿。
+[Pastenel](/apps/clipnest/)是在 iPhone 和 iPad 上儲存並重複使用已複製文字的一種選擇。[App Store 介紹](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)描述了開啟 Pastenel 鍵盤時檢查一次剪貼簿、儲存在裝置上的剪貼簿記錄、釘選及從鍵盤貼上等功能。它不會持續監控剪貼簿。
 
 上述情境備註、預留位置替換及最後檢查，屬於使用者的操作方法。本文不聲稱 App 提供自動填寫範本、檢查政策或獨立備註欄的功能。文字貼到其他 App 後，就受該目標 App 的資料處理方式影響。在本機儲存文字片段，並不保證貼上位置也是私密的。
 
@@ -73,7 +73,7 @@ related_articles: "在 Android 整理音樂檔案，準備離線播放 => https:
 
 ## 參考資料
 
-- [ClipNest 的 App Store 介紹](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)：產品所描述的儲存與重複使用行為。準備清單屬於編輯建議，並非經過測量的效率提升結果。
+- [Pastenel 的 App Store 介紹](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)：產品所描述的儲存與重複使用行為。準備清單屬於編輯建議，並非經過測量的效率提升結果。
 
 ## 結論
 

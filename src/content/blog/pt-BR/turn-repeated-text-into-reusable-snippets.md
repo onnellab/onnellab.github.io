@@ -10,7 +10,7 @@ topic_id: "TOPIC-0074"
 search_intent: "workflow"
 primary_keyword: "trechos de texto reutilizáveis"
 secondary_keywords: "contexto do trecho|campos para substituir|respostas salvas|conferência antes do envio"
-related_apps: "ClipNest"
+related_apps: "Pastenel"
 tags: "trechos de texto reutilizáveis|contexto do trecho|campos para substituir|respostas salvas|conferência antes do envio"
 short_answer: "Salve apenas a parte estável, marque os detalhes que mudam e registre separadamente quando o texto se aplica. Antes de enviar, confira o destinatário, substitua todos os campos e leia a mensagem inteira. Revise as cópias salvas quando a fonte mudar."
 canonical_url: "https://onnellab.com/blog/pt-br/turn-repeated-text-into-reusable-snippets/"
@@ -63,7 +63,7 @@ Este modelo hipotético serve para um pedido rotineiro de documento: “Por favo
 
 ## Onde entra a ONNELLAB
 
-O [ClipNest](/apps/clipnest/) é uma opção para salvar e reutilizar textos copiados no iPhone e no iPad. A [descrição na App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) informa que ele verifica a área de transferência uma vez ao abrir o teclado do ClipNest e oferece histórico local, fixação de trechos e colagem pelo teclado. Ele não monitora continuamente a área de transferência.
+O [Pastenel](/apps/clipnest/) é uma opção para salvar e reutilizar textos copiados no iPhone e no iPad. A [descrição na App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) informa que ele verifica a área de transferência uma vez ao abrir o teclado do Pastenel e oferece histórico local, fixação de trechos e colagem pelo teclado. Ele não monitora continuamente a área de transferência.
 
 As notas de contexto, a substituição de marcadores e as conferências finais são etapas que você realiza. Este guia não atribui ao aplicativo preenchimento automático de modelos, verificação de políticas ou um campo separado para notas. Ao colar em outro aplicativo, o texto passa a seguir o tratamento de dados desse destino. Armazenar trechos localmente não torna o destino privado.
 
@@ -73,7 +73,7 @@ As notas de contexto, a substituição de marcadores e as conferências finais s
 
 ## Referências
 
-- [ClipNest na App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552): comportamento de captura e reutilização descrito pelo produto. A lista de preparação é orientação editorial, não um resultado medido de produtividade.
+- [Pastenel na App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552): comportamento de captura e reutilização descrito pelo produto. A lista de preparação é orientação editorial, não um resultado medido de produtividade.
 
 ## Conclusão
 
