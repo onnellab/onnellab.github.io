@@ -58,70 +58,61 @@ const screenshotAltCopy = {
     ]
   },
   clipnest: {
-    en: [
-      'ClipNest home screen with the saved clips list',
-      'ClipNest pinned clips screen for frequently reused text',
-      'ClipNest snippet editing screen for saved text',
-      'ClipNest settings screen for clipboard and app options',
-      'ClipNest clipboard history screen with recent copied text'
+    "en": [
+        "Pastenel keyboard pasting saved text into another app",
+        "Pastenel home with pinned text and clipboard history",
+        "Pastenel search results for saved clips",
+        "Pastenel privacy and language settings"
     ],
-    ko: [
-      '저장한 클립 목록을 보여주는 ClipNest 홈 화면',
-      '자주 다시 쓰는 텍스트를 모아 둔 ClipNest 고정 클립 화면',
-      '저장한 텍스트를 수정하는 ClipNest 문구 편집 화면',
-      '클립보드와 앱 옵션을 설정하는 ClipNest 설정 화면',
-      '최근 복사한 텍스트를 보여주는 ClipNest 클립보드 기록 화면'
+    "ko": [
+        "다른 앱에 저장한 텍스트를 붙여넣는 Pastenel 키보드",
+        "고정한 텍스트와 클립보드 기록을 보여주는 Pastenel 홈",
+        "저장한 클립을 찾는 Pastenel 검색 결과",
+        "Pastenel 개인정보 보호 및 언어 설정"
     ],
-    ja: [
-      '保存したクリップ一覧を表示するClipNestホーム画面',
-      'よく再利用するテキストをまとめたClipNestのピン留め画面',
-      '保存したテキストを編集するClipNestのスニペット編集画面',
-      'クリップボードとアプリ設定を管理するClipNest設定画面',
-      '最近コピーしたテキストを表示するClipNest履歴画面'
+    "ja": [
+        "保存したテキストを別のアプリに貼り付けるPastenelキーボード",
+        "固定したテキストと履歴を表示するPastenelホーム",
+        "保存したクリップのPastenel検索結果",
+        "Pastenelのプライバシーと言語設定"
     ],
-    'zh-Hans': [
-      '显示已保存文本片段列表的 ClipNest 首页',
-      '用于快速复用常用文本的 ClipNest 置顶片段界面',
-      '编辑已保存文本的 ClipNest 片段编辑界面',
-      '管理剪贴板与应用选项的 ClipNest 设置界面',
-      '显示最近复制文本的 ClipNest 剪贴板历史界面'
+    "zh-Hans": [
+        "Pastenel 键盘将已保存文本粘贴到其他应用",
+        "Pastenel 首页显示置顶文本和剪贴板历史",
+        "Pastenel 已保存片段的搜索结果",
+        "Pastenel 隐私与语言设置"
     ],
-    'zh-Hant': [
-      '顯示已儲存文字片段清單的 ClipNest 首頁',
-      '方便快速重複使用常用文字的 ClipNest 釘選片段畫面',
-      '編輯已儲存文字的 ClipNest 片段編輯畫面',
-      '管理剪貼簿與應用程式選項的 ClipNest 設定畫面',
-      '顯示最近複製文字的 ClipNest 剪貼簿記錄畫面'
+    "zh-Hant": [
+        "Pastenel 鍵盤將已儲存文字貼至其他應用程式",
+        "Pastenel 首頁顯示置頂文字和剪貼簿歷史",
+        "Pastenel 已儲存片段的搜尋結果",
+        "Pastenel 隱私權與語言設定"
     ],
-    'pt-BR': [
-      'Tela inicial do ClipNest com a lista de textos salvos',
-      'Tela do ClipNest com textos fixados para reutilização frequente',
-      'Tela do ClipNest para editar um texto salvo',
-      'Tela de configurações do ClipNest para opções da área de transferência e do app',
-      'Tela de histórico do ClipNest com textos copiados recentemente'
+    "pt-BR": [
+        "Teclado Pastenel colando texto salvo em outro app",
+        "Início do Pastenel com textos fixados e histórico",
+        "Resultados da busca por textos salvos no Pastenel",
+        "Configurações de privacidade e idioma do Pastenel"
     ],
-    de: [
-      'ClipNest-Startseite mit der Liste gespeicherter Textausschnitte',
-      'ClipNest-Ansicht mit angehefteten häufig verwendeten Textbausteinen',
-      'ClipNest-Editor für gespeicherte Textbausteine',
-      'ClipNest-Einstellungen für Zwischenablage und App-Optionen',
-      'ClipNest-Zwischenablageverlauf mit zuletzt kopierten Texten'
+    "de": [
+        "Pastenel-Tastatur fügt gespeicherten Text in eine andere App ein",
+        "Pastenel-Startseite mit angehefteten Texten und Verlauf",
+        "Pastenel-Suchergebnisse für gespeicherte Texte",
+        "Datenschutz- und Spracheinstellungen in Pastenel"
     ],
-    fr: [
-      'Écran d’accueil de ClipNest avec la liste des extraits enregistrés',
-      'Écran ClipNest des extraits épinglés pour les textes souvent réutilisés',
-      'Écran ClipNest de modification d’un extrait enregistré',
-      'Écran des réglages ClipNest pour le presse-papiers et les options de l’application',
-      'Historique ClipNest affichant les textes copiés récemment'
+    "fr": [
+        "Clavier Pastenel collant un texte enregistré dans une autre app",
+        "Accueil Pastenel avec textes épinglés et historique",
+        "Résultats de recherche des textes enregistrés dans Pastenel",
+        "Réglages de confidentialité et de langue de Pastenel"
     ],
-    es: [
-      'Pantalla de inicio de ClipNest con la lista de textos guardados',
-      'Pantalla de ClipNest con textos fijados para reutilizarlos con frecuencia',
-      'Pantalla de ClipNest para editar un texto guardado',
-      'Pantalla de ajustes de ClipNest para el portapapeles y las opciones de la aplicación',
-      'Historial de ClipNest con los textos copiados recientemente'
+    "es": [
+        "Teclado Pastenel pegando texto guardado en otra app",
+        "Inicio de Pastenel con textos fijados e historial",
+        "Resultados de búsqueda de textos guardados en Pastenel",
+        "Ajustes de privacidad e idioma de Pastenel"
     ]
-  },
+},
   melivra: {
     en: [
       'Melivra home screen with recent albums and resume playback',

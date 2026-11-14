@@ -1,0 +1,452 @@
+{
+  "schema_version": 1,
+  "status": "staged_not_published",
+  "app_slug": "clipnest",
+  "version": "1.0.5+98",
+  "source_commit": "a79f84cb59178c63505c192c13fb891fb579790a",
+  "candidate_sha256": "90e136fe196650e0ef91a9b3f1be1ea3ab02c6bd3b998b2c77a1f0c5852fe7c4",
+  "source_selection": {
+    "policy": "android-edited-then-iphone-edited",
+    "kind": "iphone_medium",
+    "reason": "android_edited_absent"
+  },
+  "assets": [
+    {
+      "locale": "en",
+      "kind": "iphone_medium",
+      "index": 1,
+      "sha256": "3e42c55b467265f739dfc6516532578fe18879c0b260bc34a1614ffd6bb9de79",
+      "site_path": "en/pastenel-20261114-01.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/en/01.png"
+    },
+    {
+      "locale": "en",
+      "kind": "iphone_medium",
+      "index": 2,
+      "sha256": "27bc7c5d0b5d9a70adbb35337002ffee8d9b645771372966986bd72c8feb0277",
+      "site_path": "en/pastenel-20261114-02.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/en/02.png"
+    },
+    {
+      "locale": "en",
+      "kind": "iphone_medium",
+      "index": 3,
+      "sha256": "0625c38e834ce4a406c0a4e5598922b392de72fdf6212faba11a5e1c2aff601d",
+      "site_path": "en/pastenel-20261114-03.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/en/03.png"
+    },
+    {
+      "locale": "en",
+      "kind": "iphone_medium",
+      "index": 4,
+      "sha256": "a9d5164f09d1f6fb9f2bdd7560157db36da52f4b00150c81e16f3480460a5f83",
+      "site_path": "en/pastenel-20261114-04.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/en/04.png"
+    },
+    {
+      "locale": "ko",
+      "kind": "iphone_medium",
+      "index": 1,
+      "sha256": "9fac4c994f72844eabe5395e970b8649155eb00b03509f1639f12e301425c986",
+      "site_path": "ko/pastenel-20261114-01.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/ko/01.png"
+    },
+    {
+      "locale": "ko",
+      "kind": "iphone_medium",
+      "index": 2,
+      "sha256": "5ca4c502722b73dfdd2afd393e3e4f567856ff547e9c224081b1f8d4624253d6",
+      "site_path": "ko/pastenel-20261114-02.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/ko/02.png"
+    },
+    {
+      "locale": "ko",
+      "kind": "iphone_medium",
+      "index": 3,
+      "sha256": "0e610f9fec9c5cf1bddf4aeb435d5fc59ceb43ac57899b473c5887bd2fd229ea",
+      "site_path": "ko/pastenel-20261114-03.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/ko/03.png"
+    },
+    {
+      "locale": "ko",
+      "kind": "iphone_medium",
+      "index": 4,
+      "sha256": "acac6a6b48cf4f00c554c189463f557e8a4f5106ba22b962d626ed1961c07c74",
+      "site_path": "ko/pastenel-20261114-04.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/ko/04.png"
+    },
+    {
+      "locale": "ja",
+      "kind": "iphone_medium",
+      "index": 1,
+      "sha256": "cece653ec0275ec5a31a53014e3085c7b69ddace4a00a9a3f8df7072f8712e2d",
+      "site_path": "ja/pastenel-20261114-01.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/ja/01.png"
+    },
+    {
+      "locale": "ja",
+      "kind": "iphone_medium",
+      "index": 2,
+      "sha256": "f52dc31f363588355f5ecc19ccbe53240d0141faa08f0d5408554878fa9005a6",
+      "site_path": "ja/pastenel-20261114-02.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/ja/02.png"
+    },
+    {
+      "locale": "ja",
+      "kind": "iphone_medium",
+      "index": 3,
+      "sha256": "e66d074df9734118a71968660946701d0e277d87bbe54c20c2de77002abad4b7",
+      "site_path": "ja/pastenel-20261114-03.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/ja/03.png"
+    },
+    {
+      "locale": "ja",
+      "kind": "iphone_medium",
+      "index": 4,
+      "sha256": "6f99d17618e2ebf6d9ee383fd5fc90f1a2d6ccffcaa40728da4f9c06838e0c4d",
+      "site_path": "ja/pastenel-20261114-04.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/ja/04.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "kind": "iphone_medium",
+      "index": 1,
+      "sha256": "7daffedb8fc20897eb7a414f6ecefd5fb7af15a2cab8d6b1809076adeba88665",
+      "site_path": "zh-Hans/pastenel-20261114-01.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/zh-Hans/01.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "kind": "iphone_medium",
+      "index": 2,
+      "sha256": "5465ba88f0f47c0f74d3b25a49c3216448dfe997c8dc449c2b4a864ec88bb3f5",
+      "site_path": "zh-Hans/pastenel-20261114-02.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/zh-Hans/02.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "kind": "iphone_medium",
+      "index": 3,
+      "sha256": "7090e1af81b2e6cbd89b5a4adc7a37e35be64bbe8f78e4d8e15f88a81d9b4965",
+      "site_path": "zh-Hans/pastenel-20261114-03.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/zh-Hans/03.png"
+    },
+    {
+      "locale": "zh-Hans",
+      "kind": "iphone_medium",
+      "index": 4,
+      "sha256": "53bb0cc421c22e438466328cd3fdf94ed5bc16126df6a542e9f13f2b41a27bd9",
+      "site_path": "zh-Hans/pastenel-20261114-04.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/zh-Hans/04.png"
+    },
+    {
+      "locale": "zh-Hant",
+      "kind": "iphone_medium",
+      "index": 1,
+      "sha256": "a9927b1c6084e2013d6c6cb0b058e06bf44cf719048f0c0a4d00cb75e12fe779",
+      "site_path": "zh-Hant/pastenel-20261114-01.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/zh-Hant/01.png"
+    },
+    {
+      "locale": "zh-Hant",
+      "kind": "iphone_medium",
+      "index": 2,
+      "sha256": "bc08b3990d83b93f3a7addf29de7cdb8dc7d4374017dc85b90234a21869b863b",
+      "site_path": "zh-Hant/pastenel-20261114-02.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/zh-Hant/02.png"
+    },
+    {
+      "locale": "zh-Hant",
+      "kind": "iphone_medium",
+      "index": 3,
+      "sha256": "7fc3d22dc6747604fe858ecc460cf571c5675e220e2d60727b3c34244192c472",
+      "site_path": "zh-Hant/pastenel-20261114-03.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/zh-Hant/03.png"
+    },
+    {
+      "locale": "zh-Hant",
+      "kind": "iphone_medium",
+      "index": 4,
+      "sha256": "0c0a323087b0d3e2a14cf84d793e6e01a386777e56c8f6ecef58a03b15de921b",
+      "site_path": "zh-Hant/pastenel-20261114-04.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/zh-Hant/04.png"
+    },
+    {
+      "locale": "pt-BR",
+      "kind": "iphone_medium",
+      "index": 1,
+      "sha256": "1f4343fe01e66ad3d2ca42f63b9f027e7aab75a1a5ce481f4c6d68e4ab636c0f",
+      "site_path": "pt-BR/pastenel-20261114-01.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/pt-BR/01.png"
+    },
+    {
+      "locale": "pt-BR",
+      "kind": "iphone_medium",
+      "index": 2,
+      "sha256": "0403d13f655472a7fc0b5ab17928b925091cdf43d179813634e9e83fa9b1b679",
+      "site_path": "pt-BR/pastenel-20261114-02.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/pt-BR/02.png"
+    },
+    {
+      "locale": "pt-BR",
+      "kind": "iphone_medium",
+      "index": 3,
+      "sha256": "802b60e8f944ad8666e8e885d190a3f470586214bd34cb23558d961370ad79bb",
+      "site_path": "pt-BR/pastenel-20261114-03.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/pt-BR/03.png"
+    },
+    {
+      "locale": "pt-BR",
+      "kind": "iphone_medium",
+      "index": 4,
+      "sha256": "a96adb426ff4bac8a33ac5be48434391673fd5187cf6217ea030d70ff8920e86",
+      "site_path": "pt-BR/pastenel-20261114-04.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/pt-BR/04.png"
+    },
+    {
+      "locale": "de",
+      "kind": "iphone_medium",
+      "index": 1,
+      "sha256": "0a26f774c8943deaa012a5b188afb986eb67ddaff0a2f63b4c555651281367a0",
+      "site_path": "de/pastenel-20261114-01.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/de/01.png"
+    },
+    {
+      "locale": "de",
+      "kind": "iphone_medium",
+      "index": 2,
+      "sha256": "1dd33269b07984ed35c14c9e873b6c2dd0254c23dd7caa681becd20c73b2e995",
+      "site_path": "de/pastenel-20261114-02.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/de/02.png"
+    },
+    {
+      "locale": "de",
+      "kind": "iphone_medium",
+      "index": 3,
+      "sha256": "5825ce94e5bf163be7b3d9ff5f377dc5d56367e6c28aa6298442cb1fb23e5d5e",
+      "site_path": "de/pastenel-20261114-03.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/de/03.png"
+    },
+    {
+      "locale": "de",
+      "kind": "iphone_medium",
+      "index": 4,
+      "sha256": "e9d01273f617849e5b376894d91aef5f832518269c418cd74042f5d6184e678f",
+      "site_path": "de/pastenel-20261114-04.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/de/04.png"
+    },
+    {
+      "locale": "fr",
+      "kind": "iphone_medium",
+      "index": 1,
+      "sha256": "0a4a84c33bc826521782a630457bd6e16fd5bcaee0d3a0f563c20ab7862004e5",
+      "site_path": "fr/pastenel-20261114-01.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/fr/01.png"
+    },
+    {
+      "locale": "fr",
+      "kind": "iphone_medium",
+      "index": 2,
+      "sha256": "21fba8558d905ac023119089ca5910c89430186f7acc2ab10940ad6af7c7df20",
+      "site_path": "fr/pastenel-20261114-02.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/fr/02.png"
+    },
+    {
+      "locale": "fr",
+      "kind": "iphone_medium",
+      "index": 3,
+      "sha256": "bc6733264f582fea25b25f8938cdd963d1790b859e7464a75799aeca22575e26",
+      "site_path": "fr/pastenel-20261114-03.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/fr/03.png"
+    },
+    {
+      "locale": "fr",
+      "kind": "iphone_medium",
+      "index": 4,
+      "sha256": "ed051562e37755a045bda5ab045a08c01f388e32965b4b4e2c0553e128bb3e74",
+      "site_path": "fr/pastenel-20261114-04.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/fr/04.png"
+    },
+    {
+      "locale": "es",
+      "kind": "iphone_medium",
+      "index": 1,
+      "sha256": "0210658a293ba6fa9073144e45503e76bc29b9428949f915860132b16e31e35d",
+      "site_path": "es/pastenel-20261114-01.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/es/01.png"
+    },
+    {
+      "locale": "es",
+      "kind": "iphone_medium",
+      "index": 2,
+      "sha256": "39e1c5d005663fde8a749b1f27c7b61d7ef8316b5bf8dc6cca4cd06eb5ed2e26",
+      "site_path": "es/pastenel-20261114-02.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/es/02.png"
+    },
+    {
+      "locale": "es",
+      "kind": "iphone_medium",
+      "index": 3,
+      "sha256": "3ec7ae14d5302eaa183a8ad0b5745db7a83017d933d63dbc1d5f04d1d35e0885",
+      "site_path": "es/pastenel-20261114-03.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/es/03.png"
+    },
+    {
+      "locale": "es",
+      "kind": "iphone_medium",
+      "index": 4,
+      "sha256": "832e53008c1da0ff5205f183fe401c01538e477f40fab6bb4e78eb0d9e837fff",
+      "site_path": "es/pastenel-20261114-04.png",
+      "size": [
+        1206,
+        2622
+      ],
+      "source_path": "assets/store_promo/pastenel_20261114/assets/store_promo/ios_devices/iphone_medium/es/04.png"
+    }
+  ],
+  "review": {
+    "method": "all 36 edited images visually inspected in contact sheet; exact PNG hashes and dimensions matched source render manifests",
+    "limits": "not real-device validation or full-resolution OCR; source app update not confirmed published"
+  },
+  "original_urls": "Old en/ko 1..5.png preserved byte-for-byte in public/app-assets/clipnest/assets/screenshots; new galleries only select versioned Pastenel files."
+}
