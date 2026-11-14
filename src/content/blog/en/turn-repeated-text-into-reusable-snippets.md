@@ -10,7 +10,7 @@ topic_id: "TOPIC-0042"
 search_intent: "workflow"
 primary_keyword: "reusable text snippets"
 secondary_keywords: "snippet context|text placeholders|saved replies|review before sending"
-related_apps: "ClipNest"
+related_apps: "Pastenel"
 tags: "reusable text snippets|snippet context|text placeholders|saved replies"
 short_answer: "Save only the stable wording, mark details that change, and keep a note about when the text applies. Before sending, check the recipient, replace every placeholder and read the complete message. Review saved copies when their source changes."
 canonical_url: "https://onnellab.com/blog/en/turn-repeated-text-into-reusable-snippets/"
@@ -63,7 +63,7 @@ This hypothetical template is for a routine document request: “Please send [DO
 
 ## Where ONNELLAB Fits
 
-[ClipNest](/apps/clipnest/) is an optional way to save and reuse copied text on iPhone and iPad. Its [App Store listing](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) describes one clipboard check when the ClipNest keyboard opens, local history, pinning and pasting from the keyboard. It does not continuously monitor the clipboard.
+[Pastenel](/apps/clipnest/) is an optional way to save and reuse copied text on iPhone and iPad. Its [App Store listing](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) describes one clipboard check when the Pastenel keyboard opens, local history, pinning and pasting from the keyboard. It does not continuously monitor the clipboard.
 
 The context notes, placeholder replacement and final checks above are your workflow. This guide does not claim automatic template filling, policy checking or a separate notes field in the app. Pasting text into another app places it under that destination's handling; local snippet storage does not make the destination private.
 
@@ -73,7 +73,7 @@ The context notes, placeholder replacement and final checks above are your workf
 
 ## References
 
-- [ClipNest App Store listing](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552): the product's described capture and reuse behavior. The preparation checklist is editorial guidance, not a measured productivity result.
+- [Pastenel App Store listing](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552): the product's described capture and reuse behavior. The preparation checklist is editorial guidance, not a measured productivity result.
 
 ## Conclusion
 

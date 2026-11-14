@@ -39,15 +39,15 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
     },
     clipnest: {
       "subtitle": "Teclado com área de transferência",
-      "body": "ClipNest é uma ferramenta local de área de transferência para iPhone e iPad.\n\nQuando o teclado ClipNest é aberto, ele verifica a área de transferência naquele momento e salva novos textos no dispositivo. Assim você pode reutilizar mensagens, endereços, e-mails, links e trechos frequentes sem procurar novamente em outros apps ou notas.\n\n## Principais recursos\n\n- Salvar o texto copiado ao abrir o teclado\n- Colar diretamente pelo teclado\n- Fixar itens usados com frequência\n- Reutilizar o histórico recente\n- Tratar entradas duplicadas\n- Armazenamento local no dispositivo\n\nClipNest não monitora a área de transferência continuamente. Os textos salvos não são enviados para servidores externos. Não há conta, anúncios nem assinatura.",
+      "body": "Pastenel é uma ferramenta local de área de transferência para iPhone e iPad.\n\nQuando o teclado Pastenel é aberto, ele verifica a área de transferência naquele momento e salva novos textos no dispositivo. Assim você pode reutilizar mensagens, endereços, e-mails, links e trechos frequentes sem procurar novamente em outros apps ou notas.\n\n## Principais recursos\n\n- Salvar o texto copiado ao abrir o teclado\n- Colar diretamente pelo teclado\n- Fixar itens usados com frequência\n- Reutilizar o histórico recente\n- Tratar entradas duplicadas\n- Armazenamento local no dispositivo\n\nPastenel não monitora a área de transferência continuamente. Os textos salvos não são enviados para servidores externos. Não há conta, anúncios nem assinatura.",
       "faqTitle": "Perguntas frequentes",
       "faq": [
         {
           "question": "Posso colar textos salvos diretamente pelo teclado?",
-          "answer": "Sim. Abra o teclado ClipNest e escolha um texto salvo para colá-lo no app em que você está digitando."
+          "answer": "Sim. Abra o teclado Pastenel e escolha um texto salvo para colá-lo no app em que você está digitando."
         },
         {
-          "question": "O ClipNest monitora a área de transferência o tempo todo?",
+          "question": "O Pastenel monitora a área de transferência o tempo todo?",
           "answer": "Não. Ele verifica o conteúdo atual uma vez quando o teclado é aberto."
         },
         {
@@ -59,8 +59,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "answer": "Sim. Itens importantes podem ser fixados para acesso rápido pelo teclado."
         }
       ],
-      "seoDescription": "Salve textos ao abrir o teclado ClipNest, fixe frases frequentes e cole em outros apps. Os textos ficam no seu iPhone ou iPad, sem envio a servidores.",
-      "seoTitle": "ClipNest - Teclado com área de transferência"
+      "seoDescription": "Salve textos ao abrir o teclado Pastenel, fixe frases frequentes e cole em outros apps. Os textos ficam no seu iPhone ou iPad, sem envio a servidores.",
+      "seoTitle": "Pastenel - Teclado com área de transferência"
     },
     meriq: {
       "subtitle": "Crie adesivos e chaveiros de acrílico",
@@ -191,15 +191,15 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
     },
     clipnest: {
       "subtitle": "Zwischenablage & Textbaustein-Tastatur",
-      "body": "ClipNest ist ein lokal arbeitendes Zwischenablage-Werkzeug für iPhone und iPad.\n\nBeim Öffnen der ClipNest-Tastatur wird die aktuelle Zwischenablage einmal geprüft und neuer Text auf dem Gerät gespeichert. So lassen sich Nachrichten, Adressen, E-Mail-Adressen, Links und häufige Textbausteine schnell wiederverwenden.\n\n## Hauptfunktionen\n\n- Kopierten Text beim Öffnen der Tastatur speichern\n- Direkt über die Tastatur einfügen\n- Häufige Einträge anheften\n- Letzte Kopien wiederverwenden\n- Doppelte Einträge verwalten\n- Lokale Speicherung auf dem Gerät\n\nDie Zwischenablage wird nicht dauerhaft überwacht. Gespeicherte Texte werden nicht an externe Server gesendet. Es gibt kein Konto, keine Werbung und kein Abonnement.",
+      "body": "Pastenel ist ein lokal arbeitendes Zwischenablage-Werkzeug für iPhone und iPad.\n\nBeim Öffnen der Pastenel-Tastatur wird die aktuelle Zwischenablage einmal geprüft und neuer Text auf dem Gerät gespeichert. So lassen sich Nachrichten, Adressen, E-Mail-Adressen, Links und häufige Textbausteine schnell wiederverwenden.\n\n## Hauptfunktionen\n\n- Kopierten Text beim Öffnen der Tastatur speichern\n- Direkt über die Tastatur einfügen\n- Häufige Einträge anheften\n- Letzte Kopien wiederverwenden\n- Doppelte Einträge verwalten\n- Lokale Speicherung auf dem Gerät\n\nDie Zwischenablage wird nicht dauerhaft überwacht. Gespeicherte Texte werden nicht an externe Server gesendet. Es gibt kein Konto, keine Werbung und kein Abonnement.",
       "faqTitle": "Häufige Fragen",
       "faq": [
         {
           "question": "Kann ich gespeicherten Text direkt über die Tastatur einfügen?",
-          "answer": "Ja. Öffne die ClipNest-Tastatur und wähle einen gespeicherten Text aus, um ihn in der App einzufügen, in der du gerade schreibst."
+          "answer": "Ja. Öffne die Pastenel-Tastatur und wähle einen gespeicherten Text aus, um ihn in der App einzufügen, in der du gerade schreibst."
         },
         {
-          "question": "Überwacht ClipNest die Zwischenablage ständig?",
+          "question": "Überwacht Pastenel die Zwischenablage ständig?",
           "answer": "Nein. Der aktuelle Inhalt wird einmal geprüft, wenn die Tastatur geöffnet wird."
         },
         {
@@ -211,8 +211,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "answer": "Ja. Wichtige Texte können für schnellen Zugriff über die Tastatur angeheftet werden."
         }
       ],
-      "seoDescription": "ClipNest speichert kopierten Text beim Öffnen der Tastatur. Textbausteine anheften und in andere Apps einfügen – lokal auf deinem iPhone oder iPad.",
-      "seoTitle": "ClipNest - Zwischenablage & Textbaustein-Tastatur"
+      "seoDescription": "Pastenel speichert kopierten Text beim Öffnen der Tastatur. Textbausteine anheften und in andere Apps einfügen – lokal auf deinem iPhone oder iPad.",
+      "seoTitle": "Pastenel - Zwischenablage & Textbaustein-Tastatur"
     },
     meriq: {
       "subtitle": "Sticker & Acrylanhänger gestalten",
@@ -339,15 +339,15 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
     },
     clipnest: {
       "subtitle": "Clavier avec presse-papiers",
-      "body": "ClipNest est un outil de presse-papiers local pour iPhone et iPad.\n\nÀ l’ouverture du clavier ClipNest, le presse-papiers courant est vérifié une fois et les nouveaux textes sont enregistrés sur l’appareil. Messages, adresses, e-mails, liens et phrases fréquentes peuvent ainsi être réutilisés rapidement.\n\n## Fonctions principales\n\n- Enregistrer le texte copié à l’ouverture du clavier\n- Coller directement depuis le clavier\n- Épingler les éléments fréquents\n- Réutiliser l’historique récent\n- Gérer les doublons\n- Stockage local sur l’appareil\n\nLe presse-papiers n’est pas surveillé en permanence. Les textes enregistrés ne sont pas envoyés à un serveur externe. Aucun compte, aucune publicité ni abonnement.",
+      "body": "Pastenel est un outil de presse-papiers local pour iPhone et iPad.\n\nÀ l’ouverture du clavier Pastenel, le presse-papiers courant est vérifié une fois et les nouveaux textes sont enregistrés sur l’appareil. Messages, adresses, e-mails, liens et phrases fréquentes peuvent ainsi être réutilisés rapidement.\n\n## Fonctions principales\n\n- Enregistrer le texte copié à l’ouverture du clavier\n- Coller directement depuis le clavier\n- Épingler les éléments fréquents\n- Réutiliser l’historique récent\n- Gérer les doublons\n- Stockage local sur l’appareil\n\nLe presse-papiers n’est pas surveillé en permanence. Les textes enregistrés ne sont pas envoyés à un serveur externe. Aucun compte, aucune publicité ni abonnement.",
       "faqTitle": "Questions fréquentes",
       "faq": [
         {
           "question": "Puis-je coller un texte enregistré directement depuis le clavier ?",
-          "answer": "Oui. Ouvrez le clavier ClipNest et choisissez un texte enregistré pour le coller dans l’application où vous écrivez."
+          "answer": "Oui. Ouvrez le clavier Pastenel et choisissez un texte enregistré pour le coller dans l’application où vous écrivez."
         },
         {
-          "question": "ClipNest surveille-t-il le presse-papiers en continu ?",
+          "question": "Pastenel surveille-t-il le presse-papiers en continu ?",
           "answer": "Non. Il vérifie le contenu actuel une seule fois lorsque le clavier s’ouvre."
         },
         {
@@ -359,8 +359,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "answer": "Oui. Les éléments importants peuvent être épinglés pour un accès rapide."
         }
       ],
-      "seoDescription": "ClipNest enregistre le texte copié à l’ouverture du clavier. Épinglez vos phrases et collez-les dans d’autres apps. Les textes restent sur votre appareil.",
-      "seoTitle": "ClipNest - Clavier avec presse-papiers"
+      "seoDescription": "Pastenel enregistre le texte copié à l’ouverture du clavier. Épinglez vos phrases et collez-les dans d’autres apps. Les textes restent sur votre appareil.",
+      "seoTitle": "Pastenel - Clavier avec presse-papiers"
     },
     meriq: {
       "subtitle": "Créez vos stickers et porte-clés",
@@ -487,15 +487,15 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
     },
     clipnest: {
       "subtitle": "Teclado con portapapeles",
-      "body": "ClipNest es una herramienta local de portapapeles para iPhone y iPad.\n\nAl abrir el teclado de ClipNest se revisa una vez el contenido actual del portapapeles y se guarda el texto nuevo en el dispositivo. Así puedes reutilizar mensajes, direcciones, correos, enlaces y frases frecuentes sin volver a buscarlos.\n\n## Funciones principales\n\n- Guardar texto copiado al abrir el teclado\n- Pegar directamente desde el teclado\n- Fijar elementos frecuentes\n- Reutilizar el historial reciente\n- Gestionar duplicados\n- Almacenamiento local\n\nClipNest no vigila el portapapeles continuamente. Los textos guardados no se envían a servidores externos. No hay cuenta, anuncios ni suscripción.",
+      "body": "Pastenel es una herramienta local de portapapeles para iPhone y iPad.\n\nAl abrir el teclado de Pastenel se revisa una vez el contenido actual del portapapeles y se guarda el texto nuevo en el dispositivo. Así puedes reutilizar mensajes, direcciones, correos, enlaces y frases frecuentes sin volver a buscarlos.\n\n## Funciones principales\n\n- Guardar texto copiado al abrir el teclado\n- Pegar directamente desde el teclado\n- Fijar elementos frecuentes\n- Reutilizar el historial reciente\n- Gestionar duplicados\n- Almacenamiento local\n\nPastenel no vigila el portapapeles continuamente. Los textos guardados no se envían a servidores externos. No hay cuenta, anuncios ni suscripción.",
       "faqTitle": "Preguntas frecuentes",
       "faq": [
         {
           "question": "¿Puedo pegar textos guardados directamente desde el teclado?",
-          "answer": "Sí. Abre el teclado de ClipNest y elige un texto guardado para pegarlo en la app en la que estás escribiendo."
+          "answer": "Sí. Abre el teclado de Pastenel y elige un texto guardado para pegarlo en la app en la que estás escribiendo."
         },
         {
-          "question": "¿ClipNest vigila el portapapeles todo el tiempo?",
+          "question": "¿Pastenel vigila el portapapeles todo el tiempo?",
           "answer": "No. Comprueba el contenido actual una sola vez al abrir el teclado."
         },
         {
@@ -507,8 +507,8 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
           "answer": "Sí. Puedes fijarlos para acceder rápidamente desde el teclado."
         }
       ],
-      "seoDescription": "ClipNest guarda el texto copiado al abrir su teclado. Fija frases y pégalas en otras apps. Los textos se guardan en tu iPhone o iPad, sin subirlos a servidores.",
-      "seoTitle": "ClipNest - Teclado con portapapeles"
+      "seoDescription": "Pastenel guarda el texto copiado al abrir su teclado. Fija frases y pégalas en otras apps. Los textos se guardan en tu iPhone o iPad, sin subirlos a servidores.",
+      "seoTitle": "Pastenel - Teclado con portapapeles"
     },
     meriq: {
       "subtitle": "Crea pegatinas y llaveros acrílicos",

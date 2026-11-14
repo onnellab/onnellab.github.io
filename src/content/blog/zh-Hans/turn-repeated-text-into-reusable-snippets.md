@@ -10,7 +10,7 @@ topic_id: "TOPIC-0072"
 search_intent: "workflow"
 primary_keyword: "可重复使用的文本片段"
 secondary_keywords: "文本使用场景|文本占位符|保存的回复|发送前检查"
-related_apps: "ClipNest"
+related_apps: "Pastenel"
 tags: "可重复使用的文本片段|文本使用场景|文本占位符|保存的回复|发送前检查"
 short_answer: "只保存稳定不变的表述，标出每次要修改的信息，并另行记录适用场景。发送前确认收件人、替换所有占位符，再通读完整消息。依据发生变化时，也要复查保存的文字。"
 canonical_url: "https://onnellab.com/blog/zh-hans/turn-repeated-text-into-reusable-snippets/"
@@ -63,7 +63,7 @@ related_articles: "在 Android 上整理音乐文件，准备离线播放 => htt
 
 ## ONNELLAB 应用
 
-[ClipNest](/apps/clipnest/)是 iPhone 和 iPad 上保存并重复使用已复制文字的一种选择。[App Store 介绍](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)描述了打开 ClipNest 键盘时检查一次剪贴板、设备本地历史记录、置顶及从键盘粘贴等功能。它不会持续监控剪贴板。
+[Pastenel](/apps/clipnest/)是 iPhone 和 iPad 上保存并重复使用已复制文字的一种选择。[App Store 介绍](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)描述了打开 Pastenel 键盘时检查一次剪贴板、设备本地历史记录、置顶及从键盘粘贴等功能。它不会持续监控剪贴板。
 
 上述语境备注、占位符替换及最终检查属于使用者的操作方法。本文不声称应用提供自动填写模板、检查政策或独立备注栏的功能。文字粘贴到其他应用后，就受该目标应用的数据处理方式影响。本地保存文本片段并不保证粘贴目标也是私密的。
 
@@ -73,7 +73,7 @@ related_articles: "在 Android 上整理音乐文件，准备离线播放 => htt
 
 ## 参考资料
 
-- [ClipNest 的 App Store 介绍](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)：产品所描述的保存与复用行为。准备清单属于编辑建议，并非经过测量的效率提升结果。
+- [Pastenel 的 App Store 介绍](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)：产品所描述的保存与复用行为。准备清单属于编辑建议，并非经过测量的效率提升结果。
 
 ## 结论
 

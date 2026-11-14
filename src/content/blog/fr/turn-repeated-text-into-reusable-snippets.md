@@ -10,7 +10,7 @@ topic_id: "TOPIC-0076"
 search_intent: "workflow"
 primary_keyword: "extraits réutilisables"
 secondary_keywords: "contexte des extraits|champs à remplacer|réponses enregistrées|vérification avant envoi"
-related_apps: "ClipNest"
+related_apps: "Pastenel"
 tags: "extraits réutilisables|contexte des extraits|champs à remplacer|réponses enregistrées|vérification avant envoi"
 short_answer: "Enregistrez uniquement la formulation stable, signalez les éléments variables et notez séparément les situations où le texte convient. Avant l’envoi, vérifiez le destinataire, remplacez tous les champs et relisez le message entier. Révisez les copies enregistrées lorsque leur source change."
 canonical_url: "https://onnellab.com/blog/fr/turn-repeated-text-into-reusable-snippets/"
@@ -63,7 +63,7 @@ Voici un modèle fictif pour une demande courante de document : « Merci d’env
 
 ## La place d’ONNELLAB
 
-[ClipNest](/apps/clipnest/) est une option pour enregistrer et réutiliser du texte copié sur iPhone et iPad. Sa [fiche App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) décrit une seule vérification du presse-papiers à l’ouverture du clavier ClipNest, un historique local, l’épinglage et le collage depuis le clavier. L’application ne surveille pas le presse-papiers en continu.
+[Pastenel](/apps/clipnest/) est une option pour enregistrer et réutiliser du texte copié sur iPhone et iPad. Sa [fiche App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) décrit une seule vérification du presse-papiers à l’ouverture du clavier Pastenel, un historique local, l’épinglage et le collage depuis le clavier. L’application ne surveille pas le presse-papiers en continu.
 
 Les notes de contexte, le remplacement des champs et les vérifications finales relèvent de votre méthode de travail. Ce guide n’attribue à l’application ni remplissage automatique de modèles, ni contrôle des règles, ni champ de notes distinct. Un texte collé dans une autre application relève du traitement des données de cette destination. Le stockage local des extraits ne rend pas la destination privée.
 
@@ -73,7 +73,7 @@ Les notes de contexte, le remplacement des champs et les vérifications finales 
 
 ## Références
 
-- [ClipNest sur l’App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) : fonctionnement décrit pour la capture et la réutilisation. La liste de préparation est un conseil éditorial, pas un résultat de productivité mesuré.
+- [Pastenel sur l’App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) : fonctionnement décrit pour la capture et la réutilisation. La liste de préparation est un conseil éditorial, pas un résultat de productivité mesuré.
 
 ## Conclusion
 

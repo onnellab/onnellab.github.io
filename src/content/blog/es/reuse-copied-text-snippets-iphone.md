@@ -9,9 +9,9 @@ status: "published"
 topic_id: "TOPIC-0010"
 search_intent: "workflow"
 primary_keyword: "gestor de fragmentos portapapeles"
-secondary_keywords: "fragmentos de texto guardados|portapapeles iPhone|herramienta local|ClipNest"
-related_apps: "ClipNest"
-tags: "portapapeles|fragmentos de texto|iPhone|almacenamiento local|ClipNest"
+secondary_keywords: "fragmentos de texto guardados|portapapeles iPhone|herramienta local|Pastenel"
+related_apps: "Pastenel"
+tags: "portapapeles|fragmentos de texto|iPhone|almacenamiento local|Pastenel"
 canonical_url: "https://onnellab.com/blog/es/reuse-copied-text-snippets-iphone/"
 published_at: "2026-07-24T08:24:05+09:00"
 updated_at: "2026-07-24T08:24:05+09:00"
@@ -86,7 +86,7 @@ La retención es una decisión de privacidad. «Lo uso a menudo» no significa �
 
 ## Aplicación ONNELLAB
 
-[ClipNest](/apps/clipnest/es/) encaja en un flujo deliberado de portapapeles en iPhone cuando quieres mantener determinados textos copiados en una lista accesible desde un teclado. La descripción pública indica que revisa el portapapeles una vez al abrir el teclado ClipNest, guarda texto nuevo localmente, permite fijar elementos frecuentes y no vigila continuamente el portapapeles en segundo plano.
+[Pastenel](/apps/clipnest/es/) encaja en un flujo deliberado de portapapeles en iPhone cuando quieres mantener determinados textos copiados en una lista accesible desde un teclado. La descripción pública indica que revisa el portapapeles una vez al abrir el teclado Pastenel, guarda texto nuevo localmente, permite fijar elementos frecuentes y no vigila continuamente el portapapeles en segundo plano.
 
 Ese funcionamiento iniciado por el usuario es importante: abre el teclado cuando quieras capturar o reutilizar texto y verifica lo guardado. La aplicación reduce saltos entre una nota y el campo de destino, pero no puede decidir si un fragmento sigue actualizado, es apropiado o debe conservarse.
 
@@ -95,7 +95,7 @@ Ese funcionamiento iniciado por el usuario es importante: abre el teclado cuando
 - [Apple Support: Select, cut, copy, and paste text on iPhone](https://support.apple.com/guide/iphone/select-cut-copy-and-paste-text-iph1a9cae52c/ios) documenta las operaciones estándar de selección, copia y pegado.
 - [Apple Support: Copy and paste between iPhone and other Apple devices](https://support.apple.com/guide/iphone/copy-and-paste-between-devices-iph220ea8dca/ios) explica Universal Clipboard y su disponibilidad temporal.
 - [Apple Platform Security: Handoff security](https://support.apple.com/guide/security/handoff-security-secf78dbe639/web) describe el mecanismo de Handoff.
-- [ClipNest en App Store](https://apps.apple.com/app/id6779928552) es la ficha oficial del producto.
+- [Pastenel en App Store](https://apps.apple.com/app/id6779928552) es la ficha oficial del producto.
 
 ## Conclusión
 

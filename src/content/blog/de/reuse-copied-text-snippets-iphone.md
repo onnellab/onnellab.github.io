@@ -9,9 +9,9 @@ status: "published"
 topic_id: "TOPIC-0010"
 search_intent: "workflow"
 primary_keyword: "Zwischenablage Textbausteine"
-secondary_keywords: "gespeicherte Textbausteine|iPhone Zwischenablage|lokale Clipboard-App|ClipNest"
-related_apps: "ClipNest"
-tags: "Zwischenablage|Textbausteine|iPhone|lokale Speicherung|ClipNest"
+secondary_keywords: "gespeicherte Textbausteine|iPhone Zwischenablage|lokale Clipboard-App|Pastenel"
+related_apps: "Pastenel"
+tags: "Zwischenablage|Textbausteine|iPhone|lokale Speicherung|Pastenel"
 canonical_url: "https://onnellab.com/blog/de/reuse-copied-text-snippets-iphone/"
 published_at: "2026-07-24T08:24:05+09:00"
 updated_at: "2026-07-24T08:24:05+09:00"
@@ -86,7 +86,7 @@ Aufbewahrung ist eine Datenschutzentscheidung. „Häufig genutzt“ bedeutet ni
 
 ## ONNELLAB-Anwendung
 
-[ClipNest](/apps/clipnest/de/) passt zu einem bewussten iPhone-Zwischenablage-Workflow, wenn du ausgewählte kopierte Texte über eine tastaturbasierte Bausteinliste verfügbar halten möchtest. Die Produktbeschreibung sieht vor, dass beim Öffnen der ClipNest-Tastatur der aktuelle Zwischenablageinhalt einmal geprüft, neuer Text lokal gespeichert und häufige Einträge angepinnt werden können. Die Zwischenablage wird nicht dauerhaft im Hintergrund überwacht.
+[Pastenel](/apps/clipnest/de/) passt zu einem bewussten iPhone-Zwischenablage-Workflow, wenn du ausgewählte kopierte Texte über eine tastaturbasierte Bausteinliste verfügbar halten möchtest. Die Produktbeschreibung sieht vor, dass beim Öffnen der Pastenel-Tastatur der aktuelle Zwischenablageinhalt einmal geprüft, neuer Text lokal gespeichert und häufige Einträge angepinnt werden können. Die Zwischenablage wird nicht dauerhaft im Hintergrund überwacht.
 
 Dieses ereignisbasierte Verhalten ist wichtig: Öffne die Tastatur dann, wenn du Text bewusst erfassen oder wiederverwenden möchtest, und prüfe anschließend den gespeicherten Inhalt. Die App verkürzt Wege zwischen Quellnotiz und Zielfeld, entscheidet aber nicht, ob ein Baustein aktuell, passend oder sicher aufzubewahren ist.
 
@@ -102,7 +102,7 @@ Dieses ereignisbasierte Verhalten ist wichtig: Öffne die Tastatur dann, wenn du
 - [Apple Support: Select, cut, copy, and paste text on iPhone](https://support.apple.com/guide/iphone/select-cut-copy-and-paste-text-iph1a9cae52c/ios) beschreibt die Standardfunktionen für Auswahl, Kopieren und Einfügen.
 - [Apple Support: Copy and paste between iPhone and other Apple devices](https://support.apple.com/guide/iphone/copy-and-paste-between-devices-iph220ea8dca/ios) erläutert Universal Clipboard und weist auf die kurze Verfügbarkeit kopierter Inhalte hin.
 - [Apple Platform Security: Handoff security](https://support.apple.com/guide/security/handoff-security-secf78dbe639/web) beschreibt den sicheren Handoff-Mechanismus.
-- [ClipNest im App Store](https://apps.apple.com/app/id6779928552) ist die offizielle Produktseite.
+- [Pastenel im App Store](https://apps.apple.com/app/id6779928552) ist die offizielle Produktseite.
 
 ## Fazit
 

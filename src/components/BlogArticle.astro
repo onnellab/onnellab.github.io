@@ -70,7 +70,8 @@ const dateLabel = (value?: string) => {
 };
 const appHref = (appName: string) => {
   const slug = appName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  return allProductRouteFor(slug, locale);
+  // Display-name migration must not break the existing product URL.
+  return allProductRouteFor(slug === 'pastenel' ? 'clipnest' : slug, locale);
 };
 const recommendation = (item: string) => {
   const markdown = item.match(/^\[([^\]]+)\]\(([^)]+)\)$/);

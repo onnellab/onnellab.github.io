@@ -9,8 +9,8 @@ status: "published"
 topic_id: "TOPIC-0010"
 search_intent: "workflow"
 primary_keyword: "clipboard snippet manager"
-secondary_keywords: "saved text snippets|iPhone clipboard workflow|local clipboard utility|ClipNest"
-related_apps: "ClipNest"
+secondary_keywords: "saved text snippets|iPhone clipboard workflow|local clipboard utility|Pastenel"
+related_apps: "Pastenel"
 tags: "clipboard snippet manager|saved text snippets|iPhone clipboard workflow|local clipboard utility"
 canonical_url: "https://onnellab.com/blog/en/reuse-copied-text-snippets-iphone/"
 published_at: "2026-07-24T08:24:05+09:00"
@@ -87,7 +87,7 @@ Retention is a privacy decision. “Frequently used” does not mean “safe to 
 
 ## ONNELLAB Application
 
-[ClipNest](/apps/clipnest/) fits a deliberate iPhone clipboard workflow when you want selected copied text available from a keyboard-based snippet list. Its official App Store listing says that it checks the current clipboard once when the ClipNest keyboard opens, saves new text locally, supports pinning and duplicate handling, and does not constantly monitor the clipboard.
+[Pastenel](/apps/clipnest/) fits a deliberate iPhone clipboard workflow when you want selected copied text available from a keyboard-based snippet list. Its official App Store listing says that it checks the current clipboard once when the Pastenel keyboard opens, saves new text locally, supports pinning and duplicate handling, and does not constantly monitor the clipboard.
 
 That event-based behavior is important: open the keyboard when you intend to capture or reuse text, then verify what was saved. The app can reduce navigation between source notes and destination fields, but it does not decide whether a snippet is current, appropriate, or safe to retain.
 
@@ -103,7 +103,7 @@ That event-based behavior is important: open the keyboard when you intend to cap
 - [Apple Support: Select, cut, copy, and paste text on iPhone](https://support.apple.com/guide/iphone/select-cut-copy-and-paste-text-iph1a9cae52c/ios) documents the standard iPhone text selection and clipboard actions.
 - [Apple Support: Copy and paste between iPhone and other Apple devices](https://support.apple.com/guide/iphone/copy-and-paste-between-devices-iph220ea8dca/ios) explains Universal Clipboard requirements and notes that copied content is available briefly.
 - [Apple Platform Security: Handoff security](https://support.apple.com/guide/security/handoff-security-secf78dbe639/web) describes how Universal Clipboard uses Handoff to transfer clipboard content between a user’s devices.
-- [ClipNest on the App Store](https://apps.apple.com/app/id6779928552) is the official product listing for its capture trigger, local storage, pinning, duplicate handling, and privacy disclosure.
+- [Pastenel on the App Store](https://apps.apple.com/app/id6779928552) is the official product listing for its capture trigger, local storage, pinning, duplicate handling, and privacy disclosure.
 
 ## Conclusion
 

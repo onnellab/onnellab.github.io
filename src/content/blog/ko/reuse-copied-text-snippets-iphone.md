@@ -9,8 +9,8 @@ status: "published"
 topic_id: "TOPIC-0017"
 search_intent: "workflow"
 primary_keyword: "아이폰 텍스트 조각 관리"
-secondary_keywords: "저장한 텍스트 조각|아이폰 클립보드 워크플로|로컬 클립보드 도구|ClipNest"
-related_apps: "ClipNest"
+secondary_keywords: "저장한 텍스트 조각|아이폰 클립보드 워크플로|로컬 클립보드 도구|Pastenel"
+related_apps: "Pastenel"
 tags: "아이폰 텍스트 조각 관리|저장한 텍스트 조각|아이폰 클립보드 워크플로|로컬 클립보드 도구"
 canonical_url: "https://onnellab.com/blog/ko/reuse-copied-text-snippets-iphone/"
 published_at: "2026-07-24T08:24:05+09:00"
@@ -87,7 +87,7 @@ Universal Clipboard가 켜져 있고 요구 조건을 충족하면 클립보드 
 
 ## ONNELLAB 앱
 
-[ClipNest](/apps/clipnest/)는 선택한 복사 텍스트를 키보드 기반 조각 목록에서 다시 쓰고 싶을 때 이 워크플로에 맞습니다. 공식 App Store 설명에 따르면 ClipNest 키보드를 열 때 현재 클립보드를 한 번 확인해 새 텍스트를 로컬에 저장하며, 항목 고정과 중복 처리 기능을 제공합니다. 클립보드를 계속 감시하는 방식은 아니라고 명시합니다.
+[Pastenel](/apps/clipnest/)는 선택한 복사 텍스트를 키보드 기반 조각 목록에서 다시 쓰고 싶을 때 이 워크플로에 맞습니다. 공식 App Store 설명에 따르면 Pastenel 키보드를 열 때 현재 클립보드를 한 번 확인해 새 텍스트를 로컬에 저장하며, 항목 고정과 중복 처리 기능을 제공합니다. 클립보드를 계속 감시하는 방식은 아니라고 명시합니다.
 
 이 동작 조건은 중요합니다. 내용을 저장하거나 다시 쓸 의도가 있을 때 키보드를 열고, 실제로 무엇이 저장됐는지 확인해야 합니다. 앱은 원본 메모와 입력 칸 사이의 이동을 줄일 수 있지만, 문장이 최신인지, 현재 상대에게 알맞은지, 보관해도 안전한지는 대신 판단하지 않습니다.
 
@@ -103,7 +103,7 @@ Universal Clipboard가 켜져 있고 요구 조건을 충족하면 클립보드 
 - [Apple 지원: iPhone에서 텍스트 선택, 잘라내기, 복사 및 붙여넣기](https://support.apple.com/ko-kr/guide/iphone/iph1a9cae52c/ios)는 아이폰의 기본 텍스트 선택과 클립보드 동작을 설명합니다.
 - [Apple 지원: iPhone과 다른 Apple 기기 간에 복사 및 붙여넣기](https://support.apple.com/ko-kr/guide/iphone/iph220ea8dca/ios)는 Universal Clipboard의 조건과 복사 내용이 짧은 시간 동안 유지된다는 점을 설명합니다.
 - [Apple 플랫폼 보안: Handoff 보안](https://support.apple.com/ko-kr/guide/security/secf78dbe639/web)는 Universal Clipboard가 Handoff를 통해 사용자의 기기 사이에서 내용을 전달하는 방식을 설명합니다.
-- [App Store의 ClipNest](https://apps.apple.com/kr/app/id6779928552)는 저장 시점, 로컬 보관, 항목 고정, 중복 처리, 개인정보 표시에 관한 공식 제품 자료입니다.
+- [App Store의 Pastenel](https://apps.apple.com/kr/app/id6779928552)는 저장 시점, 로컬 보관, 항목 고정, 중복 처리, 개인정보 표시에 관한 공식 제품 자료입니다.
 
 ## 결론
 

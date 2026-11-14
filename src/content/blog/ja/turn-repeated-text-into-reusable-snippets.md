@@ -10,7 +10,7 @@ topic_id: "TOPIC-0071"
 search_intent: "workflow"
 primary_keyword: "再利用できる定型文"
 secondary_keywords: "定型文の使用場面|プレースホルダー|保存した返信|送信前の確認"
-related_apps: "ClipNest"
+related_apps: "Pastenel"
 tags: "再利用できる定型文|定型文の使用場面|プレースホルダー|保存した返信|送信前の確認"
 short_answer: "変わらない表現だけを保存し、毎回変える箇所に印を付け、使う場面を別に記録します。送信前に宛先を確認し、すべての印を実際の情報に置き換えて、全文を読み直します。根拠となる情報が変わったら保存文も見直します。"
 canonical_url: "https://onnellab.com/blog/ja/turn-repeated-text-into-reusable-snippets/"
@@ -63,7 +63,7 @@ related_articles: "Androidの音楽ファイルをオフライン再生用に整
 
 ## ONNELLAB の活用
 
-[ClipNest](/apps/clipnest/)は、iPhoneとiPadでコピーした文章を保存して再利用するための選択肢です。[App Storeの説明](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)には、ClipNestキーボードを開いたときに一度行うクリップボード確認、端末内の履歴、ピン留め、キーボードからの貼り付けが記載されています。クリップボードを常時監視するものではありません。
+[Pastenel](/apps/clipnest/)は、iPhoneとiPadでコピーした文章を保存して再利用するための選択肢です。[App Storeの説明](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)には、Pastenelキーボードを開いたときに一度行うクリップボード確認、端末内の履歴、ピン留め、キーボードからの貼り付けが記載されています。クリップボードを常時監視するものではありません。
 
 使用メモ、プレースホルダーの置き換え、最終確認は、この記事で提案する利用者側の手順です。アプリの自動入力、規定の確認、専用メモ欄を示すものではありません。他のアプリに貼り付けた文章は、その貼り付け先のデータ取扱いの対象になります。端末内の保存だけで、貼り付け先のプライバシーまで保証されるわけではありません。
 
@@ -73,7 +73,7 @@ related_articles: "Androidの音楽ファイルをオフライン再生用に整
 
 ## 参考資料
 
-- [ClipNestのApp Store説明](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)：製品の保存・再利用動作について。準備用チェックリストは編集上の提案であり、生産性を測定した結果ではありません。
+- [PastenelのApp Store説明](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)：製品の保存・再利用動作について。準備用チェックリストは編集上の提案であり、生産性を測定した結果ではありません。
 
 ## 結論
 

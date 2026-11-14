@@ -9,8 +9,8 @@ status: "published"
 topic_id: "TOPIC-0010"
 search_intent: "workflow"
 primary_keyword: "剪貼簿文字片段"
-secondary_keywords: "儲存文字|iPhone 剪貼簿|本機剪貼簿|ClipNest"
-related_apps: "ClipNest"
+secondary_keywords: "儲存文字|iPhone 剪貼簿|本機剪貼簿|Pastenel"
+related_apps: "Pastenel"
 tags: "剪貼簿文字片段|儲存文字|iPhone 剪貼簿|本機剪貼簿"
 canonical_url: "https://onnellab.com/blog/zh-hant/reuse-copied-text-snippets-iphone/"
 published_at: "2026-07-24T08:24:05+09:00"
@@ -85,7 +85,7 @@ Universal Clipboard 和本機片段庫也要分開理解。前者在裝置之間
 
 ## ONNELLAB 應用
 
-[ClipNest](/apps/clipnest/zh-hant/)適合從鍵盤式片段清單重複使用你主動選擇保存的文字。公開 App Store 資訊說明：ClipNest 鍵盤開啟時會檢查一次目前剪貼簿，把新文字保存於本機，並支援釘選與重複項目處理；它不會在背景持續監看剪貼簿。
+[Pastenel](/apps/clipnest/zh-hant/)適合從鍵盤式片段清單重複使用你主動選擇保存的文字。公開 App Store 資訊說明：Pastenel 鍵盤開啟時會檢查一次目前剪貼簿，把新文字保存於本機，並支援釘選與重複項目處理；它不會在背景持續監看剪貼簿。
 
 這個事件觸發方式很重要。你在需要保存或使用片段時開啟鍵盤，並確認保存了什麼。工具可以減少在原備忘錄與輸入框之間來回切換，但無法替你判斷內容是否最新、是否適合目前情境、是否適合長期保存。
 
@@ -94,7 +94,7 @@ Universal Clipboard 和本機片段庫也要分開理解。前者在裝置之間
 - [Apple Support: Select, cut, copy, and paste text on iPhone](https://support.apple.com/guide/iphone/select-cut-copy-and-paste-text-iph1a9cae52c/ios)
 - [Apple Support: Copy and paste between iPhone and other Apple devices](https://support.apple.com/guide/iphone/copy-and-paste-between-devices-iph220ea8dca/ios)
 - [Apple Platform Security: Handoff security](https://support.apple.com/guide/security/handoff-security-secf78dbe639/web)
-- [ClipNest on the App Store](https://apps.apple.com/app/id6779928552)
+- [Pastenel on the App Store](https://apps.apple.com/app/id6779928552)
 
 ## 結論
 

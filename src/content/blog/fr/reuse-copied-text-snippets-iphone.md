@@ -9,9 +9,9 @@ status: "published"
 topic_id: "TOPIC-0010"
 search_intent: "workflow"
 primary_keyword: "gestionnaire de fragments presse-papiers"
-secondary_keywords: "fragments texte enregistrés|presse-papiers iPhone|outil local|ClipNest"
-related_apps: "ClipNest"
-tags: "presse-papiers|fragments de texte|iPhone|stockage local|ClipNest"
+secondary_keywords: "fragments texte enregistrés|presse-papiers iPhone|outil local|Pastenel"
+related_apps: "Pastenel"
+tags: "presse-papiers|fragments de texte|iPhone|stockage local|Pastenel"
 canonical_url: "https://onnellab.com/blog/fr/reuse-copied-text-snippets-iphone/"
 published_at: "2026-07-24T08:24:05+09:00"
 updated_at: "2026-07-24T08:24:05+09:00"
@@ -86,7 +86,7 @@ La conservation est une décision de confidentialité. « Souvent utilisé » ne
 
 ## Application ONNELLAB
 
-[ClipNest](/apps/clipnest/fr/) s’intègre à un flux volontaire sur iPhone lorsque vous souhaitez garder certains textes copiés dans une liste accessible depuis un clavier. La description publique indique que l’application vérifie le presse-papiers une fois lorsque le clavier ClipNest est ouvert, enregistre localement le nouveau texte, permet d’épingler les éléments fréquents et ne surveille pas en continu le presse-papiers en arrière-plan.
+[Pastenel](/apps/clipnest/fr/) s’intègre à un flux volontaire sur iPhone lorsque vous souhaitez garder certains textes copiés dans une liste accessible depuis un clavier. La description publique indique que l’application vérifie le presse-papiers une fois lorsque le clavier Pastenel est ouvert, enregistre localement le nouveau texte, permet d’épingler les éléments fréquents et ne surveille pas en continu le presse-papiers en arrière-plan.
 
 Ce fonctionnement déclenché par l’utilisateur est important : ouvrez le clavier quand vous souhaitez capturer ou réutiliser un texte, puis vérifiez ce qui a été enregistré. L’application réduit les allers-retours entre une note source et un champ de destination, mais ne peut pas décider si un fragment est encore actuel, approprié ou sûr à conserver.
 
@@ -102,7 +102,7 @@ Ce fonctionnement déclenché par l’utilisateur est important : ouvrez le clav
 - [Apple Support: Select, cut, copy, and paste text on iPhone](https://support.apple.com/guide/iphone/select-cut-copy-and-paste-text-iph1a9cae52c/ios) documente les opérations standard de sélection, copie et collage.
 - [Apple Support: Copy and paste between iPhone and other Apple devices](https://support.apple.com/guide/iphone/copy-and-paste-between-devices-iph220ea8dca/ios) explique Universal Clipboard et sa disponibilité temporaire.
 - [Apple Platform Security: Handoff security](https://support.apple.com/guide/security/handoff-security-secf78dbe639/web) décrit le mécanisme de transfert utilisé par Handoff.
-- [ClipNest sur l’App Store](https://apps.apple.com/app/id6779928552) est la fiche officielle du produit.
+- [Pastenel sur l’App Store](https://apps.apple.com/app/id6779928552) est la fiche officielle du produit.
 
 ## Conclusion
 
