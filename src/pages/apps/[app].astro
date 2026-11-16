@@ -1,4 +1,5 @@
 ---
+import PastenelMoved from '../../components/PastenelMoved.astro';
 import ProductTemplate from '../../components/ProductTemplate.astro';
 import { getProductPageData, getProductSources } from '../../lib/products';
 
@@ -12,4 +13,4 @@ const app = Astro.params.app as string;
 const data = getProductPageData(app, 'en');
 ---
 
-<ProductTemplate data={data} />
+{app === 'clipnest' ? <PastenelMoved family="product" locale="en" /> : <ProductTemplate data={data} />}

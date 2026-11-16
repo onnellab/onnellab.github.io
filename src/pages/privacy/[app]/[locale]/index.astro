@@ -1,4 +1,5 @@
 ---
+import PastenelMoved from '../../../../components/PastenelMoved.astro';
 import LocalizedAppPrivacyPage from '../../../../components/LocalizedAppPrivacyPage.astro';
 import {
   allPrivacyAppSlugs,
@@ -21,4 +22,4 @@ const { app, locale } = Astro.props as {
 };
 ---
 
-<LocalizedAppPrivacyPage slug={app} locale={locale} />
+{Astro.params.app === 'clipnest' ? <PastenelMoved family="privacy" locale={locale} /> : <LocalizedAppPrivacyPage slug={app} locale={locale} />}

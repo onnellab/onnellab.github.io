@@ -1,4 +1,5 @@
 ---
+import PastenelMoved from '../../../components/PastenelMoved.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ProductTemplate from '../../../components/ProductTemplate.astro';
 import { getProductPageData, getProductSources } from '../../../lib/products';
@@ -47,7 +48,9 @@ const data =
 ---
 
 {
-  data ? (
+  app === 'clipnest' ? (
+    <PastenelMoved family="product" locale={locale} />
+  ) : data ? (
     <ProductTemplate data={data} />
   ) : (
     <BaseLayout

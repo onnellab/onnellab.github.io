@@ -1,0 +1,22 @@
+---
+import { allAppPrivacyRouteFor, allLocaleDefinitions, allProductRouteFor, type AllSiteLocale } from '../lib/extended-site-i18n';
+
+type Props = { family: 'product' | 'privacy'; locale: AllSiteLocale };
+const { family, locale } = Astro.props;
+const target = (family === 'product' ? allProductRouteFor : allAppPrivacyRouteFor)('clipnest', locale);
+const canonical = new URL(target, Astro.site);
+const { htmlLang } = allLocaleDefinitions[locale];
+---
+<!doctype html>
+<html lang={htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <link rel="canonical" href={canonical} />
+    <title>Pastenel · ONNELLAB</title>
+  </head>
+  <body>
+    <main><p><a href={target}>Pastenel</a></p></main>
+  </body>
+</html>
