@@ -1,0 +1,9 @@
+---
+import ProductTemplate from '../../../../components/ProductTemplate.astro';
+import { getProductPageData } from '../../../../lib/products';
+
+// Keep the existing product source and canonical URL; this is a store-facing alias.
+const data = getProductPageData('clipnest', 'ko');
+---
+
+<ProductTemplate data={data} />
