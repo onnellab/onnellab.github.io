@@ -404,7 +404,9 @@ const breadcrumbJsonLd = {
       )}
       {releaseNotesUrl && latestReleaseNote && (
         <a class="release-note-inline" href={releaseNotesUrl}>
-          {labels.releaseNotes}: {latestReleaseNote.title}
+          {labels.releaseNotes}: {data.source.slug === 'clipnest' && latestReleaseNote.appName === 'ClipNest'
+            ? `v${latestReleaseNote.version} (${latestReleaseNote.platform})`
+            : latestReleaseNote.title}
         </a>
       )}
     </section>
