@@ -6,7 +6,10 @@ import {
 } from '../../../lib/privacy-policy-documents';
 
 export function getStaticPaths() {
-  return allPrivacyAppSlugs.map((app) => ({ params: { app }, props: { app } }));
+  return [
+    ...allPrivacyAppSlugs.map((app) => ({ params: { app }, props: { app } })),
+    { params: { app: 'pastenel' }, props: { app: 'clipnest' as const } }
+  ];
 }
 const { app } = Astro.props as { app: AllPrivacyAppSlug };
 ---

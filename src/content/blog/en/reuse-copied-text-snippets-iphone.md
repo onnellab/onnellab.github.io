@@ -87,7 +87,7 @@ Retention is a privacy decision. “Frequently used” does not mean “safe to 
 
 ## ONNELLAB Application
 
-[Pastenel](/apps/clipnest/) fits a deliberate iPhone clipboard workflow when you want selected copied text available from a keyboard-based snippet list. Its official App Store listing says that it checks the current clipboard once when the Pastenel keyboard opens, saves new text locally, supports pinning and duplicate handling, and does not constantly monitor the clipboard.
+[Pastenel](/apps/pastenel/) fits a deliberate iPhone clipboard workflow when you want selected copied text available from a keyboard-based snippet list. Its official App Store listing says that it checks the current clipboard once when the Pastenel keyboard opens, saves new text locally, supports pinning and duplicate handling, and does not constantly monitor the clipboard.
 
 That event-based behavior is important: open the keyboard when you intend to capture or reuse text, then verify what was saved. The app can reduce navigation between source notes and destination fields, but it does not decide whether a snippet is current, appropriate, or safe to retain.
 

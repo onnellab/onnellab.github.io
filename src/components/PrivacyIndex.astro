@@ -5,6 +5,7 @@ import SiteFooter from './SiteFooter.astro';
 import { getProductIndexItems } from '../lib/products';
 import { allPrivacyAppSlugs, getPrivacyPolicyDocument, type AllPrivacyAppSlug } from '../lib/privacy-policy-documents';
 import {
+  appPublicRouteSlug,
   contentLocale,
   localeAlternates,
   localeDefinitions,
@@ -161,8 +162,9 @@ const existingPolicyHref = (href: string) => {
   return segment ? href.replace(/\/?$/, `/${segment}/`) : href;
 };
 const policies = existingApps.map((app) => {
-  const slug = app.privacy.match(/\/privacy\/([^/?#]+)\/?$/)?.[1];
-  if (!slug || !(allPrivacyAppSlugs as readonly string[]).includes(slug)) {
+  const publicSlug = app.privacy.match(/\/privacy\/([^/?#]+)\/?$/)?.[1];
+  const slug = app.slug;
+  if (!publicSlug || publicSlug !== appPublicRouteSlug(slug) || !(allPrivacyAppSlugs as readonly string[]).includes(slug)) {
     throw new Error(`Missing canonical privacy source for ${app.title}`);
   }
   return {

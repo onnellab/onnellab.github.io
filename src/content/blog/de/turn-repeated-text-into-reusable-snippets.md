@@ -63,7 +63,7 @@ Diese erfundene Vorlage dient einer gewöhnlichen Dokumentenanfrage: „Bitte se
 
 ## Wo ONNELLAB dazu passt
 
-[Pastenel](/apps/clipnest/) ist eine mögliche Hilfe zum Speichern und Wiederverwenden kopierter Texte auf iPhone und iPad. Die [App-Store-Beschreibung](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) nennt eine einmalige Prüfung der Zwischenablage beim Öffnen der Pastenel-Tastatur, einen lokalen Verlauf, das Anheften von Einträgen und das Einfügen über die Tastatur. Die Zwischenablage wird nicht dauerhaft überwacht.
+[Pastenel](/apps/pastenel/) ist eine mögliche Hilfe zum Speichern und Wiederverwenden kopierter Texte auf iPhone und iPad. Die [App-Store-Beschreibung](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) nennt eine einmalige Prüfung der Zwischenablage beim Öffnen der Pastenel-Tastatur, einen lokalen Verlauf, das Anheften von Einträgen und das Einfügen über die Tastatur. Die Zwischenablage wird nicht dauerhaft überwacht.
 
 Kontextnotizen, das Ersetzen von Platzhaltern und die Abschlussprüfung sind Schritte Ihres eigenen Arbeitsablaufs. Dieser Artikel behauptet weder automatisches Ausfüllen noch Richtlinienprüfungen oder ein eigenes Notizfeld in der App. Sobald Sie Text in eine andere App einfügen, gilt deren Datenverarbeitung. Lokales Speichern macht das Einfügeziel nicht automatisch vertraulich.
 

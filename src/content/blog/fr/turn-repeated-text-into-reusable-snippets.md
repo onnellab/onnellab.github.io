@@ -63,7 +63,7 @@ Voici un modèle fictif pour une demande courante de document : « Merci d’env
 
 ## La place d’ONNELLAB
 
-[Pastenel](/apps/clipnest/) est une option pour enregistrer et réutiliser du texte copié sur iPhone et iPad. Sa [fiche App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) décrit une seule vérification du presse-papiers à l’ouverture du clavier Pastenel, un historique local, l’épinglage et le collage depuis le clavier. L’application ne surveille pas le presse-papiers en continu.
+[Pastenel](/apps/pastenel/) est une option pour enregistrer et réutiliser du texte copié sur iPhone et iPad. Sa [fiche App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) décrit une seule vérification du presse-papiers à l’ouverture du clavier Pastenel, un historique local, l’épinglage et le collage depuis le clavier. L’application ne surveille pas le presse-papiers en continu.
 
 Les notes de contexte, le remplacement des champs et les vérifications finales relèvent de votre méthode de travail. Ce guide n’attribue à l’application ni remplissage automatique de modèles, ni contrôle des règles, ni champ de notes distinct. Un texte collé dans une autre application relève du traitement des données de cette destination. Le stockage local des extraits ne rend pas la destination privée.
 

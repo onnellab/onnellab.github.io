@@ -63,7 +63,7 @@ Esta plantilla hipotética sirve para una petición habitual de documentos: «Po
 
 ## Dónde encaja ONNELLAB
 
-[Pastenel](/apps/clipnest/) es una opción para guardar y reutilizar texto copiado en iPhone y iPad. Su [ficha de App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) describe una sola comprobación del portapapeles al abrir el teclado de Pastenel, un historial local, la fijación de fragmentos y el pegado desde el teclado. No supervisa continuamente el portapapeles.
+[Pastenel](/apps/pastenel/) es una opción para guardar y reutilizar texto copiado en iPhone y iPad. Su [ficha de App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) describe una sola comprobación del portapapeles al abrir el teclado de Pastenel, un historial local, la fijación de fragmentos y el pegado desde el teclado. No supervisa continuamente el portapapeles.
 
 Las notas de contexto, la sustitución de marcadores y las comprobaciones finales forman parte de tu método de trabajo. Esta guía no atribuye a la aplicación el rellenado automático de plantillas, la comprobación de políticas ni un campo de notas independiente. Al pegar texto en otra aplicación, pasa a estar sujeto al tratamiento de datos de ese destino. Guardar fragmentos localmente no hace que el destino sea privado.
 

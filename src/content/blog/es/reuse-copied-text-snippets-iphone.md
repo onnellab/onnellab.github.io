@@ -86,7 +86,7 @@ La retención es una decisión de privacidad. «Lo uso a menudo» no significa �
 
 ## Aplicación ONNELLAB
 
-[Pastenel](/apps/clipnest/es/) encaja en un flujo deliberado de portapapeles en iPhone cuando quieres mantener determinados textos copiados en una lista accesible desde un teclado. La descripción pública indica que revisa el portapapeles una vez al abrir el teclado Pastenel, guarda texto nuevo localmente, permite fijar elementos frecuentes y no vigila continuamente el portapapeles en segundo plano.
+[Pastenel](/apps/pastenel/es/) encaja en un flujo deliberado de portapapeles en iPhone cuando quieres mantener determinados textos copiados en una lista accesible desde un teclado. La descripción pública indica que revisa el portapapeles una vez al abrir el teclado Pastenel, guarda texto nuevo localmente, permite fijar elementos frecuentes y no vigila continuamente el portapapeles en segundo plano.
 
 Ese funcionamiento iniciado por el usuario es importante: abre el teclado cuando quieras capturar o reutilizar texto y verifica lo guardado. La aplicación reduce saltos entre una nota y el campo de destino, pero no puede decidir si un fragmento sigue actualizado, es apropiado o debe conservarse.
 

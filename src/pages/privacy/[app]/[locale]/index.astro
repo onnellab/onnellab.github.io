@@ -7,10 +7,10 @@ import {
 import { allLocaleDefinitions, allSiteLocales, type AllSiteLocale } from '../../../../lib/extended-site-i18n';
 
 export function getStaticPaths() {
-  return allPrivacyAppSlugs.flatMap((app) =>
+  return [...allPrivacyAppSlugs, 'pastenel' as const].flatMap((app) =>
     allSiteLocales.filter((locale) => locale !== 'en').map((locale) => ({
       params: { app, locale: allLocaleDefinitions[locale].pathSegment },
-      props: { app, locale }
+      props: { app: app === 'pastenel' ? 'clipnest' : app, locale }
     }))
   );
 }

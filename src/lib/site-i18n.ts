@@ -122,9 +122,14 @@ export function papiraPrivacyLocaleAlternates(): Array<{ lang: string; path: str
   ];
 }
 
+export function appPublicRouteSlug(slug: string): string {
+  return slug === 'clipnest' ? 'pastenel' : slug;
+}
+
 export function productRouteFor(slug: string, locale: SiteLocale): string {
   const segment = localeDefinitions[locale].pathSegment;
-  return segment ? `/apps/${slug}/${segment}/` : `/apps/${slug}/`;
+  const publicSlug = appPublicRouteSlug(slug);
+  return segment ? `/apps/${publicSlug}/${segment}/` : `/apps/${publicSlug}/`;
 }
 
 export function productLocaleAlternates(slug: string) {
@@ -133,7 +138,7 @@ export function productLocaleAlternates(slug: string) {
       const definition = papiraPrivacyLocaleDefinitions[locale];
       return {
         lang: definition.hreflang,
-        path: definition.pathSegment ? `/apps/${slug}/${definition.pathSegment}/` : `/apps/${slug}/`
+        path: definition.pathSegment ? `/apps/${appPublicRouteSlug(slug)}/${definition.pathSegment}/` : `/apps/${appPublicRouteSlug(slug)}/`
       };
     }),
     { lang: 'x-default', path: productRouteFor(slug, 'en') }

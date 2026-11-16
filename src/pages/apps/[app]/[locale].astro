@@ -26,6 +26,13 @@ export function getStaticPaths() {
   return [
     ...standard,
     ...extended,
+    // English and Korean already have explicit compatibility wrappers.
+    ...siteLocales.filter((locale) => locale !== 'en' && locale !== 'ko').map((locale) => ({
+      params: { app: 'pastenel', locale: localeDefinitions[locale].pathSegment }, props: { locale }
+    })),
+    ...extendedSiteLocales.map((locale) => ({
+      params: { app: 'pastenel', locale: allLocaleDefinitions[locale].pathSegment }, props: { locale }
+    })),
     { params: { app: 'ko', locale: 'ko' }, props: { locale: 'ko' as SiteLocale } }
   ];
 }
@@ -36,7 +43,7 @@ const targetPath = '/apps/ko/';
 const data =
   app === 'ko'
     ? undefined
-    : getProductPageData(app, locale);
+    : getProductPageData(app === 'pastenel' ? 'clipnest' : app, locale);
 ---
 
 {

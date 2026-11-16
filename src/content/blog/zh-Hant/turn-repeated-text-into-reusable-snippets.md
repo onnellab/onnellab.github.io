@@ -63,7 +63,7 @@ related_articles: "在 Android 整理音樂檔案，準備離線播放 => https:
 
 ## ONNELLAB 應用程式說明
 
-[Pastenel](/apps/clipnest/)是在 iPhone 和 iPad 上儲存並重複使用已複製文字的一種選擇。[App Store 介紹](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)描述了開啟 Pastenel 鍵盤時檢查一次剪貼簿、儲存在裝置上的剪貼簿記錄、釘選及從鍵盤貼上等功能。它不會持續監控剪貼簿。
+[Pastenel](/apps/pastenel/)是在 iPhone 和 iPad 上儲存並重複使用已複製文字的一種選擇。[App Store 介紹](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)描述了開啟 Pastenel 鍵盤時檢查一次剪貼簿、儲存在裝置上的剪貼簿記錄、釘選及從鍵盤貼上等功能。它不會持續監控剪貼簿。
 
 上述情境備註、預留位置替換及最後檢查，屬於使用者的操作方法。本文不聲稱 App 提供自動填寫範本、檢查政策或獨立備註欄的功能。文字貼到其他 App 後，就受該目標 App 的資料處理方式影響。在本機儲存文字片段，並不保證貼上位置也是私密的。
 

@@ -63,7 +63,7 @@ Este modelo hipotético serve para um pedido rotineiro de documento: “Por favo
 
 ## Onde entra a ONNELLAB
 
-O [Pastenel](/apps/clipnest/) é uma opção para salvar e reutilizar textos copiados no iPhone e no iPad. A [descrição na App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) informa que ele verifica a área de transferência uma vez ao abrir o teclado do Pastenel e oferece histórico local, fixação de trechos e colagem pelo teclado. Ele não monitora continuamente a área de transferência.
+O [Pastenel](/apps/pastenel/) é uma opção para salvar e reutilizar textos copiados no iPhone e no iPad. A [descrição na App Store](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) informa que ele verifica a área de transferência uma vez ao abrir o teclado do Pastenel e oferece histórico local, fixação de trechos e colagem pelo teclado. Ele não monitora continuamente a área de transferência.
 
 As notas de contexto, a substituição de marcadores e as conferências finais são etapas que você realiza. Este guia não atribui ao aplicativo preenchimento automático de modelos, verificação de políticas ou um campo separado para notas. Ao colar em outro aplicativo, o texto passa a seguir o tratamento de dados desse destino. Armazenar trechos localmente não torna o destino privado.
 

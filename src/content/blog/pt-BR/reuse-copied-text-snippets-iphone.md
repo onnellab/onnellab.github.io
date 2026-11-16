@@ -85,7 +85,7 @@ Retenção também é uma decisão de privacidade. “Uso frequente” não sign
 
 ## Como isso se relaciona à ONNELLAB
 
-[Pastenel](/apps/clipnest/pt-br/) se encaixa quando você quer reutilizar textos escolhidos por meio de uma lista acessível pelo teclado. A listagem pública da App Store explica que, quando o teclado Pastenel é aberto, ele verifica a área de transferência atual uma vez, salva localmente novos textos e oferece fixação e tratamento de duplicados; ele não monitora continuamente a área de transferência em segundo plano.
+[Pastenel](/apps/pastenel/pt-br/) se encaixa quando você quer reutilizar textos escolhidos por meio de uma lista acessível pelo teclado. A listagem pública da App Store explica que, quando o teclado Pastenel é aberto, ele verifica a área de transferência atual uma vez, salva localmente novos textos e oferece fixação e tratamento de duplicados; ele não monitora continuamente a área de transferência em segundo plano.
 
 Esse comportamento orientado por evento é importante. Abra o teclado quando quiser capturar ou reutilizar um trecho e confira o que foi salvo. A ferramenta reduz a ida e volta entre uma nota e um campo de texto, mas não decide se o trecho está atualizado, adequado ao contexto ou seguro para retenção.
 

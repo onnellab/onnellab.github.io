@@ -86,7 +86,7 @@ La conservation est une décision de confidentialité. « Souvent utilisé » ne
 
 ## Application ONNELLAB
 
-[Pastenel](/apps/clipnest/fr/) s’intègre à un flux volontaire sur iPhone lorsque vous souhaitez garder certains textes copiés dans une liste accessible depuis un clavier. La description publique indique que l’application vérifie le presse-papiers une fois lorsque le clavier Pastenel est ouvert, enregistre localement le nouveau texte, permet d’épingler les éléments fréquents et ne surveille pas en continu le presse-papiers en arrière-plan.
+[Pastenel](/apps/pastenel/fr/) s’intègre à un flux volontaire sur iPhone lorsque vous souhaitez garder certains textes copiés dans une liste accessible depuis un clavier. La description publique indique que l’application vérifie le presse-papiers une fois lorsque le clavier Pastenel est ouvert, enregistre localement le nouveau texte, permet d’épingler les éléments fréquents et ne surveille pas en continu le presse-papiers en arrière-plan.
 
 Ce fonctionnement déclenché par l’utilisateur est important : ouvrez le clavier quand vous souhaitez capturer ou réutiliser un texte, puis vérifiez ce qui a été enregistré. L’application réduit les allers-retours entre une note source et un champ de destination, mais ne peut pas décider si un fragment est encore actuel, approprié ou sûr à conserver.
 

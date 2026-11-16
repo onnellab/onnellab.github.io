@@ -86,7 +86,7 @@ Aufbewahrung ist eine Datenschutzentscheidung. „Häufig genutzt“ bedeutet ni
 
 ## ONNELLAB-Anwendung
 
-[Pastenel](/apps/clipnest/de/) passt zu einem bewussten iPhone-Zwischenablage-Workflow, wenn du ausgewählte kopierte Texte über eine tastaturbasierte Bausteinliste verfügbar halten möchtest. Die Produktbeschreibung sieht vor, dass beim Öffnen der Pastenel-Tastatur der aktuelle Zwischenablageinhalt einmal geprüft, neuer Text lokal gespeichert und häufige Einträge angepinnt werden können. Die Zwischenablage wird nicht dauerhaft im Hintergrund überwacht.
+[Pastenel](/apps/pastenel/de/) passt zu einem bewussten iPhone-Zwischenablage-Workflow, wenn du ausgewählte kopierte Texte über eine tastaturbasierte Bausteinliste verfügbar halten möchtest. Die Produktbeschreibung sieht vor, dass beim Öffnen der Pastenel-Tastatur der aktuelle Zwischenablageinhalt einmal geprüft, neuer Text lokal gespeichert und häufige Einträge angepinnt werden können. Die Zwischenablage wird nicht dauerhaft im Hintergrund überwacht.
 
 Dieses ereignisbasierte Verhalten ist wichtig: Öffne die Tastatur dann, wenn du Text bewusst erfassen oder wiederverwenden möchtest, und prüfe anschließend den gespeicherten Inhalt. Die App verkürzt Wege zwischen Quellnotiz und Zielfeld, entscheidet aber nicht, ob ein Baustein aktuell, passend oder sicher aufzubewahren ist.
 

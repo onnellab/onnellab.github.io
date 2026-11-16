@@ -63,7 +63,7 @@ This hypothetical template is for a routine document request: “Please send [DO
 
 ## Where ONNELLAB Fits
 
-[Pastenel](/apps/clipnest/) is an optional way to save and reuse copied text on iPhone and iPad. Its [App Store listing](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) describes one clipboard check when the Pastenel keyboard opens, local history, pinning and pasting from the keyboard. It does not continuously monitor the clipboard.
+[Pastenel](/apps/pastenel/) is an optional way to save and reuse copied text on iPhone and iPad. Its [App Store listing](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552) describes one clipboard check when the Pastenel keyboard opens, local history, pinning and pasting from the keyboard. It does not continuously monitor the clipboard.
 
 The context notes, placeholder replacement and final checks above are your workflow. This guide does not claim automatic template filling, policy checking or a separate notes field in the app. Pasting text into another app places it under that destination's handling; local snippet storage does not make the destination private.
 

@@ -1,4 +1,4 @@
-import { papiraPrivacyLocaleDefinitions, routeFor, type LocalizedPage, type PapiraPrivacyLocale } from './site-i18n';
+import { appPublicRouteSlug, papiraPrivacyLocaleDefinitions, routeFor, type LocalizedPage, type PapiraPrivacyLocale } from './site-i18n';
 
 export const extendedSiteLocales = ['pt-BR', 'de', 'fr', 'es'] as const;
 export type ExtendedSiteLocale = (typeof extendedSiteLocales)[number];
@@ -34,12 +34,14 @@ export function allRouteFor(page: LocalizedPage, locale: AllSiteLocale): string 
 
 export function allProductRouteFor(slug: string, locale: AllSiteLocale): string {
   const segment = allLocaleDefinitions[locale].pathSegment;
-  return segment ? `/apps/${slug}/${segment}/` : `/apps/${slug}/`;
+  const publicSlug = appPublicRouteSlug(slug);
+  return segment ? `/apps/${publicSlug}/${segment}/` : `/apps/${publicSlug}/`;
 }
 
 export function allAppPrivacyRouteFor(slug: string, locale: AllSiteLocale): string {
   const segment = allLocaleDefinitions[locale].pathSegment;
-  return segment ? `/privacy/${slug}/${segment}/` : `/privacy/${slug}/`;
+  const publicSlug = appPublicRouteSlug(slug);
+  return segment ? `/privacy/${publicSlug}/${segment}/` : `/privacy/${publicSlug}/`;
 }
 
 export function allLocaleAlternates(page: LocalizedPage) {

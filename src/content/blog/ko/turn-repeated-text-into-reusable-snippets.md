@@ -63,7 +63,7 @@ related_articles: "아이폰에서 복사한 텍스트 조각을 다시 사용�
 
 ## ONNELLAB 앱
 
-[Pastenel](/apps/clipnest/)는 iPhone과 iPad에서 복사한 글을 저장하고 다시 쓸 때 선택할 수 있는 도구입니다. [App Store 설명](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)에는 Pastenel 키보드가 열릴 때 한 번 수행하는 클립보드 확인, 기기 내 기록, 고정, 키보드에서 붙여 넣기가 소개되어 있습니다. 클립보드를 계속 감시하지는 않습니다.
+[Pastenel](/apps/pastenel/)는 iPhone과 iPad에서 복사한 글을 저장하고 다시 쓸 때 선택할 수 있는 도구입니다. [App Store 설명](https://apps.apple.com/us/app/clipnest-clipboard-tool/id6779928552)에는 Pastenel 키보드가 열릴 때 한 번 수행하는 클립보드 확인, 기기 내 기록, 고정, 키보드에서 붙여 넣기가 소개되어 있습니다. 클립보드를 계속 감시하지는 않습니다.
 
 앞서 설명한 사용 메모, 자리표시자 교체, 최종 확인은 사용자가 관리하는 절차입니다. 이 절차가 앱의 자동 입력·정책 검사·별도 메모 기능을 뜻하는 것은 아닙니다. 다른 앱에 붙여 넣은 글은 그 앱의 데이터 처리 대상이 됩니다. 기기 내에 문장을 저장한다고 붙여 넣을 곳까지 비공개가 되는 것은 아닙니다.
 
