@@ -405,6 +405,102 @@
     "internalGitHubUrl": ""
   },
   {
+    "appSlug": "clipnest",
+    "appName": "ClipNest",
+    "version": "1.0.6",
+    "tag": "v1.0.6",
+    "platform": "iOS",
+    "releasedDate": "2026-11-15",
+    "title": "ClipNest v1.0.6 (iOS)",
+    "summary": "Changes in ClipNest 1.0.6.",
+    "summaryKo": "ClipNest 1.0.6 버전의 변경 사항이에요.",
+    "changes": [
+      "Updated the app and keyboard names to Pastenel.",
+      "Refreshed app information and store screenshots in nine languages to match the new name.",
+      "Fixed newest-first ordering for clips saved or edited in quick succession."
+    ],
+    "changesKo": [
+      "앱 이름과 키보드 이름을 Pastenel로 새롭게 정리했어요.",
+      "9개 언어의 앱 안내와 스토어 스크린샷을 새 이름에 맞게 업데이트했어요.",
+      "빠르게 연속 저장하거나 편집한 클립의 최신순 정렬을 바로잡았어요."
+    ],
+    "localizations": {
+      "ko": {
+        "summary": "ClipNest 1.0.6 버전의 변경 사항이에요.",
+        "changes": [
+          "앱 이름과 키보드 이름을 Pastenel로 새롭게 정리했어요.",
+          "9개 언어의 앱 안내와 스토어 스크린샷을 새 이름에 맞게 업데이트했어요.",
+          "빠르게 연속 저장하거나 편집한 클립의 최신순 정렬을 바로잡았어요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in ClipNest 1.0.6.",
+        "changes": [
+          "Updated the app and keyboard names to Pastenel.",
+          "Refreshed app information and store screenshots in nine languages to match the new name.",
+          "Fixed newest-first ordering for clips saved or edited in quick succession."
+        ]
+      },
+      "ja": {
+        "summary": "ClipNest 1.0.6の変更点です。",
+        "changes": [
+          "アプリとキーボードの名前をPastenelに変更しました。",
+          "9言語のアプリ案内とストアのスクリーンショットを新しい名前に合わせて更新しました。",
+          "短時間に連続して保存・編集したクリップが新しい順に並ぶよう修正しました。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "ClipNest 1.0.6 的更新内容。",
+        "changes": [
+          "应用和键盘名称已更新为Pastenel。",
+          "更新了9种语言的应用说明和商店截图，以对应新名称。",
+          "修复了快速连续保存或编辑的剪贴内容未按最新顺序排列的问题。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "ClipNest 1.0.6 的更新內容。",
+        "changes": [
+          "App與鍵盤名稱已更新為Pastenel。",
+          "更新了9種語言的App說明與商店截圖，以配合新名稱。",
+          "修正快速連續儲存或編輯的剪貼內容未按最新順序排列的問題。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do ClipNest 1.0.6.",
+        "changes": [
+          "Atualizamos o nome do app e do teclado para Pastenel.",
+          "Renovamos as informações do app e as capturas da loja em nove idiomas com o novo nome.",
+          "Corrigimos a ordem dos clipes salvos ou editados em sequência rápida, mantendo os mais recentes no topo."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in ClipNest 1.0.6.",
+        "changes": [
+          "App und Tastatur heißen jetzt Pastenel.",
+          "App-Informationen und Store-Screenshots wurden in neun Sprachen an den neuen Namen angepasst.",
+          "Schnell nacheinander gespeicherte oder bearbeitete Clips werden jetzt korrekt mit den neuesten zuerst sortiert."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de ClipNest 1.0.6.",
+        "changes": [
+          "L’app et le clavier portent désormais le nom Pastenel.",
+          "Les informations de l’app et les captures de la boutique ont été actualisées dans neuf langues.",
+          "Correction du classement des clips enregistrés ou modifiés en succession rapide, du plus récent au plus ancien."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de ClipNest 1.0.6.",
+        "changes": [
+          "Actualizamos el nombre de la app y del teclado a Pastenel.",
+          "Renovamos la información de la app y las capturas de la tienda en nueve idiomas con el nuevo nombre.",
+          "Corregimos el orden de los clips guardados o editados rápidamente, mostrando primero los más recientes."
+        ]
+      }
+    },
+    "internalGitHubUrl": ""
+  },
+  {
     "appSlug": "melivra",
     "appName": "Melivra",
     "version": "1.0.4",
