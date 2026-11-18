@@ -13,6 +13,30 @@ const make = (subtitle: string, body: string, faqTitle: string, faq: ExtendedPro
 
 export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, ExtendedProductCopy>> = {
   'pt-BR': {
+    combina: {
+      "subtitle": "Unir, recortar e comprimir vídeos",
+      "body": "O Combina ajuda a organizar vídeos sem um editor complexo. Una clipes na ordem escolhida, mantenha um trecho ou reduza o tamanho de um vídeo.\n\n## Principais recursos\n\n- Unir vídeos na ordem escolhida\n- Definir o início e o fim do trecho a recortar\n- Conferir o tamanho estimado antes de comprimir\n- Salvar o resultado em um novo MP4 e preservar os originais\n- Continuar recortando ou comprimindo o vídeo salvo\n\nNo Free, é possível unir até três vídeos por vez, recortar um trecho e usar a compressão Compacta. A compra única do Pro remove o limite de vídeos por união, adiciona opções de compressão e permite salvar vários trechos em arquivos separados.\n\nO processamento principal dos vídeos acontece no dispositivo. O Combina não envia seus vídeos a um servidor do Combina.",
+      "faq": [
+        {
+          "question": "Posso escolher a ordem dos vídeos?",
+          "answer": "Sim. Organize os vídeos selecionados na ordem desejada antes de uni-los."
+        },
+        {
+          "question": "O que acontece com os vídeos originais?",
+          "answer": "O Combina cria um novo MP4 e não altera nem exclui os originais."
+        },
+        {
+          "question": "Os vídeos são enviados para um servidor?",
+          "answer": "O processamento principal acontece no dispositivo e os vídeos não são enviados a um servidor do Combina."
+        },
+        {
+          "question": "O que o Pro acrescenta?",
+          "answer": "O Free permite unir até três vídeos por vez, recortar um trecho e usar a compressão Compacta. A compra única do Pro remove o limite de vídeos por união, libera as opções Equilibrada e Nítida e salva vários trechos em arquivos separados."
+        }
+      ],
+      "seoDescription": "Una, recorte e comprima vídeos com o Combina. Confira o tamanho estimado, salve um novo MP4 e preserve os vídeos originais.",
+      "faqTitle": "Perguntas frequentes"
+    },
     aligna: {
       "subtitle": "Renomeador de arquivos em lote",
       "body": "Aligna renomeia vários arquivos de uma vez usando regras claras e previsíveis.\n\nUse os mesmos padrões em fotos, músicas e documentos: adicione datas ou números sequenciais, troque espaços por sublinhados, remova caracteres inválidos e crie nomes de arquivos de música a partir das tags.\n\n## Principais recursos\n\n- Adicionar datas\n- Adicionar numeração sequencial\n- Trocar espaços por sublinhados\n- Remover caracteres inválidos\n- Organizar fotos pela data de captura\n- Criar nomes a partir de artista, número da faixa e título\n- Conferir uma prévia antes de aplicar\n\nAligna não é um gerenciador de arquivos nem um serviço em nuvem. Não exige conta, não tem anúncios e faz o processamento no dispositivo. No iOS, por limitações do sistema, o resultado é salvo como um novo arquivo com o nome escolhido; o original permanece inalterado.",
@@ -165,6 +189,30 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
     ]),
   },
   de: {
+    combina: {
+      "subtitle": "Videos zusammenfügen, kürzen und komprimieren",
+      "body": "Combina hilft dir, Videos ohne komplexes Schnittprogramm zu ordnen. Füge Clips in der gewünschten Reihenfolge zusammen, behalte einen Ausschnitt oder verkleinere eine Videodatei.\n\n## Hauptfunktionen\n\n- Videos in der gewählten Reihenfolge zusammenfügen\n- Anfang und Ende eines Ausschnitts zum Kürzen festlegen\n- Geschätzte Dateigröße vor dem Komprimieren ansehen\n- Ergebnis als neue MP4-Datei speichern und Originale behalten\n- Gespeichertes Video direkt weiter kürzen oder komprimieren\n\nMit Free kannst du pro Vorgang bis zu drei Videos zusammenfügen, einen Ausschnitt kürzen und die Komprimierung „Klein“ nutzen. Der einmalige Kauf von Pro hebt das Limit beim Zusammenfügen auf, bietet weitere Komprimierungsoptionen und speichert mehrere Ausschnitte als separate Dateien.\n\nDie eigentliche Videoverarbeitung findet auf deinem Gerät statt. Combina lädt deine Videos nicht auf einen Combina-Server hoch.",
+      "faq": [
+        {
+          "question": "Kann ich die Reihenfolge der Videos wählen?",
+          "answer": "Ja. Ordne die ausgewählten Videos vor dem Zusammenfügen in der gewünschten Reihenfolge an."
+        },
+        {
+          "question": "Was geschieht mit den Originalvideos?",
+          "answer": "Combina erstellt eine neue MP4-Datei. Die Originale werden weder verändert noch gelöscht."
+        },
+        {
+          "question": "Werden Videos auf einen Server hochgeladen?",
+          "answer": "Die eigentliche Videoverarbeitung findet auf dem Gerät statt; Videos werden nicht auf einen Combina-Server hochgeladen."
+        },
+        {
+          "question": "Was bietet Pro zusätzlich?",
+          "answer": "Free unterstützt bis zu drei Videos pro Zusammenfügen, einen Ausschnitt und die Komprimierung „Klein“. Der einmalige Kauf von Pro hebt das Limit beim Zusammenfügen auf, ergänzt „Ausgewogen“ und „Scharf“ und speichert mehrere Ausschnitte als separate Dateien."
+        }
+      ],
+      "seoDescription": "Videos mit Combina zusammenfügen, kürzen und komprimieren. Geschätzte Dateigröße prüfen, neue MP4-Datei speichern und Originale behalten.",
+      "faqTitle": "Häufige Fragen"
+    },
     aligna: {
       "subtitle": "Stapel-Umbenennung von Dateien",
       "body": "Aligna benennt mehrere Dateien mit klaren, vorhersehbaren Regeln um.\n\nWende einheitliche Namensmuster auf Fotos, Musik und Dokumente an: Datum oder laufende Nummer ergänzen, Leerzeichen ersetzen, unzulässige Zeichen entfernen oder Musikdateinamen aus Tags erzeugen.\n\n## Hauptfunktionen\n\n- Datumsangaben ergänzen\n- Laufende Nummern ergänzen\n- Leerzeichen durch Unterstriche ersetzen\n- Unzulässige Zeichen entfernen\n- Fotos nach Aufnahmedatum ordnen\n- Dateinamen aus Künstler, Tracknummer und Titel erzeugen\n- Änderungen vor dem Anwenden in der Vorschau prüfen\n\nAligna ist weder Dateimanager noch Cloud-Dienst. Es gibt kein Konto und keine Werbung; die Verarbeitung erfolgt auf dem Gerät. Unter iOS wird das Ergebnis wegen Systembeschränkungen als neue Datei mit dem gewählten Namen gespeichert; das Original bleibt unverändert.",
@@ -313,6 +361,30 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
     vaultxt: make('Editor für große TXT-Dateien', `VaultXT ist ein schneller, leichter Texteditor für große Dateien.\n\nÖffne und bearbeite lange Dokumente, Logs, Entwürfe und exportierte Textdaten, die in gewöhnlichen Notiz-Apps schwerfällig werden können. Dateien werden direkt vom Gerät geöffnet und ohne Cloud-Upload gespeichert.\n\n## Hauptfunktionen\n\n- Große TXT-Dateien schnell öffnen\n- Lange Dokumente lesen und bearbeiten\n- Automatisch speichern\n- Wiederherstellung mit Rückgängig und Snapshots\n- Lokal und offline arbeiten\n\nKein Konto, keine Werbung, kein Tracking; Dateiinhalte werden nicht an externe Server gesendet.`, 'Häufige Fragen', [{ question: 'Kann VaultXT sehr große TXT-Dateien öffnen?', answer: 'Ja. Es ist für große TXT-Dateien, lange Dokumente, Logs, Entwürfe und exportierte Textdaten ausgelegt.' }, { question: 'Wie kann ich Änderungen wiederherstellen?', answer: 'Automatisches Speichern, Rückgängig und Snapshots bieten Wiederherstellungsmöglichkeiten.' }, { question: 'Werden Dateiinhalte an einen Server gesendet?', answer: 'Nein. Verarbeitung und Speicherung bleiben lokal.' }]),
   },
   fr: {
+    combina: {
+      "subtitle": "Assembler, raccourcir et compresser des vidéos",
+      "body": "Combina vous aide à organiser vos vidéos sans logiciel de montage complexe. Assemblez des séquences dans l’ordre choisi, gardez un extrait ou réduisez la taille d’une vidéo.\n\n## Fonctions principales\n\n- Assembler les vidéos dans l’ordre choisi\n- Définir le début et la fin de l’extrait à garder\n- Consulter la taille estimée avant la compression\n- Enregistrer le résultat dans un nouveau MP4 en conservant les originaux\n- Continuer à raccourcir ou compresser la vidéo enregistrée\n\nLa version Free permet d’assembler jusqu’à trois vidéos à la fois, de découper un extrait et d’utiliser la compression Compacte. L’achat unique de Pro supprime la limite de vidéos par assemblage, ajoute des options de compression et permet d’enregistrer plusieurs extraits dans des fichiers séparés.\n\nLe traitement principal des vidéos s’effectue sur votre appareil. Combina n’envoie pas vos vidéos à un serveur Combina.",
+      "faq": [
+        {
+          "question": "Puis-je choisir l’ordre des vidéos ?",
+          "answer": "Oui. Disposez les vidéos sélectionnées dans l’ordre souhaité avant de les assembler."
+        },
+        {
+          "question": "Que deviennent les vidéos originales ?",
+          "answer": "Combina crée un nouveau fichier MP4 et ne modifie ni ne supprime les originaux."
+        },
+        {
+          "question": "Les vidéos sont-elles envoyées à un serveur ?",
+          "answer": "Le traitement principal s’effectue sur l’appareil et les vidéos ne sont pas envoyées à un serveur Combina."
+        },
+        {
+          "question": "Que comprend Pro ?",
+          "answer": "Free permet d’assembler jusqu’à trois vidéos à la fois, de découper un extrait et d’utiliser la compression Compacte. L’achat unique de Pro supprime la limite de vidéos par assemblage, ajoute les options Équilibrée et Nette et enregistre plusieurs extraits dans des fichiers séparés."
+        }
+      ],
+      "seoDescription": "Assemblez, raccourcissez et compressez vos vidéos avec Combina. Consultez la taille estimée, créez un MP4 et conservez les originaux.",
+      "faqTitle": "Questions fréquentes"
+    },
     aligna: {
       "subtitle": "Renommage de fichiers par lot",
       "body": "Aligna renomme plusieurs fichiers avec des règles claires et prévisibles.\n\nAppliquez les mêmes conventions aux photos, musiques et documents : ajoutez une date ou une numérotation, remplacez les espaces, retirez les caractères interdits ou créez des noms de fichiers audio à partir des tags.\n\n## Fonctions principales\n\n- Ajouter des dates\n- Ajouter une numérotation\n- Remplacer les espaces par des tirets bas\n- Retirer les caractères interdits\n- Organiser les photos par date de prise de vue\n- Créer des noms à partir de l’artiste, du numéro de piste et du titre\n- Vérifier l’aperçu avant application\n\nAligna n’est ni un explorateur de fichiers ni un service cloud. Aucun compte, aucune publicité ; le traitement reste sur l’appareil. Sur iOS, les restrictions du système imposent l’enregistrement du résultat dans un nouveau fichier portant le nom choisi ; l’original reste inchangé.",
@@ -461,6 +533,30 @@ export const extendedProductCopy: Record<ExtendedSiteLocale, Record<string, Exte
     vaultxt: make('Éditeur de gros fichiers TXT', `VaultXT est un éditeur de texte rapide et léger conçu pour les gros fichiers.\n\nOuvrez et modifiez longs documents, journaux, brouillons et données texte exportées sans les envoyer vers un service cloud.\n\n## Fonctions principales\n\n- Ouvrir rapidement de gros TXT\n- Lire et modifier de longs documents\n- Sauvegarde automatique\n- Récupération avec annulation et snapshots\n- Travail local et hors ligne\n\nAucun compte, aucune publicité ni suivi ; le contenu n’est pas envoyé à un serveur externe.`, 'Questions fréquentes', [{ question: 'Puis-je ouvrir de très gros fichiers TXT ?', answer: 'Oui. VaultXT est conçu pour les gros TXT, longs documents, logs, brouillons et données exportées.' }, { question: 'Comment récupérer mes modifications ?', answer: 'Sauvegarde automatique, annulation et snapshots offrent des voies de récupération.' }, { question: 'Le contenu est-il envoyé à un serveur ?', answer: 'Non.' }]),
   },
   es: {
+    combina: {
+      "subtitle": "Unir, recortar y comprimir videos",
+      "body": "Combina te ayuda a organizar videos sin un editor complejo. Une clips en el orden que elijas, conserva un fragmento o reduce el tamaño de un video.\n\n## Funciones principales\n\n- Unir videos en el orden elegido\n- Definir el inicio y el final del fragmento que quieres recortar\n- Consultar el tamaño estimado antes de comprimir\n- Guardar el resultado como un MP4 nuevo y conservar los originales\n- Seguir recortando o comprimiendo el video guardado\n\nCon Free puedes unir hasta tres videos por operación, recortar un fragmento y usar la compresión Compacta. La compra única de Pro elimina el límite de videos por unión, añade opciones de compresión y permite guardar varios fragmentos en archivos separados.\n\nEl procesamiento principal de los videos se realiza en el dispositivo. Combina no sube tus videos a un servidor de Combina.",
+      "faq": [
+        {
+          "question": "¿Puedo elegir el orden de los videos?",
+          "answer": "Sí. Ordena los videos seleccionados como quieras antes de unirlos."
+        },
+        {
+          "question": "¿Qué ocurre con los videos originales?",
+          "answer": "Combina crea un MP4 nuevo y no modifica ni elimina los originales."
+        },
+        {
+          "question": "¿Se suben los videos a un servidor?",
+          "answer": "El procesamiento principal se realiza en el dispositivo y los videos no se suben a un servidor de Combina."
+        },
+        {
+          "question": "¿Qué añade Pro?",
+          "answer": "Free permite unir hasta tres videos por operación, recortar un fragmento y usar la compresión Compacta. La compra única de Pro elimina el límite de videos por unión, añade las opciones Equilibrada y Nítida y guarda varios fragmentos en archivos separados."
+        }
+      ],
+      "seoDescription": "Une, recorta y comprime videos con Combina. Consulta el tamaño estimado, guarda un MP4 nuevo y conserva los videos originales.",
+      "faqTitle": "Preguntas frecuentes"
+    },
     aligna: {
       "subtitle": "Renombrador de archivos por lotes",
       "body": "Aligna cambia el nombre de varios archivos usando reglas claras y predecibles.\n\nAplica patrones uniformes a fotos, música y documentos: añade fechas o números correlativos, cambia espacios por guiones bajos, elimina caracteres no válidos y genera nombres de archivos de música a partir de sus etiquetas.\n\n## Funciones principales\n\n- Añadir fechas\n- Añadir numeración consecutiva\n- Sustituir espacios por guiones bajos\n- Eliminar caracteres no válidos\n- Organizar fotos por fecha de captura\n- Crear nombres con artista, número de pista y título\n- Revisar una vista previa antes de aplicar\n\nAligna no es un explorador de archivos ni un servicio en la nube. No requiere cuenta, no tiene anuncios y procesa todo en el dispositivo. En iOS, debido a las restricciones del sistema, el resultado se guarda como un archivo nuevo con el nombre elegido; el original no se modifica.",

@@ -1,6 +1,71 @@
 import type { AllSiteLocale } from './extended-site-i18n';
 
 const screenshotAltCopy = {
+  combina: {
+    "en": [
+      "Combina merge screen with two selected videos in order",
+      "Combina trim screen with a video preview and start and end controls on the timeline",
+      "Combina compression screen showing the original size and estimated output size",
+      "Combina save options showing a result filename and save button",
+      "Combina saved result with options to continue trimming or compressing"
+    ],
+    "ko": [
+      "영상 두 개와 선택 순서를 보여 주는 Combina 합치기 화면",
+      "미리보기와 시작·끝 구간 조절점이 보이는 Combina 자르기 화면",
+      "원본 용량과 예상 저장 용량을 보여 주는 Combina 압축 화면",
+      "결과 파일명과 저장 버튼이 보이는 Combina 저장 옵션",
+      "저장한 영상을 이어서 자르거나 압축하는 선택지가 보이는 Combina 저장 완료 화면"
+    ],
+    "ja": [
+      "選択した2本の動画と順番を表示するCombinaの結合画面",
+      "プレビューとタイムラインの開始・終了位置の調整を表示するCombinaのトリミング画面",
+      "元のサイズと保存サイズの目安を表示するCombinaの圧縮画面",
+      "結果のファイル名と保存ボタンを表示するCombinaの保存オプション",
+      "保存した動画を続けてトリミングまたは圧縮する選択肢を表示するCombinaの保存完了画面"
+    ],
+    "zh-Hans": [
+      "Combina 合并界面显示两个选中的视频及其顺序",
+      "Combina 截取界面显示视频预览和时间轴上的起止调节点",
+      "Combina 压缩界面显示原始大小和预计保存大小",
+      "Combina 保存选项显示结果文件名和保存按钮",
+      "Combina 保存完成界面提供继续截取或压缩的选项"
+    ],
+    "zh-Hant": [
+      "Combina 合併畫面顯示兩部選取的影片及其順序",
+      "Combina 修剪畫面顯示影片預覽與時間軸上的起點和終點調整控制",
+      "Combina 壓縮畫面顯示原始大小與預估儲存大小",
+      "Combina 儲存選項顯示結果檔名及儲存按鈕",
+      "Combina 儲存完成畫面提供繼續修剪或壓縮的選項"
+    ],
+    "pt-BR": [
+      "Tela de união do Combina com dois vídeos selecionados na ordem escolhida",
+      "Tela de recorte do Combina com prévia e controles de início e fim na linha do tempo",
+      "Tela de compressão do Combina mostrando o tamanho original e o tamanho estimado",
+      "Opções de salvamento do Combina com nome do arquivo e botão de salvar",
+      "Tela de resultado salvo do Combina, com opções para continuar recortando ou comprimindo"
+    ],
+    "de": [
+      "Combina-Ansicht zum Zusammenfügen mit zwei ausgewählten Videos in ihrer Reihenfolge",
+      "Combina-Ansicht zum Kürzen mit Videovorschau und Reglern für Anfang und Ende auf der Zeitleiste",
+      "Combina-Komprimierung mit Originalgröße und geschätzter Dateigröße",
+      "Combina-Speicheroptionen mit Dateinamen des Ergebnisses und Speichern-Schaltfläche",
+      "Gespeichertes Combina-Ergebnis mit Optionen zum weiteren Kürzen oder Komprimieren"
+    ],
+    "fr": [
+      "Écran d’assemblage Combina montrant deux vidéos sélectionnées dans leur ordre",
+      "Écran de découpe Combina avec aperçu et commandes de début et de fin sur la chronologie",
+      "Écran de compression Combina montrant la taille d’origine et la taille estimée",
+      "Options d’enregistrement Combina avec nom du fichier et bouton d’enregistrement",
+      "Écran du résultat enregistré, avec des options pour continuer à le raccourcir ou le compresser"
+    ],
+    "es": [
+      "Pantalla de unión de Combina con dos videos seleccionados en orden",
+      "Pantalla de recorte de Combina con vista previa y controles de inicio y final en la línea de tiempo",
+      "Pantalla de compresión de Combina con el tamaño original y el tamaño estimado",
+      "Opciones de guardado de Combina con el nombre del archivo y el botón de guardar",
+      "Resultado guardado en Combina con opciones para seguir recortando o comprimiendo"
+    ]
+  },
   aligna: {
     "ko": [
       "Aligna: 파일명을 한 번에 정리해요 — 8개 프리셋으로 여러 파일의 이름을 맞춰요.",
