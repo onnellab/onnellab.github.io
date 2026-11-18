@@ -1,0 +1,95 @@
+{
+  "version": "1.0.8",
+  "locales": {
+    "en": {
+      "storeLabel": "App Store version",
+      "reviewLabel": "In App Review",
+      "changes": [
+        "Refreshed the Pastenel home, settings, and keyboard screens.",
+        "Manually clean up history older than the selected period while keeping pinned items.",
+        "When you return from search, your list position and the pinned section’s expanded state are preserved.",
+        "Improved the reliability of saving, editing, and pinning clips."
+      ]
+    },
+    "ko": {
+      "storeLabel": "App Store 공개 버전",
+      "reviewLabel": "심사 중",
+      "changes": [
+        "Pastenel의 홈, 설정, 키보드 화면을 새롭게 다듬었어요.",
+        "선택한 기간보다 오래된 기록을 수동으로 정리하고, 고정한 항목은 그대로 보관해요.",
+        "검색을 마치고 돌아와도 목록 위치와 고정 목록을 펼친 상태를 유지해요.",
+        "클립 저장, 편집, 고정의 안정성을 높였어요."
+      ]
+    },
+    "ja": {
+      "storeLabel": "App Store公開版",
+      "reviewLabel": "審査中",
+      "changes": [
+        "Pastenelのホーム、設定、キーボードの画面を新しくしました。",
+        "選択した期間より古い履歴を手動で削除できるようになりました。ピン留めした項目は残ります。",
+        "検索から戻っても、リストの位置とピン留め一覧を展開した状態が保たれます。",
+        "クリップの保存・編集・ピン留めの安定性を改善しました。"
+      ]
+    },
+    "zh-Hans": {
+      "storeLabel": "App Store 已发布版本",
+      "reviewLabel": "审核中",
+      "changes": [
+        "焕新了 Pastenel 的首页、设置和键盘界面。",
+        "手动清理早于所选时段的历史记录，保留置顶内容。",
+        "退出搜索后，保留列表位置和置顶列表的展开状态。",
+        "提升了剪贴内容保存、编辑和置顶的稳定性。"
+      ]
+    },
+    "zh-Hant": {
+      "storeLabel": "App Store 已發佈版本",
+      "reviewLabel": "審查中",
+      "changes": [
+        "更新了 Pastenel 的主畫面、設定與鍵盤介面。",
+        "手動清理早於所選期間的歷史記錄，並保留釘選項目。",
+        "結束搜尋後，保留清單位置和釘選清單的展開狀態。",
+        "提升剪貼內容儲存、編輯和釘選的穩定性。"
+      ]
+    },
+    "pt-BR": {
+      "storeLabel": "Versão na App Store",
+      "reviewLabel": "Em análise",
+      "changes": [
+        "Renovamos as telas de início, configurações e teclado do Pastenel.",
+        "Limpe manualmente o histórico anterior ao período escolhido, mantendo os itens fixados.",
+        "Ao voltar da busca, a posição da lista e o estado de expansão da seção de fixados são mantidos.",
+        "Melhoramos a confiabilidade ao salvar, editar e fixar clipes."
+      ]
+    },
+    "de": {
+      "storeLabel": "Version im App Store",
+      "reviewLabel": "In Prüfung",
+      "changes": [
+        "Die Start-, Einstellungs- und Tastaturansichten von Pastenel wurden überarbeitet.",
+        "Ältere Verlaufseinträge lassen sich manuell anhand eines gewählten Zeitraums entfernen. Angeheftete Einträge bleiben erhalten.",
+        "Beim Zurückkehren aus der Suche bleiben die Listenposition und der aufgeklappte Zustand des angehefteten Bereichs erhalten.",
+        "Das Speichern, Bearbeiten und Anheften von Clips ist zuverlässiger."
+      ]
+    },
+    "fr": {
+      "storeLabel": "Version sur l’App Store",
+      "reviewLabel": "En cours d’examen",
+      "changes": [
+        "Les écrans d’accueil, de réglages et de clavier de Pastenel ont été actualisés.",
+        "Nettoyez manuellement l’historique antérieur à la période choisie, sans supprimer les éléments épinglés.",
+        "En quittant la recherche, retrouvez votre position dans la liste et la section des éléments épinglés dépliée si elle l’était avant.",
+        "L’enregistrement, la modification et l’épinglage des clips sont plus fiables."
+      ]
+    },
+    "es": {
+      "storeLabel": "Versión en el App Store",
+      "reviewLabel": "En revisión",
+      "changes": [
+        "Renovamos las pantallas de inicio, ajustes y teclado de Pastenel.",
+        "Limpia manualmente el historial anterior al periodo elegido y conserva los elementos fijados.",
+        "Al salir de la búsqueda, se mantienen la posición de la lista y el estado expandido o contraído de la sección de elementos fijados.",
+        "Mejoramos la fiabilidad al guardar, editar y fijar clips."
+      ]
+    }
+  }
+}
