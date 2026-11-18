@@ -3,6 +3,7 @@ import type { AllSiteLocale } from './extended-site-i18n';
 const screenshotAltCopy = {
   combina: {
     "en": [
+      "Combina home screen with options to merge, trim, and compress videos",
       "Combina merge screen with two selected videos in order",
       "Combina trim screen with a video preview and start and end controls on the timeline",
       "Combina compression screen showing the original size and estimated output size",
@@ -10,6 +11,7 @@ const screenshotAltCopy = {
       "Combina saved result with options to continue trimming or compressing"
     ],
     "ko": [
+      "영상 합치기·자르기·압축을 선택하는 Combina 홈 화면",
       "영상 두 개와 선택 순서를 보여 주는 Combina 합치기 화면",
       "미리보기와 시작·끝 구간 조절점이 보이는 Combina 자르기 화면",
       "원본 용량과 예상 저장 용량을 보여 주는 Combina 압축 화면",
@@ -17,6 +19,7 @@ const screenshotAltCopy = {
       "저장한 영상을 이어서 자르거나 압축하는 선택지가 보이는 Combina 저장 완료 화면"
     ],
     "ja": [
+      "動画の結合・トリミング・圧縮を選べるCombinaのホーム画面",
       "選択した2本の動画と順番を表示するCombinaの結合画面",
       "プレビューとタイムラインの開始・終了位置の調整を表示するCombinaのトリミング画面",
       "元のサイズと保存サイズの目安を表示するCombinaの圧縮画面",
@@ -24,6 +27,7 @@ const screenshotAltCopy = {
       "保存した動画を続けてトリミングまたは圧縮する選択肢を表示するCombinaの保存完了画面"
     ],
     "zh-Hans": [
+      "Combina 首页显示合并、截取和压缩视频的选项",
       "Combina 合并界面显示两个选中的视频及其顺序",
       "Combina 截取界面显示视频预览和时间轴上的起止调节点",
       "Combina 压缩界面显示原始大小和预计保存大小",
@@ -31,6 +35,7 @@ const screenshotAltCopy = {
       "Combina 保存完成界面提供继续截取或压缩的选项"
     ],
     "zh-Hant": [
+      "Combina 首頁顯示合併、修剪和壓縮影片的選項",
       "Combina 合併畫面顯示兩部選取的影片及其順序",
       "Combina 修剪畫面顯示影片預覽與時間軸上的起點和終點調整控制",
       "Combina 壓縮畫面顯示原始大小與預估儲存大小",
@@ -38,6 +43,7 @@ const screenshotAltCopy = {
       "Combina 儲存完成畫面提供繼續修剪或壓縮的選項"
     ],
     "pt-BR": [
+      "Tela inicial do Combina com opções para unir, recortar e comprimir vídeos",
       "Tela de união do Combina com dois vídeos selecionados na ordem escolhida",
       "Tela de recorte do Combina com prévia e controles de início e fim na linha do tempo",
       "Tela de compressão do Combina mostrando o tamanho original e o tamanho estimado",
@@ -45,6 +51,7 @@ const screenshotAltCopy = {
       "Tela de resultado salvo do Combina, com opções para continuar recortando ou comprimindo"
     ],
     "de": [
+      "Combina-Startseite mit Optionen zum Zusammenfügen, Kürzen und Komprimieren von Videos",
       "Combina-Ansicht zum Zusammenfügen mit zwei ausgewählten Videos in ihrer Reihenfolge",
       "Combina-Ansicht zum Kürzen mit Videovorschau und Reglern für Anfang und Ende auf der Zeitleiste",
       "Combina-Komprimierung mit Originalgröße und geschätzter Dateigröße",
@@ -52,6 +59,7 @@ const screenshotAltCopy = {
       "Gespeichertes Combina-Ergebnis mit Optionen zum weiteren Kürzen oder Komprimieren"
     ],
     "fr": [
+      "Écran d’accueil de Combina proposant d’assembler, de raccourcir ou de compresser des vidéos",
       "Écran d’assemblage Combina montrant deux vidéos sélectionnées dans leur ordre",
       "Écran de découpe Combina avec aperçu et commandes de début et de fin sur la chronologie",
       "Écran de compression Combina montrant la taille d’origine et la taille estimée",
@@ -59,6 +67,7 @@ const screenshotAltCopy = {
       "Écran du résultat enregistré, avec des options pour continuer à le raccourcir ou le compresser"
     ],
     "es": [
+      "Pantalla de inicio de Combina con opciones para unir, recortar y comprimir videos",
       "Pantalla de unión de Combina con dos videos seleccionados en orden",
       "Pantalla de recorte de Combina con vista previa y controles de inicio y final en la línea de tiempo",
       "Pantalla de compresión de Combina con el tamaño original y el tamaño estimado",
