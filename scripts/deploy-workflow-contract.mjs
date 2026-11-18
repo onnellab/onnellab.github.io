@@ -38,7 +38,7 @@ test('reviewed artwork and visual regression gates run on the existing runner be
   assert.match(workflow, /runs-on: ubuntu-latest/);
 });
 
-test('locked Vite tracks a security-patched release without bypassing npm audit', () => {
+test('locked Vite remains pinned to a reviewed version', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
   const lockfile = JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
   const pinned = manifest.overrides?.vite;
@@ -53,8 +53,15 @@ test('locked Vite tracks a security-patched release without bypassing npm audit'
             'known vulnerable Vite 8 patch levels are forbidden');
   assert.equal(installed.resolved, `https://registry.npmjs.org/vite/-/vite-${pinned}.tgz`);
   assert.match(installed.integrity, /^sha512-[A-Za-z0-9+/]+={0,2}$/);
-  assert.ok(workflow.indexOf('npm audit --package-lock-only --include=dev --audit-level=high') <
-            workflow.indexOf('run: npm ci'), 'security audit must remain fail-closed before install');
+});
+
+test('Pages installs the locked tree without lifecycle scripts and the independent audit remains', () => {
+  const audit = fs.readFileSync(path.join(root, '.github/workflows/dependency-security.yml'), 'utf8');
+  assert.match(workflow, /^\s*run: npm ci --ignore-scripts$/m);
+  assert.doesNotMatch(workflow, /^\s*run: npm audit\b/m);
+  assert.doesNotMatch(workflow, /pages_description="[^"\n]*audit/i);
+  assert.match(audit, /npm audit --package-lock-only --include=dev --audit-level=high/);
+  assert.match(audit, /schedule:/);
 });
 
 test('reviewed minimum patched Zod and Undici versions cannot regress in lockfile', () => {

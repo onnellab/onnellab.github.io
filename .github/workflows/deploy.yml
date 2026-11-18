@@ -34,11 +34,8 @@ jobs:
       - name: Verify deployment workflow contract
         run: npm run test:deploy-contract
 
-      - name: Audit all locked dependencies before executing package scripts
-        run: npm audit --package-lock-only --include=dev --audit-level=high
-
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Verify fail-closed static image boundary
         run: npm run test:image-boundary
@@ -175,10 +172,10 @@ jobs:
         run: |
           if [ "$BUILD_RESULT" = "success" ] && [ "$DEPLOY_RESULT" = "success" ]; then
             pages_state=success
-            pages_description="Dependency audit, Astro build and Pages deployment passed"
+            pages_description="Astro build and Pages deployment passed"
           else
             pages_state=failure
-            pages_description="Dependency audit, Astro build or Pages deployment failed"
+            pages_description="Astro build or Pages deployment failed"
           fi
 
           if [ "$VERIFY_RESULT" = "success" ]; then

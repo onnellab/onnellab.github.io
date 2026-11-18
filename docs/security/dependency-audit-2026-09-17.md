@@ -57,7 +57,7 @@ This is a reachability assessment for these advisories, not a claim that static 
 
 ## Durable controls
 
-- **Deployment is blocked on high/critical dependency findings**, including build and test dependencies. The lockfile audit runs before `npm ci` can execute package lifecycle scripts. An audit service/error failure also stops the build rather than silently accepting it.
+- Pages previously blocked high/critical dependency findings before installation. On 2026-11-18, the owner authorized separating this audit from Pages deployment because CVE-2026-112366 had no published fix. Pages still installs the exact lockfile and skips dependency lifecycle scripts. The independent audit still reports unresolved findings as failures; a Pages deployment does not indicate an audit pass.
 - The localization workflow uses the same pre-install audit gate.
 - Normal build/test jobs have only `contents: read` and do not persist checkout credentials. Pages write/OIDC permissions are confined to the deployment job; commit-status write permissions are confined to separate reporting jobs.
 - `.github/workflows/dependency-security.yml` audits on dependency changes, manual dispatch and weekly. Weekly checks detect newly published advisories even when the lockfile has not changed; they do not auto-upgrade or auto-commit packages.
