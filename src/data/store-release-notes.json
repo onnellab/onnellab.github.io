@@ -1677,6 +1677,113 @@
     "internalGitHubUrl": ""
   },
   {
+    "appSlug": "tagweaver",
+    "appName": "TagWeaver",
+    "version": "2.6.0",
+    "tag": "v2.6.0",
+    "platform": "Android",
+    "releasedDate": "2026-11-22",
+    "title": "TagWeaver v2.6.0 (Android)",
+    "summary": "Changes in TagWeaver 2.6.0.",
+    "summaryKo": "TagWeaver 2.6.0 버전의 변경 사항이에요.",
+    "changes": [
+      "Lyrics and timestamps stay intact when switching edit modes or previewing audio.",
+      "Improved opening audio from other apps and save failure messages. Covers now export in their actual image format.",
+      "Drag anywhere on a song or folder handle to reorder it. Duplicate checks are faster when reselecting multiple library files.",
+      "Scroll through appearance options in short Android windows. Content stays clear of a foldable hinge that divides the window."
+    ],
+    "changesKo": [
+      "가사 편집 모드를 바꾸거나 오디오를 미리 들을 때 입력한 가사와 시간을 더 안정적으로 유지해요.",
+      "다른 앱에서 오디오를 여는 동작과 저장 실패 안내를 개선했어요. 커버를 내보낼 때 실제 이미지 형식에 맞춰 저장해요.",
+      "곡과 폴더의 드래그 손잡이 전체에서 순서를 바꿀 수 있어요. 등록한 파일 여러 개를 다시 고를 때 중복 확인이 빨라졌어요.",
+      "낮은 Android 창에서도 화면 모드 옵션을 스크롤해 선택할 수 있어요. 폴더블에서 화면을 나누는 힌지 영역을 피해 콘텐츠를 배치해요."
+    ],
+    "localizations": {
+      "ko": {
+        "summary": "TagWeaver 2.6.0 버전의 변경 사항이에요.",
+        "changes": [
+          "가사 편집 모드를 바꾸거나 오디오를 미리 들을 때 입력한 가사와 시간을 더 안정적으로 유지해요.",
+          "다른 앱에서 오디오를 여는 동작과 저장 실패 안내를 개선했어요. 커버를 내보낼 때 실제 이미지 형식에 맞춰 저장해요.",
+          "곡과 폴더의 드래그 손잡이 전체에서 순서를 바꿀 수 있어요. 등록한 파일 여러 개를 다시 고를 때 중복 확인이 빨라졌어요.",
+          "낮은 Android 창에서도 화면 모드 옵션을 스크롤해 선택할 수 있어요. 폴더블에서 화면을 나누는 힌지 영역을 피해 콘텐츠를 배치해요."
+        ]
+      },
+      "en": {
+        "summary": "Changes in TagWeaver 2.6.0.",
+        "changes": [
+          "Lyrics and timestamps stay intact when switching edit modes or previewing audio.",
+          "Improved opening audio from other apps and save failure messages. Covers now export in their actual image format.",
+          "Drag anywhere on a song or folder handle to reorder it. Duplicate checks are faster when reselecting multiple library files.",
+          "Scroll through appearance options in short Android windows. Content stays clear of a foldable hinge that divides the window."
+        ]
+      },
+      "ja": {
+        "summary": "TagWeaver 2.6.0の変更点です。",
+        "changes": [
+          "編集モードの切り替えや音声のプレビュー時に、歌詞とタイムスタンプがより確実に保持されるようになりました。",
+          "他のアプリから音声を開く動作と、保存に失敗したときの案内を改善しました。カバーは実際の画像形式で書き出します。",
+          "曲やフォルダのドラッグハンドル全体で並べ替えができます。ライブラリ内の複数ファイルを選び直すときの重複チェックを高速化しました。",
+          "Androidの高さが低いウインドウでも外観の選択肢をスクロールできます。折りたたみ端末では、画面を分けるヒンジを避けて表示します。"
+        ]
+      },
+      "zh-Hans": {
+        "summary": "TagWeaver 2.6.0 的更新内容。",
+        "changes": [
+          "切换歌词编辑模式或试听音频时，歌词和时间戳能更稳定地保留。",
+          "改进了从其他应用打开音频的流程和保存失败提示。封面会按实际的图片格式导出。",
+          "拖动歌曲或文件夹排序手柄的任意位置都能调整顺序。重新选择资料库已有的多个文件时，重复项检查更快。",
+          "在较矮的 Android 窗口中，可以滚动查看外观选项。折叠设备上的内容会避开分隔窗口的铰链。"
+        ]
+      },
+      "zh-Hant": {
+        "summary": "TagWeaver 2.6.0 的更新內容。",
+        "changes": [
+          "切換歌詞編輯模式或試聽音訊時，歌詞和時間戳記能更穩定地保留。",
+          "改善了從其他 App 開啟音訊的流程和儲存失敗提示。封面會依實際的圖片格式匯出。",
+          "歌曲或資料夾的拖曳把手，任何位置都可用來調整順序。重新選取資料庫已有的多個檔案時，重複檢查更快。",
+          "在較矮的 Android 視窗中，可以捲動瀏覽外觀選項。摺疊裝置上的內容會避開分隔視窗的轉軸。"
+        ]
+      },
+      "pt-BR": {
+        "summary": "Novidades do TagWeaver 2.6.0.",
+        "changes": [
+          "Preserve letras e marcas de tempo ao mudar de modo de edição ou pré-ouvir o áudio.",
+          "Melhoramos a abertura de áudio de outros apps e os avisos de falha ao salvar. As capas são exportadas no formato real da imagem.",
+          "Reordene músicas e pastas por toda a alça. Ao selecionar vários arquivos já na biblioteca, a verificação de duplicatas é mais rápida.",
+          "Use a rolagem nas opções de aparência em janelas baixas do Android. Em dobráveis, o conteúdo evita a dobradiça que divide a janela."
+        ]
+      },
+      "de": {
+        "summary": "Neuerungen in TagWeaver 2.6.0.",
+        "changes": [
+          "Liedtexte und Zeitmarken bleiben beim Moduswechsel und Vorhören erhalten.",
+          "Das Öffnen von Audio aus anderen Apps und Fehlermeldungen beim Speichern wurden verbessert. Cover werden im tatsächlichen Bildformat exportiert.",
+          "Zum Umsortieren an beliebiger Stelle am Griff ziehen. Die Duplikatprüfung beim erneuten Auswählen von Dateien ist schneller.",
+          "In niedrigen Android-Fenstern lässt sich die Darstellungsliste scrollen. Inhalte bleiben neben dem Scharnier sichtbar."
+        ]
+      },
+      "fr": {
+        "summary": "Nouveautés de TagWeaver 2.6.0.",
+        "changes": [
+          "Les paroles et repères sont conservés au changement de mode ou à la préécoute.",
+          "L’ouverture d’audio depuis d’autres apps et les messages d’échec d’enregistrement ont été améliorés. Les pochettes sont exportées dans leur format d’image réel.",
+          "Réorganisez pistes et dossiers en faisant glisser toute partie de leur poignée. Les doublons sont détectés plus vite à la resélection.",
+          "Sous Android, les options d’apparence défilent dans les fenêtres basses. Le contenu évite la charnière."
+        ]
+      },
+      "es": {
+        "summary": "Novedades de TagWeaver 2.6.0.",
+        "changes": [
+          "Las letras y marcas de tiempo se conservan al cambiar de modo o preescuchar.",
+          "Se mejoró la apertura de audio desde otras apps y los avisos de error al guardar. Las portadas se exportan en su formato de imagen real.",
+          "Arrastra desde cualquier punto del tirador para reordenar canciones y carpetas. Se agilizó la comprobación de duplicados al volver a seleccionar archivos.",
+          "Desplaza las opciones de apariencia en ventanas bajas de Android. El contenido evita la bisagra en pantallas plegables."
+        ]
+      }
+    },
+    "internalGitHubUrl": ""
+  },
+  {
     "appSlug": "vaultxt",
     "appName": "VaultXT",
     "version": "2.0.1",
