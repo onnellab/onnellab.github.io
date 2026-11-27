@@ -92,6 +92,27 @@ jobs:
           if-no-files-found: warn
           retention-days: 3
 
+      - name: Test search discovery contract
+        run: python3 scripts/test-search-discovery.py
+
+      - name: Prepare public search discovery manifest and IndexNow ownership file
+        id: discovery_prepare
+        if: github.ref == 'refs/heads/main'
+        continue-on-error: true
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: python3 scripts/search_discovery.py prepare --dist dist --out /tmp/search-discovery/manifest.json
+
+      - name: Retain build-bound discovery manifest
+        if: steps.discovery_prepare.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: search-discovery-manifest
+          path: /tmp/search-discovery/manifest.json
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 14
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -152,6 +173,62 @@ jobs:
           path: /tmp/ops-live-verification.json
           if-no-files-found: warn
           retention-days: 14
+
+  search_discovery:
+    name: Notify search engines after successful deployment
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    needs: [build, deploy]
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout exact deployed revision
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Download build-bound manifest
+        uses: actions/download-artifact@v4
+        with:
+          name: search-discovery-manifest
+          path: /tmp/search-discovery/current
+
+      - name: Restore latest accepted IndexNow state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/search-discovery/previous
+          previous="$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=search-discovery-state&per_page=100" --jq '[.artifacts[] | select(.expired == false and .workflow_run.head_branch == "main")] | sort_by(.created_at) | last | .workflow_run.id // empty')"
+          if [ -n "$previous" ]; then
+            gh run download "$previous" --repo "$GITHUB_REPOSITORY" --name search-discovery-state --dir /tmp/search-discovery/previous
+            test -s /tmp/search-discovery/previous/state.json
+          else
+            echo "No retained accepted state; bootstrap eligible public pages once"
+          fi
+
+      - name: Submit only verified new changed or removed public URLs
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: |
+          set -euo pipefail
+          args=(--manifest /tmp/search-discovery/current/manifest.json --out /tmp/search-discovery/state.json)
+          if [ -f /tmp/search-discovery/previous/state.json ]; then
+            args+=(--previous /tmp/search-discovery/previous/state.json)
+          fi
+          python3 scripts/search_discovery.py notify "${args[@]}"
+
+      - name: Retain accepted notifications and pending evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: search-discovery-state
+          path: /tmp/search-discovery/state.json
+          if-no-files-found: ignore
+          overwrite: true
+          retention-days: 90
 
   report:
     name: Report Pages result

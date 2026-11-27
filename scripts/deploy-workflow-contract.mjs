@@ -86,3 +86,13 @@ test('reviewed minimum patched Zod and Undici versions cannot regress in lockfil
     assert.match(pkg.integrity ?? '', /^sha512-[A-Za-z0-9+/]+={0,2}$/);
   }
 });
+
+
+test('IndexNow is bound to a successful main deployment and kept outside Pages result gates', () => {
+  assert.match(workflow, /run: python3 scripts\/test-search-discovery\.py/);
+  assert.ok(workflow.indexOf('Prepare public search discovery manifest') > workflow.indexOf('- name: Build'));
+  assert.ok(workflow.indexOf('Prepare public search discovery manifest') < workflow.indexOf('- name: Upload Pages artifact'));
+  assert.match(workflow, /search_discovery:[\s\S]*?needs: \[build, deploy\]/);
+  assert.match(workflow, /name: search-discovery-state/);
+  assert.match(workflow, /needs: \[build, deploy, verify_ops\]/);
+});
