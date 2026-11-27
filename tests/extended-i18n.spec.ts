@@ -89,6 +89,7 @@ for (const locale of locales) {
       await page.goto(oauthPath);
       await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical(oauthPath));
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
     });
   });
 }
@@ -102,11 +103,11 @@ test('sitemap exposes representative routes from all nine-language surfaces', as
     '/apps/tagweaver/de/',
     '/privacy/tagweaver/es/',
     '/blog/pt-br/read-large-txt-files-without-lag/',
-    `/release-notes/tagweaver/${latestTagWeaverVersion}/zh-hant/`,
-    '/oauth/x/callback/ja/'
+    `/release-notes/tagweaver/${latestTagWeaverVersion}/zh-hant/`
   ]) {
     expect(xml).toContain(canonical(path));
   }
+  expect(xml).not.toContain('/oauth/');
   for (const hreflang of ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de', 'fr', 'es', 'x-default']) {
     expect(xml).toContain(`hreflang="${hreflang}"`);
   }

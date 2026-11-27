@@ -30,7 +30,6 @@ export function GET() {
     ...productPrivacyEntries(),
     ...allSiteLocales.map((locale) => ({ path: sonaryTermsRouteFor(locale), alternates: allAlternates(sonaryTermsRouteFor) })),
     ...blogEntries(),
-    ...oauthEntries(),
     ...releaseNoteEntries(),
     ...productEntries()
   ];
@@ -93,11 +92,6 @@ function blogEntries(): SitemapEntry[] {
   return [...indexEntries, ...articleEntries];
 }
 
-function oauthEntries(): SitemapEntry[] {
-  const alternates = allAlternates((locale) => oauthPath(locale));
-  return allSiteLocales.map((locale) => ({ path: oauthPath(locale), alternates }));
-}
-
 function releaseNoteEntries(): SitemapEntry[] {
   return releaseNotes.flatMap((note) => {
     const alternates = allAlternates((locale) => releaseNotePathFor(note.appSlug, note.version, locale));
@@ -142,11 +136,6 @@ function blogIndexPath(locale: AllSiteLocale): string {
 function blogPostPath(locale: AllSiteLocale, slug: string): string {
   if (locale === 'en') return `/blog/en/${slug}/`;
   return `/blog/${allLocaleDefinitions[locale].pathSegment}/${slug}/`;
-}
-
-function oauthPath(locale: AllSiteLocale): string {
-  if (locale === 'en') return '/oauth/x/callback/';
-  return `/oauth/x/callback/${allLocaleDefinitions[locale].pathSegment}/`;
 }
 
 function releaseNotePathFor(appSlug: string, version: string, locale: AllSiteLocale): string {

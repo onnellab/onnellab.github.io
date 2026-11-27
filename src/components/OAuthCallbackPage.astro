@@ -112,7 +112,7 @@ const callbackPath = (item: AllSiteLocale) => {
 };
 const alternates = [...allSiteLocales.map((item)=>({lang:allLocaleDefinitions[item].hreflang,path:callbackPath(item)})),{lang:'x-default',path:'/oauth/x/callback/'}];
 ---
-<BaseLayout title={copy.title} description={copy.description} canonicalPath={canonicalPath} lang={definition.htmlLang} alternates={alternates}>
+<BaseLayout noindex={true} title={copy.title} description={copy.description} canonicalPath={canonicalPath} lang={definition.htmlLang} alternates={alternates}>
   <main class="oauth-shell">
 
     <header><h1>{copy.heading}</h1><p><strong>{copy.updated}:</strong> 2026-07-12</p></header>
