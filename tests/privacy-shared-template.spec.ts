@@ -11,10 +11,13 @@ const locales = [
   { code: 'es', segment: 'es/' }
 ] as const;
 
+// The private fixture/template key remains clipnest; public policy identity is Pastenel.
+const canonicalSlug = (app: typeof apps[number]) => app === 'clipnest' ? 'pastenel' : app;
+
 for (const { code, segment } of locales) {
   test(`${code}: all eleven app policies use one template and retain the app-specific copy`, async ({ page }) => {
     for (const app of apps) {
-      const route = `/privacy/${app}/${segment}`;
+      const route = `/privacy/${canonicalSlug(app)}/${segment}`;
       await page.goto(route);
       const main = page.locator('main.privacy-shell');
       await expect(main).toHaveAttribute('data-app-privacy', app);
@@ -24,7 +27,7 @@ for (const { code, segment } of locales) {
       await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
       await expect(page.locator('[data-locale-choice]')).toHaveCount(9);
       await expect(main.locator('section h3')).toHaveCount(8);
-      await expect(main.locator('header h1')).toContainText(new RegExp(app, 'i'));
+      await expect(main.locator('header h1')).toContainText(new RegExp(canonicalSlug(app), 'i'));
       await expect(main.locator('header time')).toHaveAttribute('datetime', /^2026-\d{2}-\d{2}$/);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       expect(overflow, `${route} horizontal overflow`).toBeLessThanOrEqual(1);
@@ -47,7 +50,7 @@ test('all 16 preserved EN/KO policies keep every original subsection and its ind
       const reference = JSON.parse(fs.readFileSync(
         path.join(process.cwd(), 'src', 'content', 'privacy-policies', locale, app + '.json'), 'utf8'
       )) as { title: string; sections: Array<{ title: string; blocks: Array<{kind:string; value?:string; items?:string[]}> }> };
-      await page.goto(`/privacy/${app}/${locale === 'en' ? '' : 'ko/'}`);
+      await page.goto(`/privacy/${canonicalSlug(app)}/${locale === 'en' ? '' : 'ko/'}`);
       const headings = await page.locator('main.privacy-shell section h3').allInnerTexts();
       expect(headings).toEqual(reference.sections.map((section) => section.title));
       const displayed = await page.locator('main.privacy-shell').innerText();
@@ -58,6 +61,16 @@ test('all 16 preserved EN/KO policies keep every original subsection and its ind
         }
       }
     }
+  }
+});
+
+test('legacy ClipNest policy routes navigate to the matching Pastenel policy', async ({ page, baseURL }) => {
+  for (const { code, segment } of locales) {
+    const target = `/privacy/pastenel/${segment}`;
+    await page.goto(`/privacy/clipnest/${segment}`);
+    await expect(page).toHaveURL(new URL(target, baseURL!).toString());
+    await expect(page.locator('main.privacy-shell')).toHaveAttribute('data-policy-locale', code);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://onnellab.com${target}`);
   }
 });
 
@@ -86,7 +99,9 @@ test('privacy directories display authoritative update dates and canonical app U
     const combina = policies.filter({ has: page.getByRole('heading', { name: 'Combina' }) });
     await expect(combina).toHaveCount(1);
     await expect(combina).toContainText('2026-11-06');
-    await expect(combina).toHaveAttribute('href', `/privacy/combina/${segment}`);
+    const canonical = `/privacy/combina/${segment}`;
+    const href = await combina.getAttribute('href');
+    expect([canonical, `https://onnellab.com${canonical}`]).toContain(href);
   }
 });
 
