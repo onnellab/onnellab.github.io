@@ -19,10 +19,12 @@ def sitemap(urls):
 
 class Discovery(unittest.TestCase):
     def test_scope(self):
-        for u in (HOME, APP, OTHER, d.ORIGIN + "/release-notes/a/1.2.3/"):
+        for u in (HOME, APP, OTHER, d.ORIGIN + "/release-notes/a/1.2.3/", d.ORIGIN + "/ondo-paper/"):
             self.assertTrue(d.eligible(u))
         for u in ("https://other.example/", "https://onnellab.com.evil/", d.ORIGIN + "/ops/", d.ORIGIN + "/oauth/x/callback/", HOME + "?token=secret", d.ORIGIN + "/apps/../ops/"):
             self.assertFalse(d.eligible(u))
+        for path in ("/ondo-paper/pinterest.xml", "/ondo-paper/pins/cozy-undated-planner/", "/ondo-paper/?preview=1"):
+            self.assertFalse(d.eligible(d.ORIGIN + path))
     def test_digest(self):
         self.assertIsNone(d.digest(APP, html(HOME)))
         self.assertIsNone(d.digest(APP, html(APP).replace(b"<head>", b'<head><meta name="robots" content="noindex">')))

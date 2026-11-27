@@ -33,7 +33,7 @@ def eligible(url):
     return (p.scheme == "https" and p.netloc == HOST and not p.query and not p.fragment
             and p.path.startswith("/") and p.path.endswith("/")
             and all(re.fullmatch(r"[A-Za-z0-9_.-]+", x) and x not in (".", "..") for x in parts)
-            and (not parts or parts[0] in PUBLIC))
+            and (not parts or parts[0] in PUBLIC or p.path == "/ondo-paper/"))
 
 def sitemap_urls(data):
     root = ET.fromstring(data)

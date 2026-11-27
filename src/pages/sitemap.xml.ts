@@ -27,6 +27,7 @@ const corePages: LocalizedPage[] = ['home', 'apps', 'about', 'privacy', 'terms']
 export function GET() {
   const entries: SitemapEntry[] = [
     ...corePages.flatMap((page) => allLocalizedEntries(page)),
+    { path: '/ondo-paper/' },
     ...productPrivacyEntries(),
     ...allSiteLocales.map((locale) => ({ path: sonaryTermsRouteFor(locale), alternates: allAlternates(sonaryTermsRouteFor) })),
     ...blogEntries(),
