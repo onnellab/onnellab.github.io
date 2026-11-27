@@ -1,0 +1,30 @@
+---
+import pins from '../../data/ondo-paper-pins.json';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ONDO PAPER | Digital planners and calendars</title>
+    <meta name="description" content="Digital planners, calendars, and journaling accessories from ONDO PAPER." />
+    <link rel="canonical" href="https://onnellab.com/ondo-paper/" />
+    <link rel="alternate" type="application/rss+xml" href="/ondo-paper/pinterest.xml" title="ONDO PAPER RSS" />
+  </head>
+  <body>
+    <main>
+      <h1>ONDO PAPER</h1>
+      <p>Digital planners, calendars, and journaling accessories.</p>
+      <ul>
+        {pins.map((pin) => <li><a href={`/ondo-paper/pins/${pin.slug}/`}>{pin.title}</a></li>)}
+      </ul>
+    </main>
+  </body>
+</html>
+<style>
+  body { margin: 0; background: #f3eee4; color: #352d26; font: 1.1rem/1.55 system-ui, sans-serif; }
+  main { max-width: 42rem; margin: auto; padding: 3rem 1.25rem; }
+  h1 { margin-top: 0; font: 2.85rem/1.08 Georgia, serif; }
+  li + li { margin-top: .8rem; }
+  a { color: #793b2d; }
+</style>

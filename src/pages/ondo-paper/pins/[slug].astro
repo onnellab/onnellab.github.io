@@ -1,0 +1,40 @@
+---
+import pins from '../../../data/ondo-paper-pins.json';
+
+export function getStaticPaths() {
+  return pins.map((pin) => ({ params: { slug: pin.slug }, props: { pin } }));
+}
+
+const { pin } = Astro.props;
+const pageUrl = `https://onnellab.com/ondo-paper/pins/${pin.slug}/`;
+const imagePath = `/ondo-paper/pins/${pin.slug}.png`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pin.title}</title>
+    <meta name="description" content={pin.description} />
+    <link rel="canonical" href={pageUrl} />
+    <meta property="og:title" content={pin.title} />
+    <meta property="og:image" content={`https://onnellab.com${imagePath}`} />
+  </head>
+  <body>
+    <main>
+      <a class="brand" href="/ondo-paper/">ONDO PAPER</a>
+      <h1>{pin.title.split(' | ')[0]}</h1>
+      <p>{pin.description}</p>
+      <a class="product" href={pin.productUrl}>View this product on Gumroad</a>
+      <img src={imagePath} alt={pin.alt} width="1000" height="1500" />
+    </main>
+  </body>
+</html>
+<style>
+  body { margin: 0; background: #f3eee4; color: #352d26; font: 1.05rem/1.55 system-ui, sans-serif; }
+  main { max-width: 37rem; margin: auto; padding: 2rem 1.25rem; }
+  h1 { font: 2.45rem/1.1 Georgia, serif; margin: .6em 0 .35em; }
+  .brand { color: #793b2d; font-weight: 700; }
+  .product { display: inline-block; border-radius: .3rem; background: #793b2d; color: white; padding: .55em .9em; }
+  img { display: block; width: 100%; height: auto; margin-top: 1.35rem; border-radius: .35rem; }
+</style>
