@@ -1,8 +1,9 @@
 import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
+import { allPrivacyAppSlugs } from '../src/lib/privacy-policy-documents';
 
-const apps = ['aligna', 'clipnest', 'combina', 'lunary', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'] as const;
+const apps = allPrivacyAppSlugs;
 const locales = [
   { code: 'en', segment: '' }, { code: 'ko', segment: 'ko/' },
   { code: 'ja', segment: 'ja/' }, { code: 'zh-Hans', segment: 'zh-hans/' },
@@ -12,9 +13,10 @@ const locales = [
 ] as const;
 
 for (const { code, segment } of locales) {
-  test(`${code}: all eleven app policies use one template and retain the app-specific copy`, async ({ page }) => {
+  test(`${code}: all current app policies use one template and retain the app-specific copy`, async ({ page }) => {
     for (const app of apps) {
-      const route = `/privacy/${app}/${segment}`;
+      const publicSlug = app === 'clipnest' ? 'pastenel' : app;
+      const route = `/privacy/${publicSlug}/${segment}`;
       await page.goto(route);
       const main = page.locator('main.privacy-shell');
       await expect(main).toHaveAttribute('data-app-privacy', app);
@@ -24,7 +26,7 @@ for (const { code, segment } of locales) {
       await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(10);
       await expect(page.locator('[data-locale-choice]')).toHaveCount(9);
       await expect(main.locator('section h3')).toHaveCount(8);
-      await expect(main.locator('header h1')).toContainText(new RegExp(app, 'i'));
+      await expect(main.locator('header h1')).toContainText(new RegExp(publicSlug, 'i'));
       await expect(main.locator('header time')).toHaveAttribute('datetime', /^2026-\d{2}-\d{2}$/);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       expect(overflow, `${route} horizontal overflow`).toBeLessThanOrEqual(1);
@@ -43,11 +45,11 @@ for (const { code, segment } of locales) {
 
 test('all 16 preserved EN/KO policies keep every original subsection and its individual data statements', async ({ page }) => {
   for (const locale of ['en', 'ko'] as const) {
-    for (const app of apps.filter((slug) => slug !== 'papira' && slug !== 'lunary' && slug !== 'combina')) {
+    for (const app of apps.filter((slug) => slug !== 'papira' && slug !== 'lunary' && slug !== 'combina' && slug !== 'sonary')) {
       const reference = JSON.parse(fs.readFileSync(
         path.join(process.cwd(), 'src', 'content', 'privacy-policies', locale, app + '.json'), 'utf8'
       )) as { title: string; sections: Array<{ title: string; blocks: Array<{kind:string; value?:string; items?:string[]}> }> };
-      await page.goto(`/privacy/${app}/${locale === 'en' ? '' : 'ko/'}`);
+      await page.goto(`/privacy/${app === 'clipnest' ? 'pastenel' : app}/${locale === 'en' ? '' : 'ko/'}`);
       const headings = await page.locator('main.privacy-shell section h3').allInnerTexts();
       expect(headings).toEqual(reference.sections.map((section) => section.title));
       const displayed = await page.locator('main.privacy-shell').innerText();
@@ -86,7 +88,8 @@ test('privacy directories display authoritative update dates and canonical app U
     const combina = policies.filter({ has: page.getByRole('heading', { name: 'Combina' }) });
     await expect(combina).toHaveCount(1);
     await expect(combina).toContainText('2026-11-06');
-    await expect(combina).toHaveAttribute('href', `/privacy/combina/${segment}`);
+    const url = new URL((await combina.getAttribute('href')) ?? '', 'https://onnellab.com');
+    expect(url.href).toBe(`https://onnellab.com/privacy/combina/${segment}`);
   }
 });
 

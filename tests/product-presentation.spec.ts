@@ -3,7 +3,7 @@ import { getProductPageData, getProductSources, pageBodyDescription, renderBlock
 import { allSiteLocales } from '../src/lib/extended-site-i18n';
 import { productPresentationLabels, validateProductPresentation } from '../src/lib/product-presentation';
 
-const featureCounts = { aligna: 7, clipnest: 6, lunary: 8, melivra: 7, meriq: 8, papira: 7, quivra: 6, segra: 5, tagweaver: 7, vaultxt: 8 };
+const featureCounts = { aligna: 7, clipnest: 6, combina: 5, lunary: 8, melivra: 7, meriq: 8, papira: 7, quivra: 6, segra: 5, tagweaver: 7, vaultxt: 8 };
 const dataFor = (app: string, locale: typeof allSiteLocales[number]) =>
   getProductPageData(app, locale);
 

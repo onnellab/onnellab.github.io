@@ -58,10 +58,11 @@ test('product detail hero shows the same short functional category as the homepa
 });
 
 test('unfeatured product detail heroes retain their original localized subtitles', async ({ page }) => {
-  for (const { segment, code } of locales) {
-    for (const slug of ['aligna', 'clipnest', 'lunary', 'meriq', 'segra', 'vaultxt']) {
-      const original = landingSubtitle(getProductPageData(slug, code).copy);
-      await page.goto('/apps/' + slug + '/' + segment);
+  for (const { code } of locales) {
+    for (const slug of ['aligna', 'clipnest', 'combina', 'lunary', 'meriq', 'segra', 'vaultxt']) {
+      const data = getProductPageData(slug, code);
+      const original = landingSubtitle(data.copy);
+      await page.goto(data.canonicalPath);
       if (original) {
         await expect(page.locator('.hero .intro')).toHaveText(original);
       } else {

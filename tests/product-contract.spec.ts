@@ -27,6 +27,7 @@ const locales = [
 const schemaClassifications: Record<string, { applicationCategory: string; applicationSubCategory: string }> = {
   aligna: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'File Renaming Utility' },
   clipnest: { applicationCategory: 'UtilitiesApplication', applicationSubCategory: 'Clipboard Utility' },
+  combina: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Video Utility' },
   lunary: { applicationCategory: 'LifestyleApplication', applicationSubCategory: 'Monthly Calendar' },
   melivra: { applicationCategory: 'MultimediaApplication', applicationSubCategory: 'Offline Music Player' },
   meriq: { applicationCategory: 'DesignApplication', applicationSubCategory: 'Merchandise Production Tool' },
@@ -53,7 +54,7 @@ async function schemas(page: import('@playwright/test').Page) {
 for (const app of apps) {
   test(`${app} uses one nine-language product contract`, async ({ page }) => {
     for (const locale of locales) {
-      const route = routeFor(app, locale.segment);
+      const route = routeFor(app === 'clipnest' ? 'pastenel' : app, locale.segment);
       await page.goto(route);
 
       await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
@@ -116,7 +117,11 @@ for (const app of apps) {
         await expect(image).toHaveAttribute('width', /\d+/);
         await expect(image).toHaveAttribute('height', /\d+/);
         const alt = (await image.getAttribute('alt') ?? '').trim();
-        expect(alt.toLowerCase()).toContain(app.toLowerCase());
+        if (app === 'combina') {
+          expect(alt).toBe(data.screenshotAlts?.[index]);
+        } else {
+          expect(alt.toLowerCase()).toContain(data.meta.title.toLowerCase());
+        }
         expect(alt).not.toMatch(/\s\d+$/);
       }
     }

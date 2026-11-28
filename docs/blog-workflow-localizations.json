@@ -860,8 +860,8 @@
       "alt": "Fluxo de metadados MP3",
       "published_at": "2026-07-20T14:56:51+09:00",
       "canonical_url": "https://onnellab.com/blog/pt-br/clean-up-mp3-metadata-before-organizing-music/",
-      "workflow_svg_blob": "9d6270bba6c6b0fdfc7ec9fd9f58b87d4dd1f963",
-      "social_svg_blob": "9d6270bba6c6b0fdfc7ec9fd9f58b87d4dd1f963"
+      "workflow_svg_blob": "e7445508a4c23f8971fcfa2c76059af16aba4228",
+      "social_svg_blob": "e7445508a4c23f8971fcfa2c76059af16aba4228"
     },
     {
       "locale": "pt-BR",
@@ -920,8 +920,8 @@
       "alt": "Fluxo de diagnóstico",
       "published_at": "2026-08-14T09:00:00+09:00",
       "canonical_url": "https://onnellab.com/blog/pt-br/large-text-file-slow-to-open/",
-      "workflow_svg_blob": "94b71b0dbdc2479c3862af1d11e1e1978cf49397",
-      "social_svg_blob": "94b71b0dbdc2479c3862af1d11e1e1978cf49397"
+      "workflow_svg_blob": "98ac8ff0949f35fc46251986bc031eee24ded354",
+      "social_svg_blob": "98ac8ff0949f35fc46251986bc031eee24ded354"
     },
     {
       "locale": "pt-BR",
@@ -950,8 +950,8 @@
       "alt": "Fluxo de leitura de TXT grande",
       "published_at": "2026-07-11T00:00:00+09:00",
       "canonical_url": "https://onnellab.com/blog/pt-br/read-large-txt-files-without-lag/",
-      "workflow_svg_blob": "c9767a0d7f639ee2ad48d40e52857ae75b63c101",
-      "social_svg_blob": "c9767a0d7f639ee2ad48d40e52857ae75b63c101"
+      "workflow_svg_blob": "ab8732412bedf260d812c1984872cca41ce49ad5",
+      "social_svg_blob": "ab8732412bedf260d812c1984872cca41ce49ad5"
     },
     {
       "locale": "pt-BR",
@@ -980,8 +980,8 @@
       "alt": "Fluxo de renomeação segura",
       "published_at": "2026-08-20T09:00:00+09:00",
       "canonical_url": "https://onnellab.com/blog/pt-br/rename-files-safely-preview-workflow/",
-      "workflow_svg_blob": "e24de39962a2e137803d3075c45fde9007022625",
-      "social_svg_blob": "e24de39962a2e137803d3075c45fde9007022625"
+      "workflow_svg_blob": "bebad2d9e045e008d986dd3d4fc8e2d58043f467",
+      "social_svg_blob": "bebad2d9e045e008d986dd3d4fc8e2d58043f467"
     },
     {
       "locale": "pt-BR",
@@ -1070,8 +1070,8 @@
       "alt": "Fluxo TXT para EPUB",
       "published_at": "2026-08-11T09:00:00+09:00",
       "canonical_url": "https://onnellab.com/blog/pt-br/txt-vs-epub-for-long-reading/",
-      "workflow_svg_blob": "701252dff74932784d5b811a9a23254b7f1bf5d9",
-      "social_svg_blob": "701252dff74932784d5b811a9a23254b7f1bf5d9"
+      "workflow_svg_blob": "a62e937cbd026ce943f6ee57cb76efdd5efd2096",
+      "social_svg_blob": "a62e937cbd026ce943f6ee57cb76efdd5efd2096"
     },
     {
       "locale": "pt-BR",
@@ -1130,8 +1130,8 @@
       "alt": "Workflow-Diagramm",
       "published_at": "2026-07-20T14:56:51+09:00",
       "canonical_url": "https://onnellab.com/blog/de/clean-up-mp3-metadata-before-organizing-music/",
-      "workflow_svg_blob": "eaca6bb1f183d98c40da5bb310e23ce456fa8f7b",
-      "social_svg_blob": "eaca6bb1f183d98c40da5bb310e23ce456fa8f7b"
+      "workflow_svg_blob": "9e64f3dc1a0953280d5d34cb7e42eaec914755fb",
+      "social_svg_blob": "9e64f3dc1a0953280d5d34cb7e42eaec914755fb"
     },
     {
       "locale": "de",
@@ -1310,8 +1310,8 @@
       "alt": "Audio-Trim-Workflow",
       "published_at": "2026-08-17T09:00:00+09:00",
       "canonical_url": "https://onnellab.com/blog/de/trim-audio-recordings-without-full-editor/",
-      "workflow_svg_blob": "cab052ecf26d56a6a118bed5ef9f93864952c758",
-      "social_svg_blob": "cab052ecf26d56a6a118bed5ef9f93864952c758"
+      "workflow_svg_blob": "9dc8fbef7217f9e306d91076307782af97a6f5b9",
+      "social_svg_blob": "9dc8fbef7217f9e306d91076307782af97a6f5b9"
     },
     {
       "locale": "de",
@@ -1670,8 +1670,8 @@
       "alt": "Diagrama del flujo",
       "published_at": "2026-07-20T14:56:51+09:00",
       "canonical_url": "https://onnellab.com/blog/es/clean-up-mp3-metadata-before-organizing-music/",
-      "workflow_svg_blob": "93bf45d8a594b78386c948f13b26e6c8e9b102a3",
-      "social_svg_blob": "93bf45d8a594b78386c948f13b26e6c8e9b102a3"
+      "workflow_svg_blob": "7c695925e833ffd389f3fd0960343e0d7a99fa88",
+      "social_svg_blob": "7c695925e833ffd389f3fd0960343e0d7a99fa88"
     },
     {
       "locale": "es",

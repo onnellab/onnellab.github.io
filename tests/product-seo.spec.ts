@@ -12,7 +12,7 @@ for (const locale of allSiteLocales) {
       const authored = data.copy.android.seoDescription ?? data.copy.ios.seoDescription;
       expect(authored, `${app}/${locale}: provide a reviewed web summary`).toBeTruthy();
       expect(data.seoDescription).toBe(authored);
-      expect(data.seoDescription.toLowerCase()).toContain(app);
+      expect(data.seoDescription.toLowerCase()).toContain(app === 'clipnest' ? 'pastenel' : app);
       expect(data.seoDescription).not.toMatch(/Platforms:|지원 플랫폼:|対応プラットフォーム:|支持平台：|支援平台：|Plataformas:|Plattformen:|Plateformes\s*:/u);
       expect(data.seoDescription).not.toMatch(/\n|<[^>]+>|\.\.\.|…/u);
       expect(data.seoDescription).not.toContain('in seconds');
@@ -22,7 +22,7 @@ for (const locale of allSiteLocales) {
   });
 }
 
-test('ClipNest summaries retain clipboard saving, pinning and keyboard reuse', () => {
+test('Pastenel summaries retain clipboard saving, pinning and keyboard reuse', () => {
   const en = dataFor('clipnest', 'en').seoDescription;
   expect(en).toMatch(/copied text.*keyboard opens.*pin.*paste/i);
   const ko = dataFor('clipnest', 'ko').seoDescription;
@@ -40,14 +40,14 @@ test('Papira uses the regular product source and omits offline from its product 
   }
 });
 
-test('ClipNest web titles name its clipboard role in every language', () => {
+test('Pastenel web titles name its clipboard role in every language', () => {
   const words = ['Clipboard', '클립보드', 'クリップボード', '剪贴板', '剪貼簿', 'área de transferência', 'Zwischenablage', 'presse-papiers', 'portapapeles'];
   const locales = ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de', 'fr', 'es'] as const;
   for (const [index, locale] of locales.entries()) {
     const data = dataFor('clipnest', locale);
     expect(data.seoTitle).toContain(words[index]);
     expect(data.seoTitle).toBe(data.copy.android.seoTitle ?? data.copy.ios.seoTitle);
-    expect(data.meta.title).toBe('ClipNest');
+    expect(data.meta.title).toBe('Pastenel');
   }
 });
 
@@ -67,7 +67,7 @@ test('VaultXT has concise authored web titles without changing its hero or store
   }
 });
 
-for (const app of ['lunary', 'meriq']) {
+for (const app of ['combina', 'lunary', 'meriq']) {
   test(`${app}: prerelease pages show their status and never claim installation availability`, async ({ page }) => {
     const preparing = {
       en: 'Preparing for release', ko: '출시 준비 중', ja: 'リリース準備中',

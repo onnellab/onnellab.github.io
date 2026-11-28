@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { getProductSources } from '../src/lib/products';
 
 const locales = ['', 'ko/', 'ja/', 'zh-hans/', 'zh-hant/', 'pt-br/', 'de/', 'fr/', 'es/'] as const;
 const showcased = ['tagweaver', 'quivra', 'melivra', 'papira'] as const;
@@ -48,12 +49,9 @@ test('apps catalogue reuses the exact short homepage function labels in all nine
     // Apps without a homepage marketing line retain their ordinary localized
     // catalogue descriptions rather than receiving invented substitutes.
     const cards = page.locator('.app-card, .app-row');
-    await expect(cards).toHaveCount(10);
-    for (const slug of ['aligna', 'clipnest', 'lunary', 'meriq', 'segra', 'vaultxt']) {
-      const card = cards.filter({ has: page.locator('h2', { hasText: new RegExp('^' + {
-        aligna: 'Aligna', clipnest: 'ClipNest', lunary: 'Lunary',
-        meriq: 'Meriq', segra: 'Segra', vaultxt: 'VaultXT'
-      }[slug] + '$') }) });
+    await expect(cards).toHaveCount(getProductSources().length);
+    for (const name of ['Aligna', 'Combina', 'Lunary', 'Meriq', 'Pastenel', 'Segra', 'VaultXT']) {
+      const card = cards.filter({ has: page.getByRole('heading', { name, exact: true }) });
       await expect(card).toHaveCount(1);
       expect((await card.locator('p').first().innerText()).trim().length).toBeGreaterThan(4);
     }
@@ -74,7 +72,7 @@ test('existing search keywords still discover apps after their catalogue descrip
     const card = page.locator('.app-card[href*="/apps/tagweaver/"], .app-row[href*="/apps/tagweaver/"]');
     await expect(card).toBeVisible();
     await search.fill('');
-    await expect(page.locator('.app-card:visible, .app-row:visible')).toHaveCount(10);
+    await expect(page.locator('.app-card:visible, .app-row:visible')).toHaveCount(getProductSources().length);
   }
 });
 

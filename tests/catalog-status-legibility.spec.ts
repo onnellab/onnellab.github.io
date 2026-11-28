@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { getProductSources } from '../src/lib/products';
 
 const locales = ['', 'ko/', 'ja/', 'zh-hans/', 'zh-hant/', 'pt-br/', 'de/', 'fr/', 'es/'];
 
@@ -7,7 +8,7 @@ test('product availability labels retain accessible text contrast and fit narrow
   for (const locale of locales) {
     await page.goto('/apps/'+locale);
     const badges = page.locator('.status-badge');
-    await expect(badges).toHaveCount(10);
+    await expect(badges).toHaveCount(getProductSources().length);
     const result = await badges.evaluateAll((nodes) => {
       const channel = (value:number) => {
         const scaled=value/255;

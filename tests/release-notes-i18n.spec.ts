@@ -95,9 +95,9 @@ test('every release note has complete copy in all nine languages', () => {
   }
 });
 
-test('every release note exposes the same evergreen nine-language page contract', async ({ page }) => {
-  for (const note of releaseNotes) {
-    for (const locale of allSiteLocales) {
+for (const locale of allSiteLocales) {
+  test(`${locale}: every release note exposes the same evergreen page contract`, async ({ page }) => {
+    for (const note of releaseNotes) {
       const definition = allLocaleDefinitions[locale];
       const path = releasePathFor(note, locale);
       const copy = localizedCopy(note, locale);
@@ -152,5 +152,5 @@ test('every release note exposes the same evergreen nine-language page contract'
       expect.soft(techArticle?.inLanguage, `${context} schema language`).toBe(definition.htmlLang);
       expect.soft(techArticle?.mainEntityOfPage, `${context} schema canonical`).toBe(canonical(path));
     }
-  }
-});
+  });
+}

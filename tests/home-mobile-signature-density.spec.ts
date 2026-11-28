@@ -17,7 +17,7 @@ test('mobile signature retains all content and authentic screenshot at a more co
     expect(feature?.height, String(width)).toBeLessThanOrEqual(maxFeatured);
     expect(sectionBox?.height, String(width)).toBeLessThanOrEqual(maxSection);
     await expect(screenshot).toBeVisible();
-    await expect(screenshot).toHaveAttribute('src', /tagweaver-library\.png$/);
+    await expect(screenshot).toHaveAttribute('src', /tagweaver-library\.png\?v=[a-f0-9]{64}$/);
     await expect(details.locator('.product-name')).toHaveText('TagWeaver');
     await expect(details.locator('.platform-text')).toBeVisible();
     await expect(details.locator('h2')).toBeVisible();

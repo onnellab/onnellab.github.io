@@ -209,7 +209,11 @@ test.describe('nine-language site core regression', () => {
       await expect(page.locator('.home-hero h1')).toHaveText(copy.heroTitle);
       const navigation = page.getByRole('navigation', { name: locale.navLabel, exact: true });
       await expect(navigation).toHaveCount(1);
+      if (page.viewportSize()!.width <= 650) {
+        await navigation.locator('.mobile-menu summary').click();
+      }
       const blog = navigation.getByRole('link', { name: locale.blogText, exact: true });
+      await expect(blog).toBeVisible();
       await expect(blog).toHaveAttribute('href', locale.blogHref);
       await expect(blog).toHaveText(locale.blogText);
       const languageMenu = page.locator('.locale-menu summary');
@@ -449,7 +453,8 @@ test.describe('nine-language site core regression', () => {
 
     for (const [segment, apps] of Object.entries(localizedSubtitles)) {
       for (const [slug, subtitle] of Object.entries(apps)) {
-        const path = `/apps/${slug}/${segment}/`;
+        const publicSlug = slug === 'clipnest' ? 'pastenel' : slug;
+        const path = `/apps/${publicSlug}/${segment}/`;
         await page.goto(path);
         await expect(page.locator('html')).toHaveAttribute('lang', htmlLang[segment as keyof typeof htmlLang]);
         // Only apps showcased on the homepage adopt the short function label.
@@ -465,11 +470,11 @@ test.describe('nine-language site core regression', () => {
         );
         await expect(page.locator('.support-links a').first()).toHaveAttribute(
           'href',
-          `https://onnellab.com/privacy/${slug}/${segment}/`
+          `https://onnellab.com/privacy/${publicSlug}/${segment}/`
         );
         const screenshot = page.locator('.screenshot-link img').first();
         if (await screenshot.count()) {
-          const screenshotLocale = ['aligna', 'quivra', 'segra', 'tagweaver', 'vaultxt', 'melivra'].includes(slug)
+          const screenshotLocale = ['aligna', 'clipnest', 'quivra', 'segra', 'tagweaver', 'vaultxt', 'melivra'].includes(slug)
             ? htmlLang[segment as keyof typeof htmlLang]
             : 'en';
           await expect(screenshot).toHaveAttribute(

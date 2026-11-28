@@ -30,7 +30,7 @@ const corePages = [
   '/terms/zh-hant/'
 ];
 
-const productSlugs = ['aligna', 'clipnest', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+const productSlugs = ['aligna', 'pastenel', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const allProductSlugs = ['aligna', 'clipnest', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const productLocales = [
   { code: 'en', suffix: '' },
@@ -56,7 +56,7 @@ const footerLabels = {
 } as const;
 const allNineHreflangs = ['en', 'ko', 'ja', 'zh-Hans', 'zh-Hant', 'pt-BR', 'de', 'fr', 'es', 'x-default'];
 const productPages = productSlugs.flatMap((slug) => [`/apps/${slug}/`, `/apps/${slug}/ko/`]);
-const privacySlugs = ['aligna', 'clipnest', 'lunary', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'sonary', 'tagweaver', 'vaultxt'];
+const privacySlugs = ['aligna', 'combina', 'lunary', 'melivra', 'meriq', 'papira', 'pastenel', 'quivra', 'segra', 'sonary', 'tagweaver', 'vaultxt'];
 const legacyPrivacySlugs = ['aligna', 'clipnest', 'melivra', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
 const privacyUrls = privacySlugs.map((slug) => `https://onnellab.com/privacy/${slug}/`);
 const koreanPrivacyUrls = privacySlugs.map((slug) => `https://onnellab.com/privacy/${slug}/ko/`);
@@ -307,7 +307,7 @@ test.describe('site layout and navigation', () => {
 
   test('Japanese and Chinese pages wrap without horizontal mobile scrolling', async ({ page }) => {
     const locales = ['ja', 'zh-hans', 'zh-hant'];
-    const slugs = ['aligna', 'clipnest', 'lunary', 'melivra', 'meriq', 'papira', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
+    const slugs = ['aligna', 'combina', 'lunary', 'melivra', 'meriq', 'papira', 'pastenel', 'quivra', 'segra', 'tagweaver', 'vaultxt'];
     const routes = locales.flatMap((locale) => [
       `/${locale}/`,
       `/apps/${locale}/`,
@@ -341,13 +341,16 @@ test.describe('site layout and navigation', () => {
     for (const slug of legacyPrivacySlugs) {
       for (const locale of ['en', 'ko'] as const) {
         const suffix = locale === 'ko' ? 'ko/' : '';
-        const canonical = `https://onnellab.com/privacy/${slug}/${suffix}`;
+        const publicSlug = slug === 'clipnest' ? 'pastenel' : slug;
+        const canonicalPath = `/privacy/${publicSlug}/${suffix}`;
         for (const route of [`/${slug}/privacy/${suffix}`, `/apps/${slug}/privacy/${suffix}`]) {
           const response = await page.goto(route);
-          expect(response?.ok()).toBe(true);
-          await expect(page.locator('main')).toBeVisible();
-          await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
-          expect((await page.locator('main').innerText()).trim().length).toBeGreaterThan(80);
+          expect(response?.ok(), route).toBe(true);
+          if (slug === 'clipnest') await expect(page).toHaveURL(canonicalPath);
+          const main = page.locator('main');
+          await expect(main.getByRole('heading', { level: 1 })).toBeVisible();
+          await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://onnellab.com${canonicalPath}`);
+          expect((await main.innerText()).trim().length).toBeGreaterThan(80);
           expect(await page.evaluate(
             () => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1
           )).toBe(true);
@@ -371,6 +374,7 @@ test.describe('site layout and navigation', () => {
   });
 
   test('all public page families share one sticky ONNELLAB header design', async ({ page }) => {
+    const width = page.viewportSize()!.width;
     const routes = [
       '/ko/', '/apps/ko/', '/apps/tagweaver/fr/', '/about/ko/',
       '/privacy/ko/', '/apps/papira/ko/', '/terms/ko/', '/blog/ko/'
@@ -405,8 +409,8 @@ test.describe('site layout and navigation', () => {
         };
       });
       expect(metrics.position).toBe('sticky');
-      expect(metrics.logoSize).toBe('18px');
-      expect(metrics.headerHeight).toBe(77);
+      expect(metrics.logoSize).toBe(width <= 355 ? '14px' : width <= 650 ? '16px' : '18px');
+      expect(metrics.headerHeight).toBe(width <= 650 ? 61 : width <= 820 ? 69 : 77);
       if (reference) expect(metrics, route).toEqual(reference);
       else reference = metrics;
     }
@@ -715,11 +719,12 @@ test.describe('app and privacy collections', () => {
     await page.goto('/apps/ko/');
     await expect(page.locator('[data-app-row] h2')).toHaveText([
       'Aligna',
-      'ClipNest',
+      'Combina',
       'Lunary',
       'Melivra',
       'Meriq',
       'Papira',
+      'Pastenel',
       'Quivra',
       'Segra',
       'TagWeaver',
@@ -868,8 +873,9 @@ test.describe('app and privacy collections', () => {
 test.describe('existing product pages', () => {
   test('all product locales keep readable prose while full-width bands retain their geometry', async ({ page }) => {
     for (const slug of allProductSlugs) {
+      const publicSlug = slug === 'clipnest' ? 'pastenel' : slug;
       for (const locale of productLocales) {
-        await page.goto(`/apps/${slug}/${locale.suffix}`);
+        await page.goto(`/apps/${publicSlug}/${locale.suffix}`);
         const main = page.locator('main.page-shell');
         const geometry = await main.evaluate((node) => {
           const box = (selector: string) => {
@@ -936,8 +942,9 @@ test.describe('existing product pages', () => {
 
   test('all app details and locales share the complete product template contract', async ({ page }) => {
     for (const slug of allProductSlugs) {
+      const publicSlug = slug === 'clipnest' ? 'pastenel' : slug;
       for (const locale of productLocales) {
-        await page.goto(`/apps/${slug}/${locale.suffix}`);
+        await page.goto(`/apps/${publicSlug}/${locale.suffix}`);
         const main = page.locator('main.page-shell');
         await expect(main).toHaveAttribute('data-product-slug', slug);
         await expect(main).toHaveAttribute('data-product-locale', locale.code);
@@ -950,7 +957,7 @@ test.describe('existing product pages', () => {
         await expect(main.locator(':scope > .download-band')).toHaveCount(1);
         const footer = main.locator(':scope > footer.site-footer');
         await expect(footer).toHaveCount(1);
-        const privacyHref = `https://onnellab.com/privacy/${slug}/${locale.suffix}`;
+        const privacyHref = `https://onnellab.com/privacy/${publicSlug}/${locale.suffix}`;
         expect(await footer.locator(':scope > a').evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual([
           privacyHref,
           `/terms/${locale.suffix}`,
@@ -960,15 +967,15 @@ test.describe('existing product pages', () => {
         const localeLinks = page.locator('[data-site-header] .locale-menu-panel a[data-locale-choice]');
         await expect(localeLinks).toHaveCount(9);
         expect(await localeLinks.evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual([
-          `/apps/${slug}/`,
-          `/apps/${slug}/ko/`,
-          `/apps/${slug}/ja/`,
-          `/apps/${slug}/zh-hans/`,
-          `/apps/${slug}/zh-hant/`,
-          `/apps/${slug}/pt-br/`,
-          `/apps/${slug}/de/`,
-          `/apps/${slug}/fr/`,
-          `/apps/${slug}/es/`
+          `/apps/${publicSlug}/`,
+          `/apps/${publicSlug}/ko/`,
+          `/apps/${publicSlug}/ja/`,
+          `/apps/${publicSlug}/zh-hans/`,
+          `/apps/${publicSlug}/zh-hant/`,
+          `/apps/${publicSlug}/pt-br/`,
+          `/apps/${publicSlug}/de/`,
+          `/apps/${publicSlug}/fr/`,
+          `/apps/${publicSlug}/es/`
         ]);
       }
     }
@@ -1082,17 +1089,18 @@ test.describe('existing product pages', () => {
 
 test.describe('blog and crawl endpoints', () => {
   test('blog pages remain available in English and Korean', async ({ page }) => {
-    await page.goto('/blog/');
-    await expect(
-      page.locator('.post-card').filter({ hasText: 'How to Read Large TXT Files Without Lag' })
-    ).toHaveCount(1);
-    await expect(page.locator('.top-nav .nav-links > a[href="/apps/"]')).toBeVisible();
-
-    await page.goto('/blog/ko/');
-    await expect(
-      page.locator('.post-card').filter({ hasText: '대용량 TXT 파일을 지연 없이 읽는 방법' })
-    ).toHaveCount(1);
-    await expect(page.locator('.top-nav .nav-links > a[href="/apps/ko/"]')).toBeVisible();
+    for (const [suffix, title, appsLabel] of [
+      ['', 'How to Read Large TXT Files Without Lag', 'Apps'],
+      ['ko/', '대용량 TXT 파일을 지연 없이 읽는 방법', '앱']
+    ]) {
+      await page.goto(`/blog/${suffix}`);
+      await expect(page.locator('.post-card').filter({ hasText: title })).toHaveCount(1);
+      const nav = page.locator('nav.site-header');
+      if (page.viewportSize()!.width <= 650) await nav.locator('.mobile-menu summary').click();
+      const apps = nav.getByRole('link', { name: appsLabel, exact: true });
+      await expect(apps).toBeVisible();
+      await expect(apps).toHaveAttribute('href', `/apps/${suffix}`);
+    }
   });
 
   test('blog article metadata remains answer-friendly', async ({ page }) => {

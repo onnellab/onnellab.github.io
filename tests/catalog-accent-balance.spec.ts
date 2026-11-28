@@ -2,7 +2,8 @@ import { expect, test } from '@playwright/test';
 
 const expectedAccents: Record<string, [string, string, string]> = {
   aligna: ['#bcd3c5', '#edf5ef', '#436253'],
-  clipnest: ['#e6cbd2', '#fbf1f3', '#754f5d'],
+  pastenel: ['#e6cbd2', '#fbf1f3', '#754f5d'],
+  combina: ['#d6cdd2', '#f7f0f3', '#674f5b'],
   lunary: ['#ced3eb', '#f2f3fb', '#566387'],
   meriq: ['#dfd0b8', '#f7f2e8', '#6a5a42'],
   segra: ['#bed7d9', '#edf7f7', '#42656b'],
@@ -14,7 +15,7 @@ const expectedAccents: Record<string, [string, string, string]> = {
 };
 const props = ['--accent-border', '--accent-bg', '--accent-text'];
 
-test('ten distinct app card colors keep the four homepage signatures unchanged', async ({ page }) => {
+test('distinct app card colors keep the four homepage signatures unchanged', async ({ page }) => {
   for (const locale of ['', 'ko/']) {
     await page.goto('/apps/' + locale);
     const cards = await page.locator('[data-app-row]').evaluateAll((elements) =>
@@ -26,8 +27,8 @@ test('ten distinct app card colors keep the four homepage signatures unchanged',
         };
       })
     );
-    expect(cards).toHaveLength(10);
-    expect(new Set(cards.map((card) => card.colors[1])).size).toBe(10);
+    expect(cards.map((card) => card.slug).sort()).toEqual(Object.keys(expectedAccents).sort());
+    expect(new Set(cards.map((card) => card.colors[1])).size).toBe(Object.keys(expectedAccents).length);
     for (const card of cards) {
       expect(card.colors, card.slug).toEqual(expectedAccents[card.slug]);
     }

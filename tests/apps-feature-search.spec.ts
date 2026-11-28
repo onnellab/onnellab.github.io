@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { getProductSources } from '../src/lib/products';
 
 const locales = [
   {path: '/apps/', extended: false},
@@ -34,7 +35,7 @@ for (const {path, extended} of locales) {
     await expect(rows.filter({visible:true})).toHaveCount(0);
     await expect(page.locator(extended ? '[data-empty]' : '[data-app-empty]')).toBeVisible();
     await query.fill('');
-    await expect(rows).toHaveCount(10);
+    await expect(rows).toHaveCount(getProductSources().length);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
   });
 }

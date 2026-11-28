@@ -10,7 +10,7 @@ for (const item of manifest.items) {
   test(`${item.locale}/${item.slug}: localized diagram and historical page identity`, async ({ page }) => {
     const articlePath = `/blog/${item.locale.toLowerCase()}/${item.slug}/`;
     const imagePath = item.workflow_svg.replace(/^public/, '');
-    for (const width of [1440, 390]) {
+    for (const width of [1440, 390, 320]) {
       await page.setViewportSize({ width, height: 900 });
       const response = await page.goto(articlePath);
       expect(response?.status()).toBe(200);
