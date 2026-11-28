@@ -8,14 +8,19 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const workflow = fs.readFileSync(path.join(root, '.github/workflows/deploy.yml'), 'utf8');
 
 test('Pages deploy always binds live ops verification to the deployed commit', () => {
-  assert.match(workflow, /verify_ops:/);
-  assert.match(workflow, /repository: onnellab\/onnel-content-engine/);
-  assert.match(workflow, /\.content-engine\/scripts\/verify_live_ops\.py/);
-  assert.match(workflow, /--expected public\/ops\/index\.html/);
-  assert.match(workflow, /--deployment-sha "\$GITHUB_SHA"/);
+  const verify = workflow.split('\n  verify_ops:\n')[1]?.split(/\n  \w+:\n/)[0];
+  assert.ok(verify, 'Live ops must remain a separate Pages job');
+  assert.match(verify, /needs: deploy/);
+  assert.match(verify, /contents: read/);
+  assert.match(verify, /ref: \$\{\{ github\.sha \}\}/);
+  assert.doesNotMatch(verify, /repository:|secrets\.|continue-on-error:/);
+  assert.match(verify, /python3 scripts\/test-verify-live-ops\.py/);
+  assert.match(verify, /python3 scripts\/verify_live_ops\.py/);
+  assert.match(verify, /--expected public\/ops\/index\.html/);
+  assert.match(verify, /--deployment-sha "\$GITHUB_SHA"/);
   assert.match(workflow, /onnellab\/ops-live-verify/);
   assert.match(workflow, /needs: \[build, deploy, verify_ops\]/);
-  assert.match(workflow, /Retain sanitized verification evidence/);
+  assert.match(verify, /Retain sanitized verification evidence/);
 });
 
 test('historical translated image rendering and browser checks precede Pages upload', () => {

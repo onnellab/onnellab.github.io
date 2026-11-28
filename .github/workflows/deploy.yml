@@ -144,13 +144,7 @@ jobs:
       - name: Checkout site
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
-
-      - name: Checkout canonical ops verifier
-        uses: actions/checkout@v4
-        with:
-          repository: onnellab/onnel-content-engine
-          path: .content-engine
+          ref: ${{ github.sha }}
           persist-credentials: false
 
       - name: Setup Python
@@ -158,9 +152,12 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Test live ops verification contract
+        run: python3 scripts/test-verify-live-ops.py
+
       - name: Verify deployed /ops/
         run: |
-          python3 .content-engine/scripts/verify_live_ops.py \
+          python3 scripts/verify_live_ops.py \
             --expected public/ops/index.html \
             --output /tmp/ops-live-verification.json \
             --deployment-sha "$GITHUB_SHA"

@@ -11,3 +11,7 @@ Canonical host: https://onnellab.com/. The content engine owns the broader SEO/G
 - Local isolated tests: python3 scripts/test-search-discovery.py. Full build/Playwright and live verification run in the existing deployment workflows.
 
 Official IndexNow reference: https://www.indexnow.org/documentation
+
+## Live Ops deployment check
+
+After Pages deploys, `Verify live ops` runs this repository's `scripts/verify_live_ops.py` from the deployed commit. It checks the deployed HTML bytes, crawler directives, robots exclusions, linked sitemap files, homepage links, and the retired route. The job retains a version 1 `ops-live-verification-<sha>` artifact with the deployment SHA, digests, and check results. The content engine can continue to consume the `onnellab/ops-live-verify` status for that SHA.
