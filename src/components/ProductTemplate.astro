@@ -1711,15 +1711,22 @@ const breadcrumbJsonLd = {
     }
 
     .screenshot-viewer {
+      --viewer-viewport-height: 100vh;
       width: min(100vw - 8px, 512px);
-      max-height: calc(100dvh - 8px);
+      max-height: calc(var(--viewer-viewport-height) - 8px);
       border-radius: 21px;
+    }
+
+    @supports (height: 100dvh) {
+      .screenshot-viewer {
+        --viewer-viewport-height: 100dvh;
+      }
     }
 
     .viewer-panel {
       position: relative;
       grid-template-rows: auto minmax(0, 1fr) auto;
-      max-height: calc(100dvh - 10px);
+      max-height: calc(var(--viewer-viewport-height) - 10px);
       padding: 4px;
       gap: 3px;
     }
@@ -1759,16 +1766,16 @@ const breadcrumbJsonLd = {
     .viewer-image-stage {
       grid-column: 1;
       grid-row: 1;
-      max-height: calc(100dvh - 96px);
+      max-height: calc(var(--viewer-viewport-height) - 96px);
       border-radius: 15px;
     }
 
     .viewer-image-stage img {
-      max-height: calc(100dvh - 96px);
+      max-height: calc(var(--viewer-viewport-height) - 96px);
     }
 
     .viewer-image-stage img[data-zoomed="true"] {
-      max-height: calc(100dvh - 96px);
+      max-height: calc(var(--viewer-viewport-height) - 96px);
     }
 
     .viewer-prev,

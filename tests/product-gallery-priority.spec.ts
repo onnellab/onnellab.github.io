@@ -37,3 +37,52 @@ test('unreleased app keeps preparation status and no misleading install links', 
   await expect(page.locator('[data-release-status]')).toContainText('출시 준비 중');
   await expect(page.locator('[data-store-link]')).toHaveCount(0);
 });
+
+test('mobile gallery stays within the viewport with or without dynamic viewport units', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 480 });
+  let rewroteViewportUnit = false;
+
+  for (const fallbackOnly of [false, true]) {
+    await test.step(fallbackOnly ? 'unsupported dvh' : 'browser default', async () => {
+      if (fallbackOnly) {
+        await page.route('**/*', async (route) => {
+          if (!['document', 'stylesheet'].includes(route.request().resourceType())) {
+            await route.continue();
+            return;
+          }
+          const response = await route.fetch();
+          const body = await response.text();
+          const fallbackBody = body.replaceAll('100dvh', '100unsupportedvh');
+          rewroteViewportUnit ||= fallbackBody !== body;
+          await route.fulfill({ response, body: fallbackBody });
+        });
+      }
+
+      await page.goto('/apps/tagweaver/ko/');
+      const links = page.locator('[data-screenshot-link]');
+      const first = links.first();
+      await first.focus();
+      await page.keyboard.press('Enter');
+
+      const viewer = page.locator('dialog.screenshot-viewer');
+      const close = viewer.locator('[data-viewer-close]');
+      const image = viewer.locator('[data-viewer-image]');
+      await expect(viewer).toBeVisible();
+      await expect(close).toBeFocused();
+      expect(await viewer.locator('.viewer-panel').evaluate((panel) =>
+        parseFloat(getComputedStyle(panel).maxHeight),
+      )).toBeLessThanOrEqual(480);
+      const closeBox = (await close.boundingBox())!;
+      expect(closeBox.y).toBeGreaterThanOrEqual(0);
+      expect(closeBox.y + closeBox.height).toBeLessThanOrEqual(480);
+
+      await expect(image).toHaveAttribute('src', (await first.getAttribute('href'))!);
+      await viewer.locator('[data-viewer-next]').click();
+      await expect(image).toHaveAttribute('src', (await links.nth(1).getAttribute('href'))!);
+      await page.keyboard.press('Escape');
+      await expect(viewer).not.toBeVisible();
+      await expect(first).toBeFocused();
+      if (fallbackOnly) expect(rewroteViewportUnit).toBe(true);
+    });
+  }
+});
